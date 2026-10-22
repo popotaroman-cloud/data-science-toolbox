@@ -1,0 +1,246 @@
+---
+title: "สัปดาห์ที่ 5"
+subtitle: "การจัดการข้อมูลและการเชื่อม SQL กับ Python"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 5"
+---
+
+## วันนี้เราจะทำอะไร
+
+- เชื่อม DuckDB ↔ pandas ทั้งสองทิศทาง
+- Tidy data, `melt` / `pivot`
+- Datetime และ timezone
+- รายชั่วโมง → รายวัน พร้อม `n_hours`
+- (เสริม) pandas vs Polars
+
+::: {.notes}
+CLO2 · ผลงาน: view `daily_pm25` ใน `data/pm25.duckdb` + tidy dataframe รายวันใน `notebooks/05_wrangling.ipynb`
+:::
+
+# จากฐานข้อมูลสู่คำถาม
+
+## คำถามส่วนใหญ่ใช้ค่ารายวัน
+
+- Q1 นับ "จำนวนวันที่ค่าเฉลี่ย 24 ชม. เกิน 37.5 µg/m³"
+- คำถามช่วงเวลาของวัน → รายชั่วโมง + คอลัมน์ชั่วโมง
+
+```{mermaid}
+flowchart LR
+  A["measurements<br/>รายชั่วโมง"] -- SQL --> B["daily_pm25<br/>view รายวัน"]
+  S["stations"] -- JOIN --> C
+  B -- ".df()" --> C["pandas<br/>tidy dataframe"] --> D["สัปดาห์ 6–7<br/>ตรวจคุณภาพ"]
+```
+
+# DuckDB ↔ pandas
+
+## จาก DuckDB ไป pandas
+
+```python
+con = duckdb.connect("data/pm25.duckdb", read_only=True)
+st = con.sql("SELECT * FROM stations").df()                   # pandas DataFrame
+h = con.sql("""
+    SELECT station_id, ts, pm25 FROM measurements
+    WHERE ts >= TIMESTAMP '2023-01-01' AND ts < TIMESTAMP '2024-01-01'
+""").df()
+```
+
+- `duckdb.sql(...)` = ฐานข้อมูลในหน่วยความจำ
+- `con.sql(...)` = ไฟล์ที่เปิดไว้ → ทำงานกับ `pm25.duckdb` ใช้ `con` เสมอ
+
+## จาก pandas กลับไป DuckDB
+
+```python
+top = duckdb.sql("""
+    SELECT station_id, AVG(pm25) AS pm25_mean
+    FROM h                       -- h คือ DataFrame ด้านบน
+    GROUP BY station_id ORDER BY pm25_mean DESC LIMIT 5
+""").df()
+```
+
+- ใช้ร่วมกับตารางในไฟล์: `con.register("h_df", h)`
+
+## งานไหนใช้อะไร
+
+| งาน | เครื่องมือ |
+|---|---|
+| กรองช่วงเวลา/สถานีก่อนดึงออก | SQL |
+| รวมข้อมูลจำนวนมาก (`GROUP BY`) | SQL |
+| JOIN ตาราง | SQL หรือ pandas |
+| `melt`/`pivot`, datetime ละเอียด | pandas |
+| ส่งต่อ seaborn / Plotly / Streamlit | pandas |
+
+**ลดขนาดข้อมูลด้วย SQL ก่อน แล้วค่อยปรับรูปด้วย pandas**
+
+# Tidy data
+
+## กฎ 3 ข้อ (Wickham 2014)
+
+1. ตัวแปรหนึ่งตัว = หนึ่งคอลัมน์
+2. การสังเกตหนึ่งครั้ง = หนึ่งแถว
+3. หน่วยการสังเกตหนึ่งชนิด = หนึ่งตาราง
+
+| ไม่ tidy | แบบ tidy |
+|---|---|
+| `pm25_jan`, `pm25_feb`, … | `month` + `pm25` |
+| คอลัมน์ละสถานี `02t`, `35t` | `station_id` + `pm25` |
+| ชื่อจังหวัดซ้ำทุกแถวค่าวัด | แยก `stations` / `measurements` |
+
+## Tidy ขึ้นกับคำถาม
+
+- `measurements` (`pm25, pm10, o3, …`) tidy เมื่อหน่วยการสังเกต = **สถานี-ชั่วโมง**
+- คำถาม "เปรียบเทียบมลพิษแต่ละชนิด" → รูป long (`pollutant` + `value`) สะดวกกว่า
+
+## melt และ pivot
+
+```python
+long = wide.melt(id_vars=["station_id", "ts"], var_name="pollutant", value_name="value")
+back = long.pivot(index=["station_id", "ts"], columns="pollutant", values="value").reset_index()
+```
+
+| ฟังก์ชัน | จาก → ไป | ใช้เมื่อ |
+|---|---|---|
+| `melt` | wide → long | กราฟหลายตัวแปรใน facet เดียว |
+| `pivot` | long → wide (key ไม่ซ้ำ) | อัตราส่วน `pm25 / pm10` |
+| `pivot_table` | long → wide + `aggfunc` | key ซ้ำ เช่น เดือน × ภาค |
+
+- ข้อมูลใหญ่: DuckDB `UNPIVOT` / `PIVOT`
+
+# Datetime และ timezone
+
+## ข้อตกลงของรายวิชา
+
+- `ts` เป็น `TIMESTAMP` **ไม่มี timezone กำกับ** = เวลา `Asia/Bangkok` (UTC+7)
+
+| ปัญหา | ผลกระทบ |
+|---|---|
+| รวมแหล่ง UTC กับเวลาไทย | เลื่อน 7 ชม. ยอดเช้ากลายเป็นดึก |
+| ตัด "วัน" ด้วย UTC | วันไทยเริ่ม 07:00 UTC ค่ารายวันปนสองวัน |
+| ปี พ.ศ. | `pd.to_datetime` ไม่รู้จัก → ลบ 543 ก่อน |
+
+## tz_localize vs tz_convert
+
+```python
+h["ts_bkk"] = h["ts"].dt.tz_localize("Asia/Bangkok")    # ประกาศว่าเวลานี้เป็นเวลาไทย
+h["ts_utc"] = h["ts_bkk"].dt.tz_convert("UTC")          # แปลงเป็น UTC (เวลาจริงเดียวกัน)
+```
+
+| เมธอด | ทำอะไร |
+|---|---|
+| `tz_localize(tz)` | ติดป้าย ตัวเลขไม่เปลี่ยน |
+| `tz_convert(tz)` | ตัวเลขเปลี่ยน แต่เป็นเวลาจริงเดียวกัน |
+| `tz_localize(None)` | ลบป้ายก่อนบันทึกกลับเป็น `TIMESTAMP` |
+
+- ไทยไม่มี daylight saving time · ข้อมูลต่างประเทศมี
+
+## แยกส่วนประกอบของเวลา
+
+```python
+h["date"] = h["ts"].dt.date            # ตัดวันตามเวลาไทย เพราะ ts เป็นเวลาไทย
+h["hour"] = h["ts"].dt.hour            # ตอบคำถามช่วงเวลาของวัน
+h["month"] = h["ts"].dt.month
+h["dow"] = h["ts"].dt.day_of_week      # 0 = จันทร์
+h["year_be"] = h["ts"].dt.year + 543   # ปี พ.ศ. สำหรับแสดงผลเท่านั้น
+```
+
+# รายชั่วโมง → รายวัน
+
+## ทำไมต้องมี `n_hours`
+
+- ค่าเฉลี่ยจากวันที่หาย 20 ชม. ≠ "ค่าเฉลี่ย 24 ชม." จริง
+- ถ้าชั่วโมงที่หายคือช่วงฝุ่นสูง → ค่าเฉลี่ยต่ำเกินจริง → Q1 ผิด
+- เก็บ **`n_hours`** (ชั่วโมงที่มีค่า) คู่กับค่าเฉลี่ยเสมอ
+
+## View `daily_pm25`
+
+```sql
+CREATE OR REPLACE VIEW daily_pm25 AS
+SELECT station_id,
+       CAST(ts AS DATE) AS date,          -- ตัดวันตามเวลาไทย
+       AVG(pm25)        AS pm25_mean,     -- AVG ข้าม NULL อัตโนมัติ
+       MAX(pm25)        AS pm25_max,
+       COUNT(pm25)      AS n_hours        -- นับเฉพาะชั่วโมงที่มีค่า
+FROM measurements
+GROUP BY station_id, CAST(ts AS DATE);
+```
+
+- **view** = query ที่ตั้งชื่อไว้ ไม่เก็บข้อมูลซ้ำ คำนวณจาก `measurements` ล่าสุดทุกครั้ง
+
+## pandas `resample` vs SQL `GROUP BY`
+
+```python
+daily_pd = (
+    h.set_index("ts")
+     .groupby("station_id")["pm25"]
+     .resample("D")
+     .agg(["mean", "max", "count"])
+)
+```
+
+- `resample` สร้างแถว **ทุกวันในช่วง** แม้ไม่มีข้อมูล (`n_hours = 0`)
+- `GROUP BY` **ไม่มีแถว** ของวันที่ไม่มีข้อมูล
+- นับ "วันที่ขาดข้อมูล" ต้องรู้ความต่างนี้
+
+## เกณฑ์ความครบถ้วน
+
+| `n_hours` | การใช้ |
+|---|---|
+| 24 | ครบ |
+| 18–23 | ใช้ได้ (ตัวอย่างนี้ ≥ 18 ชม. หรือ 75%) |
+| < 18 | ไม่นับวันเกินมาตรฐาน แต่รายงานจำนวนที่ตัดออก |
+
+::: {.callout-warning}
+เกณฑ์ 18 ชม. เป็น **การตัดสินใจของโครงการ** บันทึกใน `questions.md` และกำหนด **ก่อน** ดูผล (garden of forking paths)
+:::
+
+## ธงเกินมาตรฐานรายวัน
+
+```python
+daily = con.sql("""
+    SELECT d.*, s.province, s.region,
+           d.n_hours >= 18                       AS complete,
+           d.n_hours >= 18 AND d.pm25_mean > 37.5 AS exceed_th,   -- มาตรฐานไทย 24 ชม.
+           d.n_hours >= 18 AND d.pm25_mean > 15   AS exceed_who   -- WHO 2021
+    FROM daily_pm25 d JOIN stations s USING (station_id)
+""").df()
+```
+
+# pandas กับ Polars (เสริม)
+
+## Polars
+
+| ประเด็น | pandas | Polars |
+|---|---|---|
+| ไลบรารีรองรับ | มากที่สุด | บางตัวต้องแปลงเป็น pandas |
+| index | มี | ไม่มี |
+| รูปแบบการเขียน | หลายวิธีทำสิ่งเดียวกัน | expression `pl.col(...)` สม่ำเสมอ |
+| ความเร็ว | พอสำหรับหลักล้านแถว | เร็วกว่าชัดเจนเมื่อข้อมูลใหญ่ |
+| รับจาก DuckDB | `.df()` | `.pl()` |
+
+- Rust + Apache Arrow + หลาย core + โหมด lazy
+- รายวิชาใช้ **pandas เป็นหลัก** · ใช้ Polars ได้แต่ `.to_pandas()` ก่อนส่งต่อ
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week05-wrangling` + เพิ่ม view `daily_pm25` ใน `load_duckdb.py`
+2. ดึงเข้า pandas **เฉพาะช่วงสำรวจ** (`ts < 2024-01-01`)
+3. เทียบค่ารายวัน SQL vs `resample` อธิบายจำนวนแถวที่ต่าง
+4. ดู `n_hours` → กำหนดเกณฑ์ใน `questions.md` ก่อนสรุป
+5. tidy dataframe `daily` + `melt` / `pivot_table` + timezone
+6. บันทึก `daily_explore.parquet` → push → PR → review เพื่อน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 5](../weeks/week05/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- ให้ pipeline fetch → load รันต่อ สังเกตวันที่ `n_hours` ต่ำผิดปกติ
+- จดปัญหาคุณภาพข้อมูลที่กระทบคำถามแต่ละข้อ 2–3 ข้อ
+- อ่าน ydata-profiling Quickstart และ pandera DataFrame Schemas
+- (เสริม) Polars *Lazy API*

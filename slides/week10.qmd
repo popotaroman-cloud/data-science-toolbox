@@ -1,0 +1,282 @@
+---
+title: "สัปดาห์ที่ 10"
+subtitle: "Interactive visualization และข้อมูลขนาดใหญ่"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 10"
+---
+
+## วันนี้เราจะทำอะไร
+
+- interactivity ช่วยเมื่อไร และซ่อนอะไรได้บ้าง
+- `plotly.express` กับ `plotly.graph_objects`
+- hover, range slider, facet, animation + เส้นมาตรฐาน 37.5
+- ข้อมูลรายชั่วโมงหลักล้านแถว: สรุป สุ่ม Datashader
+- PyGWalker สำหรับสำรวจ และ `src/charts.py` สำหรับ Streamlit
+
+::: {.notes}
+CLO4 · เครื่องมือ: Plotly (หลัก), PyGWalker และ Datashader (เสริม) · ผลงาน: notebooks/10_interactive_viz.ipynb + HTML + src/charts.py
+:::
+
+# Interactivity: ช่วยหรือซ่อน
+
+## สองด้านของ interactivity
+
+| ช่วย | ซ่อน |
+|---|---|
+| **hover** ดูค่าจริง ชื่อสถานี วันที่ของจุดผิดปกติ | ข้อค้นพบหลักอยู่หลัง hover ไม่ชี้เมาส์ก็ไม่เห็น |
+| **zoom / range slider** ดูเหตุการณ์สั้น ๆ ในหลายปี | ซูมช่วงเดียวแล้วสรุปเกินจริง |
+| **legend คลิกซ่อน** ลดความรก | สถานะเริ่มต้นมีผลต่อการตีความมาก |
+| **animation** เห็นการเปลี่ยนตามเดือน | เทียบข้ามเฟรมยาก ต้องมีภาพนิ่งคู่กัน |
+
+## สถานะเริ่มต้นต้องตอบคำถามได้แล้ว
+
+Shneiderman (1996)
+
+```{mermaid}
+flowchart LR
+  A["Overview first"] --> B["Zoom and filter"] --> C["Details on demand"]
+```
+
+- interactivity = ของแถมสำหรับเจาะลึก ไม่ใช่ที่ซ่อนคำตอบ
+- เป็นโครงของ dashboard drill-down 3–4 ระดับในสัปดาห์ที่ 14
+
+# Plotly สองระดับ
+
+## `px` กับ `go`
+
+| | `plotly.express` (px) | `plotly.graph_objects` (go) |
+|---|---|---|
+| แนวคิด | grammar of graphics: DataFrame + ชื่อคอลัมน์ | สร้างทีละ trace กำหนด layout เอง |
+| โค้ด | สั้น บรรทัดเดียวได้กราฟ | ยาวกว่า ควบคุมได้ทุกจุด |
+| facet / animation | มีในตัว | ทำเองด้วย `make_subplots` / frames |
+| ใช้เมื่อ | งานส่วนใหญ่ของรายวิชา | กราฟพิเศษ ซ้อน trace หลายชนิด |
+
+ทั้งสองสร้าง `Figure` ชนิดเดียวกัน → ผสมกันได้
+
+## เริ่มด้วย px แล้วปรับแต่งด้วย Figure
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+
+fig = px.line(df, x="date", y="pm25_mean", color="region")        # px สร้างโครง
+fig.add_trace(go.Scatter(x=events["date"], y=events["pm25_mean"],  # go เพิ่ม trace พิเศษ
+                         mode="markers", name="วันเกิดเหตุ", marker_symbol="x"))
+fig.update_layout(font_family="Sarabun, Tahoma, sans-serif")
+```
+
+- เมธอดหลัก: `update_layout`, `update_traces`, `add_hline`, `add_trace`
+- แสดงใน browser → อักษรไทยแสดงได้เลย แต่ควรกำหนด `font_family`
+
+# กราฟ interactive หลักสำหรับ PM2.5
+
+## เตรียมข้อมูลด้วย DuckDB
+
+- ให้ DuckDB ทำงานหนัก: สรุปข้อมูลรายวันที่ทำความสะอาดแล้ว + join `stations`
+- `GROUP BY` ภาค × วัน → DataFrame `region_daily`
+- คอลัมน์: `region`, `date`, `pm25_median`, `n_stations`
+- ส่งเฉพาะตารางที่สรุปแล้วเข้า Plotly
+
+## Time series + hover + range slider
+
+```python
+THAI_STD = 37.5
+fig = px.line(region_daily, x="date", y="pm25_median", color="region",
+              hover_data={"n_stations": True, "pm25_median": ":.1f"})
+fig.add_hline(y=THAI_STD, line_dash="dash", line_color="black",
+              annotation_text="มาตรฐานไทย 37.5", annotation_position="top left")
+fig.update_xaxes(rangeslider_visible=True)
+fig.show()
+```
+
+- `n_stations` ใน hover → วันที่มีสถานีน้อย ควรเชื่อถือน้อยลง
+
+::: {.notes}
+ในโน้ตจริงมี labels={...} แปลชื่อคอลัมน์เป็นภาษาไทยด้วย
+:::
+
+## ปรับข้อความ hover
+
+```python
+fig.update_traces(hovertemplate="%{x|%d/%m/%Y}<br>%{y:.1f} µg/m³<extra>%{fullData.name}</extra>")
+```
+
+- กำหนดรูปแบบวันที่และทศนิยมเอง
+- ใส่หน่วย µg/m³ ใน hover
+- `<extra>` แสดงชื่อ trace (ภาค)
+
+## Facet: เทียบหลายภาคบนแกนเดียวกัน
+
+```python
+region_daily["month"] = pd.to_datetime(region_daily["date"]).dt.month
+fig = px.box(region_daily, x="month", y="pm25_median", facet_col="region", facet_col_wrap=3,
+             labels={"pm25_median": "PM2.5 (µg/m³)", "month": "เดือน"})
+fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))   # ตัด "region=" ออกจากหัว facet
+```
+
+- facet ใน px ใช้แกน y ร่วมเป็นค่าเริ่มต้น → เหมาะกับการเทียบระดับ
+
+## Animation ตามเดือน
+
+```python
+fig = px.bar(monthly, x="region", y="pm25_median", animation_frame="month",
+             range_y=[0, monthly["pm25_median"].max() * 1.1])   # ล็อกแกน y ทุกเฟรม
+fig.add_hline(y=THAI_STD, line_dash="dash")
+```
+
+- `monthly` = มัธยฐานต่อภาคต่อเดือน
+- ไม่ล็อก `range_y` → แกนไม่พอดีทุกเฟรม เทียบข้ามเดือนยาก
+
+::: {.callout-tip}
+วาง facet หรือ heatmap เดือน × ภาค คู่กับ animation เสมอ
+:::
+
+## แทนแกนคู่ด้วย subplot แกน x ร่วม
+
+```python
+from plotly.subplots import make_subplots
+fig = make_subplots(rows=2, cols=1, shared_xaxes=True, subplot_titles=["PM2.5", "จำนวนชั่วโมงที่วัดได้"])
+fig.add_trace(go.Scatter(x=one["date"], y=one["pm25_mean"], name="PM2.5"), row=1, col=1)
+fig.add_trace(go.Bar(x=one["date"], y=one["n_hours"], name="n_hours"), row=2, col=1)
+```
+
+- `one` = ข้อมูลรายวันที่ทำความสะอาดแล้วของสถานีเดียว
+- ไม่ต้องเลือกช่วงแกนสองข้างให้เส้นทับกันเอง
+
+## บันทึกเป็น HTML
+
+```python
+fig.write_html("reports/10_region_timeseries.html", include_plotlyjs="cdn")
+```
+
+| `include_plotlyjs` | ผล |
+|---|---|
+| `"cdn"` | ไฟล์เล็ก โหลด plotly.js จากอินเทอร์เน็ต |
+| `True` (ค่าเริ่มต้น) | ฝัง plotly.js ลงไฟล์ ~3–5 MB เปิดออฟไลน์ได้ |
+
+# ข้อมูลใหญ่: คิดก่อนวาด
+
+## ตาราง `measurements` ใหญ่แค่ไหน
+
+**~80 สถานี × 24 ชั่วโมง × 365 วัน × 5 ปี ≈ 3.5 ล้านแถว**
+
+- Plotly ฝังข้อมูลทุกจุดลงใน HTML/JSON
+- ส่ง 3.5 ล้านจุดไป browser → ช้าหรือค้าง
+- จอกว้าง ~1,000 pixel → ตาคนแยก 3.5 ล้านจุดไม่ได้อยู่แล้ว
+
+## สี่กลยุทธ์
+
+| กลยุทธ์ | ทำที่ไหน | ใช้เมื่อ | ข้อควรระวัง |
+|---|---|---|---|
+| **สรุปก่อน** | DuckDB `GROUP BY` | แทบทุกกรณี | ค่าเฉลี่ยซ่อนค่าสุดขั้ว เก็บ max/percentile ด้วย |
+| **สุ่มตัวอย่าง** | DuckDB `USING SAMPLE` | รูปร่างความสัมพันธ์สองตัวแปร | ค่าหายากหลุด ต้องกำหนด seed |
+| **WebGL** | `render_mode="webgl"` | หลักแสนจุด | ยังส่งข้อมูลทั้งหมดไป browser |
+| **Datashader** | Python | หลักล้านจุดขึ้นไป | ภาพ raster ไม่มี hover รายจุด |
+
+## สรุปใน DuckDB: ชั่วโมง × เดือน
+
+```python
+hour_month = con.sql("""
+    SELECT s.region, month(m.ts) AS month, hour(m.ts) AS hour,
+           median(m.pm25) AS pm25_median, count(*) AS n
+    FROM measurements AS m JOIN stations AS s USING (station_id)
+    WHERE m.pm25 IS NOT NULL
+    GROUP BY ALL
+""").df()
+len(hour_month)   # หลักพันแถว จากหลักล้าน
+```
+
+- นำไปวาด `px.density_heatmap` ชั่วโมง × เดือน (Viridis)
+
+## สุ่มตัวอย่างแบบทำซ้ำได้
+
+```python
+sample = con.sql("""
+    SELECT pm25, pm10 FROM measurements
+    USING SAMPLE 1% (bernoulli, 42)      -- 42 คือ seed
+""").df()
+px.scatter(sample, x="pm10", y="pm25", opacity=0.2, render_mode="webgl")
+```
+
+- seed ทำให้ได้ตัวอย่างเดิมทุกครั้ง
+- `opacity` ต่ำ + WebGL ลด overplotting
+
+## Datashader (เสริม): วาดหลักล้านจุด
+
+```python
+hourly["t"] = hourly["ts"].astype("int64")            # Datashader ต้องการแกนเป็นตัวเลข
+
+canvas = ds.Canvas(plot_width=900, plot_height=300, y_range=(0, 300))
+agg = canvas.points(hourly, x="t", y="pm25", agg=ds.count())
+img = tf.shade(agg, how="log")                         # log ทำให้เห็นทั้งบริเวณหนาแน่นและเบาบาง
+tf.set_background(img, "white")
+```
+
+- **นับจุดที่ตกในแต่ละ pixel** แล้วแปลงเป็นสี → ไม่มี overplotting
+- เห็นแถบหนาแน่นยกตัวทุกฤดูแล้ง + ค่าสุดขั้วด้านบน
+- ไม่มี hover → อยากรู้ว่าเป็นสถานีไหน กลับไป query ใน DuckDB
+
+# PyGWalker และ Streamlit
+
+## PyGWalker (เสริม): สำรวจแบบลากวาง
+
+```python
+import pygwalker as pyg
+pyg.walk(region_daily)        # ส่งตารางที่สรุปแล้ว ไม่ใช่ measurements ทั้งตาราง
+```
+
+| ใช้เพื่อ | ไม่ใช้เพื่อ |
+|---|---|
+| ลองหลาย encoding เร็ว ๆ | เป็นผลงานส่ง (ทำซ้ำการลากวางไม่ได้) |
+| สำรวจคอลัมน์ที่ยังไม่คุ้น | แทนโค้ด Plotly ที่ review ได้ |
+
+เจอกราฟที่ใช่ → **เขียนใหม่ด้วย Plotly** แล้ว commit โค้ดนั้น
+
+## กราฟเป็นฟังก์ชันใน `src/charts.py`
+
+```python
+def region_timeseries(df):
+    """df ต้องมีคอลัมน์ region, date, pm25_median"""
+    fig = px.line(df, x="date", y="pm25_median", color="region")
+    fig.add_hline(y=THAI_STD, line_dash="dash", annotation_text="มาตรฐานไทย 37.5")
+    fig.update_xaxes(rangeslider_visible=True)
+    return fig
+```
+
+- รับ DataFrame → คืน Figure
+- **ไม่ query DuckDB เอง** → สัปดาห์ที่ 14 ใส่ cache ที่ชั้น query ได้
+- Streamlit: `st.plotly_chart(region_timeseries(region_daily))`
+
+## สรุป
+
+- สถานะเริ่มต้นต้องตอบคำถามได้ · hover/zoom/animation ใช้เจาะลึก
+- `plotly.express` เป็นหลัก ปรับแต่งด้วย `graph_objects`
+- รายชั่วโมงหลักล้านแถว: สรุปใน DuckDB · สุ่มพร้อม seed · Datashader
+- PyGWalker ใช้สำรวจ ผลงานต้องเป็นโค้ดที่ทำซ้ำได้
+- กราฟเป็นฟังก์ชันใน `src/charts.py` เพื่อใช้ต่อใน Streamlit
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week10-interactive-viz` + notebook + ตารางสรุประดับภาค-วันด้วย DuckDB
+2. สร้าง `src/charts.py` อย่างน้อย 3 ฟังก์ชัน (time series, facet box, animation)
+3. time series + hover + range slider + เส้น 37.5 → บันทึก HTML
+4. facet และ animation รายเดือน
+5. ข้อมูลรายชั่วโมง: สรุป (heatmap ชั่วโมง × เดือน) + สุ่ม (scatter WebGL)
+6. (เสริม) Datashader / PyGWalker → อัปเดต `questions.md` → PR → review เพื่อน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 10](../weeks/week10/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- ทบทวน median, IQR, p-value และ effect size
+- อ่าน `scipy.stats.mannwhitneyu` และ `statsmodels.tsa.seasonal.STL` คร่าว ๆ
+- เลือกข้อสังเกต 2 ข้อจากกราฟสัปดาห์ 9–10 ที่อยาก *ทดสอบ*
+- เขียนเป็นสมมติฐานใน `questions.md` พร้อมระบุปีสำรวจและปี held-out

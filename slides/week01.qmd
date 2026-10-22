@@ -1,0 +1,166 @@
+---
+title: "สัปดาห์ที่ 1"
+subtitle: "ภาพรวม EDA, สภาพแวดล้อมการทำงาน และ Git/GitHub"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 1"
+---
+
+## วันนี้เราจะทำอะไร
+
+- EDA คืออะไร และอยู่ตรงไหนใน data lifecycle
+- ระบบที่จะสร้างตลอดเทอม
+- สภาพแวดล้อมที่ทำซ้ำได้: conda / uv, VS Code, Jupyter
+- Git และ GitHub: commit, branch, pull request
+
+::: {.notes}
+CLO1 · ปฏิบัติการ: ติดตั้งสภาพแวดล้อม + สร้าง repo + PR แรก
+:::
+
+# EDA และ data lifecycle
+
+## Exploratory Data Analysis
+
+> "EDA คือ **งานนักสืบ** ส่วน confirmatory analysis คือ **งานศาล**" — John Tukey (1977)
+
+- ข้อมูลมีอะไร ครอบคลุมเวลาและพื้นที่ไหน
+- คุณภาพพอจะตอบคำถามไหม
+- ตัวแปรกระจายและสัมพันธ์กันอย่างไร
+- มีรูปแบบอะไรที่ควรตรวจต่อ
+
+**EDA สร้างสมมติฐาน แต่ไม่ได้พิสูจน์สมมติฐาน**
+
+## Data lifecycle
+
+```{mermaid}
+flowchart LR
+  A[ตั้งคำถาม] --> B[ได้มาซึ่งข้อมูล] --> C[จัดเก็บ] --> D[ทำความสะอาด] --> E[สำรวจ EDA] --> F[สื่อสารผล]
+  E -. คำถามใหม่จากสิ่งที่พบ .-> A
+```
+
+# ระบบที่จะสร้างทั้งเทอม
+
+## หนึ่งโครงการ หนึ่ง repo
+
+```{mermaid}
+flowchart LR
+  A["แหล่งข้อมูล<br/>สัปดาห์ 3"] --> B["DuckDB<br/>สัปดาห์ 4"] --> C["pandas<br/>สัปดาห์ 5–7"] --> D["Plotly<br/>สัปดาห์ 9–13"] --> E["Streamlit<br/>สัปดาห์ 14"]
+```
+
+- โจทย์ตัวอย่าง: **PM2.5 ของประเทศไทย** จาก Air4Thai
+- เลือกโดเมนอื่นได้ ถ้า
+  1. ดึงข้อมูลด้วยโค้ดได้
+  2. มีมิติเวลา (และพื้นที่)
+  3. ข้อมูลไม่สะอาดสมบูรณ์
+
+## เส้นทางตลอดเทอม
+
+| สัปดาห์ | สิ่งที่เพิ่มในระบบ |
+|---|---|
+| 1–2 | สภาพแวดล้อม, repo, คำถามวิเคราะห์ |
+| 3–7 | ดึง → จัดเก็บ → แปลง → ตรวจคุณภาพ |
+| 8 | **Checkpoint 1** (20%) |
+| 9–13 | กราฟ สถิติ หลายมิติ แผนที่ |
+| 14–15 | รายงาน + แดชบอร์ด (45%) |
+
+# สภาพแวดล้อมการทำงาน
+
+## "รันได้บนเครื่องผม" ไม่พอ
+
+- เวอร์ชันของ Python / pandas ต่างกัน → ผลต่างกัน
+- **environment** = Python + ไลบรารีที่แยกของแต่ละโครงการ บันทึกเป็นไฟล์
+
+| เครื่องมือ | ไฟล์ | จุดเด่น |
+|---|---|---|
+| conda | `environment.yml` | ติดตั้ง GeoPandas ง่าย |
+| uv | `pyproject.toml` + `uv.lock` | เร็ว, lock แม่นยำ |
+
+```bash
+conda env create -f environment.yml && conda activate dstoolbox
+```
+
+## เครื่องมือประจำตัว
+
+- **terminal**: รันคำสั่ง, Git, script
+- **Jupyter**: *สำรวจ* แบบโต้ตอบ
+- **VS Code**: แก้ทุกไฟล์ + terminal + Git ในที่เดียว
+
+::: {.callout-tip}
+Notebook ใช้ **สำรวจ** · โค้ดที่ต้องรันซ้ำให้เป็น `.py`
+:::
+
+# Git และ GitHub
+
+## คำศัพท์ที่ต้องรู้
+
+| คำ | ความหมาย |
+|---|---|
+| commit | บันทึกการเปลี่ยนแปลง + ข้อความ |
+| branch | สายพัฒนาแยกจาก `main` |
+| push / pull | ส่งขึ้น / ดึงลงจาก GitHub |
+| pull request | ขอรวม branch + ให้เพื่อน review |
+
+## วงจรการทำงาน
+
+```bash
+git switch -c week01-setup
+git status
+git add README.md
+git commit -m "เพิ่มคำอธิบายโครงการ"
+git push -u origin week01-setup
+# → เปิด Pull Request บน GitHub → เพื่อน review → Merge
+```
+
+## ห้าม commit
+
+- ❌ ข้อมูล (`data/`, `*.duckdb`): commit **โค้ดที่ดึงข้อมูล** แทน
+- ❌ ความลับ (`.env`, API key): หลุดทันทีที่ push
+- ❌ ข้อมูลส่วนบุคคล: ผิด PDPA
+
+**commit message ที่ดี**
+
+- ❌ `update`, `แก้`, `final2`
+- ✅ `แก้หน่วยเวลาเป็น Asia/Bangkok ก่อนบันทึกลง DuckDB`
+
+## โครงสร้าง repo โครงการ
+
+```text
+pm25-explorer/
+├── README.md       questions.md     AI_USAGE.md
+├── environment.yml .gitignore
+├── src/            ← โค้ดที่รันซ้ำได้
+├── notebooks/      ← การสำรวจ
+├── app/            ← Streamlit (สัปดาห์ 14)
+└── data/           ← ไม่ commit
+```
+
+## การใช้ AI ในรายวิชา
+
+ใช้ได้ แต่ต้อง
+
+1. **อธิบาย**โค้ดที่ส่งได้ทุกบรรทัด
+2. **บันทึก**ใน `AI_USAGE.md`
+3. **ตรวจ**กับข้อมูลจริง: AI มักแต่งชื่อคอลัมน์ ฟังก์ชัน และ endpoint ขึ้นมาเอง
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. ติดตั้ง Git, VS Code, conda หรือ uv
+2. สร้าง environment `dstoolbox`
+3. สร้าง repo บน GitHub + โครงสร้างโครงการ
+4. commit → push → **pull request แรก**
+5. review PR ของเพื่อน 1 รายการ
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 1](../weeks/week01/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- เลือกโดเมนข้อมูลของโครงการ
+- จดคำถามที่อยากรู้ 3 ข้อ
+- อ่าน Pro Git บทที่ 2

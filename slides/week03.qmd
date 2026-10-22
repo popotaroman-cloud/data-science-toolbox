@@ -1,0 +1,264 @@
+---
+title: "สัปดาห์ที่ 3"
+subtitle: "การได้มาซึ่งข้อมูลจาก API และเว็บไซต์"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 3"
+---
+
+## วันนี้เราจะทำอะไร
+
+- จากคำถามสู่ข้อมูลที่ต้องเก็บ
+- HTTP request/response และ requests
+- JSON: ตรวจ key จาก response จริง
+- ดึงอย่างสุภาพ, timeout, retry, logging
+- ความลับใน `.env`
+- `src/fetch_air4thai.py`
+
+::: {.notes}
+CLO2 · ผลงาน: `src/fetch_air4thai.py` บันทึก JSON ดิบพร้อม timestamp ลง `data/raw/`
+:::
+
+# จากคำถามสู่ข้อมูล
+
+## Q1 ต้องการข้อมูลอะไร
+
+| สิ่งที่คำถามต้องการ | แหล่งใน Air4Thai |
+|---|---|
+| PM2.5 รายชั่วโมงทุกสถานี | `getNewAQI_JSON.php` (ดึงซ้ำทุกชั่วโมง) + ข้อมูลย้อนหลัง |
+| รหัส ชื่อ พิกัด พื้นที่ของสถานี | อยู่ใน response เดียวกัน |
+| ภาคของสถานี | ไม่มี → สร้าง mapping จังหวัด → ภาค (สัปดาห์ 4) |
+
+::: {.callout-warning}
+endpoint ข้อมูลย้อนหลังเปลี่ยนตามเวลา ตรวจจากเว็บไซต์ Air4Thai ก่อนใช้ · ระหว่างนี้ใช้ไฟล์ตัวอย่างจากผู้สอน
+:::
+
+# HTTP พื้นฐาน
+
+## Request และ response
+
+```{mermaid}
+flowchart LR
+  A["Client (Python)"] -- "GET /services/getNewAQI_JSON.php<br/>Header: User-Agent, Accept" --> B["Server<br/>air4thai.pcd.go.th"]
+  B -- "200 OK<br/>Content-Type: application/json<br/>Body: {stations: [...]}" --> A
+```
+
+## องค์ประกอบของ HTTP
+
+| องค์ประกอบ | ตัวอย่าง |
+|---|---|
+| **method** | `GET` ขอข้อมูล · `POST` ส่งข้อมูล |
+| **URL** | ที่อยู่ + query string `?station=02t&date=...` |
+| **header** | `User-Agent`, `Content-Type`, `Authorization` |
+| **status code** | 200 · 404 · 429 · 5xx |
+| **body** | JSON, HTML, CSV |
+
+## Status code บอกว่าต้องทำอะไร
+
+| กลุ่ม | ความหมาย | script ควรทำ |
+|---|---|---|
+| 2xx | สำเร็จ | ประมวลผลต่อ |
+| 4xx | ฝั่งเราผิด | หยุด แก้โค้ด (ยกเว้น **429** → รอแล้วลองใหม่) |
+| 5xx | server ผิดพลาดชั่วคราว | รอแล้ว retry |
+
+## ใช้ requests
+
+```python
+URL = "http://air4thai.pcd.go.th/services/getNewAQI_JSON.php"
+r = requests.get(URL, timeout=30)
+
+r.status_code                     # 200
+r.headers.get("Content-Type")     # ชนิดของ body
+r.text[:200]                      # body เป็นข้อความ
+data = r.json()                   # แปลง body เป็น dict/list ของ Python
+```
+
+- พารามิเตอร์ส่งผ่าน `params=` ไม่ต่อ string เอง
+
+# JSON
+
+## ตรวจโครงสร้างก่อนเชื่อเอกสาร
+
+- object `{}` → `dict` · array `[]` → `list` · `null` → `None`
+- เอกสาร หรือ AI อาจบอกชื่อ key ผิด / key เปลี่ยนแล้ว
+
+```python
+data = r.json()
+list(data.keys())                 # key ระดับบนสุด
+st = data["stations"]
+len(st), type(st[0])              # จำนวนสถานี, dict
+list(st[0].keys())                # key ของแต่ละสถานี
+```
+
+**ดูจาก response จริงเสมอ**
+
+## สิ่งที่พบใน Air4Thai (ต.ค. 2569)
+
+- สถานี: `stationID`, `nameTH`, `areaTH`, `lat`, `long`, `AQILast`, ...
+- `AQILast` ซ้อน `date`, `time`, `PM25`, `PM10`, ... แต่ละตัวมี `value`, `aqi`
+- ตัวเลขเป็น **string** เช่น `"9.9"`
+- ค่าหาย = `"-1"` ไม่ใช่ `null` (ไม่แปลง → `AVG()` เฉลี่ย -1 ด้วย)
+- ใช้ `value` (µg/m³) ไม่ใช่ `aqi`
+- จังหวัดอยู่หลังจุลภาคสุดท้ายของ `areaTH`
+
+::: {.notes}
+ย้ำว่าโครงสร้างนี้ ณ เวลาที่เขียนเอกสาร ให้ตรวจกับ response จริงก่อนใช้
+:::
+
+## SSL ของ Air4Thai
+
+- `http://` ถูก redirect ไป `https://`
+- server ส่ง certificate chain ไม่ครบ → `SSLError: CERTIFICATE_VERIFY_FAILED`
+- แก้: ให้ Python ใช้ certificate store ของระบบปฏิบัติการ
+
+```python
+import truststore; truststore.inject_into_ssl()
+```
+
+::: {.callout-warning}
+**ห้ามใช้ `verify=False` ทุกกรณี** เพราะปิดการตรวจตัวตนของ server · ถ้า `truststore` ยังไม่ได้ผล (เช่น Linux/Colab) ให้ใช้ไฟล์ตัวอย่างจากผู้สอน
+:::
+
+## ทำไมเก็บ raw ไว้ก่อน
+
+| เก็บ raw JSON | แปลงทันทีแล้วเก็บแค่ตาราง |
+|---|---|
+| แปลงผิด → ประมวลผลใหม่ได้ | ข้อมูลที่ทิ้งไปเอาคืนไม่ได้ |
+| ตรวจย้อนได้ว่า server ส่งอะไร | ไม่รู้ว่าผิดที่ server หรือโค้ดเรา |
+| ใช้พื้นที่มากกว่า | ประหยัดพื้นที่ |
+
+- **ดึง (สัปดาห์ 3) แยกจาก โหลด/แปลง (สัปดาห์ 4)**
+- `data/raw/air4thai_20261023T140500.json`
+
+# ดึงอย่างสุภาพ
+
+## Polite scraping
+
+- **ความถี่**: Air4Thai อัปเดตรายชั่วโมง → ดึงชั่วโมงละครั้ง
+- **เว้นระยะ**: `time.sleep(1)`–`time.sleep(5)` ระหว่าง request
+- **ระบุตัวตน**: header `User-Agent` ชื่อโครงการ + ช่องทางติดต่อ
+- **`robots.txt`** และ **เงื่อนไขการใช้งาน**
+- **ใช้ API ก่อน scrape**: เสถียรกว่าแกะ HTML
+
+::: {.callout-tip}
+`robots.txt` เป็นข้อตกลง ไม่ใช่กลไกป้องกัน · เข้าถึงได้ ≠ ได้รับอนุญาต (CLO6)
+:::
+
+## ตรวจ `robots.txt`
+
+```python
+from urllib.robotparser import RobotFileParser
+
+rp = RobotFileParser()
+rp.set_url("http://air4thai.pcd.go.th/robots.txt")
+rp.read()
+rp.can_fetch("pm25-explorer", URL)    # True = อนุญาต
+```
+
+# Timeout, retry, logging
+
+## Timeout ทุกครั้ง
+
+- ไม่มี `timeout` → รอไม่สิ้นสุด
+- script ตั้งเวลารายชั่วโมงอาจค้างซ้อนกันหลายตัว
+
+```python
+r = requests.get(URL, timeout=(10, 60))   # (รอเชื่อมต่อ, รออ่านข้อมูล) วินาที
+```
+
+## Retry เฉพาะข้อผิดพลาดชั่วคราว
+
+- ชั่วคราว (เครือข่ายหลุด, 5xx, 429) → รอแล้วลองใหม่ นานขึ้นเรื่อย ๆ (backoff)
+- ถาวร (404, URL ผิด) → ลองซ้ำก็ไม่หาย
+
+```python
+RETRY_STATUS = {429, 500, 502, 503, 504}
+...
+            if r.status_code not in RETRY_STATUS:
+                r.raise_for_status()      # 404 ฯลฯ → raise ทันที ไม่ลองซ้ำ
+                return r
+        if attempt < retries:
+            time.sleep(wait * attempt)    # รอ 5, 10, ... วินาที
+```
+
+## Logging แทน print
+
+- script อัตโนมัติไม่มีใครนั่งดูหน้าจอ → บันทึกลงไฟล์
+
+| ระดับ | ใช้เมื่อ |
+|---|---|
+| `INFO` | ปกติ เช่น บันทึกไฟล์แล้ว |
+| `WARNING` | ผิดปกติแต่ทำต่อได้ เช่น retry |
+| `ERROR` | ทำงานไม่สำเร็จ |
+
+```python
+log.info("ดึงข้อมูลสำเร็จ %d สถานี", 180)
+log.warning("ครั้งที่ %d ล้มเหลว: %s", 1, "timeout")
+```
+
+# ความลับ
+
+## API key อยู่ใน `.env`
+
+- key ในโค้ด → push แล้วอยู่ในประวัติ Git ตลอดไป
+- `.env` (ใน `.gitignore`) · `.env.example` (commit ได้ `API_KEY=`)
+
+```python
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.environ.get("API_KEY")
+if not api_key:
+    raise SystemExit("ไม่พบ API_KEY ใน .env")
+```
+
+- ห้าม log/print key · ระวัง key ใน query string
+
+## (เสริม) BeautifulSoup
+
+- ใช้เมื่อไม่มี API เช่น ตารางบนหน้าเว็บ
+- หน้าเว็บเปลี่ยนบ่อย → โค้ดเสียง่ายกว่า API
+
+```python
+soup = BeautifulSoup(html, "html.parser")
+for tr in soup.select("table tr"):
+    cells = [td.get_text(strip=True) for td in tr.find_all(["th", "td"])]
+```
+
+- ตรวจ `robots.txt` + เก็บ HTML ดิบใน `data/raw/`
+
+# `src/fetch_air4thai.py`
+
+## โครงสร้างของ script
+
+```{mermaid}
+flowchart LR
+  A["ตั้งค่า<br/>URL, User-Agent, logging"] --> B["ดึง<br/>timeout + retry"] --> C["ตรวจ<br/>JSON + มีสถานี"] --> D["บันทึก raw<br/>ชื่อมี timestamp"] --> E["log<br/>exit 0 / 1"]
+```
+
+- **รันซ้ำได้**: ทุกครั้งได้ไฟล์ใหม่ ไม่ทับไฟล์เดิม
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week03-fetch` + โฟลเดอร์ `data/raw`
+2. `notebooks/03_inspect_response.ipynb`: ตารางจับคู่ key จาก response จริง
+3. เขียน `src/fetch_air4thai.py` (อธิบายได้ทุกบรรทัด)
+4. รัน + ทดสอบกรณีล้มเหลว (exit code 1)
+5. ตรวจ `robots.txt`, สร้าง `.env.example`
+6. push → PR (แนบ log 3 ครั้ง) → review เพื่อนโดย **รันจริง**
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 3](../weeks/week03/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- รัน script สะสมข้อมูลต่อ (อย่างน้อย 3 ครั้ง ห่างกัน ≥ 1 ชั่วโมง)
+- ดาวน์โหลด `pm25_hourly_sample.csv` และ `stations_sample.csv`
+- ฝึก SQL `SELECT`, `WHERE`, `GROUP BY` บนเว็บ DuckDB
+- คิดว่าข้อมูลควรแยกเป็นกี่ตาราง อะไรเป็น key

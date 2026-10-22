@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+
+# Quarto output
+_site/
+_freeze/
+.quarto/
+
+# data and secrets never go into the course repo
+data/
+*.duckdb
+*.duckdb.wal
+.env
+
+# editors / OS
+.vscode/
+.DS_Store
+Thumbs.db
+~$*.docx
+
+/.quarto/
+**/*.quarto_ipynb
+
+# internal course documents (not published)
+*.docx

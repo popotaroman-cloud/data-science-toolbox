@@ -1,0 +1,222 @@
+---
+title: "สัปดาห์ที่ 13"
+subtitle: "ข้อมูลเชิงพื้นที่และข้อมูลลำดับชั้น"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 13"
+---
+
+## วันนี้เราจะทำอะไร
+
+- ระบบพิกัดอ้างอิง (CRS): EPSG:4326 vs UTM
+- จาก lat/lon สู่ GeoDataFrame และ spatial join
+- Choropleth ระดับจังหวัด และข้อควรระวัง (MAUP)
+- แผนที่ interactive ด้วย Folium
+- ลำดับชั้น ภาค → จังหวัด → สถานี ด้วย treemap / sunburst
+
+::: {.notes}
+CLO4 · ผลงาน: แผนที่สถานี + choropleth รายจังหวัด + treemap/sunburst · notebooks/13_spatial.ipynb + src/geo_utils.py
+:::
+
+# ทำไมต้องดูข้อมูลบนแผนที่
+
+## PM2.5 เป็นปรากฏการณ์เชิงพื้นที่
+
+| คำถาม (ตัวอย่าง) | ภาพที่เหมาะ |
+|---|---|
+| สถานีอยู่ที่ไหน ครอบคลุมทั้งประเทศไหม | แผนที่จุด (point map) |
+| จังหวัดใดมีวันเกิน 37.5 µg/m³ มากที่สุด | choropleth ระดับจังหวัด |
+| cluster สัปดาห์ที่ 12 กระจุกตามภูมิศาสตร์ไหม | แผนที่จุดระบายสีตาม cluster |
+| ภาคใดมีสัดส่วนสถานีอากาศแย่มาก | treemap / sunburst |
+
+::: {.callout-warning}
+แผนที่ดึงดูดสายตา แต่ทำให้เข้าใจผิดง่าย: **พื้นที่ใหญ่ดูสำคัญกว่าพื้นที่เล็กเสมอ**
+:::
+
+# ระบบพิกัดอ้างอิง (CRS)
+
+## CRS บอกว่าตัวเลขพิกัดคือที่ไหนบนโลก
+
+| CRS | หน่วย | ใช้เมื่อ |
+|---|---|---|
+| **EPSG:4326** (WGS 84, lat/lon) | องศา | เก็บข้อมูล, GPS, แผนที่เว็บ, GeoJSON |
+| **EPSG:32647** (UTM zone 47N) | เมตร | ระยะทาง/พื้นที่/buffer ส่วนใหญ่ของไทย (96°–102°E) |
+| **EPSG:32648** (UTM zone 48N) | เมตร | ตะวันออกของ 102°E เช่น อุบลฯ มุกดาหาร นครพนม |
+
+ข้อมูลเดียวกัน CRS ต่างกัน → ตัวเลขต่างกันโดยสิ้นเชิง
+
+## เก็บใน 4326 · คำนวณใน projected CRS
+
+- 1 องศาลองจิจูดที่เส้นศูนย์สูตร ≈ 111 กม. แต่สั้นลงเมื่อไปทางขั้วโลก
+- "0.5 องศา" ไม่มีความหมายเป็นกิโลเมตร
+- ทั้งประเทศ: เลือก zone เดียว (เช่น 32647) และยอมรับคลาดเคลื่อนเล็กน้อยที่ขอบ
+
+```python
+print(gdf.crs)                     # ตรวจ CRS เสมอก่อนทำอะไร
+gdf_m = gdf.to_crs(epsg=32647)     # แปลงพิกัด (reproject) เป็นเมตร
+```
+
+::: {.callout-tip}
+`to_crs()` **แปลง** พิกัดจริง · `set_crs()` แค่ **ประกาศ** CRS ใช้เมื่อข้อมูลไม่มี CRS และรู้แน่ว่าคืออะไร
+:::
+
+# GeoDataFrame และ spatial join
+
+## จาก lat/lon สู่ GeoDataFrame
+
+**GeoDataFrame** = DataFrame + คอลัมน์ `geometry` + CRS
+
+```python
+st = con.sql("SELECT * FROM stations WHERE lat IS NOT NULL AND lon IS NOT NULL").df()
+
+stations = gpd.GeoDataFrame(
+    st, geometry=gpd.points_from_xy(st["lon"], st["lat"]), crs="EPSG:4326"
+)
+```
+
+- ผิดบ่อยที่สุด: **สลับ lat กับ lon**
+- `points_from_xy` รับ x = ลองจิจูด (~97–106) ก่อน y = ละติจูด (~5–21)
+- ตรวจด้วย `stations.total_bounds` ทุกครั้ง
+
+## ขอบเขตจังหวัด: รู้ที่มา รู้สัญญาอนุญาต
+
+- ใช้ **GeoJSON จากผู้สอน** ที่ `data/geo/`
+- หรือแหล่งเปิด: geoBoundaries (ADM1), HDX ของ OCHA, GADM
+- สัญญาอนุญาตต่างกัน: บางแหล่งห้ามใช้เชิงพาณิชย์ / ต้องระบุที่มา
+- บันทึก **แหล่งที่มา สัญญาอนุญาต วันที่ดาวน์โหลด** ใน README
+- `data/` ไม่ถูก commit → เขียนวิธีได้ไฟล์มาด้วย
+
+```python
+prov = gpd.read_file("data/geo/thailand_provinces.geojson")
+print(prov.crs, len(prov))     # ควรได้ 77 จังหวัด (ขึ้นกับแหล่งข้อมูล)
+print(prov.columns.tolist())   # ตรวจชื่อคอลัมน์จริง อย่าเดา
+```
+
+## Spatial join: เชื่อมด้วยตำแหน่ง แทน key
+
+```python
+prov = prov.to_crs(stations.crs)           # CRS ต้องตรงกันก่อน join
+joined = gpd.sjoin(stations, prov[["prov_name", "geometry"]],
+                   how="left", predicate="within")
+```
+
+1. **ได้จังหวัดจากพิกัด** สำหรับข้อมูลที่ไม่มีคอลัมน์จังหวัด
+2. **ตรวจคุณภาพข้อมูล:** เทียบ `province` เดิมกับ `prov_name`
+   - ไม่ตรง → พิกัดผิด / สะกดต่าง / อยู่ติดเขตแดน
+   - ได้ `NaN` → อยู่นอกทุก polygon (ในทะเล หรือสลับ lat/lon)
+
+# Choropleth และข้อควรระวัง
+
+## Choropleth: ระบายสีพื้นที่ตามค่าสถิติ
+
+- `agg` = สรุปรายจังหวัดจากข้อมูลรายวันที่ทำความสะอาดแล้ว: `n_stations`, `pm25_mean`, `share_over_std`
+
+```python
+m = prov.merge(agg, left_on="prov_name", right_on="province", how="left")
+ax = m.plot(column="share_over_std", cmap="YlOrRd", legend=True,
+            missing_kwds={"color": "lightgrey", "label": "ไม่มีสถานี"})
+```
+
+- จังหวัดไม่มีข้อมูล → **สีเทา** ไม่ใช่เติม 0 (จะดูเหมือนอากาศดี)
+
+## ข้อควรระวังของ choropleth
+
+| ข้อควรระวัง | ปัญหา | วิธีลด |
+|---|---|---|
+| จังหวัดที่มีสถานีน้อย | สถานีเดียวในตัวเมืองระบายสีทั้งจังหวัด | แสดง `n_stations` ใน tooltip, ใช้แผนที่จุดแทน |
+| จังหวัดไม่มีข้อมูล | เติม 0 ดูเหมือนอากาศดี | `missing_kwds` แยกสีชัดเจน |
+| ขนาดพื้นที่หลอกตา | นครราชสีมาดึงสายตามากกว่ากรุงเทพฯ | ใช้คู่กับกราฟแท่ง / แผนที่จุด |
+| ค่าเฉลี่ยของค่าเฉลี่ย | สถานีข้อมูลมากมีน้ำหนักมาก | เฉลี่ยรายสถานีก่อน แล้วจึงรายจังหวัด |
+
+## Modifiable Areal Unit Problem (MAUP)
+
+- ข้อสรุปเชิงพื้นที่ **ขึ้นกับขนาดและขอบเขต** ของหน่วยที่เลือกรวม
+- จังหวัด vs อำเภอ vs กริด → ผลต่างกัน
+- ตัวอย่าง: ระดับจังหวัดอีสานดูอากาศดี แต่ระดับสถานีมีจุดร้อนที่ถูกเฉลี่ยกลบ
+- วิธีลด: ลองอย่างน้อย **2 ระดับ** (ภาค/จังหวัด) และระบุในข้อจำกัด
+
+# แผนที่ interactive ด้วย Folium (เสริม)
+
+## Folium: ซูมได้ มี popup บันทึกเป็น HTML
+
+```python
+fmap = folium.Map(location=[13.5, 101.0], zoom_start=6, tiles="OpenStreetMap")
+for r in stations.itertuples():
+    folium.CircleMarker(
+        location=[r.lat, r.lon], radius=5, fill=True, tooltip=r.name_th,
+        popup=folium.Popup(f"<b>{r.name_th}</b><br>{r.province}", max_width=250),
+    ).add_to(fmap)
+fmap.save("outputs/stations_map.html")
+```
+
+- Folium รับ `[lat, lon]` — **กลับลำดับ** กับ `points_from_xy`
+- OpenStreetMap ต้องระบุที่มา (Folium ใส่ให้อัตโนมัติ) · เปลี่ยน tiles ต้องตรวจเงื่อนไข
+- สำรวจเร็ว ๆ: `stations.explore()` บรรทัดเดียว
+
+# ข้อมูลลำดับชั้น: treemap และ sunburst
+
+## ลำดับชั้น = ระดับ drill-down ของแดชบอร์ด
+
+```{mermaid}
+flowchart LR
+  A[ประเทศไทย] --> B["ภาค<br/>region"] --> C["จังหวัด<br/>province"] --> D["สถานี<br/>station"]
+```
+
+- นี่คือโครงของ drill-down **สัปดาห์ที่ 14**
+- วาดตอนนี้เพื่อตรวจว่าลำดับชั้นสะอาด
+  - จังหวัดหนึ่งอยู่ได้ภาคเดียว
+  - ชื่อสะกดตรงกัน
+
+## Treemap ด้วย Plotly
+
+- `h` = สรุปราย ภาค/จังหวัด/สถานี จากข้อมูลรายวันที่ทำความสะอาดแล้ว: `n_days`, `pm25_mean`
+
+```python
+fig = px.treemap(h, path=[px.Constant("ประเทศไทย"), "region", "province", "name_th"],
+                 values="n_days", color="pm25_mean",
+                 color_continuous_scale="YlOrRd", color_continuous_midpoint=37.5)
+fig.show()
+```
+
+- มีค่าว่างใน `region`/`province` → error เรื่อง non-leaf rows → เติม `"ไม่ระบุ"` หรือตัดพร้อมบันทึก
+
+## Treemap vs sunburst
+
+| | Treemap | Sunburst |
+|---|---|---|
+| รูปแบบ | สี่เหลี่ยมซ้อนกัน | วงแหวนซ้อนจากศูนย์กลาง |
+| อ่านขนาดเปรียบเทียบ | ง่ายกว่า | ยากกว่า (วงนอกใหญ่กว่า) |
+| เห็นโครงสร้างลำดับชั้น | พอใช้ | ชัดเจน |
+| คลิก drill-down | ได้ | ได้ |
+
+## `values` = ขนาด · `color` = ค่าเฉลี่ย
+
+::: {.callout-warning}
+`values` ต้อง **บวกกันได้** (จำนวนวันที่มีข้อมูล, จำนวนสถานี) · ค่าเฉลี่ย PM2.5 บวกกันไม่ได้ → ใช้เป็น **สี**
+:::
+
+- ค่าสีของระดับบน Plotly คำนวณเป็นค่าเฉลี่ยถ่วงน้ำหนักด้วย `values` ให้อัตโนมัติ
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week13-spatial` + ตรวจพิกัดสถานี (`total_bounds`) + GeoDataFrame
+2. โหลดขอบเขตจังหวัด → spatial join → ตรวจ `province` ไม่ตรง → `src/geo_utils.py`
+3. หาสถานีใกล้ที่สุดใน EPSG:32647 (`sjoin_nearest`)
+4. Choropleth รายจังหวัด (matplotlib + Plotly พร้อม `n_stations` ใน tooltip)
+5. (เสริม) Folium + popup · treemap และ sunburst + ตรวจจังหวัดอยู่ภาคเดียว
+6. บันทึกแหล่งข้อมูลขอบเขตใน README → commit → PR → review เพื่อน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 13](../weeks/week13/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- ติดตั้ง Quarto CLI แล้วทดสอบ `quarto check`
+- เลือก 3–4 คำถามใน `questions.md` ที่ตอบได้ชัดที่สุด + ข้อค้นพบหลักคำถามละ 1 ประโยค
+- ร่าง wireframe แดชบอร์ดบนกระดาษ: แต่ละระดับ (ประเทศ / ภาค / จังหวัด / สถานี) แสดงอะไร มีตัวกรองอะไร

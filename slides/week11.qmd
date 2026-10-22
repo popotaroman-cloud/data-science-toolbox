@@ -1,0 +1,288 @@
+---
+title: "สัปดาห์ที่ 11"
+subtitle: "สถิติเชิงสำรวจและ time series"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 11"
+---
+
+## วันนี้เราจะทำอะไร
+
+- จากเบาะแสในกราฟ สู่การทดสอบ
+- สถิติเชิงพรรณนาที่ทนต่อความเบ้ + log transform
+- เปรียบเทียบสองกลุ่ม: t-test, Mann-Whitney U, effect size
+- Correlation, autocorrelation และ STL
+- Multiple comparisons, HARKing, held-out years
+- เขียนผลให้ตรงกับความหนักแน่นของหลักฐาน
+
+::: {.notes}
+CLO4 · เครื่องมือ: SciPy, statsmodels (หลัก), pingouin (เสริม) · ผลงาน: notebooks/11_stats.ipynb + ข้อความสรุปผลใน questions.md
+:::
+
+# จากเบาะแสสู่การทดสอบ
+
+## จากงานนักสืบ สู่งานศาล
+
+- สัปดาห์ 9–10: "ภาคเหนือ *ดูสูงกว่า* กทม. ในฤดูแล้ง"
+- สัปดาห์นี้: ความต่างนั้น **ใหญ่แค่ไหน** และ **เชื่อได้แค่ไหน**
+- ใช้ข้อมูลชุดเดียวทั้งตั้งและทดสอบสมมติฐาน → ผลดูดีเกินจริง
+- ทางแก้ในรายวิชา: **แบ่งปี**
+
+## แบ่งปีสำรวจกับปีที่กันไว้
+
+```{mermaid}
+flowchart LR
+  subgraph E["ปีสำรวจ (exploration)"]
+    A["ดูกราฟ<br/>ตั้งสมมติฐาน"] --> B["เลือกวิธีทดสอบ"] --> C["เขียนลง<br/>questions.md"]
+  end
+  subgraph H["ปีที่กันไว้ (held-out)"]
+    D["ไม่ดูก่อนเขียน<br/>สมมติฐานเสร็จ"] --> F["รันการทดสอบ<br/>ที่เขียนไว้ ครั้งเดียว"]
+  end
+  C --> D
+```
+
+# สถิติเชิงพรรณนาที่ทนต่อความเบ้
+
+## PM2.5 เบ้ขวา: mean และ SD ถูกดึง
+
+| สถิติ | ทนต่อค่าสุดขั้ว | ใช้เมื่อ |
+|---|---|---|
+| mean, SD | ไม่ทน | ค่อนข้างสมมาตร หรือต้องการ "ปริมาณรวม" |
+| **median** | ทน | ค่ากลางของข้อมูลเบ้ |
+| **IQR** (Q3 − Q1) | ทน | การกระจายของข้อมูลเบ้ |
+| percentile 90/95/99 | — | อธิบายหางขวา "วันแย่ที่สุด 10%" |
+| สัดส่วนวันที่เกิน 37.5 | ทน | สื่อสารกับคนทั่วไป ผูกกับมาตรฐาน |
+
+## สรุปรายภาคด้วย DuckDB
+
+- จากข้อมูลรายวันที่ทำความสะอาดแล้ว join `stations` แล้ว `GROUP BY` ภาค
+- `avg`, `median`, `quantile_cont(…, 0.25 / 0.75 / 0.95)`
+- สัดส่วนวันที่ `pm25_mean > 37.5`
+- mean สูงกว่า median ชัดเจน → มีหางขวา
+- ตรวจด้วย `stats.skew(x)`: ค่า > 1 ถือว่าเบ้มาก
+
+## Log transform
+
+- `log(pm25)` → การกระจายใกล้สมมาตร เหมาะกับ t-test ขึ้น
+- อ่านผลเป็น **อัตราส่วน** ได้: "สูงกว่า 1.6 เท่า"
+
+| ข้อควรระวัง | วิธีจัดการ |
+|---|---|
+| `log(0)` = −∞ | `np.log1p` หรือกรองตาม data dictionary สัปดาห์ที่ 7 |
+| ค่าเฉลี่ยของ log ≠ log ของค่าเฉลี่ย | `exp(mean(log x))` = **geometric mean** ต้องเขียนกำกับ |
+| ผู้อ่านไม่คุ้น log | รายงานกลับเป็นหน่วยเดิมหรืออัตราส่วน |
+
+# เปรียบเทียบสองกลุ่ม
+
+## หน่วยการวิเคราะห์มาก่อนการทดสอบ
+
+> *ในฤดูแล้ง (ม.ค.–เม.ย.) PM2.5 ของสถานีภาคเหนือสูงกว่าสถานีใน กทม.*
+
+- ใส่ค่ารายวันทุกวันทุกสถานี → n หลายหมื่น p-value เล็กมากเสมอ
+- ค่ารายวันของสถานีเดียวกัน *ไม่เป็นอิสระต่อกัน*
+- ซื่อตรงกว่า: **สรุปเหลือหนึ่งค่าต่อสถานี** (มัธยฐานฤดูแล้ง)
+- ใช้เฉพาะปีสำรวจ และสถานีที่มีข้อมูลพอ (`HAVING count(*) >= 60`)
+
+## Welch t-test กับ Mann-Whitney U
+
+| | Welch t-test | Mann-Whitney U |
+|---|---|---|
+| ทดสอบ | ค่าเฉลี่ยต่างกันหรือไม่ | กลุ่มหนึ่งมีแนวโน้มสูงกว่าหรือไม่ (อิงลำดับ) |
+| สมมติฐาน | ใกล้ปกติ หรือ n ใหญ่พอ | ไม่สมมติการแจกแจง |
+| กับ PM2.5 | ใช้กับ `log(pm25)` | ใช้กับค่าเดิมได้ |
+
+```python
+t = stats.ttest_ind(np.log(north), np.log(bkk), equal_var=False)
+u = stats.mannwhitneyu(north, bkk, alternative="two-sided")
+```
+
+::: {.callout-warning}
+ทั้งสองวิธีสมมติว่าแต่ละค่า **เป็นอิสระต่อกัน** → จึงต้องสรุปเป็นค่าต่อสถานีก่อน
+:::
+
+## Effect size: ต่างกัน *เท่าไร*
+
+- p-value บอกว่า "ไม่น่าเกิดจากความบังเอิญ" แค่ไหน ไม่ได้บอกว่าต่างมากหรือน้อย
+- n ใหญ่ → ความต่างเล็กน้อยก็ได้ p < 0.05
+
+```python
+ratio = np.exp(np.log(north).mean() - np.log(bkk).mean())       # อัตราส่วน geometric mean
+pooled_sd = np.sqrt((np.log(north).var(ddof=1) + np.log(bkk).var(ddof=1)) / 2)
+cohen_d = (np.log(north).mean() - np.log(bkk).mean()) / pooled_sd
+cles = u.statistic / (len(north) * len(bkk))   # P(สถานีเหนือ > สถานี กทม.) เมื่อสุ่มอย่างละหนึ่ง
+```
+
+## อ่าน effect size
+
+| effect size | อ่านว่า | ตัวอย่าง |
+|---|---|---|
+| ratio ของ geometric mean | สูงเป็นกี่เท่า | "สูงกว่าประมาณ 1.6 เท่า" |
+| Cohen's d (บน log) | ต่างกันกี่ SD (0.2 / 0.5 / 0.8) | "d = 0.9" |
+| CLES | P(ค่าจากกลุ่มแรกสูงกว่า) | "สูงกว่าใน 78% ของคู่ที่สุ่ม" |
+
+**pingouin (เสริม)**: `pg.mwu(north, bkk)`, `pg.ttest(...)` ใช้ตรวจทานตัวเลข
+
+::: {.notes}
+ชื่อคอลัมน์ผลของ pingouin ต่างกันตามเวอร์ชัน (p-val กับ p_val) ให้พิมพ์ทั้งตารางดูก่อน
+:::
+
+# Correlation และ autocorrelation
+
+## Pearson กับ Spearman
+
+| | Pearson r | Spearman ρ |
+|---|---|---|
+| วัด | ความสัมพันธ์ *เชิงเส้น* | ความสัมพันธ์ *ทางเดียว* (monotonic) |
+| ค่าสุดขั้ว | ไวมาก | ทน |
+| กับ PM2.5 | ใช้กับ log | ใช้กับค่าเดิมได้ |
+
+```python
+print(stats.pearsonr(pair["pm25"], pair["pm10"]))
+print(stats.spearmanr(pair["pm25"], pair["pm10"]))
+```
+
+::: {.callout-warning}
+สองตัวแปรที่มีฤดูกาลเหมือนกันอาจ correlate เพียงเพราะสูงในฤดูแล้งทั้งคู่ → ตรวจกับ **remainder** หลังตัด seasonality
+:::
+
+## Autocorrelation
+
+- correlation ของอนุกรมกับตัวเองที่เลื่อนเวลา (lag)
+- PM2.5 วันนี้สัมพันธ์กับเมื่อวานสูงมาก
+
+```python
+y = one.set_index(pd.to_datetime(one["date"]))["pm25_mean"].asfreq("D")   # ให้มีทุกวัน ช่องว่างเป็น NaN
+plot_acf(np.log(y), lags=60, missing="conservative")
+```
+
+- `one` = ข้อมูลรายวันที่ทำความสะอาดแล้วของสถานีเดียว
+
+## Autocorrelation ทำอะไรกับการทดสอบ
+
+| ผล | ความหมาย |
+|---|---|
+| 365 วัน ≠ ข้อมูลอิสระ 365 ชิ้น | **effective sample size** น้อยกว่าจำนวนแถวมาก |
+| t-test / correlation บนค่ารายวัน | p-value เล็กเกินจริง |
+| สองอนุกรมมี trend หรือฤดูกาล | spurious correlation |
+
+- ทางแก้ในรายวิชา: สรุปเป็นหน่วยที่ใกล้อิสระ · แยก seasonality ก่อน · ยืนยันด้วยปี held-out
+
+# STL decomposition
+
+## แยก trend และ seasonality
+
+**y(t) = trend(t) + seasonal(t) + remainder(t)** (บน log อ่านเป็นผลคูณ)
+
+STL: Seasonal-Trend decomposition using LOESS (Cleveland et al., 1990)
+
+| ขั้น | ทำอะไร |
+|---|---|
+| 1. เลือกความละเอียด | รายเดือน (`period=12`) เหมาะกับ trend หลายปี |
+| 2. ระยะห่างเท่ากัน | `asfreq("MS")` → ช่วงที่หายเป็น NaN |
+| 3. เกณฑ์ความครบ | เดือนที่มีข้อมูล < 20 วัน = NaN |
+| 4. เติมเฉพาะช่องว่างสั้น | `interpolate(limit=2)` |
+| 5. บันทึกการตัดสินใจ | เติมกี่จุด เพราะอะไร |
+
+## STL ใน statsmodels
+
+```python
+s = m.set_index(pd.to_datetime(m["month"])).asfreq("MS")
+s.loc[s["n_days"] < 20, "pm25"] = np.nan
+y = np.log(s["pm25"]).interpolate(limit=2)
+print("ยังเหลือ NaN:", y.isna().sum())          # ต้องเป็น 0 ก่อนเข้า STL
+
+res = STL(y, period=12, robust=True).fit()     # robust=True ลดอิทธิพลของเดือนผิดปกติ
+res.plot()
+```
+
+- `m` = ค่าเฉลี่ยรายเดือนของสถานีหนึ่ง สรุปจากข้อมูลรายวันที่ทำความสะอาดแล้ว
+
+## อ่านผล STL
+
+```python
+strength_trend    = max(0, 1 - res.resid.var() / (res.trend + res.resid).var())
+strength_seasonal = max(0, 1 - res.resid.var() / (res.seasonal + res.resid).var())
+```
+
+- strength (Hyndman & Athanasopoulos) อยู่ระหว่าง 0–1
+- ใกล้ 1 = ส่วนนั้นอธิบายความผันแปรได้มาก
+- สถานีภาคเหนือ: คาดว่า seasonal strength สูงมาก
+
+::: {.callout-warning}
+trend จากข้อมูลไม่กี่ปีเป็นเพียง **คำบรรยาย** ไม่ใช่การพยากรณ์
+:::
+
+# Multiple comparisons และ HARKing
+
+## ทดสอบหลายครั้ง เจอ "นัยสำคัญ" ฟรี
+
+- 80 สถานี × α = 0.05 → คาดว่า ~4 สถานี "มีนัยสำคัญ" โดยบังเอิญ
+
+| แนวทาง | ทำอย่างไร |
+|---|---|
+| ลดจำนวนการทดสอบ | ทดสอบเฉพาะสมมติฐานที่เขียนไว้ก่อนดูผล |
+| ปรับ p-value | `"holm"` (family-wise) หรือ `"fdr_bh"` (false discovery rate) |
+| กันข้อมูลไว้ยืนยัน | ทดสอบซ้ำกับปีที่ไม่ได้ใช้สำรวจ |
+
+```python
+from statsmodels.stats.multitest import multipletests
+reject, p_adj, _, _ = multipletests(pvals, method="holm")
+```
+
+## HARKing
+
+**Hypothesizing After the Results are Known**
+
+- เห็นผลก่อน แล้วเขียนสมมติฐานย้อนหลังให้ดูเหมือนตั้งไว้แต่แรก
+- ป้องกัน: commit `questions.md` (สมมติฐาน + วิธีทดสอบ + ปี held-out) **ก่อน** ทดสอบ
+- ประวัติ Git = หลักฐานว่าเขียนไว้ก่อน
+
+# เขียนผลให้ตรงกับหลักฐาน
+
+## ถ้อยคำตามความหนักแน่นของหลักฐาน
+
+| หลักฐาน | เหมาะ | เกินหลักฐาน |
+|---|---|---|
+| เห็นจากกราฟเท่านั้น | "กราฟชี้ว่า…", "ดูเหมือนว่า…" | "พิสูจน์ว่า…" |
+| ทดสอบในปีสำรวจ มีนัยสำคัญ | "…สูงกว่า กทม. ประมาณ 1.6 เท่า (p, CLES, n)" | "สูงกว่า กทม. เสมอ" |
+| ยืนยันใน held-out year | "ผลเดียวกันพบในปี 2568…" | — |
+| p ≥ 0.05 | "ข้อมูลไม่เพียงพอที่จะสรุปว่าต่างกัน" | "ไม่มีความแตกต่าง" |
+| correlation | "สัมพันธ์กัน" | "เป็นสาเหตุ", "ทำให้" |
+
+## รายงานผลที่ดีมีอะไรบ้าง
+
+**ขนาดผล + หน่วย + ช่วงเวลา/ประชากร + วิธี + p-value + n + ข้อจำกัด**
+
+> "ในปี 2563–2567 สถานีภาคเหนือมี PM2.5 ฤดูแล้งสูงกว่า กทม. ประมาณ 1.6 เท่า (Mann-Whitney p = 0.002, CLES = 0.78, n = 18 และ 12 สถานี)"
+
+## สรุป
+
+- PM2.5 เบ้ขวา: median, IQR, percentile, สัดส่วนวันที่เกิน 37.5 + log
+- เลือกหน่วยการวิเคราะห์ที่ใกล้อิสระ · รายงาน effect size คู่ p-value
+- Spearman ทนกว่า Pearson · autocorrelation ทำให้ p รายวันเชื่อไม่ได้
+- STL ต้องจัดการช่องว่างและบันทึกการตัดสินใจก่อน
+- ตั้งสมมติฐานก่อน · ปรับ p · ยืนยันด้วย held-out · ไม่เขียนเกินหลักฐาน
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week11-stats` + เขียนสมมติฐาน H1/H2 ใน `questions.md` แล้ว **commit ก่อนทดสอบ**
+2. ตารางสถิติเชิงพรรณนา + เทียบ skew ก่อน/หลัง log
+3. H1 (เหนือ vs กทม.) ด้วย `compare()` · H2 (แล้ง vs ฝน) ด้วย Wilcoxon จับคู่
+4. เทียบทุกภาคกับ กทม. แล้วปรับด้วย Holm
+5. correlation + ACF · STL รายเดือน 1 สถานี
+6. รันซ้ำกับปี held-out → เขียนผลใน `questions.md` → PR → review เพื่อน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 11](../weeks/week11/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- อ่าน *Forecasting: Principles and Practice* บท "Time series decomposition" หัวข้อ STL
+- ทบทวน PCA และ k-means หรืออ่าน scikit-learn User Guide หัวข้อ "Clustering"
+- จดสถานีที่มีพฤติกรรม "ผิดจากกลุ่ม" จากผลสัปดาห์นี้ ไว้ใช้เรื่อง outlier สัปดาห์ที่ 12

@@ -1,0 +1,24 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+
+$font-family-sans-serif: "Sarabun", sans-serif;
+$presentation-heading-font: "Sarabun", sans-serif;
+$presentation-font-size-root: 34px;
+$presentation-heading-color: #1f4e79;
+$link-color: #1f6fb5;
+
+/*-- scss:rules --*/
+.reveal table {
+  font-size: 0.75em;
+}
+.reveal pre code {
+  font-size: 0.8em;
+  line-height: 1.35;
+}
+.reveal .cell-output-display svg,
+.reveal .mermaid svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto;
+  max-height: 500px;
+}

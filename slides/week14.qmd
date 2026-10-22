@@ -1,0 +1,268 @@
+---
+title: "สัปดาห์ที่ 14"
+subtitle: "สื่อสารข้อค้นพบและ reproducibility"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 14"
+---
+
+## วันนี้เราจะทำอะไร
+
+- Data storytelling: จาก notebook สู่เรื่องเล่า
+- Quarto: รายงานที่สร้างจากโค้ด
+- Streamlit: แดชบอร์ด drill-down 4 ระดับ + cache + `session_state`
+- Reproducibility: fresh-clone test
+- เกณฑ์ data story report (15%)
+
+::: {.notes}
+CLO5 · ผลงาน: report/report.qmd (15%) + app/app.py drill-down ประเทศ → ภาค → จังหวัด → สถานี + run_all.py + README ขั้นตอนรัน
+:::
+
+# Data storytelling
+
+## Notebook ≠ Report
+
+ผู้อ่านไม่ต้องการเห็น *ทุกอย่างที่เราทำ* แต่ต้องการรู้ *สิ่งที่เราพบ* และ *เชื่อได้แค่ไหน*
+
+| Notebook (สำรวจ) | Report (สื่อสาร) |
+|---|---|
+| เรียงตามลำดับที่เราทำ | เรียงตามคำถามของผู้อ่าน |
+| มีทุกกราฟ รวมถึงทางตัน | เฉพาะกราฟที่ตอบคำถาม |
+| ผู้อ่านคือตัวเราเอง | ผู้อ่านคือคนที่ไม่ได้อยู่ในห้อง |
+| โค้ดเด่น | ข้อค้นพบเด่น โค้ดซ่อนไว้ |
+
+## โครงสร้างที่แนะนำ
+
+1. **สรุปสำหรับผู้บริหาร** 3–5 bullet: ข้อค้นพบหลักของแต่ละคำถาม
+2. **ข้อมูลและวิธีการ** แหล่งข้อมูล ช่วงเวลา จำนวนสถานี การทำความสะอาด (สั้น ๆ)
+3. **คำถามที่ 1, 2, …** → ข้อค้นพบ → หลักฐาน → ความมั่นใจ
+4. **ข้อจำกัด**
+5. **ข้อเสนอแนะ / คำถามต่อไป**
+6. **ภาคผนวก** data dictionary, การใช้ AI
+
+## หลักสามข้อ
+
+1. **ข้อค้นพบมาก่อน (finding first)**
+   - ❌ "ผลการวิเคราะห์รายภาค"
+   - ✅ "ภาคเหนือมีวันเกินมาตรฐานมากกว่าภาคอื่นราว 3 เท่า โดยกระจุกในเดือน มี.ค.–เม.ย."
+2. **เลือกกราฟอย่างตั้งใจ** หนึ่งกราฟหนึ่งประเด็น + เส้นมาตรฐาน 37.5 (และ WHO 15) µg/m³
+3. **บอกข้อจำกัดตรงไปตรงมา** สถานีกระจุกในเมือง, ข้อมูลขาดหาย, outlier ที่ไม่แน่ใจ, MAUP, ความสัมพันธ์ ≠ เหตุและผล
+
+# Quarto: รายงานที่สร้างจากโค้ด
+
+## Quarto คืออะไร
+
+- `.qmd` = Markdown + code chunk → HTML, PDF หรือ Word
+- **รันโค้ดจริงทุกครั้งที่ render** → ตัวเลขตรงกับข้อมูลเสมอ
+- ไม่ต้องคัดลอกกราฟไปวาง
+
+```bash
+quarto render report/report.qmd      # ได้ report/report.html
+quarto preview report/report.qmd     # เปิด browser และ render ใหม่เมื่อบันทึก
+```
+
+## YAML header
+
+```yaml
+format:
+  html:
+    toc: true
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: false
+```
+
+| ตัวเลือก | ความหมาย |
+|---|---|
+| `execute: echo: false` | ซ่อนโค้ดทั้งรายงาน แสดงเฉพาะผล |
+| `code-fold: true` | ถ้าเปิด echo ให้โค้ดพับไว้ กดดูได้ |
+| `embed-resources: true` | รวม CSS/JS/รูป (รวม Plotly) ในไฟล์ HTML เดียว |
+| `jupyter: python3` | ใช้ kernel Python ของ environment โครงการ |
+
+## Code chunk
+
+````markdown
+```{{python}}
+#| label: fig-region
+#| fig-cap: "ภาคเหนือมีสัดส่วนวันเกินมาตรฐานสูงที่สุด"
+fig = px.bar(df, x="region", y="share_over_std")
+fig
+```
+````
+
+- ตัวเลือก chunk เขียนด้วย `#|` บรรทัดแรก ๆ
+- **กราฟ Plotly ฝังได้ทันที** ให้ `fig` เป็นค่าสุดท้าย และยัง interactive
+- `df` query จากข้อมูลรายวันที่ทำความสะอาดแล้ว
+
+## เคล็ดลับ Quarto
+
+- ตัวเลขในประโยค: `` `{{python}} n_stations` `` (Quarto 1.4+) → ไม่ล้าสมัย
+- working directory = โฟลเดอร์ของ `.qmd` → อ้าง `../data/pm25.duckdb`
+
+::: {.callout-tip}
+ย้าย query ที่ใช้ทั้งในรายงานและแดชบอร์ดไปไว้ใน `src/queries.py` → ตัวเลขสองที่ตรงกัน
+:::
+
+# Streamlit: แดชบอร์ดจาก Python ล้วน
+
+## รัน script ใหม่ทั้งไฟล์ทุกครั้งที่ขยับ widget
+
+`streamlit run app/app.py`
+
+| Widget | ใช้ทำอะไร |
+|---|---|
+| `st.selectbox`, `st.multiselect` | เลือกภาค จังหวัด สถานี |
+| `st.date_input` | ช่วงวันที่ (tuple 2 ค่า) |
+| `st.slider`, `st.radio` | เกณฑ์ เช่น มาตรฐานไทย / WHO |
+| `st.metric` | ตัวเลขสรุป (KPI) |
+| `st.plotly_chart(fig)` | แสดงกราฟ Plotly |
+| `st.sidebar.*`, `st.columns`, `st.tabs` | จัด layout |
+
+## DuckDB แบบ read-only + cache
+
+```python
+@st.cache_resource                       # สร้าง connection ครั้งเดียว ใช้ร่วมกันทุก session
+def get_con():
+    return duckdb.connect(str(DB_PATH), read_only=True)
+
+@st.cache_data(ttl=600)                  # cache ผล query (DataFrame) 10 นาที
+def query(sql: str, params: tuple = ()):
+    return get_con().cursor().execute(sql, list(params)).df()
+```
+
+- `DB_PATH = Path(__file__).resolve().parents[1] / "data" / "pm25.duckdb"`
+
+## `cache_resource` vs `cache_data`
+
+| | `st.cache_resource` | `st.cache_data` |
+|---|---|---|
+| เก็บอะไร | object ใช้ร่วมกัน: connection, โมเดล | ผลที่ serialize ได้: DataFrame |
+| ได้ค่าแบบใด | object ตัวเดิม (shared) | สำเนาใหม่ทุกครั้ง |
+| key ของ cache | argument ของฟังก์ชัน | argument (`sql`, `params`) |
+
+## ทำไมออกแบบแบบนี้
+
+- **`read_only=True`** แดชบอร์ดอ่านอย่างเดียว · หลาย process อ่านพร้อมกันได้
+  - แต่ขณะ app เปิดอยู่ script ที่ต้อง *เขียน* จะเปิดไฟล์ไม่ได้ → ปิด app ก่อนรัน pipeline
+- **`.cursor()`** แต่ละ session รันใน thread ต่างกัน → cursor ปลอดภัยกว่าใช้ connection ข้าม thread
+- **`?` parameter** แทนต่อ string → กัน SQL injection + cache key ชัดเจน
+
+## Drill-down ด้วย `session_state`
+
+`st.session_state` = dictionary ที่อยู่รอดข้าม rerun ของ session เดียวกัน
+
+```python
+ss = st.session_state
+for k in ("region", "province", "station"):
+    ss.setdefault(k, None)
+
+def drill(level, widget_key):           # callback: รันก่อน script รอบใหม่
+    ss[level] = ss[widget_key]
+    ss[widget_key] = None
+```
+
+## สี่ระดับของแดชบอร์ด
+
+| ระดับ | สถานะ | แสดงอะไร (ตัวอย่าง) |
+|---|---|---|
+| 1 ประเทศ | ทุกค่าเป็น `None` | KPI ทั้งประเทศ, bar รายภาค, แผนที่สถานี |
+| 2 ภาค | `region` มีค่า | bar รายจังหวัด, line รายเดือน |
+| 3 จังหวัด | `province` มีค่า | สถานีในจังหวัด, time series เทียบสถานี |
+| 4 สถานี | `station` มีค่า | time series รายวัน, วันเกินมาตรฐาน, outlier flags, cluster |
+
+::: {.notes}
+ลำดับชั้นเดียวกับ treemap สัปดาห์ที่ 13 · Streamlit ≥ 1.35 มี on_select="rerun" ให้คลิกแท่งกราฟได้ แต่ให้ทำแบบ selectbox ให้ทำงานก่อน
+:::
+
+# Reproducibility: คนอื่นรันได้ไหม
+
+## สิ่งที่ต้องมี
+
+| องค์ประกอบ | สิ่งที่ต้องมี |
+|---|---|
+| สภาพแวดล้อม | `environment.yml` (หรือ `pyproject.toml` + `uv.lock`) ครบตามที่ import จริง |
+| ขั้นตอนรัน | script เดียว เช่น `run_all.py` หรือขั้นตอนใน README ที่คัดลอกไปรันได้ |
+| path | ไม่มี path absolute · ใช้ `Path(__file__).resolve().parents[1]` |
+| ข้อมูล | ไม่ commit `data/` แต่บอกวิธีสร้างใหม่ + ทางเลือกเมื่อ API ล่ม |
+| ความลับ / ความสุ่ม | `.env` + `.env.example` · ตั้ง `random_state` / `Faker.seed` ทุกที่ |
+| เอกสาร | README: คืออะไร ติดตั้ง รัน ผลอยู่ที่ไหน ข้อจำกัด |
+
+## Fresh-clone test
+
+```bash
+git clone https://github.com/<username>/pm25-explorer.git
+cd pm25-explorer
+conda env create -f environment.yml -n pm25-test
+conda activate pm25-test
+python run_all.py                         # สร้าง data/pm25.duckdb ใหม่จากต้นทาง
+quarto render report/report.qmd
+streamlit run app/app.py
+```
+
+- สัปดาห์ที่ 15 เพื่อนจะ **clone ใหม่แล้วรันตาม README** · รันไม่ได้ = ยังไม่เสร็จ
+
+## ขั้นไหนพัง แก้ที่ repo
+
+ข้อผิดพลาดที่พบบ่อย
+
+- ลืมเพิ่มไลบรารีใน `environment.yml`
+- path absolute เช่น `C:\Users\me\...`
+- ไฟล์ที่มีเฉพาะบนเครื่องเรา
+- ลำดับการรัน script
+
+::: {.callout-warning}
+แก้ที่ **repo** ไม่ใช่แก้บนเครื่อง จนรันผ่านทั้งหมด
+:::
+
+# Power BI / Looker Studio (เสริม)
+
+## Streamlit + DuckDB vs เครื่องมือ BI
+
+| | Streamlit + DuckDB | Power BI / Looker Studio |
+|---|---|---|
+| สร้างแดชบอร์ดแรก | ต้องเขียนโค้ด | เร็วมาก ลากวาง |
+| version control / code review | เต็มที่ด้วย Git | จำกัด |
+| ทำซ้ำได้ | สูง | ขึ้นกับการตั้งค่าบนแพลตฟอร์ม |
+| ปรับแต่ง/วิเคราะห์ขั้นสูง | ไม่จำกัด (Python) | จำกัดตามฟีเจอร์ |
+| ค่าใช้จ่าย / บัญชี | ฟรี | อาจต้องมีบัญชีหรือ license |
+
+ลองส่งออกข้อมูลรายวันที่ทำความสะอาดแล้วเป็น CSV ด้วย `COPY ... TO` แล้วเปรียบเทียบ
+
+# เกณฑ์ data story report (15 คะแนน)
+
+## เกณฑ์ประเมิน
+
+| เกณฑ์ | คะแนน | ดีเยี่ยม |
+|---|---|---|
+| โครงเรื่องตามคำถาม | 3 | ทุกส่วนผูกกับ `questions.md` มีบทสรุปข้อค้นพบตอนต้น |
+| ข้อค้นพบและหลักฐาน | 4 | หัวข้อ/ชื่อกราฟเป็นประโยคข้อค้นพบ หลักฐานทั้งภาพและสถิติ |
+| การเลือกและออกแบบกราฟ | 3 | เหมาะกับประเด็น มีหน่วย เส้นมาตรฐาน ป้ายไทยอ่านง่าย |
+| ข้อจำกัดและจริยธรรม | 2 | ข้อจำกัด ผลต่อข้อสรุป และประเด็น PDPA |
+| Reproducibility | 2 | render จาก fresh clone ผ่าน ตัวเลขในข้อความมาจากโค้ด |
+| ภาษาและการอ้างอิง | 1 | กระชับ อ้างแหล่งข้อมูล/สัญญาอนุญาตครบ มีภาคผนวก AI |
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week14-report-dashboard` + ตาราง คำถาม → ข้อค้นพบ → หลักฐาน → ความมั่นใจ
+2. เขียน `report/report.qmd` แล้ว `quarto render`
+3. สร้าง `app/app.py` drill-down 4 ระดับ + ตัวกรองวันที่ + breadcrumb
+4. `run_all.py` + ขั้นตอนรันใน README + ตรวจ path absolute / seed
+5. Fresh-clone test แลกกับเพื่อน → เปิด issue ตามแบบฟอร์ม
+6. commit → PR → review · ส่ง `report.html` ในระบบส่งงาน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 14](../weeks/week14/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- ทำรายงานและแดชบอร์ดให้เสร็จ แก้ตามผล fresh-clone test
+- อ่านคู่มือการนำเสนอสัปดาห์ที่ 15 และเกณฑ์ 30 คะแนน
+- ร่างลำดับการนำเสนอ 10 นาที
+- เลือก 1 ข้อค้นพบที่จะ demo บนแดชบอร์ดสด

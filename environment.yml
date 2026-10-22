@@ -1,0 +1,50 @@
+name: dstoolbox
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  # environment & notebooks
+  - jupyterlab
+  - ipykernel
+  # data acquisition
+  - requests
+  - truststore            # แก้ปัญหา SSL certificate ของ Air4Thai
+  - python-dotenv
+  - beautifulsoup4
+  # storage & query
+  - python-duckdb>=1.4,<2   # ทั้งชั้นใช้เวอร์ชันหลักเดียวกัน (ไฟล์ .duckdb ของ 2.x เปิดด้วย 1.x ไม่ได้)
+  - pyarrow
+  # wrangling
+  - pandas
+  - polars
+  # profiling & data quality
+  - ydata-profiling
+  - pandera
+  - missingno
+  # visualization
+  - seaborn
+  - altair
+  - vl-convert-python
+  - plotly
+  - datashader
+  # statistics
+  - scipy
+  - statsmodels
+  - pingouin
+  # multivariate & outliers
+  - scikit-learn
+  - umap-learn
+  - pyod
+  - imbalanced-learn
+  # synthetic data
+  - faker
+  # spatial
+  - geopandas
+  - folium
+  # communication
+  - streamlit
+  - pip
+  - pip:
+      - skimpy
+      - pygwalker
+      - sdv

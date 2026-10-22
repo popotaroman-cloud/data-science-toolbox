@@ -1,0 +1,264 @@
+---
+title: "สัปดาห์ที่ 4"
+subtitle: "การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 4"
+---
+
+## วันนี้เราจะทำอะไร
+
+- ทำไม DuckDB เหมาะกับงาน EDA
+- ออกแบบตาราง `stations` + `measurements`
+- SQL: `SELECT`, `WHERE`, `GROUP BY`, `JOIN`, window function
+- โหลดแบบ idempotent
+- Parquet และ Apache Arrow
+
+::: {.notes}
+CLO2 · ผลงาน: `src/load_duckdb.py` สร้าง `data/pm25.duckdb` มีตาราง `stations` และ `measurements`
+:::
+
+# จาก raw สู่ฐานข้อมูล
+
+## ทำไมไม่ query JSON ตรง ๆ
+
+- ตอบ Q1 จาก JSON → เปิดทุกไฟล์ แกะ key ซ้อนชั้น รวมเองทุกครั้ง
+- สัปดาห์นี้: แปลง raw เป็น **ตาราง** ที่ถามด้วย SQL ได้
+
+```{mermaid}
+flowchart LR
+  A["data/raw/*.json"] --> C["src/load_duckdb.py<br/>แปลง + ตัดซ้ำ"]
+  B["data/sample/*.csv"] --> C
+  C --> D["data/pm25.duckdb<br/>stations, measurements"] --> E["SQL / pandas<br/>สัปดาห์ 5"]
+```
+
+## เลือกที่เก็บข้อมูล
+
+| ตัวเลือก | ข้อจำกัดสำหรับงานนี้ |
+|---|---|
+| CSV/JSON หลายไฟล์ | ไม่มีชนิดข้อมูล ไม่มี key ป้องกันแถวซ้ำ |
+| SQLite | ออกแบบสำหรับ OLTP รวมหลายล้านแถวช้า |
+| PostgreSQL / MySQL | ต้องดูแล server เกินจำเป็น |
+| **DuckDB** | ไฟล์เดียว ไม่มี server, columnar · เขียนพร้อมกันหลาย process ไม่ได้ |
+
+## OLTP vs OLAP
+
+- **OLTP**: อ่าน/เขียนทีละแถว — "บันทึกการสั่งซื้อหนึ่งรายการ"
+- **OLAP**: อ่านไม่กี่คอลัมน์จากแถวจำนวนมาก — "ค่าเฉลี่ย PM2.5 ทุกสถานีทั้งปี"
+- **columnar**: ค่าในคอลัมน์เดียวกันอยู่ติดกัน → อ่านเฉพาะ `pm25`, `ts`
+- 80 สถานี × 5 ปี ≈ **3.5 ล้านแถว**: ใหญ่สำหรับ Excel เล็กมากสำหรับ DuckDB
+
+```python
+con = duckdb.connect("data/pm25.duckdb")     # ถ้าไม่มีไฟล์ จะสร้างใหม่
+con.sql("SELECT 42 AS answer").show()
+```
+
+# Data model
+
+## สองตาราง
+
+```sql
+CREATE TABLE IF NOT EXISTS measurements (
+    station_id VARCHAR,
+    ts         TIMESTAMP,          -- เวลาท้องถิ่น Asia/Bangkok รายชั่วโมง
+    pm25 DOUBLE, pm10 DOUBLE, o3 DOUBLE, co DOUBLE, no2 DOUBLE, so2 DOUBLE,
+    PRIMARY KEY (station_id, ts)
+);
+```
+
+- `stations`: `station_id` (PK), `name_th`, `name_en`, `province`, `region`, `lat`, `lon`, `station_type`
+
+## เหตุผลของการออกแบบ
+
+| การตัดสินใจ | เหตุผล |
+|---|---|
+| แยก `stations` / `measurements` | ไม่เก็บชื่อและพิกัดซ้ำทุกชั่วโมง |
+| PK `(station_id, ts)` | หนึ่งสถานีหนึ่งแถวต่อชั่วโมง ฐานข้อมูลปฏิเสธแถวซ้ำ |
+| `ts` เวลาท้องถิ่น | ตกลงกันทั้งโครงการ (timezone สัปดาห์ 5) |
+| ค่าหายเป็น `NULL` | ห้าม `-1`, `-999` เพราะ `AVG()` นำไปคำนวณ |
+| `region` ใน `stations` | เติมจาก mapping จังหวัด → ภาค ที่เขียนเอง |
+
+# SQL พื้นฐาน
+
+## SELECT และ WHERE
+
+```sql
+SELECT station_id, ts, pm25
+FROM measurements
+WHERE pm25 > 75                         -- ค่ารายชั่วโมงสูง
+  AND ts >= TIMESTAMP '2023-01-01'
+ORDER BY pm25 DESC
+LIMIT 10;
+```
+
+::: {.callout-tip}
+มาตรฐาน 37.5 µg/m³ ใช้กับ **ค่าเฉลี่ย 24 ชม.** ไม่ใช่ค่ารายชั่วโมง (สัปดาห์ 5)
+:::
+
+## GROUP BY
+
+```sql
+SELECT station_id,
+       COUNT(*)            AS n_rows,
+       COUNT(pm25)         AS n_pm25,     -- นับเฉพาะค่าที่ไม่ใช่ NULL
+       ROUND(AVG(pm25), 1) AS pm25_mean
+FROM measurements
+GROUP BY station_id;
+```
+
+- `COUNT(*)` − `COUNT(pm25)` = จำนวนชั่วโมงที่ PM2.5 หาย (สำคัญสัปดาห์ 6–7)
+
+## JOIN
+
+```sql
+SELECT s.region, ROUND(AVG(m.pm25), 1) AS pm25_mean
+FROM measurements AS m
+JOIN stations     AS s USING (station_id)
+GROUP BY s.region;
+```
+
+| ชนิด | ผลลัพธ์ |
+|---|---|
+| `JOIN` (INNER) | เฉพาะแถวที่ตรงกันทั้งสองตาราง |
+| `LEFT JOIN` | ทุกแถวของซ้าย ไม่ตรงได้ `NULL` → หาสถานีที่ไม่อยู่ใน `stations` |
+
+## Window function
+
+- คำนวณข้ามหลายแถว **โดยไม่ยุบแถว** (ต่างจาก `GROUP BY`)
+
+```sql
+SELECT station_id, ts, pm25,
+       AVG(pm25) OVER (
+           PARTITION BY station_id ORDER BY ts
+           ROWS BETWEEN 23 PRECEDING AND CURRENT ROW
+       ) AS pm25_roll24
+FROM measurements;
+```
+
+::: {.callout-warning}
+24 **แถว** ≠ 24 **ชั่วโมง** ถ้ามีชั่วโมงหาย ผลคลาดเคลื่อน
+:::
+
+## QUALIFY: top-N ต่อกลุ่ม
+
+```sql
+-- 3 ชั่วโมงที่ PM2.5 สูงสุดของแต่ละสถานี
+SELECT station_id, ts, pm25
+FROM measurements
+QUALIFY ROW_NUMBER() OVER (PARTITION BY station_id ORDER BY pm25 DESC NULLS LAST) <= 3;
+```
+
+- `QUALIFY` เป็นส่วนขยายของ DuckDB ใช้กรองผลของ window function
+
+## SQL จาก Python
+
+```python
+con = duckdb.connect("data/pm25.duckdb", read_only=True)
+con.sql("SELECT COUNT(*) FROM measurements").fetchall()      # list ของ tuple
+df = con.sql("SELECT * FROM stations").df()                 # pandas DataFrame
+con.execute("SELECT * FROM measurements WHERE station_id = ?", ["02t"]).df()
+```
+
+- ใช้ `?` แทน f-string เมื่อค่ามาจากภายนอก → กัน SQL injection
+
+# โหลดแบบ idempotent
+
+## Idempotent คืออะไร
+
+- รันกี่ครั้งก็ได้ผล **เหมือนรันครั้งเดียว**
+- รันหลังดึงทุกชั่วโมง + raw สองไฟล์อาจมีชั่วโมงเดียวกัน
+
+| วิธี | ผล |
+|---|---|
+| `INSERT` ธรรมดา | ครั้งที่สอง error ชน PK (หรือแถวซ้ำถ้าไม่มี key) |
+| `INSERT OR IGNORE` | เก็บค่าเดิม ไม่สนใจค่าใหม่ |
+| **`INSERT OR REPLACE`** | upsert: มีแล้วแทน ยังไม่มีเพิ่ม |
+| `CREATE OR REPLACE TABLE` | ถูกต้อง แต่ช้าลงเมื่อไฟล์มากขึ้น |
+
+## Upsert ที่ใช้ในรายวิชา
+
+```sql
+INSERT OR REPLACE INTO measurements (station_id, ts, pm25, pm10, o3, co, no2, so2)
+SELECT station_id, ts, pm25, pm10, o3, co, no2, so2
+FROM new_rows
+QUALIFY ROW_NUMBER() OVER (PARTITION BY station_id, ts ORDER BY fetched_at DESC) = 1;
+```
+
+- ตัดซ้ำในชุดใหม่ก่อน (เลือกไฟล์ที่ดึงล่าสุด)
+- DuckDB ไม่ยอมให้คำสั่งเดียว upsert key เดียวกันสองครั้ง
+
+```sql
+SELECT station_id, ts, COUNT(*) AS n
+FROM measurements GROUP BY ALL HAVING n > 1;   -- ควรได้ตารางว่าง
+```
+
+# Parquet และ Arrow
+
+## CSV vs Parquet
+
+| | CSV | Parquet |
+|---|---|---|
+| ชนิดข้อมูล | ไม่มี | เก็บในไฟล์ |
+| ขนาด | ใหญ่ | เล็กกว่ามาก (บีบอัดรายคอลัมน์) |
+| อ่านบางคอลัมน์ | ต้องอ่านทั้งไฟล์ | อ่านเฉพาะที่ต้องการ |
+| เปิดด้วยตา | ได้ | ไม่ได้ |
+
+## ส่งออกและอ่าน Parquet
+
+```sql
+COPY (SELECT *, year(ts) AS year FROM measurements)
+TO 'data/parquet/measurements' (FORMAT parquet, PARTITION_BY (year), OVERWRITE_OR_IGNORE);
+
+SELECT year, COUNT(*) FROM read_parquet('data/parquet/measurements/*/*.parquet', hive_partitioning = true)
+GROUP BY year ORDER BY year;
+```
+
+- DuckDB query Parquet ได้โดยตรง ไม่ต้องโหลดเข้าตาราง
+
+## Apache Arrow (แนวคิด)
+
+- columnar **ในหน่วยความจำ** ที่หลายเครื่องมือใช้ร่วมกัน
+- DuckDB → pandas / Polars ผ่าน Arrow: ไม่แปลงทีละค่า จึงเร็ว
+- **Parquet = ดิสก์** · **Arrow = RAM**
+
+```python
+tbl = con.sql("SELECT * FROM stations").fetch_arrow_table()   # pyarrow.Table
+```
+
+# `src/load_duckdb.py`
+
+## ขั้นตอนของ script
+
+```{mermaid}
+flowchart LR
+  A["สร้างตาราง<br/>IF NOT EXISTS"] --> B["อ่าน raw JSON<br/>ตามตารางจับคู่ key"] --> C["แปลงค่า<br/>string→ตัวเลข, ติดลบ→NULL"] --> D["upsert<br/>+ เติม region"] --> E["สรุป + ตรวจแถวซ้ำ"]
+```
+
+::: {.callout-warning}
+`STATION_KEYS` ไม่ตรงข้อมูลจริง → คอลัมน์เป็น `None` ทั้งหมด **โดยไม่มี error**
+:::
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week04-duckdb`
+2. `src/province_region.csv`: mapping จังหวัด → ภาค
+3. เขียน `src/load_duckdb.py` แล้ว **รันซ้ำ** ยืนยัน idempotent
+4. `notebooks/04_sql.ipynb`: ตรวจ mapping + SQL 5 ข้อ (ช่วงสำรวจเท่านั้น)
+5. ส่งออก Parquet + เทียบขนาดกับ CSV
+6. push → PR → review เพื่อน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 4](../weeks/week04/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- สะสมข้อมูลต่อ: `fetch_air4thai.py` → `load_duckdb.py`
+- อ่าน Wickham (2014) *Tidy Data* ส่วนที่ 1–3: `measurements` tidy หรือไม่
+- ทบทวน pandas `groupby`, `merge`, `pd.to_datetime`
+- ลอง `con.sql(...).df()` กับคำถามใน `questions.md`

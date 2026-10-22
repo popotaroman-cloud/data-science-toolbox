@@ -1,0 +1,309 @@
+---
+title: "สัปดาห์ที่ 9"
+subtitle: "หลักการ visualization และ grammar of graphics"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 9"
+---
+
+## วันนี้เราจะทำอะไร
+
+- เริ่มจากคำถาม แล้วค่อยเลือกกราฟ
+- Grammar of graphics: กราฟทุกชนิดมาจากไวยากรณ์ชุดเดียว
+- การรับรู้ภาพ แกนที่ซื่อสัตย์ และ palette สี
+- กราฟที่ชวนเข้าใจผิดและวิธีแก้
+- seaborn กับข้อมูล PM2.5 + font ภาษาไทย
+
+::: {.notes}
+CLO4 · เครื่องมือ: seaborn (หลัก), Altair (เสริม) · ผลงาน: กราฟ univariate / bivariate ใน notebooks/09_static_viz.ipynb ที่ผูกกับ questions.md
+:::
+
+# เริ่มจากคำถามเสมอ
+
+## จาก pipeline สู่กราฟ
+
+```{mermaid}
+flowchart LR
+  A["questions.md"] --> B["เลือกชนิดกราฟ"] --> C["query จาก DuckDB"] --> D["กราฟ"] --> E["ข้อสังเกต<br/>(ไม่ใช่ข้อสรุป)"]
+```
+
+- ถึงสัปดาห์ที่ 8 มี `stations`, `measurements` และข้อมูลรายวันที่ทำความสะอาดแล้ว (ผ่าน pandera)
+- สัปดาห์ 9–13 = **ใช้ข้อมูลตอบคำถาม**
+- ทุกภาพต้องตอบได้ว่า "ภาพนี้ตอบคำถามข้อไหน"
+
+::: {.callout-tip}
+กราฟจาก EDA ยังเป็น *เบาะแส* · การยืนยันด้วยสถิติอยู่ในสัปดาห์ที่ 11
+:::
+
+# Grammar of graphics
+
+## กราฟ = ชั้นของไวยากรณ์
+
+Wilkinson (1999) → ggplot2 (Wickham) → ไลบรารี Python หลายตัว
+
+| องค์ประกอบ | ตัวอย่างจาก PM2.5 |
+|---|---|
+| **data** (tidy) | ข้อมูลรายวันที่ทำความสะอาดแล้ว: 1 แถว = 1 สถานีต่อ 1 วัน |
+| **encoding** | x = `date`, y = `pm25_mean`, color = `region` |
+| **mark** | จุด เส้น แท่ง กล่อง |
+| **scale** | แกน y แบบ log, palette สีของภาค |
+| **facet** | หนึ่งช่องต่อหนึ่งภาค |
+| **coordinate** | Cartesian, polar, พิกัดแผนที่ (สัปดาห์ที่ 13) |
+
+::: {.notes}
+มี statistic ด้วย: การคำนวณก่อนวาด เช่น bin ของ histogram, มัธยฐานในกล่อง
+ประโยชน์: เปลี่ยนองค์ประกอบเดียวก็ได้กราฟใหม่ เช่น scatter → line แค่เปลี่ยน mark
+:::
+
+## `seaborn.objects`: เขียนตามไวยากรณ์ตรง ๆ
+
+```python
+import seaborn.objects as so
+
+(
+    so.Plot(daily_region, x="date", y="pm25_median", color="region")  # data + encoding
+    .add(so.Line())                                                    # mark
+    .scale(y="log")                                                    # scale
+    .facet(col="region", wrap=3)                                       # facet
+)
+```
+
+- มีตั้งแต่ seaborn 0.12
+- `daily_region` = มัธยฐาน PM2.5 รายวันต่อภาค
+
+## Altair (เสริม): ไวยากรณ์เดียวกันผ่าน Vega-Lite
+
+```python
+import altair as alt
+
+alt.Chart(daily_region).mark_line().encode(
+    x="date:T", y="pm25_median:Q", color="region:N"
+).facet(column="region:N")
+```
+
+- ระบุชนิดข้อมูลหลังชื่อคอลัมน์
+- `:Q` quantitative · `:N` nominal · `:O` ordinal · `:T` temporal
+
+# เลือกกราฟจากชนิดของคำถาม
+
+## สี่กลุ่มคำถาม
+
+| ชนิดคำถาม | กราฟที่เหมาะ | หลีกเลี่ยง |
+|---|---|---|
+| **distribution** | `histplot`, `ecdfplot`, `kdeplot` | แท่งค่าเฉลี่ยอย่างเดียว |
+| **comparison** | `boxplot`, `violinplot`, `stripplot` | pie chart หลายชิ้น |
+| **relationship** | `scatterplot`, `regplot`, `histplot` 2 มิติ | scatter หลายแสนจุดแบบทึบ |
+| **time** | `lineplot`, heatmap เดือน × ปี | แท่งเรียงวันละแท่ง |
+
+::: {.notes}
+ตัวอย่างคำถาม: ค่ารายวันส่วนใหญ่อยู่ช่วงไหน / ภาคเหนือสูงกว่า กทม. ในฤดูแล้งไหม / ค่าเฉลี่ยสูงแล้วค่าสูงสุดรายชั่วโมงสูงตามไหม / มีรูปแบบรายเดือนหรือแนวโน้มรายปีไหม
+barplot ใช้เมื่อเทียบจำนวน/สัดส่วน
+:::
+
+## ฟังก์ชันสองระดับใน seaborn
+
+| ระดับ | ฟังก์ชัน | ใช้เมื่อ |
+|---|---|---|
+| figure | `displot`, `catplot`, `relplot` | ต้องการ facet ทันทีด้วย `col=` / `row=` |
+| axes | `histplot`, `boxplot`, `lineplot` | วาดลง `ax` เดียว จัดหลายกราฟเอง |
+
+# การรับรู้ภาพ
+
+## ตาคนอ่านอะไรได้แม่น
+
+Cleveland & McGill (1984)
+
+```{mermaid}
+flowchart LR
+  A["ตำแหน่ง<br/>แกนร่วม"] --> B["ตำแหน่ง<br/>แกนไม่ร่วม"] --> C["ความยาว"] --> D["มุม / ความชัน"] --> E["พื้นที่"] --> F["ปริมาตร<br/>ความเข้มสี"]
+```
+
+- แม่นที่สุด (ซ้าย) → แม่นน้อยที่สุด (ขวา)
+- ค่าที่ต้องเทียบแม่น → วางบน **ตำแหน่ง**
+- pie ใช้ *มุม* → เทียบยากกว่า bar ที่ใช้ *ความยาว*
+- สี → แยกกลุ่ม หรือภาพรวมคร่าว ๆ (heatmap)
+
+## แกนที่ซื่อสัตย์ (honest axes)
+
+| กฎ | เหตุผล |
+|---|---|
+| bar chart เริ่มที่ 0 | ความยาวแท่งคือค่า |
+| line / scatter ไม่จำเป็นต้องเริ่มที่ 0 | อ่านจากตำแหน่ง แต่ติดป้ายแกนให้ชัด |
+| กราฟที่เทียบกันใช้ scale เดียวกัน | facet ใช้ `sharey=True` เป็นค่าเริ่มต้น |
+| log scale ต้องเขียนกำกับ | ผู้อ่านทั่วไปอาจอ่านผิด |
+| ระบุหน่วยเสมอ | "PM2.5 (µg/m³)" ไม่ใช่ "pm25_mean" |
+
+## สีตามชนิดข้อมูล
+
+| ชนิดข้อมูล | ตัวอย่าง PM2.5 | ใน seaborn |
+|---|---|---|
+| **categorical** | ภาค, ประเภทสถานี | `"colorblind"`, `"tab10"` |
+| **sequential** | ค่า PM2.5 ใน heatmap | `"viridis"`, `"rocket"`, `"mako"` |
+| **diverging** | ส่วนต่างจากมาตรฐาน 37.5 | `"RdBu_r"`, `"vlag"` |
+
+## Colorblind-safe
+
+- ผู้ชายประมาณ 8% บกพร่องการเห็นสีแดง-เขียว
+- อย่าใช้คู่แดง-เขียวเป็นตัวแยกกลุ่มหลัก
+- ใช้ `sns.color_palette("colorblind")` หรือตระกูล viridis (พิมพ์ขาวดำยังอ่านได้)
+- ไม่เกิน 6–8 สีต่อกราฟ มากกว่านั้นใช้ facet
+
+::: {.callout-warning}
+"rainbow" / "jet" ไม่ควรใช้กับข้อมูลต่อเนื่อง: ความสว่างไม่ไล่ตามค่า เกิดขอบปลอมในภาพ
+:::
+
+# กราฟที่ชวนเข้าใจผิด
+
+## ปัญหาที่พบบ่อยและวิธีแก้
+
+| ปัญหา | วิธีแก้ |
+|---|---|
+| **แท่งถูกตัดแกน** | เริ่มแกนที่ 0 หรือใช้ dot plot |
+| **แกนคู่ (dual axes)** | สองกราฟซ้อนแนวตั้งแกน x ร่วม หรือ scatter สองตัวแปร |
+| **overplotting** | `alpha` ต่ำ, จุดเล็ก, 2D histogram, สุ่ม, สรุปก่อนวาด |
+| **ค่าเฉลี่ยซ่อนการกระจาย** | box / violin / strip plot หรือ ECDF |
+| **เลือกช่วงเวลาให้เข้าข้าง** | แสดงทั้งหมดก่อน แล้วค่อยซูมพร้อมเหตุผล |
+| **ไม่บอกจำนวนตัวอย่าง** | ใส่ n ในป้ายหรือคำบรรยาย |
+
+::: {.notes}
+ตัวอย่าง: แกน y เริ่มที่ 30 ทำให้เชียงใหม่ (45) ดูสูงกว่า กทม. (35) สามเท่า
+แกนคู่ PM2.5 กับ hotspot: เส้นทับกันพอดีเพราะผู้วาดเลือกช่วงแกนเอง
+overplotting: สัปดาห์ที่ 10 ใช้ Datashader
+:::
+
+# font ภาษาไทย
+
+## ป้ายไทยกลายเป็น □□□
+
+- font เริ่มต้นของ matplotlib (DejaVu Sans) ไม่มีอักษรไทย
+
+```python
+sns.set_theme(style="whitegrid", palette="colorblind", font="Tahoma")   # เปลี่ยนเป็นชื่อที่มีในเครื่อง
+plt.rcParams["axes.unicode_minus"] = False   # ให้เครื่องหมายลบแสดงถูกต้อง
+```
+
+| ระบบ | font ที่มักมีอยู่แล้ว |
+|---|---|
+| Windows | Tahoma, Leelawadee UI |
+| macOS | Thonburi, Ayuthaya, Tahoma |
+| Linux / Colab | ไม่มี: ดาวน์โหลด Sarabun แล้ว `addfont(...)` |
+
+::: {.callout-tip}
+เก็บไว้ใน `src/viz_style.py` แล้ว import ทุก notebook → กราฟทั้งโครงการหน้าตาเหมือนกัน
+:::
+
+# seaborn กับข้อมูล PM2.5
+
+## โหลดข้อมูล: แบ่งงานให้ถูกที่
+
+- DuckDB: join ข้อมูลรายวันที่ทำความสะอาดแล้วกับ `stations` และกรองข้อมูล
+- pandas / seaborn: รับเฉพาะตารางที่พร้อมวาด
+- ได้ DataFrame `daily`: สถานี วันที่ `pm25_mean`, `pm25_max`, `n_hours`, จังหวัด ภาค
+- แปลง `date` เป็น datetime และเพิ่มคอลัมน์ `month`
+
+::: {.notes}
+แนวทางนี้สำคัญมากในสัปดาห์ที่ 10 เมื่อข้อมูลใหญ่ขึ้น
+:::
+
+## Distribution: histogram + เส้นมาตรฐาน
+
+```python
+THAI_STD, WHO_GUIDE = 37.5, 15
+
+fig, ax = plt.subplots(figsize=(8, 4))
+sns.histplot(data=daily, x="pm25_mean", bins=60, log_scale=True, ax=ax)
+ax.axvline(THAI_STD, color="black", linestyle="--")
+ax.axvline(WHO_GUIDE, color="gray", linestyle=":")
+```
+
+- PM2.5 **เบ้ขวา**: ส่วนใหญ่ต่ำ แต่หางขวายาวมาก → ใช้ log scale
+- มาตรฐานไทย (ปี 2566) 37.5 µg/m³ · WHO (2021) 15 µg/m³
+- เส้นอ้างอิงช่วยให้ตีความ "สูง/ต่ำ" ได้โดยไม่ต้องเดา
+
+## Comparison: boxplot เรียงตามมัธยฐาน
+
+```python
+order = daily.groupby("region")["pm25_mean"].median().sort_values().index
+ax = sns.boxplot(data=daily, x="pm25_mean", y="region", order=order,
+                 showfliers=False, color="lightsteelblue")
+ax.axvline(THAI_STD, color="black", linestyle="--")
+ax.set(xlabel="PM2.5 เฉลี่ย 24 ชม. (µg/m³)", ylabel="")
+```
+
+- เรียงตามมัธยฐาน ไม่ใช่ตามตัวอักษร → อ่านลำดับได้ทันที
+- ชื่อภาคบนแกน y → ป้ายไทยไม่ซ้อนกัน
+
+## Time: รูปแบบตามฤดูกาล
+
+```python
+ax = sns.lineplot(data=daily, x="month", y="pm25_mean", hue="region",
+                  estimator="median", errorbar=("pi", 50))   # แถบ = ช่วงระหว่าง Q1–Q3
+ax.axhline(THAI_STD, color="black", linestyle="--")
+```
+
+| `errorbar` | แถบบอกอะไร |
+|---|---|
+| `("pi", 50)` | ความผันแปรของข้อมูลจริง (percentile 25–75) |
+| `("ci", 95)` | ความไม่แน่นอนของค่าประมาณ |
+
+ต้องเขียนกำกับให้ผู้อ่านรู้ว่าแถบหมายถึงอะไร
+
+## Relationship: 2D histogram แทน scatter
+
+```python
+ax = sns.histplot(data=daily, x="pm25_mean", y="pm25_max", bins=80,
+                  log_scale=True, cmap="mako")   # 2D histogram แทน scatter ที่ทับกัน
+ax.set(xlabel="ค่าเฉลี่ย 24 ชม. (µg/m³)", ylabel="ค่าสูงสุดรายชั่วโมง (µg/m³)")
+```
+
+- บันทึกภาพไว้ใช้ในรายงาน Quarto สัปดาห์ที่ 14
+
+```python
+fig.savefig("reports/figures/09_hist_pm25.png", dpi=150, bbox_inches="tight")
+```
+
+## seaborn กับ Altair
+
+| | seaborn | Altair |
+|---|---|---|
+| พื้นฐาน | matplotlib (ภาพนิ่ง) | Vega-Lite (เว็บ) |
+| จุดเด่น | กราฟสถิติสำเร็จรูป ปรับได้ทุกจุด | ไวยากรณ์ชัด ซ้อนชั้นและ tooltip ง่าย |
+| ข้อจำกัด | ไม่ interactive | ข้อมูลใหญ่ต้องสรุปก่อน |
+| ใช้ในรายวิชา | **หลัก** | เสริม |
+
+::: {.callout-warning}
+Altair ฝังข้อมูลลงในกราฟ และเตือนเมื่อเกิน 5,000 แถว → `groupby` สรุปก่อนวาดเสมอ
+:::
+
+## สรุป
+
+- เริ่มจากคำถาม กราฟทุกภาพบอกได้ว่าตอบข้อใด
+- กราฟ = data + encoding + mark + scale + facet + coordinate
+- ค่าที่ต้องเทียบแม่นใช้ตำแหน่ง · สีตรงชนิดข้อมูล · colorblind-safe
+- bar เริ่มที่ 0 · ไม่ใช้แกนคู่ · แก้ overplotting
+- ตั้ง font ไทยก่อนวาด + เส้นมาตรฐาน 37.5 µg/m³
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week09-static-viz` + สร้าง `src/viz_style.py` (font ไทย + เส้นมาตรฐาน)
+2. `notebooks/09_static_viz.ipynb`: โหลดข้อมูล + หัว section ผูกกับคำถาม
+3. univariate ≥ 2 ภาพ: histogram (log) + ECDF แยกภาค
+4. bivariate ≥ 2 ภาพ: boxplot แยกภาค + heatmap เดือน × ปี
+5. ภาพ "ผิด vs ถูก" 1 คู่ (แกนไม่เริ่มที่ 0) + ข้อสังเกตใน `questions.md`
+6. Restart & Run All → commit → PR → review PR เพื่อน
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 9](../weeks/week09/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- อ่าน *Fundamentals of Data Visualization*: "Visualizing distributions" และ "Color basics"
+- ดูตัวอย่าง `px.line` และ `px.scatter` ใน Plotly Express
+- นับจำนวนแถวของ `measurements` ด้วย SQL แล้วจดไว้
+- เลือกกราฟ 1 ภาพที่ "ถ้า hover ได้จะตอบคำถามดีขึ้น" พร้อมเหตุผล

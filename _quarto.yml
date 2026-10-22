@@ -1,0 +1,37 @@
+project:
+  type: website
+  render:
+    - index.qmd
+    - syllabus.md
+    - weeks/*/*.md
+    - slides/*.qmd
+
+website:
+  title: "Data Science Toolbox"
+  repo-url: https://github.com/popotaroman-cloud/data-science-toolbox
+  repo-actions: [source]
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - text: "หน้าแรก"
+        href: index.qmd
+      - syllabus.md
+      - section: "เอกสารประกอบการสอน"
+        contents: "weeks/*/index.md"
+      - section: "คู่มือปฏิบัติการ"
+        contents: "weeks/*/lab.md"
+      - section: "สไลด์"
+        contents: "slides/*.qmd"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    lang: th
+    mainfont: "Sarabun, sans-serif"
+    code-copy: true
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">

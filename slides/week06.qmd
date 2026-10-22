@@ -1,0 +1,256 @@
+---
+title: "สัปดาห์ที่ 6"
+subtitle: "Data profiling และการตรวจคุณภาพข้อมูล"
+author: "อาจารย์วาโย ปุยะติ"
+format:
+  revealjs:
+    theme: [default, style.scss]
+    slide-number: true
+    incremental: false
+    code-line-numbers: false
+    footer: "1145100 Data Science Toolbox · สัปดาห์ที่ 6"
+---
+
+## วันนี้เราจะทำอะไร
+
+- มิติของคุณภาพข้อมูล 6 ด้าน
+- ปัญหาเฉพาะของ Air4Thai: sentinel, เซนเซอร์ค้าง, timezone shift
+- Data profiling อัตโนมัติด้วย ydata-profiling
+- กฎตรวจข้อมูลเป็นโค้ดด้วย pandera
+- Fail หรือ warn: ปัญหาไหนควรหยุด pipeline
+
+::: {.notes}
+CLO3 · ผลงาน: รายงาน profiling + profiling_notes.md + src/schema.py และ src/validate.py
+:::
+
+# ทำไมต้องตรวจคุณภาพข้อมูล
+
+## "โหลดเข้าได้" ≠ "เชื่อถือได้"
+
+คำถาม: *มีนาคม เชียงใหม่มีกี่วันที่ PM2.5 เฉลี่ย 24 ชม. เกิน 37.5 µg/m³*
+
+- ส่ง `-1` แทน "ไม่มีข้อมูล" → ค่าเฉลี่ยต่ำกว่าความจริง
+- เซนเซอร์ค้างค่าเดิม 30 ชม. → ดูเหมือน "อากาศดีสม่ำเสมอ"
+- แปลง timezone ผิด 7 ชม. → ค่ารายวันรวมชั่วโมงข้ามวัน
+
+::: {.callout-tip}
+ตรวจคุณภาพ **ก่อน** ตอบคำถาม และเขียนกฎเป็นโค้ด ให้ตรวจซ้ำได้ทุกครั้งที่ดึงข้อมูลใหม่
+:::
+
+## มิติของคุณภาพข้อมูล
+
+| มิติ | ตัวอย่างใน PM2.5 |
+|---|---|
+| **Completeness** | สถานีมีข้อมูล 14 จาก 24 ชั่วโมง |
+| **Validity** | `pm25 = -1`, `999`, `station_id` ไม่มีใน `stations` |
+| **Consistency** | `pm25 > pm10` เป็นเวลานาน |
+| **Uniqueness** | `(station_id, ts)` ซ้ำเพราะรัน load สองครั้ง |
+| **Timeliness** | ข้อมูลล่าสุดเก่ากว่า 3 วัน |
+| **Accuracy** | เซนเซอร์ค้าง หรือ calibration ผิด |
+
+::: {.notes}
+5 มิติแรกตรวจด้วยกฎได้ตรงไปตรงมา accuracy ต้องใช้หลักฐานภายนอก เช่น เทียบสถานีใกล้เคียง ข้อมูลที่ผ่านกฎทุกข้อจึงยังอาจไม่แม่นยำ
+:::
+
+# ปัญหาเฉพาะของ Air4Thai
+
+## Sentinel value
+
+ตัวเลขพิเศษแทนค่าว่าง เช่น `-1`, `-99`, `999`, `9999`
+
+```python
+# ค่าที่ซ้ำบ่อยผิดปกติ มักเป็น sentinel
+m["pm25"].value_counts().head(10)
+
+# ค่าติดลบ และค่าที่สูงผิดธรรมชาติ
+m.loc[(m["pm25"] < 0) | (m["pm25"] >= 999), ["station_id", "ts", "pm25"]]
+```
+
+- แก้ที่ **ขั้นโหลด** (`src/load_duckdb.py`) → แปลงเป็น NULL
+- กฎสัปดาห์นี้ = **ด่านตรวจ** จับค่าที่เล็ดลอด
+
+::: {.callout-warning}
+ค่าที่ Air4Thai ใช้จริงอาจเปลี่ยนตามเวลา ตรวจจากข้อมูลของตนเอง
+:::
+
+## เซนเซอร์ค้าง (stuck sensor)
+
+- ค่าเดิมซ้ำหลายชั่วโมง → **ผ่านกฎช่วงค่า**
+- ธรรมชาติ PM2.5 แทบไม่คงที่พอดีหลายชั่วโมง
+
+```python
+m["roll_std"] = (
+    m.groupby("station_id")["pm25"]
+     .transform(lambda s: s.rolling(6).std())
+)
+stuck = m[m["roll_std"] == 0]
+```
+
+- หน้าต่าง 6 ชม. เป็นค่าที่ **เลือกเอง** ต้องให้เหตุผลและบันทึก
+- สั้นเกิน → false positive ช่วงอากาศนิ่งจริง
+
+## เวลาคลาดเคลื่อน (timezone shift)
+
+`ts` เก็บเป็น Asia/Bangkok (UTC+7) ถ้าขั้นใดตีความเป็น UTC → เลื่อน 7 ชม.
+
+| สัญญาณ | วิธีดู |
+|---|---|
+| รูปแบบรายชั่วโมงแปลก | ยอดค่าเฉลี่ยอยู่ผิดช่วงของวัน |
+| ข้อมูลจากอนาคต | `ts` มากกว่าเวลาปัจจุบัน |
+| key ซ้ำเป็นช่วง | ช่วงเดียวกันปรากฏสองครั้ง |
+
+```python
+m.groupby(m["ts"].dt.hour)["pm25"].mean().round(1)   # รูปแบบตามชั่วโมง 0–23
+```
+
+::: {.notes}
+รูปแบบรายชั่วโมงไม่ใช่การพิสูจน์ เป็นเบาะแสให้กลับไปตรวจโค้ดแปลงเวลาสัปดาห์ 3–4
+:::
+
+# Data profiling อัตโนมัติ
+
+## เครื่องมือ profiling
+
+สรุปทุกคอลัมน์: ชนิด ค่าว่าง การกระจาย ค่าซ้ำ ความสัมพันธ์
+
+| เครื่องมือ | ประเภท | เหมาะกับ |
+|---|---|---|
+| **ydata-profiling** | หลัก | สำรวจชุดข้อมูลใหม่ครั้งแรก |
+| skimpy | เสริม | ดูภาพรวมเร็ว ๆ ใน notebook |
+| Sweetviz | เสริม | เทียบก่อน/หลังทำความสะอาด |
+
+## ydata-profiling
+
+```python
+from ydata_profiling import ProfileReport
+
+profile = ProfileReport(
+    m.drop(columns=["roll_std"]),
+    title="Air4Thai measurements — profiling",
+    minimal=True,          # ปิดส่วนที่คำนวณหนัก
+)
+profile.to_file("reports/profile_measurements.html")
+```
+
+ส่วนที่ควรอ่าน: **Alerts** · **Variables** · **Missing values** · **Duplicate rows**
+
+## อะไร commit อะไรไม่ commit
+
+| ไฟล์ | commit | เหตุผล |
+|---|---|---|
+| `reports/*.html` | ❌ `.gitignore` | ใหญ่ สร้างใหม่ได้ อาจมีข้อมูลดิบ |
+| `reports/profiling_notes.md` | ✅ | การตีความ สร้างด้วยโค้ดไม่ได้ |
+| โค้ดสร้างรายงาน | ✅ | ให้คนอื่นสร้างรายงานเดิมได้ |
+
+## Profiling ไม่ได้แทนการตีความ
+
+| รายงานบอกว่า | ต้องถามต่อ |
+|---|---|
+| `pm25` ว่าง 8% | กระจายทั่วไป หรือกระจุกบางสถานี/ช่วงเวลา |
+| `pm25` skewed ขวามาก | ธรรมชาติช่วงหมอกควัน หรือค่าผิดพลาด |
+| `pm25`–`pm10` correlation สูง | คาดได้อยู่แล้ว ไม่ใช่ข้อค้นพบ |
+| ไม่มี alert ค่าคงที่ | ดูทั้งคอลัมน์ จึงไม่เห็นเซนเซอร์ค้างรายสถานี |
+| ไม่มี alert ใด ๆ | ไม่ได้แปลว่าข้อมูลดี |
+
+::: {.callout-tip}
+ทุก alert ที่สำคัญต้องบันทึกใน `profiling_notes.md`: ตรวจต่ออย่างไร ตัดสินใจอย่างไร
+:::
+
+# กฎตรวจข้อมูลด้วย pandera
+
+## Schema = ความคาดหวังต่อข้อมูลที่ดี
+
+- ตรวจด้วยตาใน notebook: ทำครั้งเดียวแล้วจบ
+- pipeline ดึงข้อมูลใหม่ทุกวัน → ต้องตรวจทุกครั้ง
+- เขียน **schema** ใน `src/schema.py` ให้ pandera ตรวจให้
+
+```python
+"pm25": pa.Column(
+    float,
+    [pa.Check.ge(0), pa.Check.le(PM25_MAX), pa.Check.notin(SENTINELS)],
+    nullable=True,
+),
+```
+
+::: {.notes}
+PM25_MAX = 1000 คือขอบบนที่เป็นไปไม่ได้ทางกายภาพ ไม่ใช่ค่าสูงที่หายาก ขอบบนสารอื่นเป็นค่าตั้งต้นแบบหลวม ต้องตรวจหน่วยจากข้อมูลจริง (CO มักเป็น ppm, O3 เป็น ppb)
+:::
+
+## กฎแต่ละข้อจับมิติใด
+
+| กฎ | มิติ |
+|---|---|
+| ชนิด `float`, `datetime64[ns]` | validity |
+| `pm25 >= 0`, `<= 1000`, ไม่เป็น sentinel | validity |
+| `station_id` อยู่ในตาราง `stations` | validity / consistency |
+| `unique=["station_id", "ts"]` | uniqueness |
+| `nullable=True` | ตั้งใจยอมให้มีค่าว่าง → สัปดาห์ที่ 7 |
+
+## ใช้ schema ใน pipeline
+
+```python
+schema = measurements_schema(allowed_station_ids())
+try:
+    schema.validate(m, lazy=True)     # รวบรวมข้อผิดพลาดทั้งหมดก่อนรายงาน
+    print("ผ่านทุกกฎ")
+except pa.errors.SchemaErrors as err:
+    print(err.failure_cases.head(20)) # แถว/ค่าที่ไม่ผ่าน
+```
+
+::: {.callout-warning}
+pandera รุ่นเก่ากว่า 0.24 ใช้ `import pandera as pa` แทน `pandera.pandas`
+:::
+
+# Fail หรือ warn
+
+## หลักในการแบ่ง {.smaller}
+
+```{mermaid}
+flowchart TB
+  A[พบปัญหา] --> B{ผลวิเคราะห์ผิดแน่นอน<br/>หรือโค้ดเรามี bug?}
+  B -- ใช่ --> C["Fail<br/>sys.exit(1) หยุด pipeline"]
+  B -- ไม่ใช่ คาดได้จากธรรมชาติข้อมูล --> D["Warn<br/>พิมพ์ WARN แล้วทำงานต่อ"]
+```
+
+- fail ทุกเรื่อง → ระบบใช้ไม่ได้ เพราะข้อมูลจริงไม่เคยสมบูรณ์
+- warn ทุกเรื่อง → ข้อมูลเสียไหลไปถึงแดชบอร์ด
+
+## ตัวอย่างการแบ่ง
+
+| ตรวจอะไร | ผล | เหตุผล |
+|---|---|---|
+| `(station_id, ts)` ซ้ำ | **Fail** | ค่าเฉลี่ยผิด + load มี bug |
+| `pm25 < 0` หรือ sentinel | **Fail** | ต้องแก้ที่ขั้นโหลด |
+| `pm25 > 500` | Warn | เกิดได้จริงช่วงไฟป่าภาคเหนือ |
+| เซนเซอร์ค้าง ≥ 6 ชม. | Warn | ส่งต่อให้สัปดาห์ที่ 7 ตัดสินใจ |
+| `max(ts)` เก่ากว่า 2 วัน | Warn | API อาจล่มชั่วคราว |
+
+::: {.notes}
+validate.py: กฎ fail ใช้ pandera แล้ว sys.exit(1) ส่วน warn เป็นฟังก์ชัน pandas ธรรมดาที่พิมพ์ WARN และทำงานต่อ
+:::
+
+## สรุป
+
+- คุณภาพข้อมูล 6 มิติ — accuracy ตรวจด้วยโค้ดยากที่สุด
+- Air4Thai: sentinel, เซนเซอร์ค้าง, timezone shift ต้องรู้โดเมนจึงหาเจอ
+- ydata-profiling ให้ภาพรวม แต่ **ผู้วิเคราะห์ต้องตีความเอง**
+- HTML ไม่ commit · บันทึกการตีความและโค้ด commit
+- pandera ทำให้ตรวจซ้ำได้ · แยก fail / warn อย่างมีเหตุผล
+
+# ปฏิบัติการ
+
+## งานวันนี้
+
+1. branch `week06-quality` + `reports/*.html` ใน `.gitignore`
+2. โหลด `measurements` + skimpy + รายงาน ydata-profiling
+3. ตรวจ sentinel, เซนเซอร์ค้าง, timezone, key ซ้ำ → `profiling_notes.md`
+4. ปรับ `src/schema.py` + ทดสอบกับข้อมูลเสียที่สร้างเอง
+5. `src/validate.py` แยก fail / warn → PR + review เพื่อน 1 รายการ
+
+[คู่มือปฏิบัติการสัปดาห์ที่ 6](../weeks/week06/lab.md)
+
+## ก่อนสัปดาห์หน้า
+
+- อ่าน MCAR / MAR / MNAR — van Buuren, *FIMD* บทที่ 1.2
+- คำนวณสัดส่วนค่าว่างของ `pm25` แยกตามสถานีและเดือน
+- คิดล่วงหน้า: ถ้าเซนเซอร์เสียช่วงฝุ่นหนาที่สุด ค่าเฉลี่ยรายเดือนจะสูงหรือต่ำกว่าความจริง
