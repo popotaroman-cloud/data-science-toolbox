@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet – Data Science Toolbox</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-aa992321f2f7111af8da854a4261011b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&amp;display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week01/index.html">เอกสารประกอบการสอน</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/index.html">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Data Science Toolbox</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">หน้าแรก</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ประมวลรายวิชา 1145100 Data Science Toolbox</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">เอกสารประกอบการสอน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1: ภาพรวม EDA, สภาพแวดล้อมการทำงาน และ Git/GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2: การตั้งคำถามเชิงวิเคราะห์และสมมติฐาน</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3: การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5: การจัดการข้อมูลและการเชื่อม SQL กับ Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6: Data profiling และการตรวจคุณภาพข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7: การวิเคราะห์ข้อมูลสูญหาย (MCAR / MAR / MNAR)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8: Checkpoint 1 นำเสนอ data pipeline</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9: หลักการ visualization และ grammar of graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10: Interactive visualization และข้อมูลขนาดใหญ่</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11: สถิติเชิงสำรวจและ time series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12: สำรวจข้อมูลหลายมิติ, outlier และข้อมูลสังเคราะห์กับ PDPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13: ข้อมูลเชิงพื้นที่และข้อมูลลำดับชั้น</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14: สื่อสารข้อค้นพบและ reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15: นำเสนอโครงการสุดท้าย</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">คู่มือปฏิบัติการ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 1: ตั้งค่าสภาพแวดล้อมและสร้าง repository โครงการ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 2: เขียน questions.md และ first look ข้อมูล</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 3: เขียน script ดึงข้อมูลจาก Air4Thai</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 4: สร้างฐานข้อมูล DuckDB จากข้อมูล raw</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 5: สร้าง daily_pm25 และ tidy dataframe</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 6: profiling และเขียนกฎตรวจคุณภาพข้อมูล PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week07</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 7: วิเคราะห์ข้อมูลสูญหายและสร้างชุดข้อมูลสะอาด</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week08</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week09</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 9: กราฟ univariate และ bivariate ที่ตอบคำถาม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week10</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 10: กราฟ interactive ด้วย Plotly และการรับมือข้อมูลใหญ่</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week11</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 11: ทดสอบสมมติฐานและแยก trend/seasonality ของ PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week12</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 12: จัดกลุ่มสถานี วิเคราะห์ outlier และสร้างข้อมูลสังเคราะห์</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week13</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week14</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week15</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 15: ซ้อมนำเสนอ ส่งงาน และประเมินเพื่อน</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">สไลด์</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#จากไฟล-raw-สฐานขอมล" id="toc-จากไฟล-raw-สฐานขอมล" class="nav-link" data-scroll-target="#จากไฟล-raw-สฐานขอมล">1. จากไฟล์ raw สู่ฐานข้อมูล</a></li>
+  <li><a href="#ทำไมใชฐานขอมลเชงวเคราะหแบบไฟลเดยว" id="toc-ทำไมใชฐานขอมลเชงวเคราะหแบบไฟลเดยว" class="nav-link" data-scroll-target="#ทำไมใชฐานขอมลเชงวเคราะหแบบไฟลเดยว">2. ทำไมใช้ฐานข้อมูลเชิงวิเคราะห์แบบไฟล์เดียว</a></li>
+  <li><a href="#ออกแบบตาราง-data-model" id="toc-ออกแบบตาราง-data-model" class="nav-link" data-scroll-target="#ออกแบบตาราง-data-model">3. ออกแบบตาราง (data model)</a></li>
+  <li><a href="#sql-พนฐานกบขอมล-pm2.5" id="toc-sql-พนฐานกบขอมล-pm2.5" class="nav-link" data-scroll-target="#sql-พนฐานกบขอมล-pm2.5">4. SQL พื้นฐานกับข้อมูล PM2.5</a>
+  <ul class="collapse">
+  <li><a href="#select-และ-where" id="toc-select-และ-where" class="nav-link" data-scroll-target="#select-และ-where">SELECT และ WHERE</a></li>
+  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">GROUP BY</a></li>
+  <li><a href="#join" id="toc-join" class="nav-link" data-scroll-target="#join">JOIN</a></li>
+  <li><a href="#window-function-เบองตน" id="toc-window-function-เบองตน" class="nav-link" data-scroll-target="#window-function-เบองตน">Window function (เบื้องต้น)</a></li>
+  <li><a href="#ใช-sql-จาก-python" id="toc-ใช-sql-จาก-python" class="nav-link" data-scroll-target="#ใช-sql-จาก-python">ใช้ SQL จาก Python</a></li>
+  </ul></li>
+  <li><a href="#การโหลดแบบ-idempotent" id="toc-การโหลดแบบ-idempotent" class="nav-link" data-scroll-target="#การโหลดแบบ-idempotent">5. การโหลดแบบ idempotent</a></li>
+  <li><a href="#parquet-และ-apache-arrow" id="toc-parquet-และ-apache-arrow" class="nav-link" data-scroll-target="#parquet-และ-apache-arrow">6. Parquet และ Apache Arrow</a>
+  <ul class="collapse">
+  <li><a href="#parquet" id="toc-parquet" class="nav-link" data-scroll-target="#parquet">Parquet</a></li>
+  <li><a href="#apache-arrow-แนวคด" id="toc-apache-arrow-แนวคด" class="nav-link" data-scroll-target="#apache-arrow-แนวคด">Apache Arrow (แนวคิด)</a></li>
+  </ul></li>
+  <li><a href="#โครงสรางของ-srcload_duckdb.py" id="toc-โครงสรางของ-srcload_duckdb.py" class="nav-link" data-scroll-target="#โครงสรางของ-srcload_duckdb.py">7. โครงสร้างของ <code>src/load_duckdb.py</code></a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#คำถามทบทวน" id="toc-คำถามทบทวน" class="nav-link" data-scroll-target="#คำถามทบทวน">คำถามทบทวน</a></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week04/index.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week01/index.html">เอกสารประกอบการสอน</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/index.html">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>CLO:</strong> CLO2 · <strong>เครื่องมือ:</strong> DuckDB, SQL, Parquet (หลัก), Apache Arrow (แนวคิด เสริม) <strong>ผลงานที่เพิ่มในระบบ:</strong> <code>src/load_duckdb.py</code> ที่สร้าง <code>data/pm25.duckdb</code> มีตาราง <code>stations</code> และ <code>measurements</code></p>
+</blockquote>
+<section id="วตถประสงคการเรยนร" class="level2">
+<h2 class="anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบสัปดาห์นี้ ผู้เรียนสามารถ</p>
+<ol type="1">
+<li>อธิบายได้ว่าทำไมฐานข้อมูลเชิงวิเคราะห์แบบไฟล์เดียว (DuckDB) เหมาะกับงาน EDA</li>
+<li>ออกแบบตาราง <code>stations</code> และ <code>measurements</code> พร้อม primary key ที่เหมาะสม</li>
+<li>เขียน SQL พื้นฐาน: <code>SELECT</code>, <code>WHERE</code>, <code>GROUP BY</code>, <code>JOIN</code> และ window function เบื้องต้น</li>
+<li>เขียน script โหลดข้อมูลแบบ idempotent (รันซ้ำแล้วไม่เกิดแถวซ้ำ)</li>
+<li>ส่งออกและอ่านไฟล์ Parquet และอธิบายแนวคิด columnar storage และ Apache Arrow</li>
+</ol>
+<hr>
+</section>
+<section id="จากไฟล-raw-สฐานขอมล" class="level2">
+<h2 class="anchored" data-anchor-id="จากไฟล-raw-สฐานขอมล">1. จากไฟล์ raw สู่ฐานข้อมูล</h2>
+<p>สัปดาห์ที่ 3 เราได้ไฟล์ <code>data/raw/air4thai_*.json</code> หลายไฟล์ ไฟล์ละหนึ่งชั่วโมง ถ้าจะตอบ Q1 (“ภาคเหนือมีวันเกินมาตรฐานมากกว่าภาคอื่นหรือไม่”) จาก JSON โดยตรง ต้องเปิดทุกไฟล์ แกะ key ซ้อนชั้น และรวมเองทุกครั้ง สัปดาห์นี้เราแปลง raw ให้เป็น <strong>ตาราง</strong> ที่ถามด้วย SQL ได้</p>
+<pre class="text"><code>data/raw/*.json  ──►  src/load_duckdb.py  ──►  data/pm25.duckdb  ──►  SQL / pandas (สัปดาห์ที่ 5)
+data/sample/*.csv ─┘   (แปลง + ตัดซ้ำ)          stations, measurements</code></pre>
+</section>
+<section id="ทำไมใชฐานขอมลเชงวเคราะหแบบไฟลเดยว" class="level2">
+<h2 class="anchored" data-anchor-id="ทำไมใชฐานขอมลเชงวเคราะหแบบไฟลเดยว">2. ทำไมใช้ฐานข้อมูลเชิงวิเคราะห์แบบไฟล์เดียว</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ตัวเลือก</th>
+<th>จุดเด่น</th>
+<th>ข้อจำกัดสำหรับงานนี้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไฟล์ CSV/JSON หลายไฟล์</td>
+<td>เปิดง่าย</td>
+<td>ไม่มีชนิดข้อมูล ไม่มี key ป้องกันแถวซ้ำ ต้องโหลดใหม่ทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>SQLite</td>
+<td>ไฟล์เดียว ใช้แพร่หลาย</td>
+<td>ออกแบบสำหรับงานธุรกรรม (OLTP) อ่านทีละแถว รวมข้อมูลหลายล้านแถวช้า</td>
+</tr>
+<tr class="odd">
+<td>PostgreSQL / MySQL</td>
+<td>ครบเครื่อง หลายคนใช้พร้อมกัน</td>
+<td>ต้องติดตั้งและดูแล server เกินความจำเป็นสำหรับโครงการคนเดียว</td>
+</tr>
+<tr class="even">
+<td><strong>DuckDB</strong></td>
+<td>ไฟล์เดียว ไม่ต้องมี server, เก็บแบบ columnar รวมข้อมูลเร็วมาก, อ่าน CSV/Parquet/pandas ได้ตรง</td>
+<td>เขียนพร้อมกันหลาย process ไม่ได้ (เหมาะกับงานวิเคราะห์ ไม่ใช่ระบบรับคำสั่งซื้อ)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OLTP กับ OLAP:</strong> ระบบธุรกรรม (OLTP) อ่าน/เขียนทีละแถว เช่น “บันทึกการสั่งซื้อหนึ่งรายการ” ส่วนงานวิเคราะห์ (OLAP) อ่านคอลัมน์ไม่กี่คอลัมน์จากแถวจำนวนมาก เช่น “ค่าเฉลี่ย PM2.5 ทุกสถานีทั้งปี” DuckDB เก็บข้อมูลแบบ <strong>columnar</strong> (ค่าในคอลัมน์เดียวกันอยู่ติดกัน) จึงอ่านเฉพาะคอลัมน์ <code>pm25</code> และ <code>ts</code> ได้โดยไม่ต้องอ่านคอลัมน์อื่น</p>
+<p>ข้อมูลรายชั่วโมง 80 สถานี × 5 ปี ≈ 3.5 ล้านแถว ใหญ่เกินกว่าจะเปิดใน Excel สบาย ๆ แต่เล็กมากสำหรับ DuckDB</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>)     <span class="co"># ถ้าไม่มีไฟล์ จะสร้างใหม่</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"SELECT 42 AS answer"</span>).show()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>con.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ออกแบบตาราง-data-model" class="level2">
+<h2 class="anchored" data-anchor-id="ออกแบบตาราง-data-model">3. ออกแบบตาราง (data model)</h2>
+<p>ข้อมูลจาก Air4Thai มีสองส่วนที่เปลี่ยนแปลงไม่เท่ากัน: ข้อมูลสถานี (แทบไม่เปลี่ยน) กับค่าที่วัด (เพิ่มทุกชั่วโมง) จึงแยกเป็นสองตาราง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> stations (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    station_id   <span class="dt">VARCHAR</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    name_th      <span class="dt">VARCHAR</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    name_en      <span class="dt">VARCHAR</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    province     <span class="dt">VARCHAR</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    region       <span class="dt">VARCHAR</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    lat          <span class="dt">DOUBLE</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    lon          <span class="dt">DOUBLE</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    station_type <span class="dt">VARCHAR</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>);</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> measurements (</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    station_id <span class="dt">VARCHAR</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ts         <span class="dt">TIMESTAMP</span>,          <span class="co">-- เวลาท้องถิ่น Asia/Bangkok รายชั่วโมง</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    pm25 <span class="dt">DOUBLE</span>, pm10 <span class="dt">DOUBLE</span>, o3 <span class="dt">DOUBLE</span>, co <span class="dt">DOUBLE</span>, no2 <span class="dt">DOUBLE</span>, so2 <span class="dt">DOUBLE</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (station_id, ts)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>การตัดสินใจ</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>แยก <code>stations</code> ออกจาก <code>measurements</code></td>
+<td>ไม่ต้องเก็บชื่อและพิกัดซ้ำทุกชั่วโมง แก้ชื่อสถานีที่เดียว</td>
+</tr>
+<tr class="even">
+<td>primary key <code>(station_id, ts)</code></td>
+<td>หนึ่งสถานีมีค่าได้เพียงหนึ่งแถวต่อหนึ่งชั่วโมง ฐานข้อมูลจะปฏิเสธแถวซ้ำให้</td>
+</tr>
+<tr class="odd">
+<td><code>ts</code> เป็น <code>TIMESTAMP</code> เวลาท้องถิ่น</td>
+<td>ค่าจาก Air4Thai เป็นเวลาประเทศไทย เก็บตามนั้นและตกลงกันทั้งโครงการ (สัปดาห์ที่ 5 จะลงรายละเอียด timezone)</td>
+</tr>
+<tr class="even">
+<td>ค่ามลพิษเป็น <code>DOUBLE</code> และค่าหายเป็น <code>NULL</code></td>
+<td>ห้ามเก็บค่าพิเศษ เช่น <code>-1</code> หรือ <code>-999</code> เพราะ <code>AVG()</code> จะนำไปคำนวณด้วย</td>
+</tr>
+<tr class="odd">
+<td><code>region</code> อยู่ใน <code>stations</code></td>
+<td>Air4Thai ไม่ส่งภาคมา เราเติมจากตาราง mapping จังหวัด → ภาค ที่เขียนเอง เพื่อตอบ Q1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sql-พนฐานกบขอมล-pm2.5" class="level2">
+<h2 class="anchored" data-anchor-id="sql-พนฐานกบขอมล-pm2.5">4. SQL พื้นฐานกับข้อมูล PM2.5</h2>
+<p>DuckDB ใช้ SQL มาตรฐาน คำสั่งต่อไปนี้ใช้บ่อยที่สุด</p>
+<section id="select-และ-where" class="level3">
+<h3 class="anchored" data-anchor-id="select-และ-where">SELECT และ WHERE</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, ts, pm25</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> pm25 <span class="op">&gt;</span> <span class="dv">75</span>                         <span class="co">-- ค่ารายชั่วโมงสูง (มาตรฐาน 37.5 ใช้กับค่าเฉลี่ย 24 ชม. ดูสัปดาห์ที่ 5)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> ts <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2023-01-01'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> pm25 <span class="kw">DESC</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="group-by" class="level3">
+<h3 class="anchored" data-anchor-id="group-by">GROUP BY</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>)            <span class="kw">AS</span> n_rows,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(pm25)         <span class="kw">AS</span> n_pm25,     <span class="co">-- นับเฉพาะค่าที่ไม่ใช่ NULL</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(pm25), <span class="dv">1</span>) <span class="kw">AS</span> pm25_mean,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(pm25)           <span class="kw">AS</span> pm25_max</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> station_id</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> pm25_mean <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p><code>COUNT(*)</code> นับทุกแถว <code>COUNT(pm25)</code> นับเฉพาะแถวที่มีค่า ผลต่างของสองค่านี้คือจำนวนชั่วโมงที่ PM2.5 หาย ซึ่งสำคัญมากในสัปดาห์ที่ 6–7</p>
+</blockquote>
+</section>
+<section id="join" class="level3">
+<h3 class="anchored" data-anchor-id="join">JOIN</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> s.station_id) <span class="kw">AS</span> n_stations,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(m.pm25), <span class="dv">1</span>)        <span class="kw">AS</span> pm25_mean</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements <span class="kw">AS</span> m</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> stations     <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> s.region</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> pm25_mean <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชนิด JOIN</th>
+<th>ผลลัพธ์</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>JOIN</code> (INNER)</td>
+<td>เฉพาะแถวที่ตรงกันทั้งสองตาราง</td>
+</tr>
+<tr class="even">
+<td><code>LEFT JOIN</code></td>
+<td>ทุกแถวของตารางซ้าย ถ้าไม่ตรงได้ <code>NULL</code> (ใช้หาว่ามีค่าวัดของสถานีที่ไม่อยู่ใน <code>stations</code> หรือไม่)</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ตรวจสอบ: มี station_id ใน measurements ที่ไม่มีใน stations หรือไม่</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> m.station_id</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements m <span class="kw">LEFT</span> <span class="kw">JOIN</span> stations s <span class="kw">USING</span> (station_id)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> s.station_id <span class="kw">IS</span> <span class="kw">NULL</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="window-function-เบองตน" class="level3">
+<h3 class="anchored" data-anchor-id="window-function-เบองตน">Window function (เบื้องต้น)</h3>
+<p>window function คำนวณข้ามหลายแถวโดย <em>ไม่ยุบแถว</em> ต่างจาก <code>GROUP BY</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ค่าเฉลี่ยเคลื่อนที่ 24 แถวล่าสุดของแต่ละสถานี</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, ts, pm25,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(pm25) <span class="kw">OVER</span> (</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>           <span class="kw">PARTITION</span> <span class="kw">BY</span> station_id <span class="kw">ORDER</span> <span class="kw">BY</span> ts</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>           <span class="kw">ROWS</span> <span class="kw">BETWEEN</span> <span class="dv">23</span> <span class="kw">PRECEDING</span> <span class="kw">AND</span> <span class="kw">CURRENT</span> <span class="kw">ROW</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       ) <span class="kw">AS</span> pm25_roll24</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements;</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- 3 ชั่วโมงที่ PM2.5 สูงสุดของแต่ละสถานี</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, ts, pm25</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>QUALIFY <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> station_id <span class="kw">ORDER</span> <span class="kw">BY</span> pm25 <span class="kw">DESC</span> <span class="kw">NULLS</span> <span class="fu">LAST</span>) <span class="op">&lt;=</span> <span class="dv">3</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>ROWS BETWEEN 23 PRECEDING</code> นับ 24 <em>แถว</em> ไม่ใช่ 24 <em>ชั่วโมง</em> ถ้ามีชั่วโมงหายผลจะคลาดเคลื่อน สัปดาห์ที่ 5 จะทำค่ารายวันพร้อมจำนวนชั่วโมงที่มีข้อมูลแทน <code>QUALIFY</code> เป็นส่วนขยายของ DuckDB ใช้กรองผลของ window function</p>
+</section>
+<section id="ใช-sql-จาก-python" class="level3">
+<h3 class="anchored" data-anchor-id="ใช-sql-จาก-python">ใช้ SQL จาก Python</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"SELECT COUNT(*) FROM measurements"</span>).fetchall()      <span class="co"># [(3504000,)] list ของ tuple</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM stations"</span>).df()                 <span class="co"># ได้ pandas DataFrame</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"SELECT * FROM measurements WHERE station_id = ?"</span>, [<span class="st">"02t"</span>]).df()   <span class="co"># ใช้ ? แทนการต่อ string</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ใช้ <code>?</code> (parameter) แทนการต่อ string ด้วย f-string เมื่อค่ามาจากภายนอก เพื่อกัน SQL injection และปัญหาเครื่องหมายคำพูด</p>
+</section>
+</section>
+<section id="การโหลดแบบ-idempotent" class="level2">
+<h2 class="anchored" data-anchor-id="การโหลดแบบ-idempotent">5. การโหลดแบบ idempotent</h2>
+<p><strong>idempotent</strong> คือรันกี่ครั้งก็ได้ผลเหมือนรันครั้งเดียว script ที่ดีต้องรันซ้ำได้ เพราะเราจะรันหลังดึงข้อมูลทุกชั่วโมง และไฟล์ raw สองไฟล์อาจมีค่าของชั่วโมงเดียวกัน (ถ้าดึงสองครั้งในชั่วโมงเดียว)</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>วิธี</th>
+<th>คำสั่ง</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>INSERT</code> ธรรมดา</td>
+<td><code>INSERT INTO measurements SELECT ...</code></td>
+<td>รันครั้งที่สอง error เพราะชน primary key (หรือแถวซ้ำถ้าไม่มี key)</td>
+</tr>
+<tr class="even">
+<td>ข้ามแถวที่มีแล้ว</td>
+<td><code>INSERT OR IGNORE INTO ...</code></td>
+<td>เก็บค่าเดิม ไม่สนใจค่าใหม่</td>
+</tr>
+<tr class="odd">
+<td><strong>upsert</strong></td>
+<td><code>INSERT OR REPLACE INTO ...</code></td>
+<td>ถ้ามี <code>(station_id, ts)</code> แล้ว แทนด้วยค่าใหม่ ถ้ายังไม่มี เพิ่ม</td>
+</tr>
+<tr class="even">
+<td>ลบแล้วสร้างใหม่</td>
+<td><code>CREATE OR REPLACE TABLE ...</code> จากไฟล์ทั้งหมด</td>
+<td>ง่ายและถูกต้อง แต่ช้าลงเมื่อไฟล์มากขึ้น</td>
+</tr>
+</tbody>
+</table>
+<p>ขั้นตอนที่ใช้ในรายวิชา</p>
+<pre class="text"><code>1. อ่าน raw ทุกไฟล์ → DataFrame
+2. ตัดซ้ำในชุดใหม่ก่อน: เหลือหนึ่งแถวต่อ (station_id, ts) โดยเลือกไฟล์ที่ดึงล่าสุด
+3. INSERT OR REPLACE เข้าตาราง (primary key ป้องกันแถวซ้ำ)
+4. ตรวจ: จำนวนแถวก่อน/หลัง, ไม่มี (station_id, ts) ซ้ำ</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">INTO</span> measurements (station_id, ts, pm25, pm10, o3, co, no2, so2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, ts, pm25, pm10, o3, co, no2, so2</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> new_rows</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>QUALIFY <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> station_id, ts <span class="kw">ORDER</span> <span class="kw">BY</span> fetched_at <span class="kw">DESC</span>) <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ขั้นที่ 2 จำเป็น เพราะ DuckDB ไม่ยอมให้คำสั่งเดียว upsert key เดียวกันสองครั้ง</p>
+<p>ตรวจว่าไม่มีแถวซ้ำ (ควรได้ตารางว่าง)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, ts, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span> <span class="kw">HAVING</span> n <span class="op">&gt;</span> <span class="dv">1</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="parquet-และ-apache-arrow" class="level2">
+<h2 class="anchored" data-anchor-id="parquet-และ-apache-arrow">6. Parquet และ Apache Arrow</h2>
+<section id="parquet" class="level3">
+<h3 class="anchored" data-anchor-id="parquet">Parquet</h3>
+<p><strong>Parquet</strong> เป็นรูปแบบไฟล์แบบ columnar ที่บีบอัดและเก็บชนิดข้อมูลไว้ในไฟล์ ใช้แลกเปลี่ยนข้อมูลกับเครื่องมืออื่น (pandas, Polars, Spark, Power BI) หรือสำรองข้อมูล</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>CSV</th>
+<th>Parquet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ชนิดข้อมูล</td>
+<td>ไม่มี (ทุกอย่างเป็นข้อความ)</td>
+<td>เก็บไว้ในไฟล์ (<code>TIMESTAMP</code>, <code>DOUBLE</code>)</td>
+</tr>
+<tr class="even">
+<td>ขนาด</td>
+<td>ใหญ่</td>
+<td>เล็กกว่ามาก (บีบอัดรายคอลัมน์)</td>
+</tr>
+<tr class="odd">
+<td>อ่านบางคอลัมน์</td>
+<td>ต้องอ่านทั้งไฟล์</td>
+<td>อ่านเฉพาะคอลัมน์ที่ต้องการได้</td>
+</tr>
+<tr class="even">
+<td>เปิดด้วยตา</td>
+<td>ได้</td>
+<td>ไม่ได้ ต้องใช้โปรแกรม</td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ส่งออกทั้งตาราง</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> measurements <span class="kw">TO</span> <span class="st">'data/parquet/measurements.parquet'</span> (FORMAT parquet);</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- ส่งออกแบบแบ่งโฟลเดอร์ตามปี (partition)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> (<span class="kw">SELECT</span> <span class="op">*</span>, <span class="dt">year</span>(ts) <span class="kw">AS</span> <span class="dt">year</span> <span class="kw">FROM</span> measurements)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">TO</span> <span class="st">'data/parquet/measurements'</span> (FORMAT parquet, PARTITION_BY (<span class="dt">year</span>), OVERWRITE_OR_IGNORE);</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- อ่านกลับ: DuckDB query ไฟล์ Parquet ได้โดยตรงโดยไม่ต้องโหลดเข้าตาราง</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dt">year</span>, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> read_parquet(<span class="st">'data/parquet/measurements/*/*.parquet'</span>, hive_partitioning <span class="op">=</span> <span class="kw">true</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">year</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pd.read_parquet(<span class="st">"data/parquet/measurements.parquet"</span>, columns<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"ts"</span>, <span class="st">"pm25"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="apache-arrow-แนวคด" class="level3">
+<h3 class="anchored" data-anchor-id="apache-arrow-แนวคด">Apache Arrow (แนวคิด)</h3>
+<p><strong>Apache Arrow</strong> เป็นรูปแบบการเก็บตารางแบบ columnar <em>ในหน่วยความจำ</em> ที่หลายเครื่องมือใช้ร่วมกัน เมื่อ DuckDB ส่งผลให้ pandas หรือ Polars ผ่าน Arrow ข้อมูลไม่ต้องถูกแปลงทีละค่า จึงเร็ว เปรียบเทียบง่าย ๆ: Parquet คือรูปแบบบน <em>ดิสก์</em> ส่วน Arrow คือรูปแบบใน <em>RAM</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM stations"</span>).fetch_arrow_table()   <span class="co"># pyarrow.Table</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ผู้เรียนไม่ต้องเขียนโค้ด Arrow โดยตรง แต่ควรรู้ว่าเป็นเหตุผลที่ DuckDB, pandas และ Polars ส่งข้อมูลถึงกันได้เร็ว</p>
+</section>
+</section>
+<section id="โครงสรางของ-srcload_duckdb.py" class="level2">
+<h2 class="anchored" data-anchor-id="โครงสรางของ-srcload_duckdb.py">7. โครงสร้างของ <code>src/load_duckdb.py</code></h2>
+<pre class="text"><code>1. เปิด data/pm25.duckdb และสร้างตาราง (CREATE TABLE IF NOT EXISTS)
+2. อ่าน data/raw/air4thai_*.json ทุกไฟล์ → แปลงเป็นแถวของ stations และ measurements
+   (ใช้ตารางจับคู่ key จากสัปดาห์ที่ 3 ไม่เดาชื่อ key)
+3. แปลงค่า: string → ตัวเลข, ค่าติดลบ/ว่าง → NULL, date + time → TIMESTAMP
+4. (ถ้าเลือก) โหลดไฟล์ตัวอย่างจากผู้สอนใน data/sample/ เป็นข้อมูลย้อนหลัง
+5. upsert ทั้งสองตาราง แล้วเติม region จาก mapping จังหวัด → ภาค
+6. พิมพ์สรุป: จำนวนสถานี จำนวนแถว ช่วงเวลา และตรวจแถวซ้ำ</code></pre>
+<p>โค้ดเต็มอยู่ในคู่มือปฏิบัติการ</p>
+</section>
+<section id="สรป" class="level2">
+<h2 class="anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>DuckDB เป็นฐานข้อมูลเชิงวิเคราะห์แบบไฟล์เดียว columnar ไม่ต้องมี server เหมาะกับงาน EDA</li>
+<li>แยก <code>stations</code> (แทบไม่เปลี่ยน) กับ <code>measurements</code> (เพิ่มทุกชั่วโมง) และใช้ primary key <code>(station_id, ts)</code></li>
+<li>SQL หลัก: <code>SELECT</code>/<code>WHERE</code> กรอง, <code>GROUP BY</code> รวม, <code>JOIN</code> เชื่อมตาราง, window function คำนวณข้ามแถวโดยไม่ยุบแถว</li>
+<li>โหลดแบบ idempotent: ตัดซ้ำในชุดใหม่ แล้ว <code>INSERT OR REPLACE</code></li>
+<li>Parquet สำหรับเก็บ/แลกเปลี่ยนบนดิสก์ Arrow สำหรับส่งข้อมูลในหน่วยความจำ</li>
+</ul>
+</section>
+<section id="คำถามทบทวน" class="level2">
+<h2 class="anchored" data-anchor-id="คำถามทบทวน">คำถามทบทวน</h2>
+<ol type="1">
+<li>ทำไม <code>COUNT(*)</code> กับ <code>COUNT(pm25)</code> ให้ค่าต่างกัน และค่าต่างนี้บอกอะไร</li>
+<li>ถ้าเก็บค่าหายเป็น <code>-999</code> แทน <code>NULL</code> ค่าเฉลี่ยของสถานีที่ข้อมูลหาย 10% จะผิดไปทิศทางใด</li>
+<li>ถ้าไม่มี primary key และรัน <code>load_duckdb.py</code> สามครั้ง จะเกิดอะไรกับคำตอบของ Q1</li>
+<li>เขียน SQL หาจำนวนสถานีและค่าเฉลี่ย PM2.5 ของแต่ละจังหวัดในภาคเหนือ</li>
+<li><code>GROUP BY station_id</code> กับ <code>AVG(...) OVER (PARTITION BY station_id)</code> ให้ผลลัพธ์ต่างกันอย่างไร</li>
+<li>เมื่อใดควรส่งออกเป็น Parquet แทนการส่งไฟล์ <code>pm25.duckdb</code> ให้เพื่อน</li>
+</ol>
+</section>
+<section id="อานเพมเตม" class="level2">
+<h2 class="anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li>เอกสาร DuckDB: SQL Introduction, <code>INSERT</code> (ส่วน <code>INSERT OR REPLACE</code>), Window Functions, Parquet — <a href="https://duckdb.org/docs/" class="uri">https://duckdb.org/docs/</a></li>
+<li>เอกสาร DuckDB Python API — <a href="https://duckdb.org/docs/stable/clients/python/overview" class="uri">https://duckdb.org/docs/stable/clients/python/overview</a></li>
+<li>Apache Arrow: <em>Overview</em> — <a href="https://arrow.apache.org/overview/" class="uri">https://arrow.apache.org/overview/</a></li>
+<li>McKinney, W. <em>Python for Data Analysis</em> (3e), บท Data Loading, Storage, and File Formats</li>
+</ul>
+<p>➡️ <a href="../../weeks/week04/lab.html">คู่มือปฏิบัติการสัปดาห์ที่ 4</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week04/index.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

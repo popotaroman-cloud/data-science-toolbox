@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น – Data Science Toolbox</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-aa992321f2f7111af8da854a4261011b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&amp;display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">คู่มือปฏิบัติการ</li><li class="breadcrumb-item"><a href="../../weeks/week13/lab.html">Week13</a></li><li class="breadcrumb-item"><a href="../../weeks/week13/lab.html">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Data Science Toolbox</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">หน้าแรก</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ประมวลรายวิชา 1145100 Data Science Toolbox</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">เอกสารประกอบการสอน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1: ภาพรวม EDA, สภาพแวดล้อมการทำงาน และ Git/GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2: การตั้งคำถามเชิงวิเคราะห์และสมมติฐาน</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3: การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5: การจัดการข้อมูลและการเชื่อม SQL กับ Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6: Data profiling และการตรวจคุณภาพข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7: การวิเคราะห์ข้อมูลสูญหาย (MCAR / MAR / MNAR)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8: Checkpoint 1 นำเสนอ data pipeline</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9: หลักการ visualization และ grammar of graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10: Interactive visualization และข้อมูลขนาดใหญ่</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11: สถิติเชิงสำรวจและ time series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12: สำรวจข้อมูลหลายมิติ, outlier และข้อมูลสังเคราะห์กับ PDPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13: ข้อมูลเชิงพื้นที่และข้อมูลลำดับชั้น</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14: สื่อสารข้อค้นพบและ reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15: นำเสนอโครงการสุดท้าย</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">คู่มือปฏิบัติการ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 1: ตั้งค่าสภาพแวดล้อมและสร้าง repository โครงการ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 2: เขียน questions.md และ first look ข้อมูล</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 3: เขียน script ดึงข้อมูลจาก Air4Thai</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 4: สร้างฐานข้อมูล DuckDB จากข้อมูล raw</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 5: สร้าง daily_pm25 และ tidy dataframe</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 6: profiling และเขียนกฎตรวจคุณภาพข้อมูล PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week07</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 7: วิเคราะห์ข้อมูลสูญหายและสร้างชุดข้อมูลสะอาด</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week08</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week09</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 9: กราฟ univariate และ bivariate ที่ตอบคำถาม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week10</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 10: กราฟ interactive ด้วย Plotly และการรับมือข้อมูลใหญ่</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week11</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 11: ทดสอบสมมติฐานและแยก trend/seasonality ของ PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week12</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 12: จัดกลุ่มสถานี วิเคราะห์ outlier และสร้างข้อมูลสังเคราะห์</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week13</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week14</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week15</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 15: ซ้อมนำเสนอ ส่งงาน และประเมินเพื่อน</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">สไลด์</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#สงทตองเตรยม" id="toc-สงทตองเตรยม" class="nav-link active" data-scroll-target="#สงทตองเตรยม">สิ่งที่ต้องเตรียม</a></li>
+  <li><a href="#ขนท-1-สราง-branch-และตรวจพกดสถาน" id="toc-ขนท-1-สราง-branch-และตรวจพกดสถาน" class="nav-link" data-scroll-target="#ขนท-1-สราง-branch-และตรวจพกดสถาน">ขั้นที่ 1: สร้าง branch และตรวจพิกัดสถานี</a></li>
+  <li><a href="#ขนท-2-โหลดขอบเขตจงหวดและตรวจโครงสราง" id="toc-ขนท-2-โหลดขอบเขตจงหวดและตรวจโครงสราง" class="nav-link" data-scroll-target="#ขนท-2-โหลดขอบเขตจงหวดและตรวจโครงสราง">ขั้นที่ 2: โหลดขอบเขตจังหวัดและตรวจโครงสร้าง</a></li>
+  <li><a href="#ขนท-3-spatial-join-และตรวจคณภาพคอลมนจงหวด" id="toc-ขนท-3-spatial-join-และตรวจคณภาพคอลมนจงหวด" class="nav-link" data-scroll-target="#ขนท-3-spatial-join-และตรวจคณภาพคอลมนจงหวด">ขั้นที่ 3: Spatial join และตรวจคุณภาพคอลัมน์จังหวัด</a></li>
+  <li><a href="#ขนท-4-คำนวณระยะทางใน-projected-crs" id="toc-ขนท-4-คำนวณระยะทางใน-projected-crs" class="nav-link" data-scroll-target="#ขนท-4-คำนวณระยะทางใน-projected-crs">ขั้นที่ 4: คำนวณระยะทางใน projected CRS</a></li>
+  <li><a href="#ขนท-5-choropleth-ระดบจงหวด" id="toc-ขนท-5-choropleth-ระดบจงหวด" class="nav-link" data-scroll-target="#ขนท-5-choropleth-ระดบจงหวด">ขั้นที่ 5: Choropleth ระดับจังหวัด</a></li>
+  <li><a href="#ขนท-6-แผนทสถานดวย-folium-พรอม-popup-เสรม-แตแนะนำ" id="toc-ขนท-6-แผนทสถานดวย-folium-พรอม-popup-เสรม-แตแนะนำ" class="nav-link" data-scroll-target="#ขนท-6-แผนทสถานดวย-folium-พรอม-popup-เสรม-แตแนะนำ">ขั้นที่ 6: แผนที่สถานีด้วย Folium พร้อม popup (เสริม แต่แนะนำ)</a></li>
+  <li><a href="#ขนท-7-treemap-และ-sunburst-ภาค-จงหวด-สถาน" id="toc-ขนท-7-treemap-และ-sunburst-ภาค-จงหวด-สถาน" class="nav-link" data-scroll-target="#ขนท-7-treemap-และ-sunburst-ภาค-จงหวด-สถาน">ขั้นที่ 7: Treemap และ sunburst ภาค → จังหวัด → สถานี</a></li>
+  <li><a href="#ขนท-8-บนทกแหลงขอมลขอบเขตใน-readme" id="toc-ขนท-8-บนทกแหลงขอมลขอบเขตใน-readme" class="nav-link" data-scroll-target="#ขนท-8-บนทกแหลงขอมลขอบเขตใน-readme">ขั้นที่ 8: บันทึกแหล่งข้อมูลขอบเขตใน README</a></li>
+  <li><a href="#ขนท-9-commit-push-และเปด-pull-request" id="toc-ขนท-9-commit-push-และเปด-pull-request" class="nav-link" data-scroll-target="#ขนท-9-commit-push-และเปด-pull-request">ขั้นที่ 9: commit, push และเปิด pull request</a></li>
+  <li><a href="#ขนท-10-review-pr-ของเพอน" id="toc-ขนท-10-review-pr-ของเพอน" class="nav-link" data-scroll-target="#ขนท-10-review-pr-ของเพอน">ขั้นที่ 10: review PR ของเพื่อน</a></li>
+  <li><a href="#checklist-กอนสงงาน" id="toc-checklist-กอนสงงาน" class="nav-link" data-scroll-target="#checklist-กอนสงงาน">Checklist ก่อนส่งงาน</a></li>
+  <li><a href="#แกปญหาทพบบอย" id="toc-แกปญหาทพบบอย" class="nav-link" data-scroll-target="#แกปญหาทพบบอย">แก้ปัญหาที่พบบ่อย</a></li>
+  <li><a href="#งานศกษาดวยตนเอง-กอนสปดาหท-14" id="toc-งานศกษาดวยตนเอง-กอนสปดาหท-14" class="nav-link" data-scroll-target="#งานศกษาดวยตนเอง-กอนสปดาหท-14">งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 14)</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week13/lab.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">คู่มือปฏิบัติการ</li><li class="breadcrumb-item"><a href="../../weeks/week13/lab.html">Week13</a></li><li class="breadcrumb-item"><a href="../../weeks/week13/lab.html">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>เวลา:</strong> 2 ชั่วโมง · <strong>CLO:</strong> CLO4 <strong>ผลงานที่ต้องส่ง:</strong> PR ที่มี <code>notebooks/13_spatial.ipynb</code>, <code>src/geo_utils.py</code> และหัวข้อ “แหล่งข้อมูลขอบเขตจังหวัด” ใน <code>README.md</code> (ไฟล์แผนที่ HTML อยู่ใน <code>outputs/</code> ซึ่งไม่ต้อง commit)</p>
+</blockquote>
+<section id="สงทตองเตรยม" class="level2">
+<h2 class="anchored" data-anchor-id="สงทตองเตรยม">สิ่งที่ต้องเตรียม</h2>
+<ul>
+<li><code>data/pm25.duckdb</code> ที่มี <code>stations</code> (มี <code>lat</code>, <code>lon</code>, <code>province</code>, <code>region</code>), <code>daily_pm25_clean</code> และ <code>station_clusters</code> จากสัปดาห์ที่ 12</li>
+<li>ไฟล์ขอบเขตจังหวัด <strong>GeoJSON จากผู้สอน</strong> วางไว้ที่ <code>data/geo/thailand_provinces.geojson</code> หรือไฟล์ที่ดาวน์โหลดเองจากแหล่งเปิดที่ระบุชื่อได้ (geoBoundaries, HDX, GADM) <strong>พร้อมบันทึกสัญญาอนุญาต</strong></li>
+<li>ตรวจไลบรารี</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import geopandas, folium; print(geopandas.__version__, folium.__version__)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้า import GeoPandas ไม่ผ่าน ให้ติดตั้งผ่าน conda-forge (<code>conda install -c conda-forge geopandas</code>) ไม่ใช้ pip</p>
+<hr>
+</section>
+<section id="ขนท-1-สราง-branch-และตรวจพกดสถาน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-1-สราง-branch-และตรวจพกดสถาน">ขั้นที่ 1: สร้าง branch และตรวจพิกัดสถานี</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> week13-spatial</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> outputs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เพิ่ม <code>outputs/</code> ใน <code>.gitignore</code> แล้วสร้าง <code>notebooks/13_spatial.ipynb</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb, pandas <span class="im">as</span> pd, geopandas <span class="im">as</span> gpd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>st <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.*, c.cluster</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM stations s LEFT JOIN station_clusters c USING (station_id)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ไม่มีพิกัด:"</span>, st[[<span class="st">"lat"</span>, <span class="st">"lon"</span>]].isna().<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>).<span class="bu">sum</span>(), <span class="st">"สถานี"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>st <span class="op">=</span> st.dropna(subset<span class="op">=</span>[<span class="st">"lat"</span>, <span class="st">"lon"</span>])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> gpd.GeoDataFrame(st, geometry<span class="op">=</span>gpd.points_from_xy(st.lon, st.lat), crs<span class="op">=</span><span class="st">"EPSG:4326"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stations.total_bounds)   <span class="co"># [minx miny maxx maxy] ควรอยู่ราว [97 5 106 21]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้า <code>total_bounds</code> ไม่อยู่ในช่วงนี้ ให้ตรวจว่า lat/lon สลับกันหรือไม่ แล้วแก้ที่ต้นทาง (script โหลดข้อมูลใน <code>src/</code>) ไม่ใช่แก้ใน notebook</p>
+</section>
+<section id="ขนท-2-โหลดขอบเขตจงหวดและตรวจโครงสราง" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-2-โหลดขอบเขตจงหวดและตรวจโครงสราง">ขั้นที่ 2: โหลดขอบเขตจังหวัดและตรวจโครงสร้าง</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prov <span class="op">=</span> gpd.read_file(<span class="st">"data/geo/thailand_provinces.geojson"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prov.crs, <span class="bu">len</span>(prov))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>prov.head(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ดูชื่อคอลัมน์จริงแล้วเปลี่ยนชื่อให้เป็นมาตรฐานของเรา</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>prov <span class="op">=</span> prov.rename(columns<span class="op">=</span>{<span class="st">"&lt;คอลัมน์ชื่อจังหวัด&gt;"</span>: <span class="st">"prov_name"</span>})[[<span class="st">"prov_name"</span>, <span class="st">"geometry"</span>]]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>prov <span class="op">=</span> prov.to_crs(<span class="st">"EPSG:4326"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>prov.plot(edgecolor<span class="op">=</span><span class="st">"white"</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ขนท-3-spatial-join-และตรวจคณภาพคอลมนจงหวด" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-3-spatial-join-และตรวจคณภาพคอลมนจงหวด">ขั้นที่ 3: Spatial join และตรวจคุณภาพคอลัมน์จังหวัด</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>joined <span class="op">=</span> gpd.sjoin(stations, prov, how<span class="op">=</span><span class="st">"left"</span>, predicate<span class="op">=</span><span class="st">"within"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"อยู่นอกทุกจังหวัด:"</span>, joined[<span class="st">"prov_name"</span>].isna().<span class="bu">sum</span>())</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>mismatch <span class="op">=</span> joined[joined[<span class="st">"province"</span>] <span class="op">!=</span> joined[<span class="st">"prov_name"</span>]][[<span class="st">"station_id"</span>, <span class="st">"name_th"</span>, <span class="st">"province"</span>, <span class="st">"prov_name"</span>]]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mismatch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ความไม่ตรงกันส่วนใหญ่มักมาจากการสะกด (เช่น “กรุงเทพมหานคร” vs “กรุงเทพฯ” หรือภาษาไทย vs อังกฤษ) ให้สร้างตาราง mapping ใน <code>src/geo_utils.py</code> ส่วนกรณีที่ต่างจังหวัดจริง ให้ตรวจพิกัดกับเว็บไซต์ Air4Thai และบันทึกผลไว้ใน notebook</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># src/geo_utils.py</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">"""ฟังก์ชันช่วยงานเชิงพื้นที่ ใช้ร่วมกันใน notebook, report และ app"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>PROV_FILE <span class="op">=</span> ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"geo"</span> <span class="op">/</span> <span class="st">"thailand_provinces.geojson"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>NAME_FIX <span class="op">=</span> {<span class="st">"กรุงเทพฯ"</span>: <span class="st">"กรุงเทพมหานคร"</span>}   <span class="co"># เติมตามที่พบจริง</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_provinces(name_col: <span class="bu">str</span>) <span class="op">-&gt;</span> gpd.GeoDataFrame:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    prov <span class="op">=</span> gpd.read_file(PROV_FILE).rename(columns<span class="op">=</span>{name_col: <span class="st">"prov_name"</span>})</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    prov[<span class="st">"prov_name"</span>] <span class="op">=</span> prov[<span class="st">"prov_name"</span>].replace(NAME_FIX)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> prov[[<span class="st">"prov_name"</span>, <span class="st">"geometry"</span>]].to_crs(<span class="st">"EPSG:4326"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ขนท-4-คำนวณระยะทางใน-projected-crs" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-4-คำนวณระยะทางใน-projected-crs">ขั้นที่ 4: คำนวณระยะทางใน projected CRS</h2>
+<p>หาสถานีที่ใกล้ที่สุดของแต่ละสถานี เพื่อใช้ตรวจ outlier ตามบริบท (ต่อยอดสัปดาห์ที่ 12)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>s_m <span class="op">=</span> stations.to_crs(epsg<span class="op">=</span><span class="dv">32647</span>)[[<span class="st">"station_id"</span>, <span class="st">"name_th"</span>, <span class="st">"geometry"</span>]]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>near <span class="op">=</span> gpd.sjoin_nearest(s_m, s_m.rename(columns<span class="op">=</span>{<span class="st">"station_id"</span>: <span class="st">"nb_id"</span>, <span class="st">"name_th"</span>: <span class="st">"nb_name"</span>}),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                         distance_col<span class="op">=</span><span class="st">"dist_m"</span>, exclusive<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>near[<span class="st">"dist_km"</span>] <span class="op">=</span> (near[<span class="st">"dist_m"</span>] <span class="op">/</span> <span class="dv">1000</span>).<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>near.sort_values(<span class="st">"dist_km"</span>, ascending<span class="op">=</span><span class="va">False</span>).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>exclusive=True</code> ป้องกันไม่ให้จับคู่สถานีกับตัวเอง (ต้องใช้ GeoPandas 1.x) สถานีที่ห่างจากเพื่อนบ้านมากที่สุดคือสถานีที่ “แทน” พื้นที่กว้าง ให้ระวังเมื่อตีความ choropleth</p>
+</section>
+<section id="ขนท-5-choropleth-ระดบจงหวด" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-5-choropleth-ระดบจงหวด">ขั้นที่ 5: Choropleth ระดับจังหวัด</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>agg <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">    WITH per_station AS (</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT station_id, avg(pm25_mean) AS pm25, avg((pm25_mean &gt; 37.5)::INT) AS share_over</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM daily_pm25_clean GROUP BY station_id)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.province, count(*) AS n_stations,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">           avg(p.pm25) AS pm25_mean, avg(p.share_over) AS share_over_std</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM per_station p JOIN stations s USING (station_id)</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY s.province</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> prov.merge(agg, left_on<span class="op">=</span><span class="st">"prov_name"</span>, right_on<span class="op">=</span><span class="st">"province"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"จังหวัดที่ไม่มีสถานี:"</span>, m[<span class="st">"n_stations"</span>].isna().<span class="bu">sum</span>())</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>m.plot(column<span class="op">=</span><span class="st">"share_over_std"</span>, cmap<span class="op">=</span><span class="st">"YlOrRd"</span>, legend<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">9</span>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>       missing_kwds<span class="op">=</span>{<span class="st">"color"</span>: <span class="st">"lightgrey"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ทำ choropleth แบบ interactive ด้วย Plotly เพื่อให้ tooltip แสดงจำนวนสถานี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mm <span class="op">=</span> m.dropna(subset<span class="op">=</span>[<span class="st">"n_stations"</span>]).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.choropleth(mm, geojson<span class="op">=</span>mm.geometry.__geo_interface__, locations<span class="op">=</span>mm.index,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                    color<span class="op">=</span><span class="st">"share_over_std"</span>, color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                    hover_name<span class="op">=</span><span class="st">"prov_name"</span>, hover_data<span class="op">=</span>{<span class="st">"n_stations"</span>: <span class="va">True</span>, <span class="st">"pm25_mean"</span>: <span class="st">":.1f"</span>})</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig.update_geos(fitbounds<span class="op">=</span><span class="st">"locations"</span>, visible<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เขียน markdown 3–5 บรรทัด: จังหวัดใดดูแย่ที่สุด และข้อสรุปนั้นเชื่อถือได้แค่ไหนเมื่อดู <code>n_stations</code> และ MAUP</p>
+</section>
+<section id="ขนท-6-แผนทสถานดวย-folium-พรอม-popup-เสรม-แตแนะนำ" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-6-แผนทสถานดวย-folium-พรอม-popup-เสรม-แตแนะนำ">ขั้นที่ 6: แผนที่สถานีด้วย Folium พร้อม popup (เสริม แต่แนะนำ)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> con.sql(<span class="st">"SELECT station_id, avg(pm25_mean) AS pm25 FROM daily_pm25_clean GROUP BY 1"</span>).df()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> stations.merge(daily, on<span class="op">=</span><span class="st">"station_id"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> color(v):</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pd.isna(v): <span class="cf">return</span> <span class="st">"gray"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"green"</span> <span class="cf">if</span> v <span class="op">&lt;=</span> <span class="dv">15</span> <span class="cf">else</span> <span class="st">"orange"</span> <span class="cf">if</span> v <span class="op">&lt;=</span> <span class="fl">37.5</span> <span class="cf">else</span> <span class="st">"red"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>fmap <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="fl">13.5</span>, <span class="fl">101.0</span>], zoom_start<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> sm.itertuples():</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    html <span class="op">=</span> (<span class="ss">f"&lt;b&gt;</span><span class="sc">{</span>r<span class="sc">.</span>name_th<span class="sc">}</span><span class="ss">&lt;/b&gt;&lt;br&gt;</span><span class="sc">{</span>r<span class="sc">.</span>province<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>r<span class="sc">.</span>region<span class="sc">}</span><span class="ss">)&lt;br&gt;"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f"PM2.5 เฉลี่ย: </span><span class="sc">{</span>r<span class="sc">.</span>pm25<span class="sc">:.1f}</span><span class="ss"> µg/m³&lt;br&gt;cluster: </span><span class="sc">{</span>r<span class="sc">.</span>cluster<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    folium.CircleMarker([r.lat, r.lon], radius<span class="op">=</span><span class="dv">6</span>, color<span class="op">=</span>color(r.pm25), fill<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                        fill_opacity<span class="op">=</span><span class="fl">0.8</span>, tooltip<span class="op">=</span>r.name_th,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                        popup<span class="op">=</span>folium.Popup(html, max_width<span class="op">=</span><span class="dv">250</span>)).add_to(fmap)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fmap.save(<span class="st">"outputs/stations_map.html"</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>fmap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เกณฑ์สี: เขียว ≤ 15 (WHO 2021) · ส้ม ≤ 37.5 (มาตรฐานไทย) · แดง &gt; 37.5 ให้เพิ่ม legend เป็นข้อความใน markdown cell และสังเกตว่าสี cluster จากสัปดาห์ที่ 12 กระจุกตามภูมิศาสตร์หรือไม่ (ลองวาด <code>px.scatter_geo</code> หรือ <code>stations.explore(column="cluster")</code>)</p>
+</section>
+<section id="ขนท-7-treemap-และ-sunburst-ภาค-จงหวด-สถาน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-7-treemap-และ-sunburst-ภาค-จงหวด-สถาน">ขั้นที่ 7: Treemap และ sunburst ภาค → จังหวัด → สถานี</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT coalesce(s.region, 'ไม่ระบุ') AS region, coalesce(s.province, 'ไม่ระบุ') AS province,</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">           s.name_th, count(*) AS n_days, avg(d.pm25_mean) AS pm25_mean</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean d JOIN stations s USING (station_id)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ALL</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> [px.Constant(<span class="st">"ประเทศไทย"</span>), <span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"name_th"</span>]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>px.treemap(h, path<span class="op">=</span>path, values<span class="op">=</span><span class="st">"n_days"</span>, color<span class="op">=</span><span class="st">"pm25_mean"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>           color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>, color_continuous_midpoint<span class="op">=</span><span class="fl">37.5</span>).show()</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>px.sunburst(h, path<span class="op">=</span>path, values<span class="op">=</span><span class="st">"n_days"</span>, color<span class="op">=</span><span class="st">"pm25_mean"</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>, color_continuous_midpoint<span class="op">=</span><span class="fl">37.5</span>).show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตรวจความสะอาดของลำดับชั้น: จังหวัดหนึ่งต้องอยู่ภาคเดียว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>chk <span class="op">=</span> h.groupby(<span class="st">"province"</span>)[<span class="st">"region"</span>].nunique()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>chk[chk <span class="op">&gt;</span> <span class="dv">1</span>]      <span class="co"># ควรว่าง ถ้าไม่ว่างให้แก้ข้อมูล stations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>คลิกบนกราฟเพื่อ drill-down แล้วจดว่าอยากให้แดชบอร์ดสัปดาห์ที่ 14 แสดงอะไรในแต่ละระดับ (ประเทศ / ภาค / จังหวัด / สถานี)</p>
+</section>
+<section id="ขนท-8-บนทกแหลงขอมลขอบเขตใน-readme" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-8-บนทกแหลงขอมลขอบเขตใน-readme">ขั้นที่ 8: บันทึกแหล่งข้อมูลขอบเขตใน README</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## แหล่งข้อมูลขอบเขตจังหวัด</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ไฟล์: data/geo/thailand_provinces.geojson (ไม่ commit)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>แหล่งที่มา: ... (ผู้สอน / ชื่อแหล่งเปิด) · วันที่ดาวน์โหลด: ...</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>สัญญาอนุญาต: ... · การระบุที่มาที่ต้องใส่: ...</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>คอลัมน์ชื่อจังหวัดในไฟล์ต้นฉบับ: ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ขนท-9-commit-push-และเปด-pull-request" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-9-commit-push-และเปด-pull-request">ขั้นที่ 9: commit, push และเปิด pull request</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add notebooks/13_spatial.ipynb src/geo_utils.py README.md .gitignore AI_USAGE.md</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่มแผนที่สถานี choropleth รายจังหวัด และ treemap ภาค-จังหวัด-สถานี"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin week13-spatial</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เปิด PR แล้วขอ review จากเพื่อน 1 คน</p>
+</section>
+<section id="ขนท-10-review-pr-ของเพอน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-10-review-pr-ของเพอน">ขั้นที่ 10: review PR ของเพื่อน</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">ตรวจ CRS ก่อน join และคำนวณระยะทางใน projected CRS</label></li>
+<li><label><input type="checkbox">มีการเทียบ <code>province</code> เดิมกับผล spatial join และอธิบายกรณีไม่ตรงกัน</label></li>
+<li><label><input type="checkbox">choropleth แสดงพื้นที่ไม่มีข้อมูลแยกสี และมีจำนวนสถานีใน tooltip หรือข้อความ</label></li>
+<li><label><input type="checkbox">ใช้ค่าที่บวกกันได้เป็น <code>values</code> ของ treemap</label></li>
+<li><label><input type="checkbox">README ระบุแหล่งที่มาและสัญญาอนุญาตของขอบเขตจังหวัด</label></li>
+<li><label><input type="checkbox">ไม่มีไฟล์ GeoJSON หรือ HTML ขนาดใหญ่ถูก commit</label></li>
+</ul>
+<hr>
+</section>
+<section id="checklist-กอนสงงาน" class="level2">
+<h2 class="anchored" data-anchor-id="checklist-กอนสงงาน">Checklist ก่อนส่งงาน</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">notebook รันได้ตั้งแต่ต้นจนจบด้วย <em>Restart &amp; Run All</em></label></li>
+<li><label><input type="checkbox">มีแผนที่จุดสถานี, choropleth รายจังหวัด, treemap และ sunburst พร้อมคำอธิบาย</label></li>
+<li><label><input type="checkbox"><code>outputs/stations_map.html</code> เปิดใน browser ได้และ popup แสดงข้อมูลถูกต้อง</label></li>
+<li><label><input type="checkbox"><code>src/geo_utils.py</code> ใช้ path แบบ relative จาก root ของโครงการ</label></li>
+<li><label><input type="checkbox">อัปเดต <code>AI_USAGE.md</code> และมี PR ที่เพื่อน review แล้ว</label></li>
+</ul>
+</section>
+<section id="แกปญหาทพบบอย" class="level2">
+<h2 class="anchored" data-anchor-id="แกปญหาทพบบอย">แก้ปัญหาที่พบบ่อย</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุและวิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>จุดทุกจุดไปอยู่ในมหาสมุทรอินเดียหรือแอฟริกา</td>
+<td>สลับ lat/lon ใช้ <code>points_from_xy(lon, lat)</code></td>
+</tr>
+<tr class="even">
+<td><code>sjoin</code> ได้ <code>NaN</code> ทั้งหมด</td>
+<td>CRS ไม่ตรงกัน ตรวจ <code>stations.crs</code> และ <code>prov.crs</code> แล้ว <code>to_crs</code> ให้ตรงกัน</td>
+</tr>
+<tr class="odd">
+<td>เตือน <code>Geometry is in a geographic CRS</code> ตอนใช้ <code>distance</code>/<code>buffer</code></td>
+<td>ยังคำนวณใน EPSG:4326 ให้ <code>to_crs(epsg=32647)</code> ก่อน</td>
+</tr>
+<tr class="even">
+<td>merge choropleth แล้วหลายจังหวัดเป็นค่าว่าง</td>
+<td>ชื่อจังหวัดสะกดไม่ตรงกัน เพิ่มใน <code>NAME_FIX</code></td>
+</tr>
+<tr class="odd">
+<td>ตัวอักษรไทยในกราฟ matplotlib เป็นสี่เหลี่ยม</td>
+<td>ตั้งฟอนต์ไทย เช่น <code>plt.rcParams["font.family"] = "Tahoma"</code> (Windows) หรือใช้ Plotly แทน</td>
+</tr>
+<tr class="even">
+<td>treemap error เรื่อง <code>None entries cannot have not-None children</code></td>
+<td>มีค่าว่างใน <code>region</code>/<code>province</code> ใช้ <code>coalesce</code> หรือ <code>fillna("ไม่ระบุ")</code></td>
+</tr>
+<tr class="odd">
+<td>แผนที่ Folium ไม่แสดงใน notebook</td>
+<td>ให้เปิด <code>outputs/stations_map.html</code> ใน browser หรือ trust notebook</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="งานศกษาดวยตนเอง-กอนสปดาหท-14" class="level2">
+<h2 class="anchored" data-anchor-id="งานศกษาดวยตนเอง-กอนสปดาหท-14">งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 14)</h2>
+<ol type="1">
+<li>ติดตั้ง Quarto CLI (<a href="https://quarto.org/docs/get-started/" class="uri">https://quarto.org/docs/get-started/</a>) และทดสอบ <code>quarto check</code></li>
+<li>ทบทวน <code>questions.md</code> แล้วเลือก 3–4 คำถามที่ตอบได้ชัดที่สุด จดข้อค้นพบหลักของแต่ละคำถามเป็น 1 ประโยค</li>
+<li>ร่าง wireframe ของแดชบอร์ดบนกระดาษ: แต่ละระดับ (ประเทศ / ภาค / จังหวัด / สถานี) แสดงกราฟอะไรและมีตัวกรองอะไร</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week13/lab.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

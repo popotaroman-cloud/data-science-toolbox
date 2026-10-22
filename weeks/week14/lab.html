@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test – Data Science Toolbox</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-aa992321f2f7111af8da854a4261011b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&amp;display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">คู่มือปฏิบัติการ</li><li class="breadcrumb-item"><a href="../../weeks/week14/lab.html">Week14</a></li><li class="breadcrumb-item"><a href="../../weeks/week14/lab.html">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Data Science Toolbox</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">หน้าแรก</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ประมวลรายวิชา 1145100 Data Science Toolbox</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">เอกสารประกอบการสอน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1: ภาพรวม EDA, สภาพแวดล้อมการทำงาน และ Git/GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2: การตั้งคำถามเชิงวิเคราะห์และสมมติฐาน</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3: การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5: การจัดการข้อมูลและการเชื่อม SQL กับ Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6: Data profiling และการตรวจคุณภาพข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7: การวิเคราะห์ข้อมูลสูญหาย (MCAR / MAR / MNAR)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8: Checkpoint 1 นำเสนอ data pipeline</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9: หลักการ visualization และ grammar of graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10: Interactive visualization และข้อมูลขนาดใหญ่</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11: สถิติเชิงสำรวจและ time series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12: สำรวจข้อมูลหลายมิติ, outlier และข้อมูลสังเคราะห์กับ PDPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13: ข้อมูลเชิงพื้นที่และข้อมูลลำดับชั้น</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14: สื่อสารข้อค้นพบและ reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15: นำเสนอโครงการสุดท้าย</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">คู่มือปฏิบัติการ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 1: ตั้งค่าสภาพแวดล้อมและสร้าง repository โครงการ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 2: เขียน questions.md และ first look ข้อมูล</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 3: เขียน script ดึงข้อมูลจาก Air4Thai</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 4: สร้างฐานข้อมูล DuckDB จากข้อมูล raw</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 5: สร้าง daily_pm25 และ tidy dataframe</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 6: profiling และเขียนกฎตรวจคุณภาพข้อมูล PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week07</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 7: วิเคราะห์ข้อมูลสูญหายและสร้างชุดข้อมูลสะอาด</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week08</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week09</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 9: กราฟ univariate และ bivariate ที่ตอบคำถาม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week10</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 10: กราฟ interactive ด้วย Plotly และการรับมือข้อมูลใหญ่</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week11</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 11: ทดสอบสมมติฐานและแยก trend/seasonality ของ PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week12</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 12: จัดกลุ่มสถานี วิเคราะห์ outlier และสร้างข้อมูลสังเคราะห์</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week13</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week14</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week15</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 15: ซ้อมนำเสนอ ส่งงาน และประเมินเพื่อน</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">สไลด์</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#สงทตองเตรยม" id="toc-สงทตองเตรยม" class="nav-link active" data-scroll-target="#สงทตองเตรยม">สิ่งที่ต้องเตรียม</a></li>
+  <li><a href="#ขนท-1-สราง-branch-และโครงเรอง" id="toc-ขนท-1-สราง-branch-และโครงเรอง" class="nav-link" data-scroll-target="#ขนท-1-สราง-branch-และโครงเรอง">ขั้นที่ 1: สร้าง branch และโครงเรื่อง</a></li>
+  <li><a href="#ขนท-2-เขยน-reportreport.qmd" id="toc-ขนท-2-เขยน-reportreport.qmd" class="nav-link" data-scroll-target="#ขนท-2-เขยน-reportreport.qmd">ขั้นที่ 2: เขียน <code>report/report.qmd</code></a></li>
+  <li><a href="#ขนท-3-สรางแดชบอรด-appapp.py" id="toc-ขนท-3-สรางแดชบอรด-appapp.py" class="nav-link" data-scroll-target="#ขนท-3-สรางแดชบอรด-appapp.py">ขั้นที่ 3: สร้างแดชบอร์ด <code>app/app.py</code></a></li>
+  <li><a href="#ขนท-4-script-รน-pipeline-ทงหมด" id="toc-ขนท-4-script-รน-pipeline-ทงหมด" class="nav-link" data-scroll-target="#ขนท-4-script-รน-pipeline-ทงหมด">ขั้นที่ 4: script รัน pipeline ทั้งหมด</a></li>
+  <li><a href="#ขนท-5-ตรวจ-reproducibility-ดวยตนเอง" id="toc-ขนท-5-ตรวจ-reproducibility-ดวยตนเอง" class="nav-link" data-scroll-target="#ขนท-5-ตรวจ-reproducibility-ดวยตนเอง">ขั้นที่ 5: ตรวจ reproducibility ด้วยตนเอง</a></li>
+  <li><a href="#ขนท-6-fresh-clone-test-แลกกบเพอน" id="toc-ขนท-6-fresh-clone-test-แลกกบเพอน" class="nav-link" data-scroll-target="#ขนท-6-fresh-clone-test-แลกกบเพอน">ขั้นที่ 6: Fresh-clone test แลกกับเพื่อน</a></li>
+  <li><a href="#ขนท-7-เสรม-เปรยบเทยบกบ-power-bi-looker-studio" id="toc-ขนท-7-เสรม-เปรยบเทยบกบ-power-bi-looker-studio" class="nav-link" data-scroll-target="#ขนท-7-เสรม-เปรยบเทยบกบ-power-bi-looker-studio">ขั้นที่ 7 (เสริม): เปรียบเทียบกับ Power BI / Looker Studio</a></li>
+  <li><a href="#ขนท-8-commit-push-และเปด-pull-request" id="toc-ขนท-8-commit-push-และเปด-pull-request" class="nav-link" data-scroll-target="#ขนท-8-commit-push-และเปด-pull-request">ขั้นที่ 8: commit, push และเปิด pull request</a></li>
+  <li><a href="#ขนท-9-review-pr-ของเพอน" id="toc-ขนท-9-review-pr-ของเพอน" class="nav-link" data-scroll-target="#ขนท-9-review-pr-ของเพอน">ขั้นที่ 9: review PR ของเพื่อน</a></li>
+  <li><a href="#checklist-กอนสงงาน" id="toc-checklist-กอนสงงาน" class="nav-link" data-scroll-target="#checklist-กอนสงงาน">Checklist ก่อนส่งงาน</a></li>
+  <li><a href="#แกปญหาทพบบอย" id="toc-แกปญหาทพบบอย" class="nav-link" data-scroll-target="#แกปญหาทพบบอย">แก้ปัญหาที่พบบ่อย</a></li>
+  <li><a href="#งานศกษาดวยตนเอง-กอนสปดาหท-15" id="toc-งานศกษาดวยตนเอง-กอนสปดาหท-15" class="nav-link" data-scroll-target="#งานศกษาดวยตนเอง-กอนสปดาหท-15">งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 15)</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week14/lab.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">คู่มือปฏิบัติการ</li><li class="breadcrumb-item"><a href="../../weeks/week14/lab.html">Week14</a></li><li class="breadcrumb-item"><a href="../../weeks/week14/lab.html">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>เวลา:</strong> 2 ชั่วโมง (+ งานต่อนอกเวลา) · <strong>CLO:</strong> CLO5 <strong>ผลงานที่ต้องส่ง:</strong> PR ที่มี <code>report/report.qmd</code>, <code>app/app.py</code>, <code>run_all.py</code> และ README ที่มีขั้นตอนรัน + ไฟล์ <code>report.html</code> ที่ render แล้วส่งในระบบส่งงาน (data story report 15%) + ผล fresh-clone test จากเพื่อน</p>
+</blockquote>
+<section id="สงทตองเตรยม" class="level2">
+<h2 class="anchored" data-anchor-id="สงทตองเตรยม">สิ่งที่ต้องเตรียม</h2>
+<ul>
+<li><code>data/pm25.duckdb</code> ที่มี <code>stations</code>, <code>measurements</code>, <code>daily_pm25_clean</code>, <code>station_clusters</code>, <code>daily_outlier_flags</code> (สัปดาห์ที่ 4–12)</li>
+<li>กราฟ Plotly ที่ดีที่สุดจากสัปดาห์ที่ 10–13 และข้อค้นพบ 1 ประโยคต่อคำถาม (งานศึกษาด้วยตนเองสัปดาห์ที่ 13)</li>
+<li>Quarto CLI ติดตั้งแล้ว</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> check</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import streamlit, duckdb; print(streamlit.__version__, duckdb.__version__)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="ขนท-1-สราง-branch-และโครงเรอง" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-1-สราง-branch-และโครงเรอง">ขั้นที่ 1: สร้าง branch และโครงเรื่อง</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main <span class="kw">&amp;&amp;</span> <span class="fu">git</span> pull</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> week14-report-dashboard</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> report</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เพิ่มใน <code>.gitignore</code></p>
+<pre class="text"><code>report/report.html
+report/report_files/
+outputs/</code></pre>
+<p>เขียนตารางนี้ใน <code>questions.md</code> (หรือกระดาษ) ก่อนเขียนรายงาน ถ้าเติมช่อง “ข้อค้นพบ” ไม่ได้ แปลว่ายังไม่พร้อมเขียนส่วนนั้น</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>คำถาม</th>
+<th>ข้อค้นพบ (1 ประโยค)</th>
+<th>หลักฐาน (กราฟ/สถิติ)</th>
+<th>ความมั่นใจ / ข้อจำกัด</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q1 …</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ขนท-2-เขยน-reportreport.qmd" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-2-เขยน-reportreport.qmd">ขั้นที่ 2: เขียน <code>report/report.qmd</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "คุณภาพอากาศ PM2.5 ของประเทศไทย: &lt;ข้อค้นพบหลักสั้น ๆ&gt;"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "ชื่อ นามสกุล (รหัสนักศึกษา)"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> th</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: false</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb, plotly.express <span class="im">as</span> px</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"../data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>n_st <span class="op">=</span> con.execute(<span class="st">"SELECT count(DISTINCT station_id) FROM daily_pm25_clean"</span>).fetchone()[<span class="dv">0</span>]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>d0, d1 <span class="op">=</span> con.execute(<span class="st">"SELECT min(date), max(date) FROM daily_pm25_clean"</span>).fetchone()</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## สรุปข้อค้นพบ</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ข้อค้นพบที่ 1 ...</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ข้อค้นพบที่ 2 ...</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## ข้อมูลและวิธีการ</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>ข้อมูล PM2.5 รายวันจาก Air4Thai (กรมควบคุมมลพิษ) จำนวน <span class="in">`{python} n_st`</span> สถานี</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>ช่วง <span class="in">`{python} str(d0)`</span> ถึง <span class="in">`{python} str(d1)`</span> ...</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## ภาคเหนือมีวันเกินมาตรฐานมากที่สุด โดยกระจุกในเดือน มี.ค.–เม.ย.</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-region</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "สัดส่วนวันที่ค่าเฉลี่ย 24 ชม. เกิน 37.5 µg/m³ แยกตามภาค"</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.region, avg((d.pm25_mean &gt; 37.5)::INT) AS share_over</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean d JOIN stations s USING (station_id)</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY s.region ORDER BY share_over DESC</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(df, x<span class="op">=</span><span class="st">"region"</span>, y<span class="op">=</span><span class="st">"share_over"</span>,</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>             labels<span class="op">=</span>{<span class="st">"region"</span>: <span class="st">"ภาค"</span>, <span class="st">"share_over"</span>: <span class="st">"สัดส่วนวันเกินมาตรฐาน"</span>})</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>fig.update_yaxes(tickformat<span class="op">=</span><span class="st">".0%"</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>fig</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>สถิติสนับสนุน ... (ผลทดสอบจากสัปดาห์ที่ 11)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## ข้อจำกัด</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>...</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## ภาคผนวก: การใช้ AI</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>สรุปจาก <span class="in">`AI_USAGE.md`</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>render และเปิดดู</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report/report.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เขียนให้ครบทุกคำถาม เลือกกราฟจาก notebook สัปดาห์ที่ 9–13 มาเฉพาะที่ตอบคำถาม เปลี่ยนชื่อหัวข้อให้เป็นประโยคข้อค้นพบ และตรวจตามเกณฑ์ 15 คะแนนในหัวข้อ 6 ของ<a href="../../weeks/week14/index.html">เอกสารประกอบการสอน</a></p>
+</section>
+<section id="ขนท-3-สรางแดชบอรด-appapp.py" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-3-สรางแดชบอรด-appapp.py">ขั้นที่ 3: สร้างแดชบอร์ด <code>app/app.py</code></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""PM2.5 Explorer: drill-down ประเทศ → ภาค → จังหวัด → สถานี"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>] <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>STD_TH, STD_WHO <span class="op">=</span> <span class="fl">37.5</span>, <span class="dv">15</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>st.set_page_config(page_title<span class="op">=</span><span class="st">"PM2.5 Explorer"</span>, layout<span class="op">=</span><span class="st">"wide"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_resource</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_con():</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(DB_PATH), read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span>(ttl<span class="op">=</span><span class="dv">600</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query(sql, params<span class="op">=</span>()):</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> get_con().cursor().execute(sql, <span class="bu">list</span>(params)).df()</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> date_range():</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> get_con().cursor().execute(<span class="st">"SELECT min(date), max(date) FROM daily_pm25_clean"</span>).fetchone()</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- สถานะ drill-down ----------</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ss <span class="op">=</span> st.session_state</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>KEYS <span class="op">=</span> (<span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"station"</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> KEYS:</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    ss.setdefault(k, <span class="va">None</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> drill(level, widget_key):</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    ss[level] <span class="op">=</span> ss[widget_key]</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    ss[widget_key] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> go_to(depth):</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> KEYS[depth:]:</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        ss[k] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- ตัวกรอง ----------</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>dmin, dmax <span class="op">=</span> date_range()</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>picked <span class="op">=</span> st.sidebar.date_input(<span class="st">"ช่วงวันที่"</span>, value<span class="op">=</span>(dmin, dmax), min_value<span class="op">=</span>dmin, max_value<span class="op">=</span>dmax)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(picked) <span class="op">!=</span> <span class="dv">2</span>:</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    st.info(<span class="st">"เลือกวันเริ่มต้นและวันสิ้นสุด"</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    st.stop()</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>start, end <span class="op">=</span> picked</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>cond, params <span class="op">=</span> [<span class="st">"d.date BETWEEN ? AND ?"</span>], [start, end]</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col, k <span class="kw">in</span> ((<span class="st">"s.region"</span>, <span class="st">"region"</span>), (<span class="st">"s.province"</span>, <span class="st">"province"</span>), (<span class="st">"s.station_id"</span>, <span class="st">"station"</span>)):</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        cond.append(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> = ?"</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        params.append(ss[k])</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>WHERE, P <span class="op">=</span> <span class="st">" AND "</span>.join(cond), <span class="bu">tuple</span>(params)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>FROM <span class="op">=</span> <span class="st">"FROM daily_pm25_clean d JOIN stations s USING (station_id)"</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>depth <span class="op">=</span> <span class="bu">sum</span>(ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">for</span> k <span class="kw">in</span> KEYS)</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- breadcrumb ----------</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"PM2.5 Explorer"</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> st.columns(<span class="dv">4</span>)</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>c[<span class="dv">0</span>].button(<span class="st">"ประเทศไทย"</span>, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">0</span>,))</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ss.region:</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    c[<span class="dv">1</span>].button(ss.region, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">1</span>,))</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ss.province:</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>    c[<span class="dv">2</span>].button(ss.province, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">2</span>,))</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ss.station:</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>    c[<span class="dv">3</span>].markdown(<span class="ss">f"**</span><span class="sc">{</span>query(<span class="st">'SELECT name_th FROM stations WHERE station_id = ?'</span>, (ss.station,))<span class="sc">.</span>iloc[<span class="dv">0</span>, <span class="dv">0</span>]<span class="sc">}</span><span class="ss">**"</span>)</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- KPI ----------</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> query(<span class="ss">f"""SELECT avg(d.pm25_mean) AS mean, max(d.pm25_max) AS peak,</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="ss">                     avg((d.pm25_mean &gt; </span><span class="sc">{</span>STD_TH<span class="sc">}</span><span class="ss">)::INT) AS share,</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="ss">                     count(DISTINCT d.station_id) AS n_st </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss">"""</span>, P).iloc[<span class="dv">0</span>]</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> st.columns(<span class="dv">4</span>)</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">0</span>].metric(<span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>, <span class="ss">f"</span><span class="sc">{</span>k[<span class="st">'mean'</span>]<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">1</span>].metric(<span class="st">"ค่าสูงสุดรายชั่วโมง"</span>, <span class="ss">f"</span><span class="sc">{</span>k[<span class="st">'peak'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">2</span>].metric(<span class="ss">f"วันเกิน </span><span class="sc">{</span>STD_TH<span class="sc">}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>k[<span class="st">'share'</span>]<span class="sc">:.0%}</span><span class="ss">"</span>)</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">3</span>].metric(<span class="st">"จำนวนสถานี"</span>, <span class="bu">int</span>(k[<span class="st">"n_st"</span>]))</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- เนื้อหาตามระดับ ----------</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>left, right <span class="op">=</span> st.columns(<span class="dv">2</span>)</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> query(<span class="ss">f"""SELECT date_trunc('month', d.date) AS month, avg(d.pm25_mean) AS pm25</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="ss">                  </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss"> GROUP BY 1 ORDER BY 1"""</span>, P)</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(trend, x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"pm25"</span>, labels<span class="op">=</span>{<span class="st">"month"</span>: <span class="st">"เดือน"</span>, <span class="st">"pm25"</span>: <span class="st">"PM2.5 (µg/m³)"</span>})</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>fig.add_hline(y<span class="op">=</span>STD_TH, line_dash<span class="op">=</span><span class="st">"dash"</span>, annotation_text<span class="op">=</span><span class="st">"มาตรฐานไทย"</span>)</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>fig.add_hline(y<span class="op">=</span>STD_WHO, line_dash<span class="op">=</span><span class="st">"dot"</span>, annotation_text<span class="op">=</span><span class="st">"WHO"</span>)</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>right.plotly_chart(fig)</span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> depth <span class="op">&lt;</span> <span class="dv">3</span>:</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>    child, label, level <span class="op">=</span> [(<span class="st">"s.region"</span>, <span class="st">"ภาค"</span>, <span class="st">"region"</span>), (<span class="st">"s.province"</span>, <span class="st">"จังหวัด"</span>, <span class="st">"province"</span>),</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>                           (<span class="st">"s.station_id"</span>, <span class="st">"สถานี"</span>, <span class="st">"station"</span>)][depth]</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"any_value(s.name_th)"</span> <span class="cf">if</span> level <span class="op">==</span> <span class="st">"station"</span> <span class="cf">else</span> child</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>    by <span class="op">=</span> query(<span class="ss">f"""SELECT </span><span class="sc">{</span>child<span class="sc">}</span><span class="ss"> AS id, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> AS name, avg(d.pm25_mean) AS pm25</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="ss">                   </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss"> GROUP BY </span><span class="sc">{</span>child<span class="sc">}</span><span class="ss"> ORDER BY pm25 DESC"""</span>, P)</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.bar(by, x<span class="op">=</span><span class="st">"name"</span>, y<span class="op">=</span><span class="st">"pm25"</span>, color<span class="op">=</span><span class="st">"pm25"</span>, color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>,</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">"name"</span>: label, <span class="st">"pm25"</span>: <span class="st">"PM2.5 เฉลี่ย (µg/m³)"</span>})</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>    fig.add_hline(y<span class="op">=</span>STD_TH, line_dash<span class="op">=</span><span class="st">"dash"</span>)</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>    left.plotly_chart(fig)</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>    names <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(by[<span class="st">"id"</span>], by[<span class="st">"name"</span>]))</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>    left.selectbox(<span class="ss">f"เลือก</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">เพื่อดูรายละเอียด"</span>, options<span class="op">=</span><span class="bu">list</span>(by[<span class="st">"id"</span>]), index<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>                   format_func<span class="op">=</span>names.get, key<span class="op">=</span><span class="ss">f"pick_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>                   on_change<span class="op">=</span>drill, args<span class="op">=</span>(level, <span class="ss">f"pick_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>))</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> query(<span class="ss">f"SELECT d.date, d.pm25_mean </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss"> ORDER BY d.date"</span>, P)</span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.line(ts, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"pm25_mean"</span>, labels<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"วันที่"</span>, <span class="st">"pm25_mean"</span>: <span class="st">"PM2.5 (µg/m³)"</span>})</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>    fig.add_hline(y<span class="op">=</span>STD_TH, line_dash<span class="op">=</span><span class="st">"dash"</span>)</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>    left.plotly_chart(fig)</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>    flags <span class="op">=</span> query(<span class="st">"""SELECT date, pm25_mean, outlier_reason FROM daily_outlier_flags</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="st">                     WHERE station_id = ? AND date BETWEEN ? AND ? ORDER BY date"""</span>,</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>                  (ss.station, start, end))</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>    left.subheader(<span class="st">"วันที่ถูกติดธง outlier (สัปดาห์ที่ 12)"</span>)</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>    left.dataframe(flags)</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>st.caption(<span class="st">"ที่มา: Air4Thai กรมควบคุมมลพิษ · มาตรฐานไทย 37.5 µg/m³ (ค่าเฉลี่ย 24 ชม.) · WHO 2021: 15 µg/m³"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>รัน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app/app.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ทดสอบ: เลือกภาค → จังหวัด → สถานี แล้วกด breadcrumb ย้อนกลับ เปลี่ยนช่วงวันที่ทุกระดับ ตัวเลขต้องเปลี่ยนตาม ถ้ามีเวลา เพิ่มแผนที่สถานีในระดับประเทศ/ภาค (<code>px.scatter_map</code> หรือ <code>px.scatter_mapbox</code> ขึ้นกับเวอร์ชัน Plotly) หรือ treemap จากสัปดาห์ที่ 13</p>
+<blockquote class="blockquote">
+<p><strong>อธิบายได้ทุกบรรทัด:</strong> ถ้าใช้ AI ช่วยแก้ app ให้บันทึกใน <code>AI_USAGE.md</code> และตรวจว่าชื่อตาราง/คอลัมน์ตรงกับฐานข้อมูลจริง ในวันนำเสนอผู้สอนจะถามเรื่อง cache และ <code>session_state</code></p>
+</blockquote>
+</section>
+<section id="ขนท-4-script-รน-pipeline-ทงหมด" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-4-script-รน-pipeline-ทงหมด">ขั้นที่ 4: script รัน pipeline ทั้งหมด</h2>
+<p>สร้าง <code>run_all.py</code> ที่ root (ใช้ได้ทั้ง Windows/macOS/Linux) โดยต่อยอดจาก <code>src/run_pipeline.py</code> ของสัปดาห์ที่ 8 และเพิ่มขั้นตอนของสัปดาห์ที่ 12 ที่สร้างตาราง <code>station_clusters</code> และ <code>daily_outlier_flags</code> ถ้าแดชบอร์ดใช้ตารางเหล่านั้น</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""รัน pipeline ทั้งหมดตามลำดับ: python run_all.py"""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess, sys</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parent</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>STEPS <span class="op">=</span> [                         <span class="co"># ลำดับเดียวกับ src/run_pipeline.py (สัปดาห์ที่ 8)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"src/fetch_air4thai.py"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"src/load_duckdb.py"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"src/validate.py"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"src/clean.py"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> step <span class="kw">in</span> STEPS:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"==&gt; </span><span class="sc">{</span>step<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    subprocess.run([sys.executable, <span class="bu">str</span>(ROOT <span class="op">/</span> step)], check<span class="op">=</span><span class="va">True</span>, cwd<span class="op">=</span>ROOT)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"เสร็จ: data/pm25.duckdb พร้อมใช้"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(เสริม) ผู้ที่ใช้ <code>make</code> เขียน <code>Makefile</code> แทนได้ เช่น target <code>data</code>, <code>report</code>, <code>app</code> แต่ต้องมีวิธีสำหรับ Windows ใน README ด้วย</p>
+<p>เพิ่มใน <code>README.md</code> ของโครงการ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## วิธีรัน</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml <span class="kw">&amp;&amp;</span> <span class="ex">conda</span> activate <span class="op">&lt;</span>ชื่อ env<span class="op">&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> run_all.py                    <span class="co"># ดึงข้อมูลและสร้าง data/pm25.duckdb (~xx นาที)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report/report.qmd      <span class="co"># รายงาน → report/report.html</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app/app.py             <span class="co"># แดชบอร์ด</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ถ้า Air4Thai ใช้งานไม่ได้: วางไฟล์ตัวอย่างจากผู้สอนไว้ที่ <span class="in">`data/sample/`</span> แล้ว ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ขนท-5-ตรวจ-reproducibility-ดวยตนเอง" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-5-ตรวจ-reproducibility-ดวยตนเอง">ขั้นที่ 5: ตรวจ reproducibility ด้วยตนเอง</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-nE</span> <span class="st">"[A-Za-z]:</span><span class="dt">\\\\</span><span class="st">|/Users/|/home/"</span>     <span class="co"># หา path absolute ที่หลงเหลือ</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> grep <span class="at">-n</span> <span class="st">"random_state\|seed"</span>                <span class="co"># ตรวจว่าตั้ง seed แล้ว</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตรวจว่า <code>environment.yml</code> มีทุกไลบรารีที่ <code>import</code> จริง (เทียบกับ <code>git grep -h "^import\|^from" -- "*.py"</code>) ถ้าใช้ <code>conda env export --from-history</code> ให้ตรวจเพิ่มว่าแพ็กเกจที่ติดตั้งผ่าน pip (เช่น <code>sdv</code>) ไม่หายไป</p>
+</section>
+<section id="ขนท-6-fresh-clone-test-แลกกบเพอน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-6-fresh-clone-test-แลกกบเพอน">ขั้นที่ 6: Fresh-clone test แลกกับเพื่อน</h2>
+<p>จับคู่กับเพื่อน แต่ละคน clone repo ของอีกฝ่าย <strong>ลงโฟลเดอร์ใหม่</strong> แล้วทำตาม README เท่านั้น ห้ามเจ้าของ repo ช่วยพูด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>เพื่อน<span class="op">&gt;</span>/pm25-explorer.git fresh-test</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> fresh-test</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ทำตามขั้นตอนใน README ทุกขั้น</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ผู้ทดสอบเปิด issue ใน repo ของเพื่อน หัวข้อ <code>Fresh-clone test (สัปดาห์ที่ 14)</code> โดยใช้แบบฟอร์มนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> สร้าง environment ได้ (ใช้เวลา ... นาที)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`python run_all.py`</span> ผ่าน / ใช้ไฟล์ตัวอย่างแทนเพราะ ...</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`quarto render report/report.qmd`</span> ผ่าน</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`streamlit run app/app.py`</span> เปิดได้ และ drill-down ครบ 4 ระดับ</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ขั้นที่ติด / error ที่พบ: ...</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ข้อเสนอแนะต่อ README: ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เจ้าของ repo แก้ปัญหาตาม issue แล้วปิด issue โดยอ้างอิง commit ที่แก้</p>
+</section>
+<section id="ขนท-7-เสรม-เปรยบเทยบกบ-power-bi-looker-studio" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-7-เสรม-เปรยบเทยบกบ-power-bi-looker-studio">ขั้นที่ 7 (เสริม): เปรียบเทียบกับ Power BI / Looker Studio</h2>
+<p>ส่งออกข้อมูลแล้วลองสร้างแดชบอร์ดระดับภาคในเครื่องมือ BI 1 หน้า</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""COPY (SELECT d.*, s.name_th, s.province, s.region</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">                     FROM daily_pm25_clean d JOIN stations s USING (station_id))</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">               TO 'outputs/daily_pm25_clean.csv' (HEADER)"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เขียน 3–5 บรรทัดใน <code>README.md</code> ว่าเครื่องมือใดเหมาะกับงานแบบใด</p>
+</section>
+<section id="ขนท-8-commit-push-และเปด-pull-request" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-8-commit-push-และเปด-pull-request">ขั้นที่ 8: commit, push และเปิด pull request</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add report/report.qmd app/app.py run_all.py README.md questions.md .gitignore AI_USAGE.md</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่ม data story report (Quarto), แดชบอร์ด drill-down 4 ระดับ และ run_all.py"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin week14-report-dashboard</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เปิด PR แล้วขอ review จากเพื่อนคนที่ทำ fresh-clone test ส่งไฟล์ <code>report/report.html</code> ที่ render แล้วในระบบส่งงานของรายวิชา</p>
+</section>
+<section id="ขนท-9-review-pr-ของเพอน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-9-review-pr-ของเพอน">ขั้นที่ 9: review PR ของเพื่อน</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">หัวข้อในรายงานเป็นประโยคข้อค้นพบ และผูกกับคำถามใน <code>questions.md</code></label></li>
+<li><label><input type="checkbox">มีส่วนข้อจำกัดที่เฉพาะเจาะจงกับข้อมูลของโครงการ</label></li>
+<li><label><input type="checkbox">app เปิด DuckDB ด้วย <code>read_only=True</code> ภายใน <code>st.cache_resource</code> และ query อยู่ใน <code>st.cache_data</code></label></li>
+<li><label><input type="checkbox">SQL ใช้ <code>?</code> parameter กับค่าที่มาจากผู้ใช้ ไม่ต่อ string</label></li>
+<li><label><input type="checkbox">ไม่มี path absolute และ README มีขั้นตอนรันครบ</label></li>
+<li><label><input type="checkbox">ไม่ commit <code>report.html</code>, <code>data/</code> หรือ <code>outputs/</code></label></li>
+</ul>
+<hr>
+</section>
+<section id="checklist-กอนสงงาน" class="level2">
+<h2 class="anchored" data-anchor-id="checklist-กอนสงงาน">Checklist ก่อนส่งงาน</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>quarto render report/report.qmd</code> ผ่านจาก fresh clone และรายงานตอบทุกคำถามที่เลือก</label></li>
+<li><label><input type="checkbox">แดชบอร์ด drill-down ได้ 4 ระดับ ย้อนกลับได้ และตัวกรองวันที่ทำงานทุกระดับ</label></li>
+<li><label><input type="checkbox"><code>python run_all.py</code> สร้างฐานข้อมูลใหม่ได้ (หรือ README อธิบายทางเลือกเมื่อ API ล่ม)</label></li>
+<li><label><input type="checkbox">มี issue ผล fresh-clone test จากเพื่อน และแก้ครบแล้ว</label></li>
+<li><label><input type="checkbox">อัปเดต <code>AI_USAGE.md</code> และมี PR ที่เพื่อน review แล้ว</label></li>
+<li><label><input type="checkbox">ส่ง <code>report.html</code> ในระบบส่งงาน</label></li>
+</ul>
+</section>
+<section id="แกปญหาทพบบอย" class="level2">
+<h2 class="anchored" data-anchor-id="แกปญหาทพบบอย">แก้ปัญหาที่พบบ่อย</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุและวิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>quarto render</code> หา <code>data/pm25.duckdb</code> ไม่เจอ</td>
+<td>Quarto รันใน <code>report/</code> ใช้ <code>../data/pm25.duckdb</code></td>
+</tr>
+<tr class="even">
+<td>Quarto ใช้ Python ผิดตัว (<code>ModuleNotFoundError</code>)</td>
+<td>activate environment ก่อน render หรือติดตั้ง kernel: <code>python -m ipykernel install --user --name dstoolbox</code> แล้วตั้ง <code>jupyter: dstoolbox</code></td>
+</tr>
+<tr class="odd">
+<td><code>IOException: Could not set lock on file</code> ตอนรัน <code>run_all.py</code></td>
+<td>แดชบอร์ดหรือ notebook เปิดไฟล์อยู่ ปิด Streamlit และ kernel อื่นก่อน</td>
+</tr>
+<tr class="even">
+<td>แดชบอร์ดไม่เห็นข้อมูลใหม่หลังรัน pipeline</td>
+<td>cache ยังเก็บผลเดิม กดเมนู ⋮ → <em>Clear cache</em> หรือรอ <code>ttl</code></td>
+</tr>
+<tr class="odd">
+<td><code>StreamlitAPIException</code> เรื่องแก้ค่า widget</td>
+<td>แก้ <code>st.session_state[key]</code> ของ widget ได้เฉพาะใน callback (<code>on_change</code>/<code>on_click</code>) หรือก่อนสร้าง widget</td>
+</tr>
+<tr class="even">
+<td>กด drill-down แล้วเด้งกลับระดับเดิม</td>
+<td>ลืมล้างค่า <code>pick_*</code> ใน callback ตรวจฟังก์ชัน <code>drill</code></td>
+</tr>
+<tr class="odd">
+<td><code>date_input</code> error ตอนเลือกช่วง</td>
+<td>ระหว่างเลือกจะคืนค่า 1 วัน ต้องตรวจ <code>len(picked) == 2</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="งานศกษาดวยตนเอง-กอนสปดาหท-15" class="level2">
+<h2 class="anchored" data-anchor-id="งานศกษาดวยตนเอง-กอนสปดาหท-15">งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 15)</h2>
+<ol type="1">
+<li>ทำรายงานและแดชบอร์ดให้เสร็จ แก้ตามผล fresh-clone test</li>
+<li>อ่าน <a href="../../weeks/week15/index.html">คู่มือการนำเสนอสัปดาห์ที่ 15</a> และเกณฑ์ 30 คะแนน</li>
+<li>ร่างลำดับการนำเสนอ 10 นาที และเลือก 1 ข้อค้นพบที่จะ demo บนแดชบอร์ดสด</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week14/lab.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

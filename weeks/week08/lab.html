@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1 – Data Science Toolbox</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-aa992321f2f7111af8da854a4261011b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&amp;display=swap" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">คู่มือปฏิบัติการ</li><li class="breadcrumb-item"><a href="../../weeks/week08/lab.html">Week08</a></li><li class="breadcrumb-item"><a href="../../weeks/week08/lab.html">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Data Science Toolbox</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">หน้าแรก</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ประมวลรายวิชา 1145100 Data Science Toolbox</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">เอกสารประกอบการสอน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1: ภาพรวม EDA, สภาพแวดล้อมการทำงาน และ Git/GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2: การตั้งคำถามเชิงวิเคราะห์และสมมติฐาน</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3: การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4: การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5: การจัดการข้อมูลและการเชื่อม SQL กับ Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6: Data profiling และการตรวจคุณภาพข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7: การวิเคราะห์ข้อมูลสูญหาย (MCAR / MAR / MNAR)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8: Checkpoint 1 นำเสนอ data pipeline</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9: หลักการ visualization และ grammar of graphics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10: Interactive visualization และข้อมูลขนาดใหญ่</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11: สถิติเชิงสำรวจและ time series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12: สำรวจข้อมูลหลายมิติ, outlier และข้อมูลสังเคราะห์กับ PDPA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13: ข้อมูลเชิงพื้นที่และข้อมูลลำดับชั้น</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14: สื่อสารข้อค้นพบและ reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15: นำเสนอโครงการสุดท้าย</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">คู่มือปฏิบัติการ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 1: ตั้งค่าสภาพแวดล้อมและสร้าง repository โครงการ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 2: เขียน questions.md และ first look ข้อมูล</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 3: เขียน script ดึงข้อมูลจาก Air4Thai</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 4: สร้างฐานข้อมูล DuckDB จากข้อมูล raw</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 5: สร้าง daily_pm25 และ tidy dataframe</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 6: profiling และเขียนกฎตรวจคุณภาพข้อมูล PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week07</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 7: วิเคราะห์ข้อมูลสูญหายและสร้างชุดข้อมูลสะอาด</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week08</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week09</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 9: กราฟ univariate และ bivariate ที่ตอบคำถาม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week10</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 10: กราฟ interactive ด้วย Plotly และการรับมือข้อมูลใหญ่</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week11</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 11: ทดสอบสมมติฐานและแยก trend/seasonality ของ PM2.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week12</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week12/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 12: จัดกลุ่มสถานี วิเคราะห์ outlier และสร้างข้อมูลสังเคราะห์</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week13</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week13/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 13: แผนที่สถานีและกราฟลำดับชั้น</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week14</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week14/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 14: รายงาน Quarto, แดชบอร์ด Streamlit และ fresh-clone test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week15</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week15/lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ปฏิบัติการสัปดาห์ที่ 15: ซ้อมนำเสนอ ส่งงาน และประเมินเพื่อน</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">สไลด์</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 12</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 13</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 14</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../slides/week15.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">สัปดาห์ที่ 15</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#สงทตองเตรยม" id="toc-สงทตองเตรยม" class="nav-link active" data-scroll-target="#สงทตองเตรยม">สิ่งที่ต้องเตรียม</a></li>
+  <li><a href="#ขนท-1-หยดเพมฟเจอร-และสราง-branch-เตรยมงาน" id="toc-ขนท-1-หยดเพมฟเจอร-และสราง-branch-เตรยมงาน" class="nav-link" data-scroll-target="#ขนท-1-หยดเพมฟเจอร-และสราง-branch-เตรยมงาน">ขั้นที่ 1: หยุดเพิ่มฟีเจอร์ และสร้าง branch เตรียมงาน</a></li>
+  <li><a href="#ขนท-2-รน-pipeline-จากศนยบนเครองตนเอง" id="toc-ขนท-2-รน-pipeline-จากศนยบนเครองตนเอง" class="nav-link" data-scroll-target="#ขนท-2-รน-pipeline-จากศนยบนเครองตนเอง">ขั้นที่ 2: รัน pipeline จากศูนย์บนเครื่องตนเอง</a></li>
+  <li><a href="#ขนท-3-ปรบ-readme-และ-commit" id="toc-ขนท-3-ปรบ-readme-และ-commit" class="nav-link" data-scroll-target="#ขนท-3-ปรบ-readme-และ-commit">ขั้นที่ 3: ปรับ README และ commit</a></li>
+  <li><a href="#ขนท-4-fresh-clone-test-ทำโดยเพอน" id="toc-ขนท-4-fresh-clone-test-ทำโดยเพอน" class="nav-link" data-scroll-target="#ขนท-4-fresh-clone-test-ทำโดยเพอน">ขั้นที่ 4: Fresh clone test (ทำโดยเพื่อน)</a></li>
+  <li><a href="#ขนท-5-เตรยมบทนำเสนอ-7-นาท" id="toc-ขนท-5-เตรยมบทนำเสนอ-7-นาท" class="nav-link" data-scroll-target="#ขนท-5-เตรยมบทนำเสนอ-7-นาท">ขั้นที่ 5: เตรียมบทนำเสนอ 7 นาที</a></li>
+  <li><a href="#ขนท-6-ซอมกบเพอนและจบเวลา" id="toc-ขนท-6-ซอมกบเพอนและจบเวลา" class="nav-link" data-scroll-target="#ขนท-6-ซอมกบเพอนและจบเวลา">ขั้นที่ 6: ซ้อมกับเพื่อนและจับเวลา</a></li>
+  <li><a href="#ขนท-7-merge-และสราง-tag-checkpoint1" id="toc-ขนท-7-merge-และสราง-tag-checkpoint1" class="nav-link" data-scroll-target="#ขนท-7-merge-และสราง-tag-checkpoint1">ขั้นที่ 7: merge และสร้าง tag <code>checkpoint1</code></a></li>
+  <li><a href="#ขนท-8-peer-review-ในวนนำเสนอ" id="toc-ขนท-8-peer-review-ในวนนำเสนอ" class="nav-link" data-scroll-target="#ขนท-8-peer-review-ในวนนำเสนอ">ขั้นที่ 8: Peer review ในวันนำเสนอ</a></li>
+  <li><a href="#checklist-กอนสงงาน" id="toc-checklist-กอนสงงาน" class="nav-link" data-scroll-target="#checklist-กอนสงงาน">Checklist ก่อนส่งงาน</a></li>
+  <li><a href="#แกปญหาทพบบอย-กอนวนนำเสนอ" id="toc-แกปญหาทพบบอย-กอนวนนำเสนอ" class="nav-link" data-scroll-target="#แกปญหาทพบบอย-กอนวนนำเสนอ">แก้ปัญหาที่พบบ่อย (ก่อนวันนำเสนอ)</a></li>
+  <li><a href="#งานศกษาดวยตนเอง-กอนสปดาหท-9" id="toc-งานศกษาดวยตนเอง-กอนสปดาหท-9" class="nav-link" data-scroll-target="#งานศกษาดวยตนเอง-กอนสปดาหท-9">งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 9)</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week08/lab.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">คู่มือปฏิบัติการ</li><li class="breadcrumb-item"><a href="../../weeks/week08/lab.html">Week08</a></li><li class="breadcrumb-item"><a href="../../weeks/week08/lab.html">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ปฏิบัติการสัปดาห์ที่ 8: เตรียมและซ้อมนำเสนอ Checkpoint 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p><strong>เวลา:</strong> 2 ชั่วโมง (คาบซ้อมและ fresh clone test) + 10 นาทีต่อคนในวันนำเสนอ · <strong>CLO:</strong> CLO1–CLO3 <strong>ผลงานที่ต้องส่ง:</strong> tag <code>checkpoint1</code> บน GitHub · แบบบันทึก fresh clone test ที่เพื่อนกรอกแล้ว · แบบ peer review สำหรับเพื่อน 2 คน</p>
+</blockquote>
+<section id="สงทตองเตรยม" class="level2">
+<h2 class="anchored" data-anchor-id="สงทตองเตรยม">สิ่งที่ต้องเตรียม</h2>
+<ul>
+<li>งานสัปดาห์ที่ 3–7 ถูก merge เข้า <code>main</code> แล้ว: <code>fetch_air4thai.py</code>, <code>load_duckdb.py</code>, <code>schema.py</code>, <code>validate.py</code>, <code>clean.py</code>, <code>data_dictionary.md</code>, <code>reports/profiling_notes.md</code></li>
+<li>ไฟล์ JSON ดิบสำรองอย่างน้อย 1 ชุด (ที่ดึงไว้เองหรือไฟล์ตัวอย่างจากผู้สอนที่ <code>data/sample/</code>) เก็บไว้นอก repo หรือใน <code>data/</code> ซึ่งไม่ถูก commit</li>
+<li>จับคู่กับเพื่อน 1 คนสำหรับ fresh clone test (ผู้สอนอาจกำหนดคู่ให้) คู่ควรใช้ระบบปฏิบัติการต่างกันถ้าเป็นไปได้</li>
+</ul>
+<hr>
+</section>
+<section id="ขนท-1-หยดเพมฟเจอร-และสราง-branch-เตรยมงาน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-1-หยดเพมฟเจอร-และสราง-branch-เตรยมงาน">ขั้นที่ 1: หยุดเพิ่มฟีเจอร์ และสร้าง branch เตรียมงาน</h2>
+<p>ตั้งแต่ตอนนี้ถึงวันนำเสนอ <strong>แก้เฉพาะสิ่งที่ทำให้ pipeline ทำงานหรือทำซ้ำได้</strong> ไม่เพิ่มการวิเคราะห์ใหม่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> checkpoint1-prep</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ไล่ดูรายการไฟล์ตามหัวข้อที่ 3 ของเอกสารประกอบการสอน ไฟล์ใดขาดให้จดไว้ในตารางนี้แล้วทำให้ครบก่อนขั้นถัดไป</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ไฟล์ / สิ่งที่ต้องมี</th>
+<th>มีแล้ว</th>
+<th>ต้องแก้อะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>README.md</code> หัวข้อติดตั้ง รัน ผลลัพธ์ แผนสำรอง ข้อจำกัด</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>environment.yml</code> มีทุกแพ็กเกจที่ import จริง</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>src/run_pipeline.py</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>data_dictionary.md</code> ตรงกับตารางจริงใน DuckDB</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>AI_USAGE.md</code> บันทึกถึงสัปดาห์ที่ 7</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ขนท-2-รน-pipeline-จากศนยบนเครองตนเอง" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-2-รน-pipeline-จากศนยบนเครองตนเอง">ขั้นที่ 2: รัน pipeline จากศูนย์บนเครื่องตนเอง</h2>
+<p>สร้าง <code>src/run_pipeline.py</code> ตามเอกสารประกอบการสอนหัวข้อที่ 2 (ถ้ายังไม่มี) แล้วลบข้อมูลทั้งหมดก่อนรัน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ย้ายข้อมูลเดิมไปไว้ที่อื่นก่อน เผื่อต้องใช้ (อย่าลบไฟล์ดิบที่ดึงไว้แล้วถ้าไม่มีสำรอง)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data ../data_backup</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> src/run_pipeline.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตรวจผลลัพธ์</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import duckdb; c=duckdb.connect('data/pm25.duckdb', read_only=True); print(c.sql('SELECT count(*), sum(is_complete::INT) FROM daily_pm25_clean'))"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าขั้นใดล้ม ให้แก้ในโค้ด <strong>ไม่ใช่แก้ด้วยมือบนเครื่อง</strong> สาเหตุที่พบบ่อยคือ script ไม่สร้างโฟลเดอร์ <code>data/raw/</code> เอง แก้ได้ด้วย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Path(<span class="st">"data/raw"</span>).mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ทดสอบแผนสำรองด้วย: คัดลอกไฟล์ JSON สำรองเข้า <code>data/raw/</code> แล้วรันตั้งแต่ <code>load_duckdb.py</code> ให้ผ่าน จับเวลาว่าสลับได้ภายใน 1 นาที</p>
+</section>
+<section id="ขนท-3-ปรบ-readme-และ-commit" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-3-ปรบ-readme-และ-commit">ขั้นที่ 3: ปรับ README และ commit</h2>
+<p>แก้ README ตามสิ่งที่เจอในขั้นที่ 2 ทุกขั้นที่ทำด้วยมือต้องถูกเขียนเป็นคำสั่งใน README หรือย้ายเข้าไปในโค้ด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md src/run_pipeline.py environment.yml</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่ม run_pipeline.py และขั้นตอนรันจากศูนย์ใน README"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin checkpoint1-prep</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เปิด PR แต่ <strong>ยังไม่ merge</strong> จนกว่าจะผ่าน fresh clone test ในขั้นที่ 4</p>
+</section>
+<section id="ขนท-4-fresh-clone-test-ทำโดยเพอน" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-4-fresh-clone-test-ทำโดยเพอน">ขั้นที่ 4: Fresh clone test (ทำโดยเพื่อน)</h2>
+<p>สลับเครื่องกับคู่ เพื่อนทำตาม README ของเรา <strong>โดยห้ามเจ้าของ repo พูดหรือชี้</strong> เจ้าของทำหน้าที่จดอย่างเดียว ใช้เวลาไม่เกิน 25 นาทีต่อคน</p>
+<p>ผู้ทดสอบทำดังนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/fresh-test                         <span class="co"># โฟลเดอร์ใหม่ที่ไม่มีอะไรอยู่</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>เจ้าของ<span class="op">&gt;</span>/pm25-explorer.git</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pm25-explorer</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch checkpoint1-prep</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># จากนี้ทำตาม README ของเจ้าของเท่านั้น</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าเครื่องผู้ทดสอบมีสภาพแวดล้อม <code>dstoolbox</code> อยู่แล้ว ให้สร้างใหม่ด้วยชื่ออื่นตาม <code>environment.yml</code> ของเจ้าของ เช่น <code>conda env create -f environment.yml -n fresh-test</code> เพื่อจับแพ็กเกจที่ขาด</p>
+<p><strong>แบบบันทึก fresh clone test</strong> (ผู้ทดสอบกรอก แล้วโพสต์เป็นความคิดเห็นใน PR ของเจ้าของ)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fresh clone test</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ผู้ทดสอบ: ... · ระบบปฏิบัติการ: ... · วันที่: ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>repo: ... · branch/commit: ...</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> ขั้น <span class="pp">|</span> ผ่าน/ไม่ผ่าน <span class="pp">|</span> ต้องถามหรือแก้อะไร <span class="pp">|</span> เวลา (นาที) <span class="pp">|</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> clone + สร้าง environment <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> fetch_air4thai.py (หรือแผนสำรอง) <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> load_duckdb.py <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> validate.py <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> clean.py <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> ได้ daily_pm25_clean จำนวนแถวใกล้เคียงที่ README ระบุ <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>จุดที่ README ไม่ชัด: ...</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ข้อเสนอแนะ 1 ข้อ: ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เจ้าของ repo แก้ทุกจุดที่ “ต้องถามหรือแก้” ใน commit ใหม่บน branch เดิม แล้วขอให้เพื่อนทดสอบซ้ำเฉพาะขั้นที่ไม่ผ่าน</p>
+</section>
+<section id="ขนท-5-เตรยมบทนำเสนอ-7-นาท" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-5-เตรยมบทนำเสนอ-7-นาท">ขั้นที่ 5: เตรียมบทนำเสนอ 7 นาที</h2>
+<p>เขียนโครงบทพูดลงในตารางนี้ (ไม่ต้อง commit) ให้ตรงกับเกณฑ์การให้คะแนน</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>นาที</th>
+<th>หัวข้อ</th>
+<th>สิ่งที่จะเปิดให้ดู</th>
+<th>ประโยคสำคัญที่ต้องพูด</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0–1</td>
+<td>คำถามและแหล่งข้อมูล</td>
+<td><code>questions.md</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1–3</td>
+<td>Live demo</td>
+<td>terminal: <code>python src/run_pipeline.py</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3–5</td>
+<td>คุณภาพข้อมูล</td>
+<td><code>src/schema.py</code>, <code>profiling_notes.md</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>5–7</td>
+<td>ข้อมูลสูญหาย</td>
+<td>ภาพ missingno, ตาราง sensitivity, <code>data_dictionary.md</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>เตรียมล่วงหน้าเพื่อไม่เสียเวลาระหว่าง demo</p>
+<ul>
+<li>เปิดไฟล์ที่จะแสดงไว้เป็น tab ใน VS Code ตามลำดับ</li>
+<li>ขยายตัวอักษรของ terminal และ editor ให้คนหลังห้องอ่านได้</li>
+<li>รัน notebook ไว้ล่วงหน้าให้เห็นภาพแล้ว ไม่ต้องรันสดระหว่างนำเสนอ</li>
+<li>ปิดการแจ้งเตือนและหน้าต่างที่ไม่เกี่ยวข้อง</li>
+</ul>
+</section>
+<section id="ขนท-6-ซอมกบเพอนและจบเวลา" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-6-ซอมกบเพอนและจบเวลา">ขั้นที่ 6: ซ้อมกับเพื่อนและจับเวลา</h2>
+<p>ซ้อมกับคู่ (หรือกลุ่ม 3 คน) คนหนึ่งนำเสนอ คนหนึ่งจับเวลา อีกคนถามคำถามจากตาราง “คำถามที่ผู้ประเมินมักถาม” ในเอกสารประกอบการสอน 2 ข้อ</p>
+<ul class="task-list">
+<li><label><input type="checkbox">demo จบใน 7 นาที (เกิน 30 วินาทีขึ้นไปให้ตัดเนื้อหา ไม่ใช่พูดเร็วขึ้น)</label></li>
+<li><label><input type="checkbox">live demo เริ่มจากไม่มีฐานข้อมูลจริง</label></li>
+<li><label><input type="checkbox">อธิบายได้ว่าทำไมแบ่งกฎ fail / warn แบบนี้</label></li>
+<li><label><input type="checkbox">บอกได้ว่าเกณฑ์ <code>n_hours</code> ที่เลือกทำให้คำตอบเอนเอียงไปทางใด</label></li>
+<li><label><input type="checkbox">ตอบคำถามเรื่องโค้ดส่วนที่ใช้ AI ช่วยได้</label></li>
+</ul>
+</section>
+<section id="ขนท-7-merge-และสราง-tag-checkpoint1" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-7-merge-และสราง-tag-checkpoint1">ขั้นที่ 7: merge และสร้าง tag <code>checkpoint1</code></h2>
+<p>เมื่อผ่าน fresh clone test และเพื่อน approve PR แล้ว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull                              <span class="co"># หลัง merge PR บน GitHub</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> tag <span class="at">-a</span> checkpoint1 <span class="at">-m</span> <span class="st">"Checkpoint 1: data pipeline"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin checkpoint1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตรวจบน GitHub ว่ามี tag ในหน้า <strong>Tags</strong> แล้วส่งลิงก์ <code>https://github.com/&lt;username&gt;/pm25-explorer/tree/checkpoint1</code> ในระบบส่งงาน</p>
+<blockquote class="blockquote">
+<p>ถ้าต้องแก้หลังสร้าง tag แล้วและยังไม่ถึงกำหนดส่ง ให้ลบ tag เดิม (<code>git tag -d checkpoint1</code> และ <code>git push origin --delete checkpoint1</code>) แล้วสร้างใหม่ หลังกำหนดส่งห้ามย้าย tag</p>
+</blockquote>
+</section>
+<section id="ขนท-8-peer-review-ในวนนำเสนอ" class="level2">
+<h2 class="anchored" data-anchor-id="ขนท-8-peer-review-ในวนนำเสนอ">ขั้นที่ 8: Peer review ในวันนำเสนอ</h2>
+<p>แต่ละคนได้รับมอบหมายให้ประเมินเพื่อน 2 คน กรอกแบบฟอร์มนี้ระหว่างฟังและส่งภายในวันนำเสนอ</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>คำถาม</th>
+<th>คำตอบ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>pipeline รันครบทุกขั้นต่อหน้าผู้ฟังหรือไม่ ถ้าไม่ ติดที่ขั้นใด</td>
+<td>ครบ / ไม่ครบ: …</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>ผู้นำเสนอเริ่ม demo จากไม่มีฐานข้อมูลหรือไม่</td>
+<td>ใช่ / ไม่ใช่</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>ปัญหาคุณภาพข้อมูลที่น่าสนใจที่สุดที่ผู้นำเสนอพบคืออะไร</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>เหตุผลของการแบ่ง fail / warn ฟังขึ้นหรือไม่ เพราะอะไร</td>
+<td>1–5: …</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>ผู้นำเสนอมีหลักฐานสนับสนุนกลไกการสูญหายที่สรุปหรือไม่</td>
+<td>1–5: …</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>ผู้นำเสนอบอกได้ไหมว่าการตัดสินใจเรื่องข้อมูลสูญหายกระทบคำตอบของคำถามอย่างไร</td>
+<td>1–5: …</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>ถ้าคุณต้องใช้ข้อมูลจาก pipeline นี้ คุณกังวลเรื่องใดมากที่สุด</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>สิ่งหนึ่งที่คุณจะนำไปใช้กับโครงการของตนเอง</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>ข้อเสนอแนะ 1 ข้อที่ทำได้จริงภายในสัปดาห์ที่ 9</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>ความเห็นต้องเจาะจงและสุภาพ เช่น “เกณฑ์ stuck sensor 6 ชั่วโมงอาจตัดช่วงกลางคืนที่อากาศนิ่งจริง ลองเทียบกับสถานีใกล้เคียง” ดีกว่า “ดีมาก” หรือ “ควรปรับปรุง”</p>
+<hr>
+</section>
+<section id="checklist-กอนสงงาน" class="level2">
+<h2 class="anchored" data-anchor-id="checklist-กอนสงงาน">Checklist ก่อนส่งงาน</h2>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>python src/run_pipeline.py</code> ผ่านจากสถานะไม่มีโฟลเดอร์ <code>data/</code></label></li>
+<li><label><input type="checkbox">แผนสำรอง (ไฟล์ JSON ดิบ) ทดสอบแล้วและเขียนไว้ใน README</label></li>
+<li><label><input type="checkbox">เพื่อนทำ fresh clone test ผ่าน และแบบบันทึกอยู่ในความคิดเห็นของ PR</label></li>
+<li><label><input type="checkbox"><code>data_dictionary.md</code> และ <code>AI_USAGE.md</code> เป็นปัจจุบัน</label></li>
+<li><label><input type="checkbox">ไม่มี <code>data/</code>, <code>*.duckdb</code>, <code>reports/*.html</code> หรือ <code>.env</code> ใน repo (<code>git ls-files</code> ตรวจได้)</label></li>
+<li><label><input type="checkbox">tag <code>checkpoint1</code> อยู่บน GitHub และส่งลิงก์แล้ว</label></li>
+<li><label><input type="checkbox">ซ้อมจับเวลาแล้วอย่างน้อย 1 รอบ</label></li>
+<li><label><input type="checkbox">ส่งแบบ peer review ครบ 2 คน</label></li>
+</ul>
+</section>
+<section id="แกปญหาทพบบอย-กอนวนนำเสนอ" class="level2">
+<h2 class="anchored" data-anchor-id="แกปญหาทพบบอย-กอนวนนำเสนอ">แก้ปัญหาที่พบบ่อย (ก่อนวันนำเสนอ)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุและวิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>FileNotFoundError: data/raw/...</code> บนเครื่องเพื่อน</td>
+<td><code>data/</code> ไม่ถูก commit โฟลเดอร์จึงไม่มี ให้ script สร้างเองด้วย <code>Path(...).mkdir(parents=True, exist_ok=True)</code></td>
+</tr>
+<tr class="even">
+<td><code>ModuleNotFoundError</code> บนเครื่องเพื่อนแต่เครื่องตนเองรันได้</td>
+<td>ติดตั้งแพ็กเกจเพิ่มด้วย <code>pip install</code> โดยไม่ได้ใส่ใน <code>environment.yml</code> เพิ่มแล้วทดสอบด้วย environment ใหม่</td>
+</tr>
+<tr class="odd">
+<td>path แบบ <code>C:\Users\...</code> หรือ <code>/home/...</code> ในโค้ด</td>
+<td>ใช้ path สัมพัทธ์จาก root ของ repo เช่น <code>data/pm25.duckdb</code> และระบุใน README ว่าต้องรันจาก root</td>
+</tr>
+<tr class="even">
+<td>รันได้เฉพาะเมื่อรัน notebook ก่อน</td>
+<td>มีขั้นตอนสำคัญซ่อนอยู่ใน notebook ย้ายเข้า <code>src/</code> และเรียกจาก <code>run_pipeline.py</code></td>
+</tr>
+<tr class="odd">
+<td><code>load_duckdb.py</code> รันซ้ำแล้วข้อมูลซ้ำ จน <code>validate.py</code> fail</td>
+<td>ใช้ <code>CREATE OR REPLACE</code> หรือ <code>INSERT ... ON CONFLICT</code> / ลบช่วงเวลาเดิมก่อนแทรก ให้การโหลดเป็น idempotent</td>
+</tr>
+<tr class="even">
+<td><code>IO Error: Could not set lock on file</code> ระหว่าง demo</td>
+<td>notebook ที่เปิดไว้ถือ connection อยู่ ปิด kernel ก่อนเริ่ม demo หรือเปิดฐานข้อมูลใน notebook ด้วย <code>read_only=True</code></td>
+</tr>
+<tr class="odd">
+<td>Air4Thai ตอบช้าหรือ error ในห้องเรียน</td>
+<td>Wi-Fi ห้องเรียนอาจช้า สลับไปใช้แผนสำรองทันที อย่ารอ timeout ซ้ำหลายรอบ</td>
+</tr>
+<tr class="even">
+<td>ข้อความภาษาไทยใน terminal เป็นตัวอักษรแปลก (Windows)</td>
+<td>ตั้ง <code>set PYTHONUTF8=1</code> (cmd) หรือ <code>$env:PYTHONUTF8=1</code> (PowerShell) ก่อนรัน หรือใช้ terminal ของ VS Code</td>
+</tr>
+<tr class="odd">
+<td>demo เกินเวลา</td>
+<td>ตัดหัวข้อที่ไม่อยู่ในเกณฑ์การให้คะแนน และให้ pipeline รันระหว่างที่พูดอธิบาย</td>
+</tr>
+<tr class="even">
+<td>ลืม push tag</td>
+<td><code>git push</code> ไม่ส่ง tag ไปด้วย ต้องใช้ <code>git push origin checkpoint1</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="งานศกษาดวยตนเอง-กอนสปดาหท-9" class="level2">
+<h2 class="anchored" data-anchor-id="งานศกษาดวยตนเอง-กอนสปดาหท-9">งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 9)</h2>
+<ol type="1">
+<li>นำข้อเสนอแนะจากผู้สอนและ peer review เปิดเป็น GitHub Issue อย่างน้อย 2 รายการ และวางแผนแก้ภายในสัปดาห์ที่ 9</li>
+<li>อ่านเรื่อง grammar of graphics: Wickham, H. (2010). A layered grammar of graphics. <em>Journal of Computational and Graphical Statistics</em>, 19(1)</li>
+<li>ร่างกราฟ 2 แบบด้วยมือบนกระดาษ ที่จะตอบคำถามใน <code>questions.md</code> จาก <code>daily_pm25_clean</code> เช่น การกระจายของค่าเฉลี่ยรายวัน และแนวโน้มตามเวลาของสถานีที่สนใจ</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/weeks/week08/lab.md" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
