@@ -1,0 +1,46 @@
+- term: Data storytelling
+  th: การเล่าเรื่องด้วยข้อมูล
+  definition: >
+    การเรียบเรียงข้อค้นพบจากข้อมูลให้ผู้อ่านเฉพาะกลุ่มเข้าใจและนำไปใช้ได้ โดยบอกข้อค้นพบก่อน
+    ให้หลักฐานตาม และบอกความไม่แน่นอนอย่างซื่อตรง
+  section: sec-ch19-structure
+- term: Pyramid principle
+  th: หลักการพีระมิด
+  definition: >
+    โครงสร้างการเขียนที่ข้อสรุปหลักอยู่บนยอด ข้อสนับสนุนอยู่ชั้นถัดลงมา และหลักฐานอยู่ชั้นล่างสุด
+    ผู้อ่านหยุดที่ชั้นใดก็ได้สาระสำคัญแล้ว
+  section: sec-ch19-structure
+- term: Martini glass structure
+  th: โครงสร้างแก้วมาร์ตินี
+  definition: >
+    โครงสร้างการเล่าเรื่องด้วยภาพที่เริ่มด้วยส่วนที่ผู้เขียนนำลำดับ แล้วเปิดให้ผู้อ่านสำรวจเองในตอนท้าย
+  section: sec-ch19-structure
+- term: Literate programming
+  th: literate programming
+  definition: >
+    แนวคิดของ Knuth ที่ให้เขียนโปรแกรมเพื่อให้คนอ่าน โดยมีคำอธิบายและโค้ดสานกันในเอกสารเดียว
+    เป็นพื้นฐานของ Quarto และ notebook
+  section: sec-ch19-quarto
+  see_also: [Quarto]
+- term: Quarto
+  th: Quarto
+  definition: >
+    ระบบเผยแพร่เอกสารเชิงคำนวณที่รันโค้ดทุกครั้งที่ render แล้วสร้าง HTML, PDF, Word หรือสไลด์
+    ตัวเลขและกราฟจึงตรงกับข้อมูลเสมอ
+  section: sec-ch19-quarto
+- term: Parameterized report
+  th: รายงานแบบมีพารามิเตอร์
+  definition: >
+    รายงานต้นฉบับเดียวที่มีตัวแปรสำหรับส่วนที่ต่างกัน เช่น ภาคหรือปี แล้ว render หลายครั้งด้วยค่าต่างกัน
+  section: sec-ch19-params
+- term: Reproducibility
+  th: การทำซ้ำได้
+  definition: >
+    การที่ผู้อื่นได้ผลเดียวกันจากข้อมูล โค้ด และขั้นตอนเดียวกัน พิสูจน์ด้วย fresh-clone test
+    ต่างจาก replicability ซึ่งเป็นการได้ผลสอดคล้องจากการศึกษาใหม่
+  section: sec-ch19-checklist
+- term: Fresh-clone test
+  th: fresh-clone test
+  definition: >
+    การทดสอบการทำซ้ำได้ด้วยการให้ผู้อื่น clone repository ลงโฟลเดอร์ใหม่แล้วทำตาม README เท่านั้น
+  section: sec-ch19-checklist

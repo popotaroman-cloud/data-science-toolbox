@@ -33,7 +33,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 16 | `chapters/16-synthetic-privacy.qmd` | `book/ch16-synthetic-privacy` | agent:claude | | drafting | 2026-10-25 | 12 |
 | 17 | `chapters/17-spatial-data.qmd` | `book/ch17-spatial-data` | agent:claude | | drafting | 2026-10-25 | 13 |
 | 18 | `chapters/18-hierarchical-data.qmd` | `book/ch18-hierarchical-data` | agent:claude | | drafting | 2026-10-25 | 13 |
-| 19 | `chapters/19-storytelling-reports.qmd` | `book/ch19-storytelling-reports` | | | todo | | 14 |
+| 19 | `chapters/19-storytelling-reports.qmd` | `book/ch19-storytelling-reports` | agent:claude | | drafting | 2026-10-25 | 14 |
 | 20 | `chapters/20-dashboards.qmd` | `book/ch20-dashboards` | | | todo | | 14 |
 | 21 | `chapters/21-case-study-pm25.qmd` | `book/ch21-case-study-pm25` | | | todo | | 15 |
 | 22 | `chapters/22-ethics-ai.qmd` | `book/ch22-ethics-ai` | | | todo | | 1, 15 |
