@@ -200,3 +200,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Silhouette | silhouette | ทับศัพท์ | 15 |
 | Isolation Forest | Isolation Forest | ทับศัพท์ (ชื่อวิธี) | 15 |
 | Robust z-score | robust z-score | ทับศัพท์ | 15 |
+| Quasi-identifier | quasi-identifier | ทับศัพท์ · อธิบายครั้งแรก | 16 |
+| k-anonymity / l-diversity | k-anonymity / l-diversity | ทับศัพท์ | 16 |
+| Data minimization | การเก็บเท่าที่จำเป็น (data minimization) | แปล | 16 |
+| Class imbalance | class imbalance | ทับศัพท์ | 16 |
