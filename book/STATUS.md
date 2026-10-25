@@ -24,7 +24,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 7 | `chapters/07-sql-analysis.qmd` | `book/ch07-sql-analysis` | agent:claude | | drafting | 2026-10-25 | 4 |
 | 8 | `chapters/08-data-wrangling.qmd` | `book/ch08-data-wrangling` | agent:claude | | drafting | 2026-10-25 | 5 |
 | 9 | `chapters/09-data-quality.qmd` | `book/ch09-data-quality` | agent:claude | | drafting | 2026-10-25 | 6 |
-| 10 | `chapters/10-missing-data.qmd` | `book/ch10-missing-data` | | | todo | | 7 |
+| 10 | `chapters/10-missing-data.qmd` | `book/ch10-missing-data` | agent:claude | | drafting | 2026-10-25 | 7 |
 | 11 | `chapters/11-visual-perception.qmd` | `book/ch11-visual-perception` | | | todo | | 9 |
 | 12 | `chapters/12-interactive-viz.qmd` | `book/ch12-interactive-viz` | | | todo | | 10 |
 | 13 | `chapters/13-exploratory-statistics.qmd` | `book/ch13-exploratory-statistics` | | | todo | | 11 |
