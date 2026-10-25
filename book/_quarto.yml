@@ -56,6 +56,7 @@ book:
     - appendices/g-answers.qmd
     - appendices/h-toolbox-reference.qmd
     - glossary.qmd
+    - book-index.qmd
     - references.qmd
 
 bibliography:

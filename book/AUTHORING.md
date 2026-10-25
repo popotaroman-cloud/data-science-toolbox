@@ -62,7 +62,9 @@ book/
 │   ├── g-answers.qmd       ← ภาคผนวก ช (ดึงทุกไฟล์ใน answers/ มารวม ห้ามแก้)
 │   └── answers/NN.qmd      ← แนวคำตอบของบท NN (มีไฟล์ตั้งต้นพร้อม label แล้ว)
 ├── glossary/NN.yml         ← รายการศัพท์ที่บท NN นิยาม (ผู้ดูแลเล่มรวมเป็น glossary.qmd)
-├── glossary.qmd            ← อภิธานศัพท์ (สร้างตอนรวมเล่ม)
+├── glossary.qmd            ← อภิธานศัพท์ (สร้างโดย scripts/assemble.py ห้ามแก้)
+├── book-index.qmd          ← ดัชนี (สร้างโดย scripts/assemble.py ห้ามแก้)
+├── scripts/assemble.py     ← script ตรวจและประกอบเล่ม
 ├── refs/NN.bib             ← บรรณานุกรมของบท NN (มีไฟล์ว่างของทุกบทแล้ว และ _quarto.yml อ่านทุกไฟล์)
 ├── refs/appendix.bib       ← บรรณานุกรมของภาคผนวก
 ├── references.qmd          ← บรรณานุกรม (Quarto สร้างจากทุก refs/*.bib)
@@ -82,39 +84,93 @@ book/
 
 ## ขั้นตอนการทำงาน
 
+### หลักการ: เขียนแยกบท แล้วค่อยประกอบเล่ม
+
+แต่ละบทเขียนใน **branch ของตัวเอง** และไม่แตะไฟล์ของบทอื่น เมื่อบทผ่าน review แล้วจึงนำมา **ประกอบ (assemble)** ใน branch กลางของเล่ม แล้วตรวจทั้งเล่มด้วย script ก่อนรวมเข้า `main`
+
 ```mermaid
 flowchart LR
-  A[จองบทใน STATUS.md] --> B[สร้าง branch book/chNN-slug] --> C[คัดลอกแม่แบบ + เขียน] --> D[ตรวจ checklist] --> E[เปิด PR] --> F[review 1 คน] --> G[ผู้ดูแลเล่ม merge]
+  M[main] -->|แตก branch ครั้งเดียว| A[book-assembly]
+  A --> C0[book/ch00-overview]
+  A --> C7[book/ch07-sql-analysis]
+  A --> Cx[book/chNN-...]
+  A --> AP[book/app-c-sql-reference]
+  C0 -->|PR + review| A
+  C7 -->|PR + review| A
+  Cx -->|PR + review| A
+  AP -->|PR + review| A
+  A -->|assemble.py ผ่าน + ผู้ดูแลเล่มอนุมัติ| M
 ```
 
+| branch | ใช้ทำอะไร | ใครแก้ได้ |
+|---|---|---|
+| `main` | เวอร์ชันที่เผยแพร่ (เว็บไซต์รายวิชาและหนังสือฉบับที่ประกอบแล้ว) | ผู้ดูแลเล่มเท่านั้น |
+| `book-assembly` | branch ประกอบเล่ม รวมบทที่ผ่าน review แล้ว | ผู้ดูแลเล่ม merge PR เข้ามาเท่านั้น ห้าม commit ตรง |
+| `book/chNN-slug` | เขียนบทที่ NN (มี branch ของทุกบทเตรียมไว้แล้ว ชื่อตามคอลัมน์ branch ใน [STATUS.md](STATUS.md)) | ผู้เขียนบทนั้น |
+| `book/app-X-slug` | เขียนภาคผนวก X | ผู้เขียนภาคผนวกนั้น |
+
 ### 1. จองบท
-- แก้แถวของบทใน [STATUS.md](STATUS.md): ใส่ชื่อผู้เขียน (หรือ `agent:<ชื่อ>`) เปลี่ยนสถานะเป็น `drafting` และใส่วันที่
-- commit เฉพาะการแก้ STATUS.md ไปที่ `main` ก่อน (หรือแจ้งผู้ดูแลเล่ม) เพื่อให้คนอื่นเห็นว่าบทนั้นมีเจ้าของแล้ว
+- แก้แถวของบทใน [STATUS.md](STATUS.md) **ใน branch ของบทตน**: ใส่ชื่อผู้เขียน (หรือ `agent:<ชื่อ>`) เปลี่ยนสถานะเป็น `drafting` ใส่วันที่ แล้ว commit และ push ทันที
+- เปิด **draft pull request** จาก `book/chNN-slug` ไปที่ `book-assembly` ตั้งแต่ commit แรก เพื่อให้ทุกคนเห็นว่าบทนั้นมีเจ้าของแล้ว (draft PR คือ "การจอง")
 - **คนเดียวถือได้ครั้งละไม่เกิน 2 บทที่อยู่ในสถานะ `drafting`**
 
-### 2. Branch และ commit
-- ชื่อ branch: `book/chNN-slug` เช่น `book/ch07-sql` และภาคผนวกใช้ `book/app-a-python`
-- commit message ขึ้นต้นด้วยเลขบท เช่น `ch07: เพิ่มหัวข้อ 7.5 window function`
-- commit เป็นหัวข้อย่อย ไม่ commit ทั้งบทครั้งเดียว
+### 2. เริ่มเขียนใน branch ของบท
+
+```bash
+git fetch origin
+git switch book/ch07-sql-analysis          # branch ของบทที่จอง (มีอยู่แล้ว)
+git merge origin/book-assembly             # รับไฟล์กลางล่าสุด (terms, toc, คู่มือ)
+# ... เขียน chapters/07-sql-analysis.qmd และไฟล์ที่มีเลข 07 ...
+git add chapters/07-sql-analysis.qmd glossary/07.yml refs/07.bib appendices/answers/07.qmd images/07/ STATUS.md
+git commit -m "ch07: เขียนหัวข้อ 7.5 window function"
+git push
+```
+
+- commit message ขึ้นต้นด้วยรหัสบท (`ch07:`) หรือรหัสภาคผนวก (`appc:`)
+- commit ทีละหัวข้อย่อย ไม่ commit ทั้งบทครั้งเดียว
+- **`git add` เฉพาะไฟล์ของบทตน** (ใส่ชื่อไฟล์ตรง ๆ ห้ามใช้ `git add .`) ถ้า `git status` แสดงไฟล์ของบทอื่นหรือไฟล์กลาง แปลว่าแก้ผิดที่
+- ระหว่างเขียน ให้ `git merge origin/book-assembly` เป็นระยะ เพื่อรับศัพท์และ label ใหม่ที่บทอื่นเพิ่มเข้ามา
 
 ### 3. สถานะ
 
 | สถานะ | ความหมาย |
 |---|---|
 | `todo` | ยังไม่มีผู้เขียน |
-| `drafting` | กำลังเขียน |
-| `review` | เปิด PR แล้ว รอผู้ตรวจ |
+| `drafting` | กำลังเขียน (มี draft PR แล้ว) |
+| `review` | เปลี่ยน PR จาก draft เป็น ready for review แล้ว |
 | `revising` | แก้ตามความเห็นของผู้ตรวจ |
-| `done` | merge เข้า `main` แล้ว |
+| `done` | merge เข้า `book-assembly` แล้ว |
+| `published` | อยู่ใน `main` และเผยแพร่แล้ว |
 
-### 4. Review และ merge
+### 4. Review และรวมเข้า `book-assembly`
+- ก่อนเปลี่ยน PR เป็น ready for review ให้รัน `python scripts/assemble.py --chapter 07` แล้วแก้จนไม่มี error
 - ผู้ตรวจ 1 คนต้องไม่ใช่ผู้เขียนบทนั้น และบทที่ agent เขียน **ต้องตรวจโดยคน**
 - ผู้ตรวจใช้ [checklist ท้ายคู่มือ](#checklist-ก่อนส่ง-review) และเขียนความเห็นใน PR
-- ผู้ดูแลเล่มเป็นผู้ merge และเปลี่ยนสถานะเป็น `done`
+- ผู้ดูแลเล่ม merge PR เข้า `book-assembly` และเปลี่ยนสถานะเป็น `done`
 
-### 5. เมื่อต้องแก้นอกบทของตน
-- พบศัพท์ที่ยังไม่มีใน [terms.md](terms.md): เสนอเพิ่มในส่วน "ศัพท์ที่รอพิจารณา" ท้ายไฟล์ใน PR ของบท และผู้ดูแลเล่มรับรองตอน merge
+### 5. ประกอบเล่ม (ผู้ดูแลเล่ม)
+เมื่อมีบท `done` เพิ่มเข้ามาใน `book-assembly`
+
+```bash
+git switch book-assembly && git pull
+python scripts/assemble.py           # ตรวจทุกบท + สร้างอภิธานศัพท์ + สร้างดัชนี
+quarto render                        # ใน book/ ต้องไม่มี error
+git add glossary.qmd book-index.qmd && git commit -m "assemble: ประกอบเล่มรอบที่ N"
+```
+
+script `scripts/assemble.py` ทำ 4 อย่าง
+
+1. **ตรวจโครงสร้าง** ทุกบทที่ไม่ใช่ `todo`: หัวข้อตรงกับ toc.md ทั้งชื่อและลำดับ มีหัวข้อประจำบทครบ ไม่มี `VERIFY` ค้าง ไม่มีเลขหัวข้อที่พิมพ์เอง และไม่มี code chunk ที่รันได้
+2. **ตรวจไฟล์ร่วม:** BibTeX key ซ้ำข้ามบท ศัพท์ซ้ำข้ามบทใน `glossary/*.yml` และ label (`#sec-`/`#fig-`/`#tbl-`) ซ้ำข้ามบท
+3. **สร้างอภิธานศัพท์** `glossary.qmd` จาก `glossary/*.yml`
+4. **สร้างดัชนี** `book-index.qmd` จากเครื่องหมาย `.idx`, `.idx-tool`, `.idx-data` ในทุกบท
+
+เมื่อพร้อมเผยแพร่ ผู้ดูแลเล่มเปิด PR จาก `book-assembly` ไปที่ `main`
+
+### 6. เมื่อต้องแก้นอกบทของตน
+- พบศัพท์ที่ยังไม่มีใน [terms.md](terms.md): เสนอในส่วน "ศัพท์ที่รอพิจารณา" ใน PR ของบท (เป็นไฟล์กลางไฟล์เดียวที่ผู้เขียนเพิ่มได้ และเพิ่มได้เฉพาะแถวในส่วนนั้น) ผู้ดูแลเล่มรับรองตอน merge
 - อยากเพิ่มหรือเปลี่ยนหัวข้อใน toc.md, เห็นว่าบทอื่นหรือเอกสารรายสัปดาห์ผิด หรืออยากแก้ `_quarto.yml`: **เปิด issue** ห้ามแก้ใน PR ของบท
+- ถ้าเกิด merge conflict ในไฟล์กลาง (STATUS.md, terms.md) ให้เก็บทั้งสองฝั่ง เพราะแต่ละบทแก้คนละแถว
 
 ---
 
@@ -327,7 +383,7 @@ Python 3.12 · DuckDB 1.x (ห้ามใช้ API ที่มีเฉพา
 | `.idx-tool` | ดัชนีเครื่องมือและฟังก์ชัน |
 | `.idx-data` | ดัชนีชุดข้อมูลและกรณีศึกษา |
 
-- ทำเครื่องหมาย 15–40 คำต่อบท ผู้ดูแลเล่มจะสร้างดัชนีจากเครื่องหมายเหล่านี้ด้วย script ตอนรวมเล่ม
+- ทำเครื่องหมาย 15–40 คำต่อบท `scripts/assemble.py` จะสร้างดัชนีจากเครื่องหมายเหล่านี้ (ใช้ label `#sec-` ของหัวข้อที่อยู่เหนือคำนั้นเป็นจุดอ้างอิง หัวข้อจึงต้องมี label)
 
 ---
 
@@ -352,7 +408,8 @@ Python 3.12 · DuckDB 1.x (ห้ามใช้ API ที่มีเฉพา
 
 ### ระหว่างเขียน
 - ห้ามแก้ `toc.md`, `terms.md`, `AUTHORING.md`, `_quarto.yml`, ไฟล์ของบทอื่น และเอกสารรายสัปดาห์ ถ้าเห็นว่าควรแก้ ให้ใส่ไว้ในรายงาน
-- ห้ามรัน `git push`, `git merge` หรือเปลี่ยน branch เว้นแต่ผู้มอบหมายสั่งชัดเจน
+- ทำงานใน branch `book/chNN-slug` ของบทที่ได้รับมอบหมายเท่านั้น ห้าม commit ลง `book-assembly` หรือ `main` และห้าม merge PR เอง
+- `git push` ได้เฉพาะ branch ของบทตน และเฉพาะเมื่อผู้มอบหมายอนุญาต ถ้าไม่ได้รับอนุญาต ให้ commit ไว้ในเครื่องแล้วรายงาน
 - ห้ามสร้างไฟล์ข้อมูลจริงหรือข้อมูลส่วนบุคคล ถ้าต้องใช้ข้อมูลสมมุติ ให้สร้างด้วยโค้ดที่แสดงในบท
 - ถ้ารันโค้ดทดสอบได้ ให้ใช้สภาพแวดล้อมแยก (เช่น venv ใน scratchpad) และห้ามติดตั้งแพ็กเกจลงระบบ
 
@@ -377,7 +434,9 @@ Python 3.12 · DuckDB 1.x (ห้ามใช้ API ที่มีเฉพา
 2. หัวข้อย่อยต้องตรงกับบทที่ NN ใน book/toc.md ทั้งชื่อและลำดับ (ไม่ต้องพิมพ์เลขหัวข้อ)
 3. บทนี้ขยายความจากเอกสารสัปดาห์ที่ <W> (weeks/weekWW/index.md และ lab.md)
 4. คัดลอก book/_templates/chapter.qmd ไปเป็น book/chapters/NN-<slug>.qmd แล้วเขียน
-5. เมื่อเสร็จ ส่งรายงานตามรูปแบบใน AUTHORING.md
+5. ทำงานใน branch book/chNN-<slug> (git switch book/chNN-<slug> แล้ว git merge origin/book-assembly)
+6. ก่อนรายงาน รัน python scripts/assemble.py --chapter NN ให้ผ่าน
+7. เมื่อเสร็จ ส่งรายงานตามรูปแบบใน AUTHORING.md
 ```
 
 ---
@@ -407,4 +466,6 @@ Python 3.12 · DuckDB 1.x (ห้ามใช้ API ที่มีเฉพา
 - [ ] การอ้างอิงข้ามบทใช้ `@sec-`/`@fig-`/`@tbl-` ไม่พิมพ์เลขเอง
 - [ ] `glossary/NN.yml`, `refs/NN.bib` และ `appendices/answers/NN.qmd` ครบ และ key ไม่ซ้ำกับบทอื่น
 - [ ] ทำเครื่องหมายดัชนี 15–40 คำ
+- [ ] `python scripts/assemble.py --chapter NN` ไม่มี error
 - [ ] รัน `quarto render` ในโฟลเดอร์ `book/` ผ่านโดยไม่มี warning ใหม่จากบทของตน (ดูตัวอย่างระหว่างเขียนด้วย `quarto preview chapters/NN-*.qmd`)
+- [ ] `git status` แสดงเฉพาะไฟล์ของบทตน (และแถวของตนใน STATUS.md / terms.md)
