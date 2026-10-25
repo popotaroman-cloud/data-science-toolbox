@@ -212,3 +212,6 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Roll-up / slice / dice | roll-up / slice / dice | ทับศัพท์ | 18 |
 | Treemap / sunburst | treemap / sunburst | ทับศัพท์ | 18 |
 | Data cube | data cube | ทับศัพท์ | 18 |
+| Inline code | inline code | ทับศัพท์ | 19 |
+| Parameterized report | รายงานแบบมีพารามิเตอร์ | แปล | 19 |
+| Render | render | ทับศัพท์ | 19 |
