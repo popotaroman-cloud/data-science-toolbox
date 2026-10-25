@@ -1,0 +1,51 @@
+- term: API
+  th: API
+  definition: >
+    Application Programming Interface ช่องทางที่ระบบหนึ่งเปิดให้โปรแกรมอื่นเรียกใช้
+    API บนเว็บมักรับ request ผ่าน HTTP และส่งข้อมูลกลับเป็น JSON
+  section: sec-ch05-rest
+  see_also: [Endpoint, Rate limit]
+
+- term: Endpoint
+  th: endpoint
+  definition: >
+    URL ของทรัพยากรหนึ่งใน API ที่โปรแกรมเรียกเพื่อขอหรือส่งข้อมูล
+    เปลี่ยนได้ตามเวลา จึงต้องตรวจกับเอกสารของผู้ให้บริการและระบุวันที่ตรวจสอบ
+  section: sec-ch05-rest
+  see_also: [API]
+
+- term: Request / response
+  th: request / response
+  definition: >
+    คู่การสื่อสารของ HTTP request จาก client ประกอบด้วย method URL header และ body
+    response จากเซิร์ฟเวอร์ประกอบด้วย status code header และ body
+  section: sec-ch05-http
+
+- term: Rate limit
+  th: rate limit
+  definition: >
+    ขีดจำกัดจำนวน request ต่อช่วงเวลาที่ผู้ให้บริการกำหนด เมื่อเกินมักได้ status 429
+    พร้อม header Retry-After บอกระยะเวลาที่ควรรอ
+  section: sec-ch05-rest
+
+- term: Web scraping
+  th: web scraping
+  definition: >
+    การดึงข้อมูลจากหน้าเว็บที่ออกแบบมาให้คนอ่าน ด้วยการแกะโครงสร้าง HTML เช่น ใช้ CSS selector กับ BeautifulSoup
+    ใช้เมื่อไม่มี API และต้องเคารพ robots.txt ข้อกำหนดการใช้งาน และกฎหมาย
+  section: sec-ch05-scraping
+
+- term: Data acquisition
+  th: การได้มาซึ่งข้อมูล
+  definition: >
+    ขั้นแรกของ pipeline ที่นำข้อมูลจากแหล่งภายนอกเข้ามาในระบบ เช่น ดึงจาก API หรือหน้าเว็บ
+    แล้วบันทึกข้อมูลดิบพร้อมเวลาที่ดึง ก่อนแปลงรูปในขั้นถัดไป
+  section: sec-ch05-open-data
+  see_also: [Raw data]
+
+- term: Raw data
+  th: ข้อมูลดิบ
+  definition: >
+    ข้อมูลในรูปที่ได้รับจากแหล่งต้นทางโดยยังไม่ผ่านการแปลง เก็บแยกไว้และไม่เขียนทับ
+    เพื่อให้ประมวลผลใหม่ได้เมื่อพบว่าขั้นแปลงผิดพลาด
+  section: sec-ch05-robust
