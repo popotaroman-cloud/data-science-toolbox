@@ -196,3 +196,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Change point | change point | ทับศัพท์ | 14 |
 | As-of join | as-of join | ทับศัพท์ | 14 |
 | Lag | lag | ทับศัพท์ | 14 |
+| Loading | loading | ทับศัพท์ | 15 |
+| Silhouette | silhouette | ทับศัพท์ | 15 |
+| Isolation Forest | Isolation Forest | ทับศัพท์ (ชื่อวิธี) | 15 |
+| Robust z-score | robust z-score | ทับศัพท์ | 15 |
