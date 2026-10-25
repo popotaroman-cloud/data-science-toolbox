@@ -1,0 +1,28 @@
+- term: Dashboard
+  th: แดชบอร์ด
+  definition: >
+    การแสดงผลด้วยภาพของข้อมูลที่สำคัญที่สุดต่อเป้าหมายหนึ่ง จัดให้ติดตามได้เร็ว แบ่งเป็นเชิงปฏิบัติการ
+    เชิงวิเคราะห์ และเชิงกลยุทธ์ตามผู้ใช้และการตัดสินใจ
+  section: sec-ch20-types
+- term: Key performance indicator (KPI)
+  th: ตัวชี้วัดหลัก
+  definition: >
+    ตัวเลขเด่นบนแดชบอร์ดที่ต้องมีนิยาม หน่วย ช่วงเวลา การเปรียบเทียบ ทิศทางที่ดี และความสดของข้อมูล
+  section: sec-ch20-layout
+- term: Session state
+  th: session state
+  definition: >
+    ที่เก็บค่าของ Streamlit ที่อยู่รอดข้ามการ rerun ของ session เดียวกัน ใช้จำสถานะ เช่น ระดับ drill-down
+  section: sec-ch20-streamlit-model
+  see_also: [Callback]
+- term: Callback
+  th: callback
+  definition: >
+    ฟังก์ชันที่ผูกกับ widget และรันก่อนการ rerun เมื่อผู้ใช้เปลี่ยนค่า เป็นที่ที่แก้ค่าของ widget ใน session state ได้
+  section: sec-ch20-streamlit-model
+- term: Caching
+  th: caching
+  definition: >
+    การเก็บผลของฟังก์ชันไว้ใช้ซ้ำเมื่อเรียกด้วย argument เดิม ใน Streamlit ใช้ cache_resource กับออบเจกต์ที่ใช้ร่วมกัน
+    และ cache_data กับผลลัพธ์ที่คืนเป็นสำเนา
+  section: sec-ch20-cache
