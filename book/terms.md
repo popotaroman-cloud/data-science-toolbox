@@ -188,3 +188,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Linked views / brushing | linked views / brushing | ทับศัพท์ | 12 |
 | Accessibility | การเข้าถึงได้ (accessibility) | แปล | 12 |
 | Trace (Plotly) | trace | ทับศัพท์ (ศัพท์ของ Plotly) | 12 |
+| Simpson's paradox | Simpson's paradox | ทับศัพท์ | 13 |
+| Ecological fallacy | ecological fallacy | ทับศัพท์ · อธิบายครั้งแรก | 13 |
+| False discovery rate (FDR) | false discovery rate (FDR) | ทับศัพท์ | 13 |
+| Breakdown point | breakdown point | ทับศัพท์ | 13 |
