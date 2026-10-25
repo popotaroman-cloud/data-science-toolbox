@@ -18,7 +18,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 1 | `chapters/01-data-science-eda.qmd` | `book/ch01-data-science-eda` | agent:claude | | drafting | 2026-10-25 | 1 |
 | 2 | `chapters/02-reproducible-environment.qmd` | `book/ch02-reproducible-environment` | agent:claude | | drafting | 2026-10-25 | 1 |
 | 3 | `chapters/03-version-control.qmd` | `book/ch03-version-control` | agent:claude | | drafting | 2026-10-25 | 1 |
-| 4 | `chapters/04-questions-hypotheses.qmd` | `book/ch04-questions-hypotheses` | | | todo | | 2 |
+| 4 | `chapters/04-questions-hypotheses.qmd` | `book/ch04-questions-hypotheses` | agent:claude | | drafting | 2026-10-25 | 2 |
 | 5 | `chapters/05-data-acquisition.qmd` | `book/ch05-data-acquisition` | | | todo | | 3 |
 | 6 | `chapters/06-analytical-databases.qmd` | `book/ch06-analytical-databases` | | | todo | | 4 |
 | 7 | `chapters/07-sql-analysis.qmd` | `book/ch07-sql-analysis` | | | todo | | 4 |
