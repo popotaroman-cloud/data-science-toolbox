@@ -1,0 +1,52 @@
+- term: Version control
+  th: version control
+  definition: >
+    ระบบที่บันทึกการเปลี่ยนแปลงของไฟล์เป็นลำดับ พร้อมข้อมูลว่าใครเปลี่ยน เมื่อไร และทำไม
+    ย้อนดูหรือย้อนกลับได้ และรวมงานของหลายคนได้อย่างเป็นระบบ เช่น Git
+  section: sec-ch03-why
+  see_also: [Commit, Repository (repo)]
+
+- term: Repository (repo)
+  th: repository
+  definition: >
+    โฟลเดอร์โครงการที่ Git ติดตามการเปลี่ยนแปลง ประกอบด้วยไฟล์ที่ทำงานอยู่และฐานข้อมูลประวัติในโฟลเดอร์ .git/
+  section: sec-ch03-model
+
+- term: Commit
+  th: commit
+  definition: >
+    วัตถุใน Git ที่บันทึกสถานะของทั้งโครงการ ณ เวลาหนึ่ง เก็บ hash ของ tree ระดับบน hash ของ commit แม่
+    ผู้เขียน เวลา และข้อความ commit ต่อกันเป็น DAG
+  section: sec-ch03-model
+  see_also: [Branch]
+
+- term: Branch
+  th: branch
+  definition: >
+    ป้ายชื่อที่ชี้ไปยัง commit หนึ่งตัวและเลื่อนตามเมื่อมี commit ใหม่ ใช้แยกสายการพัฒนา
+    เพื่อลองของใหม่โดยไม่กระทบ main
+  section: sec-ch03-model
+  see_also: [Merge / rebase]
+
+- term: Merge / rebase
+  th: merge / rebase
+  definition: >
+    สองวิธีรวมงานจาก branch merge สร้าง commit ที่มี parent สองตัวและรักษาประวัติจริง
+    rebase นำ commit ไปเล่นซ้ำบนปลายของอีก branch ทำให้ได้ commit ใหม่และประวัติเป็นเส้นตรง
+  section: sec-ch03-branch
+  see_also: [Branch]
+
+- term: Pull request (PR)
+  th: pull request
+  definition: >
+    คำขอให้รวม branch หนึ่งเข้าอีก branch หนึ่งบนบริการอย่าง GitHub พร้อมพื้นที่อภิปรายและ review ก่อนรวม
+  section: sec-ch03-github
+  see_also: [Code review]
+
+- term: Code review
+  th: การ review โค้ด
+  definition: >
+    การให้ผู้อื่นตรวจการเปลี่ยนแปลงของโค้ดก่อนรวม งานข้อมูลควรตรวจความถูกต้องของผลลัพธ์
+    และจุดเสี่ยงของข้อมูลก่อนความอ่านง่ายของโค้ด
+  section: sec-ch03-review
+  see_also: [Pull request (PR)]
