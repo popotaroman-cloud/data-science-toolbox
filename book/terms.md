@@ -181,3 +181,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Parquet | Parquet | ทับศัพท์ (ชื่อรูปแบบไฟล์) | 6 |
 | CTE (Common Table Expression) | CTE | ทับศัพท์ · อธิบายเต็มครั้งแรก | 7 |
 | Fan-out (join) | fan-out | ทับศัพท์ · อธิบายครั้งแรก | 8 |
+| Preattentive attribute | preattentive attribute | ทับศัพท์ · อธิบายครั้งแรก | 11 |
+| Lie factor | lie factor | ทับศัพท์ (ศัพท์ของ Tufte) | 11 |
+| Data-ink ratio | อัตราส่วนหมึกข้อมูล (data-ink ratio) | แปล | 11 |
+| Annotation | คำอธิบายประกอบ (annotation) | แปล | 11 |
