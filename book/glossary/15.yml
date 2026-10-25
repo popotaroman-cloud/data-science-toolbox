@@ -1,0 +1,75 @@
+- term: Scaling / standardization
+  th: การปรับสเกล / การทำให้เป็นมาตรฐาน
+  definition: >
+    การแปลงตัวแปรให้มีสเกลเทียบกันได้ เช่น ลบค่าเฉลี่ยแล้วหารด้วยส่วนเบี่ยงเบนมาตรฐาน
+    จำเป็นก่อนใช้วิธีที่อิงระยะทาง การปรับตามคอลัมน์หรือตามแถวตอบคำถามต่างกัน
+  section: sec-ch15-distance
+- term: Principal Component Analysis (PCA)
+  th: การวิเคราะห์องค์ประกอบหลัก
+  definition: >
+    การหาทิศทางใหม่ที่ข้อมูลแปรปรวนมากที่สุดและตั้งฉากกัน ด้วย eigen decomposition ของเมทริกซ์ความแปรปรวนร่วม
+    หรือ SVD ของข้อมูล ใช้ลดมิติเพื่อมองโครงสร้าง
+  section: sec-ch15-pca-math
+  see_also: [Loading]
+- term: Loading
+  th: loading
+  definition: >
+    น้ำหนักของตัวแปรเดิมในองค์ประกอบหลักหนึ่ง ใช้ตีความว่าองค์ประกอบนั้นหมายถึงอะไร
+    เครื่องหมายกำหนดได้สองทาง จึงตีความจากการตรงข้ามกันระหว่างตัวแปร
+  section: sec-ch15-pca-interpret
+- term: Explained variance ratio
+  th: สัดส่วนความแปรปรวนที่อธิบายได้
+  definition: >
+    eigenvalue ขององค์ประกอบหนึ่งหารด้วยผลรวมของ eigenvalue ทั้งหมด บอกว่าองค์ประกอบนั้นเก็บความแปรผันของข้อมูลไว้เท่าใด
+  section: sec-ch15-pca-interpret
+- term: UMAP
+  th: UMAP
+  definition: >
+    วิธีลดมิติแบบไม่เชิงเส้นที่รักษาความสัมพันธ์เพื่อนบ้าน ขนาดและระยะห่างของกลุ่มในภาพไม่มีความหมายเชิงปริมาณ
+    ใช้เพื่อสำรวจเท่านั้น
+  section: sec-ch15-tsne-umap
+  see_also: [t-SNE]
+- term: t-SNE
+  th: t-SNE
+  definition: >
+    วิธีลดมิติแบบไม่เชิงเส้นที่แปลงระยะทางเป็นความน่าจะเป็นของการเป็นเพื่อนบ้าน
+    ผลขึ้นกับ perplexity และ seed
+  section: sec-ch15-tsne-umap
+- term: Clustering
+  th: การจัดกลุ่ม
+  definition: >
+    การแบ่งหน่วยเป็นกลุ่มที่สมาชิกคล้ายกันโดยไม่มีป้ายคำตอบ อัลกอริทึมคืนกลุ่มเสมอ
+    ผลจึงเป็นสมมติฐานที่ต้องตรวจความเสถียรและความหมาย
+  section: sec-ch15-clustering
+  see_also: [Silhouette, Adjusted Rand index]
+- term: Silhouette
+  th: silhouette
+  definition: >
+    ค่าระหว่าง −1 ถึง 1 ที่วัดว่าหน่วยใกล้กลุ่มของตนมากกว่ากลุ่มที่ใกล้ที่สุดถัดไปเพียงใด
+    ค่าเฉลี่ยของทุกหน่วยใช้เทียบจำนวนกลุ่ม
+  section: sec-ch15-cluster-eval
+- term: Adjusted Rand index
+  th: ARI
+  definition: >
+    ค่าที่วัดความตรงกันของสองการจัดกลุ่มจากคู่หน่วย ปรับให้การสุ่มได้ 0 และตรงกันสมบูรณ์ได้ 1
+    ใช้ตรวจความเสถียร
+  section: sec-ch15-cluster-eval
+- term: Outlier
+  th: ค่าผิดปกติ
+  definition: >
+    หน่วยที่ต่างจากหน่วยส่วนใหญ่มากจนน่าสงสัยว่าเกิดจากกลไกอื่น อาจเป็นความผิดพลาดหรือเหตุการณ์จริง
+    จึงควรติดธงแทนการลบ
+  section: sec-ch15-outlier-methods
+  see_also: [Mahalanobis distance, Isolation Forest]
+- term: Mahalanobis distance
+  th: ระยะทาง Mahalanobis
+  definition: >
+    ระยะจากจุดถึงศูนย์กลางของข้อมูลที่คำนึงถึงความแปรปรวนร่วม จับค่าผิดปกติหลายมิติ
+    เช่น PM2.5 สูงแต่ PM10 ต่ำ ควรใช้กับค่าประมาณแบบทนทาน
+  section: sec-ch15-outlier-methods
+- term: Isolation Forest
+  th: Isolation Forest
+  definition: >
+    วิธีตรวจค่าผิดปกติที่วัดว่าแยกจุดออกจากจุดอื่นได้ง่ายเพียงใดด้วยต้นไม้ที่แบ่งแบบสุ่ม
+    จุดที่แยกได้ในไม่กี่ขั้นถือว่าผิดปกติ
+  section: sec-ch15-outlier-methods
