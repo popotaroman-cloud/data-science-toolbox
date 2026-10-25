@@ -1,0 +1,39 @@
+- term: Hierarchy
+  th: ลำดับชั้น
+  definition: >
+    โครงสร้างที่แต่ละหน่วยในระดับล่างเป็นสมาชิกของหน่วยเดียวในระดับบน เช่น สถานี → จังหวัด → ภาค
+    ต้องตรวจว่าไม่มีหน่วยที่มีหน่วยแม่มากกว่าหนึ่ง
+  section: sec-ch18-hierarchy
+  see_also: [Drill-down]
+
+- term: Drill-down
+  th: drill-down
+  definition: >
+    การเจาะลงจากระดับบนไปยังระดับล่างของลำดับชั้น เช่น จากภาคไปยังจังหวัดและสถานี
+    ตรงข้ามกับ roll-up ซึ่งรวมขึ้นไประดับบน
+  section: sec-ch18-olap
+  see_also: [Hierarchy, OLTP / OLAP]
+
+- term: Distributive / algebraic / holistic measure
+  th: ตัวชี้วัดแบบบวกได้ / รวมได้ถ้าเก็บองค์ประกอบ / รวมไม่ได้
+  definition: >
+    การจำแนกตัวชี้วัดตามการรวมข้ามระดับ จำนวนนับบวกได้ ค่าเฉลี่ยรวมได้ถ้าเก็บผลรวมและจำนวน
+    มัธยฐานและเปอร์เซ็นไทล์ต้องคำนวณจากข้อมูลระดับล่างสุด
+  section: sec-ch18-consistency
+  see_also: [Aggregation]
+
+- term: Treemap / sunburst
+  th: treemap / sunburst
+  definition: >
+    กราฟสำหรับข้อมูลลำดับชั้น treemap ใช้สี่เหลี่ยมซ้อนกัน sunburst ใช้วงแหวนซ้อนกัน
+    ขนาดต้องเป็นค่าที่บวกกันได้ และสีใช้กับค่าที่ต้องการเปรียบเทียบ
+  section: sec-ch18-treemap
+  see_also: [Hierarchy]
+
+- term: ROLLUP / CUBE
+  th: ROLLUP / CUBE
+  definition: >
+    ส่วนขยายของ GROUP BY ที่คำนวณหลายระดับการรวมในคำสั่งเดียว ROLLUP คำนวณตามลำดับชั้น
+    CUBE คำนวณทุกชุดค่าผสม ใช้ GROUPING() แยกแถวผลรวมจากค่าว่างจริง
+  section: sec-ch18-olap
+  see_also: [Aggregation, Drill-down]

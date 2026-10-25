@@ -209,3 +209,6 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Spatial autocorrelation | สหสัมพันธ์เชิงพื้นที่ (spatial autocorrelation) | แปล | 17 |
 | Spatial interpolation | การประมาณค่าเชิงพื้นที่ | แปล | 17 |
 | Geodesic distance | ระยะทาง geodesic | ทับศัพท์ | 17 |
+| Roll-up / slice / dice | roll-up / slice / dice | ทับศัพท์ | 18 |
+| Treemap / sunburst | treemap / sunburst | ทับศัพท์ | 18 |
+| Data cube | data cube | ทับศัพท์ | 18 |
