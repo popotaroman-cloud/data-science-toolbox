@@ -192,3 +192,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Ecological fallacy | ecological fallacy | ทับศัพท์ · อธิบายครั้งแรก | 13 |
 | False discovery rate (FDR) | false discovery rate (FDR) | ทับศัพท์ | 13 |
 | Breakdown point | breakdown point | ทับศัพท์ | 13 |
+| Smoothing | การทำให้เรียบ (smoothing) | แปล | 14 |
+| Change point | change point | ทับศัพท์ | 14 |
+| As-of join | as-of join | ทับศัพท์ | 14 |
+| Lag | lag | ทับศัพท์ | 14 |
