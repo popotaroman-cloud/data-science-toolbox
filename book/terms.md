@@ -204,3 +204,8 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | k-anonymity / l-diversity | k-anonymity / l-diversity | ทับศัพท์ | 16 |
 | Data minimization | การเก็บเท่าที่จำเป็น (data minimization) | แปล | 16 |
 | Class imbalance | class imbalance | ทับศัพท์ | 16 |
+| Datum | datum | ทับศัพท์ | 17 |
+| MAUP (modifiable areal unit problem) | MAUP | ทับศัพท์ · อธิบายเต็มครั้งแรก | 17 |
+| Spatial autocorrelation | สหสัมพันธ์เชิงพื้นที่ (spatial autocorrelation) | แปล | 17 |
+| Spatial interpolation | การประมาณค่าเชิงพื้นที่ | แปล | 17 |
+| Geodesic distance | ระยะทาง geodesic | ทับศัพท์ | 17 |
