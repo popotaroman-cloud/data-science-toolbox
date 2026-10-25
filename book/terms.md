@@ -179,3 +179,4 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Normalization / denormalization | normalization / denormalization | ทับศัพท์ | 6 |
 | OLTP / OLAP | OLTP / OLAP | ทับศัพท์ · อธิบายเต็มครั้งแรก | 6 |
 | Parquet | Parquet | ทับศัพท์ (ชื่อรูปแบบไฟล์) | 6 |
+| CTE (Common Table Expression) | CTE | ทับศัพท์ · อธิบายเต็มครั้งแรก | 7 |
