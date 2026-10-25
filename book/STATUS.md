@@ -31,7 +31,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 14 | `chapters/14-time-series.qmd` | `book/ch14-time-series` | agent:claude | | drafting | 2026-10-25 | 11 |
 | 15 | `chapters/15-multivariate.qmd` | `book/ch15-multivariate` | agent:claude | | drafting | 2026-10-25 | 12 |
 | 16 | `chapters/16-synthetic-privacy.qmd` | `book/ch16-synthetic-privacy` | agent:claude | | drafting | 2026-10-25 | 12 |
-| 17 | `chapters/17-spatial-data.qmd` | `book/ch17-spatial-data` | | | todo | | 13 |
+| 17 | `chapters/17-spatial-data.qmd` | `book/ch17-spatial-data` | agent:claude | | drafting | 2026-10-25 | 13 |
 | 18 | `chapters/18-hierarchical-data.qmd` | `book/ch18-hierarchical-data` | | | todo | | 13 |
 | 19 | `chapters/19-storytelling-reports.qmd` | `book/ch19-storytelling-reports` | | | todo | | 14 |
 | 20 | `chapters/20-dashboards.qmd` | `book/ch20-dashboards` | | | todo | | 14 |
