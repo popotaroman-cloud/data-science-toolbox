@@ -1,6 +1,5 @@
 ---
 # ===== คัดลอกไฟล์นี้ไปเป็น book/chapters/NN-slug.qmd แล้วแก้ทุกบรรทัดที่มี <...> =====
-title: "<ชื่อบทตาม toc.md โดยไม่ใส่คำว่า บทที่ และไม่ใส่เลข>"
 chapter: <NN>                     # เลขบท 0–22
 part: "<ส่วนที่ X ชื่อส่วน>"
 weeks: [<W>]                      # สัปดาห์ในแผนการสอนที่บทนี้ขยายความ เว้น [] ถ้าไม่มี
@@ -10,6 +9,8 @@ authors: ["<ชื่อผู้เขียน หรือ agent:ชื่อ
 status: drafting                  # drafting | review | revising | done
 last-verified: "<YYYY-MM>"        # เดือนที่ตรวจโค้ดและข้อเท็จจริงล่าสุด
 ---
+
+# <ชื่อบทตาม toc.md โดยไม่ใส่คำว่า บทที่ และไม่ใส่เลข> {#sec-ch<NN>}
 
 <!--
 อ่าน book/AUTHORING.md ก่อนเขียน
@@ -80,7 +81,7 @@ con = duckdb.connect("data/pm25.duckdb", read_only=True)
 
 8. <...>
 
-แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ในภาคผนวก ช (@sec-appg-ch<NN>)
+แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน[ภาคผนวก ช](../appendices/g-answers.qmd#sec-appg-ch<NN>)
 
 ## อ่านเพิ่มเติม {.unnumbered}
 
