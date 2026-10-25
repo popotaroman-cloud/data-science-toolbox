@@ -176,3 +176,70 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 
 | English | เสนอให้ใช้ | รูปแบบ | เสนอโดย (บท) |
 |---|---|---|---|
+| Trace (Plotly) | trace | ทับศัพท์ | 12 |
+| Linked views | linked views | ทับศัพท์ | 12 |
+| Brushing | brushing | ทับศัพท์ | 12 |
+| Binning | binning | ทับศัพท์ | 12 |
+| Accessibility | การเข้าถึงได้ (accessibility) | แปล | 12 |
+| Alt text | ข้อความทางเลือก (alt text) | แปล | 12 |
+| Median absolute deviation (MAD) | MAD | ทับศัพท์ · อธิบายเต็มครั้งแรก | 13 |
+| Geometric mean | ค่าเฉลี่ยเรขาคณิต | ไทย | 13 |
+| Effective sample size | ขนาดตัวอย่างที่มีผล (effective sample size) | แปล | 13 |
+| Breakdown point | breakdown point | ทับศัพท์ | 13 |
+| Simpson's paradox | Simpson's paradox | ทับศัพท์ | 13 |
+| Ecological fallacy | ecological fallacy | ทับศัพท์ | 13 |
+| ECDF | ECDF | ทับศัพท์ · อธิบายเต็มครั้งแรก | 13 |
+| Residual (time series) | ส่วนเหลือ (residual) | แปล | 14 |
+| Smoothing | การปรับให้เรียบ (smoothing) | แปล | 14 |
+| Change point | จุดเปลี่ยน (change point) | แปล | 14 |
+| ASOF join | ASOF join | ทับศัพท์ | 14 |
+| Full grid | full grid | ทับศัพท์ | 14 |
+| Loading | loading | ทับศัพท์ | 15 |
+| Explained variance ratio | สัดส่วนความแปรปรวนที่อธิบายได้ (explained variance ratio) | แปล | 15 |
+| Silhouette | silhouette | ทับศัพท์ | 15 |
+| Dendrogram | dendrogram | ทับศัพท์ | 15 |
+| Adjusted Rand index (ARI) | adjusted Rand index (ARI) | ทับศัพท์ | 15 |
+| Mahalanobis distance | ระยะทาง Mahalanobis | ไทย | 15 |
+| Isolation Forest / LOF | Isolation Forest / LOF | ทับศัพท์ | 15 |
+| Quasi-identifier | ตัวระบุทางอ้อม (quasi-identifier) | แปล | 16 |
+| Data controller / processor | ผู้ควบคุมข้อมูลส่วนบุคคล / ผู้ประมวลผลข้อมูลส่วนบุคคล | ไทย (ตาม พ.ร.บ.) | 16 |
+| k-anonymity / l-diversity | k-anonymity / l-diversity | ทับศัพท์ | 16 |
+| Privacy budget (ε) | งบประมาณความเป็นส่วนตัว (privacy budget) | แปล | 16 |
+| Gaussian copula | Gaussian copula | ทับศัพท์ | 16 |
+| Class imbalance | ข้อมูลไม่สมดุล (class imbalance) | แปล | 16 |
+| Data leakage | การรั่วไหลของข้อมูล (data leakage) | แปล | 16 |
+| Datum / ellipsoid / geoid | datum / ellipsoid / geoid | ทับศัพท์ | 17 |
+| Spatial autocorrelation | สหสัมพันธ์เชิงพื้นที่ (spatial autocorrelation) | แปล | 17 |
+| MAUP | MAUP | ทับศัพท์ · อธิบายเต็มครั้งแรก | 17 |
+| Voronoi polygon | Voronoi polygon | ทับศัพท์ | 17 |
+| Spatial interpolation | การประมาณค่าเชิงพื้นที่ (spatial interpolation) | แปล | 17 |
+| IDW / kriging / semivariogram | IDW / kriging / semivariogram | ทับศัพท์ | 17 |
+| Hierarchy | ลำดับชั้น | ไทย | 18 |
+| Additive / semi-additive measure | ตัวชี้วัดที่รวมขึ้นได้ / รวมขึ้นได้บางส่วน | แปล | 18 |
+| Roll-up / slice / dice | roll-up / slice / dice | ทับศัพท์ | 18 |
+| OLAP / data cube | OLAP / data cube | ทับศัพท์ | 18 |
+| Treemap / sunburst / icicle | treemap / sunburst / icicle | ทับศัพท์ | 18 |
+| Breadcrumb | แถบเส้นทาง (breadcrumb) | แปล | 18 |
+| Finding first / pyramid principle | ข้อค้นพบก่อน / หลักการพีระมิด | แปล | 19 |
+| Big idea | big idea | ทับศัพท์ | 19 |
+| Martini glass structure | โครงสร้างแก้วมาร์ตินี (martini glass) | แปล | 19 |
+| Inline code (Quarto) | inline code | ทับศัพท์ | 19 |
+| Parameterized report | รายงานแบบมีพารามิเตอร์ (parameterized report) | แปล | 19 |
+| Replicability | การทำซ้ำผลได้ (replicability) | แปล | 19 |
+| Fresh-clone test | fresh-clone test | ทับศัพท์ | 19 |
+| Sensitivity analysis | การวิเคราะห์ความไว (sensitivity analysis) | แปล | 19 |
+| Operational / analytical / strategic dashboard | แดชบอร์ดเชิงปฏิบัติการ / เชิงวิเคราะห์ / เชิงกลยุทธ์ | แปล | 20 |
+| KPI | ตัวชี้วัดหลัก (KPI) | แปล | 20 |
+| Session state / callback / rerun | session state / callback / rerun | ทับศัพท์ | 20 |
+| Deploy | deploy | ทับศัพท์ | 20 |
+| Business intelligence (BI) | business intelligence (BI) | ทับศัพท์ | 20 |
+| Architecture decision record (ADR) | บันทึกการตัดสินใจออกแบบ (ADR) | แปล | 21 |
+| Data lineage | ลำดับวงศ์ของข้อมูล (data lineage) | แปล | 21 |
+| Data ethics | จริยธรรมข้อมูล | ไทย | 22 |
+| Bias | อคติ (bias) | แปล | 22 |
+| Automation bias | การเชื่อระบบอัตโนมัติ (automation bias) | แปล | 22 |
+| Hallucination | hallucination | ทับศัพท์ | 22 |
+| License | สัญญาอนุญาต (license) | แปล | 22 |
+| Copyleft / permissive | copyleft / permissive | ทับศัพท์ | 22 |
+| Questionable research practices | แนวปฏิบัติการวิจัยที่น่าสงสัย | แปล | 22 |
+| Environmental justice | ความยุติธรรมเชิงสิ่งแวดล้อม (environmental justice) | แปล | 22 |
