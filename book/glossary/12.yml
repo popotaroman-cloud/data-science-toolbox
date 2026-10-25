@@ -1,0 +1,55 @@
+- term: Grammar of graphics
+  th: grammar of graphics
+  definition: >
+    แนวคิดของ Wilkinson ที่มองกราฟทุกภาพว่าประกอบจากข้อมูล การจับคู่ เครื่องหมาย
+    การแปลงทางสถิติ สเกล ระบบพิกัด และ facet เป็นฐานของ ggplot2, seaborn objects และ Altair
+  section: sec-ch12-grammar
+  see_also: [Aesthetic mapping, Facet / small multiples]
+
+- term: Aesthetic mapping
+  th: การจับคู่ตัวแปรกับคุณลักษณะภาพ
+  definition: >
+    การกำหนดว่าตัวแปรใดในข้อมูลแสดงด้วยคุณลักษณะทางภาพใด เช่น ตำแหน่ง x สี หรือขนาด
+    ต้องใช้ข้อมูลในรูป tidy
+  section: sec-ch12-grammar
+  see_also: [Grammar of graphics, Encoding (visual), Tidy data]
+
+- term: Trace (Plotly)
+  th: trace
+  definition: >
+    ชุดข้อมูลหนึ่งชุดที่วาดด้วยเครื่องหมายหนึ่งแบบใน figure ของ Plotly
+    figure ประกอบด้วยรายการ trace (data) และ layout
+  section: sec-ch12-plotly
+  see_also: [Interactive]
+
+- term: Interactive
+  th: เชิงโต้ตอบ
+  definition: >
+    กราฟที่ผู้อ่านเปลี่ยนมุมมองได้ เช่น ชี้ดูรายละเอียด ซูม กรอง หรือเลือก
+    ควรออกแบบตามลำดับ overview first, zoom and filter, details on demand
+  section: sec-ch12-shneiderman
+  see_also: [Linked views / brushing, Visualization]
+
+- term: Linked views / brushing
+  th: linked views / brushing
+  definition: >
+    การแสดงข้อมูลชุดเดียวกันในหลายกราฟที่เชื่อมกัน การเลือกในกราฟหนึ่ง
+    เช่น การลากกรอบเลือก (brushing) จะกรองหรือเน้นข้อมูลในกราฟอื่น
+  section: sec-ch12-linked
+  see_also: [Interactive]
+
+- term: Datashader
+  th: Datashader
+  definition: >
+    ไลบรารีที่แสดงข้อมูลจุดจำนวนมหาศาลด้วยการนับจำนวนจุดต่อพิกเซลแล้วแปลงเป็นสี
+    แก้ทั้งปัญหา overplotting และขนาดข้อมูลที่ส่งไปยังเบราว์เซอร์
+  section: sec-ch12-big-data
+  see_also: [Overplotting]
+
+- term: Accessibility
+  th: การเข้าถึงได้
+  definition: >
+    การออกแบบให้ผู้อ่านทุกกลุ่ม รวมถึงผู้พิการทางการเห็นและผู้มีภาวะตาบอดสี เข้าถึงเนื้อหาได้
+    สำหรับกราฟได้แก่ alt text ที่บอกข้อค้นพบ ตารางข้อมูลประกอบ และการไม่พึ่งสีอย่างเดียว
+  section: sec-ch12-accessibility
+  see_also: [Visualization]

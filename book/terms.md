@@ -185,3 +185,6 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Lie factor | lie factor | ทับศัพท์ (ศัพท์ของ Tufte) | 11 |
 | Data-ink ratio | อัตราส่วนหมึกข้อมูล (data-ink ratio) | แปล | 11 |
 | Annotation | คำอธิบายประกอบ (annotation) | แปล | 11 |
+| Linked views / brushing | linked views / brushing | ทับศัพท์ | 12 |
+| Accessibility | การเข้าถึงได้ (accessibility) | แปล | 12 |
+| Trace (Plotly) | trace | ทับศัพท์ (ศัพท์ของ Plotly) | 12 |
