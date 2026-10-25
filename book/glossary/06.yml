@@ -21,14 +21,14 @@
   section: sec-ch06-relational
   see_also: [Idempotent]
 
-- term: Normalization
+- term: Normalization / denormalization
   th: normalization
   definition: >
     การแยกตารางเพื่อให้ข้อเท็จจริงแต่ละข้อถูกเก็บไว้ที่เดียว ป้องกันข้อมูลขัดแย้งเมื่อแก้ไข
     ตรงข้ามกับ denormalization ที่เก็บซ้ำอย่างตั้งใจเพื่อให้อ่านเร็วขึ้น
   section: sec-ch06-normalization
 
-- term: OLAP
+- term: OLTP / OLAP
   th: OLAP
   definition: >
     Online Analytical Processing งานวิเคราะห์ที่อ่านไม่กี่คอลัมน์จากแถวจำนวนมาก
@@ -41,7 +41,7 @@
     การเรียงค่าในตารางทีละคอลัมน์ ทำให้อ่านเฉพาะคอลัมน์ที่ต้องการได้และบีบอัดได้ดี
     เหมาะกับงาน OLAP ใช้ใน DuckDB, Parquet และ Arrow
   section: sec-ch06-row-column
-  see_also: [OLAP, Parquet]
+  see_also: [OLTP / OLAP, Parquet]
 
 - term: Parquet
   th: Parquet
