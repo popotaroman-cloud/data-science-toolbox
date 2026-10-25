@@ -219,3 +219,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Session state / callback | session state / callback | ทับศัพท์ (ศัพท์ของ Streamlit) | 20 |
 | SQL injection | SQL injection | ทับศัพท์ | 20 |
 | Breadcrumb | breadcrumb | ทับศัพท์ | 20 |
+| Architecture decision record (ADR) | บันทึกการตัดสินใจออกแบบ (ADR) | แปล | 21 |
+| Sensitivity analysis | การวิเคราะห์ความไว (sensitivity analysis) | แปล | 21 |
+| Cluster bootstrap | cluster bootstrap | ทับศัพท์ | 21 |
+| Fresh-clone test | fresh-clone test | ทับศัพท์ | 21 |
