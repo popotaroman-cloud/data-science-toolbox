@@ -1,0 +1,9 @@
+---
+status: todo
+---
+
+# ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย {.unnumbered}
+
+::: {.callout-warning}
+ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

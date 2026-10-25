@@ -1,0 +1,9 @@
+---
+status: todo
+---
+
+# ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล {.unnumbered}
+
+::: {.callout-warning}
+ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

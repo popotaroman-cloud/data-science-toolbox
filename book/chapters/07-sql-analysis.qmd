@@ -1,0 +1,9 @@
+---
+title: "SQL เพื่อการวิเคราะห์"
+chapter: 7
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

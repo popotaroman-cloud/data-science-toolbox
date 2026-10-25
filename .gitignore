@@ -26,3 +26,6 @@ Thumbs.db
 
 # internal course documents (not published)
 *.docx
+
+# book build output
+book/_book/

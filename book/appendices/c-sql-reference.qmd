@@ -1,0 +1,9 @@
+---
+status: todo
+---
+
+# ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB) {.unnumbered}
+
+::: {.callout-warning}
+ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

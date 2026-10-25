@@ -1,0 +1,9 @@
+---
+title: "สภาพแวดล้อมการทำงานที่ทำซ้ำได้"
+chapter: 2
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

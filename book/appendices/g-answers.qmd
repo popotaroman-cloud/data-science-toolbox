@@ -1,0 +1,53 @@
+---
+status: todo
+---
+
+# ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก {.unnumbered}
+
+แนวคำตอบของแบบฝึกหัดระดับพื้นฐานและประยุกต์ ส่วนระดับท้าทายเว้นไว้ให้ผู้อ่านคิดเอง
+
+{{< include answers/00.qmd >}}
+
+{{< include answers/01.qmd >}}
+
+{{< include answers/02.qmd >}}
+
+{{< include answers/03.qmd >}}
+
+{{< include answers/04.qmd >}}
+
+{{< include answers/05.qmd >}}
+
+{{< include answers/06.qmd >}}
+
+{{< include answers/07.qmd >}}
+
+{{< include answers/08.qmd >}}
+
+{{< include answers/09.qmd >}}
+
+{{< include answers/10.qmd >}}
+
+{{< include answers/11.qmd >}}
+
+{{< include answers/12.qmd >}}
+
+{{< include answers/13.qmd >}}
+
+{{< include answers/14.qmd >}}
+
+{{< include answers/15.qmd >}}
+
+{{< include answers/16.qmd >}}
+
+{{< include answers/17.qmd >}}
+
+{{< include answers/18.qmd >}}
+
+{{< include answers/19.qmd >}}
+
+{{< include answers/20.qmd >}}
+
+{{< include answers/21.qmd >}}
+
+{{< include answers/22.qmd >}}

@@ -1,0 +1,9 @@
+---
+title: "การได้มาซึ่งข้อมูลจาก API และเว็บไซต์"
+chapter: 5
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

@@ -1,0 +1,9 @@
+---
+title: "จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ"
+chapter: 22
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

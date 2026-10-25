@@ -1,0 +1,9 @@
+---
+title: "คุณภาพข้อมูลและการตรวจสอบ"
+chapter: 9
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

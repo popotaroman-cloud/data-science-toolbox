@@ -1,0 +1,9 @@
+---
+title: "วิทยาการข้อมูลและการสำรวจข้อมูล"
+chapter: 1
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

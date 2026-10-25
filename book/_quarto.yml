@@ -1,0 +1,96 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "ชุดเครื่องมือสำหรับวิทยาการข้อมูล"
+  subtitle: "การสำรวจข้อมูลเชิงลึกด้วย Python และ SQL ตั้งแต่แหล่งข้อมูลถึงแดชบอร์ด"
+  author: "วาโย ปุยะติ"
+  repo-url: https://github.com/popotaroman-cloud/data-science-toolbox
+  chapters:
+    - index.qmd
+    - chapters/00-overview.qmd
+    - part: "ส่วนที่ 1 รากฐาน"
+      chapters:
+        - chapters/01-data-science-eda.qmd
+        - chapters/02-reproducible-environment.qmd
+        - chapters/03-version-control.qmd
+        - chapters/04-questions-hypotheses.qmd
+    - part: "ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล"
+      chapters:
+        - chapters/05-data-acquisition.qmd
+        - chapters/06-analytical-databases.qmd
+        - chapters/07-sql-analysis.qmd
+        - chapters/08-data-wrangling.qmd
+    - part: "ส่วนที่ 3 คุณภาพข้อมูล"
+      chapters:
+        - chapters/09-data-quality.qmd
+        - chapters/10-missing-data.qmd
+    - part: "ส่วนที่ 4 การสำรวจด้วยภาพ"
+      chapters:
+        - chapters/11-visual-perception.qmd
+        - chapters/12-interactive-viz.qmd
+    - part: "ส่วนที่ 5 สถิติและการสำรวจหลายมิติ"
+      chapters:
+        - chapters/13-exploratory-statistics.qmd
+        - chapters/14-time-series.qmd
+        - chapters/15-multivariate.qmd
+        - chapters/16-synthetic-privacy.qmd
+    - part: "ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร"
+      chapters:
+        - chapters/17-spatial-data.qmd
+        - chapters/18-hierarchical-data.qmd
+        - chapters/19-storytelling-reports.qmd
+        - chapters/20-dashboards.qmd
+    - part: "ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ"
+      chapters:
+        - chapters/21-case-study-pm25.qmd
+        - chapters/22-ethics-ai.qmd
+  appendices:
+    - appendices/a-python.qmd
+    - appendices/b-shell-git.qmd
+    - appendices/c-sql-reference.qmd
+    - appendices/d-air4thai-open-data.qmd
+    - appendices/e-math.qmd
+    - appendices/f-troubleshooting.qmd
+    - appendices/g-answers.qmd
+    - appendices/h-toolbox-reference.qmd
+    - glossary.qmd
+    - references.qmd
+
+bibliography:
+  - refs/00.bib
+  - refs/01.bib
+  - refs/02.bib
+  - refs/03.bib
+  - refs/04.bib
+  - refs/05.bib
+  - refs/06.bib
+  - refs/07.bib
+  - refs/08.bib
+  - refs/09.bib
+  - refs/10.bib
+  - refs/11.bib
+  - refs/12.bib
+  - refs/13.bib
+  - refs/14.bib
+  - refs/15.bib
+  - refs/16.bib
+  - refs/17.bib
+  - refs/18.bib
+  - refs/19.bib
+  - refs/20.bib
+  - refs/21.bib
+  - refs/22.bib
+  - refs/appendix.bib
+
+format:
+  html:
+    theme: cosmo
+    lang: th
+    mainfont: "Sarabun, sans-serif"
+    number-sections: true
+    number-depth: 2
+    code-copy: true
+    crossref:
+      chapters: true

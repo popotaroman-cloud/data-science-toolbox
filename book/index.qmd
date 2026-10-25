@@ -1,0 +1,5 @@
+# คำนำ {.unnumbered}
+
+::: {.callout-warning}
+ส่วนนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

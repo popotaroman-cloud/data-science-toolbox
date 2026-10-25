@@ -1,0 +1,9 @@
+---
+title: "การสำรวจข้อมูลหลายมิติ"
+chapter: 15
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::

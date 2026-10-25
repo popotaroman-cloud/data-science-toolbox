@@ -1,0 +1,9 @@
+---
+title: "การจัดการและแปลงรูปข้อมูล"
+chapter: 8
+status: todo
+---
+
+::: {.callout-warning}
+บทนี้ยังไม่ได้เขียน (ดู STATUS.md)
+:::
