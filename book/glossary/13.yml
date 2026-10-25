@@ -1,0 +1,91 @@
+- term: Distribution
+  th: การแจกแจง
+  definition: >
+    รูปแบบที่บอกว่าค่าแต่ละระดับของตัวแปรเกิดบ่อยแค่ไหน ดูได้ด้วย histogram, KDE หรือ ECDF
+  section: sec-ch13-distribution
+- term: Skewness
+  th: ความเบ้
+  definition: >
+    ค่าที่วัดความไม่สมมาตรของการแจกแจง ค่าบวกแปลว่ามีหางยาวไปทางขวา เช่น PM2.5
+    ที่มีวันฝุ่นหนักจำนวนน้อย
+  section: sec-ch13-distribution
+- term: Robust statistics
+  th: สถิติแบบทนทาน
+  definition: >
+    สถิติที่ไม่ไวต่อค่าสุดขั้วจำนวนน้อย เช่น มัธยฐาน IQR และ MAD วัดด้วย breakdown point
+    คือสัดส่วนข้อมูลที่ต้องเสียก่อนสถิติจะใช้ไม่ได้
+  section: sec-ch13-robust
+  see_also: [Median absolute deviation, Interquartile range (IQR)]
+- term: Interquartile range (IQR)
+  th: พิสัยระหว่างควอร์ไทล์
+  definition: >
+    ผลต่างระหว่างควอร์ไทล์ที่ 3 กับควอร์ไทล์ที่ 1 ครอบคลุมครึ่งกลางของข้อมูล
+    ใช้วัดการกระจายของข้อมูลเบ้
+  section: sec-ch13-robust
+- term: Median absolute deviation
+  th: MAD
+  definition: >
+    มัธยฐานของระยะห่างระหว่างแต่ละค่ากับมัธยฐาน คูณ 1.4826 เพื่อให้เทียบได้กับส่วนเบี่ยงเบนมาตรฐาน
+    เมื่อข้อมูลแจกแจงปกติ
+  section: sec-ch13-robust
+- term: Geometric mean
+  th: ค่าเฉลี่ยเรขาคณิต
+  definition: >
+    exp ของค่าเฉลี่ยของ log ใช้กับข้อมูลเบ้ขวาและกระบวนการแบบคูณ ต่ำกว่าค่าเฉลี่ยเลขคณิตเสมอ
+    จึงห้ามนำไปเทียบกับมาตรฐานที่นิยามบนค่าเฉลี่ยเลขคณิต
+  section: sec-ch13-transform
+- term: Confidence interval
+  th: ช่วงความเชื่อมั่น
+  definition: >
+    ช่วงค่าที่คำนวณจากตัวอย่าง ซึ่งถ้าทำซ้ำกระบวนการหลายครั้ง ช่วงจะครอบค่าจริงในสัดส่วนที่กำหนด
+    เช่น 95%
+  section: sec-ch13-ci
+- term: Effective sample size
+  th: ขนาดตัวอย่างที่มีผล
+  definition: >
+    จำนวนค่าที่เป็นอิสระเทียบเท่า เมื่อข้อมูลมี autocorrelation จะน้อยกว่าจำนวนแถวมาก
+    ทำให้ความคลาดเคลื่อนมาตรฐานจากสูตรปกติแคบเกินจริง
+  section: sec-ch13-ci
+  see_also: [Autocorrelation]
+- term: p-value
+  th: p-value
+  definition: >
+    ความน่าจะเป็นที่จะได้ผลสุดขั้วเท่ากับหรือมากกว่าที่สังเกตได้ ถ้าสมมติฐานว่างและสมมติฐานทุกข้อของแบบจำลองเป็นจริง
+    ไม่ใช่ความน่าจะเป็นที่สมมติฐานเป็นจริง
+  section: sec-ch13-tests
+- term: Effect size
+  th: ขนาดอิทธิพล
+  definition: >
+    ตัวเลขที่บอกว่าผลต่างหรือความสัมพันธ์ใหญ่แค่ไหน เช่น อัตราส่วนค่าเฉลี่ยเรขาคณิต Cohen's d หรือ CLES
+    ควรรายงานพร้อมช่วงความเชื่อมั่นคู่กับ p-value
+  section: sec-ch13-effect-size
+- term: Bootstrap
+  th: bootstrap
+  definition: >
+    วิธีประมาณความไม่แน่นอนด้วยการสุ่มแบบใส่คืนจากตัวอย่างซ้ำหลายพันครั้ง
+    ต้องสุ่มที่ระดับหน่วยที่เป็นอิสระต่อกัน
+  section: sec-ch13-resampling
+  see_also: [Permutation test]
+- term: Permutation test
+  th: permutation test
+  definition: >
+    การทดสอบที่สร้างการแจกแจงของสถิติทดสอบภายใต้สมมติฐานว่างด้วยการสลับป้ายกลุ่มแบบสุ่ม
+    ใช้ได้กับสถิติทุกตัวเมื่อหน่วยแลกเปลี่ยนกันได้
+  section: sec-ch13-resampling
+- term: Multiple comparisons
+  th: การเปรียบเทียบหลายครั้ง
+  definition: >
+    ปัญหาที่ผลบวกลวงสะสมเมื่อทดสอบหลายสมมติฐาน แก้ด้วยการปรับ p-value แบบ Holm (คุม FWER)
+    หรือ Benjamini–Hochberg (คุม FDR)
+  section: sec-ch13-multiple
+- term: Simpson's paradox
+  th: Simpson's paradox
+  definition: >
+    สถานการณ์ที่ความสัมพันธ์ในทุกกลุ่มย่อยมีทิศทางหนึ่ง แต่เมื่อรวมกลุ่มแล้วกลับทิศ
+    มักเกิดจากองค์ประกอบของกลุ่มที่เปลี่ยนไป เช่น การเพิ่มสถานี
+  section: sec-ch13-correlation
+- term: Ecological fallacy
+  th: ecological fallacy
+  definition: >
+    การนำความสัมพันธ์ที่พบในระดับกลุ่ม เช่น จังหวัด ไปสรุปเป็นความสัมพันธ์ในระดับบุคคล
+  section: sec-ch13-correlation
