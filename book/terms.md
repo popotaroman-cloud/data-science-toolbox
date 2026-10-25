@@ -215,3 +215,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Inline code | inline code | ทับศัพท์ | 19 |
 | Parameterized report | รายงานแบบมีพารามิเตอร์ | แปล | 19 |
 | Render | render | ทับศัพท์ | 19 |
+| Key performance indicator (KPI) | ตัวชี้วัดหลัก (KPI) | แปล · ใช้ KPI ได้หลังครั้งแรก | 20 |
+| Session state / callback | session state / callback | ทับศัพท์ (ศัพท์ของ Streamlit) | 20 |
+| SQL injection | SQL injection | ทับศัพท์ | 20 |
+| Breadcrumb | breadcrumb | ทับศัพท์ | 20 |

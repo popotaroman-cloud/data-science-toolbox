@@ -1,3 +1,41 @@
 ## บทที่ 20 {#sec-appg-ch20 .unnumbered}
 
-<!-- ผู้เขียนบทที่ 20 เขียนแนวคำตอบที่นี่ ใช้เลขข้อเดียวกับในบท เช่น **20.1** -->
+**20.1** (ก) เชิงปฏิบัติการ ตัวชี้วัดหลัก: จำนวนสถานีที่ค่าล่าสุดเกินเกณฑ์เตือนภัย (ข) เชิงกลยุทธ์ ตัวชี้วัดหลัก: จำนวนวันเกินมาตรฐานรายปีเทียบกับเป้าหมายของแผน (ค) เชิงวิเคราะห์ ตัวชี้วัดหลัก: สัดส่วนวันเกินมาตรฐานแยกตามเดือนและพื้นที่ที่เลือกได้
+
+**20.2** เมื่อผู้ใช้เลือกภาค เบราว์เซอร์ส่งค่าใหม่ของ selectbox ไปยังเซิร์ฟเวอร์ Streamlit เรียก callback `drill` ก่อน ซึ่งบันทึกภาคลงใน `st.session_state["region"]` และล้างค่าของ selectbox จากนั้น rerun script ทั้งไฟล์ตั้งแต่บรรทัดแรก รอบนี้ `region` ไม่ใช่ค่าว่าง เงื่อนไข `WHERE` จึงมี `s.region = ?` และ `depth` เท่ากับ 1 ตัวชี้วัดคำนวณเฉพาะภาคนั้น (ผลของ query ที่เคยรันแล้วมาจาก cache) breadcrumb แสดงปุ่มของภาค และ bar chart กับ selectbox แสดงจังหวัดในภาคนั้น
+
+**20.3** `cache_data` คืน *สำเนา* ของค่าที่เก็บไว้ทุกครั้ง ซึ่งต้อง serialize ค่านั้นได้ การเชื่อมต่อฐานข้อมูลเป็นทรัพยากรที่มีสถานะ คัดลอกไม่ได้ และควรมีเพียงตัวเดียวที่ใช้ร่วมกันทุก session `cache_resource` คืนวัตถุเดิมตัวเดียวกันทุกครั้ง จึงเหมาะกว่า
+
+**20.4** ปัญหาคือ (1) SQL injection ถ้าค่า `province` มาจากผู้ใช้ (2) ชื่อที่มีเครื่องหมายคำพูดจะทำให้ SQL ผิดรูป (3) query กับ cache ใช้สตริง SQL ที่ต่างกันทุกจังหวัด ซึ่งยังทำงานได้แต่ไม่จำเป็น ควรเขียนเป็น `query("SELECT * FROM stations WHERE province = ?", (province,))`
+
+**20.5** ฟังก์ชันอ่าน `st.session_state.region` ภายใน แต่ไม่มีอาร์กิวเมนต์ กุญแจของ cache จึงเหมือนกันทุกครั้ง ผู้ใช้คนแรกที่เรียกจะทำให้ผลของภาคที่ตนเลือกถูกเก็บไว้ และผู้ใช้คนอื่นที่เลือกภาคอื่นจะได้ผลของภาคแรกไปด้วย ควรรับภาคเป็นอาร์กิวเมนต์ เช่น `def region_summary(region: str)` แล้วเรียก `region_summary(ss.region)`
+
+**20.6** แนวทาง: query สัดส่วนของทั้งประเทศในช่วงวันที่เดียวกัน (เงื่อนไขเฉพาะ `d.is_complete AND d.date BETWEEN ? AND ?`) แล้วใช้ `m[2].metric(..., delta=f"{(kpi['share'] - national) * 100:+.1f} จุด", delta_color="inverse")` ตั้ง `delta_color="inverse"` เพราะค่าที่สูงขึ้นหมายถึงแย่ลง ซึ่งตรงข้ามกับค่าเริ่มต้นของ Streamlit
+
+**20.7** แนวทาง: query พิกัดและสัดส่วนของแต่ละสถานีด้วยเงื่อนไขเดียวกับระดับปัจจุบัน แล้วใช้ `px.scatter_map` (Plotly รุ่นใหม่) หรือ `px.scatter_mapbox` (รุ่นเก่า) โดยให้ `color="share"` และ `hover_data=["n_days"]` ถ้าใช้ Folium ให้แสดงด้วย `streamlit-folium` หรือ `st.components.v1.html` และ cache การสร้างแผนที่ตามพารามิเตอร์
+
+**20.8** แนวทาง: เพิ่ม `months = st.sidebar.multiselect("เดือน", list(range(1, 13)), default=list(range(1, 13)))` แล้วเพิ่มเงื่อนไข `MONTH(d.date) IN (...)` โดยสร้างตัวยึดตำแหน่งตามจำนวนเดือน เช่น `"MONTH(d.date) IN (" + ", ".join("?" * len(months)) + ")"` และเพิ่มค่าลงใน `params` ต้องจัดการกรณีที่ไม่เลือกเดือนใดเลยด้วย `st.stop()` พร้อมข้อความ
+
+**20.9** แนวทาง: selectbox ของสถานีมี `format_func` จึงต้องส่ง *รหัสสถานี* ให้ `select` ไม่ใช่ชื่อที่แสดง จึง query รหัสสถานีจากฐานข้อมูลก่อน
+
+```python
+import duckdb
+
+DB = str(Path(__file__).resolve().parents[1] / "data" / "pm25.duckdb")
+
+
+def test_drill_down_to_station():
+    at = AppTest.from_file(APP, default_timeout=60).run()
+    at.selectbox[0].select(at.selectbox[0].options[0]).run()          # ภาค
+    province = at.selectbox[0].options[0]
+    at.selectbox[0].select(province).run()                            # จังหวัด
+    with duckdb.connect(DB, read_only=True) as con:
+        station = con.execute("SELECT MIN(station_id) FROM stations WHERE province = ?",
+                              [province]).fetchone()[0]
+    at.selectbox[0].select(station).run()                             # สถานี
+    assert not at.exception
+    assert at.session_state["station"] == station
+    assert len(at.dataframe) == 1                                     # ตารางธงค่าผิดปกติ
+```
+
+**20.10** คำตอบขึ้นกับเครื่องมือที่เลือก ตัวเลขควรตรงกันถ้าเครื่องมือ BI ใช้ข้อมูลที่กรอง `is_complete` แล้ว และคำนวณสัดส่วนจากจำนวนนับ ไม่ใช่ค่าเฉลี่ยของค่าเฉลี่ย ถ้าไม่ตรงกัน ให้ตรวจนิยามของการรวมข้อมูลตามบทที่ 18 ก่อน
