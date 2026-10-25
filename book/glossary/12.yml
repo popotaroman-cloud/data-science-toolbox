@@ -1,0 +1,53 @@
+- term: Grammar of graphics
+  th: grammar of graphics
+  definition: >
+    แนวคิดที่มองกราฟทุกชนิดว่าประกอบจากองค์ประกอบชุดเดียวกัน ได้แก่ data,
+    aesthetic mapping, stat, geom, scale, coordinate และ facet
+    เปลี่ยนองค์ประกอบเดียวได้กราฟใหม่
+  section: sec-ch12-grammar
+  see_also: [Aesthetic mapping]
+- term: Aesthetic mapping
+  th: การจับคู่ตัวแปรกับคุณลักษณะภาพ
+  definition: >
+    ความสัมพันธ์จากค่าในคอลัมน์ของข้อมูลไปยังค่าทางภาพ เช่น ภาค → สี หรือวันที่ → ตำแหน่งบนแกน x
+    ต่างจากการกำหนดค่าคงที่ที่ใช้ค่าเดียวกับทุกแถว
+  section: sec-ch12-grammar
+  see_also: [Grammar of graphics]
+- term: Trace
+  th: trace
+  definition: >
+    ชุดรูปทรงชนิดเดียวกันหนึ่งชุดใน Figure ของ Plotly เช่น เส้นของภาคหนึ่ง
+    Figure ประกอบด้วย list ของ trace กับ layout
+  section: sec-ch12-plotly-model
+- term: Overplotting
+  th: overplotting
+  definition: >
+    สภาพที่จุดหรือเส้นจำนวนมากทับกันจนมองไม่เห็นความหนาแน่นที่แท้จริง
+    แก้ด้วยความโปร่งใส binning การสุ่มตัวอย่าง หรือ Datashader
+  section: sec-ch12-big-data
+  see_also: [Binning]
+- term: Linked views
+  th: linked views
+  definition: >
+    กราฟหลายภาพที่แสดงข้อมูลชุดเดียวกันจากคนละมุม และเชื่อมกันด้วยการเลือก
+    เลือกรายการในภาพหนึ่งแล้วรายการเดียวกันถูกเน้นหรือกรองในภาพอื่น
+  section: sec-ch12-linked-views
+  see_also: [Brushing]
+- term: Brushing
+  th: brushing
+  definition: >
+    การลากกรอบเลือกบริเวณในกราฟหนึ่ง เพื่อเน้นหรือกรองรายการเดียวกันในกราฟอื่นที่เชื่อมกัน
+  section: sec-ch12-linked-views
+  see_also: [Linked views]
+- term: Binning
+  th: binning
+  definition: >
+    การแบ่งค่าต่อเนื่องเป็นช่วงแล้วนับหรือสรุปค่าในแต่ละช่วง ใช้ใน histogram
+    และ histogram สองมิติเพื่อลดข้อมูลก่อนวาด
+  section: sec-ch12-big-data
+- term: Alt text
+  th: ข้อความทางเลือก (alt text)
+  definition: >
+    ข้อความที่บรรยายเนื้อหาของภาพสำหรับผู้ที่มองไม่เห็นภาพ ควรบอกองค์ประกอบ สถิติสำคัญ
+    และรูปแบบที่เห็น ไม่ใช่เพียงชนิดของกราฟ
+  section: sec-ch12-accessibility
