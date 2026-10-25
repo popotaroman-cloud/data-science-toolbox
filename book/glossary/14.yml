@@ -1,0 +1,54 @@
+- term: Time series
+  th: อนุกรมเวลา
+  definition: >
+    ลำดับของค่าที่เรียงตามเวลา ค่าที่เวลาหนึ่งมักสัมพันธ์กับค่าก่อนหน้าและหลังจากนั้น
+  section: sec-ch14-components
+- term: Trend / seasonality
+  th: แนวโน้ม / ฤดูกาล
+  definition: >
+    แนวโน้มคือการเปลี่ยนระดับระยะยาวที่ช้า ฤดูกาลคือรูปแบบที่ซ้ำด้วยคาบคงที่ที่รู้ล่วงหน้า
+    เช่น รายวัน รายสัปดาห์ รายปี
+  section: sec-ch14-components
+  see_also: [Decomposition]
+- term: Stationarity
+  th: stationarity
+  definition: >
+    สมบัติของอนุกรมที่ค่าเฉลี่ย ความแปรปรวน และ autocovariance ไม่เปลี่ยนตามเวลา
+    ขึ้นกับระยะห่างเท่านั้น เป็นเงื่อนไขของการตีความ ACF และแบบจำลองหลายแบบ
+  section: sec-ch14-stationarity
+- term: Autocorrelation
+  th: สหสัมพันธ์ในตัว
+  definition: >
+    สหสัมพันธ์ระหว่างอนุกรมกับตัวเองที่เลื่อนเวลาไป k ช่วง ทำให้ข้อมูลรายวันไม่เป็นอิสระต่อกัน
+    และขนาดตัวอย่างที่มีผลน้อยกว่าจำนวนแถว
+  section: sec-ch14-acf
+  see_also: [Effective sample size, Stationarity]
+- term: Decomposition
+  th: การแยกองค์ประกอบ
+  definition: >
+    การแยกอนุกรมเวลาเป็นแนวโน้ม ฤดูกาล และส่วนเหลือ เช่น classical decomposition หรือ STL
+  section: sec-ch14-decomposition
+  see_also: [STL]
+- term: STL
+  th: STL
+  definition: >
+    Seasonal-Trend decomposition using LOESS วิธีแยกองค์ประกอบที่ให้ฤดูกาลเปลี่ยนได้ช้า ๆ
+    ไม่เสียค่าหัวท้ายอนุกรม และทนต่อค่าผิดปกติเมื่อใช้แบบ robust
+  section: sec-ch14-decomposition
+- term: LOESS
+  th: LOESS
+  definition: >
+    การปรับให้เรียบด้วยการถดถอยถ่วงน้ำหนักเฉพาะที่ ความเรียบกำหนดด้วยสัดส่วนข้อมูลที่ใช้ในแต่ละจุด
+  section: sec-ch14-smoothing
+- term: Change point
+  th: จุดเปลี่ยน
+  definition: >
+    เวลาที่สมบัติทางสถิติของอนุกรมเปลี่ยนอย่างฉับพลัน อาจเกิดจากการเปลี่ยนเครื่องมือหรือการเปลี่ยนแปลงจริง
+    ต้องยืนยันด้วยสถานีใกล้เคียงและข้อมูลเมตา
+  section: sec-ch14-change-point
+- term: ASOF join
+  th: ASOF join
+  definition: >
+    join ที่จับคู่แต่ละแถวกับแถวล่าสุดของอีกตารางที่เวลาไม่เกินเวลาของแถวนั้น
+    ใช้จัดแนวข้อมูลที่ความถี่ต่างกัน ควรกำหนดขอบเขตเวลาที่ยอมรับได้
+  section: sec-ch14-alignment

@@ -28,7 +28,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 11 | `chapters/11-visual-perception.qmd` | `book/ch11-visual-perception` | | | todo | | 9 |
 | 12 | `chapters/12-interactive-viz.qmd` | `book/ch12-interactive-viz` | agent:claude | | drafting | 2026-10-25 | 10 |
 | 13 | `chapters/13-exploratory-statistics.qmd` | `book/ch13-exploratory-statistics` | agent:claude | | drafting | 2026-10-25 | 11 |
-| 14 | `chapters/14-time-series.qmd` | `book/ch14-time-series` | | | todo | | 11 |
+| 14 | `chapters/14-time-series.qmd` | `book/ch14-time-series` | agent:claude | | drafting | 2026-10-25 | 11 |
 | 15 | `chapters/15-multivariate.qmd` | `book/ch15-multivariate` | | | todo | | 12 |
 | 16 | `chapters/16-synthetic-privacy.qmd` | `book/ch16-synthetic-privacy` | | | todo | | 12 |
 | 17 | `chapters/17-spatial-data.qmd` | `book/ch17-spatial-data` | | | todo | | 13 |
