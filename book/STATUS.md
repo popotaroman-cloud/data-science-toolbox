@@ -20,7 +20,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 3 | `chapters/03-version-control.qmd` | `book/ch03-version-control` | agent:claude | | drafting | 2026-10-25 | 1 |
 | 4 | `chapters/04-questions-hypotheses.qmd` | `book/ch04-questions-hypotheses` | agent:claude | | drafting | 2026-10-25 | 2 |
 | 5 | `chapters/05-data-acquisition.qmd` | `book/ch05-data-acquisition` | agent:claude | | drafting | 2026-10-25 | 3 |
-| 6 | `chapters/06-analytical-databases.qmd` | `book/ch06-analytical-databases` | | | todo | | 4 |
+| 6 | `chapters/06-analytical-databases.qmd` | `book/ch06-analytical-databases` | agent:claude | | drafting | 2026-10-25 | 4 |
 | 7 | `chapters/07-sql-analysis.qmd` | `book/ch07-sql-analysis` | | | todo | | 4 |
 | 8 | `chapters/08-data-wrangling.qmd` | `book/ch08-data-wrangling` | | | todo | | 5 |
 | 9 | `chapters/09-data-quality.qmd` | `book/ch09-data-quality` | | | todo | | 6 |
