@@ -187,14 +187,16 @@ flowchart LR
 
 ```python
 d["month"] = pd.to_datetime(d["date"]).dt.month
-g = d.groupby(["station_id", "month"])["pm25_mean"]
+d["log_pm25"] = np.log(d["pm25_mean"])       # สเกล log: ข้อมูลเบ้ขวา
+g = d.groupby(["station_id", "month"])["log_pm25"]
 med = g.transform("median")
 mad = g.transform(lambda s: (s - s.median()).abs().median())
-d["robust_z"] = 0.6745 * (d["pm25_mean"] - med) / mad
+d["robust_z"] = 0.6745 * (d["log_pm25"] - med) / mad
 d["is_outlier"] = d["robust_z"].abs() > 3.5
 ```
 
-- `d` มาจาก **ข้อมูลรายวันที่ทำความสะอาดแล้ว**
+- `d` มาจาก `daily_pm25_clean` **เฉพาะวันที่ `is_complete`**
+- ตัดสินเหตุผลด้วย *สถานีอื่น* ในจังหวัดเดียวกัน (ไม่นับสถานีที่ถูกติดธงเอง)
 - **ติดธง** เป็นคอลัมน์ใหม่ ไม่ลบแถว
 
 # PDPA กับโครงการข้อมูล
@@ -291,6 +293,7 @@ print(fake.name(), "|", fake.date_between(start_date="-1y", end_date="today"))
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 17](../book/chapters/17-spatial-data.html) และ [บทที่ 18](../book/chapters/18-hierarchical-data.html) ก่อนเข้าเรียน
 - สรุปลักษณะแต่ละ cluster 2–3 บรรทัด + คำถามใหม่ใน `questions.md`
 - ขอไฟล์ GeoJSON ขอบเขตจังหวัดจากผู้สอน (หรือ geoBoundaries / HDX) และอ่านสัญญาอนุญาต
 - อ่าน GeoPandas *Managing Projections* · ตรวจว่า `stations` มี `lat`, `lon` ครบ

@@ -190,7 +190,7 @@ QUALIFY ROW_NUMBER() OVER (PARTITION BY station_id, ts ORDER BY fetched_at DESC)
 ```
 
 - ตัดซ้ำในชุดใหม่ก่อน (เลือกไฟล์ที่ดึงล่าสุด)
-- DuckDB ไม่ยอมให้คำสั่งเดียว upsert key เดียวกันสองครั้ง
+- ถ้าชุดใหม่มี key ซ้ำ DuckDB 1.5 เก็บแถวแรกเงียบ ๆ (อาจเป็นค่าเก่า) จึงต้องเลือกเอง
 
 ```sql
 SELECT station_id, ts, COUNT(*) AS n
@@ -258,6 +258,7 @@ flowchart LR
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 8](../book/chapters/08-data-wrangling.html) ก่อนเข้าเรียน
 - สะสมข้อมูลต่อ: `fetch_air4thai.py` → `load_duckdb.py`
 - อ่าน Wickham (2014) *Tidy Data* ส่วนที่ 1–3: `measurements` tidy หรือไม่
 - ทบทวน pandas `groupby`, `merge`, `pd.to_datetime`

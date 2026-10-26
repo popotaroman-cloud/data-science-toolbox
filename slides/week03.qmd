@@ -258,6 +258,7 @@ flowchart LR
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 6](../book/chapters/06-analytical-databases.html) และ [บทที่ 7](../book/chapters/07-sql-analysis.html) ก่อนเข้าเรียน
 - รัน script สะสมข้อมูลต่อ (อย่างน้อย 3 ครั้ง ห่างกัน ≥ 1 ชั่วโมง)
 - ดาวน์โหลด `pm25_hourly_sample.csv` และ `stations_sample.csv`
 - ฝึก SQL `SELECT`, `WHERE`, `GROUP BY` บนเว็บ DuckDB

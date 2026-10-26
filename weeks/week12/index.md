@@ -84,6 +84,7 @@ X = StandardScaler().fit_transform(profile_filled)   # แต่ละเดื�
 **Principal Component Analysis (PCA)** หาทิศทางใหม่ (principal component, PC) ที่ข้อมูลแปรปรวนมากที่สุด PC1 อธิบายความแปรปรวนได้มากที่สุด PC2 รองลงมาและตั้งฉากกับ PC1
 
 ```python
+import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
 
@@ -184,12 +185,15 @@ KMeans *จะ* คืนกลุ่มมาให้เสมอ แม้ข
 ```python
 d = con.sql("SELECT station_id, date, pm25_mean FROM daily_pm25_clean WHERE is_complete").df()
 d["month"] = pd.to_datetime(d["date"]).dt.month
-g = d.groupby(["station_id", "month"])["pm25_mean"]
+d["log_pm25"] = np.log(d["pm25_mean"])          # สเกล log เพราะค่า PM2.5 เบ้ขวา
+g = d.groupby(["station_id", "month"])["log_pm25"]
 med = g.transform("median")
 mad = g.transform(lambda s: (s - s.median()).abs().median())
-d["robust_z"] = 0.6745 * (d["pm25_mean"] - med) / mad
+d["robust_z"] = 0.6745 * (d["log_pm25"] - med) / mad
 d["is_outlier"] = d["robust_z"].abs() > 3.5
 ```
+
+คำนวณในสเกล log เพราะในสเกลเดิม การกระจายของเดือนที่ค่าสูงกว้างกว่าเดือนที่ค่าต่ำมาก วันที่สูงผิดปกติในฤดูฝนจึงถูกมองข้าม ส่วนการตัดสินว่าธงใดเป็นความผิดพลาดหรือเหตุการณ์จริง ให้เทียบกับ *สถานีอื่น* ในจังหวัดเดียวกันในวันเดียวกัน (คู่มือปฏิบัติการขั้นที่ 5 และหนังสือบทที่ 15)
 
 ## 6. PDPA กับโครงการข้อมูล
 
