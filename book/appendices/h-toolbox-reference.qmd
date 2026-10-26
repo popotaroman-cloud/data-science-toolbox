@@ -1,9 +1,365 @@
 ---
-status: todo
+status: drafting
+authors: ["agent:claude"]
+last-verified: "2026-10"
 ---
 
 # ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว {.unnumbered}
 
-::: {.callout-warning}
-ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
-:::
+ภาคผนวกนี้มีไว้เปิดดูระหว่างทำงาน ไม่ได้มีไว้อ่านตั้งแต่ต้นจนจบ หัวข้อแรกบอกว่าเครื่องมือแต่ละตัวในเล่มใช้ทำอะไรและอธิบายไว้บทใด หัวข้อที่สองรวมคำสั่งที่ใช้บ่อยของเครื่องมือหลัก และหัวข้อสุดท้ายเป็นรายการตรวจสอบประจำแต่ละขั้นของ pipeline ตัวอย่างใน cheat sheet ใช้ตารางของโครงการ (@sec-ch00-case-main) และทดสอบกับเวอร์ชันของไลบรารีที่ใช้ในเล่มแล้ว
+
+## ซ.1 ตารางเครื่องมือทั้งหมดในเล่ม: ใช้ทำอะไร ทางเลือก และบทที่อธิบาย {#sec-apph-tools .unnumbered}
+
+### สภาพแวดล้อมและการทำงานร่วมกัน
+
+| เครื่องมือ | ใช้ทำอะไร | ทางเลือก | บท |
+|---|---|---|---|
+| conda / uv | สร้างสภาพแวดล้อม Python และ lock เวอร์ชันแพ็กเกจ | venv + pip, pixi, Poetry | 2 |
+| VS Code | แก้ไขโค้ด notebook และ debug ในที่เดียว | JupyterLab, PyCharm, Positron | 2 |
+| Jupyter | notebook สำหรับสำรวจข้อมูลแบบโต้ตอบ | Google Colab, marimo | 2 |
+| Docker / dev container ★ | บรรจุสภาพแวดล้อมทั้งระบบปฏิบัติการให้ทำซ้ำได้ | Podman | 2 |
+| Git / GitHub | จัดเวอร์ชันโค้ด ทำงานเป็นทีม และ review ผ่าน pull request | GitLab, Bitbucket | 3 |
+| nbstripout / Jupytext | ลบผลลัพธ์ของ notebook ก่อน commit และจับคู่ notebook กับไฟล์ `.py` | ReviewNB | 3 |
+| Git LFS / DVC ★ | จัดเวอร์ชันไฟล์ข้อมูลขนาดใหญ่ | lakeFS | 3 |
+| GitHub Actions ★ | รันการทดสอบและ render รายงานอัตโนมัติ | GitLab CI | 3, 19 |
+| pytest | ทดสอบฟังก์ชันและแอปอัตโนมัติ | unittest | ก, 20 |
+| ruff | ตรวจและจัดรูปแบบโค้ดตาม PEP 8 | black + flake8 | ก, 2 |
+
+: เครื่องมือด้านสภาพแวดล้อมและการทำงานร่วมกัน {#tbl-apph-env}
+
+### การได้มา จัดเก็บ และจัดการข้อมูล
+
+| เครื่องมือ | ใช้ทำอะไร | ทางเลือก | บท |
+|---|---|---|---|
+| requests | เรียก HTTP API และดาวน์โหลดไฟล์ | httpx | 5 |
+| truststore | ให้ Python ใช้ trust store ของระบบปฏิบัติการเมื่อตรวจใบรับรอง TLS | ตั้ง `REQUESTS_CA_BUNDLE` | 5 |
+| BeautifulSoup | ดึงข้อมูลจากหน้า HTML ด้วย CSS selector | lxml, Scrapy, Playwright | 5 |
+| `logging` | บันทึกการทำงานของ pipeline | loguru | 5 |
+| DuckDB | ฐานข้อมูลเชิงวิเคราะห์แบบ in-process และ SQL | SQLite, PostgreSQL | 6, 7 |
+| Parquet / Apache Arrow | รูปแบบไฟล์และรูปแบบหน่วยความจำแบบคอลัมน์ | CSV, Feather | 6 |
+| pandas | จัดการ DataFrame งานทั่วไป | Polars | 8 |
+| Polars | จัดการ DataFrame แบบ lazy และขนานกัน เร็วกับข้อมูลใหญ่ | pandas, DuckDB | 8 |
+
+: เครื่องมือด้านการได้มา จัดเก็บ และจัดการข้อมูล {#tbl-apph-data}
+
+### คุณภาพข้อมูลและข้อมูลสูญหาย
+
+| เครื่องมือ | ใช้ทำอะไร | ทางเลือก | บท |
+|---|---|---|---|
+| ydata-profiling | สร้างรายงาน profiling ของตารางอัตโนมัติ | skimpy, Sweetviz, `SUMMARIZE` ของ DuckDB | 9 |
+| pandera | กำหนดและบังคับใช้ data contract ใน pipeline | Great Expectations | 9 |
+| missingno | ดูรูปแบบการสูญหายของข้อมูล | กราฟ heatmap ที่สร้างเอง | 10 |
+| scikit-learn (`KNNImputer`, `IterativeImputer`) | เติมค่าหายด้วยหลายตัวแปร | statsmodels MICE | 10 |
+
+: เครื่องมือด้านคุณภาพข้อมูล {#tbl-apph-quality}
+
+### visualization
+
+| เครื่องมือ | ใช้ทำอะไร | ทางเลือก | บท |
+|---|---|---|---|
+| matplotlib | ฐานของกราฟแบบนิ่ง ปรับได้ทุกส่วน | — | 11 |
+| seaborn | กราฟเชิงสถิติแบบนิ่งจาก DataFrame | plotnine | 11 |
+| Plotly | กราฟโต้ตอบได้ แผนที่ treemap และแดชบอร์ด | Bokeh | 12, 17, 18 |
+| Altair | กราฟเชิงประกาศตาม grammar of graphics และ linked view | Vega-Lite โดยตรง | 12 |
+| Datashader | แสดงข้อมูลหลายล้านจุดโดยรวมเป็นภาพก่อนวาด | hexbin | 12 |
+| PyGWalker ★ | สำรวจแบบลากวางคล้าย Tableau ใน notebook | Tableau, Power BI | 12 |
+
+: เครื่องมือด้าน visualization {#tbl-apph-viz}
+
+### สถิติ หลายมิติ ข้อมูลสังเคราะห์ และข้อมูลเชิงพื้นที่
+
+| เครื่องมือ | ใช้ทำอะไร | ทางเลือก | บท |
+|---|---|---|---|
+| SciPy (`scipy.stats`) | การแจกแจง การทดสอบสมมติฐาน และ bootstrap | pingouin | 13 |
+| statsmodels | แยกองค์ประกอบอนุกรมเวลา (STL), ACF, ADF/KPSS, การปรับ p-value | — | 13, 14 |
+| ruptures | หาจุดเปลี่ยน (change point) ในอนุกรมเวลา | — | 14 |
+| scikit-learn | PCA, k-means, การปรับสเกล และตัวชี้วัดของการจัดกลุ่ม | — | 15 |
+| umap-learn | ลดมิติแบบไม่เชิงเส้นเพื่อการสำรวจ | t-SNE ใน scikit-learn | 15 |
+| Faker | สร้างข้อมูลปลอมที่ดูสมจริงสำหรับทดสอบ | Mimesis | 16 |
+| SDV | สร้างข้อมูลสังเคราะห์ที่เลียนแบบการแจกแจงของข้อมูลจริง | synthpop (R) | 16 |
+| imbalanced-learn (SMOTE) | สร้างตัวอย่างของกลุ่มที่มีน้อย | — | 16 |
+| GeoPandas | DataFrame ที่มีคอลัมน์ geometry, CRS และ spatial join | DuckDB spatial | 17 |
+| pyproj | แปลงพิกัดและคำนวณระยะ geodesic | — | 17 |
+| libpysal / esda | spatial weights และ Moran's I | — | 17 |
+| PyKrige | การประมาณค่าเชิงพื้นที่ด้วย kriging | scikit-gstat | 17 |
+| Folium | แผนที่โต้ตอบบน Leaflet | Plotly `scatter_map`, kepler.gl | 17 |
+
+: เครื่องมือด้านสถิติและการวิเคราะห์ {#tbl-apph-analysis}
+
+### การสื่อสารผล
+
+| เครื่องมือ | ใช้ทำอะไร | ทางเลือก | บท |
+|---|---|---|---|
+| Quarto | รายงาน เว็บไซต์ สไลด์ และหนังสือจากเอกสารที่มีโค้ด | R Markdown, Jupyter Book | 19 |
+| papermill | ส่งพารามิเตอร์เข้า notebook สำหรับรายงานแบบมีพารามิเตอร์ | — | 19 |
+| Streamlit | แดชบอร์ดและเว็บแอปข้อมูลด้วย Python ล้วน | Dash, Panel, Shiny for Python | 20 |
+| Power BI / Looker Studio ★ | แดชบอร์ดแบบลากวางสำหรับองค์กร | Tableau | 20 |
+
+: เครื่องมือด้านการสื่อสารผล {#tbl-apph-communication}
+
+## ซ.2 cheat sheet: pandas, Polars, Plotly, seaborn, GeoPandas, Streamlit, Quarto {#sec-apph-cheatsheet .unnumbered}
+
+ตัวอย่างในหัวข้อนี้สมมติว่ามี DataFrame `df` ที่ได้จาก `daily_pm25_clean` join กับ `stations` (มีคอลัมน์ `station_id, date, pm25_mean, pm25_max, is_complete, region, province`) และ `st` คือตาราง `stations`
+
+### pandas และ Polars
+
+| งาน | pandas | Polars |
+|---|---|---|
+| ดูภาพรวม | `df.shape`, `df.dtypes`, `df.describe()` | `df.shape`, `df.schema`, `df.describe()` |
+| นับค่าว่าง | `df.isna().sum()` | `df.null_count()` |
+| กรองแถว | `df.query("region == 'เหนือ' and pm25_mean > 37.5")` | `df.filter((pl.col("region") == "เหนือ") & (pl.col("pm25_mean") > 37.5))` |
+| เลือกคอลัมน์ | `df[["station_id", "date", "pm25_mean"]]` | `df.select("station_id", "date", "pm25_mean")` |
+| เพิ่มคอลัมน์ | `df.assign(exceed=df["pm25_mean"] > 37.5)` | `df.with_columns(exceed=pl.col("pm25_mean") > 37.5)` |
+| สรุปตามกลุ่ม | `df.groupby("region", as_index=False).agg(mean=("pm25_mean", "mean"))` | `df.group_by("region").agg(pl.col("pm25_mean").mean())` |
+| join พร้อมตรวจคีย์ | `df.merge(st, on="station_id", how="left", validate="many_to_one")` | `df.join(st, on="station_id", how="left", validate="m:1")` |
+| ยาว → กว้าง | `df.pivot_table(index="date", columns="region", values="pm25_mean")` | `df.pivot(on="region", index="date", values="pm25_mean", aggregate_function="mean")` |
+| กว้าง → ยาว | `wide.melt(id_vars="date", var_name="region", value_name="pm25")` | `wide.unpivot(index="date", variable_name="region", value_name="pm25")` |
+| moving average ต่อสถานี | `df.groupby("station_id")["pm25_mean"].transform(lambda s: s.rolling(7, min_periods=5).mean())` | `pl.col("pm25_mean").rolling_mean(7, min_samples=5).over("station_id")` |
+| เรียงและเลือก 10 อันดับ | `df.nlargest(10, "pm25_mean")` | `df.top_k(10, by="pm25_mean")` |
+| จาก/ไป DuckDB | `con.sql(q).df()` | `con.sql(q).pl()` |
+
+: คำสั่งที่ใช้บ่อยของ pandas และ Polars {#tbl-apph-pandas-polars}
+
+ข้อควรจำ pandas ต้องเรียงข้อมูลตามเวลาก่อนใช้ `rolling` หรือ `shift` และใช้ `resample` กับข้อมูลที่มี index เป็นเวลา (@sec-ch08-resample) Polars แบบ lazy (`df.lazy()` หรือ `pl.scan_parquet(...)`) จะไม่คำนวณจนกว่าจะเรียก `.collect()` ซึ่งทำให้ Polars วางแผนการทำงานทั้งหมดได้ก่อน (@sec-ch08-polars)
+
+```python
+result = (
+    pl.scan_parquet("data/processed/daily_pm25_clean.parquet")
+    .filter(pl.col("is_complete"))
+    .join(pl.scan_parquet("data/processed/stations.parquet"), on="station_id")
+    .with_columns(month=pl.col("date").dt.month(), exceed=pl.col("pm25_mean") > 37.5)
+    .group_by("region", "month")
+    .agg(pl.col("pm25_mean").mean().alias("mean"), pl.col("exceed").sum().alias("n_exceed"))
+    .sort("region", "month")
+    .collect()
+)
+```
+
+### seaborn
+
+| กราฟ | คำสั่ง |
+|---|---|
+| histogram แยกกลุ่ม | `sns.histplot(data=df, x="pm25_mean", hue="region", element="step")` |
+| ECDF | `sns.ecdfplot(data=df, x="pm25_mean", hue="region")` |
+| box plot | `sns.boxplot(data=df, x="region", y="pm25_mean")` |
+| เส้นพร้อมช่วงความเชื่อมั่น | `sns.lineplot(data=m, x="month", y="pm25_mean", hue="region", errorbar=("ci", 95))` |
+| small multiples | `sns.relplot(data=m, x="month", y="pm25_mean", col="region", col_wrap=2, kind="line")` |
+| heatmap สหสัมพันธ์ | `sns.heatmap(wide.corr(), annot=True, fmt=".2f", cmap="RdBu_r", vmin=-1, vmax=1)` |
+| เส้นมาตรฐาน | `ax.axhline(37.5, ls="--", color="gray")` |
+| บันทึกภาพ | `fig.savefig("fig.png", dpi=150, bbox_inches="tight")` |
+
+: คำสั่งที่ใช้บ่อยของ seaborn {#tbl-apph-seaborn}
+
+ก่อนวาดทุกครั้งให้เรียก `set_style()` ของโครงการเพื่อตั้งฟอนต์ไทย (@sec-ch11-thai-fonts) ฟังก์ชันระดับ figure เช่น `relplot` และ `displot` สร้าง figure ใหม่เอง จึงไม่รับอาร์กิวเมนต์ `ax=` ส่วนฟังก์ชันระดับ axes เช่น `histplot` และ `boxplot` วาดลง `ax` ที่ส่งเข้าไปได้
+
+### Plotly
+
+| กราฟ | คำสั่ง (`import plotly.express as px`) |
+|---|---|
+| เส้น | `px.line(monthly, x="month", y="pm25", color="region")` |
+| small multiples | `px.line(monthly, x="month", y="pm25", facet_col="region", facet_col_wrap=2)` |
+| histogram | `px.histogram(df, x="pm25_mean", color="region", barmode="overlay", nbins=60)` |
+| box plot | `px.box(df, x="region", y="pm25_mean")` |
+| จุดบนแผนที่ | `px.scatter_map(st, lat="lat", lon="lon", color="region", hover_name="name_th", zoom=4.5)` |
+| treemap | `px.treemap(agg, path=["region", "province"], values="pm25_mean")` |
+| เส้นมาตรฐาน | `fig.add_hline(y=37.5, line_dash="dash", annotation_text="มาตรฐาน 37.5")` |
+| รูปแบบและฟอนต์ | `fig.update_layout(template="simple_white", font_family="Sarabun", hovermode="x unified")` |
+| บันทึก | `fig.write_html("fig.html", include_plotlyjs="cdn")` |
+
+: คำสั่งที่ใช้บ่อยของ Plotly {#tbl-apph-plotly}
+
+กราฟโต้ตอบเก็บข้อมูลทุกจุดไว้ในไฟล์ HTML ข้อมูลรายวันของทุกสถานีหลายปีทำให้ไฟล์ใหญ่และเบราว์เซอร์ช้า ให้สรุปใน DuckDB ก่อน เช่น เป็นรายเดือน หรือใช้ Datashader กับข้อมูลระดับล้านจุด (@sec-ch12-big-data)
+
+### GeoPandas
+
+| งาน | คำสั่ง |
+|---|---|
+| สร้างจุดจากพิกัด | `gpd.GeoDataFrame(st, geometry=gpd.points_from_xy(st["lon"], st["lat"]), crs="EPSG:4326")` |
+| อ่านขอบเขต | `gpd.read_file("data/geo/thailand_provinces.geojson")` |
+| ดูและแปลง CRS | `gdf.crs`, `gdf.to_crs("EPSG:32647")` (UTM 47N สำหรับคำนวณระยะเป็นเมตร) |
+| จุดอยู่ในจังหวัดใด | `gpd.sjoin(points, provinces, how="left", predicate="within")` |
+| สถานีใกล้ที่สุด | `gpd.sjoin_nearest(a, b, how="left", distance_col="dist_m", exclusive=True)` |
+| buffer รัศมี 50 กม. | `points_utm.buffer(50_000)` |
+| พื้นที่และจุดศูนย์กลาง | `polys_utm.area / 1e6` (ตร.กม.), `polys_utm.centroid` |
+| รวมขอบเขต | `provinces.dissolve(by="region")` |
+| แผนที่แบบนิ่ง | `ax = provinces.plot(color="white", edgecolor="gray"); points.plot(ax=ax, column="region", legend=True)` |
+| บันทึก | `gdf.to_file("stations.gpkg", layer="stations")`, `gdf.to_parquet("stations.parquet")` |
+
+: คำสั่งที่ใช้บ่อยของ GeoPandas {#tbl-apph-geopandas}
+
+ข้อผิดพลาดที่พบบ่อยที่สุดของข้อมูลเชิงพื้นที่คือการคำนวณระยะทางหรือพื้นที่ด้วยพิกัดองศา (EPSG:4326) ซึ่งได้หน่วยเป็นองศาและไม่มีความหมายทางกายภาพ ต้องแปลงเป็นระบบพิกัดแบบฉาย เช่น UTM ก่อน และ `points_from_xy` รับลองจิจูด (x) ก่อนละติจูด (y) เสมอ (@sec-ch17-crs)
+
+### Streamlit
+
+| งาน | คำสั่ง (`import streamlit as st`) |
+|---|---|
+| รันแอป | `streamlit run app/app.py` |
+| ตั้งค่าหน้า | `st.set_page_config(page_title="PM2.5", layout="wide")` |
+| ตัวกรองใน sidebar | `st.sidebar.selectbox("ภาค", regions, key="region")`, `st.slider`, `st.multiselect`, `st.date_input` |
+| จัดวาง | `c1, c2 = st.columns(2)`, `st.tabs([...])`, `st.expander("...")` |
+| ตัวชี้วัด | `c1.metric("ค่าเฉลี่ย", "28.0 µg/m³", delta="-1.2")` |
+| กราฟและตาราง | `st.plotly_chart(fig, width="stretch")`, `st.dataframe(df, hide_index=True)` |
+| แคชผล query | `@st.cache_data(ttl=3600)` |
+| แคชการเชื่อมต่อ | `@st.cache_resource` |
+| เก็บสถานะข้าม rerun | `st.session_state["level"] = "province"` |
+| ทดสอบอัตโนมัติ | `AppTest.from_file(APP).run()` จาก `streamlit.testing.v1` |
+
+: คำสั่งที่ใช้บ่อยของ Streamlit {#tbl-apph-streamlit}
+
+โครงพื้นฐานของแอปที่อ่านจาก DuckDB มีลักษณะดังนี้ แอปเต็มของโครงการพร้อม drill-down อยู่ใน @sec-ch20-drilldown
+
+```python
+from pathlib import Path
+
+import duckdb
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+
+DB = Path(__file__).resolve().parents[1] / "data" / "pm25.duckdb"
+
+
+@st.cache_resource
+def get_con():
+    return duckdb.connect(str(DB), read_only=True)          # read-only: ไม่ล็อกไฟล์ที่ pipeline เขียน
+
+
+@st.cache_data(ttl=3600)
+def load_monthly(region: str) -> pd.DataFrame:
+    sql = """SELECT date_trunc('month', d.date) AS month, avg(d.pm25_mean) AS pm25
+             FROM daily_pm25_clean d JOIN stations s USING (station_id)
+             WHERE s.region = ? AND d.is_complete GROUP BY ALL ORDER BY month"""
+    return get_con().execute(sql, [region]).df()             # ใช้พารามิเตอร์ ? ไม่ต่อสตริง SQL
+
+
+region = st.sidebar.selectbox("ภาค", ["เหนือ", "กลาง", "ตะวันออกเฉียงเหนือ", "ใต้"], key="region")
+data = load_monthly(region)
+c1, c2 = st.columns(2)
+c1.metric("ค่าเฉลี่ยทั้งช่วง", f"{data['pm25'].mean():.1f} µg/m³")
+c2.metric("เดือนที่เกินมาตรฐาน", int((data["pm25"] > 37.5).sum()))
+st.plotly_chart(px.line(data, x="month", y="pm25"), width="stretch")
+```
+
+### Quarto
+
+| งาน | คำสั่งหรือการตั้งค่า |
+|---|---|
+| ดูตัวอย่างขณะแก้ | `quarto preview report.qmd` |
+| render | `quarto render report.qmd` หรือ `quarto render` ทั้งโครงการ |
+| ส่งพารามิเตอร์ | `quarto render report.qmd -P region:ใต้` |
+| เลือกรูปแบบ | `quarto render report.qmd --to pdf` |
+| ตรวจการติดตั้ง | `quarto check` |
+| ซ่อนโค้ดทั้งเอกสาร | `execute: echo: false` ในส่วนหัว |
+| ตัวเลือกของ cell | `#| label: fig-trend`, `#| fig-cap: "..."`, `#| echo: false` |
+| ค่าในข้อความ | `` `{python} region` `` |
+| อ้างอิงภาพ | `@fig-trend` |
+| ไฟล์ HTML ไฟล์เดียว | `embed-resources: true` |
+
+: คำสั่งและการตั้งค่าที่ใช้บ่อยของ Quarto {#tbl-apph-quarto}
+
+ส่วนหัวของรายงานภาษาไทยแบบมีพารามิเตอร์ที่ใช้ในโครงการมีลักษณะดังนี้ Quarto ยังไม่มีชุดคำแปลภาษาไทยในตัว ป้ายอย่าง "Figure 1" จึงยังเป็นภาษาอังกฤษแม้ตั้ง `lang: th` ต้องกำหนดคำเองในส่วน `language`
+
+```yaml
+---
+title: "รายงาน PM2.5 รายภาค"
+lang: th
+language:
+  crossref-fig-title: "ภาพที่"
+  crossref-fig-prefix: "ภาพที่"
+  crossref-tbl-title: "ตารางที่"
+  crossref-tbl-prefix: "ตารางที่"
+format:
+  html:
+    toc: true
+    code-fold: true
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+params:
+  region: "เหนือ"
+---
+```
+
+cell แรกของเอกสาร Python ต้องมีตัวเลือก `#| tags: [parameters]` และกำหนดค่าเริ่มต้น เช่น `region = "เหนือ"` ค่าที่ส่งผ่าน `-P` จะถูกแทรกเป็น cell ถัดไปผ่าน papermill (@sec-ch19-parameterized)
+
+## ซ.3 รายการตรวจสอบ (checklist) ประจำแต่ละขั้นของ pipeline {#sec-apph-checklists .unnumbered}
+
+รายการตรวจสอบต่อไปนี้สรุปจากหัวข้อข้อผิดพลาดที่พบบ่อยของแต่ละบท ใช้ตรวจงานของตนก่อนส่งหรือก่อนเปิด pull request และใช้เป็นเกณฑ์ในการ review งานของเพื่อน (@sec-ch03-review)
+
+### เริ่มโครงการ
+
+- [ ] repository มี `README.md` ที่บอกวิธีติดตั้งและรันตั้งแต่ต้น
+- [ ] สภาพแวดล้อมสร้างได้จากไฟล์ lock (`environment.yml` หรือ `pyproject.toml` + `uv.lock`)
+- [ ] `.gitignore` ครอบคลุม `data/`, `.env`, `.venv/` และผลลัพธ์ที่สร้างใหม่ได้
+- [ ] ความลับอยู่ใน `.env` และมี `.env.example` ที่ไม่มีค่าจริง
+- [ ] path ทั้งหมดอ้างจาก root ของโครงการ ไม่ใช่ path ของเครื่องตนเอง
+- [ ] คำถามเชิงวิเคราะห์เขียนไว้ก่อนดูข้อมูล และแยกช่วงข้อมูลสำรวจกับข้อมูลยืนยันแล้ว (@sec-ch04-split)
+
+### ได้มาซึ่งข้อมูล
+
+- [ ] ทุกคำขอมี `timeout` และ retry เฉพาะ error ชั่วคราวแบบ backoff
+- [ ] ไม่มี `verify=False` ในโค้ด
+- [ ] เก็บ response ดิบพร้อมเวลาที่ดึงไว้ใน `data/raw/` ก่อนแปลงใด ๆ
+- [ ] script รันซ้ำได้โดยไม่สร้างข้อมูลซ้ำ (idempotent)
+- [ ] ระบุ encoding ทุกครั้งที่อ่านหรือเขียนไฟล์
+- [ ] ตรวจข้อกำหนดการใช้งานและสัญญาอนุญาตของแหล่งข้อมูลแล้ว (@sec-ch05-legal)
+
+### จัดเก็บและ SQL
+
+- [ ] ตารางมี primary key และการโหลดใช้ upsert หรือขจัดข้อมูลซ้ำก่อน
+- [ ] ค่าแทนข้อมูลหาย เช่น `"-1"` ถูกแปลงเป็น `NULL` ตอนโหลด
+- [ ] เวลาอยู่ในเขตเวลาเดียวกันทั้งโครงการ และตัดวันตามเวลาไทย
+- [ ] เงื่อนไขกับ `NULL` ใช้ `IS NULL` ไม่ใช่ `= NULL` และตรวจผลของ `NOT IN` กับคอลัมน์ที่มี `NULL`
+- [ ] หลัง join ทุกครั้ง ตรวจจำนวนแถวเทียบกับที่คาด
+
+### คุณภาพข้อมูลและข้อมูลสูญหาย
+
+- [ ] มี data contract (pandera) ที่ตรวจชนิด ช่วงค่า และคีย์ซ้ำ และรันใน pipeline
+- [ ] แยกค่าที่ผิดแน่นอน (fail) กับค่าที่น่าสงสัย (warn) และบันทึกเหตุผลของแต่ละกฎ
+- [ ] รายงานสัดส่วนข้อมูลหายตามสถานีและตามเวลา ไม่ใช่เฉพาะภาพรวม
+- [ ] เกณฑ์ความครบถ้วน (≥ 18 จาก 24 ชั่วโมง) ใช้สม่ำเสมอผ่าน `is_complete`
+- [ ] ค่าที่เติมมีธง `is_filled` และไม่เติมช่องว่างที่ยาวเกินเกณฑ์
+- [ ] ทำ sensitivity analysis ว่าข้อสรุปเปลี่ยนหรือไม่เมื่อจัดการข้อมูลหายต่างวิธี (@sec-ch10-sensitivity)
+
+### สำรวจและ visualization
+
+- [ ] ทุกกราฟมีชื่อแกน หน่วย (µg/m³) แหล่งข้อมูล และช่วงเวลา
+- [ ] แกนของกราฟแท่งเริ่มที่ศูนย์ และ small multiples ใช้สเกลเดียวกันเมื่อต้องเปรียบเทียบ
+- [ ] สีปลอดภัยสำหรับผู้มีภาวะบกพร่องในการมองเห็นสี และไม่ใช้สีเป็นช่องทางเดียว
+- [ ] ภาษาไทยแสดงถูกต้อง และกราฟโต้ตอบไม่ส่งข้อมูลดิบทั้งหมดไปยังเบราว์เซอร์
+- [ ] มีเส้นมาตรฐาน 37.5 µg/m³ เมื่อผู้อ่านต้องตัดสินว่าเกินหรือไม่
+
+### สถิติและการวิเคราะห์
+
+- [ ] ใช้สถิติที่ทนต่อค่าผิดปกติ (มัธยฐาน, IQR) หรือแปลง log กับข้อมูลที่เบ้ขวา
+- [ ] รายงานขนาดผลพร้อมช่วงความเชื่อมั่น ไม่ใช่เฉพาะ p-value
+- [ ] คำนึงถึง autocorrelation เมื่อคำนวณความไม่แน่นอนของข้อมูลรายวัน
+- [ ] ปรับ p-value เมื่อทดสอบหลายครั้ง และนับจำนวนการทดสอบทั้งหมดที่ทำจริง
+- [ ] ปรับสเกลก่อน PCA และการจัดกลุ่ม และตรวจความเสถียรของกลุ่ม
+- [ ] ค่าผิดปกติทุกค่าที่ตัดหรือแก้มีหลักฐานว่าเป็นความผิดพลาด ไม่ใช่เหตุการณ์จริง (@sec-ch15-error-or-event)
+- [ ] ข้อค้นพบจากข้อมูลสำรวจได้รับการยืนยันกับข้อมูลยืนยัน (ค.ศ. 2024–2025)
+
+### ข้อมูลเชิงพื้นที่และข้อมูลส่วนบุคคล
+
+- [ ] ระบุ CRS ของทุกชั้นข้อมูล และแปลงเป็น UTM ก่อนคำนวณระยะหรือพื้นที่
+- [ ] แผนที่ choropleth ใช้อัตราหรือค่าเฉลี่ย ไม่ใช่ผลรวม และระบุจำนวนสถานีต่อพื้นที่
+- [ ] การประมาณค่าเชิงพื้นที่แสดงความไม่แน่นอนและไม่ขยายเกินขอบเขตของสถานี
+- [ ] ข้อมูลส่วนบุคคลผ่านการประเมินตาม PDPA และใช้ข้อมูลสังเคราะห์หรือข้อมูลรวมเมื่อทำได้ (@sec-ch16-pdpa)
+
+### สื่อสารผล
+
+- [ ] รายงานขึ้นต้นด้วยข้อค้นพบ และทุกข้อค้นพบมีหลักฐานอ้างอิง
+- [ ] ภาษาตรงกับระดับหลักฐาน ข้อค้นพบเชิงสำรวจไม่เขียนเป็นข้อสรุปเชิงสาเหตุ (@sec-ch04-language)
+- [ ] มีหัวข้อข้อจำกัดที่บอกผลของข้อจำกัดต่อข้อสรุป
+- [ ] ตัวเลขทุกตัวในรายงานคำนวณจากโค้ดในเอกสาร ไม่ได้พิมพ์เอง
+- [ ] รายงาน render ได้ใหม่จากเครื่องที่สะอาดตามรายการตรวจสอบการทำซ้ำได้ (@sec-ch19-checklist)
+- [ ] แดชบอร์ดเปิดฐานข้อมูลแบบ read-only แคช query และมีการทดสอบด้วย `AppTest`
+- [ ] แดชบอร์ดกรอง `is_complete` และค่าของทุกระดับ drill-down สอดคล้องกัน (@sec-ch18-consistency)
+
+### ก่อนส่งงาน
+
+- [ ] "Restart & Run All" และ `quarto render` ผ่านโดยไม่มี error
+- [ ] `pytest` และ `ruff check` ผ่าน
+- [ ] บันทึกการใช้ AI ช่วยเขียนโค้ดตามนโยบายของรายวิชา และตรวจสอบโค้ดที่ได้แล้ว (@sec-ch22-ai)
+- [ ] ระบุแหล่งข้อมูล สัญญาอนุญาต และผู้มีส่วนร่วมของแต่ละส่วน

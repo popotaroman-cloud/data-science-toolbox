@@ -50,7 +50,7 @@ title: "กระดานสถานะการเขียนหนังส
 | ภาคผนวก จ คณิตศาสตร์พื้นฐาน | `appendices/e-math.qmd` | `book/app-e-math` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ฉ การแก้ปัญหา | `appendices/f-troubleshooting.qmd` | `book/app-f-troubleshooting` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ช แนวคำตอบ | `appendices/answers/NN.qmd` (รวมผ่าน `appendices/g-answers.qmd`) | branch ของแต่ละบท / `assemble.py` | ผู้เขียนแต่ละบท | | — | |
-| ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว | `appendices/h-toolbox-reference.qmd` | `book/app-h-toolbox-reference` | | | todo | |
+| ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว | `appendices/h-toolbox-reference.qmd` | `book/app-h-toolbox-reference` | agent:claude | | drafting | 2026-10-26 |
 | อภิธานศัพท์ | `glossary.qmd` จาก `glossary/NN.yml` (สร้างอัตโนมัติ) | branch ของแต่ละบท / `assemble.py` | ผู้เขียนแต่ละบท | ผู้ดูแลเล่ม | — | |
 | บรรณานุกรม | `refs/NN.bib` (รวมอัตโนมัติ) | branch ของแต่ละบท / `assemble.py` | ผู้เขียนแต่ละบท | ผู้ดูแลเล่ม | — | |
 | ดัชนี | `book-index.qmd` จากเครื่องหมาย `.idx*` (สร้างอัตโนมัติ) | branch ของแต่ละบท / `assemble.py` | ผู้ดูแลเล่ม | | — | |
