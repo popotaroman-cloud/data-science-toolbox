@@ -312,11 +312,11 @@ Python 3.12 · DuckDB 1.x (ห้ามใช้ API ที่มีเฉพา
 
 ### รูป
 - แผนภาพแนวคิดใช้ ` ```{mermaid} ` ห้ามวาดด้วย ASCII art
-- กราฟจากข้อมูลให้บันทึกเป็น PNG (กว้าง 1600 px) หรือ SVG ไว้ใน `images/NN/` และส่ง script ที่สร้างรูปไว้ใน `images/NN/make_figures.py`
+- กราฟจากข้อมูลให้บันทึกเป็น PNG (กว้าง 1600 px) หรือ SVG ไว้ใน `images/NN/` และส่ง script ที่สร้างรูปไว้ใน `images/NN/make_figures.py` ไฟล์บทอยู่ใน `chapters/` จึงต้องอ้างรูปด้วย path `../images/NN/...`
 - ทุกรูปต้องมี caption, label และ alt text ภาษาไทย
 
 ```markdown
-![สัดส่วนวันที่ค่าเฉลี่ยรายวันเกิน 37.5 µg/m³ แยกตามภาค](images/11/exceed_by_region.png){#fig-ch11-exceed-region fig-alt="กราฟแท่งแนวนอน ภาคเหนือมีสัดส่วนสูงสุด"}
+![สัดส่วนวันที่ค่าเฉลี่ยรายวันเกิน 37.5 µg/m³ แยกตามภาค](../images/11/exceed_by_region.png){#fig-ch11-exceed-region fig-alt="กราฟแท่งแนวนอน ภาคเหนือมีสัดส่วนสูงสุด"}
 ```
 
 - รูปจากแหล่งภายนอกใช้ได้เฉพาะเมื่อสัญญาอนุญาตเปิดให้ใช้ และต้องระบุที่มาใน caption
