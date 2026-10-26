@@ -1,9 +1,259 @@
 ---
-status: todo
+status: drafting
+authors: ["agent:claude"]
+last-verified: "2026-10"
 ---
 
 # ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย {.unnumbered}
 
-::: {.callout-warning}
-ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
-:::
+ภาคผนวกนี้รวบรวมปัญหาที่ผู้เรียนพบบ่อยตลอดรายวิชา จัดตามเครื่องมือ แต่ละปัญหาบอกอาการที่เห็น สาเหตุ และวิธีแก้ ข้อความ error ที่ยกมาเป็นข้อความจริงจากเครื่องมือเวอร์ชันที่ใช้ในเล่ม ข้อความในเวอร์ชันอื่นอาจต่างเล็กน้อย
+
+ก่อนค้นหาวิธีแก้ ให้ทำสามอย่างนี้เสมอ
+
+1. **อ่านบรรทัดสุดท้ายของ traceback ก่อน** บรรทัดนั้นบอกชนิดของ error และข้อความหลัก บรรทัดก่อนหน้าบอกว่าเกิดที่ไหน ไล่ขึ้นไปหาบรรทัดแรกที่เป็นไฟล์ของเราเอง ไม่ใช่ไฟล์ของไลบรารี
+2. **ตรวจว่ากำลังใช้ Python ตัวไหน** ปัญหาจำนวนมากเกิดจากการรันโค้ดด้วย interpreter ที่ไม่ใช่ของสภาพแวดล้อมโครงการ (@sec-ch02-venv)
+3. **ทำให้ปัญหาเล็กที่สุด** ตัดโค้ดที่ไม่เกี่ยวออกจนเหลือไม่กี่บรรทัดที่ยังเกิดปัญหา ขั้นนี้มักทำให้เห็นสาเหตุเอง และเป็นสิ่งที่ต้องมีเมื่อถามผู้สอนหรือเปิด issue
+
+## ฉ.1 ปัญหาการติดตั้งและสภาพแวดล้อม {#sec-appf-install .unnumbered}
+
+### ติดตั้งแล้วแต่ `import` ไม่เจอ
+
+อาการ: `pip install pandas` สำเร็จ แต่ใน notebook ได้ `ModuleNotFoundError: No module named 'pandas'` สาเหตุเกือบทุกครั้งคือ pip กับ notebook ใช้ Python คนละตัว pip ติดตั้งลงสภาพแวดล้อมหนึ่ง แต่ kernel ของ notebook รันจากอีกสภาพแวดล้อมหนึ่ง
+
+```python
+import sys
+print(sys.executable)          # Python ที่กำลังรันโค้ดนี้อยู่จริง
+print(sys.prefix)              # โฟลเดอร์ของสภาพแวดล้อม
+```
+
+ถ้า path ที่ได้ไม่อยู่ในโฟลเดอร์ `.venv/` ของโครงการหรือ environment ของ conda ที่ตั้งใจ ให้เลือก kernel ใหม่ใน VS Code หรือ Jupyter (@sec-ch02-vscode) และใช้รูปแบบ `python -m pip install ...` แทน `pip install ...` เพื่อให้แน่ใจว่าติดตั้งลง Python ตัวเดียวกับที่เรียก ใน notebook ใช้ `%pip install ...` ซึ่งติดตั้งลง kernel ที่กำลังรันเสมอ
+
+### ปัญหาอื่นของการติดตั้ง
+
+| อาการ | สาเหตุที่พบบ่อย | วิธีแก้ |
+|---|---|---|
+| `conda: command not found` หรือ `uv: command not found` | ยังไม่ได้เพิ่มโปรแกรมลง `PATH` หรือยังไม่ได้เปิด terminal ใหม่หลังติดตั้ง | ปิดแล้วเปิด terminal ใหม่ ถ้ายังไม่ได้ ให้รัน `conda init` หรือทำตามคำแนะนำท้ายการติดตั้งของ uv |
+| `conda activate` แล้ว prompt ไม่เปลี่ยน หรือใน PowerShell ได้ error เรื่อง execution policy | shell ยังไม่ได้ตั้งค่าให้รู้จัก conda | รัน `conda init powershell` (Windows) หรือ `conda init zsh` (macOS) แล้วเปิด terminal ใหม่ |
+| แก้การพึ่งพาของแพ็กเกจไม่ได้ (`ResolutionImpossible`, `UnsatisfiableError`) | แพ็กเกจสองตัวต้องการเวอร์ชันของแพ็กเกจที่สามที่ขัดกัน | สร้างสภาพแวดล้อมใหม่จากไฟล์ lock แทนการติดตั้งเพิ่มทีละตัว ถ้าต้องเพิ่มแพ็กเกจ ให้แก้ `environment.yml` หรือ `pyproject.toml` แล้วสร้างใหม่ (@sec-ch02-lock) |
+| ติดตั้งแพ็กเกจแล้วใช้เวลานานมากและมีข้อความ `Building wheel for ...` | ไม่มี wheel สำเร็จรูปสำหรับ Python หรือระบบปฏิบัติการนี้ pip จึงคอมไพล์จาก source | ใช้ Python เวอร์ชันที่ไลบรารีรองรับ (เล่มนี้ใช้ 3.12) หรือติดตั้งจาก conda-forge ซึ่งมี binary ให้ |
+| `ModuleNotFoundError: No module named 'pkg_resources'` ตอน import ไลบรารีรุ่นเก่า เช่น ydata-profiling | setuptools รุ่นใหม่ถอด `pkg_resources` ออกแล้ว | ติดตั้ง `setuptools<81` ในสภาพแวดล้อม หรือรอไลบรารีออกรุ่นที่แก้แล้ว |
+| โค้ดทำงานในเครื่องเพื่อน แต่ไม่ทำงานในเครื่องเรา | เวอร์ชันแพ็กเกจต่างกัน | เทียบผลของ `pip list` หรือ `uv pip list` และสร้างสภาพแวดล้อมจากไฟล์ lock เดียวกัน |
+
+: ปัญหาการติดตั้งที่พบบ่อย {#tbl-appf-install}
+
+### notebook ให้ผลไม่เหมือนเดิม
+
+ถ้า notebook ทำงานได้ในตอนพัฒนา แต่ "Restart & Run All" แล้วพัง สาเหตุคือ hidden state ตัวแปรที่ใช้ถูกสร้างจาก cell ที่ถูกลบหรือแก้ไปแล้ว (@sec-ch02-jupyter) วิธีป้องกันคือรัน "Restart & Run All" ก่อน commit ทุกครั้ง และย้ายโค้ดที่ใช้ซ้ำไปไว้ในไฟล์ `.py` ใน `src/`
+
+## ฉ.2 ปัญหา Git และ GitHub {#sec-appf-git .unnumbered}
+
+| อาการ | สาเหตุ | วิธีแก้ |
+|---|---|---|
+| `fatal: not a git repository` | รันคำสั่งนอกโฟลเดอร์ของ repository | `cd` เข้าโฟลเดอร์โครงการ ตรวจด้วย `git rev-parse --show-toplevel` |
+| `Please tell me who you are` ตอน commit | ยังไม่ได้ตั้งชื่อและอีเมล | `git config --global user.name "ชื่อ"` และ `git config --global user.email "อีเมล"` |
+| `! [rejected] main -> main (fetch first)` ตอน push | มีคนอื่น push ขึ้น remote ก่อน ประวัติจึงแยกกัน | `git pull` เพื่อรวมงานของเพื่อนก่อน แก้ conflict ถ้ามี แล้ว push ใหม่ อย่าใช้ `git push --force` บน branch ที่ใช้ร่วมกัน |
+| `Authentication failed` หรือ `Support for password authentication was removed` | GitHub ไม่รับรหัสผ่านบัญชีผ่าน HTTPS แล้ว | ใช้ `gh auth login` หรือ SSH key หรือ personal access token แทนรหัสผ่าน |
+| `CONFLICT (content): Merge conflict in ...` | สอง branch แก้บรรทัดเดียวกัน | แก้ไฟล์ตามขั้นตอนใน @sec-ch03-conflict แล้ว `git add` และ `git commit` |
+| push แล้วถูกปฏิเสธเพราะไฟล์ใหญ่เกิน 100 MB | commit ไฟล์ข้อมูลเข้า Git | ดูหัวข้อถัดไป |
+| ไฟล์ `.env` หรือ token หลุดขึ้น GitHub | ลืมใส่ใน `.gitignore` | ดูหัวข้อถัดไป |
+
+: ปัญหา Git ที่พบบ่อย {#tbl-appf-git}
+
+### commit ไฟล์ที่ไม่ควร commit ไปแล้ว
+
+ถ้ายังไม่ได้ push ให้ถอดไฟล์ออกจาก commit ล่าสุดได้
+
+```bash
+git rm --cached data/raw/big.parquet        # เลิกติดตามไฟล์ แต่ไฟล์ในเครื่องยังอยู่
+echo "data/" >> .gitignore
+git add .gitignore
+git commit --amend --no-edit                # แก้ commit ล่าสุด (เฉพาะที่ยังไม่ push)
+```
+
+ถ้าไฟล์อยู่ใน commit ที่เก่ากว่านั้นหรือ push ไปแล้ว การลบในประวัติต้องใช้เครื่องมืออย่าง `git filter-repo` และต้องให้ทุกคนในทีม clone ใหม่ ให้ปรึกษาผู้สอนก่อน สำหรับ **ความลับ** เช่น API key ที่หลุดขึ้น GitHub แม้เพียงไม่กี่นาที ให้ถือว่าความลับนั้นรั่วแล้ว ขั้นแรกคือยกเลิกและออก key ใหม่ทันที การลบออกจากประวัติเป็นขั้นที่สอง เพราะ bot สามารถสแกนหาความลับใน repository สาธารณะได้ภายในไม่กี่นาทีหลัง push
+
+### notebook สร้าง conflict ที่อ่านไม่ออก
+
+ไฟล์ `.ipynb` เป็น JSON ที่เก็บผลลัพธ์และหมายเลขการรันไว้ด้วย การรันใหม่จึงเปลี่ยนไฟล์แม้โค้ดไม่เปลี่ยน ใช้ nbstripout ลบผลลัพธ์ก่อน commit หรือจับคู่ notebook กับไฟล์ `.py` ด้วย Jupytext (@sec-ch03-notebook) ถ้าเกิด conflict แล้ว วิธีที่ง่ายที่สุดมักเป็นการเลือกฉบับหนึ่งทั้งไฟล์ (`git checkout --ours` หรือ `--theirs`) แล้วนำการแก้ของอีกฝ่ายมาใส่ด้วยมือ
+
+## ฉ.3 ปัญหาการเชื่อมต่อ API (SSL, timeout, encoding) {#sec-appf-api .unnumbered}
+
+### `SSLError: certificate verify failed`
+
+อาการ: เบราว์เซอร์เปิด URL ได้ปกติ แต่ `requests.get(url)` ได้
+
+```text
+requests.exceptions.SSLError: ... certificate verify failed: unable to get local issuer certificate
+```
+
+สาเหตุที่พบบ่อยที่สุดคือเซิร์ฟเวอร์ส่งใบรับรองระดับกลางมาไม่ครบ เบราว์เซอร์หาใบที่ขาดเองได้ แต่ requests ใช้ชุดใบรับรองของ `certifi` และไม่หาให้ อีกสาเหตุคือเครือข่ายขององค์กรที่มีอุปกรณ์ตรวจ HTTPS ซึ่งใช้ใบรับรองของตนเอง วิธีแก้คือให้ Python ใช้ trust store ของระบบปฏิบัติการผ่านแพ็กเกจ truststore [@truststore2026] ตามที่อธิบายใน @sec-ch05-http
+
+```python
+import truststore
+truststore.inject_into_ssl()     # เรียกครั้งเดียวก่อนใช้ requests
+```
+
+**ห้าม** แก้ด้วย `verify=False` เพราะเป็นการปิดการยืนยันตัวตนของเซิร์ฟเวอร์ทั้งหมด
+
+### การเชื่อมต่อค้างหรือล้มเป็นครั้งคราว
+
+| อาการ | สาเหตุ | วิธีแก้ |
+|---|---|---|
+| script ค้างไม่จบ | ไม่ได้ตั้ง `timeout` requests จะรอไปเรื่อย ๆ | ใส่ `timeout=(10, 60)` ทุกครั้ง (@sec-ch05-robust) |
+| `ConnectTimeout`, `ReadTimeout` เป็นบางครั้ง | เครือข่ายหรือเซิร์ฟเวอร์ช้าชั่วคราว | retry แบบ exponential backoff สำหรับ error ชั่วคราวเท่านั้น |
+| status 429 Too Many Requests | เรียกถี่เกินกว่าที่ API อนุญาต | เว้นระยะระหว่างคำขอ อ่าน header `Retry-After` ถ้ามี |
+| status 403 Forbidden | ไม่มีสิทธิ์ ขาด API key หรือ User-Agent ถูกปฏิเสธ | ตรวจ key ใน `.env` และตั้ง User-Agent ที่ระบุตัวตนพร้อมช่องทางติดต่อ |
+| `ProxyError: ... Tunnel connection failed: 403` | เครือข่ายของมหาวิทยาลัยหรือองค์กรบังคับใช้ proxy ที่ไม่อนุญาตปลายทางนั้น | ตรวจตัวแปร `HTTPS_PROXY` ติดต่อผู้ดูแลเครือข่าย หรือทดลองจากเครือข่ายอื่น |
+| `JSONDecodeError` ตอน `r.json()` | เซิร์ฟเวอร์ตอบเป็นหน้า HTML (เช่น หน้าแจ้ง error) แทน JSON | เรียก `r.raise_for_status()` ก่อน และพิมพ์ `r.headers["Content-Type"]` กับ `r.text[:200]` ดู |
+
+: ปัญหาการเชื่อมต่อ API ที่พบบ่อย {#tbl-appf-api}
+
+ในระหว่างพัฒนา ควรเก็บ response ดิบลง `data/raw/` แล้วพัฒนาขั้นถัดไปจากไฟล์ จะได้ไม่ต้องเรียก API ซ้ำทุกครั้งที่แก้โค้ด และไม่เป็นภาระของเซิร์ฟเวอร์
+
+### ภาษาไทยกลายเป็นอักขระแปลก
+
+ถ้าข้อความภาษาไทยจาก API หรือไฟล์ CSV แสดงเป็นอักขระอย่าง `à¸à¸£à¸¸` แปลว่าไบต์ UTF-8 ถูกอ่านด้วย encoding อื่น ถ้าได้ `UnicodeDecodeError: 'utf-8' codec can't decode byte` แปลว่าไฟล์ไม่ได้เป็น UTF-8 ซึ่งในไฟล์ภาษาไทยรุ่นเก่ามักเป็น TIS-620 หรือ cp874 (@sec-ch05-formats)
+
+```python
+import pandas as pd
+
+df = pd.read_csv("stations_old.csv", encoding="cp874")    # ไฟล์ไทยรุ่นเก่าจาก Excel บน Windows
+r.encoding = "utf-8"                                      # เมื่อ header ของ API ระบุ charset ผิด
+df.to_csv("stations.csv", index=False, encoding="utf-8-sig")   # ให้ Excel เปิดภาษาไทยได้ถูกต้อง
+```
+
+`utf-8-sig` เพิ่มเครื่องหมาย BOM ที่ต้นไฟล์ ซึ่ง Excel ใช้ตัดสินว่าไฟล์เป็น UTF-8 ถ้าไม่มี Excel บน Windows มักเปิดไฟล์ UTF-8 ภาษาไทยผิด แม้ไฟล์จะถูกต้อง
+
+## ฉ.4 ปัญหา DuckDB (ไฟล์ล็อก, เวอร์ชันไม่ตรงกัน) {#sec-appf-duckdb .unnumbered}
+
+### ไฟล์ฐานข้อมูลถูกล็อก
+
+DuckDB อนุญาตให้ process เดียวเปิดไฟล์ฐานข้อมูลแบบเขียนได้ หรือหลาย process เปิดแบบอ่านอย่างเดียวพร้อมกัน แต่ไม่อนุญาตให้ทั้งสองแบบพร้อมกัน [@duckdb2026concurrency] ถ้า notebook หนึ่งเปิดไฟล์แบบเขียนค้างไว้ แล้ว script ดึงข้อมูลหรือแอป Streamlit พยายามเปิดไฟล์เดียวกัน จะได้
+
+```text
+_duckdb.IOException: IO Error: Could not set lock on file "data/pm25.duckdb":
+Conflicting lock is held in /usr/bin/python3.12 (PID 1043).
+See also https://duckdb.org/docs/stable/connect/concurrency
+```
+
+ข้อความบอก PID ของ process ที่ถือล็อกไว้ วิธีแก้มีสามระดับ
+
+1. ปิดการเชื่อมต่อที่ไม่ใช้แล้ว ด้วย `con.close()` หรือใช้ `with duckdb.connect(...) as con:` ซึ่งปิดให้อัตโนมัติ ถ้าเป็น notebook ที่ลืมปิด ให้ restart kernel
+2. ให้ทุกโปรแกรมที่อ่านอย่างเดียวเปิดด้วย `read_only=True` เช่น notebook สำรวจ แอป Streamlit และรายงาน Quarto (@sec-ch20-cache) เหลือเพียง script ดึงข้อมูลที่เปิดแบบเขียน
+3. ถ้าจำเป็นต้องเขียนขณะที่แอปทำงาน ให้ script เขียนลงไฟล์ใหม่ แล้วสลับชื่อไฟล์เมื่อเสร็จ หรือส่งออกเป็น Parquet ให้แอปอ่าน
+
+ภายใน process เดียวกัน การเปิดไฟล์เดียวกันซ้ำด้วยการตั้งค่าต่างกัน เช่น ครั้งแรกแบบเขียนได้แล้วครั้งที่สองแบบ `read_only=True` ได้ error อีกแบบ
+
+```text
+ConnectionException: Connection Error: Can't open a connection to same database file
+with a different configuration than existing connections
+```
+
+วิธีแก้คือใช้การเชื่อมต่อเดิม หรือ `close()` การเชื่อมต่อแรกก่อนเปิดใหม่
+
+### เวอร์ชันของ DuckDB ไม่ตรงกัน
+
+ไฟล์ `.duckdb` มีรูปแบบการจัดเก็บ (storage format) ที่ผูกกับเวอร์ชัน ตั้งแต่ DuckDB 1.0 รุ่นใหม่อ่านไฟล์ของรุ่นเก่าได้เสมอ และโดยค่าเริ่มต้น รุ่นใหม่เขียนไฟล์ในรูปแบบที่รุ่น 1.x ก่อนหน้ายังอ่านได้ [@duckdb2026storage] ปัญหาเกิดเมื่อไฟล์ถูกสร้างด้วยการตั้งค่า `storage_compatibility_version` เป็นรุ่นล่าสุด หรือใช้คุณสมบัติที่ต้องการรูปแบบใหม่ แล้วเพื่อนที่ใช้ DuckDB รุ่นเก่ากว่าเปิดไฟล์
+
+```text
+IOException: IO Error: Trying to read a database file with version number 68,
+but we can only read version 64.
+The database file was created with an newer version of DuckDB.
+```
+
+วิธีแก้ที่ถูกต้องคือให้ทุกคนในทีมใช้เวอร์ชันเดียวกันตามไฟล์ lock ของโครงการ (@sec-ch02-lock) เหตุผลข้อนี้เองที่โครงการไม่แลกไฟล์ `.duckdb` กัน แต่แลก script ที่สร้างไฟล์ขึ้นใหม่ได้ ถ้าจำเป็นต้องส่งข้อมูลข้ามเวอร์ชัน ให้ส่งออกเป็น Parquet ซึ่งเป็นรูปแบบมาตรฐานที่ไม่ขึ้นกับเวอร์ชันของ DuckDB
+
+```sql
+COPY daily_pm25_clean TO 'daily_pm25_clean.parquet' (FORMAT parquet);
+-- อีกเครื่อง:
+CREATE TABLE daily_pm25_clean AS SELECT * FROM 'daily_pm25_clean.parquet';
+```
+
+### ปัญหาอื่นของ DuckDB
+
+| อาการ | สาเหตุ | วิธีแก้ |
+|---|---|---|
+| `Catalog Error: Table with name ... does not exist` | เปิดไฟล์ผิด หรือเชื่อมต่อแบบ in-memory (`duckdb.connect()` ไม่ระบุไฟล์) | ตรวจ path ด้วย `SELECT current_database()` และ `SHOW TABLES` ใช้ path จาก root ของโครงการ (@sec-ch02-project) |
+| ได้ไฟล์ `pm25.duckdb` เปล่าในโฟลเดอร์ `notebooks/` | ใช้ path สัมพัทธ์ ขณะที่ notebook รันจากโฟลเดอร์อื่น DuckDB สร้างไฟล์ใหม่ให้เงียบ ๆ | ใช้ path แบบอิงตำแหน่ง root ของโครงการ และลบไฟล์เปล่านั้น |
+| `Conversion Error` ตอนโหลด CSV | มีค่าที่แปลงเป็นชนิดข้อมูลที่อนุมานไว้ไม่ได้ เช่น `"-"` ในคอลัมน์ตัวเลข | ระบุ `nullstr='-'` หรืออ่านเป็นข้อความก่อนแล้วใช้ `TRY_CAST` |
+| ค่าวันที่เลื่อนไป 7 ชั่วโมง | ปนกันระหว่าง `TIMESTAMP` กับ `TIMESTAMPTZ` และเขตเวลาของ session | เก็บเวลาเป็นเวลาไทยแบบไม่มีเขตเวลาตามข้อตกลงของโครงการ หรือ `SET TimeZone = 'Asia/Bangkok'` (@sec-ch07-datetime) |
+| upsert แล้วจำนวนแถวไม่ตรงที่คาด | ข้อมูลชุดที่ใส่มีคีย์ซ้ำกันเองภายในชุด | ขจัดข้อมูลซ้ำในชุดก่อนด้วย `QUALIFY row_number() ... = 1` (@sec-ch07-upsert) |
+| query ช้าผิดปกติ | อ่าน CSV ซ้ำทุกครั้ง หรือกรองหลัง join ข้อมูลรายชั่วโมงทั้งหมด | โหลดเข้าเป็นตารางหรือ Parquet ครั้งเดียว ดู `EXPLAIN ANALYZE` (@sec-ch07-query-plan) |
+
+: ปัญหาอื่นของ DuckDB {#tbl-appf-duckdb}
+
+## ฉ.5 ปัญหาภาษาไทยในกราฟ, notebook และ terminal {#sec-appf-thai .unnumbered}
+
+### กราฟ matplotlib และ seaborn แสดงภาษาไทยเป็นสี่เหลี่ยม
+
+อาการ: ป้ายกำกับภาษาไทยกลายเป็นสี่เหลี่ยมว่าง พร้อมคำเตือน
+
+```text
+UserWarning: Glyph 3616 (\N{THAI CHARACTER PHO SAMPHAO}) missing from font(s) DejaVu Sans.
+```
+
+สาเหตุคือฟอนต์เริ่มต้นของ matplotlib ไม่มีอักษรไทย วิธีแก้คือตั้งฟอนต์ไทยก่อนวาดด้วยฟังก์ชัน `set_style()` ใน @sec-ch11-thai-fonts ถ้าติดตั้งฟอนต์ใหม่แล้วยังไม่เห็น ให้ restart kernel เพราะ matplotlib สร้างรายการฟอนต์ไว้ตอน import ถ้ายังไม่ได้อีก ให้ลบแคชฟอนต์ของ matplotlib แล้ว restart
+
+```python
+import matplotlib
+print(matplotlib.get_cachedir())    # ลบไฟล์ fontlist-*.json ในโฟลเดอร์นี้ แล้ว restart kernel
+```
+
+### ปัญหาภาษาไทยในที่อื่น
+
+| ที่เกิด | อาการ | วิธีแก้ |
+|---|---|---|
+| Plotly และ Altair | ปกติแสดงได้ แต่ภาพที่ส่งออกเป็น PNG ด้วย Kaleido หรือ vl-convert อาจเป็นสี่เหลี่ยม | ติดตั้งฟอนต์ไทยในระบบ และระบุ `font_family` ใน layout |
+| ไฟล์ PDF จาก Quarto | อักษรไทยหายหรือเป็นสี่เหลี่ยม | ตั้ง `mainfont` เป็นฟอนต์ไทยในส่วนหัวของเอกสาร (@sec-appf-tools) |
+| terminal ของ Windows | `print()` ภาษาไทยได้ `UnicodeEncodeError: 'charmap' codec can't encode` | ตั้งตัวแปร `PYTHONUTF8=1` หรือใช้ Windows Terminal ที่ตั้งเป็น UTF-8 |
+| ชื่อไฟล์ภาษาไทย | script ทำงานบนเครื่องหนึ่งแต่หาไฟล์ไม่เจอบนอีกเครื่อง | ใช้ชื่อไฟล์และชื่อคอลัมน์เป็นภาษาอังกฤษ เก็บภาษาไทยไว้ในข้อมูล เช่น `name_th` |
+| การเรียงลำดับ | ชื่อจังหวัดเรียงผิดลำดับพจนานุกรม เช่น เชียงใหม่ อยู่หลัง ตาก เพราะเรียงตามรหัสอักขระ และสระหน้า (เ แ โ ใ ไ) มีรหัสสูงกว่าพยัญชนะ | ใน DuckDB ใช้ `ORDER BY name_th COLLATE th` ซึ่งเรียงตามพจนานุกรมไทย |
+| การตัดคำ | นับ "คำ" ในข้อความไทยด้วย `split()` ได้ผิด เพราะภาษาไทยไม่เว้นวรรคระหว่างคำ | ใช้ไลบรารีตัดคำภาษาไทย เช่น PyThaiNLP |
+
+: ปัญหาภาษาไทยที่พบบ่อย {#tbl-appf-thai}
+
+## ฉ.6 ปัญหา Streamlit และ Quarto {#sec-appf-tools .unnumbered}
+
+### Streamlit
+
+| อาการ | สาเหตุ | วิธีแก้ |
+|---|---|---|
+| `missing ScriptRunContext! This warning can be ignored when running in bare mode.` และไม่มีหน้าเว็บ | รันด้วย `python app.py` | รันด้วย `streamlit run app/app.py` |
+| แอปช้า ทุกการคลิกใช้เวลาหลายวินาที | Streamlit รัน script ใหม่ทั้งไฟล์ทุกครั้งที่ผู้ใช้โต้ตอบ และ query ถูกรันซ้ำทุกครั้ง | ใช้ `st.cache_data` กับฟังก์ชันที่ query และ `st.cache_resource` กับการเชื่อมต่อ (@sec-ch20-cache) |
+| ค่าที่ผู้ใช้เลือกหายไปหลังคลิก | เก็บค่าในตัวแปรธรรมดา ซึ่งถูกสร้างใหม่ทุก rerun | เก็บใน `st.session_state` (@sec-ch20-streamlit) |
+| แก้ข้อมูลในฐานข้อมูลแล้วแอปยังแสดงค่าเดิม | ผลของ `cache_data` ยังไม่หมดอายุ | ตั้ง `ttl` ของ cache หรือกด Clear cache ในเมนู |
+| `There are multiple button elements with the same auto-generated ID` | widget ชนิดเดียวกันสองตัวมี label และพารามิเตอร์เหมือนกัน | ใส่ `key=` ที่ไม่ซ้ำให้แต่ละตัว |
+| `Could not set lock on file` | notebook หรือ script อื่นเปิดฐานข้อมูลแบบเขียนค้างไว้ | ดู @sec-appf-duckdb และเปิดการเชื่อมต่อในแอปด้วย `read_only=True` |
+| เปิด `localhost:8501` แล้วเห็นแอปเวอร์ชันเก่า | แอป Streamlit ตัวเก่ายังทำงานอยู่ ตัวใหม่จึงไปใช้พอร์ตถัดไป เช่น 8502 | ดู URL ที่ terminal แสดง แล้วปิดตัวเก่าด้วย Ctrl+C ใน terminal ของมัน |
+
+: ปัญหา Streamlit ที่พบบ่อย {#tbl-appf-streamlit}
+
+### Quarto
+
+เริ่มด้วย `quarto check` เสมอ คำสั่งนี้ตรวจว่า Quarto หา Python, Jupyter และ LaTeX หรือ Typst ได้หรือไม่ และใช้ Python ตัวไหน
+
+| อาการ | สาเหตุ | วิธีแก้ |
+|---|---|---|
+| `ModuleNotFoundError` ระหว่าง render แต่ใน notebook import ได้ | Quarto ใช้ Python คนละตัวกับสภาพแวดล้อมโครงการ | เปิดสภาพแวดล้อมก่อนรัน `quarto render` หรือตั้งตัวแปร `QUARTO_PYTHON` ให้ชี้ไปยัง Python ของโครงการ |
+| `No module named 'papermill'` หรือพารามิเตอร์ไม่ถูกส่งเข้า | รายงานแบบมีพารามิเตอร์ของเอกสาร Python ต้องใช้ papermill และ cell ที่มี tag `parameters` | ติดตั้ง papermill และตรวจ tag ของ cell (@sec-ch19-parameterized) |
+| render สำเร็จแต่ไม่เจอไฟล์ผลลัพธ์ | ในโครงการ Quarto ผลลัพธ์ไปอยู่ใน `output-dir` เช่น `_site/` หรือ `_book/` | ดู `output-dir` ใน `_quarto.yml` |
+| PDF ไม่ออก และมีข้อความเกี่ยวกับ LaTeX | ยังไม่ได้ติดตั้ง TeX | `quarto install tinytex` หรือเปลี่ยนเป็น `format: typst` |
+| PDF ภาษาไทยเป็นสี่เหลี่ยมหรือหาย | ฟอนต์เริ่มต้นไม่มีอักษรไทย | ตั้ง `mainfont: "Sarabun"` (หรือฟอนต์ไทยอื่นที่ติดตั้ง) ในส่วนหัว |
+| ผลลัพธ์ในรายงานไม่อัปเดตหลังแก้ข้อมูล | เปิด `freeze` หรือ `cache` ไว้ | render ใหม่ด้วย `quarto render --cache-refresh` หรือปิด `freeze` ชั่วคราว |
+| render ช้ามาก | ทุก render รัน query ทั้งหมดใหม่ | ทำ query หนักใน pipeline ให้ได้ตารางสรุปก่อน แล้วให้รายงานอ่านตารางสรุป |
+
+: ปัญหา Quarto ที่พบบ่อย {#tbl-appf-quarto}
+
+ส่วนหัวของรายงาน PDF ภาษาไทยที่ใช้ได้กับ Typst มีลักษณะดังนี้
+
+```yaml
+---
+title: "รายงานสถานการณ์ PM2.5"
+lang: th
+format:
+  typst:
+    mainfont: "Sarabun"
+---
+```
+
+ถ้าปัญหาไม่ตรงกับที่รวบรวมไว้ในภาคผนวกนี้ ให้เตรียมสามอย่างก่อนถามผู้สอนหรือค้นหาในเว็บ ได้แก่ ข้อความ error ทั้งหมด (ไม่ใช่ภาพหน้าจอเฉพาะบรรทัดสุดท้าย) โค้ดที่เล็กที่สุดที่ทำให้เกิดปัญหา และเวอร์ชันของ Python กับแพ็กเกจที่เกี่ยวข้อง ถ้าใช้ AI ช่วยหาวิธีแก้ ให้ตรวจว่าวิธีที่ได้ไม่ปิดการป้องกันความปลอดภัย เช่น `verify=False` และบันทึกการใช้ตามแนวทางใน @sec-ch02-ai

@@ -48,7 +48,7 @@ title: "กระดานสถานะการเขียนหนังส
 | ภาคผนวก ค SQL ฉบับอ้างอิง | `appendices/c-sql-reference.qmd` | `book/app-c-sql-reference` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ง Air4Thai และข้อมูลเปิด | `appendices/d-air4thai-open-data.qmd` | `book/app-d-air4thai-open-data` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก จ คณิตศาสตร์พื้นฐาน | `appendices/e-math.qmd` | `book/app-e-math` | agent:claude | | drafting | 2026-10-26 |
-| ภาคผนวก ฉ การแก้ปัญหา | `appendices/f-troubleshooting.qmd` | `book/app-f-troubleshooting` | | | todo | |
+| ภาคผนวก ฉ การแก้ปัญหา | `appendices/f-troubleshooting.qmd` | `book/app-f-troubleshooting` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ช แนวคำตอบ | `appendices/answers/NN.qmd` (รวมผ่าน `appendices/g-answers.qmd`) | branch ของแต่ละบท / `assemble.py` | ผู้เขียนแต่ละบท | | — | |
 | ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว | `appendices/h-toolbox-reference.qmd` | `book/app-h-toolbox-reference` | | | todo | |
 | อภิธานศัพท์ | `glossary.qmd` จาก `glossary/NN.yml` (สร้างอัตโนมัติ) | branch ของแต่ละบท / `assemble.py` | ผู้เขียนแต่ละบท | ผู้ดูแลเล่ม | — | |
