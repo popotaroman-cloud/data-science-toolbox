@@ -31,7 +31,7 @@ last-verified: "2026-10"
 
 เครื่องมือรุ่นเก่ามักจัดกราฟเป็นเมนูของชื่อชนิด เช่น bar chart, line chart, pie chart แต่ละชนิดเป็นฟังก์ชันแยกกัน ผู้ใช้ต้องจำว่าฟังก์ชันใดรับพารามิเตอร์อะไร และเมื่อต้องการกราฟที่ไม่อยู่ในเมนู ก็ทำไม่ได้ Leland Wilkinson เสนอวิธีมองที่ต่างออกไปในหนังสือ *The Grammar of Graphics* คือ กราฟทุกภาพประกอบจากส่วนประกอบชุดเดียวกัน เหมือนประโยคทุกประโยคประกอบจากคำตามไวยากรณ์ [@wilkinson2005grammar]
 
-Hadley Wickham นำแนวคิดนี้มาทำเป็น ggplot2 ในภาษา R และเสนอเป็น **layered grammar of graphics** ซึ่งเป็นรูปแบบที่ใช้กันแพร่หลายที่สุดในปัจจุบัน [@wickham2010layered] ส่วนประกอบหลักมีดังนี้
+Hadley Wickham นำแนวคิดนี้มาทำเป็น ggplot2 ในภาษา R และเสนอเป็น **[layered grammar of graphics]{.idx}** ซึ่งเป็นรูปแบบที่ใช้กันแพร่หลายที่สุดในปัจจุบัน [@wickham2010layered] ส่วนประกอบหลักมีดังนี้
 
 | ส่วนประกอบ | ความหมาย | ตัวอย่างในกราฟ PM2.5 |
 |---|---|---|
@@ -71,7 +71,7 @@ Hadley Wickham นำแนวคิดนี้มาทำเป็น ggplot2
 
 ### seaborn objects
 
-seaborn ที่ใช้ในบทที่ 11 มีสองแบบ แบบแรกคือฟังก์ชันระดับสูงอย่าง `sns.relplot()` และ `sns.boxplot()` ซึ่งสะดวกแต่แต่ละฟังก์ชันมีพารามิเตอร์ของตัวเอง แบบที่สองคือ **seaborn objects** (`seaborn.objects`) ซึ่งเพิ่มเข้ามาตั้งแต่รุ่น 0.12 และออกแบบตาม grammar of graphics โดยตรง [@waskom2021seaborn]
+seaborn ที่ใช้ในบทที่ 11 มีสองแบบ แบบแรกคือฟังก์ชันระดับสูงอย่าง `sns.relplot()` และ `sns.boxplot()` ซึ่งสะดวกแต่แต่ละฟังก์ชันมีพารามิเตอร์ของตัวเอง แบบที่สองคือ **[seaborn objects]{.idx-tool}** (`seaborn.objects`) ซึ่งเพิ่มเข้ามาตั้งแต่รุ่น 0.12 และออกแบบตาม grammar of graphics โดยตรง [@waskom2021seaborn]
 
 ```python
 import seaborn.objects as so
@@ -96,7 +96,7 @@ p.save("reports/figures/monthly_by_region.png", dpi=200)
 
 ### Altair และ Vega-Lite
 
-**Vega-Lite** เป็นภาษาสำหรับบรรยายกราฟในรูป JSON ที่พัฒนาที่ University of Washington โดยออกแบบตาม grammar of graphics และเพิ่ม grammar of interaction เข้าไป [@satyanarayan2017vegalite] **Altair** เป็นไลบรารี Python ที่สร้าง JSON ของ Vega-Lite ให้ แล้วเบราว์เซอร์เป็นผู้วาดกราฟ [@vanderplas2018altair]
+**[Vega-Lite]{.idx}** เป็นภาษาสำหรับบรรยายกราฟในรูป JSON ที่พัฒนาที่ University of Washington โดยออกแบบตาม grammar of graphics และเพิ่ม grammar of interaction เข้าไป [@satyanarayan2017vegalite] **[Altair]{.idx-tool}** เป็นไลบรารี Python ที่สร้าง JSON ของ Vega-Lite ให้ แล้วเบราว์เซอร์เป็นผู้วาดกราฟ [@vanderplas2018altair]
 
 ```python
 import altair as alt
@@ -153,7 +153,7 @@ monthly = con.execute("""
 
 Plotly แทนกราฟทุกภาพด้วยโครงสร้างข้อมูลแบบต้นไม้ที่แปลงเป็น JSON ได้ เรียกว่า **figure** ซึ่งมีสองส่วนหลัก [@plotly2026python]
 
-- **`data`** รายการของ **trace** แต่ละ trace คือชุดข้อมูลหนึ่งชุดที่วาดด้วยเครื่องหมายหนึ่งแบบ เช่น `scatter` (ซึ่งรวมทั้งจุดและเส้น) `bar` `box` หรือ `heatmap`
+- **`data`** รายการของ **[trace]{.idx}** แต่ละ trace คือชุดข้อมูลหนึ่งชุดที่วาดด้วยเครื่องหมายหนึ่งแบบ เช่น `scatter` (ซึ่งรวมทั้งจุดและเส้น) `bar` `box` หรือ `heatmap`
 - **`layout`** ทุกอย่างที่ไม่ใช่ข้อมูล เช่น ชื่อกราฟ แกน legend ขนาด ฟอนต์ เส้นอ้างอิง และคำอธิบายประกอบ
 
 ```{mermaid}
@@ -170,7 +170,7 @@ flowchart TD
 
 ### Plotly Express และ graph_objects
 
-Plotly มีสองระดับ **Plotly Express** (`plotly.express`) เป็นฟังก์ชันระดับสูงที่รับ DataFrame แบบ tidy แล้วสร้าง figure ให้ทั้งชุด ส่วน **graph_objects** (`plotly.graph_objects`) เป็นระดับล่างที่สร้าง trace ทีละตัว ในทางปฏิบัติ มักเริ่มด้วย Plotly Express แล้วปรับแต่งต่อด้วยเมธอดของ figure
+Plotly มีสองระดับ **[Plotly Express]{.idx-tool}** (`plotly.express`) เป็นฟังก์ชันระดับสูงที่รับ DataFrame แบบ tidy แล้วสร้าง figure ให้ทั้งชุด ส่วน **[graph_objects]{.idx-tool}** (`plotly.graph_objects`) เป็นระดับล่างที่สร้าง trace ทีละตัว ในทางปฏิบัติ มักเริ่มด้วย Plotly Express แล้วปรับแต่งต่อด้วยเมธอดของ figure
 
 ```python
 import plotly.express as px
@@ -202,7 +202,7 @@ Figure 8 scatter 37.5
 
 ### template และความสม่ำเสมอ
 
-**template** ของ Plotly คือชุดค่าเริ่มต้นของ layout เช่น สีพื้น เส้นตาราง และชุดสี การตั้ง template ของโครงการไว้ที่เดียวทำให้กราฟทุกภาพมีรูปแบบเดียวกัน แนวคิดเดียวกับ `src/viz_style.py` ในบทที่ 11
+**[template]{.idx}** ของ Plotly คือชุดค่าเริ่มต้นของ layout เช่น สีพื้น เส้นตาราง และชุดสี การตั้ง template ของโครงการไว้ที่เดียวทำให้กราฟทุกภาพมีรูปแบบเดียวกัน แนวคิดเดียวกับ `src/viz_style.py` ในบทที่ 11
 
 ```python
 import plotly.io as pio
@@ -214,7 +214,7 @@ pio.templates.default = "simple_white"   # ตั้งครั้งเดี�
 
 ### visual information-seeking mantra
 
-Ben Shneiderman สรุปหลักการออกแบบระบบสำรวจข้อมูลด้วยภาพไว้เป็นวลีที่รู้จักกันในชื่อ **visual information-seeking mantra** ว่า "overview first, zoom and filter, then details-on-demand" [@shneiderman1996eyes]
+Ben Shneiderman สรุปหลักการออกแบบระบบสำรวจข้อมูลด้วยภาพไว้เป็นวลีที่รู้จักกันในชื่อ **[visual information-seeking mantra]{.idx}** ว่า "overview first, zoom and filter, then details-on-demand" [@shneiderman1996eyes]
 
 | ขั้น | ความหมาย | ตัวอย่างในระบบ PM2.5 | กลไกที่ใช้ |
 |---|---|---|---|
@@ -243,11 +243,11 @@ Ben Shneiderman สรุปหลักการออกแบบระบบ�
 
 ### หลายมุมมองที่เชื่อมกัน
 
-ข้อมูลหลายมิติแสดงในกราฟเดียวได้ยาก **linked views** (หรือ coordinated multiple views) แก้ปัญหานี้ด้วยการแสดงข้อมูลชุดเดียวกันในหลายกราฟ แต่ละกราฟแสดงคนละมิติ แล้วเชื่อมกันให้การเลือกในกราฟหนึ่งส่งผลต่อกราฟอื่น [@roberts2007state] การเลือกด้วยการลากกรอบเรียกว่า **brushing** เช่น ลากเลือกช่วงเวลาในกราฟอนุกรมเวลา แล้วกราฟแท่งด้านล่างแสดงสัดส่วนวันเกินมาตรฐานของแต่ละภาคเฉพาะในช่วงที่เลือก
+ข้อมูลหลายมิติแสดงในกราฟเดียวได้ยาก **[linked views]{.idx}** (หรือ coordinated multiple views) แก้ปัญหานี้ด้วยการแสดงข้อมูลชุดเดียวกันในหลายกราฟ แต่ละกราฟแสดงคนละมิติ แล้วเชื่อมกันให้การเลือกในกราฟหนึ่งส่งผลต่อกราฟอื่น [@roberts2007state] การเลือกด้วยการลากกรอบเรียกว่า **[brushing]{.idx}** เช่น ลากเลือกช่วงเวลาในกราฟอนุกรมเวลา แล้วกราฟแท่งด้านล่างแสดงสัดส่วนวันเกินมาตรฐานของแต่ละภาคเฉพาะในช่วงที่เลือก
 
 ### linked views ด้วย Altair
 
-Altair รองรับ linked views ผ่าน **selection parameter** ซึ่งประกาศไว้ในไวยากรณ์ของกราฟ ไม่ต้องเขียน callback
+Altair รองรับ linked views ผ่าน **[selection parameter]{.idx}** ซึ่งประกาศไว้ในไวยากรณ์ของกราฟ ไม่ต้องเขียน callback
 
 ```python
 brush = alt.selection_interval(encodings=["x"])          # เลือกช่วงบนแกน x
@@ -347,7 +347,7 @@ fig.update_layout(bargap=0)   # แท่งชิดกันแบบ histogra
 
 ### Datashader
 
-**Datashader** ใช้แนวคิดเดียวกันกับ scatter plot โดยตรง ขั้นแรกกำหนด "ผืนผ้าใบ" (canvas) ขนาดเท่าภาพที่ต้องการ ขั้นที่สองนับจำนวนจุดที่ตกในแต่ละพิกเซล (aggregation) ขั้นที่สามแปลงจำนวนเป็นสี (shading) โดยมักใช้สเกล log หรือ histogram equalization เพื่อให้เห็นทั้งบริเวณหนาแน่นและบริเวณเบาบาง [@bednar2026datashader]
+**[Datashader]{.idx-tool}** ใช้แนวคิดเดียวกันกับ scatter plot โดยตรง ขั้นแรกกำหนด "ผืนผ้าใบ" (canvas) ขนาดเท่าภาพที่ต้องการ ขั้นที่สองนับจำนวนจุดที่ตกในแต่ละพิกเซล (aggregation) ขั้นที่สามแปลงจำนวนเป็นสี (shading) โดยมักใช้สเกล log หรือ histogram equalization เพื่อให้เห็นทั้งบริเวณหนาแน่นและบริเวณเบาบาง [@bednar2026datashader]
 
 ```python
 import datashader as ds
@@ -405,7 +405,7 @@ alt text ที่ไม่มีประโยชน์บอกเพีย�
 
 ### แนวคิด
 
-เครื่องมือสำรวจแบบลากวาง (drag-and-drop) อย่าง Tableau และ Power BI ให้ผู้ใช้สร้างกราฟด้วยการลากชื่อตัวแปรไปวางบนช่องแกน x แกน y สี หรือ facet ซึ่งก็คือการกำหนด aesthetic mapping ของ grammar of graphics ด้วยเมาส์ **PyGWalker** นำแนวคิดนี้เข้ามาใน Jupyter โดยเปิดหน้าจอแบบ Tableau บน DataFrame ใน notebook [@kanaries2026pygwalker]
+เครื่องมือสำรวจแบบลากวาง (drag-and-drop) อย่าง Tableau และ Power BI ให้ผู้ใช้สร้างกราฟด้วยการลากชื่อตัวแปรไปวางบนช่องแกน x แกน y สี หรือ facet ซึ่งก็คือการกำหนด aesthetic mapping ของ grammar of graphics ด้วยเมาส์ **[PyGWalker]{.idx-tool}** นำแนวคิดนี้เข้ามาใน Jupyter โดยเปิดหน้าจอแบบ Tableau บน DataFrame ใน notebook [@kanaries2026pygwalker]
 
 ```python
 import pygwalker as pyg
