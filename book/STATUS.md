@@ -36,7 +36,7 @@ title: "กระดานสถานะการเขียนหนังส
 | 19 | `chapters/19-storytelling-reports.qmd` | `book/ch19-storytelling-reports` | agent:claude | | drafting | 2026-10-25 | 14 |
 | 20 | `chapters/20-dashboards.qmd` | `book/ch20-dashboards` | agent:claude | | drafting | 2026-10-25 | 14 |
 | 21 | `chapters/21-case-study-pm25.qmd` | `book/ch21-case-study-pm25` | agent:claude | | drafting | 2026-10-25 | 15 |
-| 22 | `chapters/22-ethics-ai.qmd` | `book/ch22-ethics-ai` | | | todo | | 1, 15 |
+| 22 | `chapters/22-ethics-ai.qmd` | `book/ch22-ethics-ai` | agent:claude | | drafting | 2026-10-25 | 1, 15 |
 
 ## ส่วนหน้าและส่วนท้ายเล่ม
 

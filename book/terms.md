@@ -223,3 +223,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Sensitivity analysis | การวิเคราะห์ความไว (sensitivity analysis) | แปล | 21 |
 | Cluster bootstrap | cluster bootstrap | ทับศัพท์ | 21 |
 | Fresh-clone test | fresh-clone test | ทับศัพท์ | 21 |
+| Data ethics | จริยธรรมข้อมูล | แปล | 22 |
+| Hallucination (AI) | hallucination | ทับศัพท์ · อธิบายครั้งแรก | 22 |
+| License | สัญญาอนุญาต (license) | แปล | 22 |
+| Environmental justice | ความยุติธรรมเชิงสิ่งแวดล้อม | แปล | 22 |
