@@ -150,7 +150,7 @@ result = (
 
 : คำสั่งที่ใช้บ่อยของ seaborn {#tbl-apph-seaborn}
 
-ก่อนวาดทุกครั้งให้เรียก `set_style()` ของโครงการเพื่อตั้งฟอนต์ไทย (@sec-ch11-thai-fonts) ฟังก์ชันระดับ figure เช่น `relplot` และ `displot` สร้าง figure ใหม่เอง จึงไม่รับอาร์กิวเมนต์ `ax=` ส่วนฟังก์ชันระดับ axes เช่น `histplot` และ `boxplot` วาดลง `ax` ที่ส่งเข้าไปได้
+ก่อนวาดทุกครั้งให้เรียก `viz_style.setup()` ของโครงการเพื่อตั้งฟอนต์ไทย (@sec-ch11-thai-fonts) ฟังก์ชันระดับ figure เช่น `relplot` และ `displot` สร้าง figure ใหม่เอง จึงไม่รับอาร์กิวเมนต์ `ax=` ส่วนฟังก์ชันระดับ axes เช่น `histplot` และ `boxplot` วาดลง `ax` ที่ส่งเข้าไปได้
 
 ### Plotly
 

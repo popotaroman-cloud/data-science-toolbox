@@ -111,7 +111,7 @@ near.sort_values("dist_km", ascending=False).head()
 agg = con.sql("""
     WITH per_station AS (
         SELECT station_id, avg(pm25_mean) AS pm25, avg((pm25_mean > 37.5)::INT) AS share_over
-        FROM daily_pm25_clean GROUP BY station_id)
+        FROM daily_pm25_clean WHERE is_complete GROUP BY station_id)
     SELECT s.province, count(*) AS n_stations,
            avg(p.pm25) AS pm25_mean, avg(p.share_over) AS share_over_std
     FROM per_station p JOIN stations s USING (station_id)
@@ -142,7 +142,7 @@ fig.show()
 ```python
 import folium
 
-daily = con.sql("SELECT station_id, avg(pm25_mean) AS pm25 FROM daily_pm25_clean GROUP BY 1").df()
+daily = con.sql("SELECT station_id, avg(pm25_mean) AS pm25 FROM daily_pm25_clean WHERE is_complete GROUP BY 1").df()
 sm = stations.merge(daily, on="station_id", how="left")
 
 def color(v):
@@ -169,6 +169,7 @@ h = con.sql("""
     SELECT coalesce(s.region, 'ไม่ระบุ') AS region, coalesce(s.province, 'ไม่ระบุ') AS province,
            s.name_th, count(*) AS n_days, avg(d.pm25_mean) AS pm25_mean
     FROM daily_pm25_clean d JOIN stations s USING (station_id)
+    WHERE d.is_complete
     GROUP BY ALL
 """).df()
 

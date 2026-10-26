@@ -227,7 +227,7 @@ GROUP BY year ORDER BY year;
 - **Parquet = ดิสก์** · **Arrow = RAM**
 
 ```python
-tbl = con.sql("SELECT * FROM stations").fetch_arrow_table()   # pyarrow.Table
+tbl = con.sql("SELECT * FROM stations").to_arrow_table()   # pyarrow.Table
 ```
 
 # `src/load_duckdb.py`

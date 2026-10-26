@@ -192,7 +192,7 @@ CREATE TABLE daily_pm25_clean AS SELECT * FROM 'daily_pm25_clean.parquet';
 UserWarning: Glyph 3616 (\N{THAI CHARACTER PHO SAMPHAO}) missing from font(s) DejaVu Sans.
 ```
 
-สาเหตุคือฟอนต์เริ่มต้นของ matplotlib ไม่มีอักษรไทย วิธีแก้คือตั้งฟอนต์ไทยก่อนวาดด้วยฟังก์ชัน `set_style()` ใน @sec-ch11-thai-fonts ถ้าติดตั้งฟอนต์ใหม่แล้วยังไม่เห็น ให้ restart kernel เพราะ matplotlib สร้างรายการฟอนต์ไว้ตอน import ถ้ายังไม่ได้อีก ให้ลบแคชฟอนต์ของ matplotlib แล้ว restart
+สาเหตุคือฟอนต์เริ่มต้นของ matplotlib ไม่มีอักษรไทย วิธีแก้คือตั้งฟอนต์ไทยก่อนวาดด้วยฟังก์ชัน `viz_style.setup()` ใน @sec-ch11-thai-fonts ถ้าติดตั้งฟอนต์ใหม่แล้วยังไม่เห็น ให้ restart kernel เพราะ matplotlib สร้างรายการฟอนต์ไว้ตอน import ถ้ายังไม่ได้อีก ให้ลบแคชฟอนต์ของ matplotlib แล้ว restart
 
 ```python
 import matplotlib

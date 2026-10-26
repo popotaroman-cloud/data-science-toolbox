@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 9: หลักการ visualization �
 
 > **CLO:** CLO4 · **เครื่องมือ:** seaborn (หลัก), Altair (เสริม)
 > **ผลงานที่เพิ่มในระบบ:** กราฟ univariate / bivariate ใน `notebooks/09_static_viz.ipynb` ที่ผูกกับคำถามใน `questions.md`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 11 [หลักการรับรู้และการออกแบบภาพข้อมูล](../../book/chapters/11-visual-perception.html) — อ่านเสริม: [หัวข้อ 12.1–12.2 grammar of graphics](../../book/chapters/12-interactive-viz.html#sec-ch12-grammar)
 
 ## วัตถุประสงค์การเรียนรู้
 
@@ -63,8 +65,12 @@ Altair (เสริม) ใช้ไวยากรณ์เดียวกั�
 ```python
 import altair as alt
 
-alt.Chart(daily_region).mark_line().encode(
-    x="date:T", y="pm25_median:Q", color="region:N"
+# Altair ปฏิเสธข้อมูลเกิน 5,000 แถว (MaxRowsError) ข้อมูลรายวันสี่ภาคสี่ปีมีราว 5,800 แถว
+# จึงสรุปเป็นรายเดือนก่อนวาด (หนังสือบทที่ 12)
+monthly_region = (daily_region.assign(month=daily_region["date"].dt.to_period("M").dt.to_timestamp())
+                  .groupby(["region", "month"], as_index=False)["pm25_median"].median())
+alt.Chart(monthly_region).mark_line().encode(
+    x="month:T", y="pm25_median:Q", color="region:N"
 ).facet(column="region:N")
 ```
 
@@ -169,6 +175,7 @@ daily = con.sql("""
            s.name_th, s.province, s.region
     FROM daily_pm25_clean AS d
     JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
 """).df()
 daily["date"] = pd.to_datetime(daily["date"])
 daily["month"] = daily["date"].dt.month

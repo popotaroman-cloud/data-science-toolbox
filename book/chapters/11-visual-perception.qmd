@@ -360,7 +360,7 @@ from matplotlib import font_manager
 THAI_FONTS = ["Sarabun", "Tahoma", "Leelawadee UI", "Thonburi", "Noto Sans Thai", "Loma", "Garuda"]
 
 
-def set_style() -> str:
+def setup() -> str:
     """เลือกฟอนต์ไทยตัวแรกที่มีในเครื่อง แล้วตั้งค่า seaborn คืนชื่อฟอนต์ที่ใช้"""
     available = {f.name for f in font_manager.fontManager.ttflist}
     font = next((f for f in THAI_FONTS if f in available), None)
@@ -379,7 +379,7 @@ def set_style() -> str:
 
 : ฟอนต์ไทยในแต่ละระบบปฏิบัติการ {#tbl-ch11-thai-fonts}
 
-การเก็บการตั้งค่านี้ไว้ใน `src/viz_style.py` แล้ว import ในทุก notebook ทำให้กราฟทุกภาพในโครงการมีรูปแบบเดียวกัน และเมื่อเปลี่ยนเครื่อง ก็แก้ที่ไฟล์เดียว ภาคผนวก ฉ รวบรวมปัญหาภาษาไทยที่พบบ่อยและวิธีแก้
+การเก็บการตั้งค่านี้ไว้ใน `src/viz_style.py` แล้ว import ในทุก notebook ทำให้กราฟทุกภาพในโครงการมีรูปแบบเดียวกัน และเมื่อเปลี่ยนเครื่อง ก็แก้ที่ไฟล์เดียว ฉบับในคู่มือปฏิบัติการสัปดาห์ที่ 9 ขยายฟังก์ชันนี้ให้รับ `font_path` สำหรับเครื่องที่ต้องเพิ่มฟอนต์เอง เช่น Colab และเพิ่มฟังก์ชัน `add_std_line()` สำหรับวาดเส้นมาตรฐาน ภาคผนวก ฉ รวบรวมปัญหาภาษาไทยที่พบบ่อยและวิธีแก้
 
 ### ข้อควรระวังอื่นของภาษาไทยในกราฟ
 
@@ -404,9 +404,9 @@ def set_style() -> str:
 **ร่างที่ปรับปรุง** bar chart แนวนอนของอัตรา เรียงจากมากไปน้อย สีเทาเดียว ตัวเลขกำกับปลายแท่ง ชื่อภาคบนแกน y และคำบรรยายที่ระบุเกณฑ์ ช่วงเวลา และจำนวนสถานี
 
 ```python
-from viz_style import set_style
+import viz_style
 
-set_style()
+viz_style.setup()
 exceed = (daily.assign(exceed=daily["pm25_mean"] > 37.5)
                .groupby("region", as_index=False)
                .agg(rate=("exceed", "mean"), n_stations=("station_id", "nunique"))

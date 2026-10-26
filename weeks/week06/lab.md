@@ -274,6 +274,7 @@ git push -u origin week06-quality
 |---|---|
 | `ModuleNotFoundError: pandera.pandas` | pandera รุ่นเก่า ให้อัปเดต (`conda update pandera`) หรือเปลี่ยนเป็น `import pandera as pa` |
 | `ModuleNotFoundError: schema` | รัน script จาก root ของ repo ด้วย `python src/validate.py` และใน notebook ต้อง `sys.path.append("src")` |
+| `ModuleNotFoundError: No module named 'pkg_resources'` ตอน `import ydata_profiling` | setuptools รุ่นใหม่ถอด `pkg_resources` ออกแล้ว ติดตั้ง `setuptools<81` (อยู่ใน `environment.yml` แล้ว) ดูหนังสือภาคผนวก ฉ.1 |
 | ProfileReport ช้ามากหรือหน่วยความจำเต็ม | ใช้ `minimal=True` หรือสุ่มตัวอย่าง `m.sample(50_000, random_state=0)` แล้วระบุในบันทึกว่าใช้ตัวอย่าง |
 | `ts` ไม่ผ่านกฎชนิดข้อมูล | DuckDB อาจคืนค่าเป็นความละเอียดอื่น (เช่น `datetime64[us]`) `coerce=True` ควรแปลงให้ ถ้ายังไม่ผ่าน ให้ดู `m.dtypes` แล้วปรับ schema |
 | `IO Error: Could not set lock on file` | มีโปรแกรมอื่นเปิด `pm25.duckdb` แบบเขียนอยู่ ปิด notebook อื่น หรือเปิดด้วย `read_only=True` |

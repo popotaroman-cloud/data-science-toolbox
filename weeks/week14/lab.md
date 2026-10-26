@@ -85,6 +85,7 @@ d0, d1 = con.execute("SELECT min(date), max(date) FROM daily_pm25_clean").fetcho
 df = con.sql("""
     SELECT s.region, avg((d.pm25_mean > 37.5)::INT) AS share_over
     FROM daily_pm25_clean d JOIN stations s USING (station_id)
+    WHERE d.is_complete
     GROUP BY s.region ORDER BY share_over DESC
 """).df()
 fig = px.bar(df, x="region", y="share_over",
@@ -159,7 +160,7 @@ if len(picked) != 2:
     st.stop()
 start, end = picked
 
-cond, params = ["d.date BETWEEN ? AND ?"], [start, end]
+cond, params = ["d.is_complete", "d.date BETWEEN ? AND ?"], [start, end]
 for col, k in (("s.region", "region"), ("s.province", "province"), ("s.station_id", "station")):
     if ss[k] is not None:
         cond.append(f"{col} = ?")

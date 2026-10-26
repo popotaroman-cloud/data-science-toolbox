@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 12: สำรวจข้อมูลห�
 
 > **CLO:** CLO4, CLO6 · **เครื่องมือหลัก:** scikit-learn (StandardScaler, PCA, KMeans, silhouette score), Faker · **เครื่องมือเสริม:** UMAP, PyOD, SDV, SMOTE (imbalanced-learn)
 > **ผลงานที่เพิ่มในระบบ:** การจัดกลุ่มสถานีตามรูปแบบ PM2.5 รายเดือน + การวิเคราะห์ outlier + ชุดข้อมูลสังเคราะห์สำหรับทดสอบ pipeline
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 15 [การสำรวจข้อมูลหลายมิติ](../../book/chapters/15-multivariate.html) · บทที่ 16 [ข้อมูลสังเคราะห์และความเป็นส่วนตัว](../../book/chapters/16-synthetic-privacy.html)
 
 ## วัตถุประสงค์การเรียนรู้
 
@@ -39,6 +41,7 @@ con = duckdb.connect("data/pm25.duckdb", read_only=True)
 monthly = con.sql("""
     SELECT station_id, month(date) AS m, avg(pm25_mean) AS pm25
     FROM daily_pm25_clean
+    WHERE is_complete
     GROUP BY station_id, m
 """).df()
 
@@ -179,7 +182,7 @@ KMeans *จะ* คืนกลุ่มมาให้เสมอ แม้ข
 | Isolation Forest (PyOD, เสริม) | จุดที่ถูก "แยกออก" ได้ง่ายในหลายมิติ | ดูหลายมลพิษพร้อมกัน เช่น PM2.5 สูงแต่ PM10 ต่ำผิดธรรมชาติ |
 
 ```python
-d = con.sql("SELECT station_id, date, pm25_mean FROM daily_pm25_clean").df()
+d = con.sql("SELECT station_id, date, pm25_mean FROM daily_pm25_clean WHERE is_complete").df()
 d["month"] = pd.to_datetime(d["date"]).dt.month
 g = d.groupby(["station_id", "month"])["pm25_mean"]
 med = g.transform("median")
@@ -250,11 +253,14 @@ print(fake.name(), "|", fake.date_between(start_date="-1y", end_date="today"))
 from sdv.metadata import Metadata
 from sdv.single_table import GaussianCopulaSynthesizer
 
-metadata = Metadata.detect_from_dataframe(data=real_df, table_name="visits")
+data = {"visits": real_df}                       # SDV 2.x รับข้อมูลเป็น dict ของตาราง
+metadata = Metadata.detect_from_dataframes(data)
 synth = GaussianCopulaSynthesizer(metadata)
-synth.fit(real_df)
-synthetic = synth.sample(num_rows=1000)
+synth.fit(data)
+synthetic = synth.sample(num_rows=1000)["visits"]
 ```
+
+API ของ SDV เปลี่ยนบ่อย ตัวอย่างนี้ใช้ SDV 2.0 ส่วนรุ่น 1.x รับ DataFrame โดยตรงและใช้ `Metadata.detect_from_dataframe` ให้ตรวจ `sdv.__version__` ก่อนเสมอ
 
 ขีดจำกัดที่ต้องรู้
 

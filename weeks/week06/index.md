@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 6: Data profiling และการต�
 
 > **CLO:** CLO3 · **เครื่องมือ:** ydata-profiling, pandera (หลัก) · skimpy, Sweetviz (เสริม)
 > **ผลงานที่เพิ่มในระบบ:** รายงาน profiling + บันทึกการตีความ + กฎตรวจข้อมูล `src/schema.py` และ `src/validate.py`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 9 [คุณภาพข้อมูลและการตรวจสอบ](../../book/chapters/09-data-quality.html)
 
 ## วัตถุประสงค์การเรียนรู้
 
