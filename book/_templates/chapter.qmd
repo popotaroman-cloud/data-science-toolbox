@@ -80,7 +80,7 @@ con = duckdb.connect("data/pm25.duckdb", read_only=True)
 
 8. <...>
 
-แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ในภาคผนวก ช (@sec-appg-ch<NN>)
+แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน[ภาคผนวก ช](../appendices/g-answers.qmd#sec-appg-ch<NN>)
 
 ## อ่านเพิ่มเติม {.unnumbered}
 

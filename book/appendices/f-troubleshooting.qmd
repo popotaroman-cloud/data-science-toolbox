@@ -204,7 +204,7 @@ print(matplotlib.get_cachedir())    # ลบไฟล์ fontlist-*.json ใน�
 | ที่เกิด | อาการ | วิธีแก้ |
 |---|---|---|
 | Plotly และ Altair | ปกติแสดงได้ แต่ภาพที่ส่งออกเป็น PNG ด้วย Kaleido หรือ vl-convert อาจเป็นสี่เหลี่ยม | ติดตั้งฟอนต์ไทยในระบบ และระบุ `font_family` ใน layout |
-| ไฟล์ PDF จาก Quarto | อักษรไทยหายหรือเป็นสี่เหลี่ยม | ตั้ง `mainfont` เป็นฟอนต์ไทยในส่วนหัวของเอกสาร (@sec-appf-tools) |
+| ไฟล์ PDF จาก Quarto | อักษรไทยหายหรือเป็นสี่เหลี่ยม | ตั้ง `mainfont` เป็นฟอนต์ไทยในส่วนหัวของเอกสาร ([ฉ.6](#sec-appf-tools)) |
 | terminal ของ Windows | `print()` ภาษาไทยได้ `UnicodeEncodeError: 'charmap' codec can't encode` | ตั้งตัวแปร `PYTHONUTF8=1` หรือใช้ Windows Terminal ที่ตั้งเป็น UTF-8 |
 | ชื่อไฟล์ภาษาไทย | script ทำงานบนเครื่องหนึ่งแต่หาไฟล์ไม่เจอบนอีกเครื่อง | ใช้ชื่อไฟล์และชื่อคอลัมน์เป็นภาษาอังกฤษ เก็บภาษาไทยไว้ในข้อมูล เช่น `name_th` |
 | การเรียงลำดับ | ชื่อจังหวัดเรียงผิดลำดับพจนานุกรม เช่น เชียงใหม่ อยู่หลัง ตาก เพราะเรียงตามรหัสอักขระ และสระหน้า (เ แ โ ใ ไ) มีรหัสสูงกว่าพยัญชนะ | ใน DuckDB ใช้ `ORDER BY name_th COLLATE th` ซึ่งเรียงตามพจนานุกรมไทย |
@@ -223,7 +223,7 @@ print(matplotlib.get_cachedir())    # ลบไฟล์ fontlist-*.json ใน�
 | ค่าที่ผู้ใช้เลือกหายไปหลังคลิก | เก็บค่าในตัวแปรธรรมดา ซึ่งถูกสร้างใหม่ทุก rerun | เก็บใน `st.session_state` (@sec-ch20-streamlit) |
 | แก้ข้อมูลในฐานข้อมูลแล้วแอปยังแสดงค่าเดิม | ผลของ `cache_data` ยังไม่หมดอายุ | ตั้ง `ttl` ของ cache หรือกด Clear cache ในเมนู |
 | `There are multiple button elements with the same auto-generated ID` | widget ชนิดเดียวกันสองตัวมี label และพารามิเตอร์เหมือนกัน | ใส่ `key=` ที่ไม่ซ้ำให้แต่ละตัว |
-| `Could not set lock on file` | notebook หรือ script อื่นเปิดฐานข้อมูลแบบเขียนค้างไว้ | ดู @sec-appf-duckdb และเปิดการเชื่อมต่อในแอปด้วย `read_only=True` |
+| `Could not set lock on file` | notebook หรือ script อื่นเปิดฐานข้อมูลแบบเขียนค้างไว้ | ดู [ฉ.4](#sec-appf-duckdb) และเปิดการเชื่อมต่อในแอปด้วย `read_only=True` |
 | เปิด `localhost:8501` แล้วเห็นแอปเวอร์ชันเก่า | แอป Streamlit ตัวเก่ายังทำงานอยู่ ตัวใหม่จึงไปใช้พอร์ตถัดไป เช่น 8502 | ดู URL ที่ terminal แสดง แล้วปิดตัวเก่าด้วย Ctrl+C ใน terminal ของมัน |
 
 : ปัญหา Streamlit ที่พบบ่อย {#tbl-appf-streamlit}

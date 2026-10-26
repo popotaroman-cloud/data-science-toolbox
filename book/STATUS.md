@@ -42,7 +42,7 @@ title: "กระดานสถานะการเขียนหนังส
 
 | ส่วน | ไฟล์ | branch | ผู้เขียน | ผู้ตรวจ | สถานะ | วันที่ |
 |---|---|---|---|---|---|---|
-| คำนำ + ข้อตกลงการเขียน + การเตรียมเครื่อง | `index.qmd` | `book-assembly` (ผู้ดูแลเล่ม) | ผู้ดูแลเล่ม | | todo | |
+| คำนำ + ข้อตกลงการเขียน + การเตรียมเครื่อง | `index.qmd` | `book-assembly` (ผู้ดูแลเล่ม) | agent:claude (ร่าง) | ผู้ดูแลเล่ม | drafting | 2026-10-26 |
 | ภาคผนวก ก Python | `appendices/a-python.qmd` | `book/app-a-python` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ข shell และ Git | `appendices/b-shell-git.qmd` | `book/app-b-shell-git` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ค SQL ฉบับอ้างอิง | `appendices/c-sql-reference.qmd` | `book/app-c-sql-reference` | agent:claude | | drafting | 2026-10-26 |
