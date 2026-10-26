@@ -1,9 +1,382 @@
 ---
-status: todo
+status: drafting
+authors: ["agent:claude"]
+last-verified: "2026-10"
 ---
 
 # ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล {.unnumbered}
 
-::: {.callout-warning}
-ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
+ภาคผนวกนี้สรุปพื้นฐานภาษา Python ที่ใช้ตลอดเล่ม สำหรับผู้อ่านที่เคยเขียนโปรแกรมมาบ้างแต่ต้องการทบทวน หรือผู้ที่มาจากภาษาอื่น ไม่ใช่ตำราการเขียนโปรแกรมฉบับสมบูรณ์ ผู้ที่ไม่เคยเขียนโปรแกรมมาก่อนควรอ่านคู่กับตำราเบื้องต้น เช่น เอกสาร tutorial อย่างเป็นทางการของ Python [@python2026tutorial] ตัวอย่างทั้งหมดใช้ Python 3.12 และทดสอบแล้ว
+
+## ก.1 ชนิดข้อมูล ตัวแปร และโครงสร้างข้อมูล (list, dict, tuple, set) {#sec-appa-types .unnumbered}
+
+### ชนิดข้อมูลพื้นฐาน
+
+| ชนิด | ตัวอย่าง | ใช้แทน |
+|---|---|---|
+| `int` | `24` | จำนวนเต็ม เช่น จำนวนชั่วโมง |
+| `float` | `37.5` | จำนวนจริง เช่น ค่า PM2.5 |
+| `str` | `"35t"` | ข้อความ เช่น รหัสสถานี ชื่อจังหวัด |
+| `bool` | `True`, `False` | ค่าความจริง เช่น `is_complete` |
+| `None` | `None` | ไม่มีค่า (เทียบกับ `NULL` ใน SQL) |
+
+: ชนิดข้อมูลพื้นฐานของ Python {#tbl-appa-basic-types}
+
+```python
+pm25 = 42.3
+station_id = "35t"
+is_over = pm25 > 37.5
+print(type(pm25).__name__, type(station_id).__name__, is_over)
+print(f"สถานี {station_id}: {pm25:.1f} µg/m³ เกินมาตรฐาน = {is_over}")
+```
+
+```text
+# ผลลัพธ์
+float str True
+สถานี 35t: 42.3 µg/m³ เกินมาตรฐาน = True
+```
+
+f-string (`f"..."`) แทรกค่าของตัวแปรลงในข้อความ และกำหนดรูปแบบได้หลังเครื่องหมาย `:` เช่น `:.1f` คือทศนิยมหนึ่งตำแหน่ง และ `:.0%` คือเปอร์เซ็นต์ไม่มีทศนิยม ข้อควรระวังเรื่อง `float` คือ ค่าทศนิยมในคอมพิวเตอร์เก็บแบบประมาณ `0.1 + 0.2 == 0.3` ได้ `False` การเปรียบเทียบค่าทศนิยมควรใช้ `math.isclose`
+
+### โครงสร้างข้อมูลสี่แบบ
+
+| โครงสร้าง | สร้าง | เปลี่ยนค่าได้ | ลำดับ | ใช้เมื่อ |
+|---|---|---|---|---|
+| list | `[1, 2, 3]` | ได้ | มี | ลำดับของค่าที่เปลี่ยนได้ เช่น รายชื่อสถานี |
+| tuple | `(1, 2)` | ไม่ได้ | มี | ค่าคงที่ที่รวมกลุ่ม เช่น พิกัด `(lat, lon)` หรือพารามิเตอร์ของ query |
+| dict | `{"a": 1}` | ได้ | มี (ตามลำดับที่ใส่) | จับคู่กุญแจกับค่า เช่น จังหวัดกับภาค |
+| set | `{1, 2}` | ได้ | ไม่มี | ค่าไม่ซ้ำ ตรวจการเป็นสมาชิกเร็ว |
+
+: โครงสร้างข้อมูลหลักของ Python {#tbl-appa-collections}
+
+```python
+stations = ["35t", "36t", "57t"]
+stations.append("05t")
+coords = (18.84, 98.97)
+region_of = {"เชียงใหม่": "เหนือ", "กรุงเทพมหานคร": "กลาง"}
+region_of["สงขลา"] = "ใต้"
+seen = {"35t", "36t", "35t"}
+print(stations[0], stations[-1], len(stations))
+print(coords[0], region_of.get("ขอนแก่น", "ไม่ทราบ"), seen)
+```
+
+```text
+# ผลลัพธ์ (ลำดับของสมาชิกใน set อาจต่างกัน)
+35t 05t 4
+18.84 ไม่ทราบ {'36t', '35t'}
+```
+
+ดัชนีของ list เริ่มที่ 0 และดัชนีลบนับจากท้าย `region_of.get(key, default)` คืนค่า default เมื่อไม่มีกุญแจ แทนที่จะเกิด `KeyError` เหมือน `region_of[key]` ส่วน set ตัดค่าซ้ำออกโดยอัตโนมัติ
+
+### ตัวแปรคือป้ายชื่อ
+
+ตัวแปรใน Python เป็นป้ายชื่อที่ชี้ไปยังวัตถุ ไม่ใช่กล่องที่เก็บสำเนา การกำหนด `b = a` เมื่อ `a` เป็น list ทำให้ทั้งสองชื่อชี้ไปยัง list เดียวกัน การแก้ผ่านชื่อหนึ่งจึงเห็นผ่านอีกชื่อหนึ่ง
+
+```python
+a = [1, 2, 3]
+b = a
+c = a.copy()
+b.append(4)
+print(a, c)
+```
+
+```text
+# ผลลัพธ์
+[1, 2, 3, 4] [1, 2, 3]
+```
+
+หลักการเดียวกันใช้กับ DataFrame ของ pandas การแก้ DataFrame ที่ได้จากการเลือกบางส่วนอาจกระทบหรือไม่กระทบต้นฉบับ ขึ้นกับสถานการณ์ ซึ่ง pandas รุ่นใหม่แก้ด้วยกลไก copy-on-write (บทที่ 8)
+
+## ก.2 เงื่อนไข การวนซ้ำ และ comprehension {#sec-appa-control .unnumbered}
+
+### เงื่อนไข
+
+```python
+def aqi_label(pm25: float) -> str:
+    """ระดับคร่าว ๆ ตามเกณฑ์ WHO 15 และมาตรฐานไทย 37.5 µg/m³ (ค่าเฉลี่ย 24 ชม.)"""
+    if pm25 <= 15:
+        return "ไม่เกินแนวทาง WHO"
+    elif pm25 <= 37.5:
+        return "ไม่เกินมาตรฐานไทย"
+    else:
+        return "เกินมาตรฐานไทย"
+
+
+print([aqi_label(v) for v in (12.0, 30.5, 55.2)])
+```
+
+```text
+# ผลลัพธ์
+['ไม่เกินแนวทาง WHO', 'ไม่เกินมาตรฐานไทย', 'เกินมาตรฐานไทย']
+```
+
+ฟังก์ชันนี้ใช้เพื่อการอธิบายเท่านั้น ระดับดัชนีคุณภาพอากาศของไทยมีเกณฑ์ละเอียดกว่านี้ (ภาคผนวก ง)
+
+### การวนซ้ำ
+
+```python
+values = {"35t": 42.3, "36t": 35.0, "63t": 12.4}
+for station, value in values.items():
+    if value > 37.5:
+        print(station, "เกินมาตรฐาน")
+for i, station in enumerate(sorted(values), start=1):
+    print(i, station)
+```
+
+```text
+# ผลลัพธ์
+35t เกินมาตรฐาน
+1 35t
+2 36t
+3 63t
+```
+
+`dict.items()` ให้คู่กุญแจกับค่า `enumerate` ให้ลำดับพร้อมค่า และ `zip(a, b)` จับคู่สมาชิกของสองลำดับ ในงานข้อมูล ถ้าพบว่ากำลังเขียน `for` วนทีละแถวของ DataFrame ให้หยุดคิดก่อน การคำนวณแบบเวกเตอร์ของ pandas หรือ SQL มักเร็วกว่าหลายร้อยเท่า (บทที่ 8)
+
+### comprehension
+
+comprehension สร้าง list, dict หรือ set จากการวนซ้ำในบรรทัดเดียว
+
+```python
+readings = [42.3, 35.0, None, 12.4, 61.0]
+valid = [v for v in readings if v is not None]
+over = {i: v for i, v in enumerate(readings) if v is not None and v > 37.5}
+print(valid, over, sum(v > 37.5 for v in valid))
+```
+
+```text
+# ผลลัพธ์
+[42.3, 35.0, 12.4, 61.0] {0: 42.3, 4: 61.0} 2
+```
+
+นิพจน์สุดท้าย `sum(v > 37.5 for v in valid)` นับจำนวนค่าที่เกินมาตรฐาน เพราะ `True` มีค่าเท่ากับ 1 เมื่อนำไปบวก comprehension ที่ยาวหรือซ้อนหลายชั้นอ่านยาก ถ้าเกินหนึ่งบรรทัด ให้เขียนเป็น `for` ธรรมดา
+
+## ก.3 ฟังก์ชัน โมดูล และ package {#sec-appa-functions .unnumbered}
+
+### ฟังก์ชัน
+
+```python
+def share_over(values: list[float], threshold: float = 37.5) -> float:
+    """สัดส่วนของค่าที่เกิน threshold โดยไม่นับค่าว่าง"""
+    valid = [v for v in values if v is not None]
+    if not valid:
+        return float("nan")
+    return sum(v > threshold for v in valid) / len(valid)
+
+
+print(round(share_over([42.3, 35.0, None, 61.0]), 3), share_over([20, 50], threshold=15))
+```
+
+```text
+# ผลลัพธ์
+0.667 1.0
+```
+
+พารามิเตอร์ที่มีค่าเริ่มต้น (`threshold=37.5`) ไม่ต้องส่งเมื่อเรียก และส่งด้วยชื่อได้เพื่อให้อ่านง่าย ข้อควรระวังคือ ห้ามใช้วัตถุที่เปลี่ยนค่าได้ เช่น list ว่าง เป็นค่าเริ่มต้น เพราะ Python สร้างค่าเริ่มต้นเพียงครั้งเดียวและใช้ซ้ำทุกการเรียก ให้ใช้ `None` แล้วสร้างใหม่ในฟังก์ชันแทน
+
+### โมดูลและ package
+
+**โมดูล** คือไฟล์ `.py` หนึ่งไฟล์ **package** คือโฟลเดอร์ของโมดูล โครงการในเล่มนี้เก็บโค้ดที่ใช้ซ้ำไว้ใน `src/` แล้ว import ใน notebook รายงาน และแอป เพื่อให้มีนิยามเดียว (บทที่ 2)
+
+```python
+import math                                  # import ทั้งโมดูล ใช้ด้วย math.sqrt
+from pathlib import Path                     # import เฉพาะชื่อที่ต้องการ
+import pandas as pd                          # ใช้ชื่อย่อมาตรฐาน (บทที่ 2)
+```
+
+การ import จาก `src/` ใน notebook ที่อยู่ใน `notebooks/` ต้องให้ Python รู้จักโฟลเดอร์ราก วิธีที่แนะนำคือติดตั้งโครงการเป็น package แบบแก้ไขได้ด้วย `pip install -e .` เมื่อมี `pyproject.toml` (บทที่ 2) วิธีชั่วคราวคือเพิ่มพาธใน `sys.path` ซึ่งใช้ได้แต่ทำให้ notebook ขึ้นกับตำแหน่งของไฟล์
+
+## ก.4 การจัดการไฟล์และ path (`pathlib`) {#sec-appa-pathlib .unnumbered}
+
+### ทำไมต้อง pathlib
+
+พาธของไฟล์ต่างกันตามระบบปฏิบัติการ Windows ใช้ `\` ส่วน macOS และ Linux ใช้ `/` การต่อพาธด้วยสตริงจึงทำให้โค้ดทำงานได้บนเครื่องเดียว `pathlib.Path` จัดการความต่างนี้ให้ และทำให้โค้ดอ่านง่ายขึ้น [@python2026pathlib]
+
+```python
+from pathlib import Path
+
+root = Path(".").resolve()                          # ในไฟล์ใน src/ ใช้ Path(__file__).resolve().parents[1]
+db_path = root / "data" / "pm25.duckdb"             # ตัวดำเนินการ / ต่อพาธ
+raw_dir = root / "data" / "raw"
+print(db_path.name, db_path.suffix, db_path.parent.name)
+print(sorted(p.name for p in raw_dir.glob("*.json"))[:3] if raw_dir.exists() else "ยังไม่มีโฟลเดอร์ raw")
+```
+
+```text
+# ผลลัพธ์ (ตัวอย่าง)
+pm25.duckdb .duckdb data
+ยังไม่มีโฟลเดอร์ raw
+```
+
+| งาน | pathlib |
+|---|---|
+| ต่อพาธ | `root / "data" / "raw"` |
+| ตรวจว่ามีอยู่ | `path.exists()`, `path.is_file()` |
+| สร้างโฟลเดอร์ | `path.mkdir(parents=True, exist_ok=True)` |
+| หาไฟล์ตามรูปแบบ | `path.glob("*.json")`, `path.rglob("*.csv")` |
+| อ่านและเขียนข้อความ | `path.read_text(encoding="utf-8")`, `path.write_text(text, encoding="utf-8")` |
+| ส่วนของชื่อ | `path.name`, `path.stem`, `path.suffix`, `path.parent` |
+
+: การดำเนินการที่ใช้บ่อยของ pathlib {#tbl-appa-pathlib}
+
+### พาธสัมพัทธ์จากตำแหน่งของไฟล์
+
+script ใน `src/` ควรสร้างพาธจากตำแหน่งของตัวเอง ไม่ใช่จากโฟลเดอร์ที่ผู้ใช้สั่งรัน เพื่อให้รันจากที่ใดก็ได้
+
+```python
+ROOT = Path(__file__).resolve().parents[1]           # src/clean.py → ราก ของโครงการ
+DB_PATH = ROOT / "data" / "pm25.duckdb"
+```
+
+### ระบุ encoding เสมอ
+
+เมื่ออ่านหรือเขียนไฟล์ข้อความที่มีภาษาไทย ให้ระบุ `encoding="utf-8"` เสมอ บน Windows ค่าเริ่มต้นของ Python บางรุ่นไม่ใช่ UTF-8 ไฟล์ที่ไม่ระบุจะอ่านภาษาไทยผิดหรือเกิด `UnicodeDecodeError` (ภาคผนวก ฉ)
+
+## ก.5 การจัดการข้อผิดพลาด (exception) และ logging {#sec-appa-exceptions .unnumbered}
+
+### try และ except
+
+```python
+import json
+
+text = '{"stationID": "35t", "PM25": {"value": "-1"}}'
+try:
+    record = json.loads(text)
+    value = float(record["PM25"]["value"])
+    if value < 0:
+        raise ValueError(f"ค่าแทนข้อมูลหาย: {value}")
+except (KeyError, ValueError) as err:
+    print("ข้ามแถวนี้:", err)
+```
+
+```text
+# ผลลัพธ์
+ข้ามแถวนี้: ค่าแทนข้อมูลหาย: -1.0
+```
+
+หลักการจัดการข้อผิดพลาดมีสามข้อ ข้อแรก **จับเฉพาะข้อผิดพลาดที่คาดไว้และรู้วิธีจัดการ** การเขียน `except:` หรือ `except Exception:` เปล่า ๆ ซ่อนข้อผิดพลาดที่ไม่คาดคิด ซึ่งอันตรายกว่าการให้โปรแกรมหยุด ข้อสอง **ข้อความต้องบอกบริบท** เช่น สถานีใด ไฟล์ใด ค่าเท่าใด ข้อสาม **ใน pipeline ข้อมูล ความล้มเหลวที่ดังดีกว่าความผิดพลาดที่เงียบ** ถ้า schema ของข้อมูลเปลี่ยน โปรแกรมควรหยุดพร้อมข้อความชัดเจน ไม่ใช่สร้างตารางที่ผิดต่อไป (บทที่ 9)
+
+### logging
+
+`print` เหมาะกับการสำรวจใน notebook ส่วน script ใน pipeline ควรใช้โมดูล `logging` ซึ่งกำหนดระดับความสำคัญ ใส่เวลา และส่งไปยังไฟล์ได้ [@python2026logging]
+
+```python
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s",
+                    datefmt="%H:%M:%S", force=True)
+log = logging.getLogger("fetch")
+log.info("ดึงข้อมูล %d สถานี", 80)
+log.warning("สถานี %s ไม่มีค่า PM2.5", "57t")
+```
+
+```text
+# ผลลัพธ์ (ตัวอย่าง เวลาจะต่างกัน)
+14:02:11 INFO ดึงข้อมูล 80 สถานี
+14:02:11 WARNING สถานี 57t ไม่มีค่า PM2.5
+```
+
+การส่งค่าเป็นอาร์กิวเมนต์ (`"%d สถานี", 80`) แทน f-string ทำให้ logging สร้างข้อความเฉพาะเมื่อจำเป็นต้องแสดง ระดับที่ใช้บ่อยคือ `DEBUG` (รายละเอียดสำหรับแก้ปัญหา) `INFO` (ความคืบหน้าปกติ) `WARNING` (ผิดปกติแต่ทำต่อได้) และ `ERROR` (ทำต่อไม่ได้)
+
+## ก.6 type hint และ docstring {#sec-appa-typing .unnumbered}
+
+### type hint
+
+**type hint** ระบุชนิดของพารามิเตอร์และค่าที่คืน ไม่ได้บังคับขณะรัน แต่ช่วยให้ผู้อ่านเข้าใจ และให้ตัวแก้ไขโค้ดและเครื่องมือตรวจ (เช่น mypy) พบข้อผิดพลาดก่อนรัน [@pep484types]
+
+```python
+from datetime import date
+
+import pandas as pd
+
+
+def daily_share(df: pd.DataFrame, start: date, end: date, threshold: float = 37.5) -> pd.Series:
+    """สัดส่วนวันเกินเกณฑ์ของแต่ละสถานีในช่วงวันที่ที่กำหนด"""
+    mask = df["date"].between(start, end)
+    return (df.loc[mask, "pm25_mean"] > threshold).groupby(df.loc[mask, "station_id"]).mean()
+```
+
+ชนิดที่พบบ่อยได้แก่ `list[str]`, `dict[str, float]`, `tuple[float, float]`, `str | None` (ค่าอาจเป็น `None`) และชนิดจากไลบรารี เช่น `pd.DataFrame`
+
+### docstring
+
+**docstring** คือข้อความในเครื่องหมายคำพูดสามตัวที่บรรทัดแรกของฟังก์ชัน โมดูล หรือคลาส บอกว่าโค้ดทำอะไร ไม่ใช่ทำอย่างไร [@pep257docstring] docstring ของฟังก์ชันในโครงการควรบอกอย่างน้อยว่า ทำอะไร รับอะไร คืนอะไร และมีเงื่อนไขพิเศษอะไร เช่น ไม่นับค่าว่าง หรือข้อมูลต้องเรียงตามเวลา ตัวแก้ไขโค้ดแสดง docstring เมื่อชี้ที่ชื่อฟังก์ชัน และ `help(daily_share)` แสดงใน notebook
+
+## ก.7 การทดสอบด้วย pytest เบื้องต้น ★ {#sec-appa-pytest .unnumbered}
+
+::: {.callout-note title="★ เนื้อหาเชิงลึก"}
+หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป
 :::
+
+### ทำไมต้องทดสอบ
+
+การทดสอบอัตโนมัติตรวจว่าโค้ดยังทำงานถูกต้องเมื่อมีการแก้ไข ในงานข้อมูล การทดสอบที่มีประโยชน์ที่สุดคือการทดสอบด้วยข้อมูลเล็ก ๆ ที่รู้คำตอบ ซึ่งจับข้อผิดพลาดเชิงตรรกะที่โค้ดรันได้แต่ให้ผลผิดได้ เช่น การรวมรายวันด้วยเวลาผิดเขตเวลา หรือค่าเฉลี่ยของค่าเฉลี่ย (บทที่ 18 และ 22) **pytest** เป็นเครื่องมือทดสอบที่ใช้มากที่สุดใน Python [@pytest2026docs]
+
+### เขียนและรันการทดสอบ
+
+ไฟล์ทดสอบชื่อขึ้นต้นด้วย `test_` อยู่ใน `tests/` และฟังก์ชันทดสอบชื่อขึ้นต้นด้วย `test_` ภายในใช้ `assert` ตรวจผล
+
+```python
+"""tests/test_metrics.py"""
+import math
+
+import pytest
+
+from src.metrics import share_over                 # ฟังก์ชัน share_over ที่เขียนไว้ใน src/metrics.py
+
+
+def test_share_over_ignores_missing():
+    assert share_over([40.0, 30.0, None, 50.0]) == pytest.approx(2 / 3)
+
+
+def test_share_over_empty_returns_nan():
+    assert math.isnan(share_over([None, None]))
+
+
+@pytest.mark.parametrize("threshold, expected", [(15, 1.0), (37.5, 0.5), (60, 0.0)])
+def test_share_over_threshold(threshold, expected):
+    assert share_over([20.0, 50.0], threshold=threshold) == expected
+```
+
+```bash
+pytest -q tests/
+```
+
+```text
+# ผลลัพธ์
+.....                                                                    [100%]
+5 passed in 0.02s
+```
+
+`pytest.approx` เปรียบเทียบค่าทศนิยมโดยยอมให้คลาดเล็กน้อย และ `@pytest.mark.parametrize` รันการทดสอบเดียวกับหลายชุดข้อมูล การทดสอบที่ต้องใช้ทรัพยากรร่วม เช่น การเชื่อมต่อฐานข้อมูลทดสอบ เขียนเป็น fixture ด้วย `@pytest.fixture` แล้วรับเป็นพารามิเตอร์ของฟังก์ชันทดสอบ บทที่ 18 และ 20 มีตัวอย่างการทดสอบความสอดคล้องของตัวชี้วัดและการทดสอบแดชบอร์ด
+
+## ก.8 สไตล์โค้ด: PEP 8 และเครื่องมือจัดรูปแบบ (ruff) {#sec-appa-style .unnumbered}
+
+### PEP 8
+
+**PEP 8** คือแนวทางสไตล์การเขียนโค้ด Python อย่างเป็นทางการ [@pep8style] หลักที่สำคัญที่สุดสำหรับงานในเล่มได้แก่
+
+| หลัก | ตัวอย่าง |
+|---|---|
+| ชื่อตัวแปรและฟังก์ชันเป็น `snake_case` ภาษาอังกฤษ | `daily_mean`, `load_stations()` |
+| ชื่อค่าคงที่เป็นตัวพิมพ์ใหญ่ | `STD_TH = 37.5`, `DB_PATH` |
+| ชื่อคลาสเป็น `CamelCase` | `StationSchema` |
+| ย่อหน้าสี่ช่องว่าง ไม่ใช้ tab | |
+| import อยู่บนสุดของไฟล์ จัดกลุ่ม: ไลบรารีมาตรฐาน ไลบรารีภายนอก โมดูลของโครงการ | ดูตัวอย่างใน @sec-appa-functions |
+| ชื่อบอกความหมาย ไม่ย่อจนเดาไม่ได้ | `share_over` ไม่ใช่ `so` |
+
+: หลักของ PEP 8 ที่ใช้บ่อย {#tbl-appa-pep8}
+
+ความเห็นในโค้ดเขียนเป็นภาษาไทยได้ตามแนวทางของเล่มนี้ แต่ชื่อในโค้ดใช้ภาษาอังกฤษ เพราะเครื่องมือหลายตัวและผู้ร่วมงานต่างชาติอ่านได้ และพิมพ์ได้สะดวกกว่า
+
+### ruff
+
+**ruff** เป็นเครื่องมือตรวจ (linter) และจัดรูปแบบ (formatter) โค้ด Python ที่ทำงานเร็วมาก รวมกฎของเครื่องมือเก่าหลายตัวไว้ในตัวเดียว [@ruff2026docs]
+
+```bash
+ruff check src/          # ตรวจปัญหา เช่น import ที่ไม่ใช้ ตัวแปรที่ไม่ได้กำหนด
+ruff check --fix src/    # แก้ปัญหาที่แก้อัตโนมัติได้
+ruff format src/         # จัดรูปแบบให้สม่ำเสมอ
+```
+
+การตั้งค่าเก็บไว้ใน `pyproject.toml` ของโครงการ เช่น ความยาวบรรทัดสูงสุด และกฎที่เปิดใช้ ทีมที่ใช้ ruff ไม่ต้องถกเถียงเรื่องสไตล์ใน code review อีกต่อไป และมีเวลาไปพิจารณาตรรกะของโค้ดแทน การตั้งให้ ruff รันอัตโนมัติก่อน commit (pre-commit hook) หรือใน GitHub Actions (บทที่ 3) ทำให้ทุกคนในทีมใช้มาตรฐานเดียวกัน

@@ -43,7 +43,7 @@ title: "กระดานสถานะการเขียนหนังส
 | ส่วน | ไฟล์ | branch | ผู้เขียน | ผู้ตรวจ | สถานะ | วันที่ |
 |---|---|---|---|---|---|---|
 | คำนำ + ข้อตกลงการเขียน + การเตรียมเครื่อง | `index.qmd` | `book-assembly` (ผู้ดูแลเล่ม) | ผู้ดูแลเล่ม | | todo | |
-| ภาคผนวก ก Python | `appendices/a-python.qmd` | `book/app-a-python` | | | todo | |
+| ภาคผนวก ก Python | `appendices/a-python.qmd` | `book/app-a-python` | agent:claude | | drafting | 2026-10-26 |
 | ภาคผนวก ข shell และ Git | `appendices/b-shell-git.qmd` | `book/app-b-shell-git` | | | todo | |
 | ภาคผนวก ค SQL ฉบับอ้างอิง | `appendices/c-sql-reference.qmd` | `book/app-c-sql-reference` | | | todo | |
 | ภาคผนวก ง Air4Thai และข้อมูลเปิด | `appendices/d-air4thai-open-data.qmd` | `book/app-d-air4thai-open-data` | | | todo | |
