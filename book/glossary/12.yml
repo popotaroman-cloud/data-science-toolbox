@@ -19,13 +19,6 @@
     ชุดรูปทรงชนิดเดียวกันหนึ่งชุดใน Figure ของ Plotly เช่น เส้นของภาคหนึ่ง
     Figure ประกอบด้วย list ของ trace กับ layout
   section: sec-ch12-plotly-model
-- term: Overplotting
-  th: overplotting
-  definition: >
-    สภาพที่จุดหรือเส้นจำนวนมากทับกันจนมองไม่เห็นความหนาแน่นที่แท้จริง
-    แก้ด้วยความโปร่งใส binning การสุ่มตัวอย่าง หรือ Datashader
-  section: sec-ch12-big-data
-  see_also: [Binning]
 - term: Linked views
   th: linked views
   definition: >
@@ -45,6 +38,7 @@
     การแบ่งค่าต่อเนื่องเป็นช่วงแล้วนับหรือสรุปค่าในแต่ละช่วง ใช้ใน histogram
     และ histogram สองมิติเพื่อลดข้อมูลก่อนวาด
   section: sec-ch12-big-data
+  see_also: [Overplotting]
 - term: Alt text
   th: ข้อความทางเลือก (alt text)
   definition: >

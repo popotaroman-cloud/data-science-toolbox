@@ -8,13 +8,7 @@
   definition: >
     ความสัมพันธ์ที่บอกว่าแต่ละตารางสร้างจากตารางใด ด้วยโค้ดใด ใช้หาสาเหตุของตัวเลขที่ผิดและรู้ว่าต้องรันขั้นใดใหม่
   section: sec-ch21-architecture
-- term: Pipeline
-  th: pipeline
-  definition: >
-    ลำดับของขั้นตอนอัตโนมัติที่เปลี่ยนข้อมูลดิบเป็นข้อมูลพร้อมใช้ เช่น ดึง โหลด ตรวจ และทำความสะอาด
-    ควรรันได้ด้วยคำสั่งเดียวและรันซ้ำได้ผลเท่าเดิม
-  section: sec-ch21-ingest
-  see_also: [Idempotent]
+  see_also: [Pipeline]
 - term: Sensitivity analysis
   th: การวิเคราะห์ความไว
   definition: >

@@ -33,14 +33,9 @@
   definition: >
     รายงานต้นฉบับเดียวที่มีตัวแปรสำหรับส่วนที่ต่างกัน เช่น ภาคหรือปี แล้ว render หลายครั้งด้วยค่าต่างกัน
   section: sec-ch19-params
-- term: Reproducibility
-  th: การทำซ้ำได้
-  definition: >
-    การที่ผู้อื่นได้ผลเดียวกันจากข้อมูล โค้ด และขั้นตอนเดียวกัน พิสูจน์ด้วย fresh-clone test
-    ต่างจาก replicability ซึ่งเป็นการได้ผลสอดคล้องจากการศึกษาใหม่
-  section: sec-ch19-checklist
 - term: Fresh-clone test
   th: fresh-clone test
   definition: >
     การทดสอบการทำซ้ำได้ด้วยการให้ผู้อื่น clone repository ลงโฟลเดอร์ใหม่แล้วทำตาม README เท่านั้น
   section: sec-ch19-checklist
+  see_also: [Reproducibility]
