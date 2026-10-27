@@ -23,7 +23,8 @@ desc = con.execute("""
            quantile_cont(d.pm25_mean, 0.95) AS p95,
            avg(CAST(d.pm25_mean > 37.5 AS DOUBLE)) AS share_over_std
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
-    WHERE d.is_complete AND (month(d.date) BETWEEN 1 AND 4 OR month(d.date) BETWEEN 6 AND 9)
+    WHERE d.is_complete AND d.date < DATE '2024-01-01'
+      AND (month(d.date) BETWEEN 1 AND 4 OR month(d.date) BETWEEN 6 AND 9)
     GROUP BY ALL ORDER BY s.region, season
 """).df()
 desc["mean_minus_median"] = desc["mean"] - desc["median"]

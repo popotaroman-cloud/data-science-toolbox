@@ -53,7 +53,7 @@ con = duckdb.connect("data/pm25.duckdb", read_only=True)
 daily = con.execute("""
     SELECT d.station_id, s.region, d.date, d.pm25_mean
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
-    WHERE d.is_complete
+    WHERE d.is_complete AND d.date < DATE '2024-01-01'     -- ช่วงสำรวจ (บทที่ 4)
 """).df()
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
@@ -156,7 +156,7 @@ robust = con.execute("""
            quantile_cont(d.pm25_mean, 0.95)            AS p95,
            avg(CAST(d.pm25_mean > 37.5 AS DOUBLE))     AS share_over_std
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
-    WHERE d.is_complete
+    WHERE d.is_complete AND d.date < DATE '2024-01-01'
     GROUP BY s.region ORDER BY median DESC
 """).df()
 ```
@@ -381,12 +381,12 @@ def station_units(con, years, months, min_days=30):
         HAVING count(*) >= ?
     """, [*years, *months, min_days]).df()
 
-EXPLORE, HOLDOUT = (2020, 2024), (2025, 2025)    # ให้ตรงกับที่เขียนใน questions.md
+EXPLORE, CONFIRM = (2020, 2023), (2024, 2025)    # ช่วงสำรวจและช่วงยืนยันตามบทที่ 4
 DRY, WET = (1, 4), (6, 9)
 dry = station_units(con, EXPLORE, DRY)
 ```
 
-ปีสำรวจและปีที่กันไว้ (held-out) ต้องตรงกับที่ commit ไว้ใน `questions.md` ก่อนรันการทดสอบ ตามหลักการแยกข้อมูลสำรวจกับข้อมูลยืนยันในบทที่ 4 การเปลี่ยนปีหลังเห็นผลคือการเดินใน garden of forking paths
+ช่วงสำรวจและช่วงยืนยันต้องตรงกับที่ commit ไว้ใน `questions.md` ก่อนรันการทดสอบ ตามหลักการแยกข้อมูลสำรวจกับข้อมูลยืนยันในบทที่ 4 การเปลี่ยนปีหลังเห็นผลคือการเดินใน garden of forking paths
 
 ### เลือกวิธีทดสอบ
 
@@ -416,8 +416,8 @@ def compare(a, b):
             "cles": round(u.statistic / (len(a) * len(b)), 2),
             "p_mwu": u.pvalue, "p_welch_log": t.pvalue}
 
-north = dry.loc[dry["region"] == "ภาคเหนือ", "pm25"]        # ตรวจชื่อภาคด้วย SELECT DISTINCT region
-bkk = dry.loc[dry["province"] == "กรุงเทพมหานคร", "pm25"]
+north = dry.loc[dry["region"] == "เหนือ", "pm25"]       # ตรวจค่าด้วย SELECT DISTINCT region, province
+bkk = dry.loc[dry["province"] == "กรุงเทพฯ", "pm25"]
 h1 = compare(north, bkk)
 ```
 
@@ -427,7 +427,7 @@ h1 = compare(north, bkk)
 
 ```python
 wet = station_units(con, EXPLORE, WET)
-paired = (dry.loc[dry["region"] == "ภาคเหนือ", ["station_id", "pm25"]]
+paired = (dry.loc[dry["region"] == "เหนือ", ["station_id", "pm25"]]
           .merge(wet[["station_id", "pm25"]], on="station_id", suffixes=("_dry", "_wet")))
 w = stats.wilcoxon(paired["pm25_dry"], paired["pm25_wet"])
 ratio = (paired["pm25_dry"] / paired["pm25_wet"]).median()
@@ -586,7 +586,7 @@ perm.statistic, perm.pvalue
 - ทดสอบหลายตัวแปร (PM2.5, PM10, O3, CO, NO2, SO2) กับคำถามเดียวกัน
 - ลองหลายช่วงฤดู หลายเกณฑ์ความครบถ้วน หรือหลายวิธีทดสอบ แล้วเลือกที่ "ได้ผล" ซึ่งเป็นการทดสอบหลายครั้งที่ไม่ได้นับ (บทที่ 4)
 
-แบบสุดท้ายแก้ด้วยการปรับ p-value ไม่ได้ เพราะไม่รู้ว่าทดสอบไปกี่ครั้ง ทางแก้คือเขียนแผนการวิเคราะห์ไว้ก่อนและยืนยันกับข้อมูลที่กันไว้
+แบบสุดท้ายแก้ด้วยการปรับ p-value ไม่ได้ เพราะไม่รู้ว่าทดสอบไปกี่ครั้ง ทางแก้คือเขียนแผนการวิเคราะห์ไว้ก่อนและยืนยันกับข้อมูลช่วงยืนยัน
 
 ### คุมอะไร: FWER หรือ FDR
 
@@ -720,7 +720,7 @@ coverage.pivot(index="year", columns="region", values="n_stations")
 
 ```markdown
 ## H1 (เขียนก่อนทดสอบ)
-ปีสำรวจ: 2563–2567 (2020–2024) · ปี held-out: 2568 (2025)
+ช่วงสำรวจ: 2563–2566 (2020–2023) · ช่วงยืนยัน: 2567–2568 (2024–2025)
 ฤดูแล้ง = ม.ค.–เม.ย. · หน่วยการวิเคราะห์ = มัธยฐานรายสถานี (วันที่ is_complete, อย่างน้อย 30 วัน)
 H1: ในฤดูแล้ง สถานีภาคเหนือมี PM2.5 สูงกว่าสถานีในกรุงเทพมหานคร
 วิธีหลัก: Mann-Whitney U สองด้าน · วิธีประกอบ: Welch t-test บน log
@@ -730,24 +730,24 @@ H1: ในฤดูแล้ง สถานีภาคเหนือมี PM
 
 ### ข้อมูลและขั้นตอน
 
-1. **บรรยายก่อนทดสอบ** สรุปมัธยฐาน IQR เปอร์เซ็นไทล์ที่ 95 และสัดส่วนวันเกินมาตรฐานของแต่ละภาคในปีสำรวจ (@sec-ch13-robust) แล้ววาด ECDF ของค่ารายสถานี
+1. **บรรยายก่อนทดสอบ** สรุปมัธยฐาน IQR เปอร์เซ็นไทล์ที่ 95 และสัดส่วนวันเกินมาตรฐานของแต่ละภาคในช่วงสำรวจ (@sec-ch13-robust) แล้ววาด ECDF ของค่ารายสถานี
 2. **ตรวจจำนวนหน่วย** นับสถานีในแต่ละกลุ่ม ถ้ากลุ่มใดมีน้อยกว่า 5 สถานี บันทึกเป็นข้อจำกัดเรื่อง power
-3. **ทดสอบ H1 ในปีสำรวจ** ด้วยฟังก์ชัน `compare()` ในหัวข้อ @sec-ch13-tests
+3. **ทดสอบ H1 ในช่วงสำรวจ** ด้วยฟังก์ชัน `compare()` ในหัวข้อ @sec-ch13-tests
 4. **คำนวณช่วงความเชื่อมั่นของอัตราส่วน** ด้วย bootstrap (@sec-ch13-resampling)
 5. **ทดสอบเสริม** ทุกภาคเทียบกรุงเทพฯ แล้วปรับด้วย Holm (@sec-ch13-multiple)
-6. **ยืนยันในปี held-out** รันขั้นตอนที่ 3–4 ซ้ำโดยไม่เปลี่ยนอะไร
+6. **ยืนยันด้วยข้อมูลช่วงยืนยัน** รันขั้นตอนที่ 3–4 ซ้ำโดยไม่เปลี่ยนอะไร
 
 ```python
 rows = []
-for region, g in dry[dry["province"] != "กรุงเทพมหานคร"].groupby("region"):
+for region, g in dry[dry["province"] != "กรุงเทพฯ"].groupby("region"):
     if len(g) >= 3:
         rows.append({"region": region, **compare(g["pm25"], bkk)})
 multi = pd.DataFrame(rows)
 multi["reject_holm"], multi["p_holm"], _, _ = multipletests(multi["p_mwu"], method="holm")
 
-dry_holdout = station_units(con, HOLDOUT, DRY)
-h1_holdout = compare(dry_holdout.loc[dry_holdout["region"] == "ภาคเหนือ", "pm25"],
-                     dry_holdout.loc[dry_holdout["province"] == "กรุงเทพมหานคร", "pm25"])
+dry_confirm = station_units(con, CONFIRM, DRY)
+h1_confirm = compare(dry_confirm.loc[dry_confirm["region"] == "เหนือ", "pm25"],
+                     dry_confirm.loc[dry_confirm["province"] == "กรุงเทพฯ", "pm25"])
 ```
 
 ### การตีความและการเขียนผล
@@ -756,8 +756,8 @@ h1_holdout = compare(dry_holdout.loc[dry_holdout["region"] == "ภาคเห�
 
 | สถานการณ์ | ถ้อยคำที่เหมาะ |
 |---|---|
-| ปีสำรวจมีนัยสำคัญ ขนาดอิทธิพลใหญ่ และยืนยันใน held-out | "ในฤดูแล้งปี 2563–2567 สถานีภาคเหนือมีมัธยฐาน PM2.5 สูงกว่าสถานีในกรุงเทพมหานครประมาณ … เท่า (95% CI … ถึง …; Mann–Whitney p = …; CLES = …; n = … และ … สถานี) และพบผลทิศทางเดียวกันในปี 2568 ที่ไม่ได้ใช้ตั้งสมมติฐาน" |
-| ปีสำรวจมีนัยสำคัญ แต่ held-out ไม่มี | "ข้อมูลปี 2563–2567 ชี้ว่า… แต่ผลไม่ปรากฏชัดในปี 2568 ซึ่งมีสถานีน้อยกว่าและ…" ต้องรายงานทั้งสองผล |
+| ช่วงสำรวจมีนัยสำคัญ ขนาดอิทธิพลใหญ่ และยืนยันในช่วงยืนยัน | "ในฤดูแล้งปี 2563–2566 สถานีภาคเหนือมีมัธยฐาน PM2.5 สูงกว่าสถานีในกรุงเทพมหานครประมาณ … เท่า (95% CI … ถึง …; Mann–Whitney p = …; CLES = …; n = … และ … สถานี) และพบผลทิศทางเดียวกันในปี 2567–2568 ที่ไม่ได้ใช้ตั้งสมมติฐาน" |
+| ช่วงสำรวจมีนัยสำคัญ แต่ช่วงยืนยันไม่มี | "ข้อมูลปี 2563–2566 ชี้ว่า… แต่ผลไม่ปรากฏชัดในปี 2567–2568 ซึ่ง…" ต้องรายงานทั้งสองผล |
 | ไม่มีนัยสำคัญ | "ข้อมูลไม่เพียงพอที่จะสรุปว่าต่างกัน (อัตราส่วน … เท่า, 95% CI … ถึง …)" ไม่ใช่ "ไม่มีความแตกต่าง" |
 
 : ถ้อยคำสรุปผลตามสถานการณ์ {#tbl-ch13-case-wording}
@@ -782,7 +782,7 @@ h1_holdout = compare(dry_holdout.loc[dry_holdout["region"] == "ภาคเห�
 | ใช้ `log1p` โดยไม่คิด | เปลี่ยนความหมายของอัตราส่วนที่ระดับต่ำ | ใช้ log ตรง ๆ กับค่าบวก และจัดการค่าศูนย์ตามที่มา |
 | bootstrap ค่ารายวันทีละวัน | ทำลายโครงสร้าง autocorrelation ได้ช่วงแคบเกินจริง | bootstrap ระดับสถานี หรือใช้ block bootstrap |
 | ทดสอบหลายภาคแล้วรายงานเฉพาะที่มีนัยสำคัญ | ผลบวกลวงสะสม | รายงานทุกการทดสอบและปรับด้วย Holm หรือ BH |
-| เปลี่ยนปี held-out หลังเห็นผล | กลายเป็น HARKing ข้อมูลยืนยันหมดความหมาย | commit แผนก่อนทดสอบ และไม่แก้ย้อนหลัง |
+| เปลี่ยนช่วงสำรวจหรือช่วงยืนยันหลังเห็นผล | กลายเป็น HARKing ข้อมูลยืนยันหมดความหมาย | commit แผนก่อนทดสอบ และไม่แก้ย้อนหลัง |
 | เทียบค่าเฉลี่ยรวมข้ามปีโดยไม่ดูองค์ประกอบของเครือข่าย | Simpson's paradox จากการเพิ่มหรือลดสถานี | ใช้เฉพาะสถานีที่มีข้อมูลทุกช่วง หรือถ่วงน้ำหนักคงที่ |
 | สรุปความสัมพันธ์ระดับจังหวัดเป็นระดับบุคคล | ecological fallacy | จำกัดข้อสรุปไว้ที่ระดับที่วิเคราะห์ |
 
@@ -796,7 +796,7 @@ h1_holdout = compare(dry_holdout.loc[dry_holdout["region"] == "ภาคเห�
 - ช่วงความเชื่อมั่นและ p-value บอกความไม่แน่นอนภายใต้สมมติฐานของแบบจำลอง autocorrelation ลดขนาดตัวอย่างที่มีผลลงมาก จึงต้องเลือกหน่วยการวิเคราะห์ก่อนเลือกวิธี
 - เลือกการทดสอบตามคำถามและโครงสร้างข้อมูล (อิสระหรือจับคู่) และรายงานขนาดอิทธิพลพร้อมช่วงความเชื่อมั่นทุกครั้ง
 - bootstrap และ permutation test ใช้ได้กับสถิติแทบทุกตัว แต่ต้องสุ่มที่ระดับหน่วยที่เป็นอิสระ
-- การทดสอบหลายครั้งต้องปรับด้วย Holm (คุม FWER) หรือ BH (คุม FDR) และการทดสอบที่ไม่ได้นับแก้ได้ด้วยแผนที่เขียนไว้ก่อนและข้อมูล held-out เท่านั้น
+- การทดสอบหลายครั้งต้องปรับด้วย Holm (คุม FWER) หรือ BH (คุม FDR) และการทดสอบที่ไม่ได้นับแก้ได้ด้วยแผนที่เขียนไว้ก่อนและข้อมูลช่วงยืนยันเท่านั้น
 - ตรวจ Simpson's paradox จากองค์ประกอบของเครือข่าย และไม่สรุปความสัมพันธ์ระดับกลุ่มเป็นระดับบุคคล
 
 ## แบบฝึกหัด {#sec-ch13-exercises .unnumbered}
