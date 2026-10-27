@@ -1,3 +1,60 @@
 ## บทที่ 7 {#sec-appg-ch07 .unnumbered}
 
-<!-- ผู้เขียนบทที่ 7 เขียนแนวคำตอบที่นี่ ใช้เลขข้อเดียวกับในบท เช่น **7.1** -->
+**7.1** `WHERE` ทำงานในขั้นที่ 2 ซึ่งยังไม่มีการจัดกลุ่ม ฟังก์ชันรวมอย่าง `COUNT(pm25)` จึงยังไม่มีความหมาย ต้องย้ายเงื่อนไขไปไว้ใน `HAVING` ซึ่งทำงานหลัง `GROUP BY`
+
+```sql
+SELECT station_id, CAST(ts AS DATE) AS date, AVG(pm25) AS pm25_mean
+FROM measurements
+GROUP BY station_id, CAST(ts AS DATE)
+HAVING COUNT(pm25) >= 18;
+```
+
+**7.2** (ก) `NULL` (ข) `TRUE` (ค) `NULL` (ง) `TRUE` (จ) `NULL` เพราะเท่ากับ `5 <> 1 AND 5 <> 2 AND 5 <> NULL` และส่วนสุดท้ายเป็น `NULL` ถ้าใช้ใน `WHERE` แถวนั้นจะถูกตัดทิ้ง
+
+**7.3** (ก) `INNER JOIN` (หรือ `LEFT JOIN` ถ้าต้องการเก็บค่าวัดที่ไม่มีข้อมูลสถานี) (ข) `ANTI JOIN` จาก `stations` ไปยังค่าวัดปี ค.ศ. 2023 (ค) `SEMI JOIN` กับตารางรายวันที่กรองค่าเฉลี่ยเกิน 75 µg/m³ (ง) `ASOF LEFT JOIN` ด้วยเงื่อนไข `m.ts >= w.obs_ts`
+
+**7.4** `ROW_NUMBER` ให้เลขไม่ซ้ำเสมอ ค่าที่เท่ากันได้ลำดับที่ฐานข้อมูลเลือก `RANK` ให้อันดับเท่ากันแล้วข้ามอันดับถัดไป เช่น 1, 2, 2, 4 ส่วน `DENSE_RANK` ให้อันดับเท่ากันโดยไม่ข้าม เช่น 1, 2, 2, 3
+
+**7.5** ถ้า `ts` เป็น UTC วันที่ 1 มีนาคมตาม UTC คือ 00:00–23:59 UTC ซึ่งเท่ากับเวลาไทย 07:00 ของวันที่ 1 มีนาคม ถึง 06:59 ของวันที่ 2 มีนาคม ค่าเฉลี่ยจึงปนช่วงเช้าของวันที่ 2 และขาดช่วง 00:00–06:59 ของวันที่ 1 ตามเวลาไทย
+
+**7.6** query ตัวอย่าง:
+
+```sql
+SELECT station_id, date_trunc('month', ts) AS month,
+       COUNT(*) AS n_rows,
+       COUNT(*) FILTER (WHERE pm25 IS NULL) AS n_null,
+       ROUND(100.0 * COUNT(*) FILTER (WHERE pm25 IS NULL) / COUNT(*), 1) AS pct_null
+FROM measurements
+WHERE ts < TIMESTAMP '2024-01-01'
+GROUP BY ALL
+ORDER BY pct_null DESC
+LIMIT 5;
+```
+
+คำสั่งนี้นับเฉพาะค่าหายแบบ explicit คือแถวที่มีแต่ค่าเป็น `NULL` ชั่วโมงที่ไม่มีแถวเลยไม่ถูกนับ (ดูแบบฝึกหัด 7.10)
+
+**7.7** วันที่สองแบบต่างกันมากคือวันที่อยู่หลังช่วงที่ข้อมูลขาดหาย `ROWS` นำค่าของวันที่อยู่ก่อนช่วงขาดหายซึ่งห่างออกไปมากกว่า 7 วันมาเฉลี่ยด้วย ส่วน `RANGE` ใช้เฉพาะวันที่อยู่ในช่วง 7 วันจริง ถ้าค่าฝุ่นก่อนช่วงขาดหายต่างจากหลังช่วงมาก (เช่น ข้ามฤดู) ความต่างจะเกิน 5 µg/m³ ได้ง่าย query ตัวอย่างให้เพิ่มคอลัมน์ `ABS(ma7_rows - ma7_range) AS diff` แล้ว `QUALIFY diff > 5`
+
+**7.8** คำตอบขึ้นกับข้อมูล เมื่อเกณฑ์ต่ำ (12 ชั่วโมง) วันที่ข้อมูลไม่ครบจำนวนมากถูกนับรวม ค่าเฉลี่ยรายวันของวันเหล่านั้นอาจเอียงตามช่วงเวลาที่มีข้อมูล เมื่อเกณฑ์สูง (22 ชั่วโมง) จำนวนวันลดลง สถานีที่ข้อมูลหายบ่อยอาจถูกตัดเกือบทั้งหมด ถ้าลำดับของภาคไม่เปลี่ยน ข้อสรุปค่อนข้างทนทานต่อทางเลือกนี้ ถ้าเปลี่ยน ต้องรายงานว่าข้อสรุปขึ้นกับเกณฑ์ (sensitivity analysis ในบทที่ 10)
+
+**7.9** แบบไม่ขจัดข้อมูลซ้ำ ผลขึ้นกับลำดับของแถวนำเข้า เมื่อทดสอบกับ DuckDB 1.5 คำสั่งเก็บแถวที่มาก่อน ถ้าสลับลำดับ ค่าที่ได้จะเปลี่ยน (ฐานข้อมูลบางรุ่นอาจแจ้ง error แทน) ส่วนแบบที่ใช้ `QUALIFY ROW_NUMBER() OVER (PARTITION BY station_id, ts ORDER BY fetched_at DESC) = 1` ได้ค่าจากไฟล์ที่ดึงล่าสุดเสมอ ไม่ว่าลำดับนำเข้าจะเป็นอย่างไร
+
+**7.10** query ตัวอย่างสำหรับทุกสถานี:
+
+```sql
+WITH expected AS (
+    SELECT s.station_id, t.ts
+    FROM stations AS s
+    CROSS JOIN generate_series(TIMESTAMP '2023-01-01 00:00',
+                               TIMESTAMP '2023-12-31 23:00', INTERVAL 1 HOUR) AS t(ts)
+)
+SELECT e.station_id,
+       COUNT(*) FILTER (WHERE m.ts IS NULL)                         AS n_no_row,
+       COUNT(*) FILTER (WHERE m.ts IS NOT NULL AND m.pm25 IS NULL)  AS n_null_value
+FROM expected AS e
+LEFT JOIN measurements AS m USING (station_id, ts)
+GROUP BY e.station_id
+ORDER BY e.station_id;
+```
+
+`n_no_row` คือข้อมูลสูญหายแบบ implicit (ไม่มีแถว) และ `n_null_value` คือแบบ explicit (มีแถวแต่ค่าว่าง) การนับเพียง `COUNT(pm25)` จากตาราง `measurements` มองเห็นเฉพาะแบบหลัง บทที่ 10 อธิบายความสำคัญของการแยกสองแบบนี้

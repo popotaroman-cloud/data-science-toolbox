@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 14: สื่อสารข้อค้�
 
 > **CLO:** CLO5 · **เครื่องมือหลัก:** Quarto, Streamlit, DuckDB (read-only + cache) · **เครื่องมือเสริม:** Power BI / Looker Studio
 > **ผลงานที่เพิ่มในระบบ:** data story report `report/report.qmd` (15%) + แดชบอร์ด `app/app.py` แบบ drill-down 4 ระดับ (ประเทศ → ภาค → จังหวัด → สถานี) + ขั้นตอนรันซ้ำได้จาก fresh clone
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 19 [การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้](../../book/chapters/19-storytelling-reports.html) · บทที่ 20 [การออกแบบและพัฒนาแดชบอร์ด](../../book/chapters/20-dashboards.html)
 
 ## วัตถุประสงค์การเรียนรู้
 

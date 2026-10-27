@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 11: สถิติเชิงสำร�
 
 > **CLO:** CLO4 · **เครื่องมือ:** SciPy, statsmodels (หลัก), pingouin (เสริม)
 > **ผลงานที่เพิ่มในระบบ:** ผลทดสอบสมมติฐานและการแยก trend/seasonality ใน `notebooks/11_stats.ipynb` พร้อมข้อความสรุปผลใน `questions.md`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 13 [สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ](../../book/chapters/13-exploratory-statistics.html) · บทที่ 14 [การวิเคราะห์อนุกรมเวลาเชิงสำรวจ](../../book/chapters/14-time-series.html)
 
 ## วัตถุประสงค์การเรียนรู้
 
@@ -58,6 +60,7 @@ con.sql("""
            round(quantile_cont(d.pm25_mean, 0.95), 1) AS p95,
            round(avg(CASE WHEN d.pm25_mean > 37.5 THEN 1 ELSE 0 END), 3) AS share_over_std
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
     GROUP BY s.region ORDER BY median DESC
 """).df()
 ```
@@ -87,7 +90,7 @@ units = con.sql("""
     SELECT d.station_id, s.region, s.province,
            median(d.pm25_mean) AS dry_median, count(*) AS n_days
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
-    WHERE month(d.date) BETWEEN 1 AND 4
+    WHERE d.is_complete AND month(d.date) BETWEEN 1 AND 4
       AND year(d.date) < 2025                 -- ปีสำรวจเท่านั้น (ปรับตามช่วงข้อมูลจริง)
     GROUP BY ALL
     HAVING count(*) >= 60                      -- สถานีต้องมีข้อมูลพอ
@@ -171,7 +174,7 @@ print(stats.spearmanr(pair["pm25"], pair["pm10"]))
 ```python
 from statsmodels.graphics.tsaplots import plot_acf
 
-one = con.execute("SELECT date, pm25_mean FROM daily_pm25_clean WHERE station_id = ? ORDER BY date",
+one = con.execute("SELECT date, pm25_mean FROM daily_pm25_clean WHERE is_complete AND station_id = ? ORDER BY date",
                   ["<station_id>"]).df()
 y = one.set_index(pd.to_datetime(one["date"]))["pm25_mean"].asfreq("D")   # ให้มีทุกวัน ช่องว่างเป็น NaN
 plot_acf(np.log(y), lags=60, missing="conservative")
@@ -210,7 +213,7 @@ from statsmodels.tsa.seasonal import STL
 
 m = con.execute("""
     SELECT date_trunc('month', date) AS month, avg(pm25_mean) AS pm25, count(*) AS n_days
-    FROM daily_pm25_clean WHERE station_id = ?
+    FROM daily_pm25_clean WHERE is_complete AND station_id = ?
     GROUP BY ALL ORDER BY month
 """, ["<station_id>"]).df()
 s = m.set_index(pd.to_datetime(m["month"])).asfreq("MS")

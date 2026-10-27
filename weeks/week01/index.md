@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 1: ภาพรวม EDA, สภาพ�
 
 > **CLO:** CLO1 · **เครื่องมือ:** conda/uv, VS Code, Jupyter, terminal, Git, GitHub
 > **ผลงานที่เพิ่มในระบบ:** สภาพแวดล้อมพร้อมใช้ + repository โครงการบน GitHub
+>
+> **อ่านประกอบในหนังสือ:** [บทที่ 0 ภาพรวมของหนังสือ](../../book/chapters/00-overview.html) · บทที่ 1 [วิทยาการข้อมูลและการสำรวจข้อมูล](../../book/chapters/01-data-science-eda.html) · บทที่ 2 [สภาพแวดล้อมการทำงานที่ทำซ้ำได้](../../book/chapters/02-reproducible-environment.html) · บทที่ 3 [Version control และการทำงานร่วมกัน](../../book/chapters/03-version-control.html) — อ่านเสริม: บทที่ 22 [จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ](../../book/chapters/22-ethics-ai.html)
 
 ## วัตถุประสงค์การเรียนรู้
 

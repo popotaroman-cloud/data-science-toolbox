@@ -30,7 +30,7 @@ git switch -c week12-multivariate
 สร้าง `notebooks/12_multivariate.ipynb`
 
 ```python
-import duckdb, pandas as pd
+import duckdb, numpy as np, pandas as pd
 import plotly.express as px
 
 con = duckdb.connect("data/pm25.duckdb", read_only=True)
@@ -38,6 +38,7 @@ monthly = con.sql("""
     SELECT d.station_id, s.name_th, s.region, month(d.date) AS m,
            avg(d.pm25_mean) AS pm25
     FROM daily_pm25_clean d JOIN stations s USING (station_id)
+    WHERE d.is_complete
     GROUP BY ALL
 """).df()
 
@@ -129,33 +130,47 @@ con.sql("SELECT cluster, count(*) FROM station_clusters GROUP BY cluster").show(
 d = con.sql("""
     SELECT d.station_id, s.province, d.date, d.pm25_mean
     FROM daily_pm25_clean d JOIN stations s USING (station_id)
+    WHERE d.is_complete
 """).df()
 d["month"] = pd.to_datetime(d["date"]).dt.month
 
-g = d.groupby(["station_id", "month"])["pm25_mean"]
+# robust z-score แยกตามสถานีและเดือน ในสเกล log เพราะค่า PM2.5 เบ้ขวา (หนังสือบทที่ 15)
+d["log_pm25"] = np.log(d["pm25_mean"])
+g = d.groupby(["station_id", "month"])["log_pm25"]
 mad = g.transform(lambda s: (s - s.median()).abs().median())
-d["robust_z"] = 0.6745 * (d["pm25_mean"] - g.transform("median")) / mad
+d["robust_z"] = 0.6745 * (d["log_pm25"] - g.transform("median")) / mad
 d["is_outlier"] = d["robust_z"].abs() > 3.5
 print(d["is_outlier"].mean().round(4), "ของวันทั้งหมดถูกติดธง")
 ```
 
-ตรวจบริบท: วันเดียวกัน สถานีอื่นในจังหวัดเดียวกันถูกติดธงด้วยหรือไม่
+ตรวจบริบท: วันเดียวกัน *สถานีอื่น* ในจังหวัดเดียวกันสูงขึ้นด้วยหรือไม่ ต้องไม่นับสถานีที่ถูกติดธงเอง มิฉะนั้นจังหวัดที่มีสองสถานีจะได้ "likely real" ทุกครั้งที่สถานีใดสถานีหนึ่งผิดปกติ
 
 ```python
-ctx = d.groupby(["province", "date"]).agg(n_st=("station_id", "nunique"),
-                                          n_flag=("is_outlier", "sum")).reset_index()
+d["is_elevated"] = d["robust_z"] > 2
+ctx = (d.groupby(["province", "date"])
+        .agg(n_stations=("station_id", "nunique"), n_elevated=("is_elevated", "sum"))
+        .reset_index())
 d = d.merge(ctx, on=["province", "date"])
-d["outlier_reason"] = None
-d.loc[d.is_outlier & (d.n_flag >= 2), "outlier_reason"] = "likely real: หลายสถานีผิดปกติพร้อมกัน"
-d.loc[d.is_outlier & (d.pm25_mean < 0), "outlier_reason"] = "error: ค่าติดลบ"   # กฎนี้สำคัญกว่า จึงเขียนทับ
-d.loc[d.is_outlier & d.outlier_reason.isna(), "outlier_reason"] = "uncertain: ตรวจต่อ"
-d.loc[d.is_outlier, "outlier_reason"].value_counts()
+d["n_others"] = d["n_stations"] - 1
+d["share_others_elevated"] = (d["n_elevated"] - d["is_elevated"]) / d["n_others"].where(d["n_others"] > 0)
+
+d["outlier_reason"] = pd.Series(pd.NA, index=d.index, dtype="string")
+rules = [   # กฎที่อยู่ก่อนมีลำดับความสำคัญสูงกว่า
+    (d["pm25_mean"] <= 0, "error: ค่าไม่เป็นบวก"),
+    ((d["robust_z"] > 0) & (d["share_others_elevated"] >= 0.5), "likely real: สถานีอื่นในจังหวัดสูงขึ้นพร้อมกัน"),
+    (d["n_others"] == 0, "uncertain: ไม่มีสถานีอื่นในจังหวัดให้เทียบ"),
+]
+for condition, reason in rules:
+    d.loc[d["is_outlier"] & d["outlier_reason"].isna() & condition, "outlier_reason"] = reason
+d.loc[d["is_outlier"] & d["outlier_reason"].isna(), "outlier_reason"] = "uncertain: ตรวจต่อ"
+d.loc[d["is_outlier"], "outlier_reason"].value_counts()
 ```
 
 เลือกกรณี "uncertain" มา 2–3 กรณี วาด time series ±7 วันของสถานีนั้นเทียบกับสถานีใกล้เคียง (ใช้ Plotly จากสัปดาห์ที่ 10) และเขียนข้อสรุป **ห้ามลบแถวใด ๆ** ให้บันทึกเป็นตารางธง
 
 ```python
 flags = d.loc[d.is_outlier, ["station_id", "date", "pm25_mean", "robust_z", "outlier_reason"]]
+flags = flags.assign(date=flags["date"].dt.date)     # ให้ DuckDB เก็บเป็น DATE ไม่ใช่ TIMESTAMP
 con.register("flags_df", flags)
 con.execute("CREATE OR REPLACE TABLE daily_outlier_flags AS SELECT * FROM flags_df")
 ```
@@ -215,7 +230,7 @@ test = con.sql("""
     WITH v AS (SELECT province, visit_date::DATE AS date, count(*) AS n_visits
                FROM 'data/synthetic/fake_visits.csv' GROUP BY ALL),
          p AS (SELECT s.province, d.date, avg(d.pm25_mean) AS pm25
-               FROM daily_pm25_clean d JOIN stations s USING (station_id) GROUP BY ALL)
+               FROM daily_pm25_clean d JOIN stations s USING (station_id) WHERE d.is_complete GROUP BY ALL)
     SELECT * FROM v JOIN p USING (province, date)
 """).df()
 test.head()
@@ -230,15 +245,19 @@ test.head()
 ```python
 from sdv.metadata import Metadata
 from sdv.single_table import GaussianCopulaSynthesizer
-from sdv.evaluation.single_table import evaluate_quality
+from sdv.evaluation import evaluate_quality
 
-real = con.sql("SELECT pm25_mean, pm25_max, n_hours FROM daily_pm25_clean WHERE station_id = '<รหัสสถานี>'").df()
-md = Metadata.detect_from_dataframe(data=real, table_name="daily")
+real = con.sql("SELECT pm25_mean, pm25_max, n_hours FROM daily_pm25_clean WHERE is_complete AND station_id = '<รหัสสถานี>'").df()
+data = {"daily": real}                         # SDV 2.x รับข้อมูลเป็น dict ของตาราง
+md = Metadata.detect_from_dataframes(data)
 syn = GaussianCopulaSynthesizer(md)
-syn.fit(real)
-fake_daily = syn.sample(num_rows=len(real))
-evaluate_quality(real, fake_daily, md)
+syn.fit(data)
+fake = syn.sample(num_rows=len(real))          # ได้ dict กลับมาเช่นกัน
+fake_daily = fake["daily"]
+evaluate_quality(data, fake, md)
 ```
+
+> โค้ดนี้ทดสอบกับ SDV 2.0 ถ้า `sdv.__version__` เป็น 1.x ให้ใช้ `Metadata.detect_from_dataframe(data=real, table_name="daily")`, `syn.fit(real)` และ `from sdv.evaluation.single_table import evaluate_quality` แทน (หนังสือบทที่ 16)
 
 เปรียบเทียบ histogram และค่า max ของ `real` กับ `fake_daily` แล้วเขียนว่า SDV รักษาอะไรได้และอะไรหายไป
 

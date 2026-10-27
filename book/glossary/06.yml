@@ -1,0 +1,52 @@
+- term: Database
+  th: ฐานข้อมูล
+  definition: >
+    ระบบที่จัดเก็บข้อมูลอย่างมีโครงสร้าง และให้ค้นหาและแก้ไขได้ด้วยภาษาอย่าง SQL
+    พร้อมบังคับกฎความถูกต้อง เช่น primary key
+  section: sec-ch06-relational
+  see_also: [Primary key, Table / view]
+
+- term: Table / view
+  th: ตาราง / view
+  definition: >
+    ตารางเก็บข้อมูลจริงเป็นแถวและคอลัมน์ view คือ query ที่ตั้งชื่อไว้
+    เรียกใช้ได้เหมือนตารางแต่คำนวณใหม่ทุกครั้ง จึงไม่เก็บข้อมูลซ้ำ
+  section: sec-ch06-normalization
+
+- term: Primary key
+  th: primary key
+  definition: >
+    คอลัมน์หรือกลุ่มคอลัมน์ที่ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL เช่น (station_id, ts) ในตาราง measurements
+    ทำให้ฐานข้อมูลปฏิเสธแถวซ้ำ
+  section: sec-ch06-relational
+  see_also: [Idempotent]
+
+- term: Normalization / denormalization
+  th: normalization
+  definition: >
+    การแยกตารางเพื่อให้ข้อเท็จจริงแต่ละข้อถูกเก็บไว้ที่เดียว ป้องกันข้อมูลขัดแย้งเมื่อแก้ไข
+    ตรงข้ามกับ denormalization ที่เก็บซ้ำอย่างตั้งใจเพื่อให้อ่านเร็วขึ้น
+  section: sec-ch06-normalization
+
+- term: OLTP / OLAP
+  th: OLAP
+  definition: >
+    Online Analytical Processing งานวิเคราะห์ที่อ่านไม่กี่คอลัมน์จากแถวจำนวนมาก
+    เช่น ค่าเฉลี่ยรายเดือนของทุกสถานี ตรงข้ามกับ OLTP ที่อ่านเขียนทีละแถว
+  section: sec-ch06-oltp-olap
+
+- term: Columnar storage
+  th: การจัดเก็บแบบ columnar
+  definition: >
+    การเรียงค่าในตารางทีละคอลัมน์ ทำให้อ่านเฉพาะคอลัมน์ที่ต้องการได้และบีบอัดได้ดี
+    เหมาะกับงาน OLAP ใช้ใน DuckDB, Parquet และ Arrow
+  section: sec-ch06-row-column
+  see_also: [OLTP / OLAP, Parquet]
+
+- term: Parquet
+  th: Parquet
+  definition: >
+    รูปแบบไฟล์แบบ columnar แบบเปิด แบ่งแถวเป็น row group เก็บชนิดข้อมูล บีบอัดรายคอลัมน์
+    และมี statistics ที่ช่วยข้ามข้อมูลที่ไม่ตรงเงื่อนไข
+  section: sec-ch06-parquet
+  see_also: [Columnar storage]

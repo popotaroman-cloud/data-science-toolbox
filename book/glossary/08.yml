@@ -1,0 +1,44 @@
+- term: Tidy data
+  th: tidy data
+  definition: >
+    รูปแบบข้อมูลตามหลักของ Wickham คือ ตัวแปรหนึ่งตัวอยู่ในคอลัมน์หนึ่ง การสังเกตหนึ่งครั้งอยู่ในแถวหนึ่ง
+    และหน่วยการสังเกตหนึ่งชนิดอยู่ในตารางหนึ่ง รูปที่ tidy ขึ้นกับคำถาม
+  section: sec-ch08-tidy
+  see_also: [Wide / long format]
+
+- term: Wide / long format
+  th: รูปแบบกว้าง / รูปแบบยาว
+  definition: >
+    รูปแบบกว้างกระจายค่าของตัวแปรเป็นหลายคอลัมน์ รูปแบบยาวรวมเป็นคอลัมน์ชื่อกับคอลัมน์ค่า
+    แปลงไปมาด้วย melt และ pivot
+  section: sec-ch08-reshape
+  see_also: [Reshape]
+
+- term: Reshape
+  th: การปรับรูป
+  definition: >
+    การเปลี่ยนรูปของตารางโดยไม่เปลี่ยนข้อมูล เช่น melt จากกว้างเป็นยาว และ pivot จากยาวเป็นกว้าง
+    pivot แจ้ง error เมื่อมีแถวซ้ำ ซึ่งเป็นสัญญาณให้ตรวจข้อมูล
+  section: sec-ch08-reshape
+
+- term: DataFrame
+  th: DataFrame
+  definition: >
+    โครงสร้างข้อมูลตารางในหน่วยความจำของ pandas หรือ Polars แต่ละคอลัมน์มีชนิดข้อมูล (dtype)
+    pandas มี index ที่ใช้จัดแนวข้อมูลอัตโนมัติ ส่วน Polars ไม่มี index
+  section: sec-ch08-pandas
+
+- term: Resample
+  th: resample
+  definition: >
+    การรวมหรือแตกข้อมูลอนุกรมเวลาเป็นช่วงเวลาใหม่ เช่น รายชั่วโมงเป็นรายวัน
+    resample ของ pandas สร้างแถวของทุกช่วงเวลาแม้ไม่มีข้อมูล ต่างจาก groupby
+  section: sec-ch08-resample
+  see_also: [Completeness]
+
+- term: Completeness
+  th: ความครบถ้วน
+  definition: >
+    สัดส่วนของข้อมูลที่มีจริงเทียบกับที่ควรมี เช่น จำนวนชั่วโมงที่มีค่า (n_hours) ต่อวัน
+    โครงการนี้ใช้เกณฑ์ไม่น้อยกว่า 18 จาก 24 ชั่วโมง ซึ่งเป็นข้อกำหนดของโครงการ
+  section: sec-ch08-resample

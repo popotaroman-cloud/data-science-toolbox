@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 from collections import defaultdict
@@ -198,6 +199,33 @@ def check_shared(files, rep: Report):
             rep.error(", ".join(where), f"BibTeX key '{k}' ซ้ำกัน ให้ใช้ key เดิมจากไฟล์แรก")
 
 
+def check_refs(files, rep: Report):
+    """การอ้างอิง @sec- ไปยังหัวข้อ .unnumbered ใช้ไม่ได้ใน Quarto (render เป็น ?@sec-...)"""
+    sources = [p for _, p in files] + sorted((BOOK / "appendices" / "answers").glob("*.qmd")) + [BOOK / "index.qmd"]
+    unnumbered = {}
+    for p in sources:
+        host = BOOK / "appendices" / "g-answers.qmd" if p.parent.name == "answers" else p
+        for _, _, attrs, _ in headings(p.read_text(encoding="utf-8")):
+            m = re.search(r"#(sec-[A-Za-z0-9_-]+)", attrs)
+            if m and ".unnumbered" in attrs:
+                unnumbered[m.group(1)] = host
+    for p in sources:
+        in_code = False
+        for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+            if line.lstrip().startswith(("```", "~~~")):
+                in_code = not in_code
+                continue
+            if in_code:
+                continue
+            for lab in re.findall(r"(?<![\w`])-?@(sec-[A-Za-z0-9_-]*[A-Za-z0-9])", line):
+                if lab in unnumbered:
+                    src_dir = BOOK / "appendices" if p.parent.name == "answers" else p.parent
+                    rel = os.path.relpath(unnumbered[lab], src_dir).replace(os.sep, "/")
+                    rep.error(p.relative_to(BOOK).as_posix(),
+                              f"บรรทัด {i}: @{lab} ชี้ไปยังหัวข้อ .unnumbered ซึ่ง Quarto อ้างอิงไม่ได้ "
+                              f"ให้ใช้ลิงก์ [เลขหัวข้อ]({rel}#{lab}) แทน")
+
+
 def load_glossary(rep: Report) -> list[dict]:
     entries, owner = [], {}
     for f in sorted((BOOK / "glossary").glob("*.yml")):
@@ -294,6 +322,7 @@ def main():
         sys.exit(f"ไม่พบบท/ภาคผนวก '{args.chapter}'")
 
     check_shared(files, rep)
+    check_refs(files, rep)
     entries = load_glossary(rep)
     labels = scan_labels(files)
     for e in entries:

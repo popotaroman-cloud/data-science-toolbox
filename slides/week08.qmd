@@ -254,6 +254,7 @@ git push origin checkpoint1
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 11](../book/chapters/11-visual-perception.html) ก่อนเข้าเรียน
 - เปิด GitHub Issue จากข้อเสนอแนะอย่างน้อย 2 รายการ แก้ภายในสัปดาห์ที่ 9
 - อ่าน Wickham (2010) *A layered grammar of graphics*
 - ร่างกราฟ 2 แบบบนกระดาษ ที่ตอบคำถามจาก `daily_pm25_clean`

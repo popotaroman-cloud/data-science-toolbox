@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 13: ข้อมูลเชิงพื�
 
 > **CLO:** CLO4 · **เครื่องมือหลัก:** GeoPandas · **เครื่องมือเสริม:** Folium, Plotly treemap/sunburst
 > **ผลงานที่เพิ่มในระบบ:** แผนที่สถานีและแผนที่ระดับจังหวัด + กราฟลำดับชั้น ภาค → จังหวัด → สถานี
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 17 [ข้อมูลเชิงพื้นที่](../../book/chapters/17-spatial-data.html) · บทที่ 18 [ข้อมูลลำดับชั้นและการ drill-down](../../book/chapters/18-hierarchical-data.html)
 
 ## วัตถุประสงค์การเรียนรู้
 
@@ -108,6 +110,7 @@ agg = con.sql("""
            avg(d.pm25_mean) AS pm25_mean,
            avg((d.pm25_mean > 37.5)::INT) AS share_over_std
     FROM daily_pm25_clean d JOIN stations s USING (station_id)
+    WHERE d.is_complete
     GROUP BY s.province
 """).df()
 
@@ -164,6 +167,7 @@ h = con.sql("""
     SELECT s.region, s.province, s.name_th, count(*) AS n_days,
            avg(d.pm25_mean) AS pm25_mean
     FROM daily_pm25_clean d JOIN stations s USING (station_id)
+    WHERE d.is_complete
     GROUP BY ALL
 """).df()
 

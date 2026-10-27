@@ -176,6 +176,15 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 
 | English | เสนอให้ใช้ | รูปแบบ | เสนอโดย (บท) |
 |---|---|---|---|
+| Normalization / denormalization | normalization / denormalization | ทับศัพท์ | 6 |
+| OLTP / OLAP | OLTP / OLAP | ทับศัพท์ · อธิบายเต็มครั้งแรก | 6 |
+| Parquet | Parquet | ทับศัพท์ (ชื่อรูปแบบไฟล์) | 6 |
+| CTE (Common Table Expression) | CTE | ทับศัพท์ · อธิบายเต็มครั้งแรก | 7 |
+| Fan-out (join) | fan-out | ทับศัพท์ · อธิบายครั้งแรก | 8 |
+| Preattentive attribute | preattentive attribute | ทับศัพท์ · อธิบายครั้งแรก | 11 |
+| Lie factor | lie factor | ทับศัพท์ (ศัพท์ของ Tufte) | 11 |
+| Data-ink ratio | อัตราส่วนหมึกข้อมูล (data-ink ratio) | แปล | 11 |
+| Annotation | คำอธิบายประกอบ (annotation) | แปล | 11 |
 | Trace (Plotly) | trace | ทับศัพท์ | 12 |
 | Linked views | linked views | ทับศัพท์ | 12 |
 | Brushing | brushing | ทับศัพท์ | 12 |

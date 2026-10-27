@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 4: การจัดเก็บแล�
 
 > **CLO:** CLO2 · **เครื่องมือ:** DuckDB, SQL, Parquet (หลัก), Apache Arrow (แนวคิด เสริม)
 > **ผลงานที่เพิ่มในระบบ:** `src/load_duckdb.py` ที่สร้าง `data/pm25.duckdb` มีตาราง `stations` และ `measurements`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 6 [แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์](../../book/chapters/06-analytical-databases.html) · บทที่ 7 [SQL เพื่อการวิเคราะห์](../../book/chapters/07-sql-analysis.html) — อ่านเสริม: [ภาคผนวก ค SQL ฉบับอ้างอิงย่อ](../../book/appendices/c-sql-reference.html)
 
 ## วัตถุประสงค์การเรียนรู้
 
@@ -192,7 +194,7 @@ FROM new_rows
 QUALIFY ROW_NUMBER() OVER (PARTITION BY station_id, ts ORDER BY fetched_at DESC) = 1;
 ```
 
-ขั้นที่ 2 จำเป็น เพราะ DuckDB ไม่ยอมให้คำสั่งเดียว upsert key เดียวกันสองครั้ง
+ขั้นที่ 2 จำเป็น เพราะถ้าชุดใหม่มี key ซ้ำกันเอง DuckDB 1.5 ไม่แจ้ง error แต่เก็บแถวที่มาก่อนตามลำดับของข้อมูลนำเข้า ซึ่งอาจเป็นค่าที่เก่ากว่า (ฐานข้อมูลบางระบบหรือบางรุ่นแจ้ง error แทน) จึงไม่ควรพึ่งพฤติกรรมนี้ และต้องเลือกแถวจากไฟล์ที่ดึงล่าสุดเอง
 
 ตรวจว่าไม่มีแถวซ้ำ (ควรได้ตารางว่าง)
 
@@ -237,7 +239,7 @@ pd.read_parquet("data/parquet/measurements.parquet", columns=["station_id", "ts"
 **Apache Arrow** เป็นรูปแบบการเก็บตารางแบบ columnar *ในหน่วยความจำ* ที่หลายเครื่องมือใช้ร่วมกัน เมื่อ DuckDB ส่งผลให้ pandas หรือ Polars ผ่าน Arrow ข้อมูลไม่ต้องถูกแปลงทีละค่า จึงเร็ว เปรียบเทียบง่าย ๆ: Parquet คือรูปแบบบน *ดิสก์* ส่วน Arrow คือรูปแบบใน *RAM*
 
 ```python
-tbl = con.sql("SELECT * FROM stations").fetch_arrow_table()   # pyarrow.Table
+tbl = con.sql("SELECT * FROM stations").to_arrow_table()   # pyarrow.Table (ชื่อเดิม fetch_arrow_table() เลิกใช้แล้วใน DuckDB 1.5)
 ```
 
 ผู้เรียนไม่ต้องเขียนโค้ด Arrow โดยตรง แต่ควรรู้ว่าเป็นเหตุผลที่ DuckDB, pandas และ Polars ส่งข้อมูลถึงกันได้เร็ว

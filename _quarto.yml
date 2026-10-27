@@ -20,9 +20,54 @@ website:
       - section: "เอกสารประกอบการสอน"
         contents: "weeks/*/index.md"
       - section: "คู่มือปฏิบัติการ"
-        contents: "weeks/*/lab.md"
+        contents:
+          - text: "ปฏิบัติการสัปดาห์ที่ 1"
+            href: weeks/week01/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 2"
+            href: weeks/week02/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 3"
+            href: weeks/week03/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 4"
+            href: weeks/week04/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 5"
+            href: weeks/week05/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 6"
+            href: weeks/week06/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 7"
+            href: weeks/week07/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 8"
+            href: weeks/week08/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 9"
+            href: weeks/week09/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 10"
+            href: weeks/week10/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 11"
+            href: weeks/week11/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 12"
+            href: weeks/week12/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 13"
+            href: weeks/week13/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 14"
+            href: weeks/week14/lab.md
+          - text: "ปฏิบัติการสัปดาห์ที่ 15"
+            href: weeks/week15/lab.md
       - section: "สไลด์"
         contents: "slides/*.qmd"
+      - text: "หนังสือประกอบการสอน"
+        href: book/index.html
+
+language:
+  crossref-fig-title: "ภาพที่"
+  crossref-fig-prefix: "ภาพที่"
+  crossref-tbl-title: "ตารางที่"
+  crossref-tbl-prefix: "ตารางที่"
+  crossref-eq-prefix: "สมการ"
+  crossref-sec-prefix: "หัวข้อ"
+  section-title-references: "เอกสารอ้างอิง"
+  toc-title-document: "สารบัญ"
+  toc-title-website: "ในหน้านี้"
+  search-no-results-text: "ไม่พบผลลัพธ์"
+  code-tools-show-all-code: "แสดงโค้ดทั้งหมด"
 
 format:
   html:

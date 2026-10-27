@@ -313,8 +313,8 @@ git push -u origin week04-duckdb
 | อาการ | สาเหตุและวิธีแก้ |
 |---|---|
 | `IOException: Could not set lock on file` | มีอีก process เปิด `pm25.duckdb` อยู่ (เช่น notebook) ปิด connection ด้วย `con.close()` หรือ restart kernel แล้วรันใหม่ |
-| `Constraint Error: Duplicate key` | ใช้ `INSERT INTO` แทน `INSERT OR REPLACE` หรือลืมตัดซ้ำใน batch |
-| `Invalid Input Error ... same row twice` | batch ใหม่มี `(station_id, ts)` ซ้ำ ตรวจว่ามีบรรทัด `QUALIFY ROW_NUMBER() ... = 1` |
+| `Constraint Error: Duplicate key` | ใช้ `INSERT INTO` แทน `INSERT OR REPLACE` กับข้อมูลที่มีอยู่แล้วในตาราง |
+| ค่าบางชั่วโมงไม่ตรงกับไฟล์ที่ดึงล่าสุด (ไม่มี error) | batch ใหม่มี `(station_id, ts)` ซ้ำ และ DuckDB 1.5 เก็บแถวที่มาก่อนโดยไม่แจ้งเตือน ตรวจว่ามีบรรทัด `QUALIFY ROW_NUMBER() ... = 1` |
 | `name_th` หรือ `pm25` เป็น `NULL` ทั้งคอลัมน์ | ชื่อ key ใน `STATION_KEYS` / `POLLUTANT_KEYS` ไม่ตรงกับข้อมูลจริง กลับไปดูตารางสัปดาห์ที่ 3 |
 | `region` เป็น `NULL` บางสถานี | ชื่อจังหวัดสะกดไม่ตรง (เช่น `"กรุงเทพฯ"` กับ `"กรุงเทพมหานคร"`) หรือ `areaTH` ไม่มีจุลภาค แก้ CSV หรือปรับการตัดข้อความ |
 | `station_id` "02t" กลายเป็นตัวเลขหรือหาย 0 นำหน้า | อ่าน CSV โดยไม่กำหนดชนิด ใช้ `dtype={"station_id": str}` |

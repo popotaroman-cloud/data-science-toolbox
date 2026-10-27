@@ -120,7 +120,7 @@ back = long.pivot(index=["station_id", "ts"], columns="pollutant", values="value
 | ปัญหา | ผลกระทบ |
 |---|---|
 | รวมแหล่ง UTC กับเวลาไทย | เลื่อน 7 ชม. ยอดเช้ากลายเป็นดึก |
-| ตัด "วัน" ด้วย UTC | วันไทยเริ่ม 07:00 UTC ค่ารายวันปนสองวัน |
+| ตัด "วัน" ด้วย UTC | วันไทยเริ่ม 17:00 UTC ของวันก่อน ค่ารายวันปนสองวัน |
 | ปี พ.ศ. | `pd.to_datetime` ไม่รู้จัก → ลบ 543 ก่อน |
 
 ## tz_localize vs tz_convert
@@ -240,6 +240,7 @@ daily = con.sql("""
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 9](../book/chapters/09-data-quality.html) ก่อนเข้าเรียน
 - ให้ pipeline fetch → load รันต่อ สังเกตวันที่ `n_hours` ต่ำผิดปกติ
 - จดปัญหาคุณภาพข้อมูลที่กระทบคำถามแต่ละข้อ 2–3 ข้อ
 - อ่าน ydata-profiling Quickstart และ pandera DataFrame Schemas
