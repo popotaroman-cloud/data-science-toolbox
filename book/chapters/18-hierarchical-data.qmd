@@ -324,7 +324,7 @@ Plotly ใช้ squarified เป็นค่าเริ่มต้น แล
 | roll-up | รวมขึ้นไปยังระดับที่หยาบกว่า | จากจังหวัดเป็นภาค จากวันเป็นเดือน | `GROUP BY` คอลัมน์ระดับบน |
 | drill-down | ลงไปยังระดับที่ละเอียดกว่า | จากภาคเหนือลงไปดูแต่ละจังหวัด | เพิ่มคอลัมน์ระดับล่างใน `GROUP BY` พร้อม `WHERE` |
 | slice | ตัดหนึ่งค่าของมิติหนึ่ง | เฉพาะเดือนมีนาคม | `WHERE month = 3` |
-| dice | ตัดลูกบาศก์ย่อยด้วยหลายเงื่อนไข | ภาคเหนือและภาคกลาง ฤดูแล้ง ปี 2566–2567 | `WHERE` หลายเงื่อนไข |
+| dice | ตัดลูกบาศก์ย่อยด้วยหลายเงื่อนไข | ภาคเหนือและภาคกลาง ฤดูแล้ง ปี 2565–2566 | `WHERE` หลายเงื่อนไข |
 | pivot | หมุนมิติไปเป็นแถวหรือคอลัมน์ | ภาคเป็นแถว เดือนเป็นคอลัมน์ | `PIVOT` หรือ `pivot_table` |
 
 : การดำเนินการแบบ OLAP {#tbl-ch18-olap-ops}
@@ -345,11 +345,11 @@ def cube(con, group_cols, where="TRUE", params=()):
     """, list(params)).df()
 
 country_by_month = cube(con, ["month(d.date) AS month"])                         # roll-up
-north_drill = cube(con, ["s.province"], "s.region = ?", ["ภาคเหนือ"])            # drill-down
+north_drill = cube(con, ["s.province"], "s.region = ?", ["เหนือ"])                # drill-down
 march = cube(con, ["s.region"], "month(d.date) = ?", [3])                         # slice
 dry_two = cube(con, ["s.region", "year(d.date) AS year"],                         # dice
                "s.region IN (?, ?) AND month(d.date) BETWEEN 1 AND 4",
-               ["ภาคเหนือ", "ภาคกลาง"])
+               ["เหนือ", "กลาง"])
 ```
 
 ฟังก์ชัน `cube` ประกอบ SQL ด้วย f-string สำหรับชื่อคอลัมน์และโครงของเงื่อนไข ซึ่ง **ต้องเป็นข้อความที่ผู้เขียนโค้ดกำหนดเท่านั้น** ส่วนค่าที่มาจากผู้ใช้ เช่น ชื่อภาคที่เลือกในแดชบอร์ด ต้องส่งผ่าน `?` parameter เสมอ เพื่อป้องกัน SQL injection (บทที่ 20)

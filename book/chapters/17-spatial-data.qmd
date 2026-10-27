@@ -308,7 +308,8 @@ agg = con.execute("""
         SELECT station_id,
                avg(pm25_mean)                        AS pm25,
                avg(CAST(pm25_mean > 37.5 AS DOUBLE)) AS share_over
-        FROM daily_pm25_clean WHERE is_complete
+        FROM daily_pm25_clean
+        WHERE is_complete AND date < DATE '2024-01-01'      -- ช่วงสำรวจ (บทที่ 4)
         GROUP BY station_id
     )
     SELECT s.province, count(*) AS n_stations,
@@ -458,7 +459,7 @@ p-value จาก permutation ตอบคำถามว่า ถ้าค่�
 units = con.execute("""
     SELECT station_id, median(pm25_mean) AS dry_median
     FROM daily_pm25_clean
-    WHERE is_complete AND month(date) BETWEEN 1 AND 4
+    WHERE is_complete AND date < DATE '2024-01-01' AND month(date) BETWEEN 1 AND 4
     GROUP BY station_id HAVING count(*) >= 30
 """).df()
 g = stations.merge(units, on="station_id").to_crs(epsg=32647)
@@ -570,7 +571,7 @@ import pandas as pd
 summary = con.execute("""
     SELECT d.station_id, avg(d.pm25_mean) AS pm25, c.cluster
     FROM daily_pm25_clean AS d LEFT JOIN station_clusters AS c USING (station_id)
-    WHERE d.is_complete GROUP BY ALL
+    WHERE d.is_complete AND d.date < DATE '2024-01-01' GROUP BY ALL
 """).df()
 sm = stations.merge(summary, on="station_id", how="left")
 

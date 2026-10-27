@@ -76,7 +76,7 @@ flowchart TD
   A["ข้อสรุปหลัก<br/>ภาคเหนือเผชิญฝุ่นเกินมาตรฐานบ่อยที่สุด<br/>และกระจุกในเดือนมีนาคม–เมษายน"] --> B["ข้อสนับสนุน 1<br/>สัดส่วนวันเกินมาตรฐานสูงสุดในทุกปี"]
   A --> C["ข้อสนับสนุน 2<br/>ฤดูกาลรายปีแรงที่สุด"]
   A --> D["ข้อสนับสนุน 3<br/>วันฝุ่นหนักเกิดพร้อมกันหลายจังหวัด"]
-  B --> B1["หลักฐาน: กราฟแท่งรายภาค<br/>ผลทดสอบในปี held-out"]
+  B --> B1["หลักฐาน: กราฟแท่งรายภาค<br/>ผลทดสอบในช่วงยืนยัน"]
   C --> C1["หลักฐาน: STL ความแรงของฤดูกาล"]
   D --> D1["หลักฐาน: Moran's I แผนที่"]
 ```
@@ -186,7 +186,7 @@ def highlight_bar(df, x, y, focus, title):
 |---|---|
 | เห็นจากกราฟเท่านั้น | "กราฟชี้ว่า…" "ดูเหมือนว่า…" |
 | ทดสอบในปีสำรวจ มีขนาดอิทธิพลชัด | "ในปี … พบว่า … สูงกว่าประมาณ … เท่า (95% CI … ถึง …)" |
-| ยืนยันในปี held-out | "ผลเดียวกันพบในปี … ที่ไม่ได้ใช้ตั้งสมมติฐาน" |
+| ยืนยันด้วยข้อมูลช่วงยืนยัน | "ผลเดียวกันพบในปี … ซึ่งไม่ได้ใช้ตั้งสมมติฐาน" |
 | ไม่มีนัยสำคัญ | "ข้อมูลไม่เพียงพอที่จะสรุปว่าต่างกัน" |
 | สหสัมพันธ์ | "สัมพันธ์กับ" ไม่ใช่ "ทำให้" |
 
@@ -369,7 +369,7 @@ jupyter: python3
 
 ```{{python}}
 #| tags: [parameters]
-region = "ภาคเหนือ"
+region = "เหนือ"           # ค่าตามคอลัมน์ stations.region
 year = 2025
 ```
 
@@ -382,18 +382,18 @@ s = region_summary(con, region, year)
 ````
 
 ```bash
-quarto render report/region.qmd -P region:ภาคเหนือ -P year:2025 --output region_north_2025.html
+quarto render report/region.qmd -P region:เหนือ -P year:2025 --output region_north_2025.html
 ```
 
 ### render ทุกฉบับด้วย script
 
 ```python
-"""render_regions.py: สร้างรายงานทุกภาคจากต้นฉบับเดียว"""
+"""src/render_regions.py: สร้างรายงานทุกภาคจากต้นฉบับเดียว"""
 import subprocess
 from pathlib import Path
 import duckdb
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]          # root ของโครงการ (ไฟล์นี้อยู่ใน src/)
 con = duckdb.connect(str(ROOT / "data" / "pm25.duckdb"), read_only=True)
 regions = [r[0] for r in con.execute("SELECT DISTINCT region FROM stations ORDER BY 1").fetchall()]
 con.close()
@@ -425,7 +425,7 @@ for i, region in enumerate(regions, start=1):
 |---|---|---|
 | สภาพแวดล้อม | ไลบรารีที่ import ทุกตัวอยู่ใน `environment.yml` หรือ `pyproject.toml` และ lock เวอร์ชัน | เทียบกับ `git grep -h "^import\|^from" -- "*.py"` |
 | ข้อมูล | บอกแหล่ง วันที่ดึง สัญญาอนุญาต และวิธีสร้างข้อมูลใหม่ | README มีหัวข้อแหล่งข้อมูล |
-| ขั้นตอน | รัน pipeline ทั้งหมดได้ด้วยคำสั่งเดียว | `python run_all.py` |
+| ขั้นตอน | รัน pipeline ทั้งหมดได้ด้วยคำสั่งเดียว | `python src/run_pipeline.py` |
 | path | ไม่มี path แบบ absolute | `git grep -nE "[A-Za-z]:\\\\|/Users/|/home/"` |
 | ความสุ่ม | ตั้ง seed ทุกที่ที่มีการสุ่ม | `git grep -n "random_state\|seed"` |
 | ความลับ | อ่านจาก `.env` มี `.env.example` ไม่มีความลับใน Git | ตรวจประวัติ Git |
@@ -460,7 +460,7 @@ print("ข้อมูลล่าสุด:", con.execute("SELECT max(date) FRO
 git clone https://github.com/USERNAME/pm25-explorer.git fresh-test
 cd fresh-test
 conda env create -f environment.yml -n pm25-test && conda activate pm25-test
-python run_all.py
+python src/run_pipeline.py
 quarto render report/report.qmd
 ```
 
@@ -494,7 +494,7 @@ quarto render report/report.qmd
 - [ข้อค้นพบ 1 พร้อมตัวเลขจาก inline code]
 - [ข้อค้นพบ 2]
 - [ข้อค้นพบ 3]
-- ความมั่นใจ: ข้อ 1 และ 2 ยืนยันในปี held-out ข้อ 3 เป็นข้อสังเกตจากภาพ
+- ความมั่นใจ: ข้อ 1 และ 2 ยืนยันด้วยข้อมูลช่วงยืนยันแล้ว ข้อ 3 เป็นข้อสังเกตจากภาพ
 
 ## ข้อมูลและวิธีการ (ย่อ)
 ## [ประโยคข้อค้นพบ 1]
