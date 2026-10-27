@@ -82,7 +82,7 @@ monthly = con.execute("""
     SELECT date_trunc('month', date) AS month,
            avg(pm25_mean) AS pm25, count(*) AS n_days
     FROM daily_pm25_clean
-    WHERE station_id = ? AND is_complete
+    WHERE station_id = ? AND is_complete AND date < DATE '2024-01-01'   -- ช่วงสำรวจ (บทที่ 4)
     GROUP BY ALL ORDER BY month
 """, [SID]).df()
 s = monthly.set_index(pd.to_datetime(monthly["month"])).asfreq("MS")
@@ -93,7 +93,7 @@ month_plot(z.to_numpy(), dates=z.index, ax=ax)     # ส่ง dates เอง �
 ax.set_ylabel("log PM2.5")
 ```
 
-`asfreq("MS")` ทำให้มีหนึ่งแถวต่อเดือน (MS = month start) แม้เดือนนั้นไม่มีข้อมูล เดือนที่หายจะเป็น NaN ให้เห็นชัดแทนที่จะหายไปเงียบ ๆ จากแกนเวลา เส้นแนวนอนในแต่ละช่องของ `month_plot` คือค่าเฉลี่ยของเดือนนั้นข้ามทุกปี
+ตัวอย่างในบทนี้ใช้ข้อมูลช่วงสำรวจ (พ.ศ. 2563–2566) เท่านั้น รูปแบบที่พบจึงเป็นข้อสันนิษฐานที่ต้องยืนยันด้วยข้อมูลช่วงยืนยันตามบทที่ 4 `asfreq("MS")` ทำให้มีหนึ่งแถวต่อเดือน (MS = month start) แม้เดือนนั้นไม่มีข้อมูล เดือนที่หายจะเป็น NaN ให้เห็นชัดแทนที่จะหายไปเงียบ ๆ จากแกนเวลา เส้นแนวนอนในแต่ละช่องของ `month_plot` คือค่าเฉลี่ยของเดือนนั้นข้ามทุกปี
 
 ## stationarity และ ★ การทดสอบ (ADF, KPSS) {#sec-ch14-stationarity}
 
@@ -323,7 +323,7 @@ from statsmodels.tsa.seasonal import MSTL
 
 hourly = con.execute("""
     SELECT ts, pm25_filled FROM measurements_clean
-    WHERE station_id = ? AND ts >= TIMESTAMP '2024-01-01' AND ts < TIMESTAMP '2024-04-01'
+    WHERE station_id = ? AND ts >= TIMESTAMP '2023-01-01' AND ts < TIMESTAMP '2023-04-01'
     ORDER BY ts
 """, [SID]).df()
 h = np.log(hourly.set_index("ts")["pm25_filled"].asfreq("h"))
@@ -500,7 +500,7 @@ $$ {#eq-ch14-robust-z}
 from scipy import stats
 
 yd = np.log(y).interpolate(limit=3, limit_area="inside")
-seg = yd["2023-01-01":"2024-12-31"]                   # เลือกช่วงที่ต่อเนื่องสองปี
+seg = yd["2022-01-01":"2023-12-31"]                   # เลือกช่วงที่ต่อเนื่องสองปีในช่วงสำรวจ
 assert seg.notna().all(), "ช่วงที่เลือกยังมีวันที่หาย"
 res_d = STL(seg, period=365, robust=True).fit()
 r = res_d.resid
@@ -643,7 +643,7 @@ grid = con.execute("""
     WITH g AS (
         SELECT s.station_id, t.ts
         FROM stations AS s,
-             generate_series(TIMESTAMP '2024-01-01 00:00', TIMESTAMP '2024-12-31 23:00',
+             generate_series(TIMESTAMP '2023-01-01 00:00', TIMESTAMP '2023-12-31 23:00',
                              INTERVAL 1 HOUR) AS t(ts)
     )
     SELECT g.station_id, g.ts, m.pm25, m.pm25 IS NULL AS is_missing
@@ -664,7 +664,7 @@ grid = con.execute("""
 
 ### ข้อมูลและขั้นตอน
 
-เลือกสถานีหนึ่งในภาคเหนือที่มีข้อมูลต่อเนื่องอย่างน้อยห้าปี ตรวจความต่อเนื่องก่อนด้วย query ความครบถ้วนรายเดือน แล้วดำเนินการดังนี้
+เลือกสถานีหนึ่งในภาคเหนือที่มีข้อมูลต่อเนื่องตลอดช่วงสำรวจ (พ.ศ. 2563–2566) ตรวจความต่อเนื่องก่อนด้วย query ความครบถ้วนรายเดือน แล้วดำเนินการดังนี้
 
 | ขั้น | วิธี | หัวข้อ |
 |---|---|---|

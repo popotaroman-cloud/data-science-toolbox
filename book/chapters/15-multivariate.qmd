@@ -54,7 +54,7 @@ monthly = con.execute("""
     SELECT d.station_id, s.name_th, s.region, month(d.date) AS m,
            avg(d.pm25_mean) AS pm25, count(*) AS n_days
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
-    WHERE d.is_complete
+    WHERE d.is_complete AND d.date < DATE '2024-01-01'     -- ช่วงสำรวจ (บทที่ 4)
     GROUP BY ALL
 """).df()
 
@@ -63,7 +63,7 @@ meta = monthly.drop_duplicates("station_id").set_index("station_id")[["name_th",
 print(profile.shape, "ช่องว่าง:", int(profile.isna().sum().sum()))
 ```
 
-เมทริกซ์ที่ได้มีหนึ่งแถวต่อสถานีและหนึ่งคอลัมน์ต่อเดือน ค่าในแต่ละช่องคือค่าเฉลี่ยของเดือนนั้นข้ามทุกปีที่มีข้อมูล การเฉลี่ยข้ามปีแบบนี้ทำให้สถานีที่มีข้อมูลเฉพาะปีที่ฝุ่นหนักดูสกปรกกว่าความจริง ถ้าสถานีมีช่วงข้อมูลต่างกันมาก ควรจำกัดให้ใช้ปีเดียวกันทุกสถานี
+เมทริกซ์ที่ได้มีหนึ่งแถวต่อสถานีและหนึ่งคอลัมน์ต่อเดือน ค่าในแต่ละช่องคือค่าเฉลี่ยของเดือนนั้นข้ามทุกปีของช่วงสำรวจที่มีข้อมูล การเฉลี่ยข้ามปีแบบนี้ทำให้สถานีที่มีข้อมูลเฉพาะปีที่ฝุ่นหนักดูสกปรกกว่าความจริง ถ้าสถานีมีช่วงข้อมูลต่างกันมาก ควรจำกัดให้ใช้ปีเดียวกันทุกสถานี
 
 scikit-learn ไม่รับค่าว่าง ต้องตัดสินใจก่อน (บทที่ 10)
 
@@ -677,7 +677,7 @@ exceed = con.execute("""
     FROM daily_pm25_clean AS d
     JOIN stations AS s USING (station_id)
     LEFT JOIN daily_outlier_flags AS f USING (station_id, date)
-    WHERE d.is_complete
+    WHERE d.is_complete AND d.date < DATE '2024-01-01'
     GROUP BY s.region
 """).df()
 ```
@@ -694,7 +694,7 @@ exceed = con.execute("""
 
 | ขั้น | ทำอะไร | หัวข้อ |
 |---|---|---|
-| 1 | สร้างเมทริกซ์สถานี × เดือน จากปีเดียวกันทุกสถานี บันทึกสถานีที่ตัดและช่องที่เติม | @sec-ch15-distance |
+| 1 | สร้างเมทริกซ์สถานี × เดือน จากช่วงสำรวจ ใช้ปีเดียวกันทุกสถานี บันทึกสถานีที่ตัดและช่องที่เติม | @sec-ch15-distance |
 | 2 | สร้างสองแบบ คือ `X_level` และ `X_shape` | @sec-ch15-distance |
 | 3 | PCA ของทั้งสองแบบ วาด scree plot, loading และ biplot | @sec-ch15-pca-interpret |
 | 4 | k-means สำหรับ $k$ = 2 ถึง 7 พร้อม silhouette และขนาดกลุ่มที่เล็กที่สุด | @sec-ch15-clustering |

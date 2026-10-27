@@ -234,7 +234,7 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 | Martini glass structure | โครงสร้างแก้วมาร์ตินี (martini glass) | แปล | 19 |
 | Inline code (Quarto) | inline code | ทับศัพท์ | 19 |
 | Parameterized report | รายงานแบบมีพารามิเตอร์ (parameterized report) | แปล | 19 |
-| Replicability | การทำซ้ำผลได้ (replicability) | แปล | 19 |
+| Replicability | การทำซ้ำด้วยข้อมูลใหม่ (replicability) | แปล (ตามบทที่ 2) | 19 |
 | Fresh-clone test | fresh-clone test | ทับศัพท์ | 19 |
 | Sensitivity analysis | การวิเคราะห์ความไว (sensitivity analysis) | แปล | 19 |
 | Operational / analytical / strategic dashboard | แดชบอร์ดเชิงปฏิบัติการ / เชิงวิเคราะห์ / เชิงกลยุทธ์ | แปล | 20 |
