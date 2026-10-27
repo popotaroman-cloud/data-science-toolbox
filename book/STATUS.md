@@ -26,17 +26,17 @@ title: "กระดานสถานะการเขียนหนังส
 | 9 | `chapters/09-data-quality.qmd` | `book/ch09-data-quality` | agent:claude | | drafting | 2026-10-25 | 6 |
 | 10 | `chapters/10-missing-data.qmd` | `book/ch10-missing-data` | agent:claude | | drafting | 2026-10-25 | 7 |
 | 11 | `chapters/11-visual-perception.qmd` | `book/ch11-visual-perception` | agent:claude | | drafting | 2026-10-25 | 9 |
-| 12 | `chapters/12-interactive-viz.qmd` | `book/ch12-interactive-viz` | agent:claude | | drafting | 2026-10-25 | 10 |
-| 13 | `chapters/13-exploratory-statistics.qmd` | `book/ch13-exploratory-statistics` | agent:claude | | drafting | 2026-10-25 | 11 |
-| 14 | `chapters/14-time-series.qmd` | `book/ch14-time-series` | agent:claude | | drafting | 2026-10-25 | 11 |
-| 15 | `chapters/15-multivariate.qmd` | `book/ch15-multivariate` | agent:claude | | drafting | 2026-10-25 | 12 |
-| 16 | `chapters/16-synthetic-privacy.qmd` | `book/ch16-synthetic-privacy` | agent:claude | | drafting | 2026-10-25 | 12 |
-| 17 | `chapters/17-spatial-data.qmd` | `book/ch17-spatial-data` | agent:claude | | drafting | 2026-10-25 | 13 |
-| 18 | `chapters/18-hierarchical-data.qmd` | `book/ch18-hierarchical-data` | agent:claude | | drafting | 2026-10-25 | 13 |
-| 19 | `chapters/19-storytelling-reports.qmd` | `book/ch19-storytelling-reports` | agent:claude | | drafting | 2026-10-25 | 14 |
-| 20 | `chapters/20-dashboards.qmd` | `book/ch20-dashboards` | agent:claude | | drafting | 2026-10-25 | 14 |
-| 21 | `chapters/21-case-study-pm25.qmd` | `book/ch21-case-study-pm25` | agent:claude | | drafting | 2026-10-25 | 15 |
-| 22 | `chapters/22-ethics-ai.qmd` | `book/ch22-ethics-ai` | agent:claude | | drafting | 2026-10-25 | 1, 15 |
+| 12 | `chapters/12-interactive-viz.qmd` | `book/ch12-interactive-viz` | agent:claude | | drafting | 2026-10-27 | 10 |
+| 13 | `chapters/13-exploratory-statistics.qmd` | `book/ch13-exploratory-statistics` | agent:claude | | drafting | 2026-10-27 | 11 |
+| 14 | `chapters/14-time-series.qmd` | `book/ch14-time-series` | agent:claude | | drafting | 2026-10-27 | 11 |
+| 15 | `chapters/15-multivariate.qmd` | `book/ch15-multivariate` | agent:claude | | drafting | 2026-10-27 | 12 |
+| 16 | `chapters/16-synthetic-privacy.qmd` | `book/ch16-synthetic-privacy` | agent:claude | | drafting | 2026-10-27 | 12 |
+| 17 | `chapters/17-spatial-data.qmd` | `book/ch17-spatial-data` | agent:claude | | drafting | 2026-10-27 | 13 |
+| 18 | `chapters/18-hierarchical-data.qmd` | `book/ch18-hierarchical-data` | agent:claude | | drafting | 2026-10-27 | 13 |
+| 19 | `chapters/19-storytelling-reports.qmd` | `book/ch19-storytelling-reports` | agent:claude | | drafting | 2026-10-27 | 14 |
+| 20 | `chapters/20-dashboards.qmd` | `book/ch20-dashboards` | agent:claude | | drafting | 2026-10-27 | 14 |
+| 21 | `chapters/21-case-study-pm25.qmd` | `book/ch21-case-study-pm25` | agent:claude | | drafting | 2026-10-27 | 15 |
+| 22 | `chapters/22-ethics-ai.qmd` | `book/ch22-ethics-ai` | agent:claude | | drafting | 2026-10-27 | 1, 15 |
 
 ## ส่วนหน้าและส่วนท้ายเล่ม
 
