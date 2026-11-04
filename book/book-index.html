@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ดัชนี – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./glossary.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="./book-index.html">ดัชนี</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="./../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./book-index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#ดชนหวเรอง" id="toc-ดชนหวเรอง" class="nav-link active" data-scroll-target="#ดชนหวเรอง">ดัชนีหัวเรื่อง</a></li>
+  <li><a href="#ดชนเครองมอและฟงกชน" id="toc-ดชนเครองมอและฟงกชน" class="nav-link" data-scroll-target="#ดชนเครองมอและฟงกชน">ดัชนีเครื่องมือและฟังก์ชัน</a></li>
+  <li><a href="#ดชนชดขอมลและกรณศกษา" id="toc-ดชนชดขอมลและกรณศกษา" class="nav-link" data-scroll-target="#ดชนชดขอมลและกรณศกษา">ดัชนีชุดข้อมูลและกรณีศึกษา</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="./book-index.html">ดัชนี</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ดัชนี</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- สร้างโดย scripts/assemble.py จากเครื่องหมาย .idx ในทุกบท ห้ามแก้ไฟล์นี้โดยตรง -->
+<section id="ดชนหวเรอง" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="ดชนหวเรอง">ดัชนีหัวเรื่อง</h2>
+<ul>
+<li>absolute path — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>ACF — <a href="./chapters/14-time-series.html#sec-ch14-acf">autocorrelation: ACF และ PACF</a></li>
+<li>adjusted Rand index — <a href="./chapters/15-multivariate.html#sec-ch15-clustering">clustering: k-means, hierarchical, DBSCAN</a></li>
+<li>anonymization — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-anonymization">anonymization กับ pseudonymization</a></li>
+<li>Anscombe’s quartet — <a href="./chapters/01-data-science-eda.html#sec-ch01-anscombe">ทำไมต้องสำรวจก่อนสรุป: Anscombe’s quartet และ Datasaurus Dozen</a></li>
+<li>API — <a href="./chapters/05-data-acquisition.html#sec-ch05-rest">REST API: authentication, pagination, rate limit</a></li>
+<li>ASOF join — <a href="./chapters/07-sql-analysis.html#sec-ch07-joins">join ทุกแบบ: inner, outer, semi, anti และ ASOF join</a></li>
+<li>attribute — <a href="./chapters/06-analytical-databases.html#sec-ch06-relational">relational model: relation, key และ integrity</a></li>
+<li>autocorrelation — <a href="./chapters/14-time-series.html#sec-ch14-acf">autocorrelation: ACF และ PACF</a></li>
+<li>biplot — <a href="./chapters/15-multivariate.html#sec-ch15-loadings">การตีความ loading และ explained variance</a></li>
+<li>blob — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>block bootstrap — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-resampling">resampling: bootstrap และ permutation test</a></li>
+<li>Bonferroni — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-multiple">การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, Benjamini–Hochberg (FDR)</a></li>
+<li>bootstrap — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-resampling">resampling: bootstrap และ permutation test</a></li>
+<li>Box-Cox — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-transform">การแปลงข้อมูล: log, Box-Cox</a></li>
+<li>branch — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>breadcrumb — <a href="./chapters/20-dashboards.html#sec-ch20-drilldown">การออกแบบ drill-down หลายระดับ</a></li>
+<li>breakdown point — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-robust">robust statistics: median, IQR, MAD, trimmed mean</a></li>
+<li>brushing — <a href="./chapters/12-interactive-viz.html#sec-ch12-linked">linked views และ brushing</a></li>
+<li>callback — <a href="./chapters/20-dashboards.html#sec-ch20-streamlit">แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</a></li>
+<li>causal diagram — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-causal">ความคิดเชิงสาเหตุเบื้องต้น: confounding และ causal diagram (DAG)</a></li>
+<li>certificate chain — <a href="./chapters/05-data-acquisition.html#sec-ch05-http">HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a></li>
+<li>change point — <a href="./chapters/14-time-series.html#sec-ch14-change-point">change point detection</a></li>
+<li>channel — <a href="./chapters/02-reproducible-environment.html#sec-ch02-packages">Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a></li>
+<li>class imbalance — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-smote">class imbalance และ SMOTE</a></li>
+<li>classical decomposition — <a href="./chapters/14-time-series.html#sec-ch14-decomposition">การแยกองค์ประกอบ: classical decomposition และ STL</a></li>
+<li>Cliff’s delta — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-effect-size">effect size: ทำไม p-value อย่างเดียวไม่พอ</a></li>
+<li>code cell — <a href="./chapters/19-storytelling-reports.html#sec-ch19-quarto">literate programming และ Quarto</a></li>
+<li>column store — <a href="./chapters/06-analytical-databases.html#sec-ch06-row-column">row store กับ column store</a></li>
+<li>commit — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>conda — <a href="./chapters/02-reproducible-environment.html#sec-ch02-packages">Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a></li>
+<li>conda-forge — <a href="./chapters/02-reproducible-environment.html#sec-ch02-packages">Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a></li>
+<li>conflict — <a href="./chapters/03-version-control.html#sec-ch03-conflict">การแก้ conflict</a></li>
+<li>container — <a href="./chapters/02-reproducible-environment.html#sec-ch02-container">container (Docker) และ dev container เบื้องต้น</a></li>
+<li>continuous integration — <a href="./chapters/03-version-control.html#sec-ch03-ci">GitHub Actions และ continuous integration เบื้องต้น</a></li>
+<li>copy-on-write — <a href="./chapters/08-data-wrangling.html#sec-ch08-pandas">pandas เชิงลึก: index, dtype, copy-on-write และ Arrow-backed dtype</a></li>
+<li>CRISP-DM — <a href="./chapters/01-data-science-eda.html#sec-ch01-lifecycle">แบบจำลองวงจรชีวิตข้อมูล: CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้</a></li>
+<li>cron — <a href="./chapters/05-data-acquisition.html#sec-ch05-incremental">การดึงข้อมูลแบบตั้งเวลาและแบบเพิ่มเติม (incremental)</a></li>
+<li>CSS selector — <a href="./chapters/05-data-acquisition.html#sec-ch05-scraping">web scraping: DOM, CSS selector และ BeautifulSoup</a></li>
+<li>CSV — <a href="./chapters/05-data-acquisition.html#sec-ch05-formats">รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a></li>
+<li>CTE — <a href="./chapters/07-sql-analysis.html#sec-ch07-cte">CTE และ recursive CTE</a></li>
+<li>CTGAN — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-synthetic">ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), แบบ deep learning (CTGAN)</a></li>
+<li>cursor pagination — <a href="./chapters/05-data-acquisition.html#sec-ch05-rest">REST API: authentication, pagination, rate limit</a></li>
+<li>DAG — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>data contract — <a href="./chapters/09-data-quality.html#sec-ch09-contract-drift">data contract และ การเฝ้าระวัง data drift</a></li>
+<li>data cube — <a href="./chapters/18-hierarchical-data.html#sec-ch18-olap">การดำเนินการแบบ OLAP: roll-up, drill-down, slice, dice</a></li>
+<li>data drift — <a href="./chapters/09-data-quality.html#sec-ch09-contract-drift">data contract และ การเฝ้าระวัง data drift</a></li>
+<li>data lake — <a href="./chapters/06-analytical-databases.html#sec-ch06-alternatives">ทางเลือกอื่น: SQLite, PostgreSQL, data lake และ lakehouse</a></li>
+<li>data profiling — <a href="./chapters/09-data-quality.html#sec-ch09-profiling">data profiling: ทฤษฎีและเครื่องมือ</a></li>
+<li>data-ink ratio — <a href="./chapters/11-visual-perception.html#sec-ch11-integrity">ความซื่อตรงของภาพ: lie factor, data-ink (Tufte), แกนที่ถูกตัด</a></li>
+<li>Datasaurus Dozen — <a href="./chapters/01-data-science-eda.html#sec-ch01-anscombe">ทำไมต้องสำรวจก่อนสรุป: Anscombe’s quartet และ Datasaurus Dozen</a></li>
+<li>Datasheets for Datasets — <a href="./chapters/09-data-quality.html#sec-ch09-documentation">การจัดทำเอกสารข้อมูล: data dictionary และ Datasheets for Datasets</a></li>
+<li>datum — <a href="./chapters/17-spatial-data.html#sec-ch17-geodesy">ภูมิมาตรศาสตร์เบื้องต้น: ellipsoid, datum, พิกัดภูมิศาสตร์</a></li>
+<li>DBSCAN — <a href="./chapters/15-multivariate.html#sec-ch15-clustering">clustering: k-means, hierarchical, DBSCAN</a></li>
+<li>DCR — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-evaluation">การประเมินข้อมูลสังเคราะห์: utility กับ privacy</a></li>
+<li>dendrogram — <a href="./chapters/15-multivariate.html#sec-ch15-clustering">clustering: k-means, hierarchical, DBSCAN</a></li>
+<li>denormalization — <a href="./chapters/06-analytical-databases.html#sec-ch06-normalization">normalization กับ denormalization</a></li>
+<li>dev container — <a href="./chapters/02-reproducible-environment.html#sec-ch02-container">container (Docker) และ dev container เบื้องต้น</a></li>
+<li>dictionary encoding — <a href="./chapters/06-analytical-databases.html#sec-ch06-parquet">Parquet เชิงลึก: row group, encoding, compression, statistics</a></li>
+<li>differential privacy — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-dp">differential privacy เบื้องต้น</a></li>
+<li>dimension table — <a href="./chapters/06-analytical-databases.html#sec-ch06-oltp-olap">OLTP กับ OLAP และ star schema</a></li>
+<li>Dockerfile — <a href="./chapters/02-reproducible-environment.html#sec-ch02-container">container (Docker) และ dev container เบื้องต้น</a></li>
+<li>DOM — <a href="./chapters/05-data-acquisition.html#sec-ch05-scraping">web scraping: DOM, CSS selector และ BeautifulSoup</a></li>
+<li>drift — <a href="./chapters/09-data-quality.html#sec-ch09-sensor">ปัญหาเฉพาะของข้อมูลจากเซนเซอร์: ค่าแทน (sentinel), sensor ค้าง, drift, การสอบเทียบ</a></li>
+<li>DVC — <a href="./chapters/03-version-control.html#sec-ch03-data-versioning">การจัดเวอร์ชันข้อมูล: Git LFS, DVC</a></li>
+<li>ECDF — <a href="./chapters/11-visual-perception.html#sec-ch11-chart-choice">การเลือกกราฟตามคำถาม</a></li>
+<li>ecological fallacy — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-correlation">สหสัมพันธ์และกับดัก: Simpson’s paradox, ecological fallacy</a></li>
+<li>effect size — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-effect-size">effect size: ทำไม p-value อย่างเดียวไม่พอ</a></li>
+<li>eigenvalue — <a href="./chapters/15-multivariate.html#sec-ch15-pca">PCA เชิงคณิตศาสตร์: eigen decomposition และ SVD</a></li>
+<li>eigenvector — <a href="./chapters/15-multivariate.html#sec-ch15-pca">PCA เชิงคณิตศาสตร์: eigen decomposition และ SVD</a></li>
+<li>elbow method — <a href="./chapters/15-multivariate.html#sec-ch15-evaluation">การประเมิน cluster: silhouette และความเสถียร</a></li>
+<li>ellipsoid — <a href="./chapters/17-spatial-data.html#sec-ch17-geodesy">ภูมิมาตรศาสตร์เบื้องต้น: ellipsoid, datum, พิกัดภูมิศาสตร์</a></li>
+<li>encoding — <a href="./chapters/05-data-acquisition.html#sec-ch05-formats">รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a></li>
+<li>environment variable — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>equivalence class — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-k-anonymity">k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ</a></li>
+<li>exponential backoff — <a href="./chapters/05-data-acquisition.html#sec-ch05-robust">การดึงข้อมูลอย่างทนทาน: timeout, retry, backoff, idempotency</a></li>
+<li>facet — <a href="./chapters/11-visual-perception.html#sec-ch11-small-multiples">small multiples และการเปรียบเทียบ</a></li>
+<li>fact table — <a href="./chapters/06-analytical-databases.html#sec-ch06-oltp-olap">OLTP กับ OLAP และ star schema</a></li>
+<li>false discovery rate — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-multiple">การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, Benjamini–Hochberg (FDR)</a></li>
+<li>family-wise error rate — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-multiple">การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, Benjamini–Hochberg (FDR)</a></li>
+<li>fan-out — <a href="./chapters/08-data-wrangling.html#sec-ch08-join-traps">กับดักของการ join: fan-out และ key ไม่ตรงกัน</a></li>
+<li>fast-forward — <a href="./chapters/03-version-control.html#sec-ch03-branch">branch, merge และ rebase</a></li>
+<li>first look — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-hypothesis-sources">แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look</a></li>
+<li>foreign key — <a href="./chapters/06-analytical-databases.html#sec-ch06-relational">relational model: relation, key และ integrity</a></li>
+<li>Gaussian copula — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-synthetic">ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), แบบ deep learning (CTGAN)</a></li>
+<li>Git LFS — <a href="./chapters/03-version-control.html#sec-ch03-data-versioning">การจัดเวอร์ชันข้อมูล: Git LFS, DVC</a></li>
+<li>hallucination — <a href="./chapters/02-reproducible-environment.html#sec-ch02-ai">การใช้ AI ช่วยเขียนโค้ด: ขอบเขต วิธีตรวจสอบ และการบันทึก</a> · <a href="./chapters/22-ethics-ai.html#sec-ch22-ai">ความรับผิดชอบเมื่อใช้ AI ช่วยเขียนโค้ด: hallucination และการตรวจสอบ</a></li>
+<li>Hampel filter — <a href="./chapters/14-time-series.html#sec-ch14-anomaly">การตรวจหาความผิดปกติในอนุกรมเวลา</a></li>
+<li>HARKing — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-forking-paths">Garden of forking paths, HARKing และ p-hacking</a></li>
+<li>hash — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>HEAD — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>hidden state — <a href="./chapters/02-reproducible-environment.html#sec-ch02-jupyter">Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ <code>.ipynb</code> และปัญหา hidden state</a></li>
+<li>hierarchical clustering — <a href="./chapters/15-multivariate.html#sec-ch15-clustering">clustering: k-means, hierarchical, DBSCAN</a></li>
+<li>hive partitioning — <a href="./chapters/06-analytical-databases.html#sec-ch06-partitioning">partitioning และการออกแบบที่เก็บข้อมูลสำหรับข้อมูลอนุกรมเวลา</a></li>
+<li>Holm — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-multiple">การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, Benjamini–Hochberg (FDR)</a></li>
+<li>HTTP — <a href="./chapters/05-data-acquisition.html#sec-ch05-http">HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a></li>
+<li>idempotent — <a href="./chapters/05-data-acquisition.html#sec-ch05-robust">การดึงข้อมูลอย่างทนทาน: timeout, retry, backoff, idempotency</a></li>
+<li>IDW — <a href="./chapters/17-spatial-data.html#sec-ch17-interpolation">การประมาณค่าเชิงพื้นที่จากเครือข่ายสถานี: IDW และ kriging เบื้องต้น</a></li>
+<li>in-process — <a href="./chapters/06-analytical-databases.html#sec-ch06-duckdb">DuckDB: สถาปัตยกรรม in-process และ vectorized execution</a></li>
+<li>incremental loading — <a href="./chapters/05-data-acquisition.html#sec-ch05-incremental">การดึงข้อมูลแบบตั้งเวลาและแบบเพิ่มเติม (incremental)</a></li>
+<li>inertia — <a href="./chapters/15-multivariate.html#sec-ch15-clustering">clustering: k-means, hierarchical, DBSCAN</a></li>
+<li>integrity constraint — <a href="./chapters/06-analytical-databases.html#sec-ch06-relational">relational model: relation, key และ integrity</a></li>
+<li>Isolation Forest — <a href="./chapters/15-multivariate.html#sec-ch15-outliers">การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest</a></li>
+<li>issue — <a href="./chapters/03-version-control.html#sec-ch03-github">GitHub: remote, pull request, issue และ code review</a></li>
+<li>join — <a href="./chapters/07-sql-analysis.html#sec-ch07-joins">join ทุกแบบ: inner, outer, semi, anti และ ASOF join</a></li>
+<li>JSON — <a href="./chapters/05-data-acquisition.html#sec-ch05-formats">รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a></li>
+<li>k-anonymity — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-k-anonymity">k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ</a></li>
+<li>k-means — <a href="./chapters/15-multivariate.html#sec-ch15-clustering">clustering: k-means, hierarchical, DBSCAN</a></li>
+<li>kernel — <a href="./chapters/02-reproducible-environment.html#sec-ch02-jupyter">Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ <code>.ipynb</code> และปัญหา hidden state</a></li>
+<li>KNN imputation — <a href="./chapters/10-missing-data.html#sec-ch10-mice">การเติมค่าด้วยแบบจำลอง: regression, KNN, MICE</a></li>
+<li>kriging — <a href="./chapters/17-spatial-data.html#sec-ch17-interpolation">การประมาณค่าเชิงพื้นที่จากเครือข่ายสถานี: IDW และ kriging เบื้องต้น</a></li>
+<li>l-diversity — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-k-anonymity">k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ</a></li>
+<li>lag — <a href="./chapters/14-time-series.html#sec-ch14-acf">autocorrelation: ACF และ PACF</a></li>
+<li>lakehouse — <a href="./chapters/06-analytical-databases.html#sec-ch06-alternatives">ทางเลือกอื่น: SQLite, PostgreSQL, data lake และ lakehouse</a></li>
+<li>layered grammar of graphics — <a href="./chapters/12-interactive-viz.html#sec-ch12-grammar">grammar of graphics ของ Wilkinson</a></li>
+<li>lazy — <a href="./chapters/08-data-wrangling.html#sec-ch08-polars">Polars: expression และ lazy evaluation</a></li>
+<li>leave-one-out cross-validation — <a href="./chapters/17-spatial-data.html#sec-ch17-interpolation">การประมาณค่าเชิงพื้นที่จากเครือข่ายสถานี: IDW และ kriging เบื้องต้น</a></li>
+<li>lie factor — <a href="./chapters/11-visual-perception.html#sec-ch11-integrity">ความซื่อตรงของภาพ: lie factor, data-ink (Tufte), แกนที่ถูกตัด</a></li>
+<li>linked views — <a href="./chapters/12-interactive-viz.html#sec-ch12-linked">linked views และ brushing</a></li>
+<li>listwise deletion — <a href="./chapters/10-missing-data.html#sec-ch10-deletion">การตัดทิ้ง: listwise, pairwise และอคติที่ตามมา</a></li>
+<li>literate programming — <a href="./chapters/19-storytelling-reports.html#sec-ch19-quarto">literate programming และ Quarto</a></li>
+<li>loading — <a href="./chapters/15-multivariate.html#sec-ch15-loadings">การตีความ loading และ explained variance</a></li>
+<li>LOCF — <a href="./chapters/10-missing-data.html#sec-ch10-single">การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation</a></li>
+<li>LOESS — <a href="./chapters/14-time-series.html#sec-ch14-smoothing">smoothing: moving average และ LOESS</a></li>
+<li>LOF — <a href="./chapters/15-multivariate.html#sec-ch15-outliers">การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest</a></li>
+<li>MAD — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-robust">robust statistics: median, IQR, MAD, trimmed mean</a></li>
+<li>Mahalanobis distance — <a href="./chapters/15-multivariate.html#sec-ch15-outliers">การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest</a></li>
+<li>MAR — <a href="./chapters/10-missing-data.html#sec-ch10-rubin">กรอบแนวคิดของ Rubin: MCAR, MAR, MNAR</a></li>
+<li>MAUP — <a href="./chapters/17-spatial-data.html#sec-ch17-choropleth">แผนที่ choropleth และปัญหา MAUP</a></li>
+<li>MCAR — <a href="./chapters/10-missing-data.html#sec-ch10-rubin">กรอบแนวคิดของ Rubin: MCAR, MAR, MNAR</a></li>
+<li>merge — <a href="./chapters/03-version-control.html#sec-ch03-branch">branch, merge และ rebase</a></li>
+<li>method chaining — <a href="./chapters/08-data-wrangling.html#sec-ch08-chaining">method chaining และโค้ดที่อ่านง่าย</a></li>
+<li>MICE — <a href="./chapters/10-missing-data.html#sec-ch10-mice">การเติมค่าด้วยแบบจำลอง: regression, KNN, MICE</a></li>
+<li>MNAR — <a href="./chapters/10-missing-data.html#sec-ch10-rubin">กรอบแนวคิดของ Rubin: MCAR, MAR, MNAR</a></li>
+<li>Moran’s I — <a href="./chapters/17-spatial-data.html#sec-ch17-moran">spatial autocorrelation: Moran’s I</a></li>
+<li>moving average — <a href="./chapters/14-time-series.html#sec-ch14-smoothing">smoothing: moving average และ LOESS</a></li>
+<li>non-parametric — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-testing">การทดสอบสมมติฐาน: parametric และ non-parametric</a></li>
+<li>normalization — <a href="./chapters/06-analytical-databases.html#sec-ch06-normalization">normalization กับ denormalization</a></li>
+<li><code>NULL</code> — <a href="./chapters/07-sql-analysis.html#sec-ch07-null">NULL และตรรกะสามค่า</a></li>
+<li>observability — <a href="./chapters/05-data-acquisition.html#sec-ch05-observability">logging และการสังเกตการณ์ (observability) ของ pipeline</a></li>
+<li>offset pagination — <a href="./chapters/05-data-acquisition.html#sec-ch05-rest">REST API: authentication, pagination, rate limit</a></li>
+<li>OLAP — <a href="./chapters/06-analytical-databases.html#sec-ch06-oltp-olap">OLTP กับ OLAP และ star schema</a></li>
+<li>OLTP — <a href="./chapters/06-analytical-databases.html#sec-ch06-oltp-olap">OLTP กับ OLAP และ star schema</a></li>
+<li>OSEMN — <a href="./chapters/01-data-science-eda.html#sec-ch01-lifecycle">แบบจำลองวงจรชีวิตข้อมูล: CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้</a></li>
+<li>overplotting — <a href="./chapters/11-visual-perception.html#sec-ch11-chart-choice">การเลือกกราฟตามคำถาม</a></li>
+<li>p-hacking — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-forking-paths">Garden of forking paths, HARKing และ p-hacking</a></li>
+<li>p-value — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-testing">การทดสอบสมมติฐาน: parametric และ non-parametric</a></li>
+<li>PACF — <a href="./chapters/14-time-series.html#sec-ch14-acf">autocorrelation: ACF และ PACF</a></li>
+<li>pairwise deletion — <a href="./chapters/10-missing-data.html#sec-ch10-deletion">การตัดทิ้ง: listwise, pairwise และอคติที่ตามมา</a></li>
+<li>parametric — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-testing">การทดสอบสมมติฐาน: parametric และ non-parametric</a></li>
+<li>Parquet — <a href="./chapters/06-analytical-databases.html#sec-ch06-parquet">Parquet เชิงลึก: row group, encoding, compression, statistics</a></li>
+<li>partition pruning — <a href="./chapters/06-analytical-databases.html#sec-ch06-partitioning">partitioning และการออกแบบที่เก็บข้อมูลสำหรับข้อมูลอนุกรมเวลา</a></li>
+<li>partitioning — <a href="./chapters/06-analytical-databases.html#sec-ch06-partitioning">partitioning และการออกแบบที่เก็บข้อมูลสำหรับข้อมูลอนุกรมเวลา</a></li>
+<li>path — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>PCA — <a href="./chapters/15-multivariate.html#sec-ch15-pca">PCA เชิงคณิตศาสตร์: eigen decomposition และ SVD</a></li>
+<li>perceptual uniformity — <a href="./chapters/11-visual-perception.html#sec-ch11-color">วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี</a></li>
+<li>permutation test — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-resampling">resampling: bootstrap และ permutation test</a></li>
+<li>pip — <a href="./chapters/02-reproducible-environment.html#sec-ch02-packages">Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a></li>
+<li>pipeline — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a></li>
+<li>PM2.5 — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a></li>
+<li>preattentive attribute — <a href="./chapters/11-visual-perception.html#sec-ch11-perception">การรับรู้ทางสายตา: preattentive attribute และหลัก Gestalt</a></li>
+<li>predicate pushdown — <a href="./chapters/06-analytical-databases.html#sec-ch06-parquet">Parquet เชิงลึก: row group, encoding, compression, statistics</a></li>
+<li>preregistration — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-prereg">preregistration และ analysis plan</a></li>
+<li>primary key — <a href="./chapters/06-analytical-databases.html#sec-ch06-relational">relational model: relation, key และ integrity</a></li>
+<li>process — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>pseudonymization — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-anonymization">anonymization กับ pseudonymization</a></li>
+<li>pull request — <a href="./chapters/03-version-control.html#sec-ch03-github">GitHub: remote, pull request, issue และ code review</a></li>
+<li>PyPI — <a href="./chapters/02-reproducible-environment.html#sec-ch02-packages">Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a></li>
+<li>raster — <a href="./chapters/17-spatial-data.html#sec-ch17-vector">vector data model: point, line, polygon</a></li>
+<li>rate limit — <a href="./chapters/05-data-acquisition.html#sec-ch05-rest">REST API: authentication, pagination, rate limit</a></li>
+<li>rebase — <a href="./chapters/03-version-control.html#sec-ch03-branch">branch, merge และ rebase</a></li>
+<li>recursive CTE — <a href="./chapters/07-sql-analysis.html#sec-ch07-cte">CTE และ recursive CTE</a></li>
+<li>regression imputation — <a href="./chapters/10-missing-data.html#sec-ch10-mice">การเติมค่าด้วยแบบจำลอง: regression, KNN, MICE</a></li>
+<li>relation — <a href="./chapters/06-analytical-databases.html#sec-ch06-relational">relational model: relation, key และ integrity</a></li>
+<li>relative path — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>remote — <a href="./chapters/03-version-control.html#sec-ch03-github">GitHub: remote, pull request, issue และ code review</a></li>
+<li>repository — <a href="./chapters/03-version-control.html#sec-ch03-commit">staging area, commit ที่ดี และประวัติที่อ่านได้</a></li>
+<li>request — <a href="./chapters/05-data-acquisition.html#sec-ch05-http">HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a></li>
+<li>response — <a href="./chapters/05-data-acquisition.html#sec-ch05-http">HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a></li>
+<li>REST — <a href="./chapters/05-data-acquisition.html#sec-ch05-rest">REST API: authentication, pagination, rate limit</a></li>
+<li>robust z-score — <a href="./chapters/15-multivariate.html#sec-ch15-outliers">การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest</a></li>
+<li>row store — <a href="./chapters/06-analytical-databases.html#sec-ch06-row-column">row store กับ column store</a></li>
+<li>run-length encoding — <a href="./chapters/06-analytical-databases.html#sec-ch06-parquet">Parquet เชิงลึก: row group, encoding, compression, statistics</a></li>
+<li>schema — <a href="./chapters/09-data-quality.html#sec-ch09-pandera">validation as code ด้วย pandera</a></li>
+<li>scree plot — <a href="./chapters/15-multivariate.html#sec-ch15-loadings">การตีความ loading และ explained variance</a></li>
+<li>selection parameter — <a href="./chapters/12-interactive-viz.html#sec-ch12-linked">linked views และ brushing</a></li>
+<li>sensitivity analysis — <a href="./chapters/10-missing-data.html#sec-ch10-sensitivity">sensitivity analysis และการรายงานการตัดสินใจ</a></li>
+<li>session state — <a href="./chapters/20-dashboards.html#sec-ch20-streamlit">แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</a></li>
+<li>shell — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>silhouette — <a href="./chapters/15-multivariate.html#sec-ch15-evaluation">การประเมิน cluster: silhouette และความเสถียร</a></li>
+<li>Simpson’s paradox — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-correlation">สหสัมพันธ์และกับดัก: Simpson’s paradox, ecological fallacy</a></li>
+<li>slice-and-dice — <a href="./chapters/18-hierarchical-data.html#sec-ch18-treemap">treemap และ sunburst: อัลกอริทึมการจัดวาง</a></li>
+<li>small cell suppression — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-anonymization">anonymization กับ pseudonymization</a></li>
+<li>small multiples — <a href="./chapters/11-visual-perception.html#sec-ch11-small-multiples">small multiples และการเปรียบเทียบ</a></li>
+<li>SMOTE — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-smote">class imbalance และ SMOTE</a></li>
+<li>spatial autocorrelation — <a href="./chapters/17-spatial-data.html#sec-ch17-moran">spatial autocorrelation: Moran’s I</a></li>
+<li>spatial join — <a href="./chapters/17-spatial-data.html#sec-ch17-operations">spatial operation และ spatial join</a></li>
+<li>spurious correlation — <a href="./chapters/14-time-series.html#sec-ch14-stationarity">stationarity และ การทดสอบ (ADF, KPSS)</a></li>
+<li>SQL injection — <a href="./chapters/20-dashboards.html#sec-ch20-drilldown">การออกแบบ drill-down หลายระดับ</a></li>
+<li>squarified — <a href="./chapters/18-hierarchical-data.html#sec-ch18-treemap">treemap และ sunburst: อัลกอริทึมการจัดวาง</a></li>
+<li>staging area — <a href="./chapters/03-version-control.html#sec-ch03-commit">staging area, commit ที่ดี และประวัติที่อ่านได้</a></li>
+<li>star schema — <a href="./chapters/06-analytical-databases.html#sec-ch06-oltp-olap">OLTP กับ OLAP และ star schema</a></li>
+<li>stationarity — <a href="./chapters/14-time-series.html#sec-ch14-stationarity">stationarity และ การทดสอบ (ADF, KPSS)</a></li>
+<li>STL — <a href="./chapters/14-time-series.html#sec-ch14-decomposition">การแยกองค์ประกอบ: classical decomposition และ STL</a></li>
+<li>sunburst — <a href="./chapters/18-hierarchical-data.html#sec-ch18-treemap">treemap และ sunburst: อัลกอริทึมการจัดวาง</a></li>
+<li>SVD — <a href="./chapters/15-multivariate.html#sec-ch15-pca">PCA เชิงคณิตศาสตร์: eigen decomposition และ SVD</a></li>
+<li>t-SNE — <a href="./chapters/15-multivariate.html#sec-ch15-tsne-umap">t-SNE และ UMAP: แนวคิดและกับดักการตีความ</a></li>
+<li>template — <a href="./chapters/12-interactive-viz.html#sec-ch12-plotly">แบบจำลองของ Plotly: figure, trace, layout</a></li>
+<li>terminal — <a href="./chapters/02-reproducible-environment.html#sec-ch02-shell">shell และ terminal: แนวคิด path, process, environment variable</a></li>
+<li>three-way merge — <a href="./chapters/03-version-control.html#sec-ch03-branch">branch, merge และ rebase</a></li>
+<li>tidy data — <a href="./chapters/08-data-wrangling.html#sec-ch08-tidy">tidy data: หลักการของ Wickham</a></li>
+<li>TIS-620 — <a href="./chapters/05-data-acquisition.html#sec-ch05-formats">รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a></li>
+<li>TLS — <a href="./chapters/05-data-acquisition.html#sec-ch05-http">HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a></li>
+<li>trace — <a href="./chapters/12-interactive-viz.html#sec-ch12-plotly">แบบจำลองของ Plotly: figure, trace, layout</a></li>
+<li>tree — <a href="./chapters/03-version-control.html#sec-ch03-model">แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a></li>
+<li>treemap — <a href="./chapters/18-hierarchical-data.html#sec-ch18-treemap">treemap และ sunburst: อัลกอริทึมการจัดวาง</a></li>
+<li>tuple — <a href="./chapters/06-analytical-databases.html#sec-ch06-relational">relational model: relation, key และ integrity</a></li>
+<li>UMAP — <a href="./chapters/15-multivariate.html#sec-ch15-tsne-umap">t-SNE และ UMAP: แนวคิดและกับดักการตีความ</a></li>
+<li>update anomaly — <a href="./chapters/06-analytical-databases.html#sec-ch06-normalization">normalization กับ denormalization</a></li>
+<li>upsert — <a href="./chapters/07-sql-analysis.html#sec-ch07-upsert">การโหลดข้อมูลแบบ idempotent: upsert และการขจัดข้อมูลซ้ำ</a></li>
+<li>UTF-8 — <a href="./chapters/05-data-acquisition.html#sec-ch05-formats">รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a></li>
+<li>UTM — <a href="./chapters/17-spatial-data.html#sec-ch17-crs">ระบบพิกัดและเส้นโครงแผนที่สำหรับประเทศไทย (WGS 84, UTM 47N/48N)</a></li>
+<li>variogram — <a href="./chapters/17-spatial-data.html#sec-ch17-interpolation">การประมาณค่าเชิงพื้นที่จากเครือข่ายสถานี: IDW และ kriging เบื้องต้น</a></li>
+<li>vector — <a href="./chapters/17-spatial-data.html#sec-ch17-vector">vector data model: point, line, polygon</a></li>
+<li>vectorization — <a href="./chapters/08-data-wrangling.html#sec-ch08-performance">ประสิทธิภาพ: vectorization, หน่วยความจำ และข้อมูลที่ใหญ่กว่า RAM</a></li>
+<li>vectorized execution — <a href="./chapters/06-analytical-databases.html#sec-ch06-duckdb">DuckDB: สถาปัตยกรรม in-process และ vectorized execution</a></li>
+<li>Vega-Lite — <a href="./chapters/12-interactive-viz.html#sec-ch12-tools">จาก ggplot2 ถึง seaborn objects และ Altair/Vega-Lite</a></li>
+<li>version control — <a href="./chapters/03-version-control.html#sec-ch03-why">ทำไมต้องมี version control</a></li>
+<li>virtual environment — <a href="./chapters/02-reproducible-environment.html#sec-ch02-venv">virtual environment ทำงานอย่างไร</a></li>
+<li>visual information-seeking mantra — <a href="./chapters/12-interactive-viz.html#sec-ch12-shneiderman">หลักการโต้ตอบ: overview first, zoom and filter, details on demand (Shneiderman)</a></li>
+<li>watermark — <a href="./chapters/05-data-acquisition.html#sec-ch05-incremental">การดึงข้อมูลแบบตั้งเวลาและแบบเพิ่มเติม (incremental)</a></li>
+<li>web scraping — <a href="./chapters/05-data-acquisition.html#sec-ch05-scraping">web scraping: DOM, CSS selector และ BeautifulSoup</a></li>
+<li>wheel — <a href="./chapters/02-reproducible-environment.html#sec-ch02-packages">Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a></li>
+<li>window function — <a href="./chapters/07-sql-analysis.html#sec-ch07-window">window function: ranking, moving average, lag/lead</a></li>
+<li>working directory — <a href="./chapters/03-version-control.html#sec-ch03-commit">staging area, commit ที่ดี และประวัติที่อ่านได้</a></li>
+<li>XML — <a href="./chapters/05-data-acquisition.html#sec-ch05-formats">รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a></li>
+<li>YAML header — <a href="./chapters/19-storytelling-reports.html#sec-ch19-quarto">literate programming และ Quarto</a></li>
+<li>zero-copy — <a href="./chapters/06-analytical-databases.html#sec-ch06-arrow">Apache Arrow: รูปแบบหน่วยความจำแบบ columnar และ zero-copy</a></li>
+<li>กฎ IQR — <a href="./chapters/15-multivariate.html#sec-ch15-outliers">การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest</a></li>
+<li>การจัดเก็บแบบ columnar — <a href="./chapters/06-analytical-databases.html#sec-ch06-row-column">row store กับ column store</a></li>
+<li>การตรวจสอบความถูกต้อง — <a href="./chapters/09-data-quality.html#sec-ch09-pandera">validation as code ด้วย pandera</a></li>
+<li>การทำให้เป็นมาตรฐาน — <a href="./chapters/15-multivariate.html#sec-ch15-distance">ระยะทาง ความคล้าย และการปรับสเกล</a></li>
+<li>การนำเสนอข้อมูลด้วยภาพ — (ไม่มี label ของหัวข้อ)</li>
+<li>การประมาณค่าในช่วง — <a href="./chapters/10-missing-data.html#sec-ch10-single">การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation</a></li>
+<li>การรวมกลุ่ม — <a href="./chapters/07-sql-analysis.html#sec-ch07-aggregation">aggregation, <code>GROUP BY ALL</code> และ <code>GROUPING SETS</code>/<code>ROLLUP</code>/<code>CUBE</code></a></li>
+<li>การระบุตัวตนซ้ำ — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-k-anonymity">k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ</a></li>
+<li>การสอบเทียบ — <a href="./chapters/09-data-quality.html#sec-ch09-sensor">ปัญหาเฉพาะของข้อมูลจากเซนเซอร์: ค่าแทน (sentinel), sensor ค้าง, drift, การสอบเทียบ</a></li>
+<li>การสำรวจข้อมูล (EDA) — <a href="./chapters/01-data-science-eda.html#sec-ch01-tukey">กำเนิด Exploratory Data Analysis: John Tukey กับ “งานนักสืบ”</a></li>
+<li>การเข้ารหัสภาพ — <a href="./chapters/11-visual-perception.html#sec-ch11-cleveland">ลำดับความแม่นยำของการเข้ารหัสภาพ (Cleveland &amp; McGill)</a></li>
+<li>การเติมค่า — <a href="./chapters/10-missing-data.html#sec-ch10-single">การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation</a></li>
+<li>การเติมค่าแบบหลายชุด — <a href="./chapters/10-missing-data.html#sec-ch10-multiple">multiple imputation และ Rubin’s rules</a></li>
+<li>ข้อค้นพบก่อน หลักฐานตาม — <a href="./chapters/19-storytelling-reports.html#sec-ch19-structure">โครงสร้างการเล่าเรื่อง: ข้อค้นพบก่อน หลักฐานตาม</a></li>
+<li>ข้อมูลสังเคราะห์ — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-synthetic">ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), แบบ deep learning (CTGAN)</a></li>
+<li>ข้อมูลสูญหาย — <a href="./chapters/10-missing-data.html#sec-ch10-explicit-implicit">explicit กับ implicit missing</a></li>
+<li>ข้อมูลส่วนบุคคล — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-personal-data">ข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว</a></li>
+<li>ข้อมูลส่วนบุคคลที่มีความอ่อนไหว — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-personal-data">ข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว</a></li>
+<li>ข้อมูลเปิด — <a href="./chapters/05-data-acquisition.html#sec-ch05-open-data">ภูมิทัศน์ข้อมูลเปิดของประเทศไทย</a></li>
+<li>ความครบถ้วน — <a href="./chapters/08-data-wrangling.html#sec-ch08-resample">resampling และความครบถ้วนของข้อมูลเมื่อรวมกลุ่ม</a></li>
+<li>ความยุติธรรมเชิงสิ่งแวดล้อม — <a href="./chapters/22-ethics-ai.html#sec-ch22-principles">หลักจริยธรรมข้อมูล</a></li>
+<li>ความรู้เชิงโดเมน — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-hypothesis-sources">แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look</a></li>
+<li>ความสว่าง — <a href="./chapters/11-visual-perception.html#sec-ch11-color">วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี</a></li>
+<li>ความอิ่มตัว — <a href="./chapters/11-visual-perception.html#sec-ch11-color">วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี</a></li>
+<li>ความเบ้ — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-distribution">การแจกแจงและรูปร่างของข้อมูล</a></li>
+<li>ความโด่งส่วนเกิน — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-distribution">การแจกแจงและรูปร่างของข้อมูล</a></li>
+<li>คำถามเชิงทำนาย (predictive) — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-question-types">ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</a></li>
+<li>คำถามเชิงพรรณนา (descriptive) — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-question-types">ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</a></li>
+<li>คำถามเชิงวิเคราะห์ — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-good-questions">คุณลักษณะของคำถามเชิงวิเคราะห์ที่ดี</a></li>
+<li>คำถามเชิงสาเหตุ (causal) — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-question-types">ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</a></li>
+<li>คำถามเชิงสำรวจ (exploratory) — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-question-types">ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</a></li>
+<li>คำถามเชิงอนุมาน (inferential) — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-question-types">ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</a></li>
+<li>คำสาปของมิติ — <a href="./chapters/15-multivariate.html#sec-ch15-distance">ระยะทาง ความคล้าย และการปรับสเกล</a></li>
+<li>คุณภาพข้อมูล — <a href="./chapters/09-data-quality.html#sec-ch09-dimensions">มิติของคุณภาพข้อมูล (DAMA, ISO/IEC 25012)</a></li>
+<li>ค่าแทน — <a href="./chapters/09-data-quality.html#sec-ch09-sensor">ปัญหาเฉพาะของข้อมูลจากเซนเซอร์: ค่าแทน (sentinel), sensor ค้าง, drift, การสอบเทียบ</a></li>
+<li>งบความเป็นส่วนตัว — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-dp">differential privacy เบื้องต้น</a></li>
+<li>จริยธรรมข้อมูล — <a href="./chapters/22-ethics-ai.html#sec-ch22-principles">หลักจริยธรรมข้อมูล</a></li>
+<li>ช่วงความเชื่อมั่น — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-ci">ประชากร ตัวอย่าง และช่วงความเชื่อมั่น</a></li>
+<li>แดชบอร์ด — <a href="./chapters/20-dashboards.html#sec-ch20-types">ประเภทของแดชบอร์ด: เชิงปฏิบัติการ เชิงวิเคราะห์ เชิงกลยุทธ์</a></li>
+<li>ตรรกะสามค่า — <a href="./chapters/07-sql-analysis.html#sec-ch07-null">NULL และตรรกะสามค่า</a></li>
+<li>ตัวชี้วัด — <a href="./chapters/20-dashboards.html#sec-ch20-layout">หลักการจัดวางและการออกแบบตัวชี้วัด</a></li>
+<li>ตัวแปรกวน — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-causal">ความคิดเชิงสาเหตุเบื้องต้น: confounding และ causal diagram (DAG)</a></li>
+<li>ตัวแปรตัวแทน — <a href="./chapters/10-missing-data.html#sec-ch10-evidence">การหาหลักฐานกลไกการสูญหาย และ Little’s MCAR test</a></li>
+<li>ตารางเวลาเต็ม — <a href="./chapters/10-missing-data.html#sec-ch10-explicit-implicit">explicit กับ implicit missing</a></li>
+<li>แนวโน้ม — <a href="./chapters/14-time-series.html#sec-ch14-components">องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual</a></li>
+<li>เบ้ขวา — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-distribution">การแจกแจงและรูปร่างของข้อมูล</a></li>
+<li>โปรไฟล์รายเดือน — <a href="./chapters/15-multivariate.html#sec-ch15-distance">ระยะทาง ความคล้าย และการปรับสเกล</a></li>
+<li>แผนการทำงาน — <a href="./chapters/07-sql-analysis.html#sec-ch07-query-plan">query plan, <code>EXPLAIN ANALYZE</code> และการปรับประสิทธิภาพ</a></li>
+<li>แผนที่ choropleth — <a href="./chapters/17-spatial-data.html#sec-ch17-choropleth">แผนที่ choropleth และปัญหา MAUP</a></li>
+<li>พจนานุกรมข้อมูล — <a href="./chapters/09-data-quality.html#sec-ch09-documentation">การจัดทำเอกสารข้อมูล: data dictionary และ Datasheets for Datasets</a></li>
+<li>พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-pdpa">พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 สำหรับนักวิทยาการข้อมูล</a></li>
+<li>รหัส EPSG — <a href="./chapters/17-spatial-data.html#sec-ch17-crs">ระบบพิกัดและเส้นโครงแผนที่สำหรับประเทศไทย (WGS 84, UTM 47N/48N)</a></li>
+<li>ระบบพิกัดอ้างอิง — <a href="./chapters/17-spatial-data.html#sec-ch17-crs">ระบบพิกัดและเส้นโครงแผนที่สำหรับประเทศไทย (WGS 84, UTM 47N/48N)</a></li>
+<li>ระยะทาง geodesic — <a href="./chapters/17-spatial-data.html#sec-ch17-geodesy">ภูมิมาตรศาสตร์เบื้องต้น: ellipsoid, datum, พิกัดภูมิศาสตร์</a></li>
+<li>ระยะทางแบบยุคลิด — <a href="./chapters/15-multivariate.html#sec-ch15-distance">ระยะทาง ความคล้าย และการปรับสเกล</a></li>
+<li>รูปแบบกว้าง — <a href="./chapters/08-data-wrangling.html#sec-ch08-reshape">reshaping: melt, pivot และ wide/long</a></li>
+<li>รูปแบบยาว — <a href="./chapters/08-data-wrangling.html#sec-ch08-reshape">reshaping: melt, pivot และ wide/long</a></li>
+<li>ฤดูกาล — <a href="./chapters/14-time-series.html#sec-ch14-components">องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual</a></li>
+<li>ลำดับการประมวลผลเชิงตรรกะ — <a href="./chapters/07-sql-analysis.html#sec-ch07-logical-order">ลำดับการประมวลผลเชิงตรรกะของคำสั่ง SELECT</a></li>
+<li>ลำดับชั้น — <a href="./chapters/18-hierarchical-data.html#sec-ch18-hierarchy">โครงสร้างลำดับชั้น: ภาค → จังหวัด → สถานี</a></li>
+<li>วงจรชีวิตข้อมูล — <a href="./chapters/01-data-science-eda.html#sec-ch01-lifecycle">แบบจำลองวงจรชีวิตข้อมูล: CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้</a></li>
+<li>วิกฤตการทำซ้ำได้ — <a href="./chapters/02-reproducible-environment.html#sec-ch02-crisis">วิกฤตการทำซ้ำได้ (reproducibility crisis) และระดับของการทำซ้ำได้</a></li>
+<li>สมมติฐาน — <a href="./chapters/04-questions-hypotheses.html#sec-ch04-hypothesis-sources">แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look</a></li>
+<li>สมมติฐานว่าง — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-testing">การทดสอบสมมติฐาน: parametric และ non-parametric</a></li>
+<li>สหสัมพันธ์ของ Pearson — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-correlation">สหสัมพันธ์และกับดัก: Simpson’s paradox, ecological fallacy</a></li>
+<li>สหสัมพันธ์ของ Spearman — <a href="./chapters/13-exploratory-statistics.html#sec-ch13-correlation">สหสัมพันธ์และกับดัก: Simpson’s paradox, ecological fallacy</a></li>
+<li>สัญญาอนุญาต — <a href="./chapters/22-ethics-ai.html#sec-ch22-licenses">สัญญาอนุญาตของข้อมูลและซอฟต์แวร์</a></li>
+<li>สีสัน — <a href="./chapters/11-visual-perception.html#sec-ch11-color">วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี</a></li>
+<li>เส้นโครงแผนที่ — <a href="./chapters/17-spatial-data.html#sec-ch17-crs">ระบบพิกัดและเส้นโครงแผนที่สำหรับประเทศไทย (WGS 84, UTM 47N/48N)</a></li>
+<li>ส่วนเหลือ — <a href="./chapters/14-time-series.html#sec-ch14-components">องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual</a></li>
+<li>อคติ — <a href="./chapters/22-ethics-ai.html#sec-ch22-bias">อคติในข้อมูลและในการตีความ</a></li>
+</ul>
+</section>
+<section id="ดชนเครองมอและฟงกชน" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="ดชนเครองมอและฟงกชน">ดัชนีเครื่องมือและฟังก์ชัน</h2>
+<ul>
+<li>Altair — <a href="./chapters/12-interactive-viz.html#sec-ch12-tools">จาก ggplot2 ถึง seaborn objects และ Altair/Vega-Lite</a></li>
+<li>Apache Arrow — <a href="./chapters/06-analytical-databases.html#sec-ch06-arrow">Apache Arrow: รูปแบบหน่วยความจำแบบ columnar และ zero-copy</a></li>
+<li>BeautifulSoup — <a href="./chapters/05-data-acquisition.html#sec-ch05-scraping">web scraping: DOM, CSS selector และ BeautifulSoup</a></li>
+<li>Datashader — <a href="./chapters/12-interactive-viz.html#sec-ch12-big-data">visualization ข้อมูลขนาดใหญ่: binning, aggregation และ Datashader</a></li>
+<li>DuckDB — <a href="./chapters/06-analytical-databases.html#sec-ch06-duckdb">DuckDB: สถาปัตยกรรม in-process และ vectorized execution</a></li>
+<li>Faker — <a href="./chapters/16-synthetic-privacy.html#sec-ch16-synthetic">ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), แบบ deep learning (CTGAN)</a></li>
+<li>Folium — <a href="./chapters/17-spatial-data.html#sec-ch17-folium">แผนที่บนเว็บด้วย Folium</a></li>
+<li>GeoPandas — <a href="./chapters/17-spatial-data.html#sec-ch17-vector">vector data model: point, line, polygon</a></li>
+<li>Git — <a href="./chapters/03-version-control.html#sec-ch03-why">ทำไมต้องมี version control</a></li>
+<li>GitHub — <a href="./chapters/03-version-control.html#sec-ch03-github">GitHub: remote, pull request, issue และ code review</a></li>
+<li>graph_objects — <a href="./chapters/12-interactive-viz.html#sec-ch12-plotly">แบบจำลองของ Plotly: figure, trace, layout</a></li>
+<li>Jupytext — <a href="./chapters/03-version-control.html#sec-ch03-notebook">notebook กับ Git: nbstripout และ Jupytext</a></li>
+<li><code>logging</code> — <a href="./chapters/05-data-acquisition.html#sec-ch05-observability">logging และการสังเกตการณ์ (observability) ของ pipeline</a></li>
+<li>missingno — <a href="./chapters/10-missing-data.html#sec-ch10-evidence">การหาหลักฐานกลไกการสูญหาย และ Little’s MCAR test</a></li>
+<li><code>nbstripout</code> — <a href="./chapters/03-version-control.html#sec-ch03-notebook">notebook กับ Git: nbstripout และ Jupytext</a></li>
+<li>pandas — <a href="./chapters/08-data-wrangling.html#sec-ch08-pandas">pandas เชิงลึก: index, dtype, copy-on-write และ Arrow-backed dtype</a></li>
+<li>pandera — <a href="./chapters/09-data-quality.html#sec-ch09-pandera">validation as code ด้วย pandera</a></li>
+<li>Plotly Express — <a href="./chapters/12-interactive-viz.html#sec-ch12-plotly">แบบจำลองของ Plotly: figure, trace, layout</a></li>
+<li>Polars — <a href="./chapters/08-data-wrangling.html#sec-ch08-polars">Polars: expression และ lazy evaluation</a></li>
+<li>PyGWalker — <a href="./chapters/12-interactive-viz.html#sec-ch12-pygwalker">เครื่องมือสำรวจแบบลากวาง (PyGWalker) และข้อจำกัด</a></li>
+<li>Quarto — <a href="./chapters/19-storytelling-reports.html#sec-ch19-quarto">literate programming และ Quarto</a></li>
+<li>seaborn objects — <a href="./chapters/12-interactive-viz.html#sec-ch12-tools">จาก ggplot2 ถึง seaborn objects และ Altair/Vega-Lite</a></li>
+<li>Streamlit — <a href="./chapters/20-dashboards.html#sec-ch20-streamlit">แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</a></li>
+<li><code>truststore</code> — <a href="./chapters/05-data-acquisition.html#sec-ch05-http">HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a></li>
+<li>ydata-profiling — <a href="./chapters/09-data-quality.html#sec-ch09-profiling">data profiling: ทฤษฎีและเครื่องมือ</a></li>
+</ul>
+</section>
+<section id="ดชนชดขอมลและกรณศกษา" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="ดชนชดขอมลและกรณศกษา">ดัชนีชุดข้อมูลและกรณีศึกษา</h2>
+<ul>
+<li>Air4Thai — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a></li>
+<li><code>daily_pm25</code> — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a> · <a href="./chapters/08-data-wrangling.html#sec-ch08-resample">resampling และความครบถ้วนของข้อมูลเมื่อรวมกลุ่ม</a></li>
+<li><code>daily_pm25_clean</code> — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a> · <a href="./chapters/10-missing-data.html#sec-ch10-timeseries-gaps">ช่องว่างในข้อมูลอนุกรมเวลา</a></li>
+<li><code>measurements</code> — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a></li>
+<li><code>measurements_clean</code> — <a href="./chapters/10-missing-data.html#sec-ch10-explicit-implicit">explicit กับ implicit missing</a></li>
+<li><code>stations</code> — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a></li>
+<li>กรมควบคุมมลพิษ — <a href="./chapters/00-overview.html#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./glossary.html" class="pagination-link" aria-label="อภิธานศัพท์">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">อภิธานศัพท์</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="บรรณานุกรม">
+        <span class="nav-page-text">บรรณานุกรม</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

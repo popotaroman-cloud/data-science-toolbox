@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05-data-acquisition.html" rel="next">
+<link href="../chapters/03-version-control.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/04-questions-hypotheses.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch04-question-types" id="toc-sec-ch04-question-types" class="nav-link" data-scroll-target="#sec-ch04-question-types"><span class="header-section-number">4.1</span> ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองรประเภทของคำถาม" id="toc-ทำไมตองรประเภทของคำถาม" class="nav-link" data-scroll-target="#ทำไมตองรประเภทของคำถาม">ทำไมต้องรู้ประเภทของคำถาม</a></li>
+  <li><a href="#หาประเภทของคำถาม" id="toc-หาประเภทของคำถาม" class="nav-link" data-scroll-target="#หาประเภทของคำถาม">ห้าประเภทของคำถาม</a></li>
+  <li><a href="#ความผดพลาดทพบบอยทสด-ตอบคำถามผดประเภท" id="toc-ความผดพลาดทพบบอยทสด-ตอบคำถามผดประเภท" class="nav-link" data-scroll-target="#ความผดพลาดทพบบอยทสด-ตอบคำถามผดประเภท">ความผิดพลาดที่พบบ่อยที่สุด: ตอบคำถามผิดประเภท</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-good-questions" id="toc-sec-ch04-good-questions" class="nav-link" data-scroll-target="#sec-ch04-good-questions"><span class="header-section-number">4.2</span> คุณลักษณะของคำถามเชิงวิเคราะห์ที่ดี</a>
+  <ul class="collapse">
+  <li><a href="#จากความสงสยสคำถามเชงวเคราะห" id="toc-จากความสงสยสคำถามเชงวเคราะห" class="nav-link" data-scroll-target="#จากความสงสยสคำถามเชงวเคราะห">จากความสงสัยสู่คำถามเชิงวิเคราะห์</a></li>
+  <li><a href="#ตวอยางการปรบคำถาม" id="toc-ตวอยางการปรบคำถาม" class="nav-link" data-scroll-target="#ตวอยางการปรบคำถาม">ตัวอย่างการปรับคำถาม</a></li>
+  <li><a href="#คำถามทดดแตมปญหา" id="toc-คำถามทดดแตมปญหา" class="nav-link" data-scroll-target="#คำถามทดดแตมปญหา">คำถามที่ดูดีแต่มีปัญหา</a></li>
+  <li><a href="#คำถามหลกและคำถามยอย" id="toc-คำถามหลกและคำถามยอย" class="nav-link" data-scroll-target="#คำถามหลกและคำถามยอย">คำถามหลักและคำถามย่อย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-hypothesis-sources" id="toc-sec-ch04-hypothesis-sources" class="nav-link" data-scroll-target="#sec-ch04-hypothesis-sources"><span class="header-section-number">4.3</span> แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look</a>
+  <ul class="collapse">
+  <li><a href="#สมมตฐานคออะไร" id="toc-สมมตฐานคออะไร" class="nav-link" data-scroll-target="#สมมตฐานคออะไร">สมมติฐานคืออะไร</a></li>
+  <li><a href="#แหลงทมาสแหลง" id="toc-แหลงทมาสแหลง" class="nav-link" data-scroll-target="#แหลงทมาสแหลง">แหล่งที่มาสี่แหล่ง</a></li>
+  <li><a href="#แยกสมมตฐานกอนและหลงเหนขอมล" id="toc-แยกสมมตฐานกอนและหลงเหนขอมล" class="nav-link" data-scroll-target="#แยกสมมตฐานกอนและหลงเหนขอมล">แยกสมมติฐานก่อนและหลังเห็นข้อมูล</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-forking-paths" id="toc-sec-ch04-forking-paths" class="nav-link" data-scroll-target="#sec-ch04-forking-paths"><span class="header-section-number">4.4</span> Garden of forking paths, HARKing และ p-hacking</a>
+  <ul class="collapse">
+  <li><a href="#กบดกทไมตองตงใจโกง" id="toc-กบดกทไมตองตงใจโกง" class="nav-link" data-scroll-target="#กบดกทไมตองตงใจโกง">กับดักที่ไม่ต้องตั้งใจโกง</a></li>
+  <li><a href="#garden-of-forking-paths" id="toc-garden-of-forking-paths" class="nav-link" data-scroll-target="#garden-of-forking-paths">Garden of forking paths</a></li>
+  <li><a href="#harking" id="toc-harking" class="nav-link" data-scroll-target="#harking">HARKing</a></li>
+  <li><a href="#p-hacking" id="toc-p-hacking" class="nav-link" data-scroll-target="#p-hacking">p-hacking</a></li>
+  <li><a href="#เหนดวยตาตวเอง-ความบงเอญจากการดหลายสถาน" id="toc-เหนดวยตาตวเอง-ความบงเอญจากการดหลายสถาน" class="nav-link" data-scroll-target="#เหนดวยตาตวเอง-ความบงเอญจากการดหลายสถาน">เห็นด้วยตาตัวเอง: ความบังเอิญจากการดูหลายสถานี</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-split" id="toc-sec-ch04-split" class="nav-link" data-scroll-target="#sec-ch04-split"><span class="header-section-number">4.5</span> การแยกข้อมูลสำรวจกับข้อมูลยืนยัน</a>
+  <ul class="collapse">
+  <li><a href="#หลกการ" id="toc-หลกการ" class="nav-link" data-scroll-target="#หลกการ">หลักการ</a></li>
+  <li><a href="#ทำไมแบงตามเวลา" id="toc-ทำไมแบงตามเวลา" class="nav-link" data-scroll-target="#ทำไมแบงตามเวลา">ทำไมแบ่งตามเวลา</a></li>
+  <li><a href="#ทำใหการแบงเปนรปธรรมในโคด" id="toc-ทำใหการแบงเปนรปธรรมในโคด" class="nav-link" data-scroll-target="#ทำใหการแบงเปนรปธรรมในโคด">ทำให้การแบ่งเป็นรูปธรรมในโค้ด</a></li>
+  <li><a href="#กฎของการยนยน" id="toc-กฎของการยนยน" class="nav-link" data-scroll-target="#กฎของการยนยน">กฎของการยืนยัน</a></li>
+  <li><a href="#ขอจำกดของการแบงตามเวลา" id="toc-ขอจำกดของการแบงตามเวลา" class="nav-link" data-scroll-target="#ขอจำกดของการแบงตามเวลา">ข้อจำกัดของการแบ่งตามเวลา</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-prereg" id="toc-sec-ch04-prereg" class="nav-link" data-scroll-target="#sec-ch04-prereg"><span class="header-section-number">4.6</span> preregistration และ analysis plan ★</a>
+  <ul class="collapse">
+  <li><a href="#preregistration-คออะไร" id="toc-preregistration-คออะไร" class="nav-link" data-scroll-target="#preregistration-คออะไร">preregistration คืออะไร</a></li>
+  <li><a href="#analysis-plan-มอะไรบาง" id="toc-analysis-plan-มอะไรบาง" class="nav-link" data-scroll-target="#analysis-plan-มอะไรบาง">analysis plan มีอะไรบ้าง</a></li>
+  <li><a href="#preregistration-ในโครงการของรายวชา" id="toc-preregistration-ในโครงการของรายวชา" class="nav-link" data-scroll-target="#preregistration-ในโครงการของรายวชา">preregistration ในโครงการของรายวิชา</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-causal" id="toc-sec-ch04-causal" class="nav-link" data-scroll-target="#sec-ch04-causal"><span class="header-section-number">4.7</span> ความคิดเชิงสาเหตุเบื้องต้น: confounding และ causal diagram (DAG) ★</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมสหสมพนธไมใชสาเหต" id="toc-ทำไมสหสมพนธไมใชสาเหต" class="nav-link" data-scroll-target="#ทำไมสหสมพนธไมใชสาเหต">ทำไมสหสัมพันธ์ไม่ใช่สาเหตุ</a></li>
+  <li><a href="#ตวแปรกวน" id="toc-ตวแปรกวน" class="nav-link" data-scroll-target="#ตวแปรกวน">ตัวแปรกวน</a></li>
+  <li><a href="#causal-diagram" id="toc-causal-diagram" class="nav-link" data-scroll-target="#causal-diagram">causal diagram</a></li>
+  <li><a href="#สามรปแบบพนฐาน" id="toc-สามรปแบบพนฐาน" class="nav-link" data-scroll-target="#สามรปแบบพนฐาน">สามรูปแบบพื้นฐาน</a></li>
+  <li><a href="#ขอบเขตของการสำรวจขอมล" id="toc-ขอบเขตของการสำรวจขอมล" class="nav-link" data-scroll-target="#ขอบเขตของการสำรวจขอมล">ขอบเขตของการสำรวจข้อมูล</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-language" id="toc-sec-ch04-language" class="nav-link" data-scroll-target="#sec-ch04-language"><span class="header-section-number">4.8</span> ภาษาที่ตรงกับระดับหลักฐาน</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมถอยคำสำคญ" id="toc-ทำไมถอยคำสำคญ" class="nav-link" data-scroll-target="#ทำไมถอยคำสำคญ">ทำไมถ้อยคำสำคัญ</a></li>
+  <li><a href="#ถอยคำตามระดบหลกฐาน" id="toc-ถอยคำตามระดบหลกฐาน" class="nav-link" data-scroll-target="#ถอยคำตามระดบหลกฐาน">ถ้อยคำตามระดับหลักฐาน</a></li>
+  <li><a href="#คำเชงสาเหตทแฝงอย" id="toc-คำเชงสาเหตทแฝงอย" class="nav-link" data-scroll-target="#คำเชงสาเหตทแฝงอย">คำเชิงสาเหตุที่แฝงอยู่</a></li>
+  <li><a href="#รายงานสงทไมพบดวย" id="toc-รายงานสงทไมพบดวย" class="nav-link" data-scroll-target="#รายงานสงทไมพบดวย">รายงานสิ่งที่ไม่พบด้วย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch04-case" id="toc-sec-ch04-case" class="nav-link" data-scroll-target="#sec-ch04-case">กรณีศึกษา: เขียน <code>questions.md</code> สำหรับโครงการ PM2.5</a></li>
+  <li><a href="#sec-ch04-pitfalls" id="toc-sec-ch04-pitfalls" class="nav-link" data-scroll-target="#sec-ch04-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch04-exercises" id="toc-sec-ch04-exercises" class="nav-link" data-scroll-target="#sec-ch04-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/04-questions-hypotheses.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 1–3 เตรียมแนวคิดและเครื่องมือไว้พร้อมแล้ว แต่ยังขาดสิ่งสำคัญที่สุด คือ <em>คำถาม</em> ข้อมูลชุดเดียวกันตอบคำถามได้นับร้อยข้อ ถ้าไม่รู้ว่าจะตอบข้อใด เราจะดึงข้อมูลทุกอย่าง วาดกราฟทุกแบบ แล้วจบด้วยข้อค้นพบที่ไม่มีใครใช้ หรือแย่กว่านั้น คือจบด้วยข้อค้นพบที่เกิดจากความบังเอิญแต่ถูกรายงานราวกับเป็นความจริง</p>
+<p>บทนี้มีสองส่วนที่เชื่อมกัน ส่วนแรกว่าด้วย <em>การตั้งคำถามให้ดี</em> ได้แก่ ประเภทของคำถาม คุณลักษณะของคำถามที่ดี และที่มาของสมมติฐาน ส่วนที่สองว่าด้วย <em>การตอบคำถามอย่างซื่อตรง</em> ได้แก่ กับดักที่ทำให้นักวิเคราะห์หลอกตัวเองโดยไม่รู้ตัว วิธีป้องกันด้วยการแยกข้อมูลสำรวจกับข้อมูลยืนยัน และการใช้ภาษาที่ตรงกับระดับหลักฐาน ทั้งสองส่วนนี้เป็นเหตุผลเบื้องหลังไฟล์ <code>questions.md</code> และการแบ่งช่วงข้อมูลที่ใช้ตลอดเล่ม</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>จำแนกคำถามข้อมูลตามประเภทของ Leek และ Peng และอธิบายว่าแต่ละประเภทต้องการหลักฐานแบบใด</li>
+<li>ปรับคำถามกว้างให้เป็นคำถามเชิงวิเคราะห์ที่เฉพาะเจาะจง วัดได้ มีคำตอบได้หลายแบบ และนำไปใช้ได้</li>
+<li>ระบุที่มาของสมมติฐาน และแยกคำถามก่อนเห็นข้อมูลออกจากคำถามที่เกิดจากข้อมูล</li>
+<li>อธิบายกลไกของ garden of forking paths, HARKing และ p-hacking และประเมินความเสี่ยงในงานของตนเอง</li>
+<li>ออกแบบการแยกข้อมูลสำรวจกับข้อมูลยืนยันสำหรับข้อมูลอนุกรมเวลา</li>
+<li>วาด causal diagram อย่างง่ายเพื่อระบุตัวแปรกวน</li>
+<li>เลือกถ้อยคำในการรายงานให้ตรงกับระดับหลักฐานที่มี</li>
+</ol>
+</section>
+<section id="sec-ch04-question-types" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-ch04-question-types"><span class="header-section-number">4.1</span> ประเภทของคำถามข้อมูล: เชิงพรรณนา สำรวจ อนุมาน ทำนาย เชิงสาเหตุ (Leek &amp; Peng)</h2>
+<section id="ทำไมตองรประเภทของคำถาม" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองรประเภทของคำถาม">ทำไมต้องรู้ประเภทของคำถาม</h3>
+<p>ในปี ค.ศ. 2015 Jeffrey Leek และ Roger Peng ตีพิมพ์บทความสั้นในวารสาร <em>Science</em> ชื่อ “What is the question?” ชี้ว่าความผิดพลาดที่พบบ่อยที่สุดในการวิเคราะห์ข้อมูลไม่ใช่การคำนวณผิด แต่เป็นการ <em>ตอบคำถามผิดประเภท</em> เช่น นำผลการวิเคราะห์เชิงสำรวจไปตีความเป็นข้อสรุปเชิงสาเหตุ <span class="citation" data-cites="leek2015question">(<a href="../references.html#ref-leek2015question" role="doc-biblioref">Leek และ Peng 2015</a>)</span> พวกเขาเสนอแผนผังจำแนกคำถามข้อมูลเป็นหกประเภท เรียงจากที่ต้องการหลักฐานน้อยไปมาก หนังสือเล่มนี้ใช้ห้าประเภทแรก ส่วนประเภทที่หก คือคำถามเชิงกลไก (mechanistic) ซึ่งต้องการรู้กลไกที่แน่นอนว่าการเปลี่ยนตัวแปรหนึ่งทำให้อีกตัวเปลี่ยนอย่างไร มักต้องอาศัยการทดลองที่ควบคุมได้ จึงอยู่นอกขอบเขตของการสำรวจข้อมูล</p>
+</section>
+<section id="หาประเภทของคำถาม" class="level3">
+<h3 class="anchored" data-anchor-id="หาประเภทของคำถาม">ห้าประเภทของคำถาม</h3>
+<p><strong><span class="idx">คำถามเชิงพรรณนา (descriptive)</span></strong> ต้องการสรุปลักษณะของข้อมูลที่มีอยู่ โดยไม่ตีความเกินกว่าข้อมูลนั้น เช่น “ในปี ค.ศ. 2023 สถานีแต่ละแห่งมีค่าเฉลี่ย PM2.5 รายปีเท่าไร” คำตอบเป็นตัวเลขที่คำนวณได้ตรง ๆ ไม่มีการสรุปไปยังกลุ่มที่ไม่ได้วัด</p>
+<p><strong><span class="idx">คำถามเชิงสำรวจ (exploratory)</span></strong> ต้องการหารูปแบบ แนวโน้ม หรือความสัมพันธ์ที่น่าสนใจ เพื่อสร้างข้อสันนิษฐาน เช่น “ค่า PM2.5 มีรูปแบบรายวันหรือรายฤดูกาลอย่างไร และแตกต่างระหว่างภาคหรือไม่” คำตอบเป็นข้อสันนิษฐานที่ยังต้องยืนยัน</p>
+<p><strong><span class="idx">คำถามเชิงอนุมาน (inferential)</span></strong> ต้องการสรุปจากข้อมูลที่มีไปยังกลุ่มที่ใหญ่กว่าหรือเงื่อนไขอื่น พร้อมระบุความไม่แน่นอน เช่น “ความต่างของค่าเฉลี่ย PM2.5 ระหว่างวันธรรมดากับวันหยุดที่เห็นในข้อมูล ใหญ่กว่าที่คาดได้จากความแปรปรวนตามธรรมชาติหรือไม่” คำตอบมาพร้อมช่วงความเชื่อมั่นหรือ p-value (บทที่ 13)</p>
+<p><strong><span class="idx">คำถามเชิงทำนาย (predictive)</span></strong> ต้องการคาดค่าของตัวแปรหนึ่งจากตัวแปรอื่น โดยไม่จำเป็นต้องรู้ว่าทำไม เช่น “จากค่า PM2.5 ในช่วง 24 ชั่วโมงที่ผ่านมา พรุ่งนี้ค่าเฉลี่ยรายวันจะเกินมาตรฐานหรือไม่” คำตอบประเมินด้วยความแม่นยำของการทำนายบนข้อมูลที่แบบจำลองไม่เคยเห็น</p>
+<p><strong><span class="idx">คำถามเชิงสาเหตุ (causal)</span></strong> ต้องการรู้ว่าถ้าเปลี่ยนตัวแปรหนึ่ง อีกตัวแปรหนึ่งจะเปลี่ยนไปเท่าไรโดยเฉลี่ย เช่น “มาตรการห้ามเผาในที่โล่งทำให้จำนวนวันที่เกินมาตรฐานลดลงเท่าไร” คำตอบต้องการการออกแบบการศึกษาที่ควบคุมตัวแปรกวนได้ หรือการทดลอง</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  A{ต้องการสรุปเฉพาะ&lt;br/&gt;ข้อมูลที่มีหรือไม่} --&gt;|ใช่| D[เชิงพรรณนา]
+  A --&gt;|ไม่| B{ต้องการหารูปแบบ&lt;br/&gt;เพื่อสร้างข้อสันนิษฐาน}
+  B --&gt;|ใช่| E[เชิงสำรวจ]
+  B --&gt;|ไม่| C{ต้องการสรุปไปยัง&lt;br/&gt;กลุ่มที่ใหญ่กว่า}
+  C --&gt;|ใช่ พร้อมความไม่แน่นอน| I[เชิงอนุมาน]
+  C --&gt;|ต้องการคาดค่า| P[เชิงทำนาย]
+  C --&gt;|ต้องการรู้ผลของการเปลี่ยน| K[เชิงสาเหตุ]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="tbl-ch04-question-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-question-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.1: ประเภทของคำถามข้อมูลและหลักฐานที่ต้องการ
+</figcaption>
+<div aria-describedby="tbl-ch04-question-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ประเภท</th>
+<th>คำถามตัวอย่าง PM2.5</th>
+<th>หลักฐานที่ต้องการ</th>
+<th>บทที่เกี่ยวข้อง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เชิงพรรณนา</td>
+<td>ค่าเฉลี่ยรายปีของแต่ละสถานีเท่าไร</td>
+<td>การคำนวณที่ถูกต้องจากข้อมูลที่สะอาด</td>
+<td>7, 8</td>
+</tr>
+<tr class="even">
+<td>เชิงสำรวจ</td>
+<td>มีรูปแบบตามฤดูกาลหรือไม่</td>
+<td>กราฟและสถิติสรุปหลายมุม</td>
+<td>11–15</td>
+</tr>
+<tr class="odd">
+<td>เชิงอนุมาน</td>
+<td>ความต่างระหว่างภาคใหญ่กว่าความบังเอิญหรือไม่</td>
+<td>การทดสอบ ช่วงความเชื่อมั่น ข้อมูลยืนยัน</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>เชิงทำนาย</td>
+<td>พรุ่งนี้จะเกินมาตรฐานหรือไม่</td>
+<td>ความแม่นยำบนข้อมูลที่แบบจำลองไม่เคยเห็น</td>
+<td>นอกขอบเขตของเล่ม</td>
+</tr>
+<tr class="odd">
+<td>เชิงสาเหตุ</td>
+<td>มาตรการลดฝุ่นได้จริงหรือไม่</td>
+<td>การออกแบบที่ควบคุมตัวแปรกวน</td>
+<td>4 (หัวข้อ ★)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ความผดพลาดทพบบอยทสด-ตอบคำถามผดประเภท" class="level3">
+<h3 class="anchored" data-anchor-id="ความผดพลาดทพบบอยทสด-ตอบคำถามผดประเภท">ความผิดพลาดที่พบบ่อยที่สุด: ตอบคำถามผิดประเภท</h3>
+<p>Leek และ Peng ชี้ว่าความผิดพลาดที่พบบ่อยคือการ <em>ยกระดับ</em> คำตอบเกินกว่าหลักฐาน ตัวอย่างกับข้อมูล PM2.5</p>
+<ul>
+<li><strong>สำรวจ → สาเหตุ</strong> เห็นว่าค่าฝุ่นในช่วงวันหยุดยาวต่ำกว่าสัปดาห์ก่อนหน้า แล้วสรุปว่า “การจราจรเป็นสาเหตุหลักของฝุ่น” ทั้งที่ช่วงวันหยุดยาวอาจตรงกับสภาพอากาศที่ช่วยระบายฝุ่น</li>
+<li><strong>พรรณนา → อนุมาน</strong> ภาคหนึ่งมีค่าเฉลี่ยสูงกว่าอีกภาค 3 µg/m³ แล้วสรุปว่า “ภาคนี้มลพิษสูงกว่า” โดยไม่ได้ดูว่าความต่างนี้ใหญ่กว่าความแปรปรวนระหว่างสถานีในภาคเดียวกันหรือไม่</li>
+<li><strong>ทำนาย → สาเหตุ</strong> แบบจำลองพบว่าค่า PM10 ทำนายค่า PM2.5 ได้แม่นยำ แล้วสรุปว่า “PM10 ทำให้เกิด PM2.5” ทั้งที่ทั้งสองค่ามาจากแหล่งกำเนิดเดียวกันและ PM2.5 เป็นส่วนหนึ่งของ PM10</li>
+</ul>
+<p>วิธีป้องกันคือ ระบุประเภทของคำถามไว้ใน <code>questions.md</code> ตั้งแต่ต้น แล้วตรวจก่อนเขียนข้อสรุปว่าหลักฐานที่มีพอสำหรับประเภทนั้นหรือไม่ หัวข้อ <a href="#sec-ch04-language" class="quarto-xref"><span>4.8</span></a> ให้ถ้อยคำที่ตรงกับแต่ละระดับ</p>
+</section>
+</section>
+<section id="sec-ch04-good-questions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-ch04-good-questions"><span class="header-section-number">4.2</span> คุณลักษณะของคำถามเชิงวิเคราะห์ที่ดี</h2>
+<section id="จากความสงสยสคำถามเชงวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="จากความสงสยสคำถามเชงวเคราะห">จากความสงสัยสู่คำถามเชิงวิเคราะห์</h3>
+<p><span class="idx">คำถามเชิงวิเคราะห์</span> คือคำถามที่ตอบได้ด้วยข้อมูล และคำตอบนำไปสู่ความเข้าใจหรือการตัดสินใจที่ชัดเจน ความสงสัยเริ่มต้นมักกว้างเกินไป เช่น “ฝุ่นแย่ไหม” ซึ่งไม่มีใครตอบได้ด้วยข้อมูล เพราะไม่รู้ว่า “แย่” วัดอย่างไร ที่ไหน และเมื่อไร งานแรกของนักวิเคราะห์คือเปลี่ยนความสงสัยให้เป็นคำถามที่มีคุณลักษณะครบสี่ข้อ</p>
+<div id="tbl-ch04-good-question" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-good-question-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.2: คุณลักษณะสี่ข้อของคำถามเชิงวิเคราะห์ที่ดี
+</figcaption>
+<div aria-describedby="tbl-ch04-good-question-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>คุณลักษณะ</th>
+<th>ความหมาย</th>
+<th>คำถามตรวจสอบ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เฉพาะเจาะจง</td>
+<td>ระบุพื้นที่ ช่วงเวลา และตัวแปร</td>
+<td>“ที่ไหน เมื่อไร วัดอะไร”</td>
+</tr>
+<tr class="even">
+<td>วัดได้</td>
+<td>มีตัวชี้วัดที่คำนวณได้จากข้อมูลที่มีหรือหาได้</td>
+<td>“จะคำนวณอะไร จากคอลัมน์ใด”</td>
+</tr>
+<tr class="odd">
+<td>มีคำตอบได้มากกว่าหนึ่งแบบ</td>
+<td>ไม่ใช่คำถามที่รู้คำตอบอยู่แล้ว หรือเป็นจริงโดยนิยาม</td>
+<td>“ถ้าผลออกมาตรงข้าม เป็นไปได้หรือไม่”</td>
+</tr>
+<tr class="even">
+<td>นำไปใช้ได้</td>
+<td>คำตอบช่วยให้ใครบางคนตัดสินใจหรือทำบางอย่างต่างไป</td>
+<td>“ถ้าได้คำตอบแล้ว ใครจะทำอะไรต่างไป”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ตวอยางการปรบคำถาม" class="level3">
+<h3 class="anchored" data-anchor-id="ตวอยางการปรบคำถาม">ตัวอย่างการปรับคำถาม</h3>
+<p>ลองปรับคำถาม “ฝุ่นที่เชียงใหม่เป็นปัญหาไหม” ทีละขั้น</p>
+<ol type="1">
+<li><strong>ทำให้เฉพาะเจาะจง:</strong> “ค่า PM2.5 ของสถานีในจังหวัดเชียงใหม่ ช่วงปี ค.ศ. 2020–2023 เป็นอย่างไร” ยังวัดไม่ได้ เพราะไม่รู้ว่าจะดูอะไร</li>
+<li><strong>ทำให้วัดได้:</strong> “ในปี ค.ศ. 2020–2023 สถานีในจังหวัดเชียงใหม่มีจำนวนวันที่ค่าเฉลี่ย 24 ชั่วโมงของ PM2.5 เกิน 37.5 µg/m³ ปีละกี่วัน” ตอนนี้คำนวณได้แล้ว</li>
+<li><strong>ตรวจว่ามีคำตอบได้หลายแบบ:</strong> คำตอบอาจเป็น 0 วัน หรือ 100 วัน ไม่ได้รู้ล่วงหน้า และอาจต่างกันระหว่างปี จึงผ่าน</li>
+<li><strong>ทำให้นำไปใช้ได้:</strong> “…และวันเหล่านั้นกระจุกอยู่ในเดือนใด เพื่อให้หน่วยงานจังหวัดวางแผนมาตรการล่วงหน้าได้ถูกช่วงเวลา” ตอนนี้รู้แล้วว่าใครใช้คำตอบและใช้ทำอะไร</li>
+</ol>
+<p>สังเกตว่าคำถามสุดท้ายยังระบุ <em>เกณฑ์</em> (37.5 µg/m³) อย่างชัดเจน การเลือกเกณฑ์เป็นการตัดสินใจเชิงวิเคราะห์ ถ้าใช้แนวทางของ WHO ที่ 15 µg/m³ จำนวนวันจะต่างกันมาก คำถามที่ดีจึงต้องบอกว่าใช้เกณฑ์ใดและเพราะอะไร</p>
+</section>
+<section id="คำถามทดดแตมปญหา" class="level3">
+<h3 class="anchored" data-anchor-id="คำถามทดดแตมปญหา">คำถามที่ดูดีแต่มีปัญหา</h3>
+<div id="tbl-ch04-bad-questions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-bad-questions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.3: คำถามที่ดูดีแต่มีปัญหา
+</figcaption>
+<div aria-describedby="tbl-ch04-bad-questions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>คำถาม</th>
+<th>ปัญหา</th>
+<th>แก้ไขเป็น</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>วันที่ PM2.5 เกิน 37.5 µg/m³ มีค่าเฉลี่ยสูงกว่า 37.5 หรือไม่</td>
+<td>เป็นจริงโดยนิยาม คำตอบรู้อยู่แล้ว</td>
+<td>วันที่เกิน 37.5 µg/m³ มีค่าเฉลี่ยของวันนั้นสูงกว่าเกณฑ์โดยเฉลี่ยเท่าไร แยกตามภาค</td>
+</tr>
+<tr class="even">
+<td>ปัจจัยอะไรทำให้ฝุ่นสูง</td>
+<td>เป็นคำถามเชิงสาเหตุที่ข้อมูลที่มีตอบไม่ได้</td>
+<td>ค่า PM2.5 สูงในช่วงเวลาใดของวันและเดือนใดของปี (เชิงสำรวจ)</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูลทั้งหมดบอกอะไรเราบ้าง</td>
+<td>กว้างจนไม่มีจุดสิ้นสุด</td>
+<td>แยกเป็นคำถามย่อยที่แต่ละข้อมีตัวชี้วัดชัดเจน</td>
+</tr>
+<tr class="even">
+<td>สถานีใดดีที่สุด</td>
+<td>“ดี” ไม่ได้นิยาม</td>
+<td>สถานีใดมีสัดส่วนชั่วโมงที่มีข้อมูลสูงที่สุดในปี ค.ศ. 2023</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="คำถามหลกและคำถามยอย" class="level3">
+<h3 class="anchored" data-anchor-id="คำถามหลกและคำถามยอย">คำถามหลักและคำถามย่อย</h3>
+<p>โครงการหนึ่งโครงการไม่ควรมีคำถามมากเกินไป โครงการในรายวิชาแนะนำให้มีคำถามหลัก 2–3 ข้อก่อนเห็นข้อมูล และเพิ่มคำถามจากข้อมูลได้อีก 1–2 ข้อ คำถามหลักแต่ละข้ออาจแตกเป็นคำถามย่อยที่ต้องตอบก่อน เช่น คำถามหลัก “ภาคใดมีสัดส่วนวันเกินมาตรฐานสูงสุด” มีคำถามย่อยว่า “แต่ละภาคมีกี่สถานีและข้อมูลครบเพียงใด” ซึ่งต้องตอบก่อนจะเชื่อถือคำตอบของคำถามหลักได้</p>
+</section>
+</section>
+<section id="sec-ch04-hypothesis-sources" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-ch04-hypothesis-sources"><span class="header-section-number">4.3</span> แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look</h2>
+<section id="สมมตฐานคออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="สมมตฐานคออะไร">สมมติฐานคืออะไร</h3>
+<p><span class="idx">สมมติฐาน</span> คือคำตอบที่คาดไว้ล่วงหน้าพร้อมเหตุผล สมมติฐานที่ดีบอกได้ว่ามาจากไหน และบอกได้ว่าถ้าข้อมูลออกมาไม่ตรงกับที่คาด จะแปลว่าอะไร สมมติฐานไม่จำเป็นต้องถูก สมมติฐานที่ผิดแต่เขียนไว้ชัดเจนมีคุณค่ามากกว่าการไม่มีสมมติฐานเลย เพราะทำให้เรารู้ว่ากำลังทดสอบอะไร และเรียนรู้ได้เมื่อผลไม่เป็นไปตามคาด</p>
+</section>
+<section id="แหลงทมาสแหลง" class="level3">
+<h3 class="anchored" data-anchor-id="แหลงทมาสแหลง">แหล่งที่มาสี่แหล่ง</h3>
+<p><strong><span class="idx">ความรู้เชิงโดเมน</span></strong> เป็นแหล่งที่ดีที่สุด เพราะมีเหตุผลเชิงกลไกรองรับ ตัวอย่างเช่น ความรู้ว่าชั้นบรรยากาศในฤดูหนาวมักนิ่งกว่าฤดูอื่นในบางช่วงของวัน ทำให้ฝุ่นสะสมใกล้พื้นดิน นำไปสู่สมมติฐานว่าค่า PM2.5 รายชั่วโมงในฤดูหนาวมีรูปแบบรายวันที่ชัดกว่าฤดูฝน ผู้ที่ยังไม่มีความรู้เชิงโดเมนควรอ่านเอกสารพื้นฐาน เช่น แนวทางคุณภาพอากาศขององค์การอนามัยโลก <span class="citation" data-cites="who2021global">(<a href="../references.html#ref-who2021global" role="doc-biblioref">World Health Organization 2021</a>)</span> และเอกสารของแหล่งข้อมูล</p>
+<p><strong>งานวิจัยและรายงานที่มีอยู่</strong> ช่วยให้ไม่ต้องเริ่มจากศูนย์ และบอกได้ว่าผลแบบใดที่ผู้อื่นพบแล้ว รายงานสถานการณ์มลพิษประจำปีของกรมควบคุมมลพิษ และงานวิจัยด้านคุณภาพอากาศในประเทศไทย เป็นแหล่งสมมติฐานที่ดี ข้อควรระวังคือ ผลจากงานวิจัยอื่นอาจมาจากพื้นที่ ช่วงเวลา หรือวิธีวัดที่ต่างจากข้อมูลของเรา</p>
+<p><strong>ผู้ใช้ผลลัพธ์</strong> หรือผู้มีส่วนได้ส่วนเสีย (stakeholder) ช่วยให้คำถามนำไปใช้ได้ เช่น โรงเรียนต้องตัดสินใจว่าจะงดกิจกรรมกลางแจ้งช่วงใด นำไปสู่สมมติฐานเกี่ยวกับช่วงเวลาของวันที่ค่าสูงที่สุด การคุยกับผู้ใช้ผลลัพธ์ก่อนเริ่มวิเคราะห์ช่วยป้องกันการตอบคำถามที่ไม่มีใครถาม</p>
+<p><strong><span class="idx">first look</span></strong> คือการดูข้อมูลเบื้องต้นเพื่อตรวจว่าข้อมูลตอบคำถามได้หรือไม่ ดูเพียงสี่เรื่อง คือ โครงสร้าง (หนึ่งแถวคืออะไร) ช่วงเวลา หน่วย และตำแหน่งของค่าหาย first look อาจทำให้เกิดคำถามใหม่ได้ เช่น “บางสถานีเพิ่งเริ่มวัดในปี ค.ศ. 2022 การเปรียบเทียบย้อนหลังจะเท่าเทียมหรือไม่” แต่คำถามที่เกิดจาก first look ต้องถูกติดป้ายว่า <em>มาจากข้อมูล</em></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># first look: ดูเฉพาะโครงสร้าง ช่วงเวลา หน่วย และค่าหาย ไม่เปรียบเทียบกลุ่ม</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(con.execute(<span class="st">"DESCRIBE measurements"</span>).df()[[<span class="st">"column_name"</span>, <span class="st">"column_type"</span>]])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(con.execute(<span class="st">"""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT MIN(ts) AS ts_min, MAX(ts) AS ts_max,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">           COUNT(DISTINCT station_id) AS n_stations,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">           ROUND(AVG(CASE WHEN pm25 IS NULL THEN 1 ELSE 0 END), 3) AS frac_missing,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">           MIN(pm25) AS pm25_min, MAX(pm25) AS pm25_max</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM measurements</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE ts &lt; TIMESTAMP '2024-01-01'</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>สิ่งที่ <em>ไม่</em> ทำใน first look คือ วาดกราฟเปรียบเทียบภาค ทดสอบสถิติ หรือหาความสัมพันธ์ระหว่างตัวแปร เพราะจะทำให้คำถามก่อนเห็นข้อมูลปนกับคำถามหลังเห็นข้อมูล ซึ่งเป็นต้นเหตุของปัญหาในหัวข้อถัดไป</p>
+</section>
+<section id="แยกสมมตฐานกอนและหลงเหนขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="แยกสมมตฐานกอนและหลงเหนขอมล">แยกสมมติฐานก่อนและหลังเห็นข้อมูล</h3>
+<div id="tbl-ch04-prior-vs-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-prior-vs-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.4: สมมติฐานสองประเภทตามที่มา
+</figcaption>
+<div aria-describedby="tbl-ch04-prior-vs-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ประเภท</th>
+<th>ที่มา</th>
+<th>สถานะของคำตอบ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ก่อนเห็นข้อมูล (prior)</td>
+<td>ความรู้เชิงโดเมน งานวิจัย ผู้ใช้ผลลัพธ์</td>
+<td>ทดสอบด้วยข้อมูลช่วงสำรวจได้ และยืนยันด้วยข้อมูลช่วงยืนยัน</td>
+</tr>
+<tr class="even">
+<td>จากข้อมูล (data-driven)</td>
+<td>first look หรือสิ่งที่เห็นระหว่างสำรวจ</td>
+<td>ห้ามยืนยันด้วยข้อมูลชุดที่ทำให้เกิดคำถาม ต้องใช้ข้อมูลช่วงยืนยันเท่านั้น</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ไฟล์ <code>questions.md</code> ของโครงการแบ่งเป็นสองส่วนตามตารางนี้ และใช้ประวัติของ Git เป็นหลักฐานเวลา commit ส่วนแรกก่อนเปิดดูข้อมูล ทำให้ใครก็ตรวจได้ว่าคำถามใดเขียนก่อนเห็นข้อมูลจริง</p>
+</section>
+</section>
+<section id="sec-ch04-forking-paths" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-ch04-forking-paths"><span class="header-section-number">4.4</span> Garden of forking paths, HARKing และ p-hacking</h2>
+<section id="กบดกทไมตองตงใจโกง" class="level3">
+<h3 class="anchored" data-anchor-id="กบดกทไมตองตงใจโกง">กับดักที่ไม่ต้องตั้งใจโกง</h3>
+<p>หัวข้อนี้อธิบายกับดักสามแบบที่ทำให้นักวิเคราะห์ได้ผลที่ดูน่าสนใจแต่ไม่จริง สิ่งที่ทำให้กับดักเหล่านี้อันตรายคือ <em>ไม่ต้องมีเจตนาโกง</em> นักวิเคราะห์ที่ซื่อสัตย์และตั้งใจดีก็ตกกับดักได้ เพราะแต่ละการตัดสินใจดูสมเหตุสมผลเมื่อมองทีละข้อ</p>
+</section>
+<section id="garden-of-forking-paths" class="level3">
+<h3 class="anchored" data-anchor-id="garden-of-forking-paths">Garden of forking paths</h3>
+<p>Andrew Gelman และ Eric Loken เปรียบการวิเคราะห์ข้อมูลกับการเดินในสวนที่มีทางแยกจำนวนมาก <span class="citation" data-cites="gelman2013garden">(<a href="../references.html#ref-gelman2013garden" role="doc-biblioref">Gelman และ Loken 2013</a>)</span> ทุกขั้นของการวิเคราะห์มีทางเลือกที่สมเหตุสมผลหลายทาง เช่น</p>
+<ul>
+<li>ใช้สถานีใด ตัดสถานีที่ข้อมูลไม่ครบหรือไม่ ใช้เกณฑ์ความครบถ้วนเท่าไร</li>
+<li>ใช้ค่าเฉลี่ยหรือมัธยฐาน รวมรายวัน รายสัปดาห์ หรือรายเดือน</li>
+<li>ตัดค่าผิดปกติหรือไม่ และใช้เกณฑ์ใดตัด</li>
+<li>เปรียบเทียบช่วงเวลาใดกับช่วงเวลาใด</li>
+<li>ใช้การทดสอบทางสถิติแบบใด</li>
+</ul>
+<p>ถ้ามีทางเลือก 5 จุด และแต่ละจุดมี 2 ทาง จะมีเส้นทางการวิเคราะห์ที่เป็นไปได้ <span class="math inline">\(2^5 = 32\)</span> เส้นทาง ปัญหาคือ นักวิเคราะห์มักตัดสินใจที่ทางแยกแต่ละจุด <em>หลังจากเห็นข้อมูลแล้ว</em> และมักเลือกทางที่ให้ผลน่าสนใจกว่าโดยไม่รู้ตัว แม้จะทดสอบเพียงครั้งเดียวในตอนท้าย ผลก็เทียบเท่ากับการลองหลายเส้นทางแล้วเลือกเส้นทางที่ดีที่สุด</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  S[ข้อมูล] --&gt; A1[ทุกสถานี]
+  S --&gt; A2[เฉพาะสถานีที่ครบ]
+  A1 --&gt; B1[ค่าเฉลี่ย]
+  A1 --&gt; B2[มัธยฐาน]
+  A2 --&gt; B3[ค่าเฉลี่ย]
+  A2 --&gt; B4[มัธยฐาน]
+  B1 --&gt; C1[รายวัน] &amp; C2[รายเดือน]
+  B2 --&gt; C3[รายวัน] &amp; C4[รายเดือน]
+  B3 --&gt; C5[รายวัน] &amp; C6[รายเดือน]
+  B4 --&gt; C7[รายวัน] &amp; C8[รายเดือน]
+  C6 ==&gt;|เส้นทางที่ให้ผล&lt;br/&gt;น่าสนใจที่สุด| R[รายงาน]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="harking" class="level3">
+<h3 class="anchored" data-anchor-id="harking">HARKing</h3>
+<p><span class="idx">HARKing</span> (Hypothesizing After the Results are Known) คือการเห็นผลในข้อมูลก่อน แล้วเขียนรายงานราวกับว่าได้ตั้งสมมติฐานนั้นไว้ล่วงหน้า Norbert Kerr ตั้งชื่อและวิเคราะห์ปรากฏการณ์นี้ไว้ในปี ค.ศ. 1998 <span class="citation" data-cites="kerr1998harking">(<a href="../references.html#ref-kerr1998harking" role="doc-biblioref">Kerr 1998</a>)</span> ตัวอย่างกับข้อมูล PM2.5 เช่น นักวิเคราะห์ดูกราฟของ 77 จังหวัด พบว่าจังหวัดหนึ่งมีค่าฝุ่นลดลงในปีหนึ่ง แล้วหาเหตุผลมาอธิบาย เช่น มีมาตรการใหม่ในปีนั้น จากนั้นเขียนรายงานว่า “เราตั้งสมมติฐานว่ามาตรการ X ลดฝุ่น และข้อมูลยืนยันสมมติฐาน”</p>
+<p>ปัญหาของ HARKing คือ ผู้อ่านเข้าใจว่าผลนั้นเป็นการ <em>ยืนยัน</em> สมมติฐานที่มีมาก่อน ซึ่งเป็นหลักฐานที่แข็งแรง ทั้งที่จริงเป็นเพียงการ <em>สร้าง</em> สมมติฐานจากข้อมูล ซึ่งเป็นหลักฐานที่อ่อนกว่ามาก เพราะเมื่อดู 77 จังหวัด ย่อมมีบางจังหวัดที่ลดลงโดยบังเอิญ</p>
+</section>
+<section id="p-hacking" class="level3">
+<h3 class="anchored" data-anchor-id="p-hacking">p-hacking</h3>
+<p><strong><span class="idx">p-hacking</span></strong> คือการวิเคราะห์ซ้ำหลายแบบจนได้ p-value ต่ำกว่าเกณฑ์ (มักเป็น 0.05) แล้วรายงานเฉพาะแบบนั้น Simmons และคณะแสดงด้วยการจำลองว่า การใช้ความยืดหยุ่นเพียงไม่กี่อย่างร่วมกัน เช่น การเลือกตัวแปรตาม การเพิ่มขนาดตัวอย่างหลังเห็นผล และการตัดข้อมูลบางส่วน ทำให้โอกาสได้ผลบวกลวงเพิ่มจากร้อยละ 5 ไปเป็นมากกว่าร้อยละ 60 <span class="citation" data-cites="simmons2011false">(<a href="../references.html#ref-simmons2011false" role="doc-biblioref">Simmons และคณะ 2011</a>)</span> สมาคมสถิติอเมริกันออกแถลงการณ์เรื่อง p-value ในปี ค.ศ. 2016 เตือนว่า การรายงานเฉพาะผลที่ p-value ต่ำโดยไม่บอกว่าวิเคราะห์ไปกี่แบบ ทำให้ p-value ตีความไม่ได้ <span class="citation" data-cites="wasserstein2016asa">(<a href="../references.html#ref-wasserstein2016asa" role="doc-biblioref">Wasserstein และ Lazar 2016</a>)</span></p>
+</section>
+<section id="เหนดวยตาตวเอง-ความบงเอญจากการดหลายสถาน" class="level3">
+<h3 class="anchored" data-anchor-id="เหนดวยตาตวเอง-ความบงเอญจากการดหลายสถาน">เห็นด้วยตาตัวเอง: ความบังเอิญจากการดูหลายสถานี</h3>
+<p>การจำลองต่อไปนี้แสดงว่ากับดักเหล่านี้เกิดขึ้นได้ง่ายเพียงใด เราสร้างข้อมูลสมมุติของ 40 สถานี แต่ละสถานีมีค่า PM2.5 ของวันธรรมดาและวันหยุดที่มาจาก <em>การแจกแจงเดียวกัน</em> หมายความว่าไม่มีความต่างจริงเลย แล้วทดสอบทีละสถานีด้วย t-test</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">2026</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>n_stations, n_days <span class="op">=</span> <span class="dv">40</span>, <span class="dv">120</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ข้อมูลสมมุติ: วันธรรมดากับวันหยุดมาจากการแจกแจงเดียวกันทุกสถานี (ไม่มีผลจริงเลย)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>p_values <span class="op">=</span> []</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_stations):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    weekday <span class="op">=</span> rng.lognormal(mean<span class="op">=</span><span class="fl">3.2</span>, sigma<span class="op">=</span><span class="fl">0.4</span>, size<span class="op">=</span>n_days)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    holiday <span class="op">=</span> rng.lognormal(mean<span class="op">=</span><span class="fl">3.2</span>, sigma<span class="op">=</span><span class="fl">0.4</span>, size<span class="op">=</span>n_days <span class="op">//</span> <span class="dv">3</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    p_values.append(stats.ttest_ind(weekday, holiday).pvalue)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>p_values <span class="op">=</span> np.array(p_values)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"จำนวนสถานีที่ p &lt; 0.05:"</span>, (p_values <span class="op">&lt;</span> <span class="fl">0.05</span>).<span class="bu">sum</span>(), <span class="st">"จาก"</span>, n_stations)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"p-value ต่ำสุด:"</span>, p_values.<span class="bu">min</span>().<span class="bu">round</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+จำนวนสถานีที่ p &lt; 0.05: 2 จาก 40
+p-value ต่ำสุด: 0.0079</code></pre>
+<p>แม้ไม่มีผลจริงเลย ก็ยังมี 2 สถานีที่ “แตกต่างอย่างมีนัยสำคัญ” และสถานีหนึ่งมี p-value ต่ำกว่า 0.01 ถ้านักวิเคราะห์รายงานเฉพาะสองสถานีนี้พร้อมคำอธิบายที่ฟังดูสมเหตุสมผล ผู้อ่านจะเชื่อได้ง่าย ทั้งที่เป็นเพียงความบังเอิญ</p>
+<p>ความน่าจะเป็นที่จะพบ “ผลที่มีนัยสำคัญ” อย่างน้อยหนึ่งสถานีจากการทดสอบ <span class="math inline">\(m\)</span> ครั้งที่เป็นอิสระต่อกัน เมื่อไม่มีผลจริงเลย คือ</p>
+<p><span id="eq-ch04-fwer"><span class="math display">\[
+P(\text{พบอย่างน้อยหนึ่ง}) = 1 - (1 - \alpha)^m
+\tag{4.1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(\alpha\)</span> คือระดับนัยสำคัญ (เช่น 0.05) และ <span class="math inline">\(m\)</span> คือจำนวนการทดสอบ สำหรับ 40 สถานีที่ <span class="math inline">\(\alpha = 0.05\)</span> ได้ <span class="math inline">\(1 - 0.95^{40} \approx 0.871\)</span> หมายความว่ามีโอกาสประมาณร้อยละ 87 ที่จะ “พบ” อย่างน้อยหนึ่งสถานีโดยบังเอิญ เราตรวจสูตรนี้ได้ด้วยการจำลองซ้ำหลายรอบ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">0</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n_sim, n_stations <span class="op">=</span> <span class="dv">10_000</span>, <span class="dv">40</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ภายใต้สมมติฐานว่าง p-value มีการแจกแจงแบบ uniform(0, 1)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> rng.uniform(size<span class="op">=</span>(n_sim, n_stations))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"จากการจำลอง: </span><span class="sc">{</span>(p <span class="op">&lt;</span> <span class="fl">0.05</span>)<span class="sc">.</span><span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>)<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"จากสูตร:      </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> <span class="fl">0.95</span><span class="op">**</span><span class="dv">40</span><span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+จากการจำลอง: 0.874
+จากสูตร:      0.871</code></pre>
+<p>บทที่ 13 อธิบายวิธีปรับแก้การเปรียบเทียบหลายครั้ง เช่น Bonferroni และ Benjamini–Hochberg แต่การปรับแก้ทางสถิติช่วยได้เฉพาะเมื่อเรารู้ว่าทดสอบไปกี่ครั้ง ปัญหาของ garden of forking paths คือ ทางเลือกจำนวนมากถูกตัดสินใจโดยไม่รู้ตัวและไม่ได้ถูกนับ วิธีป้องกันที่ได้ผลกว่าคือการแยกข้อมูลในหัวข้อถัดไป</p>
+</section>
+</section>
+<section id="sec-ch04-split" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-ch04-split"><span class="header-section-number">4.5</span> การแยกข้อมูลสำรวจกับข้อมูลยืนยัน</h2>
+<section id="หลกการ" class="level3">
+<h3 class="anchored" data-anchor-id="หลกการ">หลักการ</h3>
+<p>ถ้าการสำรวจข้อมูลทำให้เกิดข้อสันนิษฐาน และข้อสันนิษฐานนั้นต้องการการยืนยัน ข้อมูลที่ใช้ยืนยันต้องเป็น <em>ข้อมูลที่ไม่ได้มีส่วนในการสร้างข้อสันนิษฐาน</em> หลักการนี้ง่าย แต่มีผลลึกซึ้ง มันทำให้เราสำรวจได้อย่างอิสระ ลองได้ทุกเส้นทางใน garden of forking paths โดยไม่ต้องกังวล เพราะผลทั้งหมดจากข้อมูลช่วงสำรวจถูกถือเป็นเพียงข้อสันนิษฐาน และข้อสรุปสุดท้ายมาจากข้อมูลที่เราไม่เคยแตะ</p>
+</section>
+<section id="ทำไมแบงตามเวลา" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมแบงตามเวลา">ทำไมแบ่งตามเวลา</h3>
+<p>ในงาน machine learning มักแบ่งข้อมูลแบบสุ่ม แต่ข้อมูล PM2.5 เป็นอนุกรมเวลา ค่าของชั่วโมงหนึ่งสัมพันธ์กับชั่วโมงก่อนหน้า และค่าของวันหนึ่งสัมพันธ์กับวันใกล้เคียง (บทที่ 14 เรียกว่าสหสัมพันธ์ในตัว) ถ้าสุ่มแบ่งรายชั่วโมงหรือรายวัน ข้อมูลช่วงยืนยันจะมีวันที่อยู่ติดกับวันในช่วงสำรวจ และ “รั่ว” ข้อมูลจากช่วงสำรวจเข้าไป ทำให้การยืนยันดูดีเกินจริง</p>
+<p>หนังสือเล่มนี้จึง <strong>แบ่งตามเวลา</strong> ข้อมูลปีเก่าเป็นช่วงสำรวจ ข้อมูลปีล่าสุดเป็นช่วงยืนยัน ตามข้อตกลงของรายวิชา</p>
+<div id="tbl-ch04-split" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-split-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.5: การแบ่งข้อมูลสำรวจกับข้อมูลยืนยันของโครงการ
+</figcaption>
+<div aria-describedby="tbl-ch04-split-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ช่วง</th>
+<th>ปี (พ.ศ.)</th>
+<th>ปี (ค.ศ.)</th>
+<th>เงื่อนไขในโค้ด</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สำรวจ</td>
+<td>2563–2566</td>
+<td>2020–2023</td>
+<td><code>ts &lt; '2024-01-01'</code></td>
+<td>สำรวจอย่างอิสระ สร้างข้อสันนิษฐาน</td>
+</tr>
+<tr class="even">
+<td>ยืนยัน</td>
+<td>2567–2568</td>
+<td>2024–2025</td>
+<td><code>ts &gt;= '2024-01-01'</code></td>
+<td>ทดสอบข้อสันนิษฐานที่เขียนไว้แล้วเท่านั้น</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การแบ่งตามเวลามีข้อดีเพิ่มเติม คือตรงกับคำถามที่ผู้ใช้สนใจจริง ผู้ตัดสินใจต้องการรู้ว่ารูปแบบที่เห็นในอดีตยังเป็นจริงในปัจจุบันหรือไม่ การยืนยันด้วยข้อมูลปีล่าสุดจึงตอบคำถามนั้นโดยตรง</p>
+</section>
+<section id="ทำใหการแบงเปนรปธรรมในโคด" class="level3">
+<h3 class="anchored" data-anchor-id="ทำใหการแบงเปนรปธรรมในโคด">ทำให้การแบ่งเป็นรูปธรรมในโค้ด</h3>
+<p>การแบ่งข้อมูลที่อยู่แค่ในความตั้งใจรั่วได้ง่าย เช่น เผลอรัน query ที่ไม่มีเงื่อนไขเวลา วิธีป้องกันคือกำหนดค่าคงที่ไว้ที่เดียว และสร้าง view ที่มีเงื่อนไขเวลาอยู่แล้ว ให้ notebook สำรวจใช้เฉพาะ view นั้น</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>EXPLORE_END <span class="op">=</span> <span class="st">"2024-01-01"</span>   <span class="co"># ข้อมูลก่อนวันนี้ = ช่วงสำรวจ</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># view ชั่วคราวสร้างได้แม้เปิดฐานข้อมูลแบบอ่านอย่างเดียว และหายไปเมื่อปิดการเชื่อมต่อ</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="ss">f"""</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ss">    CREATE TEMP VIEW measurements_explore AS</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ss">    SELECT * FROM measurements WHERE ts &lt; TIMESTAMP '</span><span class="sc">{</span>EXPLORE_END<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(con.execute(<span class="st">"SELECT MAX(ts), COUNT(*) FROM measurements_explore"</span>).fetchone())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์ ตัวเลขจริงขึ้นกับข้อมูลที่ผู้อ่านดึงมา
+(datetime.datetime(2023, 12, 31, 23, 0), 280512)</code></pre>
+<p>notebook สำรวจทุกไฟล์เริ่มด้วย cell นี้ และใช้ <code>measurements_explore</code> แทน <code>measurements</code> ทุกที่ ถ้าผลของบรรทัดสุดท้ายแสดงวันที่ในปี ค.ศ. 2024 เป็นต้นไป แปลว่ามีบางอย่างผิด</p>
+</section>
+<section id="กฎของการยนยน" class="level3">
+<h3 class="anchored" data-anchor-id="กฎของการยนยน">กฎของการยืนยัน</h3>
+<p>ช่วงยืนยันมีคุณค่าเพียงเพราะเรายังไม่ได้ดูมัน ถ้าดูแล้ว คุณค่านั้นหายไปทันทีและเรียกคืนไม่ได้ จึงต้องมีกฎที่เคร่งครัด</p>
+<ol type="1">
+<li><strong>เขียนข้อสันนิษฐานให้เสร็จก่อน</strong> ระบุใน <code>questions.md</code> ว่าจะทดสอบอะไร ด้วยตัวชี้วัดใด และผลแบบใดถือว่ายืนยัน แล้ว commit</li>
+<li><strong>เปิดช่วงยืนยันครั้งเดียว</strong> รันการวิเคราะห์ตามที่เขียนไว้ ไม่ปรับเส้นทางหลังเห็นผล</li>
+<li><strong>รายงานทุกผล</strong> รวมถึงข้อสันนิษฐานที่ไม่ได้รับการยืนยัน ผลที่ไม่ยืนยันก็เป็นข้อค้นพบที่มีคุณค่า</li>
+<li><strong>ถ้าเห็นสิ่งใหม่ในช่วงยืนยัน</strong> บันทึกเป็นข้อสันนิษฐานใหม่สำหรับข้อมูลในอนาคต ไม่ใช่ข้อสรุป</li>
+</ol>
+</section>
+<section id="ขอจำกดของการแบงตามเวลา" class="level3">
+<h3 class="anchored" data-anchor-id="ขอจำกดของการแบงตามเวลา">ข้อจำกัดของการแบ่งตามเวลา</h3>
+<p>การแบ่งตามเวลาไม่ได้แก้ปัญหาทุกอย่าง ถ้าสภาพแวดล้อมเปลี่ยนไประหว่างช่วงสำรวจกับช่วงยืนยัน เช่น มาตรฐานถูกปรับ เครือข่ายสถานีขยาย หรือมีเหตุการณ์ผิดปกติในปีหนึ่ง ข้อสันนิษฐานที่จริงในอดีตอาจไม่ได้รับการยืนยันในปัจจุบัน ซึ่งไม่ได้แปลว่าข้อสันนิษฐานผิด แต่อาจแปลว่าโลกเปลี่ยนไป การรายงานผลจึงต้องอภิปรายความเป็นไปได้นี้ด้วย นอกจากนี้ ช่วงยืนยันสองปีอาจสั้นเกินไปสำหรับคำถามที่เกี่ยวกับแนวโน้มระยะยาว</p>
+</section>
+</section>
+<section id="sec-ch04-prereg" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sec-ch04-prereg"><span class="header-section-number">4.6</span> preregistration และ analysis plan ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="preregistration-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="preregistration-คออะไร">preregistration คืออะไร</h3>
+<p><strong><span class="idx">preregistration</span></strong> คือการบันทึกคำถาม สมมติฐาน และแผนการวิเคราะห์อย่างละเอียดไว้ในที่สาธารณะที่ระบุเวลาได้ <em>ก่อน</em> เห็นข้อมูลหรือผลลัพธ์ Nosek และคณะอธิบายว่า preregistration ทำให้แยกได้ชัดว่าส่วนใดของงานเป็นการทดสอบสิ่งที่คาดไว้ล่วงหน้า (confirmatory) และส่วนใดเป็นการสำรวจ (exploratory) ทั้งสองส่วนมีคุณค่า แต่ต้องรายงานให้ผู้อ่านรู้ว่าเป็นแบบใด <span class="citation" data-cites="nosek2018preregistration">(<a href="../references.html#ref-nosek2018preregistration" role="doc-biblioref">Nosek และคณะ 2018</a>)</span></p>
+<p>preregistration ไม่ได้ห้ามการสำรวจหรือการเปลี่ยนแผน แต่บังคับให้ <em>เปิดเผย</em> การเปลี่ยนแปลง ถ้าแผนต้องเปลี่ยนเพราะพบปัญหาในข้อมูล ก็เปลี่ยนได้ แต่ต้องรายงานว่าเปลี่ยนอะไรและเพราะอะไร</p>
+</section>
+<section id="analysis-plan-มอะไรบาง" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-plan-มอะไรบาง">analysis plan มีอะไรบ้าง</h3>
+<p>แผนการวิเคราะห์ที่ดีเขียนละเอียดพอให้คนอื่นทำการวิเคราะห์ตามได้โดยไม่ต้องถาม องค์ประกอบหลักมีดังนี้</p>
+<div id="tbl-ch04-analysis-plan" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-analysis-plan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.6: องค์ประกอบของแผนการวิเคราะห์
+</figcaption>
+<div aria-describedby="tbl-ch04-analysis-plan-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>องค์ประกอบ</th>
+<th>ตัวอย่างสำหรับคำถาม “ภาคเหนือมีสัดส่วนวันเกินมาตรฐานสูงกว่าภาคอื่น”</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>คำถามและสมมติฐาน</td>
+<td>สัดส่วนวันที่ค่าเฉลี่ยรายวันเกิน 37.5 µg/m³ ของสถานีภาคเหนือสูงกว่าภาคอื่นในปี ค.ศ. 2024–2025</td>
+</tr>
+<tr class="even">
+<td>ข้อมูลและช่วงเวลา</td>
+<td>ตาราง <code>daily_pm25_clean</code> ช่วง 2024-01-01 ถึง 2025-12-31</td>
+</tr>
+<tr class="odd">
+<td>เกณฑ์การคัดเลือก</td>
+<td>เฉพาะวันที่ <code>is_complete = TRUE</code> และเฉพาะสถานีที่มีวันครบถ้วนอย่างน้อยร้อยละ 70 ของช่วง</td>
+</tr>
+<tr class="even">
+<td>ตัวชี้วัด</td>
+<td>สัดส่วนวันเกินมาตรฐานต่อสถานี แล้วสรุปเป็นมัธยฐานของแต่ละภาค</td>
+</tr>
+<tr class="odd">
+<td>วิธีทดสอบ</td>
+<td>เปรียบเทียบภาคเหนือกับภาคอื่นด้วย permutation test ระดับสถานี (บทที่ 13)</td>
+</tr>
+<tr class="even">
+<td>เกณฑ์การตัดสิน</td>
+<td>ถือว่ายืนยันเมื่อความต่างของมัธยฐานเป็นบวก และ p-value &lt; 0.05</td>
+</tr>
+<tr class="odd">
+<td>การจัดการกรณีพิเศษ</td>
+<td>ถ้าภาคใดมีสถานีน้อยกว่า 3 แห่ง รายงานแยกโดยไม่ทดสอบ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="preregistration-ในโครงการของรายวชา" class="level3">
+<h3 class="anchored" data-anchor-id="preregistration-ในโครงการของรายวชา">preregistration ในโครงการของรายวิชา</h3>
+<p>ในงานวิจัย มีแพลตฟอร์มสำหรับ preregistration โดยเฉพาะ แต่ในโครงการของรายวิชา ไฟล์ <code>questions.md</code> ที่ commit ไว้ใน Git ก่อนเปิดช่วงยืนยันทำหน้าที่เดียวกัน เพราะ commit มีเวลาบันทึก และประวัติของ Git แก้ไขย้อนหลังโดยไม่ทิ้งร่องรอยได้ยาก (บทที่ 3) ผู้ตรวจงานจึงเปรียบเทียบได้ว่าแผนที่เขียนไว้ตรงกับสิ่งที่ทำจริงหรือไม่</p>
+</section>
+</section>
+<section id="sec-ch04-causal" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="sec-ch04-causal"><span class="header-section-number">4.7</span> ความคิดเชิงสาเหตุเบื้องต้น: confounding และ causal diagram (DAG) ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ทำไมสหสมพนธไมใชสาเหต" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมสหสมพนธไมใชสาเหต">ทำไมสหสัมพันธ์ไม่ใช่สาเหตุ</h3>
+<p>ประโยค “สหสัมพันธ์ไม่ใช่ความเป็นเหตุเป็นผล” เป็นที่รู้จักกันดี แต่คำถามที่สำคัญกว่าคือ <em>ทำไม</em> และ <em>เมื่อใดที่เราสรุปเชิงสาเหตุได้</em> หัวข้อนี้แนะนำเครื่องมือคิดอย่างหนึ่งที่ช่วยตอบคำถามนั้น คือ causal diagram ซึ่ง Judea Pearl และนักวิจัยคนอื่นพัฒนาขึ้น <span class="citation" data-cites="pearl2018book hernan2020causal">(<a href="../references.html#ref-pearl2018book" role="doc-biblioref">Pearl และ Mackenzie 2018</a>; <a href="../references.html#ref-hernan2020causal" role="doc-biblioref">Hernán และ Robins 2020</a>)</span></p>
+</section>
+<section id="ตวแปรกวน" class="level3">
+<h3 class="anchored" data-anchor-id="ตวแปรกวน">ตัวแปรกวน</h3>
+<p>สมมุติว่าเราพบว่า ในวันที่ค่า PM2.5 สูง จำนวนผู้ป่วยโรคระบบทางเดินหายใจที่มาโรงพยาบาลก็สูงด้วย เป็นไปได้ว่าฝุ่นทำให้คนป่วยมากขึ้น แต่ก็เป็นไปได้ว่ามีปัจจัยที่สามที่ส่งผลต่อทั้งสองอย่าง เช่น <em>ฤดูกาล</em> ฤดูหนาวอาจมีทั้งค่าฝุ่นสูงขึ้น (เพราะสภาพบรรยากาศ) และมีโรคทางเดินหายใจบางชนิดระบาดมากขึ้น (เพราะอุณหภูมิ) ปัจจัยที่สามนี้เรียกว่า <strong><span class="idx">ตัวแปรกวน</span></strong> (confounder) ซึ่งทำให้เห็นความสัมพันธ์ระหว่างสองตัวแปร แม้ว่าตัวแปรหนึ่งจะไม่ได้ส่งผลต่ออีกตัวเลย หรือทำให้ความสัมพันธ์ดูแรงกว่าความจริง</p>
+</section>
+<section id="causal-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="causal-diagram">causal diagram</h3>
+<p><strong><span class="idx">causal diagram</span></strong> หรือ DAG ในบริบทนี้ เป็นแผนภาพที่ใช้ลูกศรแทนความเชื่อว่าตัวแปรใดส่งผลต่อตัวแปรใด ลูกศรจาก A ไป B หมายถึง “A ส่งผลต่อ B” แผนภาพนี้ไม่ได้มาจากข้อมูล แต่มาจาก <em>ความรู้เชิงโดเมนและสมมติฐาน</em> ของผู้วิเคราะห์ ประโยชน์ของมันคือทำให้สมมติฐานชัดเจนจนวิจารณ์ได้</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  S[ฤดูกาล] --&gt; P[PM2.5]
+  S --&gt; T[อุณหภูมิ]
+  T --&gt; H[ผู้ป่วยทางเดินหายใจ]
+  P --&gt; H
+  S --&gt; I[โรคติดเชื้อ&lt;br/&gt;ทางเดินหายใจ]
+  I --&gt; H
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>จากแผนภาพนี้ เส้นทางจาก PM2.5 ไปยังจำนวนผู้ป่วยมีสองแบบ แบบแรกคือลูกศรตรง PM2.5 → ผู้ป่วย ซึ่งเป็นผลที่เราอยากรู้ แบบที่สองคือเส้นทางอ้อมที่ผ่านฤดูกาล PM2.5 ← ฤดูกาล → อุณหภูมิ → ผู้ป่วย ซึ่งเป็นเส้นทางของตัวแปรกวน ถ้าเราคำนวณสหสัมพันธ์ระหว่าง PM2.5 กับจำนวนผู้ป่วยตรง ๆ ผลจะปนทั้งสองเส้นทาง การแยกผลของเส้นทางตรงต้อง “ปิด” เส้นทางอ้อม เช่น เปรียบเทียบภายในฤดูกาลเดียวกัน หรือใช้แบบจำลองที่ควบคุมตัวแปรฤดูกาลและอุณหภูมิ</p>
+</section>
+<section id="สามรปแบบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="สามรปแบบพนฐาน">สามรูปแบบพื้นฐาน</h3>
+<div id="tbl-ch04-dag-patterns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-dag-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.7: สามรูปแบบพื้นฐานของ causal diagram
+</figcaption>
+<div aria-describedby="tbl-ch04-dag-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>รูปแบบ</th>
+<th>แผนภาพ</th>
+<th>ความหมาย</th>
+<th>ควรควบคุมตัวแปรกลางหรือไม่</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ตัวแปรกวน (fork)</td>
+<td>A ← C → B</td>
+<td>C ส่งผลต่อทั้ง A และ B</td>
+<td>ควร เพื่อปิดเส้นทางอ้อม</td>
+</tr>
+<tr class="even">
+<td>ตัวกลาง (chain)</td>
+<td>A → M → B</td>
+<td>A ส่งผลต่อ B ผ่าน M</td>
+<td>ไม่ควร ถ้าต้องการผลรวมของ A</td>
+</tr>
+<tr class="odd">
+<td>ตัวชน (collider)</td>
+<td>A → K ← B</td>
+<td>ทั้ง A และ B ส่งผลต่อ K</td>
+<td>ไม่ควร การควบคุมจะสร้างความสัมพันธ์ปลอม</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>รูปแบบตัวชนในแถวสุดท้ายของ <a href="#tbl-ch04-dag-patterns" class="quarto-xref">ตารางที่&nbsp;<span>4.7</span></a> มักขัดกับสัญชาตญาณ ตัวอย่างกับข้อมูลคุณภาพอากาศ สมมุติว่าเครื่องวัดจะหยุดทำงาน (K) ได้ทั้งจากไฟฟ้าดับ (A) และจากค่าฝุ่นที่สูงมากจนตัวกรองอุดตัน (B) ถ้าเราดูเฉพาะชั่วโมงที่เครื่องหยุดทำงาน จะเห็นความสัมพันธ์เชิงลบระหว่างไฟฟ้าดับกับค่าฝุ่นสูง ทั้งที่สองเหตุการณ์นี้ไม่เกี่ยวกัน เพราะในชั่วโมงที่เครื่องหยุดโดยไม่มีไฟฟ้าดับ สาเหตุมักเป็นฝุ่นสูง ปรากฏการณ์นี้เชื่อมโยงกับกลไกการสูญหายของข้อมูลในบทที่ 10</p>
+</section>
+<section id="ขอบเขตของการสำรวจขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="ขอบเขตของการสำรวจขอมล">ขอบเขตของการสำรวจข้อมูล</h3>
+<p>causal diagram ไม่ได้ทำให้ข้อมูลเชิงสังเกตกลายเป็นหลักฐานเชิงสาเหตุโดยอัตโนมัติ มันช่วยให้เรารู้ว่าต้องควบคุมอะไร และรู้ว่าสมมติฐานใดที่ข้อสรุปพึ่งพา ถ้ามีตัวแปรกวนที่เราไม่ได้วัด ข้อสรุปเชิงสาเหตุก็ยังไม่น่าเชื่อถือ ในหนังสือเล่มนี้ซึ่งเน้นการสำรวจ ข้อสรุปเชิงสาเหตุจึงอยู่นอกขอบเขต แต่การวาด causal diagram ช่วยให้เราเขียนข้อจำกัดของการวิเคราะห์ได้ชัดเจน และช่วยตั้งคำถามสำหรับการศึกษาเชิงสาเหตุในอนาคต</p>
+</section>
+</section>
+<section id="sec-ch04-language" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="sec-ch04-language"><span class="header-section-number">4.8</span> ภาษาที่ตรงกับระดับหลักฐาน</h2>
+<section id="ทำไมถอยคำสำคญ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมถอยคำสำคญ">ทำไมถ้อยคำสำคัญ</h3>
+<p>ผู้อ่านรายงานส่วนใหญ่ไม่ได้อ่านโค้ดหรือดูข้อมูลเอง พวกเขาตัดสินใจจาก <em>ถ้อยคำ</em> ที่เราเขียน คำว่า “พิสูจน์” “ยืนยัน” “บ่งชี้” และ “อาจ” สื่อระดับความมั่นใจที่ต่างกันมาก การใช้ถ้อยคำที่แรงเกินหลักฐาน แม้ตัวเลขทุกตัวถูกต้อง ก็ทำให้ผู้อ่านเข้าใจผิดได้ ข้อมูลคุณภาพอากาศถูกใช้ตัดสินใจเรื่องสุขภาพและนโยบาย ข้อสรุปที่แรงเกินจริงอาจทำให้คนเชื่อว่าพื้นที่หนึ่งปลอดภัยทั้งที่ไม่ใช่ หรือกล่าวโทษแหล่งกำเนิดที่ไม่เกี่ยวข้อง</p>
+</section>
+<section id="ถอยคำตามระดบหลกฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ถอยคำตามระดบหลกฐาน">ถ้อยคำตามระดับหลักฐาน</h3>
+<div id="tbl-ch04-language" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-language-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.8: ถ้อยคำที่ตรงกับระดับหลักฐาน
+</figcaption>
+<div aria-describedby="tbl-ch04-language-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระดับหลักฐาน</th>
+<th>ถ้อยคำที่เหมาะสม</th>
+<th>ถ้อยคำที่ควรหลีกเลี่ยง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>คำนวณตรงจากข้อมูล (เชิงพรรณนา)</td>
+<td>“ในปี ค.ศ. 2023 สถานี X มีค่าเฉลี่ย … µg/m³”</td>
+<td>(ใช้ได้ตรง ๆ แต่ต้องระบุว่าครอบคลุมเฉพาะข้อมูลที่มี)</td>
+</tr>
+<tr class="even">
+<td>เห็นจากการสำรวจข้อมูลช่วงสำรวจ</td>
+<td>“ข้อมูลปี ค.ศ. 2020–2023 บ่งชี้ว่า…” · “พบแนวโน้มว่า… ควรตรวจสอบต่อ”</td>
+<td>“พบว่า… อย่างชัดเจน” · “พิสูจน์ได้ว่า”</td>
+</tr>
+<tr class="odd">
+<td>ยืนยันด้วยข้อมูลช่วงยืนยันแล้ว</td>
+<td>“ผลในปี ค.ศ. 2024–2025 สอดคล้องกับข้อสันนิษฐาน…”</td>
+<td>“พิสูจน์แล้ว” (หลักฐานเชิงสถิติไม่ใช่การพิสูจน์)</td>
+</tr>
+<tr class="even">
+<td>มีเพียงความสัมพันธ์</td>
+<td>“วันที่ X สูง มักมี Y สูงด้วย” · “X สัมพันธ์กับ Y”</td>
+<td>“X ทำให้ Y” · “X ส่งผลต่อ Y” · “เพราะ X”</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูลไม่ครบหรือมีข้อจำกัด</td>
+<td>“สถานีนี้มีข้อมูลร้อยละ 60 ของชั่วโมง ผลจึงควรตีความอย่างระมัดระวัง”</td>
+<td>ไม่กล่าวถึงข้อจำกัดเลย</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="คำเชงสาเหตทแฝงอย" class="level3">
+<h3 class="anchored" data-anchor-id="คำเชงสาเหตทแฝงอย">คำเชิงสาเหตุที่แฝงอยู่</h3>
+<p>คำเชิงสาเหตุบางคำแฝงอยู่ในภาษาโดยไม่ชัดเจน ผู้เขียนรายงานควรตรวจหาคำต่อไปนี้ เมื่อหลักฐานเป็นเพียงความสัมพันธ์</p>
+<ul>
+<li>“ส่งผลให้” “ทำให้” “นำไปสู่” “เป็นสาเหตุของ”</li>
+<li>“ผลกระทบของ X ต่อ Y” “อิทธิพลของ X”</li>
+<li>“เมื่อ X เพิ่มขึ้น Y จะเพิ่มขึ้น” (สื่อว่าถ้าเราเพิ่ม X แล้ว Y จะเพิ่ม)</li>
+<li>“X ช่วยลด Y”</li>
+</ul>
+<p>แทนที่ด้วยคำที่บอกความสัมพันธ์ เช่น “สัมพันธ์กับ” “เกิดขึ้นพร้อมกับ” “พบร่วมกับ” หรือ “ในช่วงที่ X สูง Y มักสูงด้วย”</p>
+</section>
+<section id="รายงานสงทไมพบดวย" class="level3">
+<h3 class="anchored" data-anchor-id="รายงานสงทไมพบดวย">รายงานสิ่งที่ไม่พบด้วย</h3>
+<p>ความซื่อตรงทางวิชาการไม่ได้หมายถึงเพียงการไม่บิดเบือนผลที่พบ แต่หมายถึงการรายงานสิ่งที่ <em>ไม่พบ</em> ด้วย ถ้าเราทดสอบข้อสันนิษฐานสามข้อและยืนยันได้เพียงข้อเดียว รายงานต้องกล่าวถึงทั้งสามข้อ ถ้ารายงานเฉพาะข้อที่ยืนยันได้ ผู้อ่านจะประเมินความน่าเชื่อถือของผลสูงเกินจริง ซึ่งเป็น p-hacking ในระดับรายงาน การรายงานจำนวนเส้นทางที่ลองไปทั้งหมด แม้เป็นการสำรวจ ช่วยให้ผู้อ่านตัดสินได้ว่าผลที่เห็นน่าเชื่อเพียงใด บทที่ 19 กลับมาพูดถึงการเขียนข้อจำกัดและความไม่แน่นอนอย่างละเอียด และบทที่ 22 พูดถึงมิติทางจริยธรรม</p>
+</section>
+</section>
+<section id="sec-ch04-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch04-case">กรณีศึกษา: เขียน <code>questions.md</code> สำหรับโครงการ PM2.5</h2>
+<p><strong>สถานการณ์</strong> นักศึกษาเริ่มโครงการ PM2.5 ในสัปดาห์ที่ 2 ยังไม่ได้ดึงข้อมูลจริง มีเพียงไฟล์ตัวอย่างจากผู้สอน งานคือเขียน <code>questions.md</code> ที่จะใช้นำทางโครงการตลอดภาคการศึกษา</p>
+<p><strong>ขั้นที่ 1: เขียนคำถามก่อนเห็นข้อมูล แล้ว commit</strong> นักศึกษาเขียนคำถามสามข้อจากความรู้เชิงโดเมนและความต้องการของผู้ใช้ผลลัพธ์ โดยยังไม่เปิดไฟล์ข้อมูล</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># คำถามเชิงวิเคราะห์: PM2.5 Explorer</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ช่วงข้อมูลสำรวจ: 2563–2566 (ค.ศ. 2020–2023) · ช่วงข้อมูลยืนยัน: 2567–2568 (ค.ศ. 2024–2025)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## ส่วนที่ 1: คำถามก่อนเห็นข้อมูล (prior)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q1. ภาคเหนือมีสัดส่วนวันที่ PM2.5 เกินมาตรฐานสูงกว่าภาคอื่นหรือไม่</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ประเภท:** เชิงสำรวจ (ช่วงสำรวจ) → เชิงอนุมาน (ช่วงยืนยัน)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ที่มา:** ความรู้เชิงโดเมนเรื่องการเผาในที่โล่งช่วงต้นปีในภาคเหนือ</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ตัวชี้วัด:** สัดส่วนวันที่ค่าเฉลี่ย 24 ชม. &gt; 37.5 µg/m³ ต่อสถานี เฉพาะวันที่ข้อมูลครบ ≥ 18 ชม.</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**คำตอบที่คาด:** ภาคเหนือสูงสุด โดยเฉพาะช่วง ก.พ.–เม.ย.</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ถ้าไม่เป็นอย่างที่คาด แปลว่า:** ปัจจัยอื่น เช่น การจราจรหรืออุตุนิยมวิทยา อาจสำคัญกว่าที่คิด</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ใครใช้คำตอบ:** หน่วยงานจังหวัดที่วางแผนมาตรการช่วงฤดูฝุ่น</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q2. ช่วงเวลาใดของวันที่ PM2.5 ในฤดูหนาวสูงที่สุด</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ประเภท:** เชิงสำรวจ</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ที่มา:** ผู้ใช้ผลลัพธ์ (โรงเรียนต้องเลือกช่วงเวลากิจกรรมกลางแจ้ง)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add questions.md</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่มคำถามก่อนเห็นข้อมูล Q1–Q3"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>ขั้นที่ 2: first look ช่วงสำรวจ</strong> นักศึกษารัน first look ตามหัวข้อ <a href="#sec-ch04-hypothesis-sources" class="quarto-xref"><span>4.3</span></a> กับข้อมูลช่วงสำรวจเท่านั้น และพบว่า (1) บางสถานีเริ่มมีข้อมูลกลางช่วง (2) สัดส่วนค่าหายของบางสถานีสูงในบางเดือน</p>
+<p><strong>ขั้นที่ 3: เพิ่มคำถามจากข้อมูล</strong> สิ่งที่พบนำไปสู่คำถามใหม่ ซึ่งต้องติดป้ายและระบุที่มา</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## ส่วนที่ 2: คำถามจากข้อมูล (data-driven)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### Q4. [data-driven] สถานีที่ค่าหายเกิน 20% ของเดือน กระจุกอยู่ในเดือนที่ค่าฝุ่นสูงหรือไม่</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**เห็นจาก:** <span class="in">`notebooks/02_first_look.ipynb`</span> ส่วนที่นับค่าหายรายเดือน</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**ทำไมสำคัญ:** ถ้าใช่ สัดส่วนวันเกินมาตรฐานใน Q1 จะต่ำกว่าความจริง (บทที่ 10)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**จะยืนยันด้วยข้อมูลช่วง:** 2567–2568</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>ขั้นที่ 4: ตรวจคำถามกับเกณฑ์</strong> นักศึกษาตรวจทุกคำถามกับ <a href="#tbl-ch04-good-question" class="quarto-xref">ตารางที่&nbsp;<span>4.2</span></a> และ <a href="#tbl-ch04-question-types" class="quarto-xref">ตารางที่&nbsp;<span>4.1</span></a> แล้วพบว่า Q3 เดิมเขียนว่า “การจราจรทำให้ฝุ่นในกรุงเทพฯ สูงขึ้นหรือไม่” ซึ่งเป็นคำถามเชิงสาเหตุที่ข้อมูลตอบไม่ได้ จึงปรับเป็น “ค่า PM2.5 ในกรุงเทพฯ ช่วงวันทำงานต่างจากวันหยุดสุดสัปดาห์เท่าไร” ซึ่งเป็นคำถามเชิงสำรวจ และเพิ่มหมายเหตุว่าความต่างที่พบอาจมาจากหลายปัจจัย</p>
+<p><strong>ผล</strong> ประวัติใน Git แสดงว่า Q1–Q3 ถูก commit ก่อน notebook first look และ Q4 ถูกเพิ่มทีหลังพร้อมป้าย <code>[data-driven]</code> ผู้ตรวจงานจึงรู้ว่าคำถามใดทดสอบได้ด้วยข้อมูลช่วงสำรวจ และคำถามใดต้องรอข้อมูลช่วงยืนยัน</p>
+<p><strong>ข้อจำกัด</strong> การ commit ก่อนดูข้อมูลไม่ได้ป้องกันการที่นักศึกษาเคยเห็นข้อมูลชุดนี้มาก่อนในที่อื่น เช่น จากข่าวหรือแดชบอร์ดของหน่วยงาน ความรู้นั้นอาจซึมเข้าไปใน “คำถามก่อนเห็นข้อมูล” โดยไม่รู้ตัว กลไกนี้จึงเป็นการลดความเสี่ยง ไม่ใช่การป้องกันได้สมบูรณ์ ความซื่อตรงของผู้วิเคราะห์ยังเป็นสิ่งที่ขาดไม่ได้</p>
+</section>
+<section id="sec-ch04-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch04-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch04-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch04-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4.9: ข้อผิดพลาดที่พบบ่อยในบทที่ 4
+</figcaption>
+<div aria-describedby="tbl-ch04-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เริ่มดูข้อมูลก่อนเขียนคำถาม</td>
+<td>คำถามที่เขียนทีหลังถูกชี้นำโดยสิ่งที่เห็น แยกไม่ได้ว่าข้อใดเป็นการยืนยัน</td>
+<td>เขียนและ commit คำถามก่อนเปิดข้อมูล</td>
+</tr>
+<tr class="even">
+<td>ตั้งคำถามเชิงสาเหตุแต่มีเพียงข้อมูลเชิงสังเกต</td>
+<td>ตอบไม่ได้ด้วยข้อมูลที่มี และเสี่ยงต่อข้อสรุปผิด</td>
+<td>ปรับเป็นคำถามเชิงสำรวจหรือพรรณนา และระบุตัวแปรกวนที่อาจมี</td>
+</tr>
+<tr class="odd">
+<td>ไม่ระบุเกณฑ์ในคำถาม</td>
+<td>ผลเปลี่ยนตามเกณฑ์ที่เลือกทีหลัง เป็นทางแยกที่ไม่ได้นับ</td>
+<td>ระบุเกณฑ์ (เช่น 37.5 µg/m³) และเหตุผลไว้ในคำถาม</td>
+</tr>
+<tr class="even">
+<td>ทดสอบหลายสถานีแล้วรายงานเฉพาะที่มีนัยสำคัญ</td>
+<td>ผลที่รายงานอาจเกิดจากความบังเอิญล้วน ๆ</td>
+<td>รายงานจำนวนการทดสอบทั้งหมด และยืนยันด้วยข้อมูลช่วงยืนยัน</td>
+</tr>
+<tr class="odd">
+<td>สุ่มแบ่งข้อมูลอนุกรมเวลารายวัน</td>
+<td>วันใกล้กันสัมพันธ์กัน ข้อมูลรั่วระหว่างสองช่วง</td>
+<td>แบ่งตามเวลา ช่วงเก่าสำรวจ ช่วงใหม่ยืนยัน</td>
+</tr>
+<tr class="even">
+<td>เปิดดูข้อมูลช่วงยืนยัน “แค่แวบเดียว”</td>
+<td>คุณค่าของช่วงยืนยันหายไปทันทีและเรียกคืนไม่ได้</td>
+<td>ใช้ view ที่มีเงื่อนไขเวลาใน notebook สำรวจทุกไฟล์</td>
+</tr>
+<tr class="odd">
+<td>เขียน “พิสูจน์ได้ว่า” จากผลการสำรวจ</td>
+<td>ผู้อ่านเข้าใจว่าข้อสันนิษฐานเป็นข้อสรุปที่ยืนยันแล้ว</td>
+<td>ใช้ถ้อยคำตาม <a href="#tbl-ch04-language" class="quarto-xref">ตารางที่&nbsp;<span>4.8</span></a></td>
+</tr>
+<tr class="even">
+<td>รายงานเฉพาะข้อสันนิษฐานที่ยืนยันได้</td>
+<td>ผู้อ่านประเมินความน่าเชื่อถือสูงเกินจริง</td>
+<td>รายงานทุกข้อสันนิษฐาน รวมถึงที่ไม่ได้รับการยืนยัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>คำถามข้อมูลแบ่งได้เป็นเชิงพรรณนา สำรวจ อนุมาน ทำนาย และเชิงสาเหตุ แต่ละประเภทต้องการหลักฐานต่างกัน ความผิดพลาดที่พบบ่อยที่สุดคือการตอบคำถามผิดประเภท</li>
+<li>คำถามเชิงวิเคราะห์ที่ดีต้องเฉพาะเจาะจง วัดได้ มีคำตอบได้มากกว่าหนึ่งแบบ และนำไปใช้ได้ รวมทั้งระบุเกณฑ์ที่ใช้อย่างชัดเจน</li>
+<li>สมมติฐานมาจากความรู้เชิงโดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look ต้องแยกคำถามก่อนเห็นข้อมูลออกจากคำถามที่เกิดจากข้อมูล</li>
+<li>garden of forking paths, HARKing และ p-hacking ทำให้ได้ผลที่ดูน่าสนใจแต่เกิดจากความบังเอิญ โดยไม่ต้องมีเจตนาโกง การทดสอบ 40 ครั้งเมื่อไม่มีผลจริงมีโอกาสประมาณร้อยละ 87 ที่จะพบผล “มีนัยสำคัญ” อย่างน้อยหนึ่งครั้ง</li>
+<li>การแยกข้อมูลช่วงสำรวจ (ค.ศ. 2020–2023) กับช่วงยืนยัน (ค.ศ. 2024–2025) ตามเวลา ทำให้สำรวจได้อย่างอิสระ และยืนยันด้วยข้อมูลที่ไม่เคยแตะ</li>
+<li>preregistration และ causal diagram เป็นเครื่องมือที่ทำให้สมมติฐานและแผนการวิเคราะห์ชัดเจนจนตรวจสอบและวิจารณ์ได้</li>
+<li>ถ้อยคำในรายงานต้องตรงกับระดับหลักฐาน และต้องรายงานสิ่งที่ไม่พบด้วย</li>
+</ul>
+</section>
+<section id="sec-ch04-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch04-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>จำแนกคำถามต่อไปนี้ตามประเภทของ Leek และ Peng: (ก) สถานีใดมีค่าสูงสุดในเดือนมีนาคม ค.ศ. 2023 (ข) ถ้าห้ามเผาในที่โล่งในภาคเหนือ วันเกินมาตรฐานจะลดลงกี่วัน (ค) ค่า PM2.5 มีรูปแบบรายสัปดาห์หรือไม่ (ง) พรุ่งนี้กรุงเทพฯ จะเกินมาตรฐานหรือไม่</li>
+<li>คำถาม “วันที่ PM2.5 เกิน 37.5 µg/m³ มีค่าเฉลี่ยสูงกว่า 37.5 µg/m³ หรือไม่” ไม่ผ่านเกณฑ์ข้อใดใน <a href="#tbl-ch04-good-question" class="quarto-xref">ตารางที่&nbsp;<span>4.2</span></a> เพราะอะไร</li>
+<li>อธิบายความต่างระหว่าง HARKing กับ garden of forking paths พร้อมยกตัวอย่างกับข้อมูล PM2.5 อย่างละหนึ่งตัวอย่าง</li>
+<li>ทำไมการแบ่งข้อมูล PM2.5 ควรแบ่งตามเวลาแทนการสุ่มแบ่งรายวัน</li>
+<li>ใช้ <a href="#eq-ch04-fwer" class="quarto-xref">สมการ&nbsp;<span>4.1</span></a> คำนวณความน่าจะเป็นที่จะพบผล “มีนัยสำคัญ” อย่างน้อยหนึ่งครั้ง เมื่อทดสอบ 10 สถานีและ 100 สถานี ที่ <span class="math inline">\(\alpha = 0.05\)</span> และไม่มีผลจริงเลย</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>ปรับคำถาม “ฝุ่นที่อุบลราชธานีเป็นปัญหาไหม” ให้เป็นคำถามเชิงวิเคราะห์ที่ผ่านเกณฑ์ทั้งสี่ข้อ โดยแสดงการปรับทีละขั้นตามตัวอย่างในหัวข้อ <a href="#sec-ch04-good-questions" class="quarto-xref"><span>4.2</span></a></li>
+<li>รันการจำลองในหัวข้อ <a href="#sec-ch04-forking-paths" class="quarto-xref"><span>4.4</span></a> โดยเปลี่ยน seed เป็น 10 ค่าต่างกัน บันทึกจำนวนสถานีที่ p &lt; 0.05 ในแต่ละครั้ง ค่าเฉลี่ยของจำนวนนี้ใกล้เคียงกับค่าที่คาดจากทฤษฎี (<span class="math inline">\(40 \times 0.05 = 2\)</span>) หรือไม่</li>
+<li>สร้าง view <code>measurements_explore</code> ใน notebook ของโครงการ แล้วเขียน query first look ตามหัวข้อ <a href="#sec-ch04-hypothesis-sources" class="quarto-xref"><span>4.3</span></a> ตรวจว่าไม่มีแถวใดที่ <code>ts &gt;= '2024-01-01'</code> หลุดเข้ามา</li>
+<li>เขียน <code>questions.md</code> ของโครงการตนเองตามแม่แบบในกรณีศึกษา ให้มีคำถามก่อนเห็นข้อมูลอย่างน้อย 2 ข้อ และระบุประเภท ที่มา ตัวชี้วัด คำตอบที่คาด และผู้ใช้คำตอบของทุกข้อ</li>
+<li>เขียนประโยครายงานผลต่อไปนี้ใหม่ให้ตรงกับระดับหลักฐาน: “จากข้อมูลปี 2563–2566 เราพิสูจน์ได้ว่าวันหยุดยาวทำให้ค่าฝุ่นในกรุงเทพฯ ลดลง 15%”</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ระบุทางแยกทั้งหมดที่เป็นไปได้ในการตอบคำถาม Q1 ของกรณีศึกษา (ภาคเหนือมีสัดส่วนวันเกินมาตรฐานสูงกว่าภาคอื่นหรือไม่) อย่างน้อย 6 จุด แล้วเขียนโค้ดรันทุกเส้นทางกับข้อมูลช่วงสำรวจ รายงานว่าคำตอบเปลี่ยนไปตามเส้นทางมากน้อยเพียงใด (แนวคิดนี้เรียกว่า multiverse analysis)</li>
+<li>วาด causal diagram สำหรับคำถาม “มาตรการห้ามเผาในที่โล่งช่วงฤดูแล้งลดค่า PM2.5 ในภาคเหนือหรือไม่” ระบุตัวแปรกวนอย่างน้อยสามตัว และอธิบายว่าตัวแปรใดวัดได้ด้วยข้อมูลที่มี และตัวแปรใดวัดไม่ได้</li>
+<li>เขียนแผนการวิเคราะห์ตาม <a href="#tbl-ch04-analysis-plan" class="quarto-xref">ตารางที่&nbsp;<span>4.6</span></a> สำหรับคำถามหนึ่งข้อในโครงการของตน แล้วให้เพื่อนอ่านและพยายามทำการวิเคราะห์ตามแผนโดยไม่ถามผู้เขียน บันทึกจุดที่เพื่อนต้องตีความเองและปรับแผนให้ชัดขึ้น</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch04">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="leek2015question">Leek และ Peng (<a href="../references.html#ref-leek2015question" role="doc-biblioref">2015</a>)</span> — บทความสั้นสองหน้าที่เสนอแผนผังจำแนกประเภทคำถามข้อมูล อ่านจบได้ในไม่กี่นาที แต่เปลี่ยนวิธีคิดได้มาก</li>
+<li><span class="citation" data-cites="gelman2013garden">Gelman และ Loken (<a href="../references.html#ref-gelman2013garden" role="doc-biblioref">2013</a>)</span> — บทความต้นฉบับของแนวคิด garden of forking paths อธิบายว่าทำไมการทดสอบครั้งเดียวก็ยังมีปัญหาการเปรียบเทียบหลายครั้งได้</li>
+<li><span class="citation" data-cites="simmons2011false">Simmons และคณะ (<a href="../references.html#ref-simmons2011false" role="doc-biblioref">2011</a>)</span> — การจำลองที่แสดงว่าความยืดหยุ่นในการวิเคราะห์เพียงเล็กน้อยทำให้ผลบวกลวงเพิ่มขึ้นมาก พร้อมข้อเสนอแนวปฏิบัติ</li>
+<li><span class="citation" data-cites="kerr1998harking">Kerr (<a href="../references.html#ref-kerr1998harking" role="doc-biblioref">1998</a>)</span> — บทความที่ตั้งชื่อและวิเคราะห์ HARKing อย่างเป็นระบบ</li>
+<li><span class="citation" data-cites="nosek2018preregistration">Nosek และคณะ (<a href="../references.html#ref-nosek2018preregistration" role="doc-biblioref">2018</a>)</span> — อธิบายเหตุผลและวิธีทำ preregistration รวมถึงการจัดการเมื่อแผนต้องเปลี่ยน</li>
+<li><span class="citation" data-cites="wasserstein2016asa">Wasserstein และ Lazar (<a href="../references.html#ref-wasserstein2016asa" role="doc-biblioref">2016</a>)</span> — แถลงการณ์ของสมาคมสถิติอเมริกันเรื่องการใช้และตีความ p-value</li>
+<li><span class="citation" data-cites="hernan2020causal">Hernán และ Robins (<a href="../references.html#ref-hernan2020causal" role="doc-biblioref">2020</a>)</span> — ตำราการอนุมานเชิงสาเหตุที่อ่านฟรีออนไลน์ บทแรก ๆ อธิบาย causal diagram ได้ชัดเจน</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-gelman2013garden" class="csl-entry" role="listitem">
+Gelman, Andrew, และ Eric Loken. 2013. <em>The Garden of Forking Paths: Why Multiple Comparisons Can Be a Problem, Even When There Is No <span>“Fishing Expedition”</span> or <span>“p-Hacking”</span> and the Research Hypothesis Was Posited Ahead of Time</em>. Unpublished manuscript, Department of Statistics, Columbia University. <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf">http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf</a>.
+</div>
+<div id="ref-hernan2020causal" class="csl-entry" role="listitem">
+Hernán, Miguel A., และ James M. Robins. 2020. <em>Causal Inference: What If</em>. Chapman &amp; Hall/CRC. <a href="https://miguelhernan.org/whatifbook">https://miguelhernan.org/whatifbook</a>.
+</div>
+<div id="ref-kerr1998harking" class="csl-entry" role="listitem">
+Kerr, Norbert L. 1998. <span>“<span>HARKing</span>: Hypothesizing After the Results Are Known”</span>. <em>Personality and Social Psychology Review</em> 2 (3): 196–217. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.
+</div>
+<div id="ref-leek2015question" class="csl-entry" role="listitem">
+Leek, Jeffery T., และ Roger D. Peng. 2015. <span>“What Is the Question?”</span> <em>Science</em> 347 (6228): 1314–15. <a href="https://doi.org/10.1126/science.aaa6146">https://doi.org/10.1126/science.aaa6146</a>.
+</div>
+<div id="ref-nosek2018preregistration" class="csl-entry" role="listitem">
+Nosek, Brian A., Charles R. Ebersole, Alexander C. DeHaven, และ David T. Mellor. 2018. <span>“The Preregistration Revolution”</span>. <em>Proceedings of the National Academy of Sciences</em> 115 (11): 2600–2606. <a href="https://doi.org/10.1073/pnas.1708274114">https://doi.org/10.1073/pnas.1708274114</a>.
+</div>
+<div id="ref-pearl2018book" class="csl-entry" role="listitem">
+Pearl, Judea, และ Dana Mackenzie. 2018. <em>The Book of Why: The New Science of Cause and Effect</em>. Basic Books.
+</div>
+<div id="ref-simmons2011false" class="csl-entry" role="listitem">
+Simmons, Joseph P., Leif D. Nelson, และ Uri Simonsohn. 2011. <span>“False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant”</span>. <em>Psychological Science</em> 22 (11): 1359–66. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>.
+</div>
+<div id="ref-wasserstein2016asa" class="csl-entry" role="listitem">
+Wasserstein, Ronald L., และ Nicole A. Lazar. 2016. <span>“The <span>ASA</span> Statement on p-Values: Context, Process, and Purpose”</span>. <em>The American Statistician</em> 70 (2): 129–33. <a href="https://doi.org/10.1080/00031305.2016.1154108">https://doi.org/10.1080/00031305.2016.1154108</a>.
+</div>
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality Guidelines: Particulate Matter (<span>PM2.5</span> and <span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon Monoxide</em>. World Health Organization.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/03-version-control.html" class="pagination-link" aria-label="Version control และการทำงานร่วมกัน">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/05-data-acquisition.html" class="pagination-link" aria-label="การได้มาซึ่งข้อมูลจาก API และเว็บไซต์">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

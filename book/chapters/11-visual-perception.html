@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; หลักการรับรู้และการออกแบบภาพข้อมูล – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/12-interactive-viz.html" rel="next">
+<link href="../chapters/10-missing-data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/11-visual-perception.html">ส่วนที่ 4 การสำรวจด้วยภาพ</a></li><li class="breadcrumb-item"><a href="../chapters/11-visual-perception.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch11-perception" id="toc-sec-ch11-perception" class="nav-link" data-scroll-target="#sec-ch11-perception"><span class="header-section-number">11.1</span> การรับรู้ทางสายตา: preattentive attribute และหลัก Gestalt</a>
+  <ul class="collapse">
+  <li><a href="#ตาเหนอะไรกอนทจะคด" id="toc-ตาเหนอะไรกอนทจะคด" class="nav-link" data-scroll-target="#ตาเหนอะไรกอนทจะคด">ตาเห็นอะไรก่อนที่จะคิด</a></li>
+  <li><a href="#หลก-gestalt" id="toc-หลก-gestalt" class="nav-link" data-scroll-target="#หลก-gestalt">หลัก Gestalt</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-cleveland" id="toc-sec-ch11-cleveland" class="nav-link" data-scroll-target="#sec-ch11-cleveland"><span class="header-section-number">11.2</span> ลำดับความแม่นยำของการเข้ารหัสภาพ (Cleveland &amp; McGill)</a>
+  <ul class="collapse">
+  <li><a href="#การเขารหสภาพคออะไร" id="toc-การเขารหสภาพคออะไร" class="nav-link" data-scroll-target="#การเขารหสภาพคออะไร">การเข้ารหัสภาพคืออะไร</a></li>
+  <li><a href="#การทดลองของ-cleveland-และ-mcgill" id="toc-การทดลองของ-cleveland-และ-mcgill" class="nav-link" data-scroll-target="#การทดลองของ-cleveland-และ-mcgill">การทดลองของ Cleveland และ McGill</a></li>
+  <li><a href="#นยตอการออกแบบ" id="toc-นยตอการออกแบบ" class="nav-link" data-scroll-target="#นยตอการออกแบบ">นัยต่อการออกแบบ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-color" id="toc-sec-ch11-color" class="nav-link" data-scroll-target="#sec-ch11-color"><span class="header-section-number">11.3</span> วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี</a>
+  <ul class="collapse">
+  <li><a href="#สไมไดเปนมตเดยว" id="toc-สไมไดเปนมตเดยว" class="nav-link" data-scroll-target="#สไมไดเปนมตเดยว">สีไม่ได้เป็นมิติเดียว</a></li>
+  <li><a href="#perceptual-uniformity" id="toc-perceptual-uniformity" class="nav-link" data-scroll-target="#perceptual-uniformity">perceptual uniformity</a></li>
+  <li><a href="#ชนดของชดสตามชนดขอมล" id="toc-ชนดของชดสตามชนดขอมล" class="nav-link" data-scroll-target="#ชนดของชดสตามชนดขอมล">ชนิดของชุดสีตามชนิดข้อมูล</a></li>
+  <li><a href="#ภาวะตาบอดส" id="toc-ภาวะตาบอดส" class="nav-link" data-scroll-target="#ภาวะตาบอดส">ภาวะตาบอดสี</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-chart-choice" id="toc-sec-ch11-chart-choice" class="nav-link" data-scroll-target="#sec-ch11-chart-choice"><span class="header-section-number">11.4</span> การเลือกกราฟตามคำถาม</a>
+  <ul class="collapse">
+  <li><a href="#เรมจากคำถาม-ไมใชจากชนดกราฟ" id="toc-เรมจากคำถาม-ไมใชจากชนดกราฟ" class="nav-link" data-scroll-target="#เรมจากคำถาม-ไมใชจากชนดกราฟ">เริ่มจากคำถาม ไม่ใช่จากชนิดกราฟ</a></li>
+  <li><a href="#ขอมลสำหรบตวอยางในบทน" id="toc-ขอมลสำหรบตวอยางในบทน" class="nav-link" data-scroll-target="#ขอมลสำหรบตวอยางในบทน">ข้อมูลสำหรับตัวอย่างในบทนี้</a></li>
+  <li><a href="#การแจกแจง-histogram-และ-ecdf" id="toc-การแจกแจง-histogram-และ-ecdf" class="nav-link" data-scroll-target="#การแจกแจง-histogram-และ-ecdf">การแจกแจง: histogram และ ECDF</a></li>
+  <li><a href="#การเปรยบเทยบ-box-plot-และ-dot-plot" id="toc-การเปรยบเทยบ-box-plot-และ-dot-plot" class="nav-link" data-scroll-target="#การเปรยบเทยบ-box-plot-และ-dot-plot">การเปรียบเทียบ: box plot และ dot plot</a></li>
+  <li><a href="#ความสมพนธ-scatter-plot-และ-overplotting" id="toc-ความสมพนธ-scatter-plot-และ-overplotting" class="nav-link" data-scroll-target="#ความสมพนธ-scatter-plot-และ-overplotting">ความสัมพันธ์: scatter plot และ overplotting</a></li>
+  <li><a href="#การเปลยนแปลงตามเวลา-line-chart-และ-heatmap" id="toc-การเปลยนแปลงตามเวลา-line-chart-และ-heatmap" class="nav-link" data-scroll-target="#การเปลยนแปลงตามเวลา-line-chart-และ-heatmap">การเปลี่ยนแปลงตามเวลา: line chart และ heatmap</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-integrity" id="toc-sec-ch11-integrity" class="nav-link" data-scroll-target="#sec-ch11-integrity"><span class="header-section-number">11.5</span> ความซื่อตรงของภาพ: lie factor, data-ink (Tufte), แกนที่ถูกตัด</a>
+  <ul class="collapse">
+  <li><a href="#lie-factor" id="toc-lie-factor" class="nav-link" data-scroll-target="#lie-factor">lie factor</a></li>
+  <li><a href="#แกนทถกตด" id="toc-แกนทถกตด" class="nav-link" data-scroll-target="#แกนทถกตด">แกนที่ถูกตัด</a></li>
+  <li><a href="#data-ink" id="toc-data-ink" class="nav-link" data-scroll-target="#data-ink">data-ink</a></li>
+  <li><a href="#การเลอกขอมลเพอเขาขาง" id="toc-การเลอกขอมลเพอเขาขาง" class="nav-link" data-scroll-target="#การเลอกขอมลเพอเขาขาง">การเลือกข้อมูลเพื่อเข้าข้าง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-small-multiples" id="toc-sec-ch11-small-multiples" class="nav-link" data-scroll-target="#sec-ch11-small-multiples"><span class="header-section-number">11.6</span> small multiples และการเปรียบเทียบ</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของกราฟทใสทกอยาง" id="toc-ปญหาของกราฟทใสทกอยาง" class="nav-link" data-scroll-target="#ปญหาของกราฟทใสทกอยาง">ปัญหาของกราฟที่ใส่ทุกอย่าง</a></li>
+  <li><a href="#small-multiples" id="toc-small-multiples" class="nav-link" data-scroll-target="#small-multiples">small multiples</a></li>
+  <li><a href="#หลกการออกแบบ-small-multiples" id="toc-หลกการออกแบบ-small-multiples" class="nav-link" data-scroll-target="#หลกการออกแบบ-small-multiples">หลักการออกแบบ small multiples</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-annotation" id="toc-sec-ch11-annotation" class="nav-link" data-scroll-target="#sec-ch11-annotation"><span class="header-section-number">11.7</span> การใส่คำอธิบายประกอบและเส้นอ้างอิง (มาตรฐาน 37.5 µg/m³)</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองมเสนอางอง" id="toc-ทำไมตองมเสนอางอง" class="nav-link" data-scroll-target="#ทำไมตองมเสนอางอง">ทำไมต้องมีเส้นอ้างอิง</a></li>
+  <li><a href="#คำอธบายประกอบ" id="toc-คำอธบายประกอบ" class="nav-link" data-scroll-target="#คำอธบายประกอบ">คำอธิบายประกอบ</a></li>
+  <li><a href="#ชอกราฟทบอกขอคนพบ" id="toc-ชอกราฟทบอกขอคนพบ" class="nav-link" data-scroll-target="#ชอกราฟทบอกขอคนพบ">ชื่อกราฟที่บอกข้อค้นพบ</a></li>
+  <li><a href="#รายละเอยดททำใหกราฟอานงาย" id="toc-รายละเอยดททำใหกราฟอานงาย" class="nav-link" data-scroll-target="#รายละเอยดททำใหกราฟอานงาย">รายละเอียดที่ทำให้กราฟอ่านง่าย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-thai-fonts" id="toc-sec-ch11-thai-fonts" class="nav-link" data-scroll-target="#sec-ch11-thai-fonts"><span class="header-section-number">11.8</span> ตัวอักษรไทยในกราฟ</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมภาษาไทยกลายเปนสเหลยม" id="toc-ทำไมภาษาไทยกลายเปนสเหลยม" class="nav-link" data-scroll-target="#ทำไมภาษาไทยกลายเปนสเหลยม">ทำไมภาษาไทยกลายเป็นสี่เหลี่ยม</a></li>
+  <li><a href="#ตงคาฟอนต" id="toc-ตงคาฟอนต" class="nav-link" data-scroll-target="#ตงคาฟอนต">ตั้งค่าฟอนต์</a></li>
+  <li><a href="#ขอควรระวงอนของภาษาไทยในกราฟ" id="toc-ขอควรระวงอนของภาษาไทยในกราฟ" class="nav-link" data-scroll-target="#ขอควรระวงอนของภาษาไทยในกราฟ">ข้อควรระวังอื่นของภาษาไทยในกราฟ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch11-case" id="toc-sec-ch11-case" class="nav-link" data-scroll-target="#sec-ch11-case">กรณีศึกษา: ออกแบบกราฟตอบคำถาม Q1 ให้ซื่อตรงและอ่านง่าย</a></li>
+  <li><a href="#sec-ch11-pitfalls" id="toc-sec-ch11-pitfalls" class="nav-link" data-scroll-target="#sec-ch11-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch11-exercises" id="toc-sec-ch11-exercises" class="nav-link" data-scroll-target="#sec-ch11-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/11-visual-perception.html">ส่วนที่ 4 การสำรวจด้วยภาพ</a></li><li class="breadcrumb-item"><a href="../chapters/11-visual-perception.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ส่วนที่ 3 จบลงด้วยตาราง <code>daily_pm25_clean</code> ซึ่งผ่านการตรวจคุณภาพและการจัดการข้อมูลสูญหายแล้ว ตั้งแต่บทนี้เป็นต้นไป เราใช้ตารางนี้ <em>ตอบคำถาม</em> เครื่องมือแรกและทรงพลังที่สุดคือ<span class="idx">การนำเสนอข้อมูลด้วยภาพ</span> (visualization) หรือกราฟ บทที่ 1 แสดงด้วย Anscombe’s quartet ว่ากราฟเผยสิ่งที่สถิติสรุปซ่อนไว้ได้ เหตุผลคือระบบการมองเห็นของมนุษย์ตรวจจับรูปแบบ ความผิดปกติ และความแตกต่างได้เร็วกว่าการอ่านตัวเลขมาก แต่ระบบเดียวกันนี้ก็ถูกหลอกได้ง่าย และบางการออกแบบทำให้ผู้อ่านเห็นสิ่งที่ไม่มีอยู่จริง</p>
+<p>บทนี้ว่าด้วย <em>หลักการ</em> ที่อยู่เบื้องหลังกราฟที่ดี มาจากงานวิจัยด้านการรับรู้ทางสายตา วิทยาศาสตร์ของสี และแนวคิดเรื่องความซื่อตรงของภาพ หลักการเหล่านี้ไม่ขึ้นกับเครื่องมือ ใช้ได้ทั้งกับ seaborn, Plotly หรือแม้แต่การวาดด้วยมือ บทที่ 12 จะต่อยอดไปยัง grammar of graphics และกราฟเชิงโต้ตอบ ตัวอย่างโค้ดในบทนี้ใช้ seaborn และ matplotlib ซึ่งเป็นเครื่องมือหลักของสัปดาห์ที่ 9</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบาย preattentive attribute และหลัก Gestalt และใช้ออกแบบกราฟที่ผู้อ่านเห็นประเด็นได้ทันที</li>
+<li>ใช้ลำดับความแม่นยำของการเข้ารหัสภาพเลือกวิธีแสดงค่าที่ต้องเปรียบเทียบ</li>
+<li>เลือกชุดสีให้ตรงกับชนิดข้อมูล และตรวจว่าผู้มีภาวะตาบอดสีอ่านได้</li>
+<li>เลือกชนิดกราฟจากชนิดของคำถาม</li>
+<li>ประเมินความซื่อตรงของกราฟ และแก้กราฟที่ชวนเข้าใจผิด</li>
+<li>ออกแบบ small multiples และใส่คำอธิบายประกอบกับเส้นอ้างอิงอย่างเหมาะสม</li>
+<li>ตั้งค่าตัวอักษรไทยในกราฟให้แสดงผลถูกต้องบนทุกระบบ</li>
+</ol>
+</section>
+<section id="sec-ch11-perception" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="sec-ch11-perception"><span class="header-section-number">11.1</span> การรับรู้ทางสายตา: preattentive attribute และหลัก Gestalt</h2>
+<section id="ตาเหนอะไรกอนทจะคด" class="level3">
+<h3 class="anchored" data-anchor-id="ตาเหนอะไรกอนทจะคด">ตาเห็นอะไรก่อนที่จะคิด</h3>
+<p>เมื่อมองภาพ ระบบการมองเห็นประมวลผลคุณลักษณะบางอย่างได้ภายในเวลาสั้นมาก ก่อนที่เราจะตั้งใจมองหา คุณลักษณะเหล่านี้เรียกว่า <strong><span class="idx">preattentive attribute</span></strong> <span class="citation" data-cites="healey2012attention">(<a href="../references.html#ref-healey2012attention" role="doc-biblioref">Healey และ Enns 2012</a>)</span> ตัวอย่างที่สำคัญต่อการออกแบบกราฟได้แก่</p>
+<div id="tbl-ch11-preattentive" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-preattentive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.1: preattentive attribute ที่ใช้บ่อยในการออกแบบกราฟ
+</figcaption>
+<div aria-describedby="tbl-ch11-preattentive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>กลุ่ม</th>
+<th>คุณลักษณะ</th>
+<th>ตัวอย่างการใช้ในกราฟ PM2.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>รูปทรง</td>
+<td>ความยาว ความกว้าง ขนาด รูปร่าง การวางแนว</td>
+<td>แท่งที่ยาวกว่าแท่งอื่นชัดเจน</td>
+</tr>
+<tr class="even">
+<td>สี</td>
+<td>สีสัน (hue) ความเข้ม (intensity)</td>
+<td>สถานีเดียวที่เป็นสีส้มท่ามกลางสถานีสีเทา</td>
+</tr>
+<tr class="odd">
+<td>ตำแหน่ง</td>
+<td>ตำแหน่งบนแกน การจัดกลุ่มเชิงพื้นที่</td>
+<td>จุดที่อยู่เหนือเส้นมาตรฐาน</td>
+</tr>
+<tr class="even">
+<td>การเคลื่อนไหว</td>
+<td>การกะพริบ ทิศทาง</td>
+<td>ใช้ในแดชบอร์ดเพื่อเรียกความสนใจ (บทที่ 20)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>นัยสำคัญต่อการออกแบบคือ <strong>สิ่งที่ต้องการให้ผู้อ่านเห็นก่อน ควรต่างจากส่วนที่เหลือด้วย preattentive attribute เพียงอย่างเดียว</strong> ตัวอย่างเช่น ถ้าต้องการให้เห็นว่าสถานีหนึ่งมีค่าสูงผิดปกติ ให้ระบายสถานีนั้นด้วยสีเข้ม และให้สถานีอื่นเป็นสีเทาอ่อน แทนที่จะให้ทุกสถานีมีสีต่างกัน เมื่อทุกอย่างมีสีสัน สีก็ไม่ได้ชี้อะไรอีกต่อไป ในทางกลับกัน การใช้สองคุณลักษณะร่วมกัน เช่น หาจุดที่ “สีแดง <em>และ</em> รูปสามเหลี่ยม” ท่ามกลางจุดสีแดงรูปวงกลมและจุดสีน้ำเงินรูปสามเหลี่ยม ไม่เกิดขึ้นทันที ผู้อ่านต้องไล่หาทีละจุด</p>
+</section>
+<section id="หลก-gestalt" class="level3">
+<h3 class="anchored" data-anchor-id="หลก-gestalt">หลัก Gestalt</h3>
+<p>นักจิตวิทยากลุ่ม Gestalt ศึกษาว่ามนุษย์จัดระเบียบสิ่งที่เห็นให้เป็นกลุ่มและรูปแบบอย่างไร หลักที่ใช้กับการออกแบบกราฟโดยตรงมีดังนี้ <span class="citation" data-cites="ware2020information">(<a href="../references.html#ref-ware2020information" role="doc-biblioref">Ware 2020</a>)</span></p>
+<div id="tbl-ch11-gestalt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-gestalt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.2: หลัก Gestalt ที่ใช้ในการออกแบบกราฟ
+</figcaption>
+<div aria-describedby="tbl-ch11-gestalt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลัก</th>
+<th>ความหมาย</th>
+<th>การใช้ในกราฟ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ความใกล้ชิด (proximity)</td>
+<td>สิ่งที่อยู่ใกล้กันถูกมองว่าเป็นกลุ่มเดียวกัน</td>
+<td>วางแท่งของภาคเดียวกันไว้ติดกัน เว้นระยะระหว่างภาค</td>
+</tr>
+<tr class="even">
+<td>ความคล้ายคลึง (similarity)</td>
+<td>สิ่งที่มีสี รูปร่าง หรือขนาดเหมือนกันถูกมองว่าเป็นกลุ่มเดียวกัน</td>
+<td>ใช้สีเดียวกันกับสถานีในภาคเดียวกัน</td>
+</tr>
+<tr class="odd">
+<td>ความต่อเนื่อง (continuity)</td>
+<td>ตาไล่ตามเส้นหรือทิศทางที่ต่อเนื่อง</td>
+<td>เส้นอนุกรมเวลาทำให้เห็นแนวโน้ม แม้จุดจะกระจาย</td>
+</tr>
+<tr class="even">
+<td>การปิดล้อม (enclosure)</td>
+<td>สิ่งที่อยู่ในกรอบเดียวกันถูกมองว่าเป็นกลุ่ม</td>
+<td>แถบสีพื้นหลังแสดงช่วงฤดูฝุ่น</td>
+</tr>
+<tr class="odd">
+<td>การเชื่อมต่อ (connection)</td>
+<td>สิ่งที่ถูกเชื่อมด้วยเส้นถูกมองว่าสัมพันธ์กัน</td>
+<td>เส้นเชื่อมจุดของสถานีเดียวกันข้ามปี</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>หลักเหล่านี้ทำงานอยู่เสมอ ไม่ว่าผู้ออกแบบจะตั้งใจหรือไม่ ถ้าเลือกสีให้สถานีโดยสุ่ม ผู้อ่านจะจัดกลุ่มสถานีที่บังเอิญได้สีคล้ายกันเข้าด้วยกันโดยอัตโนมัติ และอาจคิดว่ามีความสัมพันธ์ที่ไม่มีอยู่จริง การออกแบบที่ดีจึงต้องใช้หลักเหล่านี้ให้สอดคล้องกับโครงสร้างของข้อมูล</p>
+</section>
+</section>
+<section id="sec-ch11-cleveland" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-ch11-cleveland"><span class="header-section-number">11.2</span> ลำดับความแม่นยำของการเข้ารหัสภาพ (Cleveland &amp; McGill)</h2>
+<section id="การเขารหสภาพคออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="การเขารหสภาพคออะไร">การเข้ารหัสภาพคืออะไร</h3>
+<p>กราฟทุกกราฟแปลงค่าของข้อมูลเป็นคุณสมบัติทางภาพ เช่น ค่า PM2.5 ที่สูงกลายเป็นแท่งที่ยาว จุดที่อยู่สูง หรือสีที่เข้ม การแปลงนี้เรียกว่า <span class="idx">การเข้ารหัสภาพ</span> (visual encoding) คำถามสำคัญคือ ผู้อ่านถอดรหัสกลับเป็นค่าได้แม่นยำเพียงใด</p>
+</section>
+<section id="การทดลองของ-cleveland-และ-mcgill" class="level3">
+<h3 class="anchored" data-anchor-id="การทดลองของ-cleveland-และ-mcgill">การทดลองของ Cleveland และ McGill</h3>
+<p>ในปี ค.ศ. 1984 William Cleveland และ Robert McGill ทดลองให้ผู้เข้าร่วมประมาณสัดส่วนระหว่างค่าสองค่าที่แสดงด้วยการเข้ารหัสต่างแบบ แล้ววัดความคลาดเคลื่อน <span class="citation" data-cites="cleveland1984graphical">(<a href="../references.html#ref-cleveland1984graphical" role="doc-biblioref">Cleveland และ McGill 1984</a>)</span> ผลการทดลองและงานที่ตามมาให้ลำดับความแม่นยำโดยประมาณดังนี้</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A["ตำแหน่ง&lt;br/&gt;บนแกนร่วม"] --&gt; B["ตำแหน่ง&lt;br/&gt;บนแกนไม่ร่วม"] --&gt; C["ความยาว"] --&gt; D["มุม&lt;br/&gt;ความชัน"] --&gt; E["พื้นที่"] --&gt; F["ปริมาตร&lt;br/&gt;ความเข้มสี"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ลำดับนี้อ่านจากซ้าย (แม่นที่สุด) ไปขวา (แม่นน้อยที่สุด) Heer และ Bostock ทำซ้ำการทดลองนี้ด้วยผู้เข้าร่วมจำนวนมากผ่านอินเทอร์เน็ต และได้ผลที่สอดคล้องกันโดยรวม <span class="citation" data-cites="heer2010crowdsourcing">(<a href="../references.html#ref-heer2010crowdsourcing" role="doc-biblioref">Heer และ Bostock 2010</a>)</span></p>
+<div id="fig-ch11-pie-vs-bar" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ภาพซ้ายเป็น pie chart ห้าชิ้นที่ขนาดใกล้กันจนแยกลำดับได้ยาก ภาพขวาเป็น bar chart ห้าแท่งที่เห็นลำดับจากสูงไปต่ำได้ชัดเจน">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch11-pie-vs-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/11/pie_vs_bar.png" class="img-fluid figure-img" alt="ภาพซ้ายเป็น pie chart ห้าชิ้นที่ขนาดใกล้กันจนแยกลำดับได้ยาก ภาพขวาเป็น bar chart ห้าแท่งที่เห็นลำดับจากสูงไปต่ำได้ชัดเจน">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch11-pie-vs-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;11.1: ค่าห้าค่าที่ต่างกันเล็กน้อย (ตัวเลขสมมุติ 23, 21, 20, 19, 17) แสดงด้วยมุมของ pie chart และด้วยความยาวของ bar chart บนแกนร่วม
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ch11-pie-vs-bar" class="quarto-xref">ภาพที่&nbsp;<span>11.1</span></a> แสดงค่าชุดเดียวกันสองแบบ ใน pie chart ผู้อ่านต้องเปรียบเทียบมุม ซึ่งยากมากเมื่อค่าใกล้กัน ส่วน bar chart ใช้ความยาวบนแกนร่วม ลำดับของค่าเห็นได้ทันที</p>
+</section>
+<section id="นยตอการออกแบบ" class="level3">
+<h3 class="anchored" data-anchor-id="นยตอการออกแบบ">นัยต่อการออกแบบ</h3>
+<ul>
+<li><strong>ค่าที่ต้องเปรียบเทียบให้แม่นยำ ให้แสดงด้วยตำแหน่งบนแกนร่วม</strong> เช่น จุดหรือแท่งที่เรียงบนแกนเดียวกัน</li>
+<li><strong>สีและขนาดเหมาะกับการแสดงภาพรวมหรือแยกกลุ่ม</strong> ไม่เหมาะกับการอ่านค่าละเอียด heatmap ที่ใช้ความเข้มสีจึงดีสำหรับการเห็นรูปแบบ แต่ถ้าผู้อ่านต้องรู้ค่าที่แน่นอน ต้องใส่ตัวเลขกำกับ</li>
+<li><strong>การเปรียบเทียบที่สำคัญที่สุดควรอยู่บนการเข้ารหัสที่แม่นที่สุด</strong> ถ้าคำถามคือ “ภาคใดสูงที่สุด” ให้ภาคอยู่บนแกนและค่าเป็นตำแหน่ง ไม่ใช่ให้ภาคเป็นสี</li>
+</ul>
+<p>ลำดับนี้ไม่ได้แปลว่าห้ามใช้การเข้ารหัสที่แม่นน้อย แผนที่ choropleth ในบทที่ 17 ใช้สีเพราะตำแหน่งบนแผนที่ถูกใช้แสดงพิกัดไปแล้ว และ heatmap ใช้สีเพราะแกนทั้งสองถูกใช้แสดงเดือนและปี การเลือกเป็นการชั่งน้ำหนักว่าข้อมูลมิติใดสำคัญที่สุดและควรได้การเข้ารหัสที่ดีที่สุด</p>
+</section>
+</section>
+<section id="sec-ch11-color" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="sec-ch11-color"><span class="header-section-number">11.3</span> วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี</h2>
+<section id="สไมไดเปนมตเดยว" class="level3">
+<h3 class="anchored" data-anchor-id="สไมไดเปนมตเดยว">สีไม่ได้เป็นมิติเดียว</h3>
+<p>สีที่เราเห็นมีอย่างน้อยสามมิติ คือ <strong><span class="idx">สีสัน</span></strong> (hue) เช่น แดง เขียว น้ำเงิน <strong><span class="idx">ความสว่าง</span></strong> (lightness) และ <strong><span class="idx">ความอิ่มตัว</span></strong> (chroma หรือ saturation) มิติที่สำคัญที่สุดต่อการอ่านค่าคือความสว่าง เพราะมนุษย์รับรู้ลำดับของความสว่างได้โดยธรรมชาติ ภาพขาวดำยังอ่านได้ก็เพราะความสว่าง ส่วนสีสันไม่มีลำดับในตัว เราไม่ได้รู้สึกว่าสีเขียว “มากกว่า” สีแดง</p>
+</section>
+<section id="perceptual-uniformity" class="level3">
+<h3 class="anchored" data-anchor-id="perceptual-uniformity">perceptual uniformity</h3>
+<p>ชุดสีที่ดีสำหรับข้อมูลต่อเนื่องควรมีคุณสมบัติ <strong><span class="idx">perceptual uniformity</span></strong> คือ การเปลี่ยนค่าข้อมูลเท่ากันให้ความรู้สึกว่าสีเปลี่ยนเท่ากัน ตลอดทั้งช่วง ชุดสี rainbow หรือ jet ซึ่งเคยเป็นค่าเริ่มต้นของโปรแกรมหลายตัว ไม่มีคุณสมบัตินี้ ความสว่างของมันขึ้นลงไม่สม่ำเสมอ ทำให้เกิดขอบปลอมในภาพ บริเวณที่ค่าเปลี่ยนเพียงเล็กน้อยอาจดูเหมือนเปลี่ยนมาก <span class="citation" data-cites="borland2007rainbow">(<a href="../references.html#ref-borland2007rainbow" role="doc-biblioref">Borland และ Taylor II 2007</a>)</span> ชุดสี viridis ซึ่งออกแบบมาให้ความสว่างเพิ่มขึ้นสม่ำเสมอ ได้กลายเป็นค่าเริ่มต้นของ matplotlib ตั้งแต่รุ่น 2.0 <span class="citation" data-cites="vanderwalt2015viridis">(<a href="../references.html#ref-vanderwalt2015viridis" role="doc-biblioref">Walt และ Smith 2015</a>)</span></p>
+<div id="fig-ch11-colormap" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ความสว่างของ jet ขึ้นและลงหลายครั้งตลอดช่วง ส่วนความสว่างของ viridis เพิ่มขึ้นอย่างสม่ำเสมอจากซ้ายไปขวา">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch11-colormap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/11/colormap_lightness.png" class="img-fluid figure-img" alt="ความสว่างของ jet ขึ้นและลงหลายครั้งตลอดช่วง ส่วนความสว่างของ viridis เพิ่มขึ้นอย่างสม่ำเสมอจากซ้ายไปขวา">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch11-colormap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;11.2: แถบชุดสี jet และ viridis (บน) และความสว่างสัมพัทธ์ตามตำแหน่งในชุดสี (ล่าง)
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ch11-colormap" class="quarto-xref">ภาพที่&nbsp;<span>11.2</span></a> แสดงว่า ความสว่างของ jet ขึ้นถึงจุดสูงสุดตรงกลางชุดสี (สีเหลืองเขียว) แล้วลดลง ค่ากลางของข้อมูลจึงดูโดดเด่นที่สุด ทั้งที่ไม่ได้มีความหมายพิเศษใด ส่วน viridis มีความสว่างเพิ่มขึ้นต่อเนื่อง ค่าที่สูงกว่าจึงดูสว่างกว่าเสมอ และยังอ่านได้เมื่อพิมพ์เป็นขาวดำ</p>
+</section>
+<section id="ชนดของชดสตามชนดขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="ชนดของชดสตามชนดขอมล">ชนิดของชุดสีตามชนิดข้อมูล</h3>
+<div id="tbl-ch11-palettes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.3: ชนิดของชุดสีตามชนิดข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch11-palettes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชนิดข้อมูล</th>
+<th>ชนิดชุดสี</th>
+<th>ลักษณะ</th>
+<th>ตัวอย่าง PM2.5</th>
+<th>ใน seaborn/matplotlib</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>หมวดหมู่ไม่มีลำดับ</td>
+<td>categorical</td>
+<td>สีสันต่างกันชัด ความสว่างใกล้กัน</td>
+<td>ภาค ประเภทสถานี</td>
+<td><code>"colorblind"</code>, <code>"tab10"</code></td>
+</tr>
+<tr class="even">
+<td>ค่าต่อเนื่องจากต่ำไปสูง</td>
+<td>sequential</td>
+<td>สีเดียวหรือสองสี ไล่ความสว่าง</td>
+<td>ค่า PM2.5 ใน heatmap</td>
+<td><code>"viridis"</code>, <code>"rocket"</code>, <code>"mako"</code></td>
+</tr>
+<tr class="odd">
+<td>ค่าที่มีจุดกลางมีความหมาย</td>
+<td>diverging</td>
+<td>สองสีออกจากจุดกลางที่สว่าง</td>
+<td>ส่วนต่างจากมาตรฐาน 37.5 µg/m³</td>
+<td><code>"RdBu_r"</code>, <code>"vlag"</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Cynthia Brewer ออกแบบชุดสีสามชนิดนี้สำหรับแผนที่ไว้อย่างเป็นระบบ และชุดสี ColorBrewer ยังใช้กันแพร่หลาย <span class="citation" data-cites="harrower2003colorbrewer">(<a href="../references.html#ref-harrower2003colorbrewer" role="doc-biblioref">Harrower และ Brewer 2003</a>)</span> ข้อผิดพลาดที่พบบ่อยคือการใช้ชุดสีผิดชนิด เช่น ใช้ชุดสี categorical กับค่าต่อเนื่อง ซึ่งทำให้ผู้อ่านเห็นกลุ่มที่ไม่มีอยู่จริง หรือใช้ชุดสี diverging กับข้อมูลที่ไม่มีจุดกลาง ซึ่งทำให้ค่ากลางของข้อมูลดูเหมือนมีความหมายพิเศษ</p>
+<p>ชุดสี diverging ต้องกำหนดจุดกลางให้ตรงกับค่าที่มีความหมาย เช่น เมื่อแสดงส่วนต่างจากมาตรฐาน ให้จุดกลางอยู่ที่ศูนย์</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>deviation <span class="op">=</span> monthly_table <span class="op">-</span> <span class="fl">37.5</span>              <span class="co"># ตารางเดือน × ปี ลบด้วยมาตรฐาน</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap(deviation, cmap<span class="op">=</span><span class="st">"RdBu_r"</span>, center<span class="op">=</span><span class="dv">0</span>)   <span class="co"># สีขาว = เท่ามาตรฐาน แดง = เกิน น้ำเงิน = ต่ำกว่า</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ภาวะตาบอดส" class="level3">
+<h3 class="anchored" data-anchor-id="ภาวะตาบอดส">ภาวะตาบอดสี</h3>
+<p>ภาวะบกพร่องการเห็นสีพบได้ไม่น้อย โดยเฉพาะในเพศชาย แบบที่พบบ่อยที่สุดคือการแยกสีแดงกับสีเขียวได้ยาก <span class="citation" data-cites="birch2012worldwide">(<a href="../references.html#ref-birch2012worldwide" role="doc-biblioref">Birch 2012</a>)</span> หลักปฏิบัติสำหรับกราฟที่ผู้อ่านทุกคนอ่านได้มีดังนี้</p>
+<ul>
+<li>หลีกเลี่ยงการใช้คู่สีแดงกับเขียวเป็นตัวแยกกลุ่มหลัก ซึ่งน่าเสียดายว่าเป็นคู่สีที่นิยมใช้แทน “ดี” กับ “ไม่ดี”</li>
+<li>ใช้ชุดสีที่ออกแบบมาให้ผู้มีภาวะตาบอดสีอ่านได้ เช่น <code>sns.color_palette("colorblind")</code> หรือตระกูล viridis</li>
+<li>อย่าใช้สีเป็นช่องทางเดียวในการสื่อความหมาย ใช้ป้ายกำกับ รูปร่าง หรือรูปแบบเส้นร่วมด้วย</li>
+<li>จำกัดจำนวนสีในกราฟเดียวไว้ที่ประมาณ 6–8 สี ถ้ามีกลุ่มมากกว่านั้น ให้ใช้ small multiples (หัวข้อ <a href="#sec-ch11-small-multiples" class="quarto-xref"><span>11.6</span></a>) หรือเน้นเฉพาะกลุ่มที่สำคัญแล้วให้กลุ่มอื่นเป็นสีเทา</li>
+</ul>
+<p>ข้อสังเกตเกี่ยวกับข้อมูลคุณภาพอากาศ ดัชนีคุณภาพอากาศ (AQI) ของหลายประเทศรวมถึงไทยใช้ระดับสีตั้งแต่ฟ้าหรือเขียวไปจนถึงแดงหรือม่วง ซึ่งผู้อ่านคุ้นเคย (ภาคผนวก ง) การใช้ระดับสีเหล่านี้ในกราฟช่วยให้สื่อสารได้ง่าย แต่ต้องมีป้ายกำกับระดับควบคู่เสมอ เพราะผู้อ่านที่มีภาวะตาบอดสีอาจแยกระดับที่อยู่ติดกันไม่ได้</p>
+</section>
+</section>
+<section id="sec-ch11-chart-choice" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="sec-ch11-chart-choice"><span class="header-section-number">11.4</span> การเลือกกราฟตามคำถาม</h2>
+<section id="เรมจากคำถาม-ไมใชจากชนดกราฟ" class="level3">
+<h3 class="anchored" data-anchor-id="เรมจากคำถาม-ไมใชจากชนดกราฟ">เริ่มจากคำถาม ไม่ใช่จากชนิดกราฟ</h3>
+<p>กราฟทุกภาพควรตอบได้ว่า “ภาพนี้ตอบคำถามข้อใดใน <code>questions.md</code>” ถ้าตอบไม่ได้ แปลว่ากำลังวาดเพราะวาดได้ ไม่ใช่เพราะต้องรู้ คำถามเชิงสำรวจส่วนใหญ่จัดอยู่ในสี่กลุ่ม แต่ละกลุ่มมีกราฟที่เหมาะสม <span class="citation" data-cites="wilke2019fundamentals">(<a href="../references.html#ref-wilke2019fundamentals" role="doc-biblioref">Wilke 2019</a>)</span></p>
+<div id="tbl-ch11-chart-choice" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-chart-choice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.4: การเลือกกราฟตามชนิดของคำถาม
+</figcaption>
+<div aria-describedby="tbl-ch11-chart-choice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชนิดคำถาม</th>
+<th>ตัวอย่างคำถาม PM2.5</th>
+<th>กราฟที่เหมาะ</th>
+<th>หลีกเลี่ยง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>การแจกแจง</td>
+<td>ค่าเฉลี่ยรายวันส่วนใหญ่อยู่ช่วงใด เกินมาตรฐานบ่อยเพียงใด</td>
+<td>histogram, ECDF, density</td>
+<td>แท่งค่าเฉลี่ยอย่างเดียว</td>
+</tr>
+<tr class="even">
+<td>การเปรียบเทียบ</td>
+<td>ภาคเหนือสูงกว่าภาคอื่นในฤดูแล้งหรือไม่</td>
+<td>box plot, violin, strip plot, dot plot, bar (สำหรับจำนวนหรือสัดส่วน)</td>
+<td>pie chart หลายชิ้น</td>
+</tr>
+<tr class="odd">
+<td>ความสัมพันธ์</td>
+<td>วันที่ค่าเฉลี่ยสูง ค่าสูงสุดรายชั่วโมงสูงตามหรือไม่</td>
+<td>scatter plot, 2D histogram</td>
+<td>scatter หลายแสนจุดแบบทึบ</td>
+</tr>
+<tr class="even">
+<td>การเปลี่ยนแปลงตามเวลา</td>
+<td>มีรูปแบบรายเดือนหรือแนวโน้มรายปีหรือไม่</td>
+<td>line chart, heatmap เดือน × ปี</td>
+<td>แท่งเรียงวันละแท่ง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ขอมลสำหรบตวอยางในบทน" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลสำหรบตวอยางในบทน">ข้อมูลสำหรับตัวอย่างในบทนี้</h3>
+<p>ตัวอย่างโค้ดในบทนี้ใช้ค่าเฉลี่ยรายวันที่ข้อมูลครบจาก <code>daily_pm25_clean</code> ในช่วงสำรวจ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT d.station_id, d.date, d.pm25_mean, d.pm25_max, d.n_hours, s.province, s.region</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete AND d.date &lt; DATE '2024-01-01'</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>daily[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(daily[<span class="st">"date"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="การแจกแจง-histogram-และ-ecdf" class="level3">
+<h3 class="anchored" data-anchor-id="การแจกแจง-histogram-และ-ecdf">การแจกแจง: histogram และ ECDF</h3>
+<p>ค่า PM2.5 มักเบ้ขวา คือ ค่าส่วนใหญ่ต่ำ แต่มีวันที่สูงมากจำนวนหนึ่ง histogram ที่ใช้แกนเชิงเส้นจะอัดค่าส่วนใหญ่ไว้ทางซ้าย การใช้แกนแบบ log ช่วยให้เห็นรายละเอียดของช่วงค่าต่ำได้ดีขึ้น แต่ต้องเขียนกำกับให้ชัด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>daily, x<span class="op">=</span><span class="st">"pm25_mean"</span>, bins<span class="op">=</span><span class="dv">60</span>, log_scale<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="fl">37.5</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"PM2.5 เฉลี่ย 24 ชม. (µg/m³, แกน log)"</span>, ylabel<span class="op">=</span><span class="st">"จำนวนสถานี-วัน"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><span class="idx">ECDF</span></strong> (empirical cumulative distribution function) เป็นทางเลือกที่มักถูกมองข้าม แกน y บอกสัดส่วนของข้อมูลที่มีค่าไม่เกินค่าบนแกน x ข้อดีคือไม่ต้องเลือกจำนวน bin และอ่านสัดส่วนที่เกินมาตรฐานได้โดยตรง เช่น ถ้าเส้นตัดค่า 37.5 ที่ระดับ 0.85 แปลว่าร้อยละ 15 ของวันเกินมาตรฐาน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.ecdfplot(data<span class="op">=</span>daily, x<span class="op">=</span><span class="st">"pm25_mean"</span>, hue<span class="op">=</span><span class="st">"region"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="fl">37.5</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="การเปรยบเทยบ-box-plot-และ-dot-plot" class="level3">
+<h3 class="anchored" data-anchor-id="การเปรยบเทยบ-box-plot-และ-dot-plot">การเปรียบเทียบ: box plot และ dot plot</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> daily.groupby(<span class="st">"region"</span>)[<span class="st">"pm25_mean"</span>].median().sort_values().index</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.boxplot(data<span class="op">=</span>daily, x<span class="op">=</span><span class="st">"pm25_mean"</span>, y<span class="op">=</span><span class="st">"region"</span>, order<span class="op">=</span>order,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                 showfliers<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span><span class="st">"lightsteelblue"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="fl">37.5</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"PM2.5 เฉลี่ย 24 ชม. (µg/m³)"</span>, ylabel<span class="op">=</span><span class="st">""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อสังเกตเชิงออกแบบสามข้อ ข้อแรก เรียงกลุ่มตามมัธยฐาน ไม่ใช่ตามตัวอักษร ผู้อ่านจึงอ่านลำดับได้ทันที ข้อสอง วางชื่อภาคบนแกน y เพื่อให้ป้ายภาษาไทยที่ยาวไม่ซ้อนกัน ข้อสาม box plot ซ่อนจำนวนข้อมูลในแต่ละกลุ่ม ถ้าภาคหนึ่งมีสถานีเดียว ต้องแจ้งผู้อ่าน เช่น ใส่จำนวนสถานีไว้ในป้ายกำกับ</p>
+</section>
+<section id="ความสมพนธ-scatter-plot-และ-overplotting" class="level3">
+<h3 class="anchored" data-anchor-id="ความสมพนธ-scatter-plot-และ-overplotting">ความสัมพันธ์: scatter plot และ overplotting</h3>
+<p>เมื่อจุดมีจำนวนมาก scatter plot จะกลายเป็นก้อนทึบ เรียกว่า <span class="idx">overplotting</span> ผู้อ่านไม่เห็นว่าบริเวณใดมีจุดหนาแน่น วิธีแก้ได้แก่ ลดความทึบของจุดด้วย <code>alpha</code> ใช้จุดเล็ก สุ่มตัวอย่าง หรือเปลี่ยนเป็น 2D histogram ซึ่งแสดงความหนาแน่นด้วยสี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>daily, x<span class="op">=</span><span class="st">"pm25_mean"</span>, y<span class="op">=</span><span class="st">"pm25_max"</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>             bins<span class="op">=</span><span class="dv">80</span>, log_scale<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"mako"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>บทที่ 12 อธิบายวิธีจัดการข้อมูลขนาดใหญ่มากด้วย Datashader</p>
+</section>
+<section id="การเปลยนแปลงตามเวลา-line-chart-และ-heatmap" class="level3">
+<h3 class="anchored" data-anchor-id="การเปลยนแปลงตามเวลา-line-chart-และ-heatmap">การเปลี่ยนแปลงตามเวลา: line chart และ heatmap</h3>
+<p>line chart เหมาะกับการแสดงแนวโน้มและรูปแบบตามเวลา ส่วน heatmap ที่มีแกนหนึ่งเป็นเดือนและอีกแกนเป็นปี เหมาะกับการเห็นรูปแบบตามฤดูกาลที่ซ้ำทุกปี และปีที่ผิดปกติ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heat <span class="op">=</span> (daily.assign(year<span class="op">=</span>daily[<span class="st">"date"</span>].dt.year, month<span class="op">=</span>daily[<span class="st">"date"</span>].dt.month)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>             .query(<span class="st">"region == 'เหนือ'"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>             .pivot_table(index<span class="op">=</span><span class="st">"year"</span>, columns<span class="op">=</span><span class="st">"month"</span>, values<span class="op">=</span><span class="st">"pm25_mean"</span>, aggfunc<span class="op">=</span><span class="st">"median"</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sns.heatmap(heat, cmap<span class="op">=</span><span class="st">"rocket_r"</span>, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".0f"</span>, cbar_kws<span class="op">=</span>{<span class="st">"label"</span>: <span class="st">"µg/m³"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-ch11-integrity" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="sec-ch11-integrity"><span class="header-section-number">11.5</span> ความซื่อตรงของภาพ: lie factor, data-ink (Tufte), แกนที่ถูกตัด</h2>
+<section id="lie-factor" class="level3">
+<h3 class="anchored" data-anchor-id="lie-factor">lie factor</h3>
+<p>Edward Tufte เสนอว่ากราฟที่ซื่อตรงต้องแสดงขนาดของผลในภาพให้เป็นสัดส่วนกับขนาดของผลในข้อมูล และนิยาม <strong><span class="idx">lie factor</span></strong> ไว้ดังนี้ <span class="citation" data-cites="tufte2001visual">(<a href="../references.html#ref-tufte2001visual" role="doc-biblioref">Tufte 2001</a>)</span></p>
+<p><span id="eq-ch11-lie-factor"><span class="math display">\[
+\text{lie factor} = \frac{\text{ขนาดของผลที่แสดงในภาพ}}{\text{ขนาดของผลในข้อมูล}}
+\tag{11.1}\]</span></span></p>
+<p>โดยที่ขนาดของผลคำนวณเป็นการเปลี่ยนแปลงสัมพัทธ์ <span class="math inline">\((x_2 - x_1)/x_1\)</span> กราฟที่ซื่อตรงมี lie factor ใกล้ 1 ค่าที่มากกว่า 1 มากแปลว่ากราฟขยายผลเกินจริง</p>
+<p>ตัวอย่างกับตัวเลขสมมุติ เมือง ก มีค่าเฉลี่ย PM2.5 35 µg/m³ และเมือง ข มี 45 µg/m³ ขนาดของผลในข้อมูลคือ <span class="math inline">\((45 - 35)/35 \approx 0.29\)</span> ถ้าวาด bar chart ที่แกน y เริ่มที่ 30 ความสูงของแท่งในภาพคือ 5 และ 15 หน่วย ขนาดของผลในภาพคือ <span class="math inline">\((15 - 5)/5 = 2\)</span> lie factor จึงเท่ากับ <span class="math inline">\(2 / 0.29 \approx 7\)</span> กราฟนี้ขยายความต่างประมาณเจ็ดเท่า</p>
+<div id="fig-ch11-truncated" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ภาพซ้ายแท่งของเมือง ข สูงกว่าเมือง ก ประมาณสามเท่า ภาพขวาแท่งของเมือง ข สูงกว่าเมือง ก เพียงเล็กน้อย">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch11-truncated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/11/truncated_axis.png" class="img-fluid figure-img" alt="ภาพซ้ายแท่งของเมือง ข สูงกว่าเมือง ก ประมาณสามเท่า ภาพขวาแท่งของเมือง ข สูงกว่าเมือง ก เพียงเล็กน้อย">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch11-truncated-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;11.3: bar chart ของตัวเลขสมมุติชุดเดียวกัน แกนเริ่มที่ 30 (ซ้าย) และแกนเริ่มที่ 0 (ขวา)
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="แกนทถกตด" class="level3">
+<h3 class="anchored" data-anchor-id="แกนทถกตด">แกนที่ถูกตัด</h3>
+<p><a href="#fig-ch11-truncated" class="quarto-xref">ภาพที่&nbsp;<span>11.3</span></a> แสดงหลักการที่สำคัญที่สุดข้อหนึ่ง <strong>bar chart ต้องเริ่มที่ศูนย์</strong> เพราะผู้อ่านอ่านค่าจากความยาวของแท่ง ถ้าตัดแกน ความยาวก็ไม่เป็นสัดส่วนกับค่าอีกต่อไป ส่วน line chart และ scatter plot ซึ่งผู้อ่านอ่านจากตำแหน่ง ไม่จำเป็นต้องเริ่มที่ศูนย์ การเริ่มที่ศูนย์อาจทำให้การเปลี่ยนแปลงที่สำคัญมองไม่เห็นด้วยซ้ำ แต่ต้องติดป้ายแกนให้ชัด</p>
+<div id="tbl-ch11-honest-axes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-honest-axes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.5: กฎของแกนที่ซื่อตรง
+</figcaption>
+<div aria-describedby="tbl-ch11-honest-axes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>กฎ</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>bar chart ต้องเริ่มที่ศูนย์</td>
+<td>ความยาวของแท่งคือค่า</td>
+</tr>
+<tr class="even">
+<td>line chart และ scatter plot ไม่จำเป็นต้องเริ่มที่ศูนย์</td>
+<td>อ่านจากตำแหน่ง แต่ต้องติดป้ายแกน</td>
+</tr>
+<tr class="odd">
+<td>กราฟที่ต้องเปรียบเทียบกันต้องใช้สเกลเดียวกัน</td>
+<td>ถ้าแต่ละกราฟมีสเกลของตัวเอง ผู้อ่านจะเปรียบเทียบความสูงผิด</td>
+</tr>
+<tr class="even">
+<td>ใช้แกน log ได้ แต่ต้องเขียนกำกับ</td>
+<td>ผู้อ่านทั่วไปอาจอ่านแกน log เป็นแกนเชิงเส้น</td>
+</tr>
+<tr class="odd">
+<td>ระบุหน่วยเสมอ</td>
+<td>“PM2.5 (µg/m³)” ไม่ใช่ “pm25_mean”</td>
+</tr>
+<tr class="even">
+<td>หลีกเลี่ยงแกนคู่</td>
+<td>ผู้ออกแบบเลือกช่วงของแต่ละแกนเองได้ ทำให้เส้นสองเส้นดูสัมพันธ์หรือไม่สัมพันธ์ตามต้องการ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวสุดท้ายของ <a href="#tbl-ch11-honest-axes" class="quarto-xref">ตารางที่&nbsp;<span>11.5</span></a> ควรขยายความ กราฟแกนคู่ เช่น PM2.5 บนแกนซ้ายและจำนวนจุดความร้อนบนแกนขวา เป็นที่นิยมเพราะประหยัดพื้นที่ แต่ความสัมพันธ์ที่ผู้อ่านเห็น ขึ้นกับว่าผู้ออกแบบเลือกช่วงของแต่ละแกนอย่างไร การเลื่อนช่วงของแกนหนึ่งทำให้เส้นสองเส้นทับกันพอดีหรือแยกออกจากกันได้ตามต้องการ ทางเลือกที่ซื่อตรงกว่าคือวาดสองกราฟซ้อนในแนวตั้งที่ใช้แกน x ร่วมกัน หรือวาด scatter plot ของสองตัวแปรโดยตรง</p>
+</section>
+<section id="data-ink" class="level3">
+<h3 class="anchored" data-anchor-id="data-ink">data-ink</h3>
+<p>Tufte เสนอแนวคิด <strong><span class="idx">data-ink ratio</span></strong> คือสัดส่วนของหมึกที่ใช้แสดงข้อมูลจริงต่อหมึกทั้งหมดในกราฟ และแนะนำให้ลดหมึกที่ไม่ได้แสดงข้อมูล (non-data ink) เช่น เส้นตารางที่หนาเกินไป กรอบรอบกราฟ เงา หรือผลแบบสามมิติ <span class="citation" data-cites="tufte2001visual">(<a href="../references.html#ref-tufte2001visual" role="doc-biblioref">Tufte 2001</a>)</span> หลักการนี้มีประโยชน์ในการลดสิ่งรบกวน แต่ไม่ควรตีความสุดโต่ง งานวิจัยภายหลังพบว่าองค์ประกอบบางอย่างที่ Tufte จัดเป็นหมึกส่วนเกิน เช่น ภาพประกอบที่เกี่ยวข้องกับเนื้อหา อาจช่วยให้ผู้อ่านจำกราฟได้ดีขึ้นโดยไม่ลดความแม่นยำในการอ่าน <span class="citation" data-cites="bateman2010useful">(<a href="../references.html#ref-bateman2010useful" role="doc-biblioref">Bateman และคณะ 2010</a>)</span> แนวทางที่สมดุลคือ ตัดสิ่งที่ไม่ช่วยให้ผู้อ่านเข้าใจข้อมูล และเก็บสิ่งที่ช่วย เช่น เส้นอ้างอิงและคำอธิบายประกอบ</p>
+</section>
+<section id="การเลอกขอมลเพอเขาขาง" class="level3">
+<h3 class="anchored" data-anchor-id="การเลอกขอมลเพอเขาขาง">การเลือกข้อมูลเพื่อเข้าข้าง</h3>
+<p>ความซื่อตรงไม่ได้อยู่ที่แกนและหมึกเท่านั้น แต่อยู่ที่ <em>ข้อมูลที่เลือกแสดง</em> ด้วย เช่น แสดงเฉพาะเดือนมีนาคมแล้วให้ผู้อ่านเข้าใจว่าเป็นภาพของทั้งปี เลือกเฉพาะสถานีที่สนับสนุนข้อสรุป หรือเลือกจุดเริ่มต้นของอนุกรมเวลาที่ทำให้แนวโน้มดูเพิ่มขึ้นหรือลดลง ปัญหาเหล่านี้เป็นรูปหนึ่งของ garden of forking paths ในบทที่ 4 และกรณี Challenger ในบทที่ 0 หลักปฏิบัติคือ แสดงข้อมูลทั้งหมดก่อน แล้วจึงซูมเข้าไปยังส่วนที่สนใจ พร้อมบอกเหตุผลที่เลือก</p>
+</section>
+</section>
+<section id="sec-ch11-small-multiples" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="sec-ch11-small-multiples"><span class="header-section-number">11.6</span> small multiples และการเปรียบเทียบ</h2>
+<section id="ปญหาของกราฟทใสทกอยาง" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของกราฟทใสทกอยาง">ปัญหาของกราฟที่ใส่ทุกอย่าง</h3>
+<p>เมื่อต้องการเปรียบเทียบรูปแบบตามเวลาของหลายสถานี ทางเลือกแรกที่หลายคนทำคือวาดเส้นของทุกสถานีในกราฟเดียว แต่ละสถานีคนละสี เมื่อมีสถานีเกินห้าหกแห่ง กราฟจะกลายเป็นเส้นพันกันที่อ่านไม่ออก สีก็มากเกินกว่าจะแยกได้ และผู้มีภาวะตาบอดสีอ่านไม่ได้เลย</p>
+</section>
+<section id="small-multiples" class="level3">
+<h3 class="anchored" data-anchor-id="small-multiples">small multiples</h3>
+<p>Tufte เรียกวิธีแก้ปัญหานี้ว่า <strong><span class="idx">small multiples</span></strong> คือชุดของกราฟขนาดเล็กหลายกราฟที่ออกแบบเหมือนกันทุกประการ ต่างกันเพียงข้อมูลที่แสดง <span class="citation" data-cites="tufte1990envisioning">(<a href="../references.html#ref-tufte1990envisioning" role="doc-biblioref">Tufte 1990</a>)</span> ในภาษาของ grammar of graphics (บทที่ 12) เรียกว่า <strong><span class="idx">facet</span></strong> ผู้อ่านเรียนรู้วิธีอ่านกราฟเพียงครั้งเดียว แล้วใช้สายตาเปรียบเทียบข้ามกราฟได้ทันที</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> (daily.assign(month<span class="op">=</span>daily[<span class="st">"date"</span>].dt.month)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                .groupby([<span class="st">"region"</span>, <span class="st">"station_id"</span>, <span class="st">"month"</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"pm25_mean"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                .median())</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.relplot(data<span class="op">=</span>monthly, x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"pm25_mean"</span>, units<span class="op">=</span><span class="st">"station_id"</span>, estimator<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                col<span class="op">=</span><span class="st">"region"</span>, col_wrap<span class="op">=</span><span class="dv">2</span>, kind<span class="op">=</span><span class="st">"line"</span>, color<span class="op">=</span><span class="st">"0.3"</span>, height<span class="op">=</span><span class="fl">2.6</span>, aspect<span class="op">=</span><span class="fl">1.4</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>g.refline(y<span class="op">=</span><span class="fl">37.5</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"เดือน"</span>, <span class="st">"มัธยฐาน PM2.5 (µg/m³)"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>g.set_titles(<span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>โค้ดนี้วาดหนึ่งแผงต่อภาค แต่ละแผงมีเส้นของทุกสถานีในภาคนั้นเป็นสีเทาเดียวกัน (<code>units="station_id"</code> กับ <code>estimator=None</code> วาดเส้นแยกต่อสถานีโดยไม่เฉลี่ย) และมีเส้นมาตรฐานเป็นเส้นอ้างอิงในทุกแผง</p>
+</section>
+<section id="หลกการออกแบบ-small-multiples" class="level3">
+<h3 class="anchored" data-anchor-id="หลกการออกแบบ-small-multiples">หลักการออกแบบ small multiples</h3>
+<div id="tbl-ch11-small-multiples" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-small-multiples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.6: หลักการออกแบบ small multiples
+</figcaption>
+<div aria-describedby="tbl-ch11-small-multiples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลักการ</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ใช้สเกลเดียวกันทุกแผง</td>
+<td>ผู้อ่านเปรียบเทียบความสูงข้ามแผงได้ถูกต้อง (seaborn ใช้ <code>sharey=True</code> เป็นค่าเริ่มต้น)</td>
+</tr>
+<tr class="even">
+<td>เรียงแผงตามลำดับที่มีความหมาย</td>
+<td>เช่น ตามค่ามัธยฐาน หรือตามภูมิศาสตร์ ไม่ใช่ตามตัวอักษร</td>
+</tr>
+<tr class="odd">
+<td>ใส่เส้นอ้างอิงเดียวกันทุกแผง</td>
+<td>เป็นจุดเทียบร่วมที่ช่วยให้เปรียบเทียบข้ามแผงได้</td>
+</tr>
+<tr class="even">
+<td>ลดสิ่งที่ซ้ำในแต่ละแผง</td>
+<td>ป้ายแกนแสดงเฉพาะแผงขอบ ชื่อแผงสั้นและชัด</td>
+</tr>
+<tr class="odd">
+<td>แสดงบริบทในทุกแผงเมื่อจำเป็น</td>
+<td>เช่น เส้นสีเทาจางของภาพรวมทั้งประเทศ ให้แต่ละแผงเทียบกับภาพรวมได้</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ถ้าแต่ละแผงมีช่วงค่าต่างกันมาก เช่น ภาคใต้มีค่าต่ำกว่าภาคเหนือมาก การใช้สเกลร่วมอาจทำให้รายละเอียดของภาคใต้มองไม่เห็น การปิด <code>sharey</code> ทำได้ แต่ต้องบอกผู้อ่านอย่างชัดเจนในคำบรรยายภาพ เพราะผู้อ่านจะเปรียบเทียบความสูงข้ามแผงโดยอัตโนมัติ</p>
+</section>
+</section>
+<section id="sec-ch11-annotation" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-ch11-annotation"><span class="header-section-number">11.7</span> การใส่คำอธิบายประกอบและเส้นอ้างอิง (มาตรฐาน 37.5 µg/m³)</h2>
+<section id="ทำไมตองมเสนอางอง" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองมเสนอางอง">ทำไมต้องมีเส้นอ้างอิง</h3>
+<p>ตัวเลข 45 µg/m³ บนแกนไม่ได้บอกผู้อ่านส่วนใหญ่ว่าสูงหรือต่ำ <strong>เส้นอ้างอิง</strong> (reference line) ให้บริบทนั้น ผู้อ่านเห็นทันทีว่าค่าใดอยู่เหนือหรือใต้เกณฑ์ สำหรับข้อมูล PM2.5 เส้นอ้างอิงที่สำคัญคือมาตรฐานค่าเฉลี่ย 24 ชั่วโมงของไทย 37.5 µg/m³ ซึ่งมีผลตั้งแต่ พ.ศ. 2566 <span class="citation" data-cites="neb2022pm25">(<a href="../references.html#ref-neb2022pm25" role="doc-biblioref">คณะกรรมการสิ่งแวดล้อมแห่งชาติ 2022</a>)</span> และแนวทางขององค์การอนามัยโลก 15 µg/m³ <span class="citation" data-cites="who2021global">(<a href="../references.html#ref-who2021global" role="doc-biblioref">World Health Organization 2021</a>)</span></p>
+<p>ข้อควรระวังคือ <strong>เส้นอ้างอิงต้องตรงกับชนิดของค่าที่แสดง</strong> มาตรฐาน 37.5 µg/m³ กำหนดสำหรับค่าเฉลี่ย 24 ชั่วโมง การวาดเส้นนี้บนกราฟของค่ารายชั่วโมงทำให้ผู้อ่านเข้าใจผิดว่าทุกชั่วโมงที่เกินเส้นคือการละเมิดมาตรฐาน ถ้าต้องแสดงค่ารายชั่วโมง ให้ระบุในคำบรรยายว่าเส้นเป็นมาตรฐานของค่าเฉลี่ยรายวันที่แสดงไว้เพื่อเป็นบริบทเท่านั้น หรือไม่วาดเส้นเลย</p>
+</section>
+<section id="คำอธบายประกอบ" class="level3">
+<h3 class="anchored" data-anchor-id="คำอธบายประกอบ">คำอธิบายประกอบ</h3>
+<p><strong>คำอธิบายประกอบ</strong> (annotation) คือข้อความที่วางบนกราฟเพื่อชี้ประเด็น เช่น ชื่อของเส้นอ้างอิง ค่าสูงสุด หรือเหตุการณ์ที่อธิบายรูปแบบที่เห็น คำอธิบายประกอบที่ดีเปลี่ยนกราฟจาก “ภาพที่ผู้อ่านต้องตีความเอง” เป็น “ภาพที่บอกประเด็น”</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>st <span class="op">=</span> daily.query(<span class="st">"station_id == '35t'"</span>).sort_values(<span class="st">"date"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.5</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ax.plot(st[<span class="st">"date"</span>], st[<span class="st">"pm25_mean"</span>], lw<span class="op">=</span><span class="fl">0.8</span>, color<span class="op">=</span><span class="st">"0.3"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="fl">37.5</span>, color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">"มาตรฐานไทย 37.5 µg/m³ (เฉลี่ย 24 ชม.)"</span>, xy<span class="op">=</span>(st[<span class="st">"date"</span>].iloc[<span class="dv">0</span>], <span class="fl">37.5</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">4</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>peak <span class="op">=</span> st.loc[st[<span class="st">"pm25_mean"</span>].idxmax()]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="ss">f"สูงสุด </span><span class="sc">{</span>peak[<span class="st">'pm25_mean'</span>]<span class="sc">:.0f}</span><span class="ss"> µg/m³"</span>, xy<span class="op">=</span>(peak[<span class="st">"date"</span>], peak[<span class="st">"pm25_mean"</span>]),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">20</span>, <span class="op">-</span><span class="dv">10</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, arrowprops<span class="op">=</span>{<span class="st">"arrowstyle"</span>: <span class="st">"-&gt;"</span>})</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">""</span>, ylabel<span class="op">=</span><span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ชอกราฟทบอกขอคนพบ" class="level3">
+<h3 class="anchored" data-anchor-id="ชอกราฟทบอกขอคนพบ">ชื่อกราฟที่บอกข้อค้นพบ</h3>
+<p>ชื่อกราฟแบบบรรยาย เช่น “ค่า PM2.5 รายเดือนแยกตามภาค” บอกว่ากราฟแสดงอะไร แต่ไม่บอกว่าผู้อ่านควรเห็นอะไร ชื่อกราฟแบบข้อค้นพบ เช่น “ภาคเหนือมีค่าเกินมาตรฐานเกือบทุกปีในเดือนมีนาคม” บอกประเด็นทันที และผู้อ่านใช้กราฟเป็นหลักฐาน แนวทางนี้เป็นหัวใจของการเล่าเรื่องด้วยข้อมูลในบทที่ 19 ข้อควรระวังคือ ชื่อกราฟแบบข้อค้นพบต้องใช้ถ้อยคำที่ตรงกับระดับหลักฐานตามบทที่ 4 ถ้ากราฟมาจากข้อมูลช่วงสำรวจ ให้ใช้คำว่า “บ่งชี้” ไม่ใช่ “พิสูจน์”</p>
+</section>
+<section id="รายละเอยดททำใหกราฟอานงาย" class="level3">
+<h3 class="anchored" data-anchor-id="รายละเอยดททำใหกราฟอานงาย">รายละเอียดที่ทำให้กราฟอ่านง่าย</h3>
+<div id="tbl-ch11-details" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.7: รายละเอียดที่ทำให้กราฟอ่านง่าย
+</figcaption>
+<div aria-describedby="tbl-ch11-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>องค์ประกอบ</th>
+<th>แนวทาง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ป้ายแกน</td>
+<td>ใช้ภาษาที่ผู้อ่านเข้าใจพร้อมหน่วย ไม่ใช่ชื่อคอลัมน์</td>
+</tr>
+<tr class="even">
+<td>ป้ายกำกับโดยตรง</td>
+<td>วางชื่อกลุ่มไว้ที่ปลายเส้นแทนการใช้ legend เมื่อทำได้ ผู้อ่านไม่ต้องมองสลับไปมา</td>
+</tr>
+<tr class="odd">
+<td>ตัวเลขบนแท่ง</td>
+<td>ใส่เมื่อผู้อ่านต้องรู้ค่าที่แน่นอน และไม่มีแท่งมากเกินไป</td>
+</tr>
+<tr class="even">
+<td>จำนวนข้อมูล</td>
+<td>ระบุ n ในป้ายหรือคำบรรยายเมื่อกลุ่มมีขนาดต่างกันมาก</td>
+</tr>
+<tr class="odd">
+<td>แหล่งข้อมูล</td>
+<td>ระบุที่มาและช่วงเวลาในคำบรรยายภาพ เช่น “ข้อมูล: Air4Thai กรมควบคุมมลพิษ ค.ศ. 2020–2023”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch11-thai-fonts" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="sec-ch11-thai-fonts"><span class="header-section-number">11.8</span> ตัวอักษรไทยในกราฟ</h2>
+<section id="ทำไมภาษาไทยกลายเปนสเหลยม" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมภาษาไทยกลายเปนสเหลยม">ทำไมภาษาไทยกลายเป็นสี่เหลี่ยม</h3>
+<p>ฟอนต์เริ่มต้นของ matplotlib คือ DejaVu Sans ซึ่งไม่มีอักษรไทย เมื่อป้ายกำกับเป็นภาษาไทย matplotlib จะแสดงเป็นสี่เหลี่ยมว่าง (เรียกกันว่า tofu) และแสดงคำเตือนว่าไม่พบ glyph ปัญหานี้ไม่เกิดกับ Plotly ซึ่งแสดงผลในเบราว์เซอร์และใช้ฟอนต์ของระบบ แต่เกิดกับ matplotlib และ seaborn ซึ่งวาดภาพเอง</p>
+<div id="fig-ch11-thai-font" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ภาพซ้ายป้ายกำกับใต้แท่งแสดงเป็นสี่เหลี่ยมว่าง ภาพขวาแสดงคำว่าภาคเหนือและภาคกลางถูกต้อง">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch11-thai-font-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/11/thai_font.png" class="img-fluid figure-img" alt="ภาพซ้ายป้ายกำกับใต้แท่งแสดงเป็นสี่เหลี่ยมว่าง ภาพขวาแสดงคำว่าภาคเหนือและภาคกลางถูกต้อง">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch11-thai-font-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;11.4: ป้ายกำกับภาษาไทยเดียวกันเมื่อใช้ฟอนต์เริ่มต้นของ matplotlib (ซ้าย) และเมื่อใช้ฟอนต์ที่มีอักษรไทย (ขวา)
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="ตงคาฟอนต" class="level3">
+<h3 class="anchored" data-anchor-id="ตงคาฟอนต">ตั้งค่าฟอนต์</h3>
+<p>วิธีแก้คือสั่งให้ matplotlib ใช้ฟอนต์ที่มีอักษรไทยก่อนวาดกราฟ ชื่อฟอนต์ที่มีอยู่ต่างกันในแต่ละระบบปฏิบัติการ จึงควรเขียนโค้ดที่เลือกฟอนต์แรกที่พบจากรายการ แทนการระบุชื่อเดียวตายตัว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""src/viz_style.py: ตั้งค่ารูปแบบกราฟของโครงการ (import ในทุก notebook)"""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> font_manager</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>THAI_FONTS <span class="op">=</span> [<span class="st">"Sarabun"</span>, <span class="st">"Tahoma"</span>, <span class="st">"Leelawadee UI"</span>, <span class="st">"Thonburi"</span>, <span class="st">"Noto Sans Thai"</span>, <span class="st">"Loma"</span>, <span class="st">"Garuda"</span>]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> setup() <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""เลือกฟอนต์ไทยตัวแรกที่มีในเครื่อง แล้วตั้งค่า seaborn คืนชื่อฟอนต์ที่ใช้"""</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    available <span class="op">=</span> {f.name <span class="cf">for</span> f <span class="kw">in</span> font_manager.fontManager.ttflist}</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    font <span class="op">=</span> <span class="bu">next</span>((f <span class="cf">for</span> f <span class="kw">in</span> THAI_FONTS <span class="cf">if</span> f <span class="kw">in</span> available), <span class="va">None</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> font <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="st">"ไม่พบฟอนต์ไทย ติดตั้ง Sarabun แล้วเรียก font_manager.fontManager.addfont(path)"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>, palette<span class="op">=</span><span class="st">"colorblind"</span>, font<span class="op">=</span>font)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    plt.rcParams[<span class="st">"axes.unicode_minus"</span>] <span class="op">=</span> <span class="va">False</span>    <span class="co"># ให้เครื่องหมายลบแสดงถูกต้อง</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> font</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-ch11-thai-fonts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-thai-fonts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.8: ฟอนต์ไทยในแต่ละระบบปฏิบัติการ
+</figcaption>
+<div aria-describedby="tbl-ch11-thai-fonts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระบบ</th>
+<th>ฟอนต์ที่มักมีอยู่แล้ว</th>
+<th>ถ้าไม่มี</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Windows</td>
+<td>Tahoma, Leelawadee UI</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>macOS</td>
+<td>Thonburi, Tahoma</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Linux และ Colab</td>
+<td>มักไม่มีเป็นค่าเริ่มต้น บางระบบมีชุดฟอนต์ TLWG เช่น Loma และ Garuda</td>
+<td>ดาวน์โหลด Sarabun จาก Google Fonts แล้วใช้ <code>font_manager.fontManager.addfont("path/Sarabun-Regular.ttf")</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การเก็บการตั้งค่านี้ไว้ใน <code>src/viz_style.py</code> แล้ว import ในทุก notebook ทำให้กราฟทุกภาพในโครงการมีรูปแบบเดียวกัน และเมื่อเปลี่ยนเครื่อง ก็แก้ที่ไฟล์เดียว ฉบับในคู่มือปฏิบัติการสัปดาห์ที่ 9 ขยายฟังก์ชันนี้ให้รับ <code>font_path</code> สำหรับเครื่องที่ต้องเพิ่มฟอนต์เอง เช่น Colab และเพิ่มฟังก์ชัน <code>add_std_line()</code> สำหรับวาดเส้นมาตรฐาน ภาคผนวก ฉ รวบรวมปัญหาภาษาไทยที่พบบ่อยและวิธีแก้</p>
+</section>
+<section id="ขอควรระวงอนของภาษาไทยในกราฟ" class="level3">
+<h3 class="anchored" data-anchor-id="ขอควรระวงอนของภาษาไทยในกราฟ">ข้อควรระวังอื่นของภาษาไทยในกราฟ</h3>
+<ul>
+<li><strong>ป้ายยาวซ้อนกัน</strong> ชื่อจังหวัดและภาคภาษาไทยมักยาวกว่าภาษาอังกฤษ วางป้ายบนแกน y (กราฟแนวนอน) แทนแกน x หรือหมุนป้าย</li>
+<li><strong>สระและวรรณยุกต์ถูกตัด</strong> ฟอนต์บางตัวมีสระบนและวรรณยุกต์ที่สูงกว่าความสูงของบรรทัดที่ matplotlib คำนวณ ทำให้ถูกตัดที่ขอบภาพ ใช้ <code>bbox_inches="tight"</code> เมื่อบันทึกภาพ และเพิ่มระยะขอบเมื่อจำเป็น</li>
+<li><strong>ภาพที่บันทึกเป็น SVG หรือ PDF</strong> ถ้าไม่ได้ฝังฟอนต์ไว้ เครื่องที่ไม่มีฟอนต์นั้นจะแสดงผลผิด สำหรับรายงาน การบันทึกเป็น PNG ความละเอียดสูงเป็นทางเลือกที่ปลอดภัยกว่า</li>
+</ul>
+</section>
+</section>
+<section id="sec-ch11-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch11-case">กรณีศึกษา: ออกแบบกราฟตอบคำถาม Q1 ให้ซื่อตรงและอ่านง่าย</h2>
+<p><strong>คำถาม</strong> จะออกแบบกราฟที่ตอบคำถาม Q1 (ภาคใดมีสัดส่วนวันที่ค่าเฉลี่ย PM2.5 รายวันเกิน 37.5 µg/m³ สูงที่สุด) อย่างไร ให้ผู้อ่านเห็นคำตอบได้ทันที และไม่ชวนให้เข้าใจผิด</p>
+<p><strong>ข้อมูล</strong> <code>daily_pm25_clean</code> ช่วงสำรวจ เฉพาะวันที่ <code>is_complete</code></p>
+<p><strong>ร่างแรก</strong> นักศึกษาวาด pie chart สี่ชิ้นแสดง “สัดส่วนของวันเกินมาตรฐานของประเทศที่มาจากแต่ละภาค” ด้วยสีของ seaborn ค่าเริ่มต้น และชื่อกราฟ “สัดส่วนวันเกินมาตรฐาน”</p>
+<p><strong>ปัญหาของร่างแรก</strong></p>
+<ol type="1">
+<li>pie chart ตอบคำถามผิด สัดส่วนของวันเกินมาตรฐานที่มาจากแต่ละภาค ขึ้นกับจำนวนสถานีในภาคนั้น ภาคที่มีสถานีมากจะได้ชิ้นใหญ่แม้อากาศไม่ได้แย่กว่า คำถาม Q1 ต้องการ <em>อัตรา</em> ต่อภาค ไม่ใช่ส่วนแบ่ง</li>
+<li>มุมของ pie chart เปรียบเทียบได้ยาก (หัวข้อ <a href="#sec-ch11-cleveland" class="quarto-xref"><span>11.2</span></a>)</li>
+<li>ชื่อกราฟไม่บอกข้อค้นพบ และไม่บอกเกณฑ์ที่ใช้</li>
+</ol>
+<p><strong>ร่างที่ปรับปรุง</strong> bar chart แนวนอนของอัตรา เรียงจากมากไปน้อย สีเทาเดียว ตัวเลขกำกับปลายแท่ง ชื่อภาคบนแกน y และคำบรรยายที่ระบุเกณฑ์ ช่วงเวลา และจำนวนสถานี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> viz_style</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>viz_style.setup()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>exceed <span class="op">=</span> (daily.assign(exceed<span class="op">=</span>daily[<span class="st">"pm25_mean"</span>] <span class="op">&gt;</span> <span class="fl">37.5</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>               .groupby(<span class="st">"region"</span>, as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>               .agg(rate<span class="op">=</span>(<span class="st">"exceed"</span>, <span class="st">"mean"</span>), n_stations<span class="op">=</span>(<span class="st">"station_id"</span>, <span class="st">"nunique"</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>               .sort_values(<span class="st">"rate"</span>))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">3.5</span>))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>ax.barh(exceed[<span class="st">"region"</span>] <span class="op">+</span> <span class="st">" ("</span> <span class="op">+</span> exceed[<span class="st">"n_stations"</span>].astype(<span class="bu">str</span>) <span class="op">+</span> <span class="st">" สถานี)"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="dv">100</span> <span class="op">*</span> exceed[<span class="st">"rate"</span>], color<span class="op">=</span><span class="st">"0.4"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y, v <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="dv">100</span> <span class="op">*</span> exceed[<span class="st">"rate"</span>]):</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    ax.text(v <span class="op">+</span> <span class="fl">0.3</span>, y, <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.1f}</span><span class="ss">%"</span>, va<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"ร้อยละของวันที่ค่าเฉลี่ยรายวันเกิน 37.5 µg/m³ (วันที่ข้อมูลครบ ≥ 18 ชม.)"</span>, ylabel<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"reports/figures/exceed_by_region.png"</span>, dpi<span class="op">=</span><span class="dv">200</span>, bbox_inches<span class="op">=</span><span class="st">"tight"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>การตีความ</strong> กราฟที่ปรับปรุงตอบคำถามได้ตรง แกนเริ่มที่ศูนย์โดยธรรมชาติของ bar chart ตัวเลขกำกับทำให้ไม่ต้องอ่านค่าจากแกน และจำนวนสถานีในป้ายเตือนผู้อ่านว่าภาคที่มีสถานีน้อยมีความไม่แน่นอนสูงกว่า ชื่อกราฟในรายงานควรเป็นข้อค้นพบที่ได้จากข้อมูลจริง เช่น “ข้อมูล พ.ศ. 2563–2566 บ่งชี้ว่าภาค… มีสัดส่วนวันเกินมาตรฐานสูงที่สุด”</p>
+<p><strong>ข้อจำกัด</strong> อัตราของแต่ละภาคในกราฟนี้คำนวณจากสถานี-วันทั้งหมดในภาครวมกัน ซึ่งต่างจากการใช้มัธยฐานของสถานีในบทที่ 7 ทั้งสองแบบตอบคำถามต่างกันเล็กน้อย และต้องเลือกให้ตรงกับที่เขียนไว้ใน <code>questions.md</code> นอกจากนี้ กราฟแท่งไม่แสดงความไม่แน่นอนของอัตรา บทที่ 13 แสดงวิธีเพิ่มช่วงความเชื่อมั่นด้วย bootstrap</p>
+</section>
+<section id="sec-ch11-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch11-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch11-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch11-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;11.9: ข้อผิดพลาดที่พบบ่อยในบทที่ 11
+</figcaption>
+<div aria-describedby="tbl-ch11-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>bar chart ที่แกนไม่เริ่มที่ศูนย์</td>
+<td>ความยาวของแท่งไม่เป็นสัดส่วนกับค่า lie factor สูง</td>
+<td>เริ่มแกนที่ศูนย์ หรือเปลี่ยนเป็น dot plot</td>
+</tr>
+<tr class="even">
+<td>ใช้ pie chart เปรียบเทียบค่าที่ใกล้กัน</td>
+<td>มุมเปรียบเทียบได้ยากกว่าความยาว</td>
+<td>ใช้ bar chart หรือ dot plot เรียงตามค่า</td>
+</tr>
+<tr class="odd">
+<td>ใช้ชุดสี rainbow หรือ jet กับข้อมูลต่อเนื่อง</td>
+<td>ความสว่างไม่ไล่ตามค่า เกิดขอบปลอม</td>
+<td>ใช้ชุดสี sequential ที่ perceptually uniform เช่น viridis</td>
+</tr>
+<tr class="even">
+<td>ใช้ชุดสี categorical กับค่าต่อเนื่อง หรือ diverging กับข้อมูลที่ไม่มีจุดกลาง</td>
+<td>ผู้อ่านเห็นกลุ่มหรือจุดกลางที่ไม่มีอยู่จริง</td>
+<td>เลือกชุดสีตาม <a href="#tbl-ch11-palettes" class="quarto-xref">ตารางที่&nbsp;<span>11.3</span></a></td>
+</tr>
+<tr class="odd">
+<td>ใช้แดงกับเขียวเป็นตัวแยกกลุ่มหลัก</td>
+<td>ผู้มีภาวะตาบอดสีแยกไม่ได้</td>
+<td>ใช้ชุดสี colorblind และป้ายกำกับร่วม</td>
+</tr>
+<tr class="even">
+<td>ใส่เส้นของทุกสถานีในกราฟเดียวหลายสี</td>
+<td>เส้นพันกันและสีมากเกินจะแยก</td>
+<td>ใช้ small multiples หรือเน้นเฉพาะสถานีที่สำคัญ</td>
+</tr>
+<tr class="odd">
+<td>ใช้แกนคู่แสดงสองตัวแปร</td>
+<td>ผู้ออกแบบเลือกช่วงแกนเองได้ ทำให้เห็นความสัมพันธ์ปลอม</td>
+<td>วาดสองกราฟซ้อนแนวตั้ง หรือ scatter plot</td>
+</tr>
+<tr class="even">
+<td>วาดเส้นมาตรฐาน 37.5 บนกราฟค่ารายชั่วโมง</td>
+<td>มาตรฐานกำหนดสำหรับค่าเฉลี่ย 24 ชั่วโมง</td>
+<td>ใช้กับค่าเฉลี่ยรายวัน หรือระบุบริบทให้ชัด</td>
+</tr>
+<tr class="odd">
+<td>ป้ายแกนเป็นชื่อคอลัมน์และไม่มีหน่วย</td>
+<td>ผู้อ่านไม่รู้ว่าค่าหมายถึงอะไร</td>
+<td>ป้ายภาษาที่ผู้อ่านเข้าใจพร้อมหน่วย</td>
+</tr>
+<tr class="even">
+<td>ไม่ตั้งฟอนต์ไทยใน matplotlib</td>
+<td>ป้ายภาษาไทยกลายเป็นสี่เหลี่ยม</td>
+<td>ใช้ <code>src/viz_style.py</code> ในทุก notebook</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>preattentive attribute เช่น สี ขนาด และตำแหน่ง ถูกประมวลผลก่อนการตั้งใจมอง สิ่งที่ต้องการให้เห็นก่อนควรต่างจากส่วนที่เหลือด้วยคุณลักษณะเดียว และหลัก Gestalt ต้องสอดคล้องกับโครงสร้างของข้อมูล</li>
+<li>Cleveland และ McGill พบว่าตำแหน่งบนแกนร่วมอ่านได้แม่นที่สุด ตามด้วยความยาว มุม พื้นที่ และความเข้มสี ค่าที่ต้องเปรียบเทียบให้แม่นจึงควรอยู่บนตำแหน่ง</li>
+<li>สีมีสามมิติ ความสว่างสำคัญที่สุดต่อการอ่านค่า ใช้ชุดสี sequential, diverging หรือ categorical ให้ตรงชนิดข้อมูล หลีกเลี่ยง rainbow และคำนึงถึงภาวะตาบอดสี</li>
+<li>เลือกกราฟจากชนิดของคำถาม ได้แก่ การแจกแจง การเปรียบเทียบ ความสัมพันธ์ และการเปลี่ยนแปลงตามเวลา</li>
+<li>กราฟที่ซื่อตรงมี lie factor ใกล้ 1 bar chart ต้องเริ่มที่ศูนย์ หลีกเลี่ยงแกนคู่ และแสดงข้อมูลทั้งหมดก่อนซูม</li>
+<li>small multiples ใช้สเกลเดียวกันทุกแผงและเส้นอ้างอิงร่วม ช่วยเปรียบเทียบหลายกลุ่มได้ดีกว่าการใส่ทุกอย่างในกราฟเดียว</li>
+<li>เส้นอ้างอิง 37.5 µg/m³ ต้องใช้กับค่าเฉลี่ยรายวัน และชื่อกราฟแบบข้อค้นพบต้องใช้ถ้อยคำที่ตรงกับระดับหลักฐาน</li>
+<li>ตั้งฟอนต์ไทยใน matplotlib ด้วยโค้ดที่เลือกฟอนต์แรกที่มีในเครื่อง และเก็บไว้ใน <code>src/viz_style.py</code></li>
+</ul>
+</section>
+<section id="sec-ch11-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch11-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>อธิบายด้วยแนวคิด preattentive attribute ว่าทำไมการเน้นสถานีเดียวด้วยสีส้มท่ามกลางสถานีสีเทา จึงได้ผลดีกว่าการให้ทุกสถานีมีสีต่างกัน</li>
+<li>เรียงลำดับการเข้ารหัสต่อไปนี้จากแม่นที่สุดไปแม่นน้อยที่สุดตามผลของ Cleveland และ McGill: พื้นที่ ตำแหน่งบนแกนร่วม มุม ความยาว ความเข้มสี</li>
+<li>ระบุชนิดของชุดสีที่เหมาะกับข้อมูลต่อไปนี้: (ก) ภาคของสถานี (ข) ค่า PM2.5 เฉลี่ยรายเดือนใน heatmap (ค) ส่วนต่างของค่าเฉลี่ยรายวันจาก 37.5 µg/m³</li>
+<li>คำนวณ lie factor ของ bar chart ที่แสดงค่า 20 และ 30 µg/m³ โดยแกน y เริ่มที่ 15</li>
+<li>ทำไมการวาดเส้นมาตรฐาน 37.5 µg/m³ บนกราฟของค่ารายชั่วโมงจึงอาจทำให้เข้าใจผิด</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>สร้าง <code>src/viz_style.py</code> ตามหัวข้อ <a href="#sec-ch11-thai-fonts" class="quarto-xref"><span>11.8</span></a> แล้วทดสอบบนเครื่องของตนเองและบน Google Colab บันทึกว่าแต่ละที่ใช้ฟอนต์ใด และต้องทำอะไรเพิ่มเติม</li>
+<li>วาดการแจกแจงของค่าเฉลี่ยรายวันด้วยสามวิธี คือ histogram แกนเชิงเส้น histogram แกน log และ ECDF แยกสีตามภาค แล้วอภิปรายว่าวิธีใดตอบคำถาม “แต่ละภาคมีสัดส่วนวันเกินมาตรฐานเท่าใด” ได้ตรงที่สุด</li>
+<li>วาดกราฟเส้นของค่าเฉลี่ยรายเดือนของทุกสถานีในกราฟเดียวหลายสี แล้ววาดใหม่เป็น small multiples ตามหัวข้อ <a href="#sec-ch11-small-multiples" class="quarto-xref"><span>11.6</span></a> เปรียบเทียบว่าแบบใดตอบคำถาม “สถานีใดมีรูปแบบตามฤดูกาลต่างจากสถานีอื่นในภาคเดียวกัน” ได้ดีกว่า</li>
+<li>สร้าง heatmap เดือน × ปีของภาคหนึ่งด้วยชุดสี jet และ viridis แล้วอธิบายความต่างที่เห็นโดยอ้างถึงความสว่าง จากนั้นสร้าง heatmap ของส่วนต่างจาก 37.5 µg/m³ ด้วยชุดสี diverging ที่ตั้งจุดกลางถูกต้อง</li>
+<li>หากราฟเกี่ยวกับ PM2.5 จากสื่อหรือรายงานหนึ่งชิ้น ประเมินตามหลักในบทนี้อย่างน้อยห้าด้าน แล้ววาดใหม่ด้วยข้อมูลของโครงการที่ตอบคำถามเดียวกัน (หรือข้อมูลสมมุติที่ระบุชัด ถ้าไม่มีข้อมูลเดียวกัน)</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ออกแบบการทดลองขนาดเล็กกับเพื่อนในชั้นเรียนอย่างน้อย 10 คน เพื่อทดสอบว่าผู้อ่านประมาณสัดส่วนระหว่างค่าสองค่าจาก bar chart แม่นกว่า pie chart หรือไม่ ใช้ข้อมูลสมมุติหลายชุด วิเคราะห์ความคลาดเคลื่อน และเปรียบเทียบผลกับ Cleveland และ McGill</li>
+<li>จำลองว่าผู้มีภาวะตาบอดสีแบบ deuteranopia เห็นกราฟของโครงการอย่างไร โดยใช้เครื่องมือจำลองการมองเห็นสี แล้วปรับชุดสีของกราฟทุกภาพในโครงการให้ยังอ่านได้ บันทึกการเปลี่ยนแปลงทั้งหมด</li>
+<li>เขียนฟังก์ชันที่รับ bar chart ของ matplotlib (Axes) แล้วคำนวณ lie factor ระหว่างแท่งสูงสุดกับต่ำสุดจากช่วงของแกนและค่าของแท่งโดยอัตโนมัติ พร้อมเตือนเมื่อเกินเกณฑ์ที่กำหนด อภิปรายข้อจำกัดของการตรวจความซื่อตรงของกราฟด้วยโค้ด</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch11">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="cleveland1984graphical">Cleveland และ McGill (<a href="../references.html#ref-cleveland1984graphical" role="doc-biblioref">1984</a>)</span> — งานวิจัยต้นฉบับเรื่องความแม่นยำของการเข้ารหัสภาพ อ่านเพื่อเข้าใจวิธีทดลองและข้อจำกัดของผล</li>
+<li><span class="citation" data-cites="tufte2001visual">Tufte (<a href="../references.html#ref-tufte2001visual" role="doc-biblioref">2001</a>)</span> — หนังสือคลาสสิกเรื่องความซื่อตรงของภาพ lie factor และ data-ink พร้อมตัวอย่างกราฟประวัติศาสตร์จำนวนมาก</li>
+<li><span class="citation" data-cites="wilke2019fundamentals">Wilke (<a href="../references.html#ref-wilke2019fundamentals" role="doc-biblioref">2019</a>)</span> — ตำราการออกแบบภาพข้อมูลที่อ่านฟรีออนไลน์ ครอบคลุมการเลือกกราฟ สี และการออกแบบที่ซื่อตรงอย่างเป็นระบบ</li>
+<li><span class="citation" data-cites="ware2020information">Ware (<a href="../references.html#ref-ware2020information" role="doc-biblioref">2020</a>)</span> — ตำราการรับรู้ทางสายตาสำหรับการออกแบบภาพข้อมูล อธิบายกลไกเบื้องหลังหลัก Gestalt และ preattentive attribute</li>
+<li><span class="citation" data-cites="borland2007rainbow">Borland และ Taylor II (<a href="../references.html#ref-borland2007rainbow" role="doc-biblioref">2007</a>)</span> — บทความที่อธิบายเหตุผลว่าทำไมชุดสี rainbow จึงเป็นอันตรายต่อการตีความ</li>
+<li><span class="citation" data-cites="heer2010crowdsourcing">Heer และ Bostock (<a href="../references.html#ref-heer2010crowdsourcing" role="doc-biblioref">2010</a>)</span> — การทำซ้ำการทดลองของ Cleveland และ McGill ด้วยผู้เข้าร่วมจำนวนมาก ตัวอย่างที่ดีของการทดสอบหลักการออกแบบด้วยหลักฐาน</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bateman2010useful" class="csl-entry" role="listitem">
+Bateman, Scott, Regan L. Mandryk, Carl Gutwin, Aaron Genest, David McDine, และ Christopher Brooks. 2010. <span>“Useful Junk? The Effects of Visual Embellishment on Comprehension and Memorability of Charts”</span>. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI ’10)</em>, 2573–82. <a href="https://doi.org/10.1145/1753326.1753716">https://doi.org/10.1145/1753326.1753716</a>.
+</div>
+<div id="ref-birch2012worldwide" class="csl-entry" role="listitem">
+Birch, Jennifer. 2012. <span>“Worldwide Prevalence of Red-Green Color Deficiency”</span>. <em>Journal of the Optical Society of America A</em> 29 (3): 313–20. <a href="https://doi.org/10.1364/JOSAA.29.000313">https://doi.org/10.1364/JOSAA.29.000313</a>.
+</div>
+<div id="ref-borland2007rainbow" class="csl-entry" role="listitem">
+Borland, David, และ Russell M. Taylor II. 2007. <span>“Rainbow Color Map (Still) Considered Harmful”</span>. <em>IEEE Computer Graphics and Applications</em> 27 (2): 14–17. <a href="https://doi.org/10.1109/MCG.2007.323435">https://doi.org/10.1109/MCG.2007.323435</a>.
+</div>
+<div id="ref-cleveland1984graphical" class="csl-entry" role="listitem">
+Cleveland, William S., และ Robert McGill. 1984. <span>“Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods”</span>. <em>Journal of the American Statistical Association</em> 79 (387): 531–54. <a href="https://doi.org/10.1080/01621459.1984.10478080">https://doi.org/10.1080/01621459.1984.10478080</a>.
+</div>
+<div id="ref-harrower2003colorbrewer" class="csl-entry" role="listitem">
+Harrower, Mark, และ Cynthia A. Brewer. 2003. <span>“ColorBrewer.org: An Online Tool for Selecting Colour Schemes for Maps”</span>. <em>The Cartographic Journal</em> 40 (1): 27–37. <a href="https://doi.org/10.1179/000870403235002042">https://doi.org/10.1179/000870403235002042</a>.
+</div>
+<div id="ref-healey2012attention" class="csl-entry" role="listitem">
+Healey, Christopher G., และ James T. Enns. 2012. <span>“Attention and Visual Memory in Visualization and Computer Graphics”</span>. <em>IEEE Transactions on Visualization and Computer Graphics</em> 18 (7): 1170–88. <a href="https://doi.org/10.1109/TVCG.2011.127">https://doi.org/10.1109/TVCG.2011.127</a>.
+</div>
+<div id="ref-heer2010crowdsourcing" class="csl-entry" role="listitem">
+Heer, Jeffrey, และ Michael Bostock. 2010. <span>“Crowdsourcing Graphical Perception: Using Mechanical Turk to Assess Visualization Design”</span>. <em>Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI ’10)</em>, 203–12. <a href="https://doi.org/10.1145/1753326.1753357">https://doi.org/10.1145/1753326.1753357</a>.
+</div>
+<div id="ref-tufte1990envisioning" class="csl-entry" role="listitem">
+Tufte, Edward R. 1990. <em>Envisioning Information</em>. Graphics Press.
+</div>
+<div id="ref-tufte2001visual" class="csl-entry" role="listitem">
+Tufte, Edward R. 2001. <em>The Visual Display of Quantitative Information</em>. 2 พิมพ์ครั้งที่. Graphics Press.
+</div>
+<div id="ref-vanderwalt2015viridis" class="csl-entry" role="listitem">
+Walt, Stéfan van der, และ Nathaniel Smith. 2015. <em>A Better Default Colormap for Matplotlib</em>. Talk at SciPy 2015 Conference. <a href="https://bids.github.io/colormap/">https://bids.github.io/colormap/</a>.
+</div>
+<div id="ref-ware2020information" class="csl-entry" role="listitem">
+Ware, Colin. 2020. <em>Information Visualization: Perception for Design</em>. 4 พิมพ์ครั้งที่. Morgan Kaufmann.
+</div>
+<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. O’Reilly Media. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>.
+</div>
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality Guidelines: Particulate Matter (<span>PM2.5</span> and <span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon Monoxide</em>. World Health Organization.
+</div>
+<div id="ref-neb2022pm25" class="csl-entry" role="listitem">
+คณะกรรมการสิ่งแวดล้อมแห่งชาติ. 2022. <em>ประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ เรื่อง กำหนดมาตรฐานฝุ่นละอองขนาดไม่เกิน 2.5 ไมครอน ในบรรยากาศโดยทั่วไป</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/10-missing-data.html" class="pagination-link" aria-label="ข้อมูลสูญหาย">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/12-interactive-viz.html" class="pagination-link" aria-label="Grammar of graphics และ visualization เชิงโต้ตอบ">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

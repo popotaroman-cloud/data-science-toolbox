@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/g-answers.html" rel="next">
+<link href="../appendices/e-math.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/f-troubleshooting.html">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#sec-appf-install" id="toc-sec-appf-install" class="nav-link active" data-scroll-target="#sec-appf-install">ฉ.1 ปัญหาการติดตั้งและสภาพแวดล้อม</a>
+  <ul class="collapse">
+  <li><a href="#ตดตงแลวแต-import-ไมเจอ" id="toc-ตดตงแลวแต-import-ไมเจอ" class="nav-link" data-scroll-target="#ตดตงแลวแต-import-ไมเจอ">ติดตั้งแล้วแต่ <code>import</code> ไม่เจอ</a></li>
+  <li><a href="#ปญหาอนของการตดตง" id="toc-ปญหาอนของการตดตง" class="nav-link" data-scroll-target="#ปญหาอนของการตดตง">ปัญหาอื่นของการติดตั้ง</a></li>
+  <li><a href="#notebook-ใหผลไมเหมอนเดม" id="toc-notebook-ใหผลไมเหมอนเดม" class="nav-link" data-scroll-target="#notebook-ใหผลไมเหมอนเดม">notebook ให้ผลไม่เหมือนเดิม</a></li>
+  </ul></li>
+  <li><a href="#sec-appf-git" id="toc-sec-appf-git" class="nav-link" data-scroll-target="#sec-appf-git">ฉ.2 ปัญหา Git และ GitHub</a>
+  <ul class="collapse">
+  <li><a href="#commit-ไฟลทไมควร-commit-ไปแลว" id="toc-commit-ไฟลทไมควร-commit-ไปแลว" class="nav-link" data-scroll-target="#commit-ไฟลทไมควร-commit-ไปแลว">commit ไฟล์ที่ไม่ควร commit ไปแล้ว</a></li>
+  <li><a href="#notebook-สราง-conflict-ทอานไมออก" id="toc-notebook-สราง-conflict-ทอานไมออก" class="nav-link" data-scroll-target="#notebook-สราง-conflict-ทอานไมออก">notebook สร้าง conflict ที่อ่านไม่ออก</a></li>
+  </ul></li>
+  <li><a href="#sec-appf-api" id="toc-sec-appf-api" class="nav-link" data-scroll-target="#sec-appf-api">ฉ.3 ปัญหาการเชื่อมต่อ API (SSL, timeout, encoding)</a>
+  <ul class="collapse">
+  <li><a href="#sslerror-certificate-verify-failed" id="toc-sslerror-certificate-verify-failed" class="nav-link" data-scroll-target="#sslerror-certificate-verify-failed"><code>SSLError: certificate verify failed</code></a></li>
+  <li><a href="#การเชอมตอคางหรอลมเปนครงคราว" id="toc-การเชอมตอคางหรอลมเปนครงคราว" class="nav-link" data-scroll-target="#การเชอมตอคางหรอลมเปนครงคราว">การเชื่อมต่อค้างหรือล้มเป็นครั้งคราว</a></li>
+  <li><a href="#ภาษาไทยกลายเปนอกขระแปลก" id="toc-ภาษาไทยกลายเปนอกขระแปลก" class="nav-link" data-scroll-target="#ภาษาไทยกลายเปนอกขระแปลก">ภาษาไทยกลายเป็นอักขระแปลก</a></li>
+  </ul></li>
+  <li><a href="#sec-appf-duckdb" id="toc-sec-appf-duckdb" class="nav-link" data-scroll-target="#sec-appf-duckdb">ฉ.4 ปัญหา DuckDB (ไฟล์ล็อก, เวอร์ชันไม่ตรงกัน)</a>
+  <ul class="collapse">
+  <li><a href="#ไฟลฐานขอมลถกลอก" id="toc-ไฟลฐานขอมลถกลอก" class="nav-link" data-scroll-target="#ไฟลฐานขอมลถกลอก">ไฟล์ฐานข้อมูลถูกล็อก</a></li>
+  <li><a href="#เวอรชนของ-duckdb-ไมตรงกน" id="toc-เวอรชนของ-duckdb-ไมตรงกน" class="nav-link" data-scroll-target="#เวอรชนของ-duckdb-ไมตรงกน">เวอร์ชันของ DuckDB ไม่ตรงกัน</a></li>
+  <li><a href="#ปญหาอนของ-duckdb" id="toc-ปญหาอนของ-duckdb" class="nav-link" data-scroll-target="#ปญหาอนของ-duckdb">ปัญหาอื่นของ DuckDB</a></li>
+  </ul></li>
+  <li><a href="#sec-appf-thai" id="toc-sec-appf-thai" class="nav-link" data-scroll-target="#sec-appf-thai">ฉ.5 ปัญหาภาษาไทยในกราฟ, notebook และ terminal</a>
+  <ul class="collapse">
+  <li><a href="#กราฟ-matplotlib-และ-seaborn-แสดงภาษาไทยเปนสเหลยม" id="toc-กราฟ-matplotlib-และ-seaborn-แสดงภาษาไทยเปนสเหลยม" class="nav-link" data-scroll-target="#กราฟ-matplotlib-และ-seaborn-แสดงภาษาไทยเปนสเหลยม">กราฟ matplotlib และ seaborn แสดงภาษาไทยเป็นสี่เหลี่ยม</a></li>
+  <li><a href="#ปญหาภาษาไทยในทอน" id="toc-ปญหาภาษาไทยในทอน" class="nav-link" data-scroll-target="#ปญหาภาษาไทยในทอน">ปัญหาภาษาไทยในที่อื่น</a></li>
+  </ul></li>
+  <li><a href="#sec-appf-tools" id="toc-sec-appf-tools" class="nav-link" data-scroll-target="#sec-appf-tools">ฉ.6 ปัญหา Streamlit และ Quarto</a>
+  <ul class="collapse">
+  <li><a href="#streamlit" id="toc-streamlit" class="nav-link" data-scroll-target="#streamlit">Streamlit</a></li>
+  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/f-troubleshooting.html">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ภาคผนวกนี้รวบรวมปัญหาที่ผู้เรียนพบบ่อยตลอดรายวิชา จัดตามเครื่องมือ แต่ละปัญหาบอกอาการที่เห็น สาเหตุ และวิธีแก้ ข้อความ error ที่ยกมาเป็นข้อความจริงจากเครื่องมือเวอร์ชันที่ใช้ในเล่ม ข้อความในเวอร์ชันอื่นอาจต่างเล็กน้อย</p>
+<p>ก่อนค้นหาวิธีแก้ ให้ทำสามอย่างนี้เสมอ</p>
+<ol type="1">
+<li><strong>อ่านบรรทัดสุดท้ายของ traceback ก่อน</strong> บรรทัดนั้นบอกชนิดของ error และข้อความหลัก บรรทัดก่อนหน้าบอกว่าเกิดที่ไหน ไล่ขึ้นไปหาบรรทัดแรกที่เป็นไฟล์ของเราเอง ไม่ใช่ไฟล์ของไลบรารี</li>
+<li><strong>ตรวจว่ากำลังใช้ Python ตัวไหน</strong> ปัญหาจำนวนมากเกิดจากการรันโค้ดด้วย interpreter ที่ไม่ใช่ของสภาพแวดล้อมโครงการ (<a href="../chapters/02-reproducible-environment.html#sec-ch02-venv" class="quarto-xref"><span>virtual environment ทำงานอย่างไร</span></a>)</li>
+<li><strong>ทำให้ปัญหาเล็กที่สุด</strong> ตัดโค้ดที่ไม่เกี่ยวออกจนเหลือไม่กี่บรรทัดที่ยังเกิดปัญหา ขั้นนี้มักทำให้เห็นสาเหตุเอง และเป็นสิ่งที่ต้องมีเมื่อถามผู้สอนหรือเปิด issue</li>
+</ol>
+<section id="sec-appf-install" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appf-install">ฉ.1 ปัญหาการติดตั้งและสภาพแวดล้อม</h2>
+<section id="ตดตงแลวแต-import-ไมเจอ" class="level3">
+<h3 class="anchored" data-anchor-id="ตดตงแลวแต-import-ไมเจอ">ติดตั้งแล้วแต่ <code>import</code> ไม่เจอ</h3>
+<p>อาการ: <code>pip install pandas</code> สำเร็จ แต่ใน notebook ได้ <code>ModuleNotFoundError: No module named 'pandas'</code> สาเหตุเกือบทุกครั้งคือ pip กับ notebook ใช้ Python คนละตัว pip ติดตั้งลงสภาพแวดล้อมหนึ่ง แต่ kernel ของ notebook รันจากอีกสภาพแวดล้อมหนึ่ง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.executable)          <span class="co"># Python ที่กำลังรันโค้ดนี้อยู่จริง</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.prefix)              <span class="co"># โฟลเดอร์ของสภาพแวดล้อม</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้า path ที่ได้ไม่อยู่ในโฟลเดอร์ <code>.venv/</code> ของโครงการหรือ environment ของ conda ที่ตั้งใจ ให้เลือก kernel ใหม่ใน VS Code หรือ Jupyter (<a href="../chapters/02-reproducible-environment.html#sec-ch02-vscode" class="quarto-xref"><span>VS Code สำหรับงานข้อมูล</span></a>) และใช้รูปแบบ <code>python -m pip install ...</code> แทน <code>pip install ...</code> เพื่อให้แน่ใจว่าติดตั้งลง Python ตัวเดียวกับที่เรียก ใน notebook ใช้ <code>%pip install ...</code> ซึ่งติดตั้งลง kernel ที่กำลังรันเสมอ</p>
+</section>
+<section id="ปญหาอนของการตดตง" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาอนของการตดตง">ปัญหาอื่นของการติดตั้ง</h3>
+<div id="tbl-appf-install" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-install-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1: ปัญหาการติดตั้งที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-appf-install-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุที่พบบ่อย</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>conda: command not found</code> หรือ <code>uv: command not found</code></td>
+<td>ยังไม่ได้เพิ่มโปรแกรมลง <code>PATH</code> หรือยังไม่ได้เปิด terminal ใหม่หลังติดตั้ง</td>
+<td>ปิดแล้วเปิด terminal ใหม่ ถ้ายังไม่ได้ ให้รัน <code>conda init</code> หรือทำตามคำแนะนำท้ายการติดตั้งของ uv</td>
+</tr>
+<tr class="even">
+<td><code>conda activate</code> แล้ว prompt ไม่เปลี่ยน หรือใน PowerShell ได้ error เรื่อง execution policy</td>
+<td>shell ยังไม่ได้ตั้งค่าให้รู้จัก conda</td>
+<td>รัน <code>conda init powershell</code> (Windows) หรือ <code>conda init zsh</code> (macOS) แล้วเปิด terminal ใหม่</td>
+</tr>
+<tr class="odd">
+<td>แก้การพึ่งพาของแพ็กเกจไม่ได้ (<code>ResolutionImpossible</code>, <code>UnsatisfiableError</code>)</td>
+<td>แพ็กเกจสองตัวต้องการเวอร์ชันของแพ็กเกจที่สามที่ขัดกัน</td>
+<td>สร้างสภาพแวดล้อมใหม่จากไฟล์ lock แทนการติดตั้งเพิ่มทีละตัว ถ้าต้องเพิ่มแพ็กเกจ ให้แก้ <code>environment.yml</code> หรือ <code>pyproject.toml</code> แล้วสร้างใหม่ (<a href="../chapters/02-reproducible-environment.html#sec-ch02-lock" class="quarto-xref"><span>การ lock เวอร์ชัน: environment.yml, pyproject.toml, uv.lock</span></a>)</td>
+</tr>
+<tr class="even">
+<td>ติดตั้งแพ็กเกจแล้วใช้เวลานานมากและมีข้อความ <code>Building wheel for ...</code></td>
+<td>ไม่มี wheel สำเร็จรูปสำหรับ Python หรือระบบปฏิบัติการนี้ pip จึงคอมไพล์จาก source</td>
+<td>ใช้ Python เวอร์ชันที่ไลบรารีรองรับ (เล่มนี้ใช้ 3.12) หรือติดตั้งจาก conda-forge ซึ่งมี binary ให้</td>
+</tr>
+<tr class="odd">
+<td><code>ModuleNotFoundError: No module named 'pkg_resources'</code> ตอน import ไลบรารีรุ่นเก่า เช่น ydata-profiling</td>
+<td>setuptools รุ่นใหม่ถอด <code>pkg_resources</code> ออกแล้ว</td>
+<td>ติดตั้ง <code>setuptools&lt;81</code> ในสภาพแวดล้อม หรือรอไลบรารีออกรุ่นที่แก้แล้ว</td>
+</tr>
+<tr class="even">
+<td>โค้ดทำงานในเครื่องเพื่อน แต่ไม่ทำงานในเครื่องเรา</td>
+<td>เวอร์ชันแพ็กเกจต่างกัน</td>
+<td>เทียบผลของ <code>pip list</code> หรือ <code>uv pip list</code> และสร้างสภาพแวดล้อมจากไฟล์ lock เดียวกัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="notebook-ใหผลไมเหมอนเดม" class="level3">
+<h3 class="anchored" data-anchor-id="notebook-ใหผลไมเหมอนเดม">notebook ให้ผลไม่เหมือนเดิม</h3>
+<p>ถ้า notebook ทำงานได้ในตอนพัฒนา แต่ “Restart &amp; Run All” แล้วพัง สาเหตุคือ hidden state ตัวแปรที่ใช้ถูกสร้างจาก cell ที่ถูกลบหรือแก้ไปแล้ว (<a href="../chapters/02-reproducible-environment.html#sec-ch02-jupyter" class="quarto-xref"><span>Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ .ipynb และปัญหา hidden state</span></a>) วิธีป้องกันคือรัน “Restart &amp; Run All” ก่อน commit ทุกครั้ง และย้ายโค้ดที่ใช้ซ้ำไปไว้ในไฟล์ <code>.py</code> ใน <code>src/</code></p>
+</section>
+</section>
+<section id="sec-appf-git" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appf-git">ฉ.2 ปัญหา Git และ GitHub</h2>
+<div id="tbl-appf-git" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-git-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2: ปัญหา Git ที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-appf-git-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>fatal: not a git repository</code></td>
+<td>รันคำสั่งนอกโฟลเดอร์ของ repository</td>
+<td><code>cd</code> เข้าโฟลเดอร์โครงการ ตรวจด้วย <code>git rev-parse --show-toplevel</code></td>
+</tr>
+<tr class="even">
+<td><code>Please tell me who you are</code> ตอน commit</td>
+<td>ยังไม่ได้ตั้งชื่อและอีเมล</td>
+<td><code>git config --global user.name "ชื่อ"</code> และ <code>git config --global user.email "อีเมล"</code></td>
+</tr>
+<tr class="odd">
+<td><code>! [rejected] main -&gt; main (fetch first)</code> ตอน push</td>
+<td>มีคนอื่น push ขึ้น remote ก่อน ประวัติจึงแยกกัน</td>
+<td><code>git pull</code> เพื่อรวมงานของเพื่อนก่อน แก้ conflict ถ้ามี แล้ว push ใหม่ อย่าใช้ <code>git push --force</code> บน branch ที่ใช้ร่วมกัน</td>
+</tr>
+<tr class="even">
+<td><code>Authentication failed</code> หรือ <code>Support for password authentication was removed</code></td>
+<td>GitHub ไม่รับรหัสผ่านบัญชีผ่าน HTTPS แล้ว</td>
+<td>ใช้ <code>gh auth login</code> หรือ SSH key หรือ personal access token แทนรหัสผ่าน</td>
+</tr>
+<tr class="odd">
+<td><code>CONFLICT (content): Merge conflict in ...</code></td>
+<td>สอง branch แก้บรรทัดเดียวกัน</td>
+<td>แก้ไฟล์ตามขั้นตอนใน <a href="../chapters/03-version-control.html#sec-ch03-conflict" class="quarto-xref"><span>การแก้ conflict</span></a> แล้ว <code>git add</code> และ <code>git commit</code></td>
+</tr>
+<tr class="even">
+<td>push แล้วถูกปฏิเสธเพราะไฟล์ใหญ่เกิน 100 MB</td>
+<td>commit ไฟล์ข้อมูลเข้า Git</td>
+<td>ดูหัวข้อถัดไป</td>
+</tr>
+<tr class="odd">
+<td>ไฟล์ <code>.env</code> หรือ token หลุดขึ้น GitHub</td>
+<td>ลืมใส่ใน <code>.gitignore</code></td>
+<td>ดูหัวข้อถัดไป</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="commit-ไฟลทไมควร-commit-ไปแลว" class="level3">
+<h3 class="anchored" data-anchor-id="commit-ไฟลทไมควร-commit-ไปแลว">commit ไฟล์ที่ไม่ควร commit ไปแล้ว</h3>
+<p>ถ้ายังไม่ได้ push ให้ถอดไฟล์ออกจาก commit ล่าสุดได้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rm <span class="at">--cached</span> data/raw/big.parquet        <span class="co"># เลิกติดตามไฟล์ แต่ไฟล์ในเครื่องยังอยู่</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"data/"</span> <span class="op">&gt;&gt;</span> .gitignore</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .gitignore</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">--amend</span> <span class="at">--no-edit</span>                <span class="co"># แก้ commit ล่าสุด (เฉพาะที่ยังไม่ push)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าไฟล์อยู่ใน commit ที่เก่ากว่านั้นหรือ push ไปแล้ว การลบในประวัติต้องใช้เครื่องมืออย่าง <code>git filter-repo</code> และต้องให้ทุกคนในทีม clone ใหม่ ให้ปรึกษาผู้สอนก่อน สำหรับ <strong>ความลับ</strong> เช่น API key ที่หลุดขึ้น GitHub แม้เพียงไม่กี่นาที ให้ถือว่าความลับนั้นรั่วแล้ว ขั้นแรกคือยกเลิกและออก key ใหม่ทันที การลบออกจากประวัติเป็นขั้นที่สอง เพราะ bot สามารถสแกนหาความลับใน repository สาธารณะได้ภายในไม่กี่นาทีหลัง push</p>
+</section>
+<section id="notebook-สราง-conflict-ทอานไมออก" class="level3">
+<h3 class="anchored" data-anchor-id="notebook-สราง-conflict-ทอานไมออก">notebook สร้าง conflict ที่อ่านไม่ออก</h3>
+<p>ไฟล์ <code>.ipynb</code> เป็น JSON ที่เก็บผลลัพธ์และหมายเลขการรันไว้ด้วย การรันใหม่จึงเปลี่ยนไฟล์แม้โค้ดไม่เปลี่ยน ใช้ nbstripout ลบผลลัพธ์ก่อน commit หรือจับคู่ notebook กับไฟล์ <code>.py</code> ด้วย Jupytext (<a href="../chapters/03-version-control.html#sec-ch03-notebook" class="quarto-xref"><span>notebook กับ Git: nbstripout และ Jupytext ★</span></a>) ถ้าเกิด conflict แล้ว วิธีที่ง่ายที่สุดมักเป็นการเลือกฉบับหนึ่งทั้งไฟล์ (<code>git checkout --ours</code> หรือ <code>--theirs</code>) แล้วนำการแก้ของอีกฝ่ายมาใส่ด้วยมือ</p>
+</section>
+</section>
+<section id="sec-appf-api" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appf-api">ฉ.3 ปัญหาการเชื่อมต่อ API (SSL, timeout, encoding)</h2>
+<section id="sslerror-certificate-verify-failed" class="level3">
+<h3 class="anchored" data-anchor-id="sslerror-certificate-verify-failed"><code>SSLError: certificate verify failed</code></h3>
+<p>อาการ: เบราว์เซอร์เปิด URL ได้ปกติ แต่ <code>requests.get(url)</code> ได้</p>
+<pre class="text"><code>requests.exceptions.SSLError: ... certificate verify failed: unable to get local issuer certificate</code></pre>
+<p>สาเหตุที่พบบ่อยที่สุดคือเซิร์ฟเวอร์ส่งใบรับรองระดับกลางมาไม่ครบ เบราว์เซอร์หาใบที่ขาดเองได้ แต่ requests ใช้ชุดใบรับรองของ <code>certifi</code> และไม่หาให้ อีกสาเหตุคือเครือข่ายขององค์กรที่มีอุปกรณ์ตรวจ HTTPS ซึ่งใช้ใบรับรองของตนเอง วิธีแก้คือให้ Python ใช้ trust store ของระบบปฏิบัติการผ่านแพ็กเกจ truststore <span class="citation" data-cites="truststore2026">(<a href="../references.html#ref-truststore2026" role="doc-biblioref"><span class="nocase">Larson และคณะ</span> 2026</a>)</span> ตามที่อธิบายใน <a href="../chapters/05-data-acquisition.html#sec-ch05-http" class="quarto-xref"><span>HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</span></a></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> truststore</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>truststore.inject_into_ssl()     <span class="co"># เรียกครั้งเดียวก่อนใช้ requests</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>ห้าม</strong> แก้ด้วย <code>verify=False</code> เพราะเป็นการปิดการยืนยันตัวตนของเซิร์ฟเวอร์ทั้งหมด</p>
+</section>
+<section id="การเชอมตอคางหรอลมเปนครงคราว" class="level3">
+<h3 class="anchored" data-anchor-id="การเชอมตอคางหรอลมเปนครงคราว">การเชื่อมต่อค้างหรือล้มเป็นครั้งคราว</h3>
+<div id="tbl-appf-api" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-api-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3: ปัญหาการเชื่อมต่อ API ที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-appf-api-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>script ค้างไม่จบ</td>
+<td>ไม่ได้ตั้ง <code>timeout</code> requests จะรอไปเรื่อย ๆ</td>
+<td>ใส่ <code>timeout=(10, 60)</code> ทุกครั้ง (<a href="../chapters/05-data-acquisition.html#sec-ch05-robust" class="quarto-xref"><span>การดึงข้อมูลอย่างทนทาน: timeout, retry, backoff, idempotency</span></a>)</td>
+</tr>
+<tr class="even">
+<td><code>ConnectTimeout</code>, <code>ReadTimeout</code> เป็นบางครั้ง</td>
+<td>เครือข่ายหรือเซิร์ฟเวอร์ช้าชั่วคราว</td>
+<td>retry แบบ exponential backoff สำหรับ error ชั่วคราวเท่านั้น</td>
+</tr>
+<tr class="odd">
+<td>status 429 Too Many Requests</td>
+<td>เรียกถี่เกินกว่าที่ API อนุญาต</td>
+<td>เว้นระยะระหว่างคำขอ อ่าน header <code>Retry-After</code> ถ้ามี</td>
+</tr>
+<tr class="even">
+<td>status 403 Forbidden</td>
+<td>ไม่มีสิทธิ์ ขาด API key หรือ User-Agent ถูกปฏิเสธ</td>
+<td>ตรวจ key ใน <code>.env</code> และตั้ง User-Agent ที่ระบุตัวตนพร้อมช่องทางติดต่อ</td>
+</tr>
+<tr class="odd">
+<td><code>ProxyError: ... Tunnel connection failed: 403</code></td>
+<td>เครือข่ายของมหาวิทยาลัยหรือองค์กรบังคับใช้ proxy ที่ไม่อนุญาตปลายทางนั้น</td>
+<td>ตรวจตัวแปร <code>HTTPS_PROXY</code> ติดต่อผู้ดูแลเครือข่าย หรือทดลองจากเครือข่ายอื่น</td>
+</tr>
+<tr class="even">
+<td><code>JSONDecodeError</code> ตอน <code>r.json()</code></td>
+<td>เซิร์ฟเวอร์ตอบเป็นหน้า HTML (เช่น หน้าแจ้ง error) แทน JSON</td>
+<td>เรียก <code>r.raise_for_status()</code> ก่อน และพิมพ์ <code>r.headers["Content-Type"]</code> กับ <code>r.text[:200]</code> ดู</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ในระหว่างพัฒนา ควรเก็บ response ดิบลง <code>data/raw/</code> แล้วพัฒนาขั้นถัดไปจากไฟล์ จะได้ไม่ต้องเรียก API ซ้ำทุกครั้งที่แก้โค้ด และไม่เป็นภาระของเซิร์ฟเวอร์</p>
+</section>
+<section id="ภาษาไทยกลายเปนอกขระแปลก" class="level3">
+<h3 class="anchored" data-anchor-id="ภาษาไทยกลายเปนอกขระแปลก">ภาษาไทยกลายเป็นอักขระแปลก</h3>
+<p>ถ้าข้อความภาษาไทยจาก API หรือไฟล์ CSV แสดงเป็นอักขระอย่าง <code>à¸à¸£à¸¸</code> แปลว่าไบต์ UTF-8 ถูกอ่านด้วย encoding อื่น ถ้าได้ <code>UnicodeDecodeError: 'utf-8' codec can't decode byte</code> แปลว่าไฟล์ไม่ได้เป็น UTF-8 ซึ่งในไฟล์ภาษาไทยรุ่นเก่ามักเป็น TIS-620 หรือ cp874 (<a href="../chapters/05-data-acquisition.html#sec-ch05-formats" class="quarto-xref"><span>รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</span></a>)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"stations_old.csv"</span>, encoding<span class="op">=</span><span class="st">"cp874"</span>)    <span class="co"># ไฟล์ไทยรุ่นเก่าจาก Excel บน Windows</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>r.encoding <span class="op">=</span> <span class="st">"utf-8"</span>                                      <span class="co"># เมื่อ header ของ API ระบุ charset ผิด</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">"stations.csv"</span>, index<span class="op">=</span><span class="va">False</span>, encoding<span class="op">=</span><span class="st">"utf-8-sig"</span>)   <span class="co"># ให้ Excel เปิดภาษาไทยได้ถูกต้อง</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>utf-8-sig</code> เพิ่มเครื่องหมาย BOM ที่ต้นไฟล์ ซึ่ง Excel ใช้ตัดสินว่าไฟล์เป็น UTF-8 ถ้าไม่มี Excel บน Windows มักเปิดไฟล์ UTF-8 ภาษาไทยผิด แม้ไฟล์จะถูกต้อง</p>
+</section>
+</section>
+<section id="sec-appf-duckdb" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appf-duckdb">ฉ.4 ปัญหา DuckDB (ไฟล์ล็อก, เวอร์ชันไม่ตรงกัน)</h2>
+<section id="ไฟลฐานขอมลถกลอก" class="level3">
+<h3 class="anchored" data-anchor-id="ไฟลฐานขอมลถกลอก">ไฟล์ฐานข้อมูลถูกล็อก</h3>
+<p>DuckDB อนุญาตให้ process เดียวเปิดไฟล์ฐานข้อมูลแบบเขียนได้ หรือหลาย process เปิดแบบอ่านอย่างเดียวพร้อมกัน แต่ไม่อนุญาตให้ทั้งสองแบบพร้อมกัน <span class="citation" data-cites="duckdb2026concurrency">(<a href="../references.html#ref-duckdb2026concurrency" role="doc-biblioref">DuckDB Foundation 2026a</a>)</span> ถ้า notebook หนึ่งเปิดไฟล์แบบเขียนค้างไว้ แล้ว script ดึงข้อมูลหรือแอป Streamlit พยายามเปิดไฟล์เดียวกัน จะได้</p>
+<pre class="text"><code>_duckdb.IOException: IO Error: Could not set lock on file "data/pm25.duckdb":
+Conflicting lock is held in /usr/bin/python3.12 (PID 1043).
+See also https://duckdb.org/docs/stable/connect/concurrency</code></pre>
+<p>ข้อความบอก PID ของ process ที่ถือล็อกไว้ วิธีแก้มีสามระดับ</p>
+<ol type="1">
+<li>ปิดการเชื่อมต่อที่ไม่ใช้แล้ว ด้วย <code>con.close()</code> หรือใช้ <code>with duckdb.connect(...) as con:</code> ซึ่งปิดให้อัตโนมัติ ถ้าเป็น notebook ที่ลืมปิด ให้ restart kernel</li>
+<li>ให้ทุกโปรแกรมที่อ่านอย่างเดียวเปิดด้วย <code>read_only=True</code> เช่น notebook สำรวจ แอป Streamlit และรายงาน Quarto (<a href="../chapters/20-dashboards.html#sec-ch20-cache" class="quarto-xref"><span>caching: cache_data กับ cache_resource และการเชื่อมต่อแบบ read-only</span></a>) เหลือเพียง script ดึงข้อมูลที่เปิดแบบเขียน</li>
+<li>ถ้าจำเป็นต้องเขียนขณะที่แอปทำงาน ให้ script เขียนลงไฟล์ใหม่ แล้วสลับชื่อไฟล์เมื่อเสร็จ หรือส่งออกเป็น Parquet ให้แอปอ่าน</li>
+</ol>
+<p>ภายใน process เดียวกัน การเปิดไฟล์เดียวกันซ้ำด้วยการตั้งค่าต่างกัน เช่น ครั้งแรกแบบเขียนได้แล้วครั้งที่สองแบบ <code>read_only=True</code> ได้ error อีกแบบ</p>
+<pre class="text"><code>ConnectionException: Connection Error: Can't open a connection to same database file
+with a different configuration than existing connections</code></pre>
+<p>วิธีแก้คือใช้การเชื่อมต่อเดิม หรือ <code>close()</code> การเชื่อมต่อแรกก่อนเปิดใหม่</p>
+</section>
+<section id="เวอรชนของ-duckdb-ไมตรงกน" class="level3">
+<h3 class="anchored" data-anchor-id="เวอรชนของ-duckdb-ไมตรงกน">เวอร์ชันของ DuckDB ไม่ตรงกัน</h3>
+<p>ไฟล์ <code>.duckdb</code> มีรูปแบบการจัดเก็บ (storage format) ที่ผูกกับเวอร์ชัน ตั้งแต่ DuckDB 1.0 รุ่นใหม่อ่านไฟล์ของรุ่นเก่าได้เสมอ และโดยค่าเริ่มต้น รุ่นใหม่เขียนไฟล์ในรูปแบบที่รุ่น 1.x ก่อนหน้ายังอ่านได้ <span class="citation" data-cites="duckdb2026storage">(<a href="../references.html#ref-duckdb2026storage" role="doc-biblioref">DuckDB Foundation 2026b</a>)</span> ปัญหาเกิดเมื่อไฟล์ถูกสร้างด้วยการตั้งค่า <code>storage_compatibility_version</code> เป็นรุ่นล่าสุด หรือใช้คุณสมบัติที่ต้องการรูปแบบใหม่ แล้วเพื่อนที่ใช้ DuckDB รุ่นเก่ากว่าเปิดไฟล์</p>
+<pre class="text"><code>IOException: IO Error: Trying to read a database file with version number 68,
+but we can only read version 64.
+The database file was created with an newer version of DuckDB.</code></pre>
+<p>วิธีแก้ที่ถูกต้องคือให้ทุกคนในทีมใช้เวอร์ชันเดียวกันตามไฟล์ lock ของโครงการ (<a href="../chapters/02-reproducible-environment.html#sec-ch02-lock" class="quarto-xref"><span>การ lock เวอร์ชัน: environment.yml, pyproject.toml, uv.lock</span></a>) เหตุผลข้อนี้เองที่โครงการไม่แลกไฟล์ <code>.duckdb</code> กัน แต่แลก script ที่สร้างไฟล์ขึ้นใหม่ได้ ถ้าจำเป็นต้องส่งข้อมูลข้ามเวอร์ชัน ให้ส่งออกเป็น Parquet ซึ่งเป็นรูปแบบมาตรฐานที่ไม่ขึ้นกับเวอร์ชันของ DuckDB</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> daily_pm25_clean <span class="kw">TO</span> <span class="st">'daily_pm25_clean.parquet'</span> (FORMAT parquet);</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- อีกเครื่อง:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> daily_pm25_clean <span class="kw">AS</span> <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="st">'daily_pm25_clean.parquet'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ปญหาอนของ-duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาอนของ-duckdb">ปัญหาอื่นของ DuckDB</h3>
+<div id="tbl-appf-duckdb" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-duckdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4: ปัญหาอื่นของ DuckDB
+</figcaption>
+<div aria-describedby="tbl-appf-duckdb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Catalog Error: Table with name ... does not exist</code></td>
+<td>เปิดไฟล์ผิด หรือเชื่อมต่อแบบ in-memory (<code>duckdb.connect()</code> ไม่ระบุไฟล์)</td>
+<td>ตรวจ path ด้วย <code>SELECT current_database()</code> และ <code>SHOW TABLES</code> ใช้ path จาก root ของโครงการ (<a href="../chapters/02-reproducible-environment.html#sec-ch02-project" class="quarto-xref"><span>โครงสร้างโครงการ การตั้งค่า และการจัดการความลับ (.env)</span></a>)</td>
+</tr>
+<tr class="even">
+<td>ได้ไฟล์ <code>pm25.duckdb</code> เปล่าในโฟลเดอร์ <code>notebooks/</code></td>
+<td>ใช้ path สัมพัทธ์ ขณะที่ notebook รันจากโฟลเดอร์อื่น DuckDB สร้างไฟล์ใหม่ให้เงียบ ๆ</td>
+<td>ใช้ path แบบอิงตำแหน่ง root ของโครงการ และลบไฟล์เปล่านั้น</td>
+</tr>
+<tr class="odd">
+<td><code>Conversion Error</code> ตอนโหลด CSV</td>
+<td>มีค่าที่แปลงเป็นชนิดข้อมูลที่อนุมานไว้ไม่ได้ เช่น <code>"-"</code> ในคอลัมน์ตัวเลข</td>
+<td>ระบุ <code>nullstr='-'</code> หรืออ่านเป็นข้อความก่อนแล้วใช้ <code>TRY_CAST</code></td>
+</tr>
+<tr class="even">
+<td>ค่าวันที่เลื่อนไป 7 ชั่วโมง</td>
+<td>ปนกันระหว่าง <code>TIMESTAMP</code> กับ <code>TIMESTAMPTZ</code> และเขตเวลาของ session</td>
+<td>เก็บเวลาเป็นเวลาไทยแบบไม่มีเขตเวลาตามข้อตกลงของโครงการ หรือ <code>SET TimeZone = 'Asia/Bangkok'</code> (<a href="../chapters/07-sql-analysis.html#sec-ch07-datetime" class="quarto-xref"><span>การจัดการวันเวลาและเขตเวลาใน SQL</span></a>)</td>
+</tr>
+<tr class="odd">
+<td>upsert แล้วจำนวนแถวไม่ตรงที่คาด</td>
+<td>ข้อมูลชุดที่ใส่มีคีย์ซ้ำกันเองภายในชุด</td>
+<td>ขจัดข้อมูลซ้ำในชุดก่อนด้วย <code>QUALIFY row_number() ... = 1</code> (<a href="../chapters/07-sql-analysis.html#sec-ch07-upsert" class="quarto-xref"><span>การโหลดข้อมูลแบบ idempotent: upsert และการขจัดข้อมูลซ้ำ</span></a>)</td>
+</tr>
+<tr class="even">
+<td>query ช้าผิดปกติ</td>
+<td>อ่าน CSV ซ้ำทุกครั้ง หรือกรองหลัง join ข้อมูลรายชั่วโมงทั้งหมด</td>
+<td>โหลดเข้าเป็นตารางหรือ Parquet ครั้งเดียว ดู <code>EXPLAIN ANALYZE</code> (<a href="../chapters/07-sql-analysis.html#sec-ch07-query-plan" class="quarto-xref"><span>query plan, EXPLAIN ANALYZE และการปรับประสิทธิภาพ ★</span></a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-appf-thai" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appf-thai">ฉ.5 ปัญหาภาษาไทยในกราฟ, notebook และ terminal</h2>
+<section id="กราฟ-matplotlib-และ-seaborn-แสดงภาษาไทยเปนสเหลยม" class="level3">
+<h3 class="anchored" data-anchor-id="กราฟ-matplotlib-และ-seaborn-แสดงภาษาไทยเปนสเหลยม">กราฟ matplotlib และ seaborn แสดงภาษาไทยเป็นสี่เหลี่ยม</h3>
+<p>อาการ: ป้ายกำกับภาษาไทยกลายเป็นสี่เหลี่ยมว่าง พร้อมคำเตือน</p>
+<pre class="text"><code>UserWarning: Glyph 3616 (\N{THAI CHARACTER PHO SAMPHAO}) missing from font(s) DejaVu Sans.</code></pre>
+<p>สาเหตุคือฟอนต์เริ่มต้นของ matplotlib ไม่มีอักษรไทย วิธีแก้คือตั้งฟอนต์ไทยก่อนวาดด้วยฟังก์ชัน <code>viz_style.setup()</code> ใน <a href="../chapters/11-visual-perception.html#sec-ch11-thai-fonts" class="quarto-xref"><span>ตัวอักษรไทยในกราฟ</span></a> ถ้าติดตั้งฟอนต์ใหม่แล้วยังไม่เห็น ให้ restart kernel เพราะ matplotlib สร้างรายการฟอนต์ไว้ตอน import ถ้ายังไม่ได้อีก ให้ลบแคชฟอนต์ของ matplotlib แล้ว restart</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(matplotlib.get_cachedir())    <span class="co"># ลบไฟล์ fontlist-*.json ในโฟลเดอร์นี้ แล้ว restart kernel</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ปญหาภาษาไทยในทอน" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาภาษาไทยในทอน">ปัญหาภาษาไทยในที่อื่น</h3>
+<div id="tbl-appf-thai" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-thai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5: ปัญหาภาษาไทยที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-appf-thai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ที่เกิด</th>
+<th>อาการ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Plotly และ Altair</td>
+<td>ปกติแสดงได้ แต่ภาพที่ส่งออกเป็น PNG ด้วย Kaleido หรือ vl-convert อาจเป็นสี่เหลี่ยม</td>
+<td>ติดตั้งฟอนต์ไทยในระบบ และระบุ <code>font_family</code> ใน layout</td>
+</tr>
+<tr class="even">
+<td>ไฟล์ PDF จาก Quarto</td>
+<td>อักษรไทยหายหรือเป็นสี่เหลี่ยม</td>
+<td>ตั้ง <code>mainfont</code> เป็นฟอนต์ไทยในส่วนหัวของเอกสาร (<a href="#sec-appf-tools">ฉ.6</a>)</td>
+</tr>
+<tr class="odd">
+<td>terminal ของ Windows</td>
+<td><code>print()</code> ภาษาไทยได้ <code>UnicodeEncodeError: 'charmap' codec can't encode</code></td>
+<td>ตั้งตัวแปร <code>PYTHONUTF8=1</code> หรือใช้ Windows Terminal ที่ตั้งเป็น UTF-8</td>
+</tr>
+<tr class="even">
+<td>ชื่อไฟล์ภาษาไทย</td>
+<td>script ทำงานบนเครื่องหนึ่งแต่หาไฟล์ไม่เจอบนอีกเครื่อง</td>
+<td>ใช้ชื่อไฟล์และชื่อคอลัมน์เป็นภาษาอังกฤษ เก็บภาษาไทยไว้ในข้อมูล เช่น <code>name_th</code></td>
+</tr>
+<tr class="odd">
+<td>การเรียงลำดับ</td>
+<td>ชื่อจังหวัดเรียงผิดลำดับพจนานุกรม เช่น เชียงใหม่ อยู่หลัง ตาก เพราะเรียงตามรหัสอักขระ และสระหน้า (เ แ โ ใ ไ) มีรหัสสูงกว่าพยัญชนะ</td>
+<td>ใน DuckDB ใช้ <code>ORDER BY name_th COLLATE th</code> ซึ่งเรียงตามพจนานุกรมไทย</td>
+</tr>
+<tr class="even">
+<td>การตัดคำ</td>
+<td>นับ “คำ” ในข้อความไทยด้วย <code>split()</code> ได้ผิด เพราะภาษาไทยไม่เว้นวรรคระหว่างคำ</td>
+<td>ใช้ไลบรารีตัดคำภาษาไทย เช่น PyThaiNLP</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-appf-tools" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appf-tools">ฉ.6 ปัญหา Streamlit และ Quarto</h2>
+<section id="streamlit" class="level3">
+<h3 class="anchored" data-anchor-id="streamlit">Streamlit</h3>
+<div id="tbl-appf-streamlit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-streamlit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6: ปัญหา Streamlit ที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-appf-streamlit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>missing ScriptRunContext! This warning can be ignored when running in bare mode.</code> และไม่มีหน้าเว็บ</td>
+<td>รันด้วย <code>python app.py</code></td>
+<td>รันด้วย <code>streamlit run app/app.py</code></td>
+</tr>
+<tr class="even">
+<td>แอปช้า ทุกการคลิกใช้เวลาหลายวินาที</td>
+<td>Streamlit รัน script ใหม่ทั้งไฟล์ทุกครั้งที่ผู้ใช้โต้ตอบ และ query ถูกรันซ้ำทุกครั้ง</td>
+<td>ใช้ <code>st.cache_data</code> กับฟังก์ชันที่ query และ <code>st.cache_resource</code> กับการเชื่อมต่อ (<a href="../chapters/20-dashboards.html#sec-ch20-cache" class="quarto-xref"><span>caching: cache_data กับ cache_resource และการเชื่อมต่อแบบ read-only</span></a>)</td>
+</tr>
+<tr class="odd">
+<td>ค่าที่ผู้ใช้เลือกหายไปหลังคลิก</td>
+<td>เก็บค่าในตัวแปรธรรมดา ซึ่งถูกสร้างใหม่ทุก rerun</td>
+<td>เก็บใน <code>st.session_state</code> (<a href="../chapters/20-dashboards.html#sec-ch20-streamlit" class="quarto-xref"><span>แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</span></a>)</td>
+</tr>
+<tr class="even">
+<td>แก้ข้อมูลในฐานข้อมูลแล้วแอปยังแสดงค่าเดิม</td>
+<td>ผลของ <code>cache_data</code> ยังไม่หมดอายุ</td>
+<td>ตั้ง <code>ttl</code> ของ cache หรือกด Clear cache ในเมนู</td>
+</tr>
+<tr class="odd">
+<td><code>There are multiple button elements with the same auto-generated ID</code></td>
+<td>widget ชนิดเดียวกันสองตัวมี label และพารามิเตอร์เหมือนกัน</td>
+<td>ใส่ <code>key=</code> ที่ไม่ซ้ำให้แต่ละตัว</td>
+</tr>
+<tr class="even">
+<td><code>Could not set lock on file</code></td>
+<td>notebook หรือ script อื่นเปิดฐานข้อมูลแบบเขียนค้างไว้</td>
+<td>ดู <a href="#sec-appf-duckdb">ฉ.4</a> และเปิดการเชื่อมต่อในแอปด้วย <code>read_only=True</code></td>
+</tr>
+<tr class="odd">
+<td>เปิด <code>localhost:8501</code> แล้วเห็นแอปเวอร์ชันเก่า</td>
+<td>แอป Streamlit ตัวเก่ายังทำงานอยู่ ตัวใหม่จึงไปใช้พอร์ตถัดไป เช่น 8502</td>
+<td>ดู URL ที่ terminal แสดง แล้วปิดตัวเก่าด้วย Ctrl+C ใน terminal ของมัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="quarto" class="level3">
+<h3 class="anchored" data-anchor-id="quarto">Quarto</h3>
+<p>เริ่มด้วย <code>quarto check</code> เสมอ คำสั่งนี้ตรวจว่า Quarto หา Python, Jupyter และ LaTeX หรือ Typst ได้หรือไม่ และใช้ Python ตัวไหน</p>
+<div id="tbl-appf-quarto" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appf-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;7: ปัญหา Quarto ที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-appf-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>อาการ</th>
+<th>สาเหตุ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ModuleNotFoundError</code> ระหว่าง render แต่ใน notebook import ได้</td>
+<td>Quarto ใช้ Python คนละตัวกับสภาพแวดล้อมโครงการ</td>
+<td>เปิดสภาพแวดล้อมก่อนรัน <code>quarto render</code> หรือตั้งตัวแปร <code>QUARTO_PYTHON</code> ให้ชี้ไปยัง Python ของโครงการ</td>
+</tr>
+<tr class="even">
+<td><code>No module named 'papermill'</code> หรือพารามิเตอร์ไม่ถูกส่งเข้า</td>
+<td>รายงานแบบมีพารามิเตอร์ของเอกสาร Python ต้องใช้ papermill และ cell ที่มี tag <code>parameters</code></td>
+<td>ติดตั้ง papermill และตรวจ tag ของ cell (<a href="../chapters/19-storytelling-reports.html#sec-ch19-parameterized" class="quarto-xref"><span>รายงานแบบมีพารามิเตอร์ ★</span></a>)</td>
+</tr>
+<tr class="odd">
+<td>render สำเร็จแต่ไม่เจอไฟล์ผลลัพธ์</td>
+<td>ในโครงการ Quarto ผลลัพธ์ไปอยู่ใน <code>output-dir</code> เช่น <code>_site/</code> หรือ <code>_book/</code></td>
+<td>ดู <code>output-dir</code> ใน <code>_quarto.yml</code></td>
+</tr>
+<tr class="even">
+<td>PDF ไม่ออก และมีข้อความเกี่ยวกับ LaTeX</td>
+<td>ยังไม่ได้ติดตั้ง TeX</td>
+<td><code>quarto install tinytex</code> หรือเปลี่ยนเป็น <code>format: typst</code></td>
+</tr>
+<tr class="odd">
+<td>PDF ภาษาไทยเป็นสี่เหลี่ยมหรือหาย</td>
+<td>ฟอนต์เริ่มต้นไม่มีอักษรไทย</td>
+<td>ตั้ง <code>mainfont: "Sarabun"</code> (หรือฟอนต์ไทยอื่นที่ติดตั้ง) ในส่วนหัว</td>
+</tr>
+<tr class="even">
+<td>ผลลัพธ์ในรายงานไม่อัปเดตหลังแก้ข้อมูล</td>
+<td>เปิด <code>freeze</code> หรือ <code>cache</code> ไว้</td>
+<td>render ใหม่ด้วย <code>quarto render --cache-refresh</code> หรือปิด <code>freeze</code> ชั่วคราว</td>
+</tr>
+<tr class="odd">
+<td>render ช้ามาก</td>
+<td>ทุก render รัน query ทั้งหมดใหม่</td>
+<td>ทำ query หนักใน pipeline ให้ได้ตารางสรุปก่อน แล้วให้รายงานอ่านตารางสรุป</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ส่วนหัวของรายงาน PDF ภาษาไทยที่ใช้ได้กับ Typst มีลักษณะดังนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"รายงานสถานการณ์ PM2.5"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> th</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">typst</span><span class="kw">:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> </span><span class="st">"Sarabun"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าปัญหาไม่ตรงกับที่รวบรวมไว้ในภาคผนวกนี้ ให้เตรียมสามอย่างก่อนถามผู้สอนหรือค้นหาในเว็บ ได้แก่ ข้อความ error ทั้งหมด (ไม่ใช่ภาพหน้าจอเฉพาะบรรทัดสุดท้าย) โค้ดที่เล็กที่สุดที่ทำให้เกิดปัญหา และเวอร์ชันของ Python กับแพ็กเกจที่เกี่ยวข้อง ถ้าใช้ AI ช่วยหาวิธีแก้ ให้ตรวจว่าวิธีที่ได้ไม่ปิดการป้องกันความปลอดภัย เช่น <code>verify=False</code> และบันทึกการใช้ตามแนวทางใน <a href="../chapters/02-reproducible-environment.html#sec-ch02-ai" class="quarto-xref"><span>การใช้ AI ช่วยเขียนโค้ด: ขอบเขต วิธีตรวจสอบ และการบันทึก</span></a></p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-duckdb2026concurrency" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026a. <em>Concurrency</em>. <a href="https://duckdb.org/docs/stable/connect/concurrency">https://duckdb.org/docs/stable/connect/concurrency</a>.
+</div>
+<div id="ref-duckdb2026storage" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026b. <em>Storage Versions and Format</em>. <a href="https://duckdb.org/docs/stable/internals/storage">https://duckdb.org/docs/stable/internals/storage</a>.
+</div>
+<div id="ref-truststore2026" class="csl-entry" role="listitem">
+<span class="nocase">Larson, Seth และคณะ</span>. 2026. <em>truststore: Verify Certificates Using <span>OS</span> Trust Stores</em>. <a href="https://truststore.readthedocs.io/">https://truststore.readthedocs.io/</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../appendices/e-math.html" class="pagination-link" aria-label="ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/g-answers.html" class="pagination-link" aria-label="ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก">
+        <span class="nav-page-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

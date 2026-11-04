@@ -513,7 +513,7 @@
 <span id="cb9-4"><a aria-hidden="true" tabindex="-1"></a>QUALIFY <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> station_id, ts <span class="kw">ORDER</span> <span class="kw">BY</span> fetched_at <span class="kw">DESC</span>) <span class="op">=</span> <span class="dv">1</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>ตัดซ้ำในชุดใหม่ก่อน (เลือกไฟล์ที่ดึงล่าสุด)</li>
-<li>DuckDB ไม่ยอมให้คำสั่งเดียว upsert key เดียวกันสองครั้ง</li>
+<li>ถ้าชุดใหม่มี key ซ้ำ DuckDB 1.5 เก็บแถวแรกเงียบ ๆ (อาจเป็นค่าเก่า) จึงต้องเลือกเอง</li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, ts, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n</span>
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span> <span class="kw">HAVING</span> n <span class="op">&gt;</span> <span class="dv">1</span>;   <span class="co">-- ควรได้ตารางว่าง</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -575,7 +575,7 @@
 <li>DuckDB → pandas / Polars ผ่าน Arrow: ไม่แปลงทีละค่า จึงเร็ว</li>
 <li><strong>Parquet = ดิสก์</strong> · <strong>Arrow = RAM</strong></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>tbl <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM stations"</span>).fetch_arrow_table()   <span class="co"># pyarrow.Table</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>tbl <span class="op">=</span> con.sql(<span class="st">"SELECT * FROM stations"</span>).to_arrow_table()   <span class="co"># pyarrow.Table</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section></section>
 <section>
 <section id="srcload_duckdb.py" class="title-slide slide level1 center">
@@ -631,6 +631,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/08-data-wrangling.html">บทที่ 8</a> ก่อนเข้าเรียน</li>
 <li>สะสมข้อมูลต่อ: <code>fetch_air4thai.py</code> → <code>load_duckdb.py</code></li>
 <li>อ่าน Wickham (2014) <em>Tidy Data</em> ส่วนที่ 1–3: <code>measurements</code> tidy หรือไม่</li>
 <li>ทบทวน pandas <code>groupby</code>, <code>merge</code>, <code>pd.to_datetime</code></li>
@@ -924,7 +925,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

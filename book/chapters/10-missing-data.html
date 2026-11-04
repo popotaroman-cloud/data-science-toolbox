@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; ข้อมูลสูญหาย – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/11-visual-perception.html" rel="next">
+<link href="../chapters/09-data-quality.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/09-data-quality.html">ส่วนที่ 3 คุณภาพข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/10-missing-data.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch10-explicit-implicit" id="toc-sec-ch10-explicit-implicit" class="nav-link" data-scroll-target="#sec-ch10-explicit-implicit"><span class="header-section-number">10.1</span> explicit กับ implicit missing</a>
+  <ul class="collapse">
+  <li><a href="#ขอมลสญหายมสองหนาตา" id="toc-ขอมลสญหายมสองหนาตา" class="nav-link" data-scroll-target="#ขอมลสญหายมสองหนาตา">ข้อมูลสูญหายมีสองหน้าตา</a></li>
+  <li><a href="#สรางตารางเวลาเตม" id="toc-สรางตารางเวลาเตม" class="nav-link" data-scroll-target="#สรางตารางเวลาเตม">สร้างตารางเวลาเต็ม</a></li>
+  <li><a href="#ชนดของการสญหายใน-measurements_clean" id="toc-ชนดของการสญหายใน-measurements_clean" class="nav-link" data-scroll-target="#ชนดของการสญหายใน-measurements_clean">ชนิดของการสูญหายใน measurements_clean</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-rubin" id="toc-sec-ch10-rubin" class="nav-link" data-scroll-target="#sec-ch10-rubin"><span class="header-section-number">10.2</span> กรอบแนวคิดของ Rubin: MCAR, MAR, MNAR</a>
+  <ul class="collapse">
+  <li><a href="#คำถามทถกตอง" id="toc-คำถามทถกตอง" class="nav-link" data-scroll-target="#คำถามทถกตอง">คำถามที่ถูกต้อง</a></li>
+  <li><a href="#ผลของแตละกลไก" id="toc-ผลของแตละกลไก" class="nav-link" data-scroll-target="#ผลของแตละกลไก">ผลของแต่ละกลไก</a></li>
+  <li><a href="#mnar-พสจนไมไดจากขอมลชดเดยว" id="toc-mnar-พสจนไมไดจากขอมลชดเดยว" class="nav-link" data-scroll-target="#mnar-พสจนไมไดจากขอมลชดเดยว">MNAR พิสูจน์ไม่ได้จากข้อมูลชุดเดียว</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-evidence" id="toc-sec-ch10-evidence" class="nav-link" data-scroll-target="#sec-ch10-evidence"><span class="header-section-number">10.3</span> การหาหลักฐานกลไกการสูญหาย และ ★ Little’s MCAR test</a>
+  <ul class="collapse">
+  <li><a href="#ภาพรวมดวย-missingno" id="toc-ภาพรวมดวย-missingno" class="nav-link" data-scroll-target="#ภาพรวมดวย-missingno">ภาพรวมด้วย missingno</a></li>
+  <li><a href="#ความสมพนธกบเวลา" id="toc-ความสมพนธกบเวลา" class="nav-link" data-scroll-target="#ความสมพนธกบเวลา">ความสัมพันธ์กับเวลา</a></li>
+  <li><a href="#ความสมพนธกบตวแปรตวแทน" id="toc-ความสมพนธกบตวแปรตวแทน" class="nav-link" data-scroll-target="#ความสมพนธกบตวแปรตวแทน">ความสัมพันธ์กับตัวแปรตัวแทน</a></li>
+  <li><a href="#littles-mcar-test" id="toc-littles-mcar-test" class="nav-link" data-scroll-target="#littles-mcar-test">Little’s MCAR test ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-deletion" id="toc-sec-ch10-deletion" class="nav-link" data-scroll-target="#sec-ch10-deletion"><span class="header-section-number">10.4</span> การตัดทิ้ง: listwise, pairwise และอคติที่ตามมา</a>
+  <ul class="collapse">
+  <li><a href="#listwise-deletion" id="toc-listwise-deletion" class="nav-link" data-scroll-target="#listwise-deletion">listwise deletion</a></li>
+  <li><a href="#pairwise-deletion" id="toc-pairwise-deletion" class="nav-link" data-scroll-target="#pairwise-deletion">pairwise deletion</a></li>
+  <li><a href="#เกณฑความครบถวนเปนการตดทงแบบหนง" id="toc-เกณฑความครบถวนเปนการตดทงแบบหนง" class="nav-link" data-scroll-target="#เกณฑความครบถวนเปนการตดทงแบบหนง">เกณฑ์ความครบถ้วนเป็นการตัดทิ้งแบบหนึ่ง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-single" id="toc-sec-ch10-single" class="nav-link" data-scroll-target="#sec-ch10-single"><span class="header-section-number">10.5</span> การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation</a>
+  <ul class="collapse">
+  <li><a href="#การเตมคาคออะไร" id="toc-การเตมคาคออะไร" class="nav-link" data-scroll-target="#การเตมคาคออะไร">การเติมค่าคืออะไร</a></li>
+  <li><a href="#เตมดวยคาเฉลยหรอมธยฐาน" id="toc-เตมดวยคาเฉลยหรอมธยฐาน" class="nav-link" data-scroll-target="#เตมดวยคาเฉลยหรอมธยฐาน">เติมด้วยค่าเฉลี่ยหรือมัธยฐาน</a></li>
+  <li><a href="#locf" id="toc-locf" class="nav-link" data-scroll-target="#locf">LOCF</a></li>
+  <li><a href="#interpolation" id="toc-interpolation" class="nav-link" data-scroll-target="#interpolation">interpolation</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-mice" id="toc-sec-ch10-mice" class="nav-link" data-scroll-target="#sec-ch10-mice"><span class="header-section-number">10.6</span> การเติมค่าด้วยแบบจำลอง: regression, KNN, MICE ★</a>
+  <ul class="collapse">
+  <li><a href="#ใชขอมลทเหนทำนายขอมลทหาย" id="toc-ใชขอมลทเหนทำนายขอมลทหาย" class="nav-link" data-scroll-target="#ใชขอมลทเหนทำนายขอมลทหาย">ใช้ข้อมูลที่เห็นทำนายข้อมูลที่หาย</a></li>
+  <li><a href="#เปรยบเทยบกบขอมลทรคำตอบ" id="toc-เปรยบเทยบกบขอมลทรคำตอบ" class="nav-link" data-scroll-target="#เปรยบเทยบกบขอมลทรคำตอบ">เปรียบเทียบกับข้อมูลที่รู้คำตอบ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-multiple" id="toc-sec-ch10-multiple" class="nav-link" data-scroll-target="#sec-ch10-multiple"><span class="header-section-number">10.7</span> multiple imputation และ Rubin’s rules ★</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองเตมหลายชด" id="toc-ทำไมตองเตมหลายชด" class="nav-link" data-scroll-target="#ทำไมตองเตมหลายชด">ทำไมต้องเติมหลายชุด</a></li>
+  <li><a href="#rubins-rules" id="toc-rubins-rules" class="nav-link" data-scroll-target="#rubins-rules">Rubin’s rules</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-timeseries-gaps" id="toc-sec-ch10-timeseries-gaps" class="nav-link" data-scroll-target="#sec-ch10-timeseries-gaps"><span class="header-section-number">10.8</span> ช่องว่างในข้อมูลอนุกรมเวลา</a>
+  <ul class="collapse">
+  <li><a href="#อนกรมเวลาตางจากขอมลทวไปอยางไร" id="toc-อนกรมเวลาตางจากขอมลทวไปอยางไร" class="nav-link" data-scroll-target="#อนกรมเวลาตางจากขอมลทวไปอยางไร">อนุกรมเวลาต่างจากข้อมูลทั่วไปอย่างไร</a></li>
+  <li><a href="#ชองวางสนกบชองวางยาว" id="toc-ชองวางสนกบชองวางยาว" class="nav-link" data-scroll-target="#ชองวางสนกบชองวางยาว">ช่องว่างสั้นกับช่องว่างยาว</a></li>
+  <li><a href="#srcclean.py" id="toc-srcclean.py" class="nav-link" data-scroll-target="#srcclean.py">src/clean.py</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-sensitivity" id="toc-sec-ch10-sensitivity" class="nav-link" data-scroll-target="#sec-ch10-sensitivity"><span class="header-section-number">10.9</span> sensitivity analysis และการรายงานการตัดสินใจ</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองทดสอบความไว" id="toc-ทำไมตองทดสอบความไว" class="nav-link" data-scroll-target="#ทำไมตองทดสอบความไว">ทำไมต้องทดสอบความไว</a></li>
+  <li><a href="#ตวอยาง-เกณฑความครบถวน" id="toc-ตวอยาง-เกณฑความครบถวน" class="nav-link" data-scroll-target="#ตวอยาง-เกณฑความครบถวน">ตัวอย่าง: เกณฑ์ความครบถ้วน</a></li>
+  <li><a href="#ทดสอบสถานการณ-mnar" id="toc-ทดสอบสถานการณ-mnar" class="nav-link" data-scroll-target="#ทดสอบสถานการณ-mnar">ทดสอบสถานการณ์ MNAR</a></li>
+  <li><a href="#รายงานการตดสนใจ" id="toc-รายงานการตดสนใจ" class="nav-link" data-scroll-target="#รายงานการตดสนใจ">รายงานการตัดสินใจ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch10-case" id="toc-sec-ch10-case" class="nav-link" data-scroll-target="#sec-ch10-case">กรณีศึกษา: ข้อมูลที่หายในฤดูฝุ่นเปลี่ยนคำตอบของ Q1 หรือไม่</a></li>
+  <li><a href="#sec-ch10-pitfalls" id="toc-sec-ch10-pitfalls" class="nav-link" data-scroll-target="#sec-ch10-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch10-exercises" id="toc-sec-ch10-exercises" class="nav-link" data-scroll-target="#sec-ch10-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/09-data-quality.html">ส่วนที่ 3 คุณภาพข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/10-missing-data.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 9 ตั้งกฎให้ยอมรับค่าว่างไว้ก่อน (<code>nullable=True</code>) เพราะการตัดสินใจว่าจะทิ้ง เติม หรือเก็บค่าว่างไว้ ต้องรู้ก่อนว่าข้อมูล <em>หายไปเพราะอะไร</em> บทนี้ตอบคำถามนั้น ข้อมูลสูญหายดูเหมือนปัญหาทางเทคนิคเล็ก ๆ ที่แก้ได้ด้วย <code>dropna()</code> หรือ <code>fillna()</code> แต่ความจริงเป็นหนึ่งในจุดที่ข้อสรุปของการวิเคราะห์เปลี่ยนได้มากที่สุด ถ้าเครื่องวัดหยุดทำงานบ่อยในวันที่ฝุ่นหนาที่สุด การตัดวันเหล่านั้นทิ้งจะทำให้สรุปว่าอากาศดีกว่าความจริง ทั้งที่ทุกขั้นของการคำนวณถูกต้อง</p>
+<p>บทนี้เริ่มจากการมองให้เห็นข้อมูลสูญหายครบทั้งสองแบบ ต่อด้วยกรอบแนวคิดของ Rubin ซึ่งเป็นภาษากลางของเรื่องนี้ วิธีหาหลักฐานว่าข้อมูลหายแบบใด แล้วจึงไปยังทางเลือกในการจัดการ ตั้งแต่การตัดทิ้งไปจนถึงการเติมค่าแบบหลายชุด และจบด้วยสิ่งที่สำคัญที่สุด คือการทดสอบว่าข้อสรุปไวต่อการตัดสินใจเหล่านี้มากน้อยเพียงใด และการรายงานอย่างซื่อตรง ผลงานของบทคือ <code>src/clean.py</code> ซึ่งสร้างตาราง <code>measurements_clean</code> และ view <code>daily_pm25_clean</code> ที่ใช้ตลอดเล่มตั้งแต่บทที่ 11</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>แยกข้อมูลสูญหายแบบ explicit กับ implicit และตรวจพบทั้งสองแบบ</li>
+<li>อธิบายกลไกการสูญหาย MCAR, MAR และ MNAR และผลของแต่ละกลไกต่อค่าสรุป</li>
+<li>หาหลักฐานของกลไกการสูญหายจากความสัมพันธ์กับเวลา สถานี และตัวแปรตัวแทน</li>
+<li>เปรียบเทียบการตัดทิ้ง การเติมค่าแบบเดี่ยว และการเติมค่าด้วยแบบจำลอง พร้อมข้อแลกเปลี่ยน</li>
+<li>จัดการช่องว่างในข้อมูลอนุกรมเวลาโดยแยกช่องว่างสั้นกับช่องว่างยาว</li>
+<li>ทำ sensitivity analysis และรายงานการตัดสินใจเรื่องข้อมูลสูญหายอย่างโปร่งใส</li>
+</ol>
+</section>
+<section id="sec-ch10-explicit-implicit" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="sec-ch10-explicit-implicit"><span class="header-section-number">10.1</span> explicit กับ implicit missing</h2>
+<section id="ขอมลสญหายมสองหนาตา" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลสญหายมสองหนาตา">ข้อมูลสูญหายมีสองหน้าตา</h3>
+<p><span class="idx">ข้อมูลสูญหาย</span> (missing data) ในตารางของโครงการปรากฏได้สองแบบ</p>
+<div id="tbl-ch10-explicit-implicit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-explicit-implicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.1: ข้อมูลสูญหายแบบ explicit และ implicit
+</figcaption>
+<div aria-describedby="tbl-ch10-explicit-implicit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แบบ</th>
+<th>ลักษณะ</th>
+<th>ตัวอย่าง</th>
+<th>ตรวจด้วย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>explicit</td>
+<td>มีแถว แต่ค่าเป็น <code>NULL</code></td>
+<td>สถานีส่งข้อมูลมา แต่ <code>pm25</code> เป็น <code>"-1"</code> ซึ่งถูกแปลงเป็น <code>NULL</code></td>
+<td><code>isna()</code>, <code>COUNT(*) - COUNT(pm25)</code></td>
+</tr>
+<tr class="even">
+<td>implicit</td>
+<td>ไม่มีแถวนั้นเลย</td>
+<td>ระบบไม่ได้บันทึกชั่วโมง 02:00–05:00 จึงไม่มีแถวของชั่วโมงเหล่านั้น</td>
+<td>ต้องสร้างรายการเวลาที่ควรมีก่อน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><code>isna()</code> และ <code>COUNT(pm25)</code> มองเห็นเฉพาะแบบแรก แบบที่สองมองไม่เห็นเพราะไม่มีแถวให้ตรวจ ถ้าวัดสัดส่วนข้อมูลสูญหายจากตาราง <code>measurements</code> ตรง ๆ จะได้ตัวเลขที่ต่ำกว่าความจริงเสมอ บทที่ 7 และ 8 ได้แสดงร่องรอยของปัญหานี้แล้ว ทั้ง <code>generate_series</code> ใน SQL และความต่างระหว่าง <code>resample</code> กับ <code>groupby</code> ใน pandas</p>
+</section>
+<section id="สรางตารางเวลาเตม" class="level3">
+<h3 class="anchored" data-anchor-id="สรางตารางเวลาเตม">สร้างตารางเวลาเต็ม</h3>
+<p>วิธีทำให้ข้อมูลสูญหายแบบ implicit กลายเป็นแบบ explicit คือ สร้าง <strong><span class="idx">ตารางเวลาเต็ม</span></strong> (full grid) ของทุกสถานีกับทุกชั่วโมงที่ควรมี แล้วนำข้อมูลจริงมาเติม ช่องที่ไม่มีข้อมูลจะกลายเป็น <code>NaN</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> con.execute(<span class="st">"SELECT station_id, ts, pm25, pm10 FROM measurements"</span>).df()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> m[<span class="st">"ts"</span>].<span class="bu">min</span>().floor(<span class="st">"D"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>end <span class="op">=</span> m[<span class="st">"ts"</span>].<span class="bu">max</span>().floor(<span class="st">"D"</span>) <span class="op">+</span> pd.Timedelta(days<span class="op">=</span><span class="dv">1</span>)            <span class="co"># วันถัดไป (ไม่รวม)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>hours <span class="op">=</span> pd.date_range(start, end, freq<span class="op">=</span><span class="st">"h"</span>, inclusive<span class="op">=</span><span class="st">"left"</span>)    <span class="co"># 24 ชั่วโมงต่อวันครบทุกวัน</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>full_idx <span class="op">=</span> pd.MultiIndex.from_product([m[<span class="st">"station_id"</span>].unique(), hours],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                                      names<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"ts"</span>])</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>hourly <span class="op">=</span> m.set_index([<span class="st">"station_id"</span>, <span class="st">"ts"</span>]).reindex(full_idx).reset_index()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"แถวจริง </span><span class="sc">{</span><span class="bu">len</span>(m)<span class="sc">:,}</span><span class="ss"> · แถวที่ควรมี </span><span class="sc">{</span><span class="bu">len</span>(hourly)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"pm25 ว่างในตารางเดิม </span><span class="sc">{</span>m[<span class="st">'pm25'</span>]<span class="sc">.</span>isna()<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss"> · ว่างจริง </span><span class="sc">{</span>hourly[<span class="st">'pm25'</span>]<span class="sc">.</span>isna()<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ขั้นตอนนี้ทำได้เพราะ <code>(station_id, ts)</code> ไม่ซ้ำ ซึ่งบทที่ 9 ตรวจด้วย pandera แล้ว ถ้ามี key ซ้ำ <code>reindex</code> จะแจ้ง error ข้อควรระวังคือ ตารางเวลาเต็มที่สร้างจากวันแรกถึงวันสุดท้ายของทั้งชุดข้อมูล จะนับช่วงก่อนสถานีเปิดหรือหลังสถานีปิดเป็นข้อมูลสูญหายด้วย ถ้ารู้วันเปิดและปิดของแต่ละสถานี ควรสร้างตารางเวลาเต็มแยกตามช่วงของแต่ละสถานี</p>
+</section>
+<section id="ชนดของการสญหายใน-measurements_clean" class="level3">
+<h3 class="anchored" data-anchor-id="ชนดของการสญหายใน-measurements_clean">ชนิดของการสูญหายใน measurements_clean</h3>
+<p>เอกสารรายสัปดาห์ที่ 7 จัดสถานะของแต่ละชั่วโมงในตารางเวลาเต็มเป็นห้าแบบ เก็บไว้ในคอลัมน์ <code>status</code> ของตาราง <span class="idx-data"><code>measurements_clean</code></span></p>
+<div id="tbl-ch10-status" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.2: สถานะของแต่ละชั่วโมงใน measurements_clean
+</figcaption>
+<div aria-describedby="tbl-ch10-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>status</code></th>
+<th>ความหมาย</th>
+<th>มาจาก</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ok</code></td>
+<td>มีค่าที่ผ่านการตรวจ</td>
+<td>ข้อมูลปกติ</td>
+</tr>
+<tr class="even">
+<td><code>null</code></td>
+<td>มีแถวแต่ค่าว่าง</td>
+<td>ข้อมูลสูญหายแบบ explicit</td>
+</tr>
+<tr class="odd">
+<td><code>no_row</code></td>
+<td>ไม่มีแถว</td>
+<td>ข้อมูลสูญหายแบบ implicit</td>
+</tr>
+<tr class="even">
+<td><code>sentinel</code></td>
+<td>ค่าแทนที่หลุดผ่านขั้นโหลด</td>
+<td>กฎในบทที่ 9</td>
+</tr>
+<tr class="odd">
+<td><code>stuck</code></td>
+<td>ค่าอยู่ในช่วงค่าซ้ำที่ยาวเกินเกณฑ์</td>
+<td>การตรวจเครื่องวัดค้างในบทที่ 9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การแยกสถานะแบบนี้ทำให้ค่าว่างไม่ใช่ “ค่าว่าง” ที่ไม่มีที่มาอีกต่อไป ผู้วิเคราะห์รู้ว่าค่าแต่ละค่าหายไปเพราะอะไร ซึ่งเป็นข้อมูลที่จำเป็นต่อการหาหลักฐานของกลไกการสูญหายในหัวข้อถัดไป</p>
+</section>
+</section>
+<section id="sec-ch10-rubin" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-ch10-rubin"><span class="header-section-number">10.2</span> กรอบแนวคิดของ Rubin: MCAR, MAR, MNAR</h2>
+<section id="คำถามทถกตอง" class="level3">
+<h3 class="anchored" data-anchor-id="คำถามทถกตอง">คำถามที่ถูกต้อง</h3>
+<p>ในปี ค.ศ. 1976 Donald Rubin เสนอกรอบแนวคิดที่กลายเป็นภาษากลางของเรื่องข้อมูลสูญหาย <span class="citation" data-cites="rubin1976inference">(<a href="../references.html#ref-rubin1976inference" role="doc-biblioref">Rubin 1976</a>)</span> แนวคิดหลักคือ ให้ถามว่า <em>โอกาสที่ค่าหนึ่งจะหาย ขึ้นกับอะไร</em> ไม่ใช่ถามเพียงว่าหายไปกี่ค่า คำตอบแบ่งได้เป็นสามแบบ</p>
+<p><strong><span class="idx">MCAR</span></strong> (Missing Completely At Random) โอกาสที่ค่าจะหายไม่ขึ้นกับอะไรเลย ทั้งค่าที่เห็นและค่าที่หายไป เช่น เครือข่ายขัดข้องแบบสุ่มโดยไม่มีรูปแบบ</p>
+<p><strong><span class="idx">MAR</span></strong> (Missing At Random) โอกาสที่ค่าจะหายขึ้นกับตัวแปรที่ <em>เราเห็น</em> แต่เมื่อคำนึงถึงตัวแปรเหล่านั้นแล้ว ไม่ขึ้นกับค่าที่หายไปเอง เช่น สถานีปิดซ่อมบำรุงตามรอบในช่วงกลางวันของวันทำงาน หรือสถานีบางแห่งเก่ากว่าจึงขัดข้องบ่อยกว่า ชื่อ “at random” ทำให้สับสนได้ง่าย เพราะ MAR ไม่ได้สุ่มจริง แต่เป็นระบบที่อธิบายได้ด้วยข้อมูลที่มี</p>
+<p><strong><span class="idx">MNAR</span></strong> (Missing Not At Random) โอกาสที่ค่าจะหายขึ้นกับ <em>ค่าที่หายไปเอง</em> เช่น ตัวกรองของเครื่องวัดอุดตันในช่วงที่ฝุ่นหนามาก จึงไม่มีค่าในชั่วโมงที่ PM2.5 สูงที่สุด</p>
+<p>ในภาษาของความน่าจะเป็น ให้ <span class="math inline">\(R\)</span> เป็นตัวแปรที่บอกว่าค่าหายหรือไม่ <span class="math inline">\(Y_{\text{obs}}\)</span> เป็นค่าที่เห็น และ <span class="math inline">\(Y_{\text{mis}}\)</span> เป็นค่าที่หายไป สามกลไกนิยามได้ดังนี้</p>
+<p><span id="eq-ch10-mechanisms"><span class="math display">\[
+\begin{aligned}
+\text{MCAR:}\quad &amp; P(R \mid Y_{\text{obs}}, Y_{\text{mis}}) = P(R) \\
+\text{MAR:}\quad &amp; P(R \mid Y_{\text{obs}}, Y_{\text{mis}}) = P(R \mid Y_{\text{obs}}) \\
+\text{MNAR:}\quad &amp; P(R \mid Y_{\text{obs}}, Y_{\text{mis}}) \text{ ขึ้นกับ } Y_{\text{mis}}
+\end{aligned}
+\tag{10.1}\]</span></span></p>
+<p>กล่าวคือ ภายใต้ MCAR โอกาสที่ค่าจะหายเป็นค่าคงที่ ภายใต้ MAR โอกาสนั้นอธิบายได้ด้วยข้อมูลที่เห็นเพียงอย่างเดียว ส่วน MNAR อธิบายด้วยข้อมูลที่เห็นไม่ได้ทั้งหมด</p>
+</section>
+<section id="ผลของแตละกลไก" class="level3">
+<h3 class="anchored" data-anchor-id="ผลของแตละกลไก">ผลของแต่ละกลไก</h3>
+<p>การจำลองต่อไปนี้แสดงผลของแต่ละกลไกให้เห็นเป็นตัวเลข เราใช้ค่ารายชั่วโมงหนึ่งปีของสถานีหนึ่งในฐานข้อมูลสมมุติเป็น “ความจริง” แล้วจงใจลบค่าออกสามแบบ แบบ MCAR ลบแบบสุ่มร้อยละ 20 แบบ MAR ลบครึ่งหนึ่งของชั่วโมง 09:00–16:00 (ขึ้นกับชั่วโมงของวันซึ่งเราเห็น) และแบบ MNAR ลบครึ่งหนึ่งของชั่วโมงที่ค่าสูงกว่าควอนไทล์ที่ 80 (ขึ้นกับค่าที่หายไปเอง) จากนั้นคำนวณจำนวนวันที่ข้อมูลครบและสัดส่วนวันเกินมาตรฐานด้วยเกณฑ์ 18 ชั่วโมงตามปกติ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">10</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>truth <span class="op">=</span> con.execute(<span class="st">"""SELECT ts, pm25 FROM measurements</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE station_id = '35t' AND ts &gt;= TIMESTAMP '2022-01-01' AND ts &lt; TIMESTAMP '2023-01-01'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">      AND pm25 IS NOT NULL"""</span>).df().set_index(<span class="st">"ts"</span>)[<span class="st">"pm25"</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(s: pd.Series) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> s.resample(<span class="st">"D"</span>).agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> d[d[<span class="st">"count"</span>] <span class="op">&gt;=</span> <span class="dv">18</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(d), <span class="bu">round</span>(<span class="dv">100</span> <span class="op">*</span> (d[<span class="st">"mean"</span>] <span class="op">&gt;</span> <span class="fl">37.5</span>).mean(), <span class="dv">1</span>), <span class="bu">round</span>(s.mean(), <span class="dv">1</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>hour <span class="op">=</span> truth.index.hour</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>mcar <span class="op">=</span> truth.where(rng.random(<span class="bu">len</span>(truth)) <span class="op">&gt;</span> <span class="fl">0.2</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>mar <span class="op">=</span> truth.where(<span class="op">~</span>((hour <span class="op">&gt;=</span> <span class="dv">9</span>) <span class="op">&amp;</span> (hour <span class="op">&lt;=</span> <span class="dv">16</span>) <span class="op">&amp;</span> (rng.random(<span class="bu">len</span>(truth)) <span class="op">&lt;</span> <span class="fl">0.5</span>)))</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>mnar <span class="op">=</span> truth.where(<span class="op">~</span>((truth <span class="op">&gt;</span> truth.quantile(<span class="fl">0.8</span>)) <span class="op">&amp;</span> (rng.random(<span class="bu">len</span>(truth)) <span class="op">&lt;</span> <span class="fl">0.5</span>)))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, s <span class="kw">in</span> [(<span class="st">"ความจริง"</span>, truth), (<span class="st">"MCAR"</span>, mcar), (<span class="st">"MAR"</span>, mar), (<span class="st">"MNAR"</span>, mnar)]:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name, <span class="ss">f"หาย </span><span class="sc">{</span>s<span class="sc">.</span>isna()<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>, summarize(s))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-ch10-mechanism-sim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-mechanism-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.3: ผลของกลไกการสูญหายต่อค่าสรุป จากการจำลองบนข้อมูลสมมุติ
+</figcaption>
+<div aria-describedby="tbl-ch10-mechanism-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ชุด</th>
+<th>ค่าหาย</th>
+<th>วันที่ครบ</th>
+<th>ร้อยละวันเกิน 37.5 µg/m³</th>
+<th>ค่าเฉลี่ยรายชั่วโมง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ความจริง</td>
+<td>0.0%</td>
+<td>365</td>
+<td>20.5</td>
+<td>29.5</td>
+</tr>
+<tr class="even">
+<td>MCAR</td>
+<td>19.4%</td>
+<td>268</td>
+<td>20.1</td>
+<td>29.3</td>
+</tr>
+<tr class="odd">
+<td>MAR (ตามชั่วโมงของวัน)</td>
+<td>16.4%</td>
+<td>322</td>
+<td>20.2</td>
+<td>29.2</td>
+</tr>
+<tr class="even">
+<td>MNAR (หายเมื่อค่าสูง)</td>
+<td>10.3%</td>
+<td>298</td>
+<td>1.7</td>
+<td>26.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ผลใน <a href="#tbl-ch10-mechanism-sim" class="quarto-xref">ตารางที่&nbsp;<span>10.3</span></a> สอนสามเรื่อง เรื่องแรก MCAR ทำให้ข้อมูลน้อยลง (วันที่ครบลดจาก 365 เหลือ 268) แต่สัดส่วนวันเกินมาตรฐานแทบไม่เปลี่ยน เพราะวันที่หายไปเป็นตัวแทนของทุกวัน เรื่องที่สอง MAR ในตัวอย่างนี้ก็แทบไม่ทำให้เอนเอียงเช่นกัน เพราะชั่วโมงที่หายกระจายเท่ากันทุกวัน แต่ถ้าชั่วโมงกลางวันมีค่าต่างจากชั่วโมงอื่นมาก ค่าเฉลี่ยรายวันจะเอนเอียงได้ และแก้ได้ด้วยการคำนึงถึงชั่วโมงของวัน เรื่องที่สามสำคัญที่สุด MNAR ทำให้ค่าหายเพียงร้อยละ 10 ซึ่งน้อยกว่า MCAR แต่สัดส่วนวันเกินมาตรฐานลดจากร้อยละ 20.5 เหลือ 1.7 เพราะวันที่ฝุ่นหนาสูญเสียชั่วโมงไปจนไม่ผ่านเกณฑ์ความครบถ้วน และวันที่เหลือก็มีค่าเฉลี่ยต่ำลง <strong>ปริมาณของข้อมูลที่หายสำคัญน้อยกว่ากลไกที่ทำให้หาย</strong></p>
+</section>
+<section id="mnar-พสจนไมไดจากขอมลชดเดยว" class="level3">
+<h3 class="anchored" data-anchor-id="mnar-พสจนไมไดจากขอมลชดเดยว">MNAR พิสูจน์ไม่ได้จากข้อมูลชุดเดียว</h3>
+<p>ข้อจำกัดพื้นฐานของกรอบแนวคิดนี้คือ การแยก MAR ออกจาก MNAR ต้องรู้ค่าที่หายไป ซึ่งเราไม่รู้ ข้อมูลชุดเดียวจึงพิสูจน์ไม่ได้ว่าเป็น MNAR หรือไม่ สิ่งที่ทำได้คือหา <em>หลักฐานแวดล้อม</em> และใช้ความรู้เชิงโดเมน แล้วระบุสมมติฐานของเราให้ชัดในรายงาน ส่วน MCAR ทดสอบได้บางส่วน ซึ่งหัวข้อถัดไปอธิบาย</p>
+</section>
+</section>
+<section id="sec-ch10-evidence" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="sec-ch10-evidence"><span class="header-section-number">10.3</span> การหาหลักฐานกลไกการสูญหาย และ ★ Little’s MCAR test</h2>
+<section id="ภาพรวมดวย-missingno" class="level3">
+<h3 class="anchored" data-anchor-id="ภาพรวมดวย-missingno">ภาพรวมด้วย missingno</h3>
+<p><span class="idx-tool">missingno</span> เป็นไลบรารีที่แสดงรูปแบบของข้อมูลสูญหายเป็นภาพ <span class="citation" data-cites="bilogur2018missingno">(<a href="../references.html#ref-bilogur2018missingno" role="doc-biblioref">Bilogur 2018</a>)</span> ทำงานกับ DataFrame แบบกว้าง จึงต้อง pivot ให้แถวเป็นชั่วโมงและคอลัมน์เป็นสถานีก่อน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> missingno <span class="im">as</span> msno</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> hourly.pivot(index<span class="op">=</span><span class="st">"ts"</span>, columns<span class="op">=</span><span class="st">"station_id"</span>, values<span class="op">=</span><span class="st">"pm25"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>msno.matrix(wide)      <span class="co"># แถบขาว = ช่วงที่หาย ดูว่าหายเป็นช่วงยาวหรือกระจาย</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>msno.bar(wide)         <span class="co"># สัดส่วนข้อมูลที่มีของแต่ละสถานี</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>msno.heatmap(wide)     <span class="co"># สถานีใดมักหายพร้อมกัน (nullity correlation)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-ch10-missingno" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-missingno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.4: การตีความภาพของ missingno
+</figcaption>
+<div aria-describedby="tbl-ch10-missingno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ภาพ</th>
+<th>ถ้าเห็นแบบนี้</th>
+<th>ตีความเบื้องต้น</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>matrix</td>
+<td>แถบขาวแนวนอนตัดทุกสถานีพร้อมกัน</td>
+<td>ปัญหาของระบบส่วนกลางหรือ script ดึงข้อมูลของเราเอง ไม่ใช่เครื่องวัด</td>
+</tr>
+<tr class="even">
+<td>matrix</td>
+<td>แถบขาวยาวเฉพาะสถานีเดียว</td>
+<td>สถานีขัดข้องหรือปิดซ่อม</td>
+</tr>
+<tr class="odd">
+<td>heatmap</td>
+<td>สถานีในจังหวัดเดียวกันหายพร้อมกัน</td>
+<td>ปัญหาไฟฟ้าหรือเครือข่ายในพื้นที่ (MAR ตามพื้นที่)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ความสมพนธกบเวลา" class="level3">
+<h3 class="anchored" data-anchor-id="ความสมพนธกบเวลา">ความสัมพันธ์กับเวลา</h3>
+<p>ถ้าการสูญหายสัมพันธ์กับเวลา เป็นหลักฐานว่าไม่ใช่ MCAR</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hourly[<span class="st">"is_na"</span>] <span class="op">=</span> hourly[<span class="st">"pm25"</span>].isna()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hourly.groupby(hourly[<span class="st">"ts"</span>].dt.hour)[<span class="st">"is_na"</span>].mean())          <span class="co"># ตามชั่วโมงของวัน</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hourly.groupby(hourly[<span class="st">"ts"</span>].dt.day_of_week)[<span class="st">"is_na"</span>].mean())   <span class="co"># ตามวันในสัปดาห์ (0 = จันทร์)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hourly.groupby(hourly[<span class="st">"ts"</span>].dt.month)[<span class="st">"is_na"</span>].mean())         <span class="co"># ตามเดือน</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าค่าหายมากเฉพาะวันหนึ่งของสัปดาห์ในช่วงกลางวัน เป็นหลักฐานของการซ่อมบำรุงตามรอบ ซึ่งเป็น MAR ตามเวลา ถ้าค่าหายมากในเดือนที่ฝุ่นสูงตามฤดูกาล ให้สงสัย MNAR เพราะเดือนนั้นมีค่าสูง แต่ก็อาจเป็น MAR ตามเดือนได้ ถ้าเหตุที่หายเป็นเรื่องอื่นที่เกิดในช่วงเดียวกัน เช่น การซ่อมบำรุงประจำปี หลักฐานแบบนี้จึงต้องตีความร่วมกับความรู้เชิงโดเมน</p>
+</section>
+<section id="ความสมพนธกบตวแปรตวแทน" class="level3">
+<h3 class="anchored" data-anchor-id="ความสมพนธกบตวแปรตวแทน">ความสัมพันธ์กับตัวแปรตัวแทน</h3>
+<p>เราไม่เห็นค่า PM2.5 ที่หายไป แต่เห็น <strong><span class="idx">ตัวแปรตัวแทน</span></strong> (proxy) ที่สัมพันธ์กับมันได้ เช่น ค่า PM2.5 ของชั่วโมงก่อนหน้า ค่า PM10 ของชั่วโมงเดียวกัน หรือค่าของสถานีใกล้เคียง ถ้าตัวแปรตัวแทนในช่วงที่ค่าหายสูงกว่าช่วงที่มีค่าอย่างชัดเจน เป็นหลักฐานว่าค่ามักหายตอนฝุ่นหนา</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hourly <span class="op">=</span> hourly.sort_values([<span class="st">"station_id"</span>, <span class="st">"ts"</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>hourly[<span class="st">"pm25_prev"</span>] <span class="op">=</span> hourly.groupby(<span class="st">"station_id"</span>)[<span class="st">"pm25"</span>].shift(<span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(hourly.groupby(<span class="st">"is_na"</span>)[[<span class="st">"pm25_prev"</span>, <span class="st">"pm10"</span>]].median())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อควรระวังมีสองข้อ ข้อแรก ถ้า PM10 หายพร้อมกับ PM2.5 เสมอ เช่น เมื่อทั้งสถานีหยุดทำงาน PM10 จะใช้เป็นตัวแทนไม่ได้ ต้องใช้ค่าของชั่วโมงก่อนหน้าหรือสถานีใกล้เคียงแทน ข้อสอง ควรตรวจแยกสถานี เพราะผลรวมของทุกสถานีอาจซ่อนความต่างระหว่างสถานี สถานีหนึ่งอาจมีกลไกแบบ MNAR ขณะที่สถานีอื่นเป็น MCAR</p>
+<p>ผลที่ได้จากตัวแปรตัวแทนต้องตีความอย่างระมัดระวัง ถ้าค่าของชั่วโมงก่อนหน้าสูงกว่าในกลุ่มที่หาย เราสรุปได้ว่าการสูญหายสัมพันธ์กับระดับมลพิษ ซึ่ง <em>สนับสนุน</em> MNAR หรืออย่างน้อย MAR ที่ขึ้นกับระดับมลพิษ แต่ยังไม่ได้ <em>พิสูจน์</em> MNAR</p>
+</section>
+<section id="littles-mcar-test" class="level3">
+<h3 class="anchored" data-anchor-id="littles-mcar-test">Little’s MCAR test ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>Roderick Little เสนอการทดสอบทางสถิติสำหรับสมมติฐานว่างที่ว่าข้อมูลเป็น MCAR <span class="citation" data-cites="little1988test">(<a href="../references.html#ref-little1988test" role="doc-biblioref">Little 1988</a>)</span> แนวคิดคือ แบ่งแถวเป็นกลุ่มตาม <em>รูปแบบของการสูญหาย</em> (เช่น กลุ่มที่ครบทุกคอลัมน์ กลุ่มที่ขาดเฉพาะ <code>pm25</code> กลุ่มที่ขาดทั้ง <code>pm25</code> และ <code>pm10</code>) ถ้าข้อมูลเป็น MCAR ค่าเฉลี่ยของตัวแปรที่เห็นในแต่ละกลุ่มควรใกล้เคียงกับค่าเฉลี่ยรวม สถิติทดสอบคือ</p>
+<p><span id="eq-ch10-little"><span class="math display">\[
+d^2 = \sum_{j=1}^{J} n_j \left(\bar{y}_{\text{obs},j} - \hat{\mu}_{\text{obs},j}\right)^{\top} \hat{\Sigma}_{\text{obs},j}^{-1} \left(\bar{y}_{\text{obs},j} - \hat{\mu}_{\text{obs},j}\right)
+\tag{10.2}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(J\)</span> คือจำนวนรูปแบบของการสูญหาย <span class="math inline">\(n_j\)</span> คือจำนวนแถวในกลุ่ม <span class="math inline">\(j\)</span> <span class="math inline">\(\bar{y}_{\text{obs},j}\)</span> คือค่าเฉลี่ยของตัวแปรที่เห็นในกลุ่มนั้น และ <span class="math inline">\(\hat{\mu}_{\text{obs},j}\)</span> กับ <span class="math inline">\(\hat{\Sigma}_{\text{obs},j}\)</span> คือค่าเฉลี่ยและเมทริกซ์ความแปรปรวนร่วมที่ประมาณจากข้อมูลทั้งหมด (ด้วยอัลกอริทึม EM) เฉพาะส่วนของตัวแปรที่เห็นในกลุ่มนั้น ภายใต้ MCAR <span class="math inline">\(d^2\)</span> มีการแจกแจงโดยประมาณแบบไคกำลังสอง ค่า <span class="math inline">\(d^2\)</span> ที่ใหญ่กว่าที่คาดไว้มากจึงเป็นหลักฐานว่าไม่ใช่ MCAR</p>
+<p>การทดสอบนี้มีข้อจำกัดที่ต้องรู้ ข้อแรก ปฏิเสธได้แค่ MCAR ไม่ได้บอกว่าเป็น MAR หรือ MNAR ข้อสอง สมมุติว่าข้อมูลมีการแจกแจงปกติหลายตัวแปร ซึ่งค่า PM2.5 ที่เบ้ขวามากไม่เป็นเช่นนั้น ข้อสาม กับข้อมูลหลายแสนแถว การทดสอบจะปฏิเสธ MCAR เกือบทุกครั้งแม้ความต่างจะเล็กมากในทางปฏิบัติ และข้อสี่ ไม่ได้คำนึงถึงโครงสร้างอนุกรมเวลา ในทางปฏิบัติ การตรวจรูปแบบตามเวลาและตัวแปรตัวแทนในหัวข้อก่อนหน้าจึงให้ข้อมูลที่มีประโยชน์กว่า</p>
+</section>
+</section>
+<section id="sec-ch10-deletion" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="sec-ch10-deletion"><span class="header-section-number">10.4</span> การตัดทิ้ง: listwise, pairwise และอคติที่ตามมา</h2>
+<section id="listwise-deletion" class="level3">
+<h3 class="anchored" data-anchor-id="listwise-deletion">listwise deletion</h3>
+<p><strong><span class="idx">listwise deletion</span></strong> (หรือ complete-case analysis) คือการตัดแถวที่มีค่าว่างในคอลัมน์ใดคอลัมน์หนึ่งที่ใช้ทิ้งทั้งแถว เป็นค่าเริ่มต้นของเครื่องมือส่วนใหญ่ เช่น <code>dropna()</code> และแบบจำลองทางสถิติจำนวนมาก ข้อดีคือเรียบง่ายและไม่สร้างค่าที่ไม่ได้วัดจริง ข้อเสียมีสองข้อ ข้อแรก ข้อมูลลดลง โดยเฉพาะเมื่อใช้หลายคอลัมน์ ถ้าแต่ละคอลัมน์หายร้อยละ 5 แบบอิสระต่อกัน การใช้หกคอลัมน์จะเหลือแถวที่ครบเพียงประมาณ <span class="math inline">\(0.95^6 \approx 0.74\)</span> หรือร้อยละ 74 ข้อสอง ถ้าไม่ใช่ MCAR ผลจะเอนเอียง ดังที่ <a href="#tbl-ch10-mechanism-sim" class="quarto-xref">ตารางที่&nbsp;<span>10.3</span></a> แสดง</p>
+</section>
+<section id="pairwise-deletion" class="level3">
+<h3 class="anchored" data-anchor-id="pairwise-deletion">pairwise deletion</h3>
+<p><strong><span class="idx">pairwise deletion</span></strong> ใช้แถวที่ครบเฉพาะคอลัมน์ที่เกี่ยวข้องกับการคำนวณแต่ละครั้ง เช่น สหสัมพันธ์ระหว่าง PM2.5 กับ PM10 ใช้แถวที่ทั้งสองคอลัมน์มีค่า ส่วนสหสัมพันธ์ระหว่าง PM2.5 กับ O3 ใช้อีกชุดแถวหนึ่ง <code>DataFrame.corr()</code> ของ pandas ทำงานแบบนี้โดยค่าเริ่มต้น ข้อดีคือใช้ข้อมูลได้มากกว่า ข้อเสียคือแต่ละค่าในเมทริกซ์สหสัมพันธ์มาจากแถวคนละชุด จึงเปรียบเทียบกันได้ไม่ตรง และเมทริกซ์ที่ได้อาจไม่มีคุณสมบัติทางคณิตศาสตร์ที่ควรมี (positive semi-definite) ซึ่งทำให้การวิเคราะห์ต่อ เช่น PCA ในบทที่ 15 มีปัญหา</p>
+</section>
+<section id="เกณฑความครบถวนเปนการตดทงแบบหนง" class="level3">
+<h3 class="anchored" data-anchor-id="เกณฑความครบถวนเปนการตดทงแบบหนง">เกณฑ์ความครบถ้วนเป็นการตัดทิ้งแบบหนึ่ง</h3>
+<p>เกณฑ์ <code>n_hours &gt;= 18</code> ที่ใช้ตลอดเล่มคือการตัดทิ้งในระดับวัน วันที่ข้อมูลไม่ครบถูกตัดออกจากการนับวันเกินมาตรฐาน ข้อดีคือค่าเฉลี่ยรายวันที่เหลือเชื่อถือได้มากขึ้น เกณฑ์ร้อยละ 75 แบบนี้เป็นแนวปฏิบัติที่พบได้ทั่วไปในการรายงานคุณภาพอากาศ แต่ในเล่มนี้ถือเป็นข้อกำหนดของโครงการ ไม่ใช่มาตรฐานทางการ ข้อเสียคือ ถ้าการสูญหายเป็น MNAR วันที่ฝุ่นหนาที่สุดจะถูกตัดทิ้งไปด้วย ดังที่การจำลองแสดง</p>
+<div id="tbl-ch10-deletion" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-deletion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.5: เปรียบเทียบวิธีตัดทิ้ง
+</figcaption>
+<div aria-describedby="tbl-ch10-deletion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>วิธี</th>
+<th>ใช้ข้อมูล</th>
+<th>ความเอนเอียงภายใต้ MCAR</th>
+<th>ความเอนเอียงภายใต้ MAR/MNAR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>listwise</td>
+<td>เฉพาะแถวที่ครบทุกคอลัมน์</td>
+<td>ไม่เอนเอียง ข้อมูลน้อยลง</td>
+<td>เอนเอียงได้</td>
+</tr>
+<tr class="even">
+<td>pairwise</td>
+<td>แถวที่ครบเฉพาะคู่ที่คำนวณ</td>
+<td>ไม่เอนเอียง</td>
+<td>เอนเอียงได้ และแต่ละค่ามาจากแถวคนละชุด</td>
+</tr>
+<tr class="odd">
+<td>เกณฑ์ความครบถ้วนรายวัน</td>
+<td>เฉพาะวันที่มีชั่วโมงพอ</td>
+<td>ไม่เอนเอียง</td>
+<td>เอนเอียงได้มากถ้าวันที่หายคือวันที่ค่าสูง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch10-single" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="sec-ch10-single"><span class="header-section-number">10.5</span> การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation</h2>
+<section id="การเตมคาคออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="การเตมคาคออะไร">การเติมค่าคืออะไร</h3>
+<p><span class="idx">การเติมค่า</span> (imputation) คือการแทนค่าที่หายไปด้วยค่าประมาณ <strong>การเติมค่าแบบเดี่ยว</strong> (single imputation) เติมค่าเดียวต่อช่อง แล้ววิเคราะห์ต่อเหมือนข้อมูลครบ ปัญหาร่วมของทุกวิธีในกลุ่มนี้คือ การวิเคราะห์ที่ตามมาไม่รู้ว่าค่าใดเป็นค่าเติม จึงถือว่าค่าเติมแน่นอนเท่ากับค่าที่วัดจริง ความไม่แน่นอนของผลจึงดูน้อยกว่าความจริง ด้วยเหตุนี้ ค่าที่เติมต้องมีคอลัมน์บอกสถานะเสมอ เช่น <code>is_filled</code> ใน <code>measurements_clean</code></p>
+</section>
+<section id="เตมดวยคาเฉลยหรอมธยฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="เตมดวยคาเฉลยหรอมธยฐาน">เติมด้วยค่าเฉลี่ยหรือมัธยฐาน</h3>
+<p>การเติมด้วยค่าเฉลี่ยของคอลัมน์ทำให้ค่าเฉลี่ยรวมไม่เปลี่ยน แต่ลดความแปรปรวนลง และทำลายความสัมพันธ์กับตัวแปรอื่น เพราะค่าเติมทุกค่าเท่ากัน กับข้อมูลอนุกรมเวลาแบบ PM2.5 การเติมด้วยค่าเฉลี่ยทั้งปียิ่งไม่เหมาะ เพราะค่าในฤดูฝุ่นกับฤดูฝนต่างกันมาก ถ้าจะเติมด้วยค่ากลาง อย่างน้อยควรใช้ค่ากลางของบริบทใกล้เคียง เช่น มัธยฐานของชั่วโมงเดียวกันในเดือนเดียวกัน</p>
+</section>
+<section id="locf" class="level3">
+<h3 class="anchored" data-anchor-id="locf">LOCF</h3>
+<p><strong><span class="idx">LOCF</span></strong> (Last Observation Carried Forward) เติมด้วยค่าล่าสุดก่อนหน้า (<code>ffill()</code> ใน pandas) สมมุติว่าค่าคงที่จนกว่าจะมีค่าใหม่ ใช้ได้กับช่องว่างสั้นมาก แต่กับช่องว่างยาวจะสร้างช่วงค่าคงที่ซึ่งดูเหมือนเครื่องวัดค้างทุกประการ</p>
+</section>
+<section id="interpolation" class="level3">
+<h3 class="anchored" data-anchor-id="interpolation">interpolation</h3>
+<p><span class="idx">การประมาณค่าในช่วง</span> (interpolation) เติมค่าด้วยเส้นตรง (หรือเส้นโค้ง) ระหว่างค่าที่อยู่สองฝั่งของช่องว่าง เหมาะกับค่า PM2.5 ในช่วงสั้น เพราะค่ารายชั่วโมงมักเปลี่ยนต่อเนื่อง แต่กับช่องว่างยาว เส้นตรงจะตัดพีกที่อาจเกิดในช่วงที่หายทิ้ง</p>
+<p>ข้อควรระวังสำคัญคือ <code>Series.interpolate(limit=3)</code> ของ pandas <em>ไม่ได้</em> แปลว่า “เติมเฉพาะช่องว่างที่ยาวไม่เกิน 3” แต่แปลว่า “เติมไม่เกิน 3 ช่องแรกของทุกช่องว่าง” <span class="citation" data-cites="pandas2026missing">(<a href="../references.html#ref-pandas2026missing" role="doc-biblioref"><span class="nocase">pandas development team</span> 2026</a>)</span> ช่องว่าง 5 ชั่วโมงจึงถูกเติม 3 ชั่วโมงแรก ซึ่งไม่ใช่สิ่งที่ต้องการ ฟังก์ชันต่อไปนี้จากเอกสารรายสัปดาห์ที่ 7 วัดความยาวของช่องว่างเอง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fill_short_gaps(s: pd.Series, max_gap: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span>) <span class="op">-&gt;</span> pd.Series:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""เติมเส้นตรงตามเวลาเฉพาะช่องว่างที่ยาวไม่เกิน max_gap ชั่วโมง (s ต้องมี DatetimeIndex)"""</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    is_na <span class="op">=</span> s.isna()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    run_id <span class="op">=</span> (is_na <span class="op">!=</span> is_na.shift()).cumsum()          <span class="co"># เลขกลุ่มของช่วงที่ต่อเนื่องกัน</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    run_len <span class="op">=</span> is_na.groupby(run_id).transform(<span class="st">"sum"</span>)    <span class="co"># ความยาวของช่วงที่ว่าง</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    short <span class="op">=</span> is_na <span class="op">&amp;</span> (run_len <span class="op">&lt;=</span> max_gap)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    filled <span class="op">=</span> s.interpolate(method<span class="op">=</span><span class="st">"time"</span>, limit_area<span class="op">=</span><span class="st">"inside"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s.where(<span class="op">~</span>short, filled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เปรียบเทียบสามวิธีกับข้อมูลสมมุติ 12 ชั่วโมงที่มีช่องว่าง 2 ชั่วโมงและ 5 ชั่วโมง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>idx <span class="op">=</span> pd.date_range(<span class="st">"2026-01-15 00:00"</span>, periods<span class="op">=</span><span class="dv">12</span>, freq<span class="op">=</span><span class="st">"h"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series([<span class="dv">30</span>, <span class="va">None</span>, <span class="va">None</span>, <span class="dv">36</span>, <span class="dv">40</span>, <span class="va">None</span>, <span class="va">None</span>, <span class="va">None</span>, <span class="va">None</span>, <span class="va">None</span>, <span class="dv">20</span>, <span class="fl">22.0</span>], index<span class="op">=</span>idx)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.DataFrame({<span class="st">"pm25"</span>: s, <span class="st">"LOCF"</span>: s.ffill(),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"interpolate(limit=3)"</span>: s.interpolate(method<span class="op">=</span><span class="st">"time"</span>, limit<span class="op">=</span><span class="dv">3</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"fill_short_gaps"</span>: fill_short_gaps(s, <span class="dv">3</span>)}).<span class="bu">round</span>(<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+                     pm25  LOCF  interpolate(limit=3)  fill_short_gaps
+2026-01-15 00:00:00  30.0  30.0                  30.0             30.0
+2026-01-15 01:00:00   NaN  30.0                  32.0             32.0
+2026-01-15 02:00:00   NaN  30.0                  34.0             34.0
+2026-01-15 03:00:00  36.0  36.0                  36.0             36.0
+2026-01-15 04:00:00  40.0  40.0                  40.0             40.0
+2026-01-15 05:00:00   NaN  40.0                  36.7              NaN
+2026-01-15 06:00:00   NaN  40.0                  33.3              NaN
+2026-01-15 07:00:00   NaN  40.0                  30.0              NaN
+2026-01-15 08:00:00   NaN  40.0                   NaN              NaN
+2026-01-15 09:00:00   NaN  40.0                   NaN              NaN
+2026-01-15 10:00:00  20.0  20.0                  20.0             20.0
+2026-01-15 11:00:00  22.0  22.0                  22.0             22.0</code></pre>
+<p>ช่องว่าง 2 ชั่วโมงถูกเติมเหมือนกันทั้ง <code>interpolate</code> และ <code>fill_short_gaps</code> แต่ช่องว่าง 5 ชั่วโมง <code>interpolate(limit=3)</code> เติมครึ่งหนึ่งแล้วปล่อยที่เหลือว่าง ผลคือวันนั้นอาจผ่านเกณฑ์ความครบถ้วนเพราะค่าที่สร้างขึ้นจากช่องว่างยาว ส่วน <code>fill_short_gaps</code> ปล่อยช่องว่างยาวไว้ทั้งหมด และ LOCF สร้างค่าคงที่ 40 ต่อเนื่องหกชั่วโมง ซึ่งจะถูกกฎเครื่องวัดค้างในบทที่ 9 ตรวจพบ ถ้าการตรวจทำหลังการเติมค่า ลำดับของขั้นตอนใน pipeline จึงสำคัญ การตรวจต้องทำกับข้อมูลดิบก่อนเติมค่าเสมอ</p>
+</section>
+</section>
+<section id="sec-ch10-mice" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="sec-ch10-mice"><span class="header-section-number">10.6</span> การเติมค่าด้วยแบบจำลอง: regression, KNN, MICE ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ใชขอมลทเหนทำนายขอมลทหาย" class="level3">
+<h3 class="anchored" data-anchor-id="ใชขอมลทเหนทำนายขอมลทหาย">ใช้ข้อมูลที่เห็นทำนายข้อมูลที่หาย</h3>
+<p>ภายใต้ MAR ข้อมูลที่เห็นมีข้อมูลเกี่ยวกับค่าที่หายไป การเติมค่าด้วยแบบจำลองใช้ประโยชน์จากข้อมูลนั้น สำหรับข้อมูล PM2.5 ตัวแปรที่ช่วยทำนายได้ดีที่สุดมักเป็นค่าของ <em>สถานีอื่นในวันเดียวกัน</em> เพราะสถานีใกล้กันได้รับอิทธิพลจากสภาพอากาศเดียวกัน</p>
+<ul>
+<li><strong><span class="idx">regression imputation</span></strong> สร้างแบบจำลองถดถอยที่ทำนายคอลัมน์ที่หายจากคอลัมน์อื่น แล้วใช้ค่าทำนายเติม ปัญหาคือค่าเติมอยู่บนเส้นถดถอยพอดี จึงมีความแปรปรวนน้อยกว่าข้อมูลจริง</li>
+<li><strong><span class="idx">KNN imputation</span></strong> หาแถวที่คล้ายที่สุด <span class="math inline">\(k\)</span> แถว (ตามคอลัมน์ที่เห็น) แล้วใช้ค่าเฉลี่ยของแถวเหล่านั้นเติม <code>KNNImputer</code> ของ scikit-learn ทำได้ <span class="citation" data-cites="pedregosa2011scikit">(<a href="../references.html#ref-pedregosa2011scikit" role="doc-biblioref"><span class="nocase">Pedregosa และคณะ</span> 2011</a>)</span></li>
+<li><strong><span class="idx">MICE</span></strong> (Multivariate Imputation by Chained Equations) เติมค่าทีละคอลัมน์ด้วยแบบจำลองที่ใช้คอลัมน์อื่นเป็นตัวทำนาย แล้ววนซ้ำหลายรอบจนค่าเติมนิ่ง <span class="citation" data-cites="vanbuuren2011mice">(<a href="../references.html#ref-vanbuuren2011mice" role="doc-biblioref">Buuren และ Groothuis-Oudshoorn 2011</a>)</span> <code>IterativeImputer</code> ของ scikit-learn ใช้แนวคิดเดียวกัน</li>
+</ul>
+</section>
+<section id="เปรยบเทยบกบขอมลทรคำตอบ" class="level3">
+<h3 class="anchored" data-anchor-id="เปรยบเทยบกบขอมลทรคำตอบ">เปรียบเทียบกับข้อมูลที่รู้คำตอบ</h3>
+<p>วิธีประเมินการเติมค่าที่ตรงไปตรงมาคือ จงใจลบค่าที่รู้ออก แล้ววัดว่าแต่ละวิธีเติมได้ใกล้ค่าจริงเพียงใด ตัวอย่างต่อไปนี้ใช้ค่าเฉลี่ยรายวันปี ค.ศ. 2022 ในรูปแบบกว้าง (แถวเป็นวัน คอลัมน์เป็นสถานี) ลบค่าออกแบบสุ่มร้อยละ 15 แล้วเติมด้วยสามวิธี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.experimental <span class="im">import</span> enable_iterative_imputer  <span class="co"># noqa: F401  (ต้อง import ก่อน)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> IterativeImputer, KNNImputer, SimpleImputer</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> con.execute(<span class="st">"""SELECT station_id, CAST(ts AS DATE) AS date, AVG(pm25) AS v</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM measurements WHERE ts &gt;= TIMESTAMP '2022-01-01' AND ts &lt; TIMESTAMP '2023-01-01'</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ALL HAVING COUNT(pm25) &gt;= 18"""</span>).df()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>truth <span class="op">=</span> daily.pivot(index<span class="op">=</span><span class="st">"date"</span>, columns<span class="op">=</span><span class="st">"station_id"</span>, values<span class="op">=</span><span class="st">"v"</span>).sort_index()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.random.default_rng(<span class="dv">1</span>).random(truth.shape) <span class="op">&lt;</span> <span class="fl">0.15</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> truth.mask(mask)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> mask <span class="op">&amp;</span> truth.notna().to_numpy()      <span class="co"># ประเมินเฉพาะช่องที่จงใจลบและรู้ค่าจริง</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rmse(imputer) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    est <span class="op">=</span> imputer.fit_transform(X)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">float</span>(np.sqrt(np.nanmean((est <span class="op">-</span> truth.to_numpy())[target] <span class="op">**</span> <span class="dv">2</span>)))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, imp <span class="kw">in</span> [(<span class="st">"mean"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"mean"</span>)),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                  (<span class="st">"KNN"</span>, KNNImputer(n_neighbors<span class="op">=</span><span class="dv">5</span>)),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                  (<span class="st">"Iterative"</span>, IterativeImputer(max_iter<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">0</span>))]:</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name, <span class="bu">round</span>(rmse(imp), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+mean 9.62
+KNN 7.95
+Iterative 7.59</code></pre>
+<p>วิธีที่ใช้ข้อมูลของสถานีอื่นคลาดเคลื่อนน้อยกว่าการเติมด้วยค่าเฉลี่ยของคอลัมน์ ข้อจำกัดของการประเมินแบบนี้คือ เราลบค่าแบบสุ่ม (MCAR) ซึ่งง่ายกว่าสถานการณ์จริง ถ้าข้อมูลจริงเป็น MNAR ทุกวิธีในหัวข้อนี้จะเติมค่าต่ำเกินไป เพราะแบบจำลองเรียนรู้จากค่าที่เห็น ซึ่งไม่มีค่าสูงสุดอยู่ด้วย</p>
+</section>
+</section>
+<section id="sec-ch10-multiple" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-ch10-multiple"><span class="header-section-number">10.7</span> multiple imputation และ Rubin’s rules ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ทำไมตองเตมหลายชด" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองเตมหลายชด">ทำไมต้องเติมหลายชุด</h3>
+<p>ปัญหาของการเติมค่าแบบเดี่ยวคือ ค่าเติมถูกปฏิบัติราวกับเป็นค่าที่วัดได้จริง ความไม่แน่นอนของการเติมหายไป ช่วงความเชื่อมั่นจึงแคบเกินจริง <span class="idx">การเติมค่าแบบหลายชุด</span> (multiple imputation) ซึ่ง Rubin เสนอ แก้ปัญหานี้ด้วยการเติมค่า <span class="math inline">\(m\)</span> ชุด โดยแต่ละชุดสุ่มค่าเติมจากการแจกแจงของค่าที่น่าจะเป็น แล้ววิเคราะห์แต่ละชุดแยกกัน และรวมผลด้วยกฎที่คำนึงถึงทั้งความไม่แน่นอนภายในแต่ละชุดและความต่างระหว่างชุด <span class="citation" data-cites="rubin1987multiple">(<a href="../references.html#ref-rubin1987multiple" role="doc-biblioref">Rubin 1987</a>)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  D[ข้อมูลที่มีค่าหาย] --&gt; I1[เติมชุดที่ 1] --&gt; A1[วิเคราะห์ ได้ Q₁, U₁]
+  D --&gt; I2[เติมชุดที่ 2] --&gt; A2[วิเคราะห์ ได้ Q₂, U₂]
+  D --&gt; Im[เติมชุดที่ m] --&gt; Am[วิเคราะห์ ได้ Qₘ, Uₘ]
+  A1 &amp; A2 &amp; Am --&gt; P[รวมด้วย Rubin's rules]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="rubins-rules" class="level3">
+<h3 class="anchored" data-anchor-id="rubins-rules">Rubin’s rules</h3>
+<p>ให้ <span class="math inline">\(\hat{Q}_i\)</span> เป็นค่าประมาณที่สนใจ (เช่น ค่าเฉลี่ยรายปีของสถานีหนึ่ง) จากชุดที่ <span class="math inline">\(i\)</span> และ <span class="math inline">\(U_i\)</span> เป็นความแปรปรวนของค่าประมาณนั้น กฎการรวมผลคือ</p>
+<p><span id="eq-ch10-rubin"><span class="math display">\[
+\bar{Q} = \frac{1}{m}\sum_{i=1}^{m}\hat{Q}_i, \qquad
+W = \frac{1}{m}\sum_{i=1}^{m}U_i, \qquad
+B = \frac{1}{m-1}\sum_{i=1}^{m}\left(\hat{Q}_i - \bar{Q}\right)^2, \qquad
+T = W + \left(1 + \frac{1}{m}\right)B
+\tag{10.3}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(\bar{Q}\)</span> คือค่าประมาณรวม <span class="math inline">\(W\)</span> คือความแปรปรวนเฉลี่ยภายในชุด <span class="math inline">\(B\)</span> คือความแปรปรวนระหว่างชุด ซึ่งสะท้อนความไม่แน่นอนจากการเติมค่า และ <span class="math inline">\(T\)</span> คือความแปรปรวนรวม ความคลาดเคลื่อนมาตรฐานของค่าประมาณรวมคือ <span class="math inline">\(\sqrt{T}\)</span></p>
+<p>ตัวอย่างกับข้อมูลชุดเดียวกับหัวข้อก่อน เติมค่า 5 ชุดด้วย <code>IterativeImputer(sample_posterior=True)</code> ซึ่งสุ่มค่าเติมจากการแจกแจงแทนการใช้ค่าทำนายเพียงค่าเดียว แล้วประมาณค่าเฉลี่ยรายปีของสถานีหนึ่ง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m_sets <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>est, var <span class="op">=</span> [], []</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(m_sets):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    imp <span class="op">=</span> IterativeImputer(sample_posterior<span class="op">=</span><span class="va">True</span>, max_iter<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span>i)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> pd.DataFrame(imp.fit_transform(X), index<span class="op">=</span>X.index, columns<span class="op">=</span>X.columns)[<span class="st">"35t"</span>]</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    est.append(y.mean())</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    var.append(y.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> <span class="bu">len</span>(y))           <span class="co"># ความแปรปรวนของค่าเฉลี่ย</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>est, var <span class="op">=</span> np.array(est), np.array(var)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>q_bar, W, B <span class="op">=</span> est.mean(), var.mean(), est.var(ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> W <span class="op">+</span> (<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">/</span> m_sets) <span class="op">*</span> B</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(est.<span class="bu">round</span>(<span class="dv">2</span>), <span class="ss">f"Q̄=</span><span class="sc">{</span>q_bar<span class="sc">:.2f}</span><span class="ss">  SE รวม=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(T)<span class="sc">:.3f}</span><span class="ss">  SE ถ้าไม่นับ B=</span><span class="sc">{</span>np<span class="sc">.</span>sqrt(W)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+[29.24 29.4  29.81 29.33 29.36] Q̄=29.43  SE รวม=0.798  SE ถ้าไม่นับ B=0.760</code></pre>
+<p>ค่าประมาณจากแต่ละชุดต่างกันเล็กน้อย ความต่างนั้นคือความไม่แน่นอนจากการเติมค่า ซึ่งเพิ่มความคลาดเคลื่อนมาตรฐานจาก 0.760 เป็น 0.798 ถ้าใช้การเติมค่าแบบเดี่ยว เราจะรายงานความคลาดเคลื่อนมาตรฐานที่เล็กเกินไป ในตัวอย่างนี้ความต่างไม่มาก เพราะค่าหายเพียงร้อยละ 15 และสถานีอื่นทำนายได้ดี แต่ถ้าค่าหายมากหรือทำนายได้ยาก <span class="math inline">\(B\)</span> จะใหญ่ขึ้นมาก</p>
+<p>ข้อควรระวังคือ ตัวอย่างนี้ใช้ค่าเฉลี่ยของวันเป็นหน่วยและถือว่าวันเป็นอิสระต่อกัน ซึ่งไม่จริงสำหรับอนุกรมเวลา (บทที่ 14) ความคลาดเคลื่อนมาตรฐานจริงจึงน่าจะสูงกว่านี้ และ multiple imputation ก็ยังพึ่งสมมติฐาน MAR ถ้าเป็น MNAR ทุกชุดจะเอนเอียงไปทางเดียวกัน</p>
+</section>
+</section>
+<section id="sec-ch10-timeseries-gaps" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="sec-ch10-timeseries-gaps"><span class="header-section-number">10.8</span> ช่องว่างในข้อมูลอนุกรมเวลา</h2>
+<section id="อนกรมเวลาตางจากขอมลทวไปอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="อนกรมเวลาตางจากขอมลทวไปอยางไร">อนุกรมเวลาต่างจากข้อมูลทั่วไปอย่างไร</h3>
+<p>วิธีในหัวข้อก่อนหน้าส่วนใหญ่ถือว่าแถวเป็นอิสระต่อกัน แต่ข้อมูล PM2.5 รายชั่วโมงไม่เป็นเช่นนั้น ค่าของชั่วโมงหนึ่งสัมพันธ์กับชั่วโมงก่อนหน้าอย่างมาก (บทที่ 14 เรียกว่าสหสัมพันธ์ในตัว) และข้อมูลมักหายเป็น <em>ช่วงต่อเนื่อง</em> ไม่ใช่กระจายทีละชั่วโมง คุณสมบัติทั้งสองนี้มีผลต่อการเลือกวิธีจัดการ</p>
+</section>
+<section id="ชองวางสนกบชองวางยาว" class="level3">
+<h3 class="anchored" data-anchor-id="ชองวางสนกบชองวางยาว">ช่องว่างสั้นกับช่องว่างยาว</h3>
+<div id="tbl-ch10-gap-length" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-gap-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.6: แนวทางจัดการช่องว่างในข้อมูลอนุกรมเวลาตามความยาว
+</figcaption>
+<div aria-describedby="tbl-ch10-gap-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ความยาวช่องว่าง</th>
+<th>สาเหตุที่พบบ่อย</th>
+<th>วิธีที่เหมาะ</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1–3 ชั่วโมง</td>
+<td>การสื่อสารขัดข้องชั่วคราว</td>
+<td>interpolation ตามเวลา</td>
+<td>ค่าเปลี่ยนต่อเนื่อง ค่าเติมใกล้ความจริง</td>
+</tr>
+<tr class="even">
+<td>หลายชั่วโมงถึงหนึ่งวัน</td>
+<td>เครื่องวัดขัดข้อง ไฟฟ้าดับ</td>
+<td>ปล่อยว่าง ให้เกณฑ์ความครบถ้วนจัดการ</td>
+<td>เส้นตรงตัดพีกของวันทิ้ง</td>
+</tr>
+<tr class="odd">
+<td>หลายวันถึงหลายสัปดาห์</td>
+<td>ซ่อมบำรุง เปลี่ยนเครื่อง ปิดสถานี</td>
+<td>ปล่อยว่าง รายงานแยก อาจใช้สถานีใกล้เคียงเพื่อการสำรวจด้วยภาพเท่านั้น</td>
+<td>ไม่มีข้อมูลของสถานีนั้นให้อ้างอิง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>โครงการในเล่มนี้ใช้แนวทางตามเอกสารรายสัปดาห์ที่ 7 คือ เติมเฉพาะช่องว่างไม่เกิน 3 ชั่วโมงด้วย <code>fill_short_gaps</code> แล้วใช้เกณฑ์ความครบถ้วน 18 ชั่วโมงกับค่าหลังเติม ตัวเลข 3 ชั่วโมงเป็นการตัดสินใจของโครงการ ซึ่งต้องบันทึกไว้และทดสอบความไวในหัวข้อถัดไป</p>
+</section>
+<section id="srcclean.py" class="level3">
+<h3 class="anchored" data-anchor-id="srcclean.py">src/clean.py</h3>
+<p><code>src/clean.py</code> รวมทุกการตัดสินใจของบทที่ 9–10 ไว้ที่เดียว ลำดับของขั้นตอนมีดังนี้</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  M[(measurements)] --&gt; G[สร้างตารางเวลาเต็ม&lt;br/&gt;status = no_row / null]
+  G --&gt; S[ตรวจค่าแทนและเครื่องวัดค้าง&lt;br/&gt;status = sentinel / stuck]
+  S --&gt; K[เก็บค่าดิบไว้ใน pm25_raw&lt;br/&gt;pm25 = เฉพาะ status = ok]
+  K --&gt; F[เติมช่องว่าง ≤ 3 ชม.&lt;br/&gt;pm25_filled + is_filled]
+  F --&gt; MC[(measurements_clean)]
+  MC --&gt; DC[(view daily_pm25_clean)]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>view <span class="idx-data"><code>daily_pm25_clean</code></span> สร้างจาก <code>measurements_clean</code> ดังนี้ (ตามเอกสารรายสัปดาห์ที่ 7)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> daily_pm25_clean <span class="kw">AS</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">CAST</span>(ts <span class="kw">AS</span> <span class="dt">DATE</span>)            <span class="kw">AS</span> <span class="dt">date</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(pm25_filled)            <span class="kw">AS</span> pm25_mean,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(pm25_filled)            <span class="kw">AS</span> pm25_max,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(pm25_filled)          <span class="kw">AS</span> n_hours,            <span class="co">-- รวมชั่วโมงที่เติม</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(pm25)                 <span class="kw">AS</span> n_hours_observed,   <span class="co">-- เฉพาะชั่วโมงที่วัดได้จริง</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(pm25_filled) <span class="op">&gt;=</span> <span class="dv">18</span>    <span class="kw">AS</span> is_complete</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements_clean</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> station_id, <span class="fu">CAST</span>(ts <span class="kw">AS</span> <span class="dt">DATE</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>หลักการสำคัญมีสองข้อ ข้อแรก <strong>ไม่แก้ตาราง <code>measurements</code> ต้นฉบับ</strong> และเก็บค่าดิบไว้ใน <code>pm25_raw</code> เสมอ เพื่อให้ย้อนกลับไปตรวจหรือเปลี่ยนการตัดสินใจได้ ข้อสอง <strong>เก็บทั้ง <code>n_hours</code> และ <code>n_hours_observed</code></strong> ผู้ใช้จึงรู้ว่าวันที่ผ่านเกณฑ์ความครบถ้วนนั้นพึ่งค่าที่เติมมากน้อยเพียงใด ตั้งแต่บทที่ 11 เป็นต้นไป การวิเคราะห์ทั้งหมดใช้ <code>daily_pm25_clean</code> และกรอง <code>is_complete</code> ก่อนเทียบกับมาตรฐาน</p>
+</section>
+</section>
+<section id="sec-ch10-sensitivity" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="sec-ch10-sensitivity"><span class="header-section-number">10.9</span> sensitivity analysis และการรายงานการตัดสินใจ</h2>
+<section id="ทำไมตองทดสอบความไว" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองทดสอบความไว">ทำไมต้องทดสอบความไว</h3>
+<p>ทุกการตัดสินใจในบทนี้ ทั้งเกณฑ์ความครบถ้วน ความยาวช่องว่างที่เติม และเกณฑ์เครื่องวัดค้าง เป็นทางแยกใน garden of forking paths ของบทที่ 4 การเลือกทางหนึ่งแล้วรายงานเฉพาะผลของทางนั้น ทำให้ผู้อ่านไม่รู้ว่าข้อสรุปเปราะบางเพียงใด <strong><span class="idx">sensitivity analysis</span></strong> คือการคำนวณคำตอบภายใต้ทางเลือกที่สมเหตุสมผลหลายทาง แล้วดูว่าคำตอบเปลี่ยนไปมากน้อยเพียงใด ถ้าคำตอบแทบไม่เปลี่ยน ข้อสรุปทนทาน ถ้าเปลี่ยนมาก ต้องรายงานความไม่แน่นอนนั้น</p>
+</section>
+<section id="ตวอยาง-เกณฑความครบถวน" class="level3">
+<h3 class="anchored" data-anchor-id="ตวอยาง-เกณฑความครบถวน">ตัวอย่าง: เกณฑ์ความครบถ้วน</h3>
+<p>query ต่อไปนี้คำนวณสัดส่วนวันเกินมาตรฐานของแต่ละภาคในช่วงสำรวจ ภายใต้เกณฑ์ความครบถ้วนสี่ระดับ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> [<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">24</span>]:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> con.execute(<span class="ss">f"""</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="ss">        WITH d AS (</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ss">            SELECT s.region, CAST(m.ts AS DATE) AS date, m.station_id,</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ss">                   AVG(m.pm25) AS v, COUNT(m.pm25) AS n</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ss">            FROM measurements AS m JOIN stations AS s USING (station_id)</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="ss">            WHERE m.ts &lt; TIMESTAMP '2024-01-01'</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="ss">            GROUP BY ALL)</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="ss">        SELECT region, ROUND(100 * AVG(CASE WHEN v &gt; 37.5 THEN 1.0 ELSE 0 END), 1) AS pct</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="ss">        FROM d WHERE n &gt;= </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss"> GROUP BY region"""</span>).df()</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    rows.append(r.assign(min_hours<span class="op">=</span>k))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.concat(rows).pivot(index<span class="op">=</span><span class="st">"region"</span>, columns<span class="op">=</span><span class="st">"min_hours"</span>, values<span class="op">=</span><span class="st">"pct"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+min_hours             12    18    22    24
+region
+กลาง                 8.7   8.7   8.7   8.7
+ตะวันออกเฉียงเหนือ   7.0   7.0   7.0   6.6
+เหนือ               16.5  16.5  16.4  17.2
+ใต้                  0.0   0.0   0.0   0.0</code></pre>
+<p>กับข้อมูลสมมุติซึ่งสร้างให้ข้อมูลหายแบบ MCAR ผลแทบไม่เปลี่ยนตามเกณฑ์ ลำดับของภาคคงที่ทุกเกณฑ์ ข้อสรุปเรื่องลำดับจึงทนทาน ข้อมูลจริงอาจให้ผลต่างออกไป โดยเฉพาะถ้ามีหลักฐานของ MNAR และผลนั้นเองคือสิ่งที่ต้องรายงาน นอกจากเกณฑ์ความครบถ้วน ทางเลือกที่ควรทดสอบความไวด้วยวิธีเดียวกันได้แก่ การเติมหรือไม่เติมช่องว่างสั้น และความยาวช่องว่างสูงสุดที่เติม</p>
+</section>
+<section id="ทดสอบสถานการณ-mnar" class="level3">
+<h3 class="anchored" data-anchor-id="ทดสอบสถานการณ-mnar">ทดสอบสถานการณ์ MNAR</h3>
+<p>เมื่อสงสัย MNAR วิธีที่ซื่อตรงคือ ถามว่า “ถ้าค่าที่หายไปสูงกว่าค่าที่เห็น ข้อสรุปจะเปลี่ยนหรือไม่” แนวทางหนึ่งคือ เติมค่าที่หายด้วยค่าที่เลื่อนขึ้นจากค่าเติมปกติเป็นระดับต่าง ๆ เช่น เพิ่มร้อยละ 10, 25 และ 50 แล้วดูว่าข้อสรุปเปลี่ยนเมื่อใด แนวคิดนี้เรียกว่า delta adjustment <span class="citation" data-cites="vanbuuren2018flexible">(<a href="../references.html#ref-vanbuuren2018flexible" role="doc-biblioref">Buuren 2018</a>)</span> ถ้าข้อสรุปเปลี่ยนเฉพาะเมื่อสมมุติว่าค่าที่หายสูงกว่าค่าเติมปกติมาก ซึ่งไม่น่าเป็นไปได้ตามความรู้เชิงโดเมน ข้อสรุปก็ค่อนข้างทนทาน</p>
+</section>
+<section id="รายงานการตดสนใจ" class="level3">
+<h3 class="anchored" data-anchor-id="รายงานการตดสนใจ">รายงานการตัดสินใจ</h3>
+<p>ทุกการตัดสินใจเรื่องข้อมูลสูญหายต้องบันทึกใน <code>data_dictionary.md</code> ในรูปแบบที่ผู้อ่านเห็นทั้งเหตุผลและผลที่อาจตามมา</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## บันทึกการตัดสินใจเรื่องข้อมูลสูญหาย</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> # <span class="pp">|</span> การตัดสินใจ <span class="pp">|</span> เหตุผลหรือหลักฐาน <span class="pp">|</span> ผลที่อาจทำให้เอนเอียง <span class="pp">|</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> แปลง "-1" เป็น NULL ในขั้นโหลด <span class="pp">|</span> ค่าแทนของ Air4Thai (ตรวจเมื่อ ต.ค. 2569) <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> ตัดช่วงค่าซ้ำ ≥ 6 ชั่วโมงเป็น stuck <span class="pp">|</span> การแจกแจงของความยาวช่วงค่าซ้ำ <span class="pp">|</span> ช่วงอากาศนิ่งจริงอาจถูกตัด <span class="pp">|</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> เติมเฉพาะช่องว่าง ≤ 3 ชั่วโมง <span class="pp">|</span> ค่ารายชั่วโมงเปลี่ยนต่อเนื่องในช่วงสั้น <span class="pp">|</span> ตัดพีกที่เกิดในช่องว่าง <span class="pp">|</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> นับเฉพาะวันที่ n_hours ≥ 18 <span class="pp">|</span> ข้อกำหนดของโครงการ <span class="pp">|</span> ถ้าหายเมื่อฝุ่นหนา จะนับวันเกินมาตรฐานต่ำกว่าจริง <span class="pp">|</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> ทดสอบความไวที่เกณฑ์ 12/18/22/24 <span class="pp">|</span> ลำดับของภาคไม่เปลี่ยน <span class="pp">|</span> — <span class="pp">|</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ในรายงานผล ให้แสดงทั้งตัวตั้งและตัวหารเสมอ เช่น “สถานีในภาคเหนือมีวันเกินมาตรฐาน X จาก Y วันที่ข้อมูลครบ” แทน “ภาคเหนือมีวันเกินมาตรฐานร้อยละ Z” เพราะผู้อ่านจะเห็นทันทีว่าข้อสรุปมาจากข้อมูลมากน้อยเพียงใด บทที่ 19 อธิบายการเขียนข้อจำกัดในรายงานอย่างละเอียด</p>
+</section>
+</section>
+<section id="sec-ch10-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch10-case">กรณีศึกษา: ข้อมูลที่หายในฤดูฝุ่นเปลี่ยนคำตอบของ Q1 หรือไม่</h2>
+<p><strong>คำถาม</strong> การสูญหายของข้อมูล PM2.5 ในโครงการมีหลักฐานของ MNAR หรือไม่ และถ้ามี คำตอบของคำถาม Q1 (ภาคใดมีสัดส่วนวันเกินมาตรฐานสูงสุด) เปลี่ยนไปหรือไม่</p>
+<p><strong>ข้อมูล</strong> ตาราง <code>measurements</code> ช่วงสำรวจ และตารางเวลาเต็มที่สร้างจากตารางนั้น</p>
+<p><strong>วิธีการ</strong></p>
+<ol type="1">
+<li><strong>สร้างตารางเวลาเต็ม</strong> (หัวข้อ <a href="#sec-ch10-explicit-implicit" class="quarto-xref"><span>10.1</span></a>) และนับข้อมูลสูญหายทั้งแบบ explicit และ implicit แยกตามสถานี</li>
+<li><strong>ดูรูปแบบ</strong> (หัวข้อ <a href="#sec-ch10-evidence" class="quarto-xref"><span>10.3</span></a>) ด้วย <code>msno.matrix</code> และสัดส่วนค่าหายตามชั่วโมงของวัน วันในสัปดาห์ และเดือน</li>
+<li><strong>ตรวจตัวแปรตัวแทน</strong> เปรียบเทียบค่าของชั่วโมงก่อนหน้า และค่าของสถานีอื่นในภาคเดียวกัน ระหว่างชั่วโมงที่ค่าหายกับชั่วโมงที่มีค่า แยกตามสถานี</li>
+<li><strong>ตัดสินใจและสร้าง <code>measurements_clean</code></strong> (หัวข้อ <a href="#sec-ch10-timeseries-gaps" class="quarto-xref"><span>10.8</span></a>) ตามแนวทางของโครงการ</li>
+<li><strong>ทดสอบความไว</strong> (หัวข้อ <a href="#sec-ch10-sensitivity" class="quarto-xref"><span>10.9</span></a>) ที่เกณฑ์ความครบถ้วนหลายระดับ และแบบเติมกับไม่เติมช่องว่างสั้น ถ้ามีหลักฐานของ MNAR ให้ทดสอบ delta adjustment ด้วย</li>
+<li><strong>บันทึก</strong> การตัดสินใจและผลการทดสอบใน <code>data_dictionary.md</code></li>
+</ol>
+<p><strong>ผล</strong> กับข้อมูลสมมุติที่ใช้ทดสอบโค้ด สัดส่วนค่าหายรายเดือนอยู่ระหว่างร้อยละ 2.9–4.3 โดยสูงขึ้นเล็กน้อยในเดือนมีนาคมและเมษายน ค่ามัธยฐานของชั่วโมงก่อนหน้าในกลุ่มที่ค่าหาย (21.4 µg/m³) ใกล้เคียงกับกลุ่มที่มีค่า (21.5 µg/m³) และลำดับของภาคไม่เปลี่ยนในทุกเกณฑ์ความครบถ้วน หลักฐานทั้งหมดนี้สอดคล้องกับ MCAR ซึ่งเป็นวิธีที่ข้อมูลสมมุติถูกสร้างขึ้น ข้อมูลจริงของผู้อ่านอาจให้ผลต่างออกไป</p>
+<p><strong>การตีความ</strong> ถ้าข้อมูลจริงแสดงว่าค่าของชั่วโมงก่อนหน้าในกลุ่มที่หายสูงกว่ากลุ่มที่มีค่าอย่างชัดเจน และการหายกระจุกในเดือนที่ฝุ่นสูง สัดส่วนวันเกินมาตรฐานที่คำนวณได้น่าจะต่ำกว่าความจริง ข้อสรุปเรื่อง <em>ลำดับ</em> ของภาคอาจยังทนทาน ถ้าภาคที่มีหลักฐานของ MNAR มากที่สุดเป็นภาคที่อยู่อันดับหนึ่งอยู่แล้ว แต่ <em>ระดับ</em> ของสัดส่วนต้องรายงานพร้อมคำเตือนว่าน่าจะประเมินต่ำไป</p>
+<p><strong>ข้อจำกัด</strong> ไม่มีวิธีใดในบทนี้พิสูจน์ได้ว่าข้อมูลไม่ใช่ MNAR หลักฐานทั้งหมดเป็นหลักฐานแวดล้อม และการตัดสินใจขึ้นกับความรู้เชิงโดเมน ถ้าเป็นไปได้ การสอบถามผู้ให้บริการข้อมูลถึงสาเหตุของช่วงที่ข้อมูลหาย เช่น บันทึกการซ่อมบำรุง ให้หลักฐานที่ดีกว่าการวิเคราะห์ข้อมูลเพียงอย่างเดียว</p>
+</section>
+<section id="sec-ch10-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch10-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch10-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch10-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;10.7: ข้อผิดพลาดที่พบบ่อยในบทที่ 10
+</figcaption>
+<div aria-describedby="tbl-ch10-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>วัดสัดส่วนข้อมูลสูญหายด้วย <code>isna()</code> บนตาราง <code>measurements</code></td>
+<td>มองไม่เห็นแถวที่หายไปทั้งแถว</td>
+<td>สร้างตารางเวลาเต็มก่อน</td>
+</tr>
+<tr class="even">
+<td>ตัดสินใจจัดการค่าหายจากปริมาณที่หาย</td>
+<td>กลไกสำคัญกว่าปริมาณ MNAR ร้อยละ 10 เอนเอียงกว่า MCAR ร้อยละ 20</td>
+<td>หาหลักฐานของกลไกก่อนเลือกวิธี</td>
+</tr>
+<tr class="odd">
+<td>สรุปว่า “ข้อมูลหายแบบสุ่ม” โดยไม่ตรวจ</td>
+<td>ข้อมูลเซนเซอร์มักหายเป็นช่วงและสัมพันธ์กับเวลาหรือระดับมลพิษ</td>
+<td>ตรวจรูปแบบตามเวลาและตัวแปรตัวแทน</td>
+</tr>
+<tr class="even">
+<td>ใช้ <code>interpolate(limit=3)</code> เพื่อเติมเฉพาะช่องว่างสั้น</td>
+<td>เติม 3 ช่องแรกของทุกช่องว่าง รวมช่องว่างยาว</td>
+<td>วัดความยาวช่องว่างเองด้วย <code>fill_short_gaps</code></td>
+</tr>
+<tr class="odd">
+<td>เติมค่าหายด้วยค่าเฉลี่ยทั้งปี</td>
+<td>ไม่สนใจฤดูกาลและลดความแปรปรวน</td>
+<td>ปล่อยว่าง หรือใช้บริบทใกล้เคียง/สถานีอื่น และมี flag</td>
+</tr>
+<tr class="even">
+<td>นับวันเกินมาตรฐานด้วยค่าที่เติมจากแบบจำลอง</td>
+<td>ค่าเติมไม่ได้วัดจริง และภายใต้ MNAR จะต่ำเกินไป</td>
+<td>ใช้ค่าที่วัดได้กับเกณฑ์ความครบถ้วน รายงาน <code>n_hours_observed</code> ด้วย</td>
+</tr>
+<tr class="odd">
+<td>ตรวจเครื่องวัดค้างหลังเติมค่าแบบ LOCF</td>
+<td>ค่าเติมคงที่ถูกตรวจว่าค้าง หรือกลบค่าค้างจริง</td>
+<td>ตรวจกับข้อมูลดิบก่อนเติมค่าเสมอ</td>
+</tr>
+<tr class="even">
+<td>แก้ตาราง <code>measurements</code> ต้นฉบับ</td>
+<td>ย้อนกลับไปเปลี่ยนการตัดสินใจไม่ได้</td>
+<td>สร้าง <code>measurements_clean</code> และเก็บ <code>pm25_raw</code></td>
+</tr>
+<tr class="odd">
+<td>รายงานผลจากเกณฑ์เดียวโดยไม่ทดสอบความไว</td>
+<td>ผู้อ่านไม่รู้ว่าข้อสรุปเปราะบางเพียงใด</td>
+<td>sensitivity analysis และรายงานตัวตั้งกับตัวหาร</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>ข้อมูลสูญหายมีทั้งแบบ explicit (ค่าว่าง) และ implicit (ไม่มีแถว) ต้องสร้างตารางเวลาเต็มจึงจะเห็นครบ และควรบันทึกสถานะของแต่ละชั่วโมง</li>
+<li>กรอบแนวคิดของ Rubin แบ่งกลไกเป็น MCAR, MAR และ MNAR กลไกสำคัญกว่าปริมาณ การจำลองแสดงว่า MNAR ที่หายเพียงร้อยละ 10 ทำให้สัดส่วนวันเกินมาตรฐานลดจากร้อยละ 20.5 เหลือ 1.7</li>
+<li>MNAR พิสูจน์ไม่ได้จากข้อมูลชุดเดียว สิ่งที่ทำได้คือหาหลักฐานแวดล้อมจากรูปแบบตามเวลา ตัวแปรตัวแทน และความรู้เชิงโดเมน</li>
+<li>การตัดทิ้งเรียบง่ายแต่เอนเอียงได้เมื่อไม่ใช่ MCAR เกณฑ์ความครบถ้วนรายวันก็เป็นการตัดทิ้งแบบหนึ่ง</li>
+<li>การเติมค่าแบบเดี่ยวทำให้ความไม่แน่นอนดูน้อยกว่าความจริง การเติมด้วยแบบจำลองใช้ข้อมูลของสถานีอื่นได้ดีกว่า และ multiple imputation กับ Rubin’s rules นับความไม่แน่นอนจากการเติมค่าเข้าไปด้วย</li>
+<li>ช่องว่างในอนุกรมเวลาต้องแยกตามความยาว เติมเฉพาะช่องว่างสั้น และระวังว่า <code>interpolate(limit=...)</code> ไม่ได้จำกัดความยาวช่องว่าง</li>
+<li><code>daily_pm25_clean</code> เก็บทั้ง <code>n_hours</code> และ <code>n_hours_observed</code> และเป็นฐานของการวิเคราะห์ทั้งหมดตั้งแต่บทที่ 11</li>
+<li>ทุกการตัดสินใจต้องทดสอบความไวและบันทึกพร้อมผลที่อาจทำให้เอนเอียง</li>
+</ul>
+</section>
+<section id="sec-ch10-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch10-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>ยกตัวอย่างสถานการณ์ของข้อมูล PM2.5 ที่เป็น MCAR, MAR และ MNAR อย่างละหนึ่งตัวอย่าง ที่ไม่ซ้ำกับในบทนี้</li>
+<li>ทำไม <code>isna().mean()</code> บนตาราง <code>measurements</code> จึงประเมินการสูญหายต่ำกว่าความจริง และต้องแก้อย่างไร</li>
+<li>ถ้าพบว่าค่าของชั่วโมงก่อนหน้าในกลุ่มที่ PM2.5 หายสูงกว่ากลุ่มที่มีค่า ควรสรุปอะไร และไม่ควรสรุปอะไร</li>
+<li>อธิบายความต่างระหว่าง <code>interpolate(limit=3)</code> กับ <code>fill_short_gaps(max_gap=3)</code> ด้วยตัวอย่างช่องว่างยาว 6 ชั่วโมง</li>
+<li>ใน <a href="#eq-ch10-rubin" class="quarto-xref">สมการ&nbsp;<span>10.3</span></a> ถ้าการเติมค่าทุกชุดให้ค่าประมาณเท่ากันทุกประการ <span class="math inline">\(B\)</span> และ <span class="math inline">\(T\)</span> มีค่าเท่าไร และสถานการณ์นี้บอกอะไรเกี่ยวกับความไม่แน่นอนของการเติมค่า</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>สร้างตารางเวลาเต็มของข้อมูลโครงการ แล้วรายงานสัดส่วนข้อมูลสูญหายแบบ explicit และ implicit แยกตามสถานี สถานีใดมีสัดส่วนแบบ implicit สูงที่สุด และน่าจะเกิดจากอะไร</li>
+<li>ใช้ <code>msno.matrix</code> และ <code>msno.heatmap</code> กับสถานีในภาคหนึ่ง แล้วเขียนการตีความอย่างน้อยสามข้อตาม <a href="#tbl-ch10-missingno" class="quarto-xref">ตารางที่&nbsp;<span>10.4</span></a></li>
+<li>รันการจำลองในหัวข้อ <a href="#sec-ch10-rubin" class="quarto-xref"><span>10.2</span></a> กับสถานีอื่นในข้อมูลของโครงการ แล้วเปลี่ยนความรุนแรงของ MNAR (สัดส่วนที่ลบในชั่วโมงที่ค่าสูง) เป็น 0.2, 0.5 และ 0.8 รายงานว่าสัดส่วนวันเกินมาตรฐานเปลี่ยนไปอย่างไร</li>
+<li>ทำ sensitivity analysis ของคำถาม Q1 ที่เกณฑ์ความครบถ้วนสี่ระดับ และแบบเติมกับไม่เติมช่องว่างสั้น (รวมแปดแบบ) แล้วสรุปว่าข้อสรุปเรื่องลำดับของภาคทนทานหรือไม่</li>
+<li>เขียนส่วน “บันทึกการตัดสินใจเรื่องข้อมูลสูญหาย” ใน <code>data_dictionary.md</code> ของโครงการ ให้มีอย่างน้อยห้าการตัดสินใจ พร้อมเหตุผลและผลที่อาจทำให้เอนเอียง</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>เขียนฟังก์ชัน Little’s MCAR test ด้วย NumPy ตาม <a href="#eq-ch10-little" class="quarto-xref">สมการ&nbsp;<span>10.2</span></a> (ใช้ค่าเฉลี่ยและความแปรปรวนร่วมจากข้อมูลที่ครบแทน EM ได้เพื่อความเรียบง่าย) ทดสอบกับข้อมูลจำลองที่รู้ว่าเป็น MCAR และ MNAR แล้วอภิปรายผลของขนาดตัวอย่างต่อการทดสอบ</li>
+<li>ออกแบบวิธีเติมค่าช่องว่างยาวของสถานีหนึ่งด้วยข้อมูลของสถานีใกล้เคียง ประเมินด้วยการจงใจลบช่วงยาว 3–7 วันจากข้อมูลที่รู้คำตอบ และเปรียบเทียบกับการปล่อยว่าง อภิปรายว่าควรใช้ค่าที่เติมได้กับคำถามแบบใด และไม่ควรใช้กับคำถามแบบใด</li>
+<li>ทำ delta adjustment สำหรับคำถาม Q1 โดยเพิ่มค่าเติมของชั่วโมงที่หายในเดือนฤดูฝุ่นขึ้นร้อยละ 10, 25 และ 50 หาจุดที่ข้อสรุปเรื่องลำดับของภาคเปลี่ยน และอภิปรายว่าจุดนั้นเป็นไปได้ตามความรู้เชิงโดเมนหรือไม่</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch10">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="rubin1976inference">Rubin (<a href="../references.html#ref-rubin1976inference" role="doc-biblioref">1976</a>)</span> — บทความต้นฉบับของกรอบแนวคิด MCAR, MAR และ MNAR อ่านส่วนบทนำเพื่อเข้าใจแรงจูงใจ</li>
+<li><span class="citation" data-cites="vanbuuren2018flexible">Buuren (<a href="../references.html#ref-vanbuuren2018flexible" role="doc-biblioref">2018</a>)</span> — ตำราการเติมค่าแบบหลายชุดที่อ่านฟรีออนไลน์ บทที่ 1–2 อธิบายแนวคิดได้ชัดเจนที่สุด และมีบทเรื่อง sensitivity analysis</li>
+<li><span class="citation" data-cites="little1988test">Little (<a href="../references.html#ref-little1988test" role="doc-biblioref">1988</a>)</span> — บทความที่เสนอการทดสอบ MCAR พร้อมรายละเอียดของสถิติทดสอบ</li>
+<li><span class="citation" data-cites="rubin1987multiple">Rubin (<a href="../references.html#ref-rubin1987multiple" role="doc-biblioref">1987</a>)</span> — ตำราต้นฉบับของ multiple imputation และกฎการรวมผล</li>
+<li><span class="citation" data-cites="bilogur2018missingno">Bilogur (<a href="../references.html#ref-bilogur2018missingno" role="doc-biblioref">2018</a>)</span> — บทความแนะนำ missingno อธิบายภาพแต่ละแบบและการตีความ</li>
+<li><span class="citation" data-cites="pandas2026missing"><span class="nocase">pandas development team</span> (<a href="../references.html#ref-pandas2026missing" role="doc-biblioref">2026</a>)</span> — เอกสารทางการของ pandas เรื่องการทำงานกับข้อมูลสูญหาย รวมถึงพฤติกรรมของ <code>interpolate</code></li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bilogur2018missingno" class="csl-entry" role="listitem">
+Bilogur, Aleksey. 2018. <span>“Missingno: A Missing Data Visualization Suite”</span>. <em>Journal of Open Source Software</em> 3 (22): 547. <a href="https://doi.org/10.21105/joss.00547">https://doi.org/10.21105/joss.00547</a>.
+</div>
+<div id="ref-vanbuuren2018flexible" class="csl-entry" role="listitem">
+Buuren, Stef van. 2018. <em>Flexible Imputation of Missing Data</em>. 2 พิมพ์ครั้งที่. CRC Press. <a href="https://stefvanbuuren.name/fimd/">https://stefvanbuuren.name/fimd/</a>.
+</div>
+<div id="ref-vanbuuren2011mice" class="csl-entry" role="listitem">
+Buuren, Stef van, และ Karin Groothuis-Oudshoorn. 2011. <span>“mice: Multivariate Imputation by Chained Equations in <span>R</span>”</span>. <em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="https://doi.org/10.18637/jss.v045.i03">https://doi.org/10.18637/jss.v045.i03</a>.
+</div>
+<div id="ref-little1988test" class="csl-entry" role="listitem">
+Little, Roderick J. A. 1988. <span>“A Test of Missing Completely at Random for Multivariate Data with Missing Values”</span>. <em>Journal of the American Statistical Association</em> 83 (404): 1198–202. <a href="https://doi.org/10.1080/01621459.1988.10478722">https://doi.org/10.1080/01621459.1988.10478722</a>.
+</div>
+<div id="ref-pandas2026missing" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026. <em>Working with Missing Data</em>. <a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">https://pandas.pydata.org/docs/user_guide/missing_data.html</a>.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+<span class="nocase">Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, และคณะ</span>. 2011. <span>“Scikit-learn: Machine Learning in <span>Python</span>”</span>. <em>Journal of Machine Learning Research</em> 12: 2825–30.
+</div>
+<div id="ref-rubin1976inference" class="csl-entry" role="listitem">
+Rubin, Donald B. 1976. <span>“Inference and Missing Data”</span>. <em>Biometrika</em> 63 (3): 581–92. <a href="https://doi.org/10.1093/biomet/63.3.581">https://doi.org/10.1093/biomet/63.3.581</a>.
+</div>
+<div id="ref-rubin1987multiple" class="csl-entry" role="listitem">
+Rubin, Donald B. 1987. <em>Multiple Imputation for Nonresponse in Surveys</em>. Wiley.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/09-data-quality.html" class="pagination-link" aria-label="คุณภาพข้อมูลและการตรวจสอบ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/11-visual-perception.html" class="pagination-link" aria-label="หลักการรับรู้และการออกแบบภาพข้อมูล">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

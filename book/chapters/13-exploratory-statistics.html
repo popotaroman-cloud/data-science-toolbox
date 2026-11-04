@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/14-time-series.html" rel="next">
+<link href="../chapters/12-interactive-viz.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</a></li><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch13-distribution" id="toc-sec-ch13-distribution" class="nav-link" data-scroll-target="#sec-ch13-distribution"><span class="header-section-number">13.1</span> การแจกแจงและรูปร่างของข้อมูล</a>
+  <ul class="collapse">
+  <li><a href="#สามคำถามเกยวกบการแจกแจง" id="toc-สามคำถามเกยวกบการแจกแจง" class="nav-link" data-scroll-target="#สามคำถามเกยวกบการแจกแจง">สามคำถามเกี่ยวกับการแจกแจง</a></li>
+  <li><a href="#การแจกแจงของ-pm2.5-เบขวา" id="toc-การแจกแจงของ-pm2.5-เบขวา" class="nav-link" data-scroll-target="#การแจกแจงของ-pm2.5-เบขวา">การแจกแจงของ PM2.5 เบ้ขวา</a></li>
+  <li><a href="#ความเบและความโดง" id="toc-ความเบและความโดง" class="nav-link" data-scroll-target="#ความเบและความโดง">ความเบ้และความโด่ง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-robust" id="toc-sec-ch13-robust" class="nav-link" data-scroll-target="#sec-ch13-robust"><span class="header-section-number">13.2</span> robust statistics: median, IQR, MAD, trimmed mean</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของคาเฉลยและสวนเบยงเบนมาตรฐาน" id="toc-ปญหาของคาเฉลยและสวนเบยงเบนมาตรฐาน" class="nav-link" data-scroll-target="#ปญหาของคาเฉลยและสวนเบยงเบนมาตรฐาน">ปัญหาของค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐาน</a></li>
+  <li><a href="#breakdown-point" id="toc-breakdown-point" class="nav-link" data-scroll-target="#breakdown-point">breakdown point</a></li>
+  <li><a href="#mad" id="toc-mad" class="nav-link" data-scroll-target="#mad">MAD</a></li>
+  <li><a href="#robust-statistics-ใน-duckdb" id="toc-robust-statistics-ใน-duckdb" class="nav-link" data-scroll-target="#robust-statistics-ใน-duckdb">robust statistics ใน DuckDB</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-transform" id="toc-sec-ch13-transform" class="nav-link" data-scroll-target="#sec-ch13-transform"><span class="header-section-number">13.3</span> การแปลงข้อมูล: log, Box-Cox</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองแปลง" id="toc-ทำไมตองแปลง" class="nav-link" data-scroll-target="#ทำไมตองแปลง">ทำไมต้องแปลง</a></li>
+  <li><a href="#การแปลง-log" id="toc-การแปลง-log" class="nav-link" data-scroll-target="#การแปลง-log">การแปลง log</a></li>
+  <li><a href="#box-cox" id="toc-box-cox" class="nav-link" data-scroll-target="#box-cox">Box-Cox</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-ci" id="toc-sec-ch13-ci" class="nav-link" data-scroll-target="#sec-ch13-ci"><span class="header-section-number">13.4</span> ประชากร ตัวอย่าง และช่วงความเชื่อมั่น</a>
+  <ul class="collapse">
+  <li><a href="#ประชากรคออะไรในขอมล-pm2.5" id="toc-ประชากรคออะไรในขอมล-pm2.5" class="nav-link" data-scroll-target="#ประชากรคออะไรในขอมล-pm2.5">ประชากรคืออะไรในข้อมูล PM2.5</a></li>
+  <li><a href="#หนวยของการวเคราะหและความเปนอสระ" id="toc-หนวยของการวเคราะหและความเปนอสระ" class="nav-link" data-scroll-target="#หนวยของการวเคราะหและความเปนอสระ">หน่วยของการวิเคราะห์และความเป็นอิสระ</a></li>
+  <li><a href="#ชวงความเชอมน" id="toc-ชวงความเชอมน" class="nav-link" data-scroll-target="#ชวงความเชอมน">ช่วงความเชื่อมั่น</a></li>
+  <li><a href="#การตความชวงความเชอมนอยางถกตอง" id="toc-การตความชวงความเชอมนอยางถกตอง" class="nav-link" data-scroll-target="#การตความชวงความเชอมนอยางถกตอง">การตีความช่วงความเชื่อมั่นอย่างถูกต้อง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-testing" id="toc-sec-ch13-testing" class="nav-link" data-scroll-target="#sec-ch13-testing"><span class="header-section-number">13.5</span> การทดสอบสมมติฐาน: parametric และ non-parametric</a>
+  <ul class="collapse">
+  <li><a href="#ตรรกะของการทดสอบ" id="toc-ตรรกะของการทดสอบ" class="nav-link" data-scroll-target="#ตรรกะของการทดสอบ">ตรรกะของการทดสอบ</a></li>
+  <li><a href="#เลอกการทดสอบ" id="toc-เลอกการทดสอบ" class="nav-link" data-scroll-target="#เลอกการทดสอบ">เลือกการทดสอบ</a></li>
+  <li><a href="#การทดสอบทไมพบความตาง" id="toc-การทดสอบทไมพบความตาง" class="nav-link" data-scroll-target="#การทดสอบทไมพบความตาง">การทดสอบที่ไม่พบความต่าง</a></li>
+  <li><a href="#p-value-ในการวเคราะหเชงสำรวจ" id="toc-p-value-ในการวเคราะหเชงสำรวจ" class="nav-link" data-scroll-target="#p-value-ในการวเคราะหเชงสำรวจ">p-value ในการวิเคราะห์เชิงสำรวจ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-effect-size" id="toc-sec-ch13-effect-size" class="nav-link" data-scroll-target="#sec-ch13-effect-size"><span class="header-section-number">13.6</span> effect size: ทำไม p-value อย่างเดียวไม่พอ</a>
+  <ul class="collapse">
+  <li><a href="#p-value-ผสมขนาดผลกบขนาดตวอยาง" id="toc-p-value-ผสมขนาดผลกบขนาดตวอยาง" class="nav-link" data-scroll-target="#p-value-ผสมขนาดผลกบขนาดตวอยาง">p-value ผสมขนาดผลกับขนาดตัวอย่าง</a></li>
+  <li><a href="#effect-size-ในหนวยเดม" id="toc-effect-size-ในหนวยเดม" class="nav-link" data-scroll-target="#effect-size-ในหนวยเดม">effect size ในหน่วยเดิม</a></li>
+  <li><a href="#effect-size-แบบมาตรฐาน" id="toc-effect-size-แบบมาตรฐาน" class="nav-link" data-scroll-target="#effect-size-แบบมาตรฐาน">effect size แบบมาตรฐาน</a></li>
+  <li><a href="#รายงานอะไร" id="toc-รายงานอะไร" class="nav-link" data-scroll-target="#รายงานอะไร">รายงานอะไร</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-resampling" id="toc-sec-ch13-resampling" class="nav-link" data-scroll-target="#sec-ch13-resampling"><span class="header-section-number">13.7</span> resampling: bootstrap และ permutation test ★</a>
+  <ul class="collapse">
+  <li><a href="#แนวคดของ-bootstrap" id="toc-แนวคดของ-bootstrap" class="nav-link" data-scroll-target="#แนวคดของ-bootstrap">แนวคิดของ bootstrap</a></li>
+  <li><a href="#bootstrap-กบขอมลทไมอสระ" id="toc-bootstrap-กบขอมลทไมอสระ" class="nav-link" data-scroll-target="#bootstrap-กบขอมลทไมอสระ">bootstrap กับข้อมูลที่ไม่อิสระ</a></li>
+  <li><a href="#permutation-test" id="toc-permutation-test" class="nav-link" data-scroll-target="#permutation-test">permutation test</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-multiple" id="toc-sec-ch13-multiple" class="nav-link" data-scroll-target="#sec-ch13-multiple"><span class="header-section-number">13.8</span> การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, ★ Benjamini–Hochberg (FDR)</a>
+  <ul class="collapse">
+  <li><a href="#ปญหา" id="toc-ปญหา" class="nav-link" data-scroll-target="#ปญหา">ปัญหา</a></li>
+  <li><a href="#bonferroni-และ-holm" id="toc-bonferroni-และ-holm" class="nav-link" data-scroll-target="#bonferroni-และ-holm">Bonferroni และ Holm</a></li>
+  <li><a href="#benjaminihochberg-fdr" id="toc-benjaminihochberg-fdr" class="nav-link" data-scroll-target="#benjaminihochberg-fdr">Benjamini–Hochberg (FDR) ★</a></li>
+  <li><a href="#เปรยบเทยบสามวธ" id="toc-เปรยบเทยบสามวธ" class="nav-link" data-scroll-target="#เปรยบเทยบสามวธ">เปรียบเทียบสามวิธี</a></li>
+  <li><a href="#การปรบไมไดแกทกอยาง" id="toc-การปรบไมไดแกทกอยาง" class="nav-link" data-scroll-target="#การปรบไมไดแกทกอยาง">การปรับไม่ได้แก้ทุกอย่าง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-correlation" id="toc-sec-ch13-correlation" class="nav-link" data-scroll-target="#sec-ch13-correlation"><span class="header-section-number">13.9</span> สหสัมพันธ์และกับดัก: Simpson’s paradox, ecological fallacy</a>
+  <ul class="collapse">
+  <li><a href="#pearson-และ-spearman" id="toc-pearson-และ-spearman" class="nav-link" data-scroll-target="#pearson-และ-spearman">Pearson และ Spearman</a></li>
+  <li><a href="#simpsons-paradox" id="toc-simpsons-paradox" class="nav-link" data-scroll-target="#simpsons-paradox">Simpson’s paradox</a></li>
+  <li><a href="#ecological-fallacy" id="toc-ecological-fallacy" class="nav-link" data-scroll-target="#ecological-fallacy">ecological fallacy</a></li>
+  </ul></li>
+  <li><a href="#sec-ch13-case" id="toc-sec-ch13-case" class="nav-link" data-scroll-target="#sec-ch13-case">กรณีศึกษา: ภาคเหนือมีค่า PM2.5 ฤดูแล้งสูงกว่าภาคกลางเท่าใด</a></li>
+  <li><a href="#sec-ch13-pitfalls" id="toc-sec-ch13-pitfalls" class="nav-link" data-scroll-target="#sec-ch13-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch13-exercises" id="toc-sec-ch13-exercises" class="nav-link" data-scroll-target="#sec-ch13-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</a></li><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>กราฟในส่วนที่ 4 ทำให้เห็นรูปแบบ เช่น ภาคเหนือดูสูงกว่าภาคอื่นในฤดูแล้ง แต่คำว่า “ดูสูงกว่า” ยังไม่พอสำหรับรายงาน ผู้อ่านจะถามต่อว่า สูงกว่าเท่าใด ตัวเลขนั้นแน่นอนแค่ไหน และความต่างที่เห็นอาจเกิดจากความบังเอิญได้หรือไม่ บทนี้ให้เครื่องมือตอบคำถามเหล่านี้ ตั้งแต่การสรุปการแจกแจงด้วยตัวเลขที่ทนทานต่อค่าผิดปกติ ไปจนถึงช่วงความเชื่อมั่น การทดสอบสมมติฐาน ขนาดอิทธิพล และวิธี resampling</p>
+<p>คำว่า “เชิงสำรวจ” ในชื่อบทสำคัญ บทที่ 4 แยกการวิเคราะห์เชิงสำรวจออกจากเชิงยืนยัน และกำหนดให้ข้อมูลปี ค.ศ. 2020–2023 เป็นช่วงสำรวจ ตัวเลขทางสถิติที่คำนวณจากข้อมูลช่วงนี้เป็น <em>เครื่องมือช่วยคิด</em> ไม่ใช่หลักฐานยืนยัน p-value ที่ได้จากการทดสอบสมมติฐานที่ตั้งขึ้นหลังดูกราฟ ไม่มีความหมายแบบเดียวกับ p-value ของสมมติฐานที่ลงทะเบียนไว้ล่วงหน้า บทนี้จึงเน้นทั้งวิธีคำนวณและข้อจำกัดของการตีความไปพร้อมกัน</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายรูปร่างของการแจกแจงด้วยตำแหน่ง การกระจาย และความเบ้ และเลือกสถิติสรุปที่เหมาะสม</li>
+<li>ใช้ robust statistics สรุปข้อมูลที่มีค่าผิดปกติ และอธิบายเหตุผลด้วยแนวคิด breakdown point</li>
+<li>คำนวณและตีความช่วงความเชื่อมั่น และอธิบายความสัมพันธ์ระหว่างประชากร ตัวอย่าง และหน่วยของการวิเคราะห์</li>
+<li>เลือกการทดสอบแบบ parametric หรือ non-parametric ที่เหมาะกับข้อมูล และรายงาน effect size คู่กับ p-value</li>
+<li>ใช้ bootstrap และ permutation test เมื่อสมมติฐานของวิธีดั้งเดิมไม่เป็นจริง</li>
+<li>ปรับ p-value สำหรับการเปรียบเทียบหลายครั้ง</li>
+<li>ระบุกับดักของสหสัมพันธ์ ได้แก่ Simpson’s paradox และ ecological fallacy ในข้อมูลของตน</li>
+</ol>
+</section>
+<section id="sec-ch13-distribution" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="sec-ch13-distribution"><span class="header-section-number">13.1</span> การแจกแจงและรูปร่างของข้อมูล</h2>
+<section id="สามคำถามเกยวกบการแจกแจง" class="level3">
+<h3 class="anchored" data-anchor-id="สามคำถามเกยวกบการแจกแจง">สามคำถามเกี่ยวกับการแจกแจง</h3>
+<p>การแจกแจง (distribution) ของตัวแปรหนึ่งบอกว่าค่าแต่ละช่วงเกิดขึ้นบ่อยเพียงใด การสรุปการแจกแจงด้วยตัวเลขตอบคำถามสามข้อ</p>
+<div id="tbl-ch13-summary" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch13-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;13.1: สามมิติของการสรุปการแจกแจง
+</figcaption>
+<div aria-describedby="tbl-ch13-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>คำถาม</th>
+<th>ชื่อทางสถิติ</th>
+<th>ตัววัดที่ใช้บ่อย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ค่าส่วนใหญ่อยู่ตรงไหน</td>
+<td>ตำแหน่ง (location)</td>
+<td>ค่าเฉลี่ย มัธยฐาน</td>
+</tr>
+<tr class="even">
+<td>ค่ากระจายกว้างเพียงใด</td>
+<td>การกระจาย (spread)</td>
+<td>ส่วนเบี่ยงเบนมาตรฐาน IQR MAD</td>
+</tr>
+<tr class="odd">
+<td>การแจกแจงสมมาตรหรือไม่ หางยาวเพียงใด</td>
+<td>รูปร่าง (shape)</td>
+<td>ความเบ้ (skewness) ความโด่ง (kurtosis)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT d.station_id, d.date, d.pm25_mean, s.region</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete AND d.date &lt; DATE '2024-01-01'</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> daily[<span class="st">"pm25_mean"</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.describe().<span class="bu">round</span>(<span class="dv">1</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"skewness"</span>, <span class="bu">round</span>(stats.skew(x), <span class="dv">2</span>), <span class="st">"excess kurtosis"</span>, <span class="bu">round</span>(stats.kurtosis(x), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+count    11651.0
+mean        24.5
+std         10.7
+min          5.6
+25%         17.6
+50%         22.5
+75%         28.7
+max        116.7
+skewness 1.68 excess kurtosis 4.81</code></pre>
+</section>
+<section id="การแจกแจงของ-pm2.5-เบขวา" class="level3">
+<h3 class="anchored" data-anchor-id="การแจกแจงของ-pm2.5-เบขวา">การแจกแจงของ PM2.5 เบ้ขวา</h3>
+<p>ผลลัพธ์ข้างต้นมีลักษณะที่พบเสมอในข้อมูลความเข้มข้นของมลพิษ ค่าเฉลี่ย (24.5) มากกว่ามัธยฐาน (22.5) ระยะจากควอร์ไทล์ที่สามถึงค่าสูงสุด (28.7 ถึง 116.7) ยาวกว่าระยะจากค่าต่ำสุดถึงควอร์ไทล์ที่หนึ่งมาก และความเบ้เป็นบวก การแจกแจงแบบนี้เรียกว่า <strong><span class="idx">เบ้ขวา</span></strong> (right-skewed) วันส่วนใหญ่มีค่าปานกลาง แต่มีวันจำนวนหนึ่งที่สูงมาก ซึ่งดึงค่าเฉลี่ยขึ้น</p>
+<p>เหตุผลเชิงกายภาพคือ ความเข้มข้นของฝุ่นเกิดจากหลายปัจจัยที่ <em>คูณ</em> กัน เช่น ปริมาณการเผา ความสูงของชั้นผสมอากาศ และความเร็วลม เมื่อปัจจัยหลายตัวคูณกัน ผลลัพธ์มักมีการแจกแจงใกล้เคียง log-normal <span class="citation" data-cites="ott1990physical">(<a href="../references.html#ref-ott1990physical" role="doc-biblioref">Ott 1990</a>)</span> ความเข้าใจนี้มีผลต่อการเลือกสถิติในหัวข้อถัดไป</p>
+<div id="fig-ch13-skew-log" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ภาพซ้าย histogram มียอดอยู่ทางซ้ายและหางยาวไปทางขวา เส้นค่าเฉลี่ยอยู่ทางขวาของเส้นมัธยฐาน ภาพขวา histogram หลังแปลง log มีรูปร่างใกล้ระฆังคว่ำสมมาตร">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch13-skew-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/13/skew_log.png" class="img-fluid figure-img" alt="ภาพซ้าย histogram มียอดอยู่ทางซ้ายและหางยาวไปทางขวา เส้นค่าเฉลี่ยอยู่ทางขวาของเส้นมัธยฐาน ภาพขวา histogram หลังแปลง log มีรูปร่างใกล้ระฆังคว่ำสมมาตร">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch13-skew-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;13.1: การแจกแจงของค่าเฉลี่ยรายวันสังเคราะห์ในสเกลเดิม (ซ้าย) และหลังแปลงด้วย log (ขวา)
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="ความเบและความโดง" class="level3">
+<h3 class="anchored" data-anchor-id="ความเบและความโดง">ความเบ้และความโด่ง</h3>
+<p><strong><span class="idx">ความเบ้</span></strong> (skewness) วัดความไม่สมมาตร ค่าบวกหมายถึงหางยาวทางขวา ค่าลบหมายถึงหางยาวทางซ้าย และค่าใกล้ศูนย์หมายถึงใกล้สมมาตร <strong><span class="idx">ความโด่งส่วนเกิน</span></strong> (excess kurtosis) วัดความหนักของหางเทียบกับการแจกแจงปกติ ค่าบวกหมายถึงมีค่าสุดโต่งบ่อยกว่าการแจกแจงปกติ ซึ่งสำคัญต่อข้อมูล PM2.5 เพราะวันที่ค่าสูงมากคือวันที่มีผลต่อสุขภาพมากที่สุด</p>
+<p>ข้อควรระวังคือ ตัวเลขสรุปไม่ได้แทนกราฟ บทที่ 1 แสดงด้วย Anscombe’s quartet ว่าข้อมูลที่มีสถิติสรุปเหมือนกันมีรูปร่างต่างกันได้มาก การสรุปการแจกแจงจึงควรทำคู่กับ histogram หรือ ECDF (<a href="11-visual-perception.html#sec-ch11-chart-choice" class="quarto-xref"><span>หัวข้อ 11.4</span></a>) เสมอ</p>
+</section>
+</section>
+<section id="sec-ch13-robust" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="sec-ch13-robust"><span class="header-section-number">13.2</span> robust statistics: median, IQR, MAD, trimmed mean</h2>
+<section id="ปญหาของคาเฉลยและสวนเบยงเบนมาตรฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของคาเฉลยและสวนเบยงเบนมาตรฐาน">ปัญหาของค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐาน</h3>
+<p>ค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐานใช้ค่าทุกค่าในการคำนวณ ค่าผิดปกติเพียงค่าเดียวจึงดึงผลไปได้ไกล ลองนึกถึงค่าผิดพลาดจากเครื่องวัดที่ไม่ถูกตรวจพบในบทที่ 9 เช่น ค่า 5,000 µg/m³ เพียงหนึ่งแถว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>contaminated <span class="op">=</span> x.copy()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>contaminated.iloc[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(contaminated.mean(), <span class="dv">2</span>), <span class="bu">round</span>(contaminated.median(), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+24.93 22.51</code></pre>
+<p>ค่าผิดพลาดเพียงหนึ่งแถวในกว่าหมื่นแถวเปลี่ยนค่าเฉลี่ยไปเกือบ 0.5 µg/m³ ขณะที่มัธยฐานไม่เปลี่ยนเลย ถ้าข้อมูลมีน้อยกว่านี้ เช่น ค่าเฉลี่ยรายเดือนของสถานีเดียวจาก 30 วัน ผลจะรุนแรงกว่ามาก</p>
+</section>
+<section id="breakdown-point" class="level3">
+<h3 class="anchored" data-anchor-id="breakdown-point">breakdown point</h3>
+<p>แนวคิดที่ใช้เปรียบเทียบความทนทานคือ <strong><span class="idx">breakdown point</span></strong> คือสัดส่วนของข้อมูลที่ต้องเปลี่ยนเป็นค่าที่ผิดอย่างไม่มีขอบเขต จึงจะทำให้สถิตินั้นผิดไปได้ไม่มีขอบเขต <span class="citation" data-cites="huber2009robust">(<a href="../references.html#ref-huber2009robust" role="doc-biblioref">Huber และ Ronchetti 2009</a>)</span> ค่าเฉลี่ยมี breakdown point เท่ากับ 0 (ค่าเดียวก็พอ) ส่วนมัธยฐานมี breakdown point เท่ากับ 50% ซึ่งสูงที่สุดที่เป็นไปได้</p>
+<div id="tbl-ch13-robust" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch13-robust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;13.2: เปรียบเทียบสถิติแบบดั้งเดิมกับ robust statistics
+</figcaption>
+<div aria-describedby="tbl-ch13-robust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สถิติ</th>
+<th>วัดอะไร</th>
+<th>breakdown point</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ค่าเฉลี่ย</td>
+<td>ตำแหน่ง</td>
+<td>0%</td>
+<td>ใช้ค่าทุกค่า มีประสิทธิภาพสูงเมื่อข้อมูลปกติ</td>
+</tr>
+<tr class="even">
+<td>มัธยฐาน</td>
+<td>ตำแหน่ง</td>
+<td>50%</td>
+<td>ค่ากลางเมื่อเรียงข้อมูล</td>
+</tr>
+<tr class="odd">
+<td>trimmed mean 10%</td>
+<td>ตำแหน่ง</td>
+<td>10%</td>
+<td>ตัดค่าต่ำสุดและสูงสุดอย่างละ 10% แล้วเฉลี่ย</td>
+</tr>
+<tr class="even">
+<td>ส่วนเบี่ยงเบนมาตรฐาน</td>
+<td>การกระจาย</td>
+<td>0%</td>
+<td>ไวต่อค่าผิดปกติมากเพราะยกกำลังสอง</td>
+</tr>
+<tr class="odd">
+<td>IQR</td>
+<td>การกระจาย</td>
+<td>25%</td>
+<td><span class="math inline">\(Q_3 - Q_1\)</span> ครอบคลุมข้อมูลครึ่งกลาง</td>
+</tr>
+<tr class="even">
+<td>MAD</td>
+<td>การกระจาย</td>
+<td>50%</td>
+<td>มัธยฐานของ <span class="math inline">\(\lvert x_i - \text{มัธยฐาน} \rvert\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="mad" class="level3">
+<h3 class="anchored" data-anchor-id="mad">MAD</h3>
+<p><strong><span class="idx">MAD</span></strong> (median absolute deviation) นิยามดังนี้</p>
+<p><span id="eq-ch13-mad"><span class="math display">\[
+\text{MAD} = \operatorname{median}_i \left( \lvert x_i - \tilde{x} \rvert \right)
+\tag{13.1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(x_i\)</span> คือค่าแต่ละค่า และ <span class="math inline">\(\tilde{x}\)</span> คือมัธยฐานของข้อมูล ถ้าต้องการเปรียบเทียบกับส่วนเบี่ยงเบนมาตรฐาน ให้คูณด้วย 1.4826 ซึ่งทำให้ MAD ประมาณส่วนเบี่ยงเบนมาตรฐานได้เมื่อข้อมูลมีการแจกแจงปกติ เช่น ข้อมูลห้าค่า 20, 22, 23, 25, 60 µg/m³ มีมัธยฐาน 23 ค่าเบี่ยงเบนสัมบูรณ์คือ 3, 1, 0, 2, 37 มัธยฐานของค่าเหล่านี้คือ MAD = 2 และ MAD ที่ปรับสเกลคือ <span class="math inline">\(2 \times 1.4826 \approx 3.0\)</span> ขณะที่ส่วนเบี่ยงเบนมาตรฐานของข้อมูลชุดเดียวกันประมาณ 17 เพราะค่า 60 เพียงค่าเดียว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>q1, q3 <span class="op">=</span> np.percentile(x, [<span class="dv">25</span>, <span class="dv">75</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> pd.Series({</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mean"</span>: x.mean(), <span class="st">"median"</span>: x.median(), <span class="st">"trimmed_mean_10"</span>: stats.trim_mean(x, <span class="fl">0.1</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sd"</span>: x.std(), <span class="st">"iqr"</span>: q3 <span class="op">-</span> q1, <span class="st">"mad_scaled"</span>: stats.median_abs_deviation(x, scale<span class="op">=</span><span class="st">"normal"</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+mean               24.50
+median             22.51
+trimmed_mean_10    23.18
+sd                 10.73
+iqr                11.13
+mad_scaled          8.02</code></pre>
+</section>
+<section id="robust-statistics-ใน-duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="robust-statistics-ใน-duckdb">robust statistics ใน DuckDB</h3>
+<p>DuckDB มีฟังก์ชันรวมสำหรับ robust statistics ครบ ทำให้สรุปแยกกลุ่มได้ในคำสั่งเดียว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(d.pm25_mean), <span class="dv">1</span>) <span class="kw">AS</span> mean,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">MEDIAN</span>(d.pm25_mean), <span class="dv">1</span>) <span class="kw">AS</span> <span class="fu">median</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(QUANTILE_CONT(d.pm25_mean, <span class="fl">0.75</span>) <span class="op">-</span> QUANTILE_CONT(d.pm25_mean, <span class="fl">0.25</span>), <span class="dv">1</span>) <span class="kw">AS</span> iqr,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(MAD(d.pm25_mean), <span class="dv">1</span>) <span class="kw">AS</span> mad</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> d.is_complete <span class="kw">AND</span> d.<span class="dt">date</span> <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">'2024-01-01'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> s.region</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="fu">median</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+               region     n  mean  median   iqr  mad
+0                กลาง  2922  26.3    24.9   9.6  4.6
+1               เหนือ  4357  27.7    23.8  11.9  5.3
+2  ตะวันออกเฉียงเหนือ  2919  23.9    22.3   9.7  4.7
+3                 ใต้  1453  12.7    12.3   4.1  2.1</code></pre>
+<p>ผลลัพธ์นี้แสดงจุดที่น่าสนใจ ภาคเหนือมีค่าเฉลี่ยสูงที่สุด แต่ภาคกลางมีมัธยฐานสูงที่สุด แปลว่าภาคเหนือมีหางทางขวายาวกว่า คือมีวันที่ค่าสูงมากจำนวนหนึ่งในฤดูฝุ่น แต่วันทั่วไปไม่ได้สูงกว่าภาคกลาง ลำดับของภาคจึงขึ้นกับว่าใช้สถิติใด และ <em>สถิติที่เลือกต้องตรงกับคำถาม</em> ถ้าคำถามคือ “วันทั่วไปเป็นอย่างไร” ใช้มัธยฐาน ถ้าคำถามเกี่ยวกับภาระมลพิษรวมหรือความเสี่ยงจากวันที่สูงมาก ค่าเฉลี่ยหรือเปอร์เซ็นไทล์สูง เช่น P95 ตอบได้ตรงกว่า นี่คือเหตุผลที่ <code>questions.md</code> ต้องระบุตัวชี้วัดไว้ล่วงหน้าตามบทที่ 4</p>
+<p>ข้อสังเกตเรื่องฟังก์ชัน <code>MAD()</code> ของ DuckDB คืนค่า MAD ที่ยังไม่ปรับสเกล ส่วน <code>stats.median_abs_deviation(x, scale="normal")</code> ของ SciPy ปรับสเกลด้วย 1.4826 แล้ว ตัวเลขจากสองเครื่องมือจึงต่างกัน ต้องระบุในรายงานว่าใช้แบบใด</p>
+</section>
+</section>
+<section id="sec-ch13-transform" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="sec-ch13-transform"><span class="header-section-number">13.3</span> การแปลงข้อมูล: log, Box-Cox</h2>
+<section id="ทำไมตองแปลง" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองแปลง">ทำไมต้องแปลง</h3>
+<p>การแปลงข้อมูลด้วยฟังก์ชันทางคณิตศาสตร์มีเป้าหมายสามข้อ ข้อแรกเพื่อ <strong>ลดความเบ้</strong> ให้การแจกแจงใกล้สมมาตร ซึ่งทำให้วิธีทางสถิติหลายวิธีที่สมมติการแจกแจงปกติใช้ได้ดีขึ้น ข้อสองเพื่อ <strong>ทำให้การกระจายคงที่</strong> ระหว่างกลุ่ม ในข้อมูล PM2.5 กลุ่มที่มีค่าเฉลี่ยสูงมักมีการกระจายสูงด้วย การแปลง log ทำให้การกระจายของแต่ละกลุ่มใกล้กันขึ้น ข้อสามเพื่อ <strong>เปลี่ยนความสัมพันธ์แบบคูณเป็นแบบบวก</strong> ซึ่งตีความง่ายกว่า</p>
+</section>
+<section id="การแปลง-log" class="level3">
+<h3 class="anchored" data-anchor-id="การแปลง-log">การแปลง log</h3>
+<p>การแปลงที่ใช้บ่อยที่สุดกับข้อมูลความเข้มข้นคือ log ธรรมชาติ ความต่างในสเกล log แปลเป็นอัตราส่วนในสเกลเดิม ถ้า <span class="math inline">\(\log(a) - \log(b) = 0.2\)</span> แปลว่า <span class="math inline">\(a/b = e^{0.2} \approx 1.22\)</span> คือ <span class="math inline">\(a\)</span> สูงกว่า <span class="math inline">\(b\)</span> ประมาณ 22%</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"skewness after log"</span>, <span class="bu">round</span>(stats.skew(np.log(x)), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+skewness after log 0.08</code></pre>
+<p>ข้อควรระวังสองข้อ ข้อแรก log ของศูนย์หรือค่าลบไม่นิยาม ค่าเฉลี่ยรายวันของ PM2.5 แทบไม่เคยเป็นศูนย์ แต่ค่ารายชั่วโมงอาจเป็นศูนย์ได้ การบวกค่าคงที่ก่อนแปลง เช่น <span class="math inline">\(\log(x + 1)\)</span> ใช้ได้ แต่ค่าคงที่ที่เลือกมีผลต่อผล และต้องรายงาน ข้อสอง <strong>ค่าเฉลี่ยของ log ไม่ใช่ log ของค่าเฉลี่ย</strong> การแปลงกลับด้วย <span class="math inline">\(e^{\overline{\log x}}\)</span> ได้ <em>ค่าเฉลี่ยเรขาคณิต</em> (geometric mean) ซึ่งต่ำกว่าค่าเฉลี่ยเลขคณิตเสมอเมื่อข้อมูลไม่คงที่ การรายงานค่าเฉลี่ยเรขาคณิตโดยเรียกว่า “ค่าเฉลี่ย” ทำให้ผู้อ่านเข้าใจผิด และเทียบกับมาตรฐาน 37.5 µg/m³ ซึ่งนิยามบนค่าเฉลี่ยเลขคณิตไม่ได้</p>
+</section>
+<section id="box-cox" class="level3">
+<h3 class="anchored" data-anchor-id="box-cox">Box-Cox</h3>
+<p>การแปลง <strong><span class="idx">Box-Cox</span></strong> เป็นตระกูลของการแปลงกำลังที่มีพารามิเตอร์ <span class="math inline">\(\lambda\)</span> <span class="citation" data-cites="box1964analysis">(<a href="../references.html#ref-box1964analysis" role="doc-biblioref">Box และ Cox 1964</a>)</span></p>
+<p><span id="eq-ch13-boxcox"><span class="math display">\[
+y^{(\lambda)} =
+\begin{cases}
+\dfrac{y^{\lambda} - 1}{\lambda}, &amp; \lambda \neq 0 \\[6pt]
+\log y, &amp; \lambda = 0
+\end{cases}
+\tag{13.2}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(y\)</span> คือข้อมูลที่ต้องเป็นบวก และ <span class="math inline">\(\lambda\)</span> คือพารามิเตอร์ที่เลือกให้ข้อมูลหลังแปลงใกล้การแจกแจงปกติที่สุด (โดยวิธี maximum likelihood) ค่า <span class="math inline">\(\lambda = 1\)</span> คือไม่แปลง (นอกจากเลื่อนค่า) <span class="math inline">\(\lambda = 0.5\)</span> ใกล้เคียงรากที่สอง และ <span class="math inline">\(\lambda = 0\)</span> คือ log</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>transformed, lam <span class="op">=</span> stats.boxcox(x)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"lambda"</span>, <span class="bu">round</span>(lam, <span class="dv">3</span>), <span class="st">"skewness"</span>, <span class="bu">round</span>(stats.skew(transformed), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+lambda -0.058 skewness -0.0</code></pre>
+<p>ค่า <span class="math inline">\(\lambda\)</span> ที่ได้ใกล้ศูนย์มาก ยืนยันว่าการแปลง log เหมาะกับข้อมูลชุดนี้ ในทางปฏิบัติ ถ้า <span class="math inline">\(\lambda\)</span> ใกล้ค่าที่ตีความง่าย เช่น 0 หรือ 0.5 ควรใช้การแปลงที่ตีความง่ายนั้นแทนค่า <span class="math inline">\(\lambda\)</span> ที่คำนวณได้ เพราะผลต่างในสเกล log แปลเป็นอัตราส่วนได้ ส่วนผลต่างในสเกล <span class="math inline">\(y^{-0.058}\)</span> ไม่มีความหมายที่สื่อสารได้</p>
+</section>
+</section>
+<section id="sec-ch13-ci" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="sec-ch13-ci"><span class="header-section-number">13.4</span> ประชากร ตัวอย่าง และช่วงความเชื่อมั่น</h2>
+<section id="ประชากรคออะไรในขอมล-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="ประชากรคออะไรในขอมล-pm2.5">ประชากรคืออะไรในข้อมูล PM2.5</h3>
+<p>การอนุมานทางสถิติเริ่มจากคำถามที่ฟังดูง่ายแต่มักถูกข้าม: <strong>เรากำลังอนุมานไปยังประชากรใด</strong> ข้อมูล Air4Thai ไม่ได้เป็นตัวอย่างสุ่มจากประชากรที่นิยามชัดเจน สถานีถูกตั้งในตำแหน่งที่หน่วยงานเลือก มักอยู่ในเขตเมืองหรือพื้นที่ที่มีปัญหา และวันที่มีในข้อมูลคือวันที่เครื่องทำงาน ซึ่งไม่ได้สุ่ม (บทที่ 10)</p>
+<p>ประชากรที่สมเหตุสมผลจึงต้องนิยามอย่างระมัดระวัง เช่น “สภาพอากาศ ณ ตำแหน่งของสถานีที่มีอยู่ ในฤดูแล้งตามสภาพภูมิอากาศช่วงนี้” ซึ่งต่างจาก “คุณภาพอากาศของภาคเหนือทั้งภาค” มาก การอนุมานไปยังพื้นที่ที่ไม่มีสถานีต้องใช้วิธีเชิงพื้นที่ในบทที่ 17 และมีความไม่แน่นอนสูงกว่า</p>
+</section>
+<section id="หนวยของการวเคราะหและความเปนอสระ" class="level3">
+<h3 class="anchored" data-anchor-id="หนวยของการวเคราะหและความเปนอสระ">หน่วยของการวิเคราะห์และความเป็นอิสระ</h3>
+<p>วิธีทางสถิติดั้งเดิมส่วนใหญ่สมมติว่า ข้อมูลแต่ละหน่วยเป็นอิสระต่อกัน ค่าเฉลี่ยรายวันของ PM2.5 ละเมิดสมมติฐานนี้อย่างรุนแรง วันที่ฝุ่นสูงมักตามด้วยวันที่ฝุ่นสูง เพราะสภาพอากาศเปลี่ยนช้า ในข้อมูลสังเคราะห์ของหนังสือ สหสัมพันธ์ระหว่างค่าของวันหนึ่งกับวันถัดไปของสถานีเดียวกันประมาณ 0.75 (บทที่ 14 อธิบายเรื่อง autocorrelation) สถานีที่อยู่ใกล้กันก็มีค่าสัมพันธ์กันเช่นกัน (บทที่ 17)</p>
+<p>ผลของการละเมิดคือ ถ้านำค่ารายวันหลายพันค่ามาคำนวณเหมือนเป็นอิสระ ความคลาดเคลื่อนมาตรฐานจะต่ำเกินจริงมาก ช่วงความเชื่อมั่นแคบเกินจริง และ p-value เล็กเกินจริง นักวิเคราะห์จะ “มั่นใจ” ในข้อสรุปมากกว่าที่ข้อมูลรองรับ วิธีแก้ที่ง่ายและได้ผลคือ <strong>เลือกหน่วยของการวิเคราะห์ที่ใกล้เคียงอิสระ</strong> เช่น สรุปเป็นค่าต่อสถานีต่อปีก่อน แล้วใช้ค่าเหล่านั้นในการอนุมาน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>station_year <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.region, d.station_id, YEAR(d.date) AS year, AVG(d.pm25_mean) AS pm25_dry</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete AND d.date &lt; DATE '2024-01-01' AND MONTH(d.date) IN (2, 3, 4)</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY s.region, d.station_id, YEAR(d.date)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>north <span class="op">=</span> station_year.query(<span class="st">"region == 'เหนือ'"</span>)[<span class="st">"pm25_dry"</span>]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>central <span class="op">=</span> station_year.query(<span class="st">"region == 'กลาง'"</span>)[<span class="st">"pm25_dry"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตาราง <code>station_year</code> มีหนึ่งแถวต่อสถานีต่อปี เก็บค่าเฉลี่ยฤดูแล้ง (กุมภาพันธ์ถึงเมษายน) แม้ค่าของสถานีเดียวกันในปีต่างกันยังสัมพันธ์กันอยู่บ้าง แต่ใกล้อิสระกว่าค่ารายวันมาก ข้อมูลสังเคราะห์ของหนังสือมีเพียงไม่กี่สถานีต่อภาค ข้อมูลจริงมีมากกว่านี้</p>
+</section>
+<section id="ชวงความเชอมน" class="level3">
+<h3 class="anchored" data-anchor-id="ชวงความเชอมน">ช่วงความเชื่อมั่น</h3>
+<p><strong><span class="idx">ช่วงความเชื่อมั่น</span></strong> (confidence interval) 95% ของค่าเฉลี่ยคำนวณจาก</p>
+<p><span id="eq-ch13-ci"><span class="math display">\[
+\bar{x} \pm t_{0.975,\, n-1} \cdot \frac{s}{\sqrt{n}}
+\tag{13.3}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(\bar{x}\)</span> คือค่าเฉลี่ยของตัวอย่าง <span class="math inline">\(s\)</span> คือส่วนเบี่ยงเบนมาตรฐานของตัวอย่าง <span class="math inline">\(n\)</span> คือขนาดตัวอย่าง <span class="math inline">\(s/\sqrt{n}\)</span> คือความคลาดเคลื่อนมาตรฐาน (standard error) และ <span class="math inline">\(t_{0.975,\, n-1}\)</span> คือค่าวิกฤตของการแจกแจง t ที่มีองศาอิสระ <span class="math inline">\(n - 1\)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m, se <span class="op">=</span> north.mean(), stats.sem(north)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(north), <span class="bu">round</span>(m, <span class="dv">1</span>), np.<span class="bu">round</span>(stats.t.interval(<span class="fl">0.95</span>, <span class="bu">len</span>(north) <span class="op">-</span> <span class="dv">1</span>, loc<span class="op">=</span>m, scale<span class="op">=</span>se), <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+12 44.0 [42.8 45.3]</code></pre>
+<p>ตัวอย่างการคำนวณด้วยมือ ภาคเหนือมี 12 สถานี-ปี ค่าเฉลี่ย 44.0 ส่วนเบี่ยงเบนมาตรฐาน 2.0 ความคลาดเคลื่อนมาตรฐานคือ <span class="math inline">\(2.0 / \sqrt{12} \approx 0.58\)</span> ค่าวิกฤต <span class="math inline">\(t_{0.975,\,11} \approx 2.20\)</span> ช่วงความเชื่อมั่นจึงเป็น <span class="math inline">\(44.0 \pm 2.20 \times 0.58 \approx 44.0 \pm 1.3\)</span> หรือ 42.7 ถึง 45.3 (ต่างจากผลของโค้ดเล็กน้อยเพราะการปัดเศษ)</p>
+</section>
+<section id="การตความชวงความเชอมนอยางถกตอง" class="level3">
+<h3 class="anchored" data-anchor-id="การตความชวงความเชอมนอยางถกตอง">การตีความช่วงความเชื่อมั่นอย่างถูกต้อง</h3>
+<p>ช่วงความเชื่อมั่น 95% <strong>ไม่ได้</strong> แปลว่า “ค่าจริงมีความน่าจะเป็น 95% ที่จะอยู่ในช่วง 42.8 ถึง 45.3” ในกรอบความคิดแบบความถี่ ค่าจริงเป็นค่าคงที่ ไม่ใช่ตัวแปรสุ่ม ความหมายที่ถูกต้องคือ ถ้าทำซ้ำกระบวนการสุ่มตัวอย่างและคำนวณช่วงแบบนี้หลายครั้ง ประมาณ 95% ของช่วงที่ได้จะครอบคลุมค่าจริง <span class="citation" data-cites="greenland2016statistical">(<a href="../references.html#ref-greenland2016statistical" role="doc-biblioref">Greenland และคณะ 2016</a>)</span> ในการสื่อสารทั่วไป การบอกว่า “ข้อมูลสอดคล้องกับค่าเฉลี่ยตั้งแต่ประมาณ 43 ถึง 45 µg/m³” เป็นการตีความที่ใช้ได้และไม่ผิด</p>
+<p>ข้อควรจำที่สำคัญกว่าคือ ช่วงความเชื่อมั่นสะท้อนเฉพาะ <strong>ความไม่แน่นอนจากการสุ่มตัวอย่าง</strong> ไม่ได้รวมความไม่แน่นอนจากการเลือกตำแหน่งสถานี การจัดการข้อมูลสูญหาย หรือความคลาดเคลื่อนของเครื่องวัด ช่วงที่แคบจึงไม่ได้รับประกันว่าข้อสรุปถูกต้อง ถ้าข้อมูลมีอคติเชิงระบบ</p>
+</section>
+</section>
+<section id="sec-ch13-testing" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="sec-ch13-testing"><span class="header-section-number">13.5</span> การทดสอบสมมติฐาน: parametric และ non-parametric</h2>
+<section id="ตรรกะของการทดสอบ" class="level3">
+<h3 class="anchored" data-anchor-id="ตรรกะของการทดสอบ">ตรรกะของการทดสอบ</h3>
+<p>การทดสอบสมมติฐานเริ่มจาก <strong><span class="idx">สมมติฐานว่าง</span></strong> (null hypothesis, <span class="math inline">\(H_0\)</span>) เช่น “ค่าเฉลี่ยฤดูแล้งของภาคเหนือและภาคกลางเท่ากัน” แล้วถามว่า ถ้า <span class="math inline">\(H_0\)</span> เป็นจริง ข้อมูลที่ต่างกันอย่างน้อยเท่าที่เห็นจะเกิดขึ้นได้บ่อยเพียงใด สัดส่วนนี้คือ <strong><span class="idx">p-value</span></strong> ค่า p-value ต่ำแปลว่าข้อมูลไม่ค่อยสอดคล้องกับ <span class="math inline">\(H_0\)</span></p>
+<p>สมาคมสถิติอเมริกันออกแถลงการณ์ในปี ค.ศ. 2016 เพื่อแก้ความเข้าใจผิดเกี่ยวกับ p-value ที่แพร่หลาย <span class="citation" data-cites="wasserstein2016asa">(<a href="../references.html#ref-wasserstein2016asa" role="doc-biblioref">Wasserstein และ Lazar 2016</a>)</span> ประเด็นสำคัญได้แก่ p-value ไม่ได้วัดความน่าจะเป็นที่ <span class="math inline">\(H_0\)</span> เป็นจริง ไม่ได้วัดขนาดหรือความสำคัญของผล และการตัดสินใจทางวิทยาศาสตร์ไม่ควรขึ้นกับว่า p-value ข้ามเกณฑ์ 0.05 หรือไม่เพียงอย่างเดียว</p>
+</section>
+<section id="เลอกการทดสอบ" class="level3">
+<h3 class="anchored" data-anchor-id="เลอกการทดสอบ">เลือกการทดสอบ</h3>
+<div id="tbl-ch13-tests" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch13-tests-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;13.3: การเลือกการทดสอบสมมติฐาน
+</figcaption>
+<div aria-describedby="tbl-ch13-tests-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สถานการณ์</th>
+<th>parametric</th>
+<th>non-parametric</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สองกลุ่มอิสระ</td>
+<td>Welch’s t-test</td>
+<td>Mann-Whitney U</td>
+<td>ใช้ Welch เป็นค่าเริ่มต้น ไม่ต้องสมมติความแปรปรวนเท่ากัน</td>
+</tr>
+<tr class="even">
+<td>สองกลุ่มจับคู่</td>
+<td>paired t-test</td>
+<td>Wilcoxon signed-rank</td>
+<td>เช่น สถานีเดียวกันในสองปี</td>
+</tr>
+<tr class="odd">
+<td>มากกว่าสองกลุ่ม</td>
+<td>one-way ANOVA (Welch)</td>
+<td>Kruskal-Wallis</td>
+<td>ถ้าผลมีนัยสำคัญ ต้องเปรียบเทียบรายคู่ต่อ</td>
+</tr>
+<tr class="even">
+<td>ความสัมพันธ์ของสองตัวแปรต่อเนื่อง</td>
+<td>Pearson</td>
+<td>Spearman</td>
+<td>หัวข้อ <a href="#sec-ch13-correlation" class="quarto-xref"><span>13.9</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การทดสอบแบบ <strong><span class="idx">parametric</span></strong> สมมติรูปแบบของการแจกแจง เช่น t-test สมมติว่าค่าเฉลี่ยของตัวอย่างมีการแจกแจงใกล้ปกติ ซึ่งเป็นจริงโดยประมาณเมื่อข้อมูลไม่เบ้มากหรือตัวอย่างใหญ่พอ (central limit theorem) การทดสอบแบบ <strong><span class="idx">non-parametric</span></strong> ไม่สมมติรูปแบบของการแจกแจง ส่วนใหญ่ทำงานกับลำดับ (rank) ของข้อมูล จึงทนต่อความเบ้และค่าผิดปกติ แต่ตอบคำถามที่ต่างออกไปเล็กน้อย Mann-Whitney U ไม่ได้ทดสอบว่ามัธยฐานเท่ากัน แต่ทดสอบว่าค่าจากกลุ่มหนึ่งมีแนวโน้มสูงกว่าอีกกลุ่มหรือไม่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stats.ttest_ind(north, central, equal_var<span class="op">=</span><span class="va">False</span>))      <span class="co"># Welch's t-test</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stats.mannwhitneyu(north, central, alternative<span class="op">=</span><span class="st">"two-sided"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+TtestResult(statistic=16.65, pvalue=3.94e-12, df=17.4)
+MannwhitneyuResult(statistic=96.0, pvalue=1.59e-05)</code></pre>
+<p>(ผลลัพธ์จัดรูปแบบตัวเลขให้อ่านง่าย) ทั้งสองการทดสอบให้ p-value ต่ำมาก ข้อมูลไม่สอดคล้องกับสมมติฐานว่าค่าฤดูแล้งของสองภาคเท่ากัน ค่า U = 96 เท่ากับ <span class="math inline">\(12 \times 8\)</span> ซึ่งเป็นค่าสูงสุดที่เป็นไปได้ แปลว่าทุกสถานี-ปีของภาคเหนือสูงกว่าทุกสถานี-ปีของภาคกลาง ข้อมูลสังเคราะห์ของหนังสือสร้างให้ภาคต่างกันชัดเจนกว่าข้อมูลจริง</p>
+</section>
+<section id="การทดสอบทไมพบความตาง" class="level3">
+<h3 class="anchored" data-anchor-id="การทดสอบทไมพบความตาง">การทดสอบที่ไม่พบความต่าง</h3>
+<p>เปรียบเทียบภาคกลางกับภาคตะวันออกเฉียงเหนือด้วยวิธีเดียวกัน ได้ Welch’s t-test p = 0.73 และ Mann-Whitney U p = 0.72 ผลนี้ <strong>ไม่ได้</strong> แปลว่าสองภาคมีค่าเท่ากัน แปลเพียงว่าข้อมูลไม่มีหลักฐานพอจะบอกว่าต่างกัน ซึ่งอาจเป็นเพราะไม่ต่างจริง หรือเพราะตัวอย่างน้อยเกินไป (ที่นี่มีเพียง 8 สถานี-ปีต่อภาค) ความต่างระหว่าง “ไม่มีหลักฐานของความต่าง” กับ “มีหลักฐานว่าไม่ต่าง” เป็นหนึ่งในความเข้าใจผิดที่พบบ่อยที่สุด <span class="citation" data-cites="altman1995absence">(<a href="../references.html#ref-altman1995absence" role="doc-biblioref">Altman และ Bland 1995</a>)</span> หัวข้อถัดไปแสดงว่าช่วงความเชื่อมั่นของขนาดผลช่วยแยกสองกรณีนี้ได้</p>
+</section>
+<section id="p-value-ในการวเคราะหเชงสำรวจ" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-ในการวเคราะหเชงสำรวจ">p-value ในการวิเคราะห์เชิงสำรวจ</h3>
+<p>ข้อควรจำที่สำคัญที่สุดของบทนี้ p-value มีความหมายตามนิยามเฉพาะเมื่อสมมติฐานและวิธีวิเคราะห์ถูกกำหนด <em>ก่อน</em> ดูข้อมูล ถ้านักวิเคราะห์ดูกราฟก่อน เห็นว่าภาคเหนือดูสูง แล้วจึงทดสอบ p-value ที่ได้จะต่ำกว่าที่ควรเป็น เพราะการทดสอบถูกเลือกเพราะข้อมูลดูน่าสนใจ (garden of forking paths ในบทที่ 4) ในการวิเคราะห์ข้อมูลช่วงสำรวจ ให้ถือว่า p-value เป็นตัวชี้วัดคร่าว ๆ ว่ารูปแบบใดควรตรวจสอบต่อในข้อมูลช่วงยืนยัน ไม่ใช่หลักฐาน</p>
+</section>
+</section>
+<section id="sec-ch13-effect-size" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="sec-ch13-effect-size"><span class="header-section-number">13.6</span> effect size: ทำไม p-value อย่างเดียวไม่พอ</h2>
+<section id="p-value-ผสมขนาดผลกบขนาดตวอยาง" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-ผสมขนาดผลกบขนาดตวอยาง">p-value ผสมขนาดผลกับขนาดตัวอย่าง</h3>
+<p>p-value ขึ้นกับสองสิ่งพร้อมกัน คือ ขนาดของผลและขนาดของตัวอย่าง ผลที่เล็กมากจนไม่มีความหมายในทางปฏิบัติก็ได้ p-value ต่ำได้ ถ้าตัวอย่างใหญ่พอ เช่น ถ้านำค่ารายชั่วโมงหลายล้านค่ามาทดสอบ ความต่าง 0.1 µg/m³ ระหว่างสองภาคก็อาจ “มีนัยสำคัญทางสถิติ” ทั้งที่ไม่มีผลต่อสุขภาพหรือนโยบายเลย ในทางกลับกัน ผลที่ใหญ่และสำคัญอาจได้ p-value สูงถ้าตัวอย่างเล็ก <strong><span class="idx">effect size</span></strong> (ขนาดอิทธิพล) แยกขนาดของผลออกมาวัดโดยตรง <span class="citation" data-cites="sullivan2012using">(<a href="../references.html#ref-sullivan2012using" role="doc-biblioref">Sullivan และ Feinn 2012</a>)</span></p>
+</section>
+<section id="effect-size-ในหนวยเดม" class="level3">
+<h3 class="anchored" data-anchor-id="effect-size-ในหนวยเดม">effect size ในหน่วยเดิม</h3>
+<p>effect size ที่สื่อสารได้ดีที่สุดมักเป็น <strong>ความต่างในหน่วยเดิม</strong> พร้อมช่วงความเชื่อมั่น เช่น “ค่าเฉลี่ยฤดูแล้งของภาคเหนือสูงกว่าภาคกลางประมาณ 11 µg/m³ (ช่วงความเชื่อมั่น 95% ประมาณ 9 ถึง 13 µg/m³)” ผู้อ่านเทียบกับมาตรฐาน 37.5 µg/m³ ได้ทันทีว่าความต่างนี้ใหญ่เพียงใด</p>
+</section>
+<section id="effect-size-แบบมาตรฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="effect-size-แบบมาตรฐาน">effect size แบบมาตรฐาน</h3>
+<p>เมื่อต้องเปรียบเทียบผลข้ามตัวแปรที่มีหน่วยต่างกัน ใช้ effect size แบบมาตรฐาน ตัวที่ใช้บ่อยคือ Cohen’s d ซึ่งแบ่งความต่างของค่าเฉลี่ยด้วยส่วนเบี่ยงเบนมาตรฐานรวม และ Hedges’ g ซึ่งปรับแก้ความเอนเอียงเมื่อตัวอย่างเล็ก</p>
+<p><span id="eq-ch13-hedges-g"><span class="math display">\[
+g = \frac{\bar{x}_1 - \bar{x}_2}{s_p}\left(1 - \frac{3}{4(n_1 + n_2) - 9}\right),
+\qquad s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
+\tag{13.4}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(\bar{x}_1, \bar{x}_2\)</span> คือค่าเฉลี่ยของสองกลุ่ม <span class="math inline">\(s_1, s_2\)</span> คือส่วนเบี่ยงเบนมาตรฐาน <span class="math inline">\(n_1, n_2\)</span> คือขนาดตัวอย่าง และ <span class="math inline">\(s_p\)</span> คือส่วนเบี่ยงเบนมาตรฐานรวม (pooled) สำหรับข้อมูลที่เบ้หรือมีค่าผิดปกติ <strong><span class="idx">Cliff’s delta</span></strong> เป็นทางเลือกแบบ non-parametric คือความน่าจะเป็นที่ค่าจากกลุ่มที่หนึ่งสูงกว่ากลุ่มที่สอง ลบด้วยความน่าจะเป็นที่ต่ำกว่า มีค่าตั้งแต่ −1 ถึง 1 <span class="citation" data-cites="cliff1993dominance">(<a href="../references.html#ref-cliff1993dominance" role="doc-biblioref">Cliff 1993</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hedges_g(a: pd.Series, b: pd.Series) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    na, nb <span class="op">=</span> <span class="bu">len</span>(a), <span class="bu">len</span>(b)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    sp <span class="op">=</span> np.sqrt(((na <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> a.var(ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> (nb <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> b.var(ddof<span class="op">=</span><span class="dv">1</span>)) <span class="op">/</span> (na <span class="op">+</span> nb <span class="op">-</span> <span class="dv">2</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (a.mean() <span class="op">-</span> b.mean()) <span class="op">/</span> sp <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> <span class="dv">3</span> <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> (na <span class="op">+</span> nb) <span class="op">-</span> <span class="dv">9</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cliffs_delta(a: pd.Series, b: pd.Series) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    a, b <span class="op">=</span> np.asarray(a), np.asarray(b)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (a[:, <span class="va">None</span>] <span class="op">&gt;</span> b[<span class="va">None</span>, :]).mean() <span class="op">-</span> (a[:, <span class="va">None</span>] <span class="op">&lt;</span> b[<span class="va">None</span>, :]).mean()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(hedges_g(north, central), <span class="dv">2</span>), <span class="bu">round</span>(cliffs_delta(north, central), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+6.47 1.0</code></pre>
+<p>ค่า g = 6.47 ใหญ่มากผิดปกติ เพราะข้อมูลสังเคราะห์มีความแปรปรวนภายในภาคต่ำ ในข้อมูลจริง ความแปรปรวนระหว่างสถานีและระหว่างปีสูงกว่านี้มาก Cohen เสนอเกณฑ์คร่าว ๆ ว่า d ประมาณ 0.2, 0.5 และ 0.8 คือผลเล็ก ปานกลาง และใหญ่ แต่เตือนเองว่าเกณฑ์นี้ควรใช้เมื่อไม่มีบริบทอื่นเท่านั้น <span class="citation" data-cites="cohen1988statistical">(<a href="../references.html#ref-cohen1988statistical" role="doc-biblioref">Cohen 1988</a>)</span> ในโดเมนคุณภาพอากาศ การตีความในหน่วย µg/m³ เทียบกับมาตรฐานมีความหมายกว่ามาก</p>
+</section>
+<section id="รายงานอะไร" class="level3">
+<h3 class="anchored" data-anchor-id="รายงานอะไร">รายงานอะไร</h3>
+<div id="tbl-ch13-report" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch13-report-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;13.4: องค์ประกอบของการรายงานผลการเปรียบเทียบ
+</figcaption>
+<div aria-describedby="tbl-ch13-report-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>องค์ประกอบ</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ขนาดผลในหน่วยเดิม</td>
+<td>ภาคเหนือสูงกว่าภาคกลาง 11.2 µg/m³ (ผลต่างมัธยฐาน)</td>
+</tr>
+<tr class="even">
+<td>ช่วงความเชื่อมั่นของขนาดผล</td>
+<td>ช่วงความเชื่อมั่น 95% แบบ bootstrap: 9.4 ถึง 12.8 µg/m³</td>
+</tr>
+<tr class="odd">
+<td>หน่วยของการวิเคราะห์และขนาดตัวอย่าง</td>
+<td>ค่าเฉลี่ยฤดูแล้งต่อสถานีต่อปี 12 และ 8 ค่า</td>
+</tr>
+<tr class="even">
+<td>การทดสอบและ p-value (ถ้าจำเป็น)</td>
+<td>permutation test, p &lt; 0.001</td>
+</tr>
+<tr class="odd">
+<td>ช่วงข้อมูลและสถานะ</td>
+<td>ข้อมูลช่วงสำรวจ ค.ศ. 2020–2023 ต้องยืนยันด้วยข้อมูล ค.ศ. 2024–2025</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>สำหรับกรณีภาคกลางกับภาคตะวันออกเฉียงเหนือ ผลต่างมัธยฐานคือ 0.4 µg/m³ ช่วงความเชื่อมั่นแบบ bootstrap คือ −1.2 ถึง 1.4 µg/m³ ช่วงนี้ครอบคลุมศูนย์ และทั้งสองปลายมีขนาดเล็กเมื่อเทียบกับมาตรฐาน 37.5 µg/m³ จึงพูดได้ว่า <em>ถ้า</em> มีความต่าง ก็น่าจะเล็ก ซึ่งให้ข้อมูลมากกว่าการบอกเพียงว่า “ไม่มีนัยสำคัญ”</p>
+</section>
+</section>
+<section id="sec-ch13-resampling" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="sec-ch13-resampling"><span class="header-section-number">13.7</span> resampling: bootstrap และ permutation test ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="แนวคดของ-bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="แนวคดของ-bootstrap">แนวคิดของ bootstrap</h3>
+<p>สูตรช่วงความเชื่อมั่นใน <a href="#eq-ch13-ci" class="quarto-xref">สมการ&nbsp;<span>13.3</span></a> ใช้ได้กับค่าเฉลี่ยเมื่อสมมติฐานบางอย่างเป็นจริง แต่ถ้าต้องการช่วงความเชื่อมั่นของมัธยฐาน ผลต่างของมัธยฐาน หรือสัดส่วนวันเกินมาตรฐาน ไม่มีสูตรง่าย ๆ <strong><span class="idx">bootstrap</span></strong> ที่ Bradley Efron เสนอในปี ค.ศ. 1979 แก้ปัญหานี้ด้วยการคำนวณ <span class="citation" data-cites="efron1979bootstrap efron1993introduction">(<a href="../references.html#ref-efron1979bootstrap" role="doc-biblioref">Efron 1979</a>; <a href="../references.html#ref-efron1993introduction" role="doc-biblioref">Efron และ Tibshirani 1993</a>)</span> แนวคิดคือ ใช้ตัวอย่างที่มีเป็นตัวแทนของประชากร แล้วจำลองการสุ่มตัวอย่างซ้ำ</p>
+<ol type="1">
+<li>สุ่มข้อมูลจากตัวอย่างเดิม <em>แบบใส่คืน</em> ให้ได้ขนาดเท่าเดิม (ค่าบางค่าถูกเลือกซ้ำ บางค่าไม่ถูกเลือก)</li>
+<li>คำนวณสถิติที่สนใจจากตัวอย่างที่สุ่มได้</li>
+<li>ทำซ้ำหลายพันครั้ง ได้การแจกแจงของสถิตินั้น</li>
+<li>ใช้เปอร์เซ็นไทล์ที่ 2.5 และ 97.5 ของการแจกแจงเป็นช่วงความเชื่อมั่น 95% (วิธี percentile)</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>diff_median <span class="op">=</span> <span class="kw">lambda</span> a, b: np.median(a) <span class="op">-</span> np.median(b)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> stats.bootstrap((north.to_numpy(), central.to_numpy()), diff_median,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                      n_resamples<span class="op">=</span><span class="dv">9999</span>, method<span class="op">=</span><span class="st">"percentile"</span>, random_state<span class="op">=</span>rng)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(diff_median(north, central), <span class="dv">1</span>), np.<span class="bu">round</span>(res.confidence_interval, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+11.2 [ 9.4 12.8]</code></pre>
+<div id="fig-ch13-bootstrap" class="quarto-float quarto-figure quarto-figure-center anchored" alt="histogram ของผลต่างมัธยฐานจากการสุ่มซ้ำ 9,999 ครั้ง มีรูปร่างขรุขระไม่เรียบ เส้นผลต่างจากตัวอย่างจริงอยู่ใกล้กลาง แถบช่วงความเชื่อมั่นครอบคลุมส่วนกลางของการแจกแจง">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch13-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/13/bootstrap.png" class="img-fluid figure-img" alt="histogram ของผลต่างมัธยฐานจากการสุ่มซ้ำ 9,999 ครั้ง มีรูปร่างขรุขระไม่เรียบ เส้นผลต่างจากตัวอย่างจริงอยู่ใกล้กลาง แถบช่วงความเชื่อมั่นครอบคลุมส่วนกลางของการแจกแจง">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch13-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;13.2: การแจกแจง bootstrap ของผลต่างมัธยฐานระหว่างสองกลุ่มสังเคราะห์ขนาด 12 และ 8 ค่า แถบสีฟ้าคือช่วง percentile 95%
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ch13-bootstrap" class="quarto-xref">ภาพที่&nbsp;<span>13.2</span></a> แสดงลักษณะที่ควรสังเกต การแจกแจง bootstrap ของมัธยฐานจากตัวอย่างเล็กมีรูปร่างขรุขระ เพราะมัธยฐานของตัวอย่างที่สุ่มซ้ำมีค่าที่เป็นไปได้จำกัด ช่วงความเชื่อมั่นจาก bootstrap ในกรณีนี้จึงประมาณได้ไม่ดีนัก bootstrap ไม่ใช่เวทมนตร์ ทำงานได้ดีเมื่อตัวอย่างใหญ่พอที่จะเป็นตัวแทนของประชากร และสถิติที่สนใจไม่ขึ้นกับค่าเพียงไม่กี่ค่า ตัวเลือก <code>method="BCa"</code> ของ SciPy ปรับแก้ความเอนเอียงและความเบ้ของการแจกแจง bootstrap ซึ่งมักดีกว่าวิธี percentile เมื่อตัวอย่างไม่เล็กเกินไป</p>
+</section>
+<section id="bootstrap-กบขอมลทไมอสระ" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap-กบขอมลทไมอสระ">bootstrap กับข้อมูลที่ไม่อิสระ</h3>
+<p>bootstrap แบบพื้นฐานสุ่มแต่ละค่าแยกกัน จึงสมมติว่าข้อมูลเป็นอิสระต่อกันเหมือนวิธีดั้งเดิม ถ้านำค่ารายวันที่มี autocorrelation สูงมา bootstrap ทีละวัน ช่วงที่ได้จะแคบเกินจริง ทางแก้มีสองแนว แนวแรกคือเลือกหน่วยที่ใกล้อิสระก่อน เช่น สถานี-ปีในตัวอย่างข้างต้น แนวที่สองคือ <strong><span class="idx">block bootstrap</span></strong> ซึ่งสุ่มเป็นช่วงต่อเนื่อง เช่น ครั้งละหนึ่งเดือน เพื่อรักษาโครงสร้างความสัมพันธ์ภายในช่วงไว้ <span class="citation" data-cites="kunsch1989jackknife">(<a href="../references.html#ref-kunsch1989jackknife" role="doc-biblioref">Künsch 1989</a>)</span> หรือสุ่มทั้งสถานี (cluster bootstrap) เมื่อค่าภายในสถานีเดียวกันสัมพันธ์กัน</p>
+</section>
+<section id="permutation-test" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-test">permutation test</h3>
+<p><strong><span class="idx">permutation test</span></strong> ใช้แนวคิด resampling กับการทดสอบสมมติฐาน ถ้า <span class="math inline">\(H_0\)</span> เป็นจริง คือภาคไม่มีผลต่อค่าฝุ่น ป้ายชื่อภาคก็เป็นเพียงป้ายที่สลับกันได้โดยไม่เปลี่ยนการแจกแจง วิธีทดสอบคือ</p>
+<ol type="1">
+<li>คำนวณสถิติจากข้อมูลจริง เช่น ผลต่างของค่าเฉลี่ย</li>
+<li>สลับป้ายชื่อกลุ่มแบบสุ่ม แล้วคำนวณสถิติใหม่</li>
+<li>ทำซ้ำหลายพันครั้ง ได้การแจกแจงของสถิติภายใต้ <span class="math inline">\(H_0\)</span></li>
+<li>p-value คือสัดส่วนของการสลับที่ให้สถิติสุดโต่งอย่างน้อยเท่าข้อมูลจริง</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mean_diff <span class="op">=</span> <span class="kw">lambda</span> a, b: np.mean(a) <span class="op">-</span> np.mean(b)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>perm <span class="op">=</span> stats.permutation_test((north.to_numpy(), central.to_numpy()), mean_diff,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                              n_resamples<span class="op">=</span><span class="dv">9999</span>, random_state<span class="op">=</span>rng)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(perm.statistic, <span class="dv">2</span>), perm.pvalue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+11.45 0.0002</code></pre>
+<p>p-value ที่ได้คือ 0.0002 ซึ่งเท่ากับ <span class="math inline">\(2/10{,}000\)</span> โดยประมาณ ค่านี้เป็นขอบล่างที่ permutation test สุ่ม 9,999 ครั้งให้ได้ เพราะ SciPy นับข้อมูลจริงเป็นหนึ่งในการสลับ และรวมทั้งสองด้านของการทดสอบ p-value ที่แท้จริงอาจต่ำกว่านี้มาก ข้อดีของ permutation test คือไม่ต้องสมมติรูปแบบของการแจกแจง และใช้กับสถิติใดก็ได้ ข้อจำกัดคือยังสมมติว่าหน่วยข้อมูลสลับกันได้ (exchangeable) ซึ่งไม่เป็นจริงเมื่อข้อมูลมี autocorrelation เช่นเดียวกับ bootstrap</p>
+</section>
+</section>
+<section id="sec-ch13-multiple" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="sec-ch13-multiple"><span class="header-section-number">13.8</span> การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, ★ Benjamini–Hochberg (FDR)</h2>
+<section id="ปญหา" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหา">ปัญหา</h3>
+<p>ถ้าทดสอบสมมติฐานหนึ่งที่ระดับนัยสำคัญ 0.05 และ <span class="math inline">\(H_0\)</span> เป็นจริง โอกาสที่จะได้ผล “มีนัยสำคัญ” ผิดพลาดคือ 5% แต่ถ้าทดสอบ 20 สมมติฐานที่ <span class="math inline">\(H_0\)</span> เป็นจริงทั้งหมดและเป็นอิสระต่อกัน โอกาสที่อย่างน้อยหนึ่งการทดสอบจะมีนัยสำคัญผิดพลาดคือ <span class="math inline">\(1 - 0.95^{20} \approx 0.64\)</span> สถานการณ์นี้เกิดง่ายมากในข้อมูล PM2.5 เช่น เปรียบเทียบวันธรรมดากับวันหยุดของแต่ละสถานีจาก 80 สถานี ตัวอย่างในบทที่ 1 แสดงผลเสียของปัญหานี้ และนี่คือเหตุผลเชิงปริมาณของ garden of forking paths ในบทที่ 4</p>
+</section>
+<section id="bonferroni-และ-holm" class="level3">
+<h3 class="anchored" data-anchor-id="bonferroni-และ-holm">Bonferroni และ Holm</h3>
+<p>ตัวชี้วัดที่ควบคุมโดยวิธีดั้งเดิมคือ <strong><span class="idx">family-wise error rate</span></strong> (FWER) คือความน่าจะเป็นที่จะมีผลบวกเท็จอย่างน้อยหนึ่งผลในชุดการทดสอบ</p>
+<ul>
+<li><strong><span class="idx">Bonferroni</span></strong> ใช้เกณฑ์ <span class="math inline">\(\alpha / m\)</span> แทน <span class="math inline">\(\alpha\)</span> เมื่อทดสอบ <span class="math inline">\(m\)</span> ครั้ง หรือเทียบเท่ากับคูณ p-value ด้วย <span class="math inline">\(m\)</span> ง่ายและใช้ได้เสมอ แต่เข้มงวดเกินไปเมื่อ <span class="math inline">\(m\)</span> ใหญ่ ทำให้พลาดผลจริงได้มาก</li>
+<li><strong><span class="idx">Holm</span></strong> เรียง p-value จากน้อยไปมาก แล้วเปรียบเทียบค่าที่ <span class="math inline">\(k\)</span> กับ <span class="math inline">\(\alpha / (m - k + 1)\)</span> ทีละขั้น หยุดเมื่อพบค่าแรกที่ไม่ผ่าน ควบคุม FWER ได้เท่า Bonferroni แต่มีกำลังมากกว่าเสมอ จึงไม่มีเหตุผลที่จะใช้ Bonferroni แทน Holm <span class="citation" data-cites="holm1979simple">(<a href="../references.html#ref-holm1979simple" role="doc-biblioref">Holm 1979</a>)</span></li>
+</ul>
+</section>
+<section id="benjaminihochberg-fdr" class="level3">
+<h3 class="anchored" data-anchor-id="benjaminihochberg-fdr">Benjamini–Hochberg (FDR) ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>เมื่อทดสอบหลายสิบหรือหลายร้อยครั้งในการสำรวจ การควบคุม FWER เข้มงวดเกินไป Benjamini และ Hochberg เสนอให้ควบคุม <strong><span class="idx">false discovery rate</span></strong> (FDR) แทน คือสัดส่วนที่คาดหวังของผลบวกเท็จในบรรดาผลที่ประกาศว่ามีนัยสำคัญ <span class="citation" data-cites="benjamini1995controlling">(<a href="../references.html#ref-benjamini1995controlling" role="doc-biblioref">Benjamini และ Hochberg 1995</a>)</span> วิธีคือเรียง p-value จากน้อยไปมาก <span class="math inline">\(p_{(1)} \le \dots \le p_{(m)}\)</span> แล้วหา <span class="math inline">\(k\)</span> ที่มากที่สุดที่ <span class="math inline">\(p_{(k)} \le \frac{k}{m}\alpha\)</span> และประกาศว่าการทดสอบที่ 1 ถึง <span class="math inline">\(k\)</span> มีนัยสำคัญ การควบคุม FDR ที่ 5% หมายความว่า โดยเฉลี่ยแล้ว ในผลที่ประกาศว่าพบ ไม่เกิน 5% เป็นผลบวกเท็จ ซึ่งเหมาะกับการคัดกรองว่าสถานีใดควรตรวจสอบต่อ</p>
+</section>
+<section id="เปรยบเทยบสามวธ" class="level3">
+<h3 class="anchored" data-anchor-id="เปรยบเทยบสามวธ">เปรียบเทียบสามวิธี</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.multitest <span class="im">import</span> multipletests</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>p_values <span class="op">=</span> np.array([<span class="fl">0.001</span>, <span class="fl">0.008</span>, <span class="fl">0.012</span>, <span class="fl">0.03</span>, <span class="fl">0.04</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>])</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> method <span class="kw">in</span> [<span class="st">"bonferroni"</span>, <span class="st">"holm"</span>, <span class="st">"fdr_bh"</span>]:</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    reject, p_adj, _, _ <span class="op">=</span> multipletests(p_values, alpha<span class="op">=</span><span class="fl">0.05</span>, method<span class="op">=</span>method)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>method<span class="sc">:&lt;10}</span><span class="ss">"</span>, reject.astype(<span class="bu">int</span>), np.<span class="bu">round</span>(p_adj, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# p-value สมมุติเจ็ดค่า
+bonferroni [1 0 0 0 0 0 0] [0.007 0.056 0.084 0.21  0.28  1.    1.   ]
+holm       [1 1 0 0 0 0 0] [0.007 0.048 0.06  0.12  0.12  0.4   0.5  ]
+fdr_bh     [1 1 1 0 0 0 0] [0.007 0.028 0.028 0.052 0.056 0.233 0.5  ]</code></pre>
+<p>ถ้าไม่ปรับเลย ห้าการทดสอบแรกจะมีนัยสำคัญที่ 0.05 Bonferroni เหลือหนึ่ง Holm เหลือสอง และ Benjamini–Hochberg เหลือสาม การเลือกวิธีขึ้นกับต้นทุนของความผิดพลาด ถ้าผลบวกเท็จแม้เพียงหนึ่งผลมีต้นทุนสูง เช่น ข้อสรุปที่จะใช้ตั้งนโยบาย ให้ควบคุม FWER ด้วย Holm ถ้าเป็นการคัดกรองเพื่อตรวจสอบต่อ ยอมรับผลบวกเท็จบางส่วนได้ FDR เหมาะกว่า</p>
+</section>
+<section id="การปรบไมไดแกทกอยาง" class="level3">
+<h3 class="anchored" data-anchor-id="การปรบไมไดแกทกอยาง">การปรับไม่ได้แก้ทุกอย่าง</h3>
+<p>การปรับ p-value แก้ได้เฉพาะการทดสอบที่ <em>นับได้</em> ถ้านักวิเคราะห์ลองดูกราฟหลายสิบแบบก่อนเลือกทดสอบสามสมมติฐาน การปรับด้วย <span class="math inline">\(m = 3\)</span> ไม่ได้สะท้อนจำนวนเส้นทางที่ลองจริง วิธีป้องกันที่ได้ผลกว่าคือการแยกข้อมูลช่วงสำรวจและช่วงยืนยัน และการลงทะเบียนสมมติฐานไว้ล่วงหน้าตามบทที่ 4</p>
+</section>
+</section>
+<section id="sec-ch13-correlation" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="sec-ch13-correlation"><span class="header-section-number">13.9</span> สหสัมพันธ์และกับดัก: Simpson’s paradox, ecological fallacy</h2>
+<section id="pearson-และ-spearman" class="level3">
+<h3 class="anchored" data-anchor-id="pearson-และ-spearman">Pearson และ Spearman</h3>
+<p><strong><span class="idx">สหสัมพันธ์ของ Pearson</span></strong> (<span class="math inline">\(r\)</span>) วัดความสัมพันธ์เชิงเส้นระหว่างสองตัวแปร มีค่าตั้งแต่ −1 ถึง 1 <strong><span class="idx">สหสัมพันธ์ของ Spearman</span></strong> (<span class="math inline">\(\rho\)</span>) คือสหสัมพันธ์ของ Pearson ที่คำนวณจากลำดับของข้อมูล จึงวัดความสัมพันธ์แบบทางเดียว (monotonic) ไม่จำเป็นต้องเป็นเส้นตรง และทนต่อค่าผิดปกติมากกว่า</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pair <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT pm25_mean, pm25_max FROM daily_pm25_clean</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE is_complete AND date &lt; DATE '2024-01-01'</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(stats.pearsonr(pair.pm25_mean, pair.pm25_max)[<span class="dv">0</span>], <span class="dv">3</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      <span class="bu">round</span>(stats.spearmanr(pair.pm25_mean, pair.pm25_max)[<span class="dv">0</span>], <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+0.955 0.95</code></pre>
+<p>ค่าสหสัมพันธ์สูงระหว่างค่าเฉลี่ยรายวันกับค่าสูงสุดรายชั่วโมงไม่น่าแปลกใจ เพราะค่าสูงสุดเป็นหนึ่งในค่าที่ใช้คำนวณค่าเฉลี่ย ข้อควรระวังทั่วไปของสหสัมพันธ์ได้แก่ สหสัมพันธ์ไม่ใช่เหตุและผล (บทที่ 4) ค่า <span class="math inline">\(r\)</span> ใกล้ศูนย์ไม่ได้แปลว่าไม่สัมพันธ์ อาจสัมพันธ์แบบไม่เป็นเส้นตรง (Anscombe’s quartet ในบทที่ 1) และ autocorrelation ทำให้ p-value ของการทดสอบสหสัมพันธ์ระหว่างอนุกรมเวลาสองชุดต่ำเกินจริงมาก</p>
+</section>
+<section id="simpsons-paradox" class="level3">
+<h3 class="anchored" data-anchor-id="simpsons-paradox">Simpson’s paradox</h3>
+<p><strong><span class="idx">Simpson’s paradox</span></strong> คือปรากฏการณ์ที่ความสัมพันธ์ในข้อมูลรวม ตรงข้ามกับความสัมพันธ์ในทุกกลุ่มย่อย <span class="citation" data-cites="simpson1951interpretation">(<a href="../references.html#ref-simpson1951interpretation" role="doc-biblioref">Simpson 1951</a>)</span> ตัวอย่างที่อาจเกิดกับเครือข่ายสถานีตรวจวัดจริง สมมุติว่าในปีที่สอง หน่วยงานติดตั้งสถานีใหม่จำนวนมากในภาคใต้ ซึ่งมีค่าฝุ่นต่ำ</p>
+<div id="tbl-ch13-simpson" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch13-simpson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;13.5: ตัวอย่าง Simpson’s paradox จากการขยายเครือข่ายสถานี (ตัวเลขสมมุติ)
+</figcaption>
+<div aria-describedby="tbl-ch13-simpson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ภาค</th>
+<th>ปีที่ 1: สถานี</th>
+<th>ปีที่ 1: ค่าเฉลี่ย</th>
+<th>ปีที่ 2: สถานี</th>
+<th>ปีที่ 2: ค่าเฉลี่ย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เหนือ</td>
+<td>10</td>
+<td>30</td>
+<td>10</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td>ใต้</td>
+<td>2</td>
+<td>12</td>
+<td>10</td>
+<td>13</td>
+</tr>
+<tr class="odd">
+<td>ค่าเฉลี่ยของทุกสถานี</td>
+<td>12</td>
+<td>27.0</td>
+<td>20</td>
+<td>22.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ค่าเฉลี่ยของทุกสถานีลดลงจาก <span class="math inline">\((10 \times 30 + 2 \times 12)/12 = 27.0\)</span> เป็น <span class="math inline">\((10 \times 32 + 10 \times 13)/20 = 22.5\)</span> µg/m³ ทั้งที่ <em>ทุกภาค</em> มีค่าเพิ่มขึ้น สาเหตุคือองค์ประกอบของเครือข่ายเปลี่ยน สถานีในพื้นที่สะอาดมีสัดส่วนมากขึ้น ใครที่รายงานว่า “คุณภาพอากาศของประเทศดีขึ้น” จากค่าเฉลี่ยรวมจะสรุปผิด</p>
+<p>วิธีป้องกันคือ ตรวจองค์ประกอบของข้อมูลในแต่ละช่วงเสมอ และเปรียบเทียบด้วยชุดสถานีที่คงที่ (เช่น เฉพาะสถานีที่มีข้อมูลครบทั้งสองปี) หรือรายงานแยกกลุ่ม คำถามว่าข้อมูลรวมหรือข้อมูลแยกกลุ่มถูกต้องกว่านั้น ขึ้นกับโครงสร้างเชิงเหตุของปัญหา ไม่ใช่สถิติ <span class="citation" data-cites="pearl2018book">(<a href="../references.html#ref-pearl2018book" role="doc-biblioref">Pearl และ Mackenzie 2018</a>)</span> ในกรณีนี้ การขยายเครือข่ายไม่ได้ทำให้อากาศเปลี่ยน ข้อมูลแยกกลุ่มจึงตอบคำถามเรื่องแนวโน้มได้ถูกต้องกว่า</p>
+</section>
+<section id="ecological-fallacy" class="level3">
+<h3 class="anchored" data-anchor-id="ecological-fallacy">ecological fallacy</h3>
+<p><strong><span class="idx">ecological fallacy</span></strong> คือการอนุมานความสัมพันธ์ในระดับบุคคลจากข้อมูลระดับกลุ่ม <span class="citation" data-cites="robinson1950ecological">(<a href="../references.html#ref-robinson1950ecological" role="doc-biblioref">Robinson 1950</a>)</span> เช่น ถ้าพบว่าจังหวัดที่ค่า PM2.5 เฉลี่ยสูงมีอัตราผู้ป่วยโรคทางเดินหายใจสูง ข้อมูลนี้ไม่ได้แสดงว่าบุคคลที่สัมผัสฝุ่นมากกว่าป่วยมากกว่า เพราะความสัมพันธ์ระดับจังหวัดอาจเกิดจากปัจจัยอื่นที่ต่างกันระหว่างจังหวัด เช่น โครงสร้างอายุของประชากร การเข้าถึงบริการสุขภาพ หรือการสูบบุหรี่ ข้อมูลระดับจังหวัดตอบคำถามระดับจังหวัดได้ แต่การอนุมานไปยังระดับบุคคลต้องใช้ข้อมูลระดับบุคคล</p>
+<p>ปัญหานี้เกี่ยวข้องกับ MAUP (modifiable areal unit problem) ในบทที่ 17 ซึ่งแสดงว่าความสัมพันธ์ที่พบเปลี่ยนไปได้ตามขนาดและขอบเขตของพื้นที่ที่ใช้รวมข้อมูล และการรวมข้อมูลข้ามระดับในบทที่ 18</p>
+</section>
+</section>
+<section id="sec-ch13-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch13-case">กรณีศึกษา: ภาคเหนือมีค่า PM2.5 ฤดูแล้งสูงกว่าภาคกลางเท่าใด</h2>
+<p><strong>คำถาม</strong> ข้อมูลช่วงสำรวจสนับสนุนสมมติฐานว่าค่าเฉลี่ย PM2.5 ในฤดูแล้ง (กุมภาพันธ์ถึงเมษายน) ของภาคเหนือสูงกว่าภาคกลางหรือไม่ และสูงกว่าเท่าใด</p>
+<p><strong>การตัดสินใจก่อนวิเคราะห์</strong> (บันทึกไว้ใน <code>questions.md</code> ก่อนคำนวณ)</p>
+<ol type="1">
+<li>หน่วยของการวิเคราะห์: ค่าเฉลี่ยฤดูแล้งต่อสถานีต่อปี จากวันที่ข้อมูลครบ เพื่อลดผลของ autocorrelation รายวัน</li>
+<li>ตัวชี้วัดหลัก: ผลต่างมัธยฐานระหว่างภาค พร้อมช่วงความเชื่อมั่น 95% แบบ bootstrap ตัวชี้วัดรอง: ผลต่างค่าเฉลี่ย</li>
+<li>การทดสอบ: permutation test ของผลต่างค่าเฉลี่ย เพราะตัวอย่างเล็กและไม่ต้องสมมติการแจกแจง</li>
+<li>สถานะ: ข้อมูลปี ค.ศ. 2020–2023 เป็นช่วงสำรวจ ผลที่ได้เป็นสมมติฐานสำหรับยืนยันด้วยข้อมูลปี ค.ศ. 2024–2025</li>
+</ol>
+<p><strong>การวิเคราะห์</strong> ใช้ตาราง <code>station_year</code> และโค้ดในหัวข้อ <a href="#sec-ch13-ci" class="quarto-xref"><span>13.4</span></a> ถึง <a href="#sec-ch13-resampling" class="quarto-xref"><span>13.7</span></a></p>
+<p><strong>ผล</strong> (ข้อมูลสังเคราะห์)</p>
+<ul>
+<li>ภาคเหนือมี 12 สถานี-ปี ภาคกลางมี 8 สถานี-ปี</li>
+<li>ผลต่างมัธยฐาน 11.2 µg/m³ ช่วงความเชื่อมั่น 95% แบบ bootstrap 9.4 ถึง 12.8 µg/m³</li>
+<li>ผลต่างค่าเฉลี่ย 11.45 µg/m³ permutation test p &lt; 0.001</li>
+<li>Cliff’s delta = 1.0 คือทุกค่าของภาคเหนือสูงกว่าทุกค่าของภาคกลาง</li>
+</ul>
+<p><strong>การตีความ</strong> ข้อมูลช่วงสำรวจบ่งชี้ว่าค่าเฉลี่ยฤดูแล้ง ณ ตำแหน่งสถานีในภาคเหนือสูงกว่าภาคกลางประมาณ 9 ถึง 13 µg/m³ ซึ่งมีขนาดประมาณหนึ่งในสามของมาตรฐาน 37.5 µg/m³ จึงมีความหมายในทางปฏิบัติ ไม่ใช่เพียงนัยสำคัญทางสถิติ ข้อความในรายงานควรเขียนว่า “ข้อมูล พ.ศ. 2563–2566 บ่งชี้ว่า…” และระบุว่าจะยืนยันด้วยข้อมูลปีล่าสุด</p>
+<p><strong>ข้อจำกัด</strong></p>
+<ul>
+<li>ค่าของสถานีเดียวกันในปีต่างกันยังสัมพันธ์กัน ขนาดตัวอย่างที่มีประสิทธิผลจึงต่ำกว่าจำนวนสถานี-ปี การ bootstrap ทั้งสถานี (cluster bootstrap) จะให้ช่วงที่กว้างขึ้นและซื่อตรงกว่า</li>
+<li>ผลใช้ได้กับ <em>ตำแหน่งของสถานี</em> ซึ่งส่วนใหญ่อยู่ในเขตเมือง ไม่ใช่ทั้งภาค</li>
+<li>คำถามนี้ถูกตั้งหลังจากเห็นกราฟในบทที่ 11 แล้ว p-value จึงต่ำกว่าที่ควรเป็น ความหมายของผลอยู่ที่ขนาดและช่วงความเชื่อมั่น ซึ่งต้องยืนยันด้วยข้อมูลช่วงยืนยัน</li>
+</ul>
+</section>
+<section id="sec-ch13-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch13-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch13-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch13-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;13.6: ข้อผิดพลาดที่พบบ่อยในบทที่ 13
+</figcaption>
+<div aria-describedby="tbl-ch13-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ใช้ค่ารายวันหรือรายชั่วโมงทุกค่าเป็นหน่วยอิสระในการทดสอบ</td>
+<td>autocorrelation ทำให้ความคลาดเคลื่อนมาตรฐานต่ำเกินจริง p-value เล็กเกินจริง</td>
+<td>รวมเป็นหน่วยที่ใกล้อิสระ เช่น สถานี-ปี หรือใช้ block bootstrap</td>
+</tr>
+<tr class="even">
+<td>รายงานเฉพาะค่าเฉลี่ยของข้อมูลที่เบ้</td>
+<td>ค่าเฉลี่ยถูกดึงโดยหางยาว ไม่แทนวันทั่วไป</td>
+<td>รายงานมัธยฐานและ IQR คู่กัน เลือกตัวชี้วัดให้ตรงกับคำถาม</td>
+</tr>
+<tr class="odd">
+<td>เรียกค่าเฉลี่ยเรขาคณิตว่าค่าเฉลี่ย</td>
+<td>ต่ำกว่าค่าเฉลี่ยเลขคณิต เทียบกับมาตรฐานไม่ได้</td>
+<td>ระบุชื่อให้ชัด หรือรายงานค่าเฉลี่ยเลขคณิตในสเกลเดิม</td>
+</tr>
+<tr class="even">
+<td>ตีความ p &gt; 0.05 ว่า “ไม่ต่างกัน”</td>
+<td>ไม่มีหลักฐานของความต่างไม่ใช่หลักฐานว่าไม่ต่าง</td>
+<td>รายงานช่วงความเชื่อมั่นของขนาดผล</td>
+</tr>
+<tr class="odd">
+<td>รายงาน p-value โดยไม่มีขนาดผล</td>
+<td>p-value ผสมขนาดผลกับขนาดตัวอย่าง</td>
+<td>รายงานขนาดผลในหน่วยเดิมพร้อมช่วงความเชื่อมั่น</td>
+</tr>
+<tr class="even">
+<td>ทดสอบหลายสถานีแล้วรายงานเฉพาะที่มีนัยสำคัญ</td>
+<td>ผลบวกเท็จเพิ่มขึ้นตามจำนวนการทดสอบ</td>
+<td>ปรับด้วย Holm หรือ Benjamini–Hochberg และรายงานจำนวนการทดสอบทั้งหมด</td>
+</tr>
+<tr class="odd">
+<td>เปรียบเทียบค่าเฉลี่ยรวมข้ามปีเมื่อเครือข่ายสถานีเปลี่ยน</td>
+<td>Simpson’s paradox จากองค์ประกอบที่เปลี่ยน</td>
+<td>ใช้ชุดสถานีคงที่หรือรายงานแยกกลุ่ม</td>
+</tr>
+<tr class="even">
+<td>อนุมานระดับบุคคลจากข้อมูลระดับจังหวัด</td>
+<td>ecological fallacy</td>
+<td>จำกัดข้อสรุปไว้ที่ระดับของข้อมูล</td>
+</tr>
+<tr class="odd">
+<td>ใช้ MAD จาก DuckDB เทียบกับ MAD จาก SciPy โดยตรง</td>
+<td>DuckDB ไม่ปรับสเกล SciPy ปรับด้วย 1.4826 เมื่อใช้ <code>scale="normal"</code></td>
+<td>ระบุว่าใช้ MAD แบบใด</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>สรุปการแจกแจงด้วยตำแหน่ง การกระจาย และรูปร่าง คู่กับกราฟเสมอ ข้อมูล PM2.5 เบ้ขวาและใกล้เคียง log-normal ค่าเฉลี่ยจึงสูงกว่ามัธยฐาน</li>
+<li>robust statistics อย่างมัธยฐาน IQR MAD และ trimmed mean มี breakdown point สูง ทนต่อค่าผิดปกติ แต่สถิติที่เลือกต้องตรงกับคำถาม</li>
+<li>การแปลง log ลดความเบ้และเปลี่ยนความต่างเป็นอัตราส่วน Box-Cox ช่วยเลือกการแปลง แต่ควรใช้การแปลงที่ตีความได้ และระวังว่าค่าเฉลี่ยของ log คือค่าเฉลี่ยเรขาคณิต</li>
+<li>ช่วงความเชื่อมั่นสะท้อนเฉพาะความไม่แน่นอนจากการสุ่มตัวอย่าง และสมมติความเป็นอิสระ ซึ่งค่ารายวันของ PM2.5 ละเมิด จึงต้องเลือกหน่วยของการวิเคราะห์ที่เหมาะสม</li>
+<li>เลือกการทดสอบตามโครงสร้างข้อมูล ใช้ Welch’s t-test เป็นค่าเริ่มต้นสำหรับสองกลุ่ม และใช้ non-parametric เมื่อข้อมูลเบ้หรือตัวอย่างเล็ก p-value ในการสำรวจเป็นเพียงตัวชี้นำ</li>
+<li>รายงานขนาดผลในหน่วยเดิมพร้อมช่วงความเชื่อมั่นเสมอ เพราะ p-value ไม่ได้บอกขนาดหรือความสำคัญของผล</li>
+<li>bootstrap และ permutation test ใช้ได้กับสถิติใดก็ได้โดยไม่ต้องสมมติการแจกแจง แต่ยังต้องการหน่วยที่เป็นอิสระหรือการสุ่มแบบ block</li>
+<li>การทดสอบหลายครั้งต้องปรับด้วย Holm (ควบคุม FWER) หรือ Benjamini–Hochberg (ควบคุม FDR) และระวัง Simpson’s paradox กับ ecological fallacy เมื่อตีความสหสัมพันธ์</li>
+</ul>
+</section>
+<section id="sec-ch13-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch13-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>ข้อมูลค่าเฉลี่ยรายวันเจ็ดวันของสถานีหนึ่งคือ 18, 21, 22, 24, 25, 27, 95 µg/m³ คำนวณค่าเฉลี่ย มัธยฐาน IQR (ใช้วิธีของ <code>np.percentile</code> ค่าเริ่มต้น) และ MAD ที่ยังไม่ปรับสเกล แล้วอธิบายว่าสถิติใดได้รับผลจากค่า 95 มากที่สุด</li>
+<li>ถ้าค่าเฉลี่ยของ <span class="math inline">\(\log(\text{PM2.5})\)</span> ของสถานี ก สูงกว่าสถานี ข อยู่ 0.3 สถานี ก สูงกว่าสถานี ข ประมาณกี่เปอร์เซ็นต์ (ในแง่ค่าเฉลี่ยเรขาคณิต)</li>
+<li>อธิบายว่าทำไมการนำค่ารายวันทั้งหมดของสองภาคมาทำ t-test จึงให้ p-value ที่เล็กเกินจริง</li>
+<li>นักศึกษาคนหนึ่งเขียนว่า “ช่วงความเชื่อมั่น 95% คือ 42.8 ถึง 45.3 แปลว่าค่าจริงมีโอกาส 95% ที่จะอยู่ในช่วงนี้” ประโยคนี้มีปัญหาอย่างไร และควรเขียนอย่างไร</li>
+<li>มี p-value ห้าค่า: 0.004, 0.011, 0.02, 0.04, 0.3 ระบุว่าการทดสอบใดมีนัยสำคัญที่ 0.05 เมื่อใช้ (ก) Bonferroni (ข) Holm (ค) Benjamini–Hochberg</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>คำนวณมัธยฐาน IQR MAD และ P95 ของค่าเฉลี่ยรายวันแยกตามภาคและเดือน ด้วย SQL คำสั่งเดียวใน DuckDB แล้วอภิปรายว่าลำดับของภาคเปลี่ยนไปตามสถิติที่ใช้หรือไม่</li>
+<li>หา <span class="math inline">\(\lambda\)</span> ของ Box-Cox สำหรับค่าเฉลี่ยรายวันของแต่ละภาคแยกกัน และของทุกภาครวมกัน ค่าที่ได้ใกล้เคียงการแปลงใดที่ตีความง่าย</li>
+<li>ทำซ้ำกรณีศึกษาของบทกับคู่ภาคอื่นที่ทีมสนใจ รายงานตามองค์ประกอบใน <a href="#tbl-ch13-report" class="quarto-xref">ตารางที่&nbsp;<span>13.4</span></a></li>
+<li>เขียนฟังก์ชัน cluster bootstrap ที่สุ่ม <em>สถานี</em> แบบใส่คืน (ไม่ใช่สถานี-ปี) แล้วเปรียบเทียบช่วงความเชื่อมั่นของผลต่างมัธยฐานกับ bootstrap แบบสถานี-ปีในกรณีศึกษา อธิบายว่าทำไมจึงต่างกัน</li>
+<li>เปรียบเทียบค่าเฉลี่ยของวันธรรมดากับวันหยุดสุดสัปดาห์ของทุกสถานีด้วย Mann-Whitney U บนค่าเฉลี่ยรายสัปดาห์ของแต่ละสถานี แล้วปรับ p-value ด้วย Holm และ Benjamini–Hochberg นับจำนวนสถานีที่มีนัยสำคัญก่อนและหลังปรับ</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ใช้การจำลองเพื่อแสดงว่า autocorrelation ทำให้ t-test ให้ผลบวกเท็จบ่อยเกินไป สร้างอนุกรม AR(1) สองชุดที่มีค่าเฉลี่ยเท่ากันและสัมประสิทธิ์ 0.75 แล้วทดสอบด้วย t-test ซ้ำ 1,000 ครั้ง นับสัดส่วนที่ p &lt; 0.05 เปรียบเทียบกับกรณีที่ไม่มี autocorrelation</li>
+<li>ตรวจว่าเครือข่ายสถานีในข้อมูลของทีมเปลี่ยนแปลงระหว่างปีหรือไม่ (สถานีใหม่ สถานีที่หยุด) แล้วคำนวณแนวโน้มรายปีของค่าเฉลี่ยประเทศสองแบบ คือ ใช้ทุกสถานีที่มีในแต่ละปี และใช้เฉพาะสถานีที่มีข้อมูลครบทุกปี อภิปรายผลในแง่ Simpson’s paradox</li>
+<li>ค้นคว้าข้อถกเถียงเรื่องการยกเลิกคำว่า “statistically significant” ที่เกิดขึ้นในวงการสถิติหลังปี ค.ศ. 2016 แล้วเสนอแนวปฏิบัติการรายงานผลทางสถิติสำหรับรายงานโครงการของรายวิชานี้</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch13">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="wasserstein2016asa">Wasserstein และ Lazar (<a href="../references.html#ref-wasserstein2016asa" role="doc-biblioref">2016</a>)</span> — แถลงการณ์ของสมาคมสถิติอเมริกันเรื่อง p-value สั้น อ่านง่าย และควรอ่านก่อนรายงาน p-value ใด ๆ</li>
+<li><span class="citation" data-cites="greenland2016statistical">Greenland และคณะ (<a href="../references.html#ref-greenland2016statistical" role="doc-biblioref">2016</a>)</span> — รวบรวมความเข้าใจผิดเกี่ยวกับ p-value ช่วงความเชื่อมั่น และกำลังของการทดสอบ 25 ข้อ พร้อมคำอธิบาย</li>
+<li><span class="citation" data-cites="efron1993introduction">Efron และ Tibshirani (<a href="../references.html#ref-efron1993introduction" role="doc-biblioref">1993</a>)</span> — ตำราคลาสสิกของ bootstrap โดยผู้คิดค้น อธิบายทั้งแนวคิดและข้อจำกัด</li>
+<li><span class="citation" data-cites="huber2009robust">Huber และ Ronchetti (<a href="../references.html#ref-huber2009robust" role="doc-biblioref">2009</a>)</span> — ตำรา robust statistics สำหรับผู้ต้องการพื้นฐานทางทฤษฎีของ breakdown point และตัวประมาณแบบทนทาน</li>
+<li><span class="citation" data-cites="benjamini1995controlling">Benjamini และ Hochberg (<a href="../references.html#ref-benjamini1995controlling" role="doc-biblioref">1995</a>)</span> — บทความต้นฉบับของ FDR ซึ่งเปลี่ยนวิธีจัดการการทดสอบหลายครั้งในวิทยาศาสตร์ข้อมูล</li>
+<li><span class="citation" data-cites="sullivan2012using">Sullivan และ Feinn (<a href="../references.html#ref-sullivan2012using" role="doc-biblioref">2012</a>)</span> — บทความสั้นที่อธิบายเหตุผลและวิธีรายงาน effect size</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-altman1995absence" class="csl-entry" role="listitem">
+Altman, Douglas G., และ J. Martin Bland. 1995. <span>“Absence of Evidence Is Not Evidence of Absence”</span>. <em>BMJ</em> 311 (7003): 485. <a href="https://doi.org/10.1136/bmj.311.7003.485">https://doi.org/10.1136/bmj.311.7003.485</a>.
+</div>
+<div id="ref-benjamini1995controlling" class="csl-entry" role="listitem">
+Benjamini, Yoav, และ Yosef Hochberg. 1995. <span>“Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing”</span>. <em>Journal of the Royal Statistical Society: Series B</em> 57 (1): 289–300. <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x">https://doi.org/10.1111/j.2517-6161.1995.tb02031.x</a>.
+</div>
+<div id="ref-box1964analysis" class="csl-entry" role="listitem">
+Box, George E. P., และ David R. Cox. 1964. <span>“An Analysis of Transformations”</span>. <em>Journal of the Royal Statistical Society: Series B</em> 26 (2): 211–52. <a href="https://doi.org/10.1111/j.2517-6161.1964.tb00553.x">https://doi.org/10.1111/j.2517-6161.1964.tb00553.x</a>.
+</div>
+<div id="ref-cliff1993dominance" class="csl-entry" role="listitem">
+Cliff, Norman. 1993. <span>“Dominance Statistics: Ordinal Analyses to Answer Ordinal Questions”</span>. <em>Psychological Bulletin</em> 114 (3): 494–509. <a href="https://doi.org/10.1037/0033-2909.114.3.494">https://doi.org/10.1037/0033-2909.114.3.494</a>.
+</div>
+<div id="ref-cohen1988statistical" class="csl-entry" role="listitem">
+Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2 พิมพ์ครั้งที่. Lawrence Erlbaum Associates.
+</div>
+<div id="ref-efron1979bootstrap" class="csl-entry" role="listitem">
+Efron, Bradley. 1979. <span>“Bootstrap Methods: Another Look at the Jackknife”</span>. <em>The Annals of Statistics</em> 7 (1): 1–26. <a href="https://doi.org/10.1214/aos/1176344552">https://doi.org/10.1214/aos/1176344552</a>.
+</div>
+<div id="ref-efron1993introduction" class="csl-entry" role="listitem">
+Efron, Bradley, และ Robert J. Tibshirani. 1993. <em>An Introduction to the Bootstrap</em>. Chapman &amp; Hall.
+</div>
+<div id="ref-greenland2016statistical" class="csl-entry" role="listitem">
+Greenland, Sander, Stephen J. Senn, Kenneth J. Rothman, และคณะ. 2016. <span>“Statistical Tests, <span>P</span> Values, Confidence Intervals, and Power: A Guide to Misinterpretations”</span>. <em>European Journal of Epidemiology</em> 31 (4): 337–50. <a href="https://doi.org/10.1007/s10654-016-0149-3">https://doi.org/10.1007/s10654-016-0149-3</a>.
+</div>
+<div id="ref-holm1979simple" class="csl-entry" role="listitem">
+Holm, Sture. 1979. <span>“A Simple Sequentially Rejective Multiple Test Procedure”</span>. <em>Scandinavian Journal of Statistics</em> 6 (2): 65–70.
+</div>
+<div id="ref-huber2009robust" class="csl-entry" role="listitem">
+Huber, Peter J., และ Elvezio M. Ronchetti. 2009. <em>Robust Statistics</em>. 2 พิมพ์ครั้งที่. Wiley. <a href="https://doi.org/10.1002/9780470434697">https://doi.org/10.1002/9780470434697</a>.
+</div>
+<div id="ref-kunsch1989jackknife" class="csl-entry" role="listitem">
+Künsch, Hans R. 1989. <span>“The Jackknife and the Bootstrap for General Stationary Observations”</span>. <em>The Annals of Statistics</em> 17 (3): 1217–41. <a href="https://doi.org/10.1214/aos/1176347265">https://doi.org/10.1214/aos/1176347265</a>.
+</div>
+<div id="ref-ott1990physical" class="csl-entry" role="listitem">
+Ott, Wayne R. 1990. <span>“A Physical Explanation of the Lognormality of Pollutant Concentrations”</span>. <em>Journal of the Air &amp; Waste Management Association</em> 40 (10): 1378–83. <a href="https://doi.org/10.1080/10473289.1990.10466789">https://doi.org/10.1080/10473289.1990.10466789</a>.
+</div>
+<div id="ref-pearl2018book" class="csl-entry" role="listitem">
+Pearl, Judea, และ Dana Mackenzie. 2018. <em>The Book of Why: The New Science of Cause and Effect</em>. Basic Books.
+</div>
+<div id="ref-robinson1950ecological" class="csl-entry" role="listitem">
+Robinson, W. S. 1950. <span>“Ecological Correlations and the Behavior of Individuals”</span>. <em>American Sociological Review</em> 15 (3): 351–57. <a href="https://doi.org/10.2307/2087176">https://doi.org/10.2307/2087176</a>.
+</div>
+<div id="ref-simpson1951interpretation" class="csl-entry" role="listitem">
+Simpson, Edward H. 1951. <span>“The Interpretation of Interaction in Contingency Tables”</span>. <em>Journal of the Royal Statistical Society: Series B</em> 13 (2): 238–41. <a href="https://doi.org/10.1111/j.2517-6161.1951.tb00088.x">https://doi.org/10.1111/j.2517-6161.1951.tb00088.x</a>.
+</div>
+<div id="ref-sullivan2012using" class="csl-entry" role="listitem">
+Sullivan, Gail M., และ Richard Feinn. 2012. <span>“Using Effect Size—or Why the <span>P</span> Value Is Not Enough”</span>. <em>Journal of Graduate Medical Education</em> 4 (3): 279–82. <a href="https://doi.org/10.4300/JGME-D-12-00156.1">https://doi.org/10.4300/JGME-D-12-00156.1</a>.
+</div>
+<div id="ref-wasserstein2016asa" class="csl-entry" role="listitem">
+Wasserstein, Ronald L., และ Nicole A. Lazar. 2016. <span>“The <span>ASA</span> Statement on p-Values: Context, Process, and Purpose”</span>. <em>The American Statistician</em> 70 (2): 129–33. <a href="https://doi.org/10.1080/00031305.2016.1154108">https://doi.org/10.1080/00031305.2016.1154108</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/12-interactive-viz.html" class="pagination-link" aria-label="Grammar of graphics และ visualization เชิงโต้ตอบ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/14-time-series.html" class="pagination-link" aria-label="การวิเคราะห์อนุกรมเวลาเชิงสำรวจ">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

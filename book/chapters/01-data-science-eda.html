@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; วิทยาการข้อมูลและการสำรวจข้อมูล – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/02-reproducible-environment.html" rel="next">
+<link href="../chapters/00-overview.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch01-what-is-ds" id="toc-sec-ch01-what-is-ds" class="nav-link" data-scroll-target="#sec-ch01-what-is-ds"><span class="header-section-number">1.1</span> วิทยาการข้อมูลคืออะไร: สถิติ วิทยาการคอมพิวเตอร์ และความรู้เชิงโดเมน</a>
+  <ul class="collapse">
+  <li><a href="#นยามทใชในหนงสอเลมน" id="toc-นยามทใชในหนงสอเลมน" class="nav-link" data-scroll-target="#นยามทใชในหนงสอเลมน">นิยามที่ใช้ในหนังสือเล่มนี้</a></li>
+  <li><a href="#ทมาของคำ" id="toc-ทมาของคำ" class="nav-link" data-scroll-target="#ทมาของคำ">ที่มาของคำ</a></li>
+  <li><a href="#องคประกอบทหนง-สถตศาสตร" id="toc-องคประกอบทหนง-สถตศาสตร" class="nav-link" data-scroll-target="#องคประกอบทหนง-สถตศาสตร">องค์ประกอบที่หนึ่ง: สถิติศาสตร์</a></li>
+  <li><a href="#องคประกอบทสอง-วทยาการคอมพวเตอร" id="toc-องคประกอบทสอง-วทยาการคอมพวเตอร" class="nav-link" data-scroll-target="#องคประกอบทสอง-วทยาการคอมพวเตอร">องค์ประกอบที่สอง: วิทยาการคอมพิวเตอร์</a></li>
+  <li><a href="#องคประกอบทสาม-ความรเชงโดเมน" id="toc-องคประกอบทสาม-ความรเชงโดเมน" class="nav-link" data-scroll-target="#องคประกอบทสาม-ความรเชงโดเมน">องค์ประกอบที่สาม: ความรู้เชิงโดเมน</a></li>
+  <li><a href="#เมอขาดองคประกอบใดองคประกอบหนง" id="toc-เมอขาดองคประกอบใดองคประกอบหนง" class="nav-link" data-scroll-target="#เมอขาดองคประกอบใดองคประกอบหนง">เมื่อขาดองค์ประกอบใดองค์ประกอบหนึ่ง</a></li>
+  <li><a href="#วทยาการขอมลในฐานะงานของทม" id="toc-วทยาการขอมลในฐานะงานของทม" class="nav-link" data-scroll-target="#วทยาการขอมลในฐานะงานของทม">วิทยาการข้อมูลในฐานะงานของทีม</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-tukey" id="toc-sec-ch01-tukey" class="nav-link" data-scroll-target="#sec-ch01-tukey"><span class="header-section-number">1.2</span> กำเนิด Exploratory Data Analysis: John Tukey กับ “งานนักสืบ”</a>
+  <ul class="collapse">
+  <li><a href="#john-tukey" id="toc-john-tukey" class="nav-link" data-scroll-target="#john-tukey">John Tukey</a></li>
+  <li><a href="#งานนกสบ" id="toc-งานนกสบ" class="nav-link" data-scroll-target="#งานนกสบ">งานนักสืบ</a></li>
+  <li><a href="#หลกการของ-tukey-ทยงใชไดในปจจบน" id="toc-หลกการของ-tukey-ทยงใชไดในปจจบน" class="nav-link" data-scroll-target="#หลกการของ-tukey-ทยงใชไดในปจจบน">หลักการของ Tukey ที่ยังใช้ได้ในปัจจุบัน</a></li>
+  <li><a href="#ตวอยางวธคดแบบนกสบกบขอมล-pm2.5" id="toc-ตวอยางวธคดแบบนกสบกบขอมล-pm2.5" class="nav-link" data-scroll-target="#ตวอยางวธคดแบบนกสบกบขอมล-pm2.5">ตัวอย่างวิธีคิดแบบนักสืบกับข้อมูล PM2.5</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-eda-cda" id="toc-sec-ch01-eda-cda" class="nav-link" data-scroll-target="#sec-ch01-eda-cda"><span class="header-section-number">1.3</span> EDA กับ Confirmatory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#สองโหมดของการวเคราะห" id="toc-สองโหมดของการวเคราะห" class="nav-link" data-scroll-target="#สองโหมดของการวเคราะห">สองโหมดของการวิเคราะห์</a></li>
+  <li><a href="#ทำไมตองแยกสองโหมดออกจากกน" id="toc-ทำไมตองแยกสองโหมดออกจากกน" class="nav-link" data-scroll-target="#ทำไมตองแยกสองโหมดออกจากกน">ทำไมต้องแยกสองโหมดออกจากกัน</a></li>
+  <li><a href="#eda-ไมไดแปลวา-ไมมหลกการ" id="toc-eda-ไมไดแปลวา-ไมมหลกการ" class="nav-link" data-scroll-target="#eda-ไมไดแปลวา-ไมมหลกการ">EDA ไม่ได้แปลว่า “ไม่มีหลักการ”</a></li>
+  <li><a href="#วงจรเลกของการสำรวจ" id="toc-วงจรเลกของการสำรวจ" class="nav-link" data-scroll-target="#วงจรเลกของการสำรวจ">วงจรเล็กของการสำรวจ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-lifecycle" id="toc-sec-ch01-lifecycle" class="nav-link" data-scroll-target="#sec-ch01-lifecycle"><span class="header-section-number">1.4</span> แบบจำลองวงจรชีวิตข้อมูล: CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองมแบบจำลองวงจร" id="toc-ทำไมตองมแบบจำลองวงจร" class="nav-link" data-scroll-target="#ทำไมตองมแบบจำลองวงจร">ทำไมต้องมีแบบจำลองวงจร</a></li>
+  <li><a href="#crisp-dm" id="toc-crisp-dm" class="nav-link" data-scroll-target="#crisp-dm">CRISP-DM</a></li>
+  <li><a href="#osemn" id="toc-osemn" class="nav-link" data-scroll-target="#osemn">OSEMN</a></li>
+  <li><a href="#วงจรของหนงสอเลมน" id="toc-วงจรของหนงสอเลมน" class="nav-link" data-scroll-target="#วงจรของหนงสอเลมน">วงจรของหนังสือเล่มนี้</a></li>
+  <li><a href="#วงจรไมใชเสนตรง" id="toc-วงจรไมใชเสนตรง" class="nav-link" data-scroll-target="#วงจรไมใชเสนตรง">วงจรไม่ใช่เส้นตรง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-anscombe" id="toc-sec-ch01-anscombe" class="nav-link" data-scroll-target="#sec-ch01-anscombe"><span class="header-section-number">1.5</span> ทำไมต้องสำรวจก่อนสรุป: Anscombe’s quartet และ Datasaurus Dozen</a>
+  <ul class="collapse">
+  <li><a href="#anscombes-quartet" id="toc-anscombes-quartet" class="nav-link" data-scroll-target="#anscombes-quartet">Anscombe’s quartet</a></li>
+  <li><a href="#datasaurus-dozen" id="toc-datasaurus-dozen" class="nav-link" data-scroll-target="#datasaurus-dozen">Datasaurus Dozen</a></li>
+  <li><a href="#บทเรยนสำหรบขอมล-pm2.5" id="toc-บทเรยนสำหรบขอมล-pm2.5" class="nav-link" data-scroll-target="#บทเรยนสำหรบขอมล-pm2.5">บทเรียนสำหรับข้อมูล PM2.5</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-policy" id="toc-sec-ch01-policy" class="nav-link" data-scroll-target="#sec-ch01-policy"><span class="header-section-number">1.6</span> EDA ในบริบทการตัดสินใจเชิงนโยบาย: กรณีฝุ่น PM2.5 ของไทย ★</a>
+  <ul class="collapse">
+  <li><a href="#คำถามทหนง-ปนสถานการณแยกวาปกอนหรอไม" id="toc-คำถามทหนง-ปนสถานการณแยกวาปกอนหรอไม" class="nav-link" data-scroll-target="#คำถามทหนง-ปนสถานการณแยกวาปกอนหรอไม">คำถามที่หนึ่ง: ปีนี้สถานการณ์แย่กว่าปีก่อนหรือไม่</a></li>
+  <li><a href="#คำถามทสอง-มกวนทอากาศไมปลอดภย" id="toc-คำถามทสอง-มกวนทอากาศไมปลอดภย" class="nav-link" data-scroll-target="#คำถามทสอง-มกวนทอากาศไมปลอดภย">คำถามที่สอง: มีกี่วันที่อากาศไม่ปลอดภัย</a></li>
+  <li><a href="#คำถามทสาม-มาตรการทออกไปไดผลหรอไม" id="toc-คำถามทสาม-มาตรการทออกไปไดผลหรอไม" class="nav-link" data-scroll-target="#คำถามทสาม-มาตรการทออกไปไดผลหรอไม">คำถามที่สาม: มาตรการที่ออกไปได้ผลหรือไม่</a></li>
+  <li><a href="#บทบาททเหมาะสมของ-eda-ในงานนโยบาย" id="toc-บทบาททเหมาะสมของ-eda-ในงานนโยบาย" class="nav-link" data-scroll-target="#บทบาททเหมาะสมของ-eda-ในงานนโยบาย">บทบาทที่เหมาะสมของ EDA ในงานนโยบาย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-system" id="toc-sec-ch01-system" class="nav-link" data-scroll-target="#sec-ch01-system"><span class="header-section-number">1.7</span> ภาพรวมระบบที่จะสร้างตลอดเล่ม</a>
+  <ul class="collapse">
+  <li><a href="#จากแนวคดสระบบ" id="toc-จากแนวคดสระบบ" class="nav-link" data-scroll-target="#จากแนวคดสระบบ">จากแนวคิดสู่ระบบ</a></li>
+  <li><a href="#การแบงงานระหวาง-script-กบ-notebook" id="toc-การแบงงานระหวาง-script-กบ-notebook" class="nav-link" data-scroll-target="#การแบงงานระหวาง-script-กบ-notebook">การแบ่งงานระหว่าง script กับ notebook</a></li>
+  <li><a href="#ดขอมลครงแรก" id="toc-ดขอมลครงแรก" class="nav-link" data-scroll-target="#ดขอมลครงแรก">ดูข้อมูลครั้งแรก</a></li>
+  </ul></li>
+  <li><a href="#sec-ch01-case" id="toc-sec-ch01-case" class="nav-link" data-scroll-target="#sec-ch01-case">กรณีศึกษา: สองสถานีที่ค่าเฉลี่ยใกล้กัน</a></li>
+  <li><a href="#sec-ch01-pitfalls" id="toc-sec-ch01-pitfalls" class="nav-link" data-scroll-target="#sec-ch01-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch01-exercises" id="toc-sec-ch01-exercises" class="nav-link" data-scroll-target="#sec-ch01-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 0 วางแผนที่ของทั้งเล่มไว้แล้ว บทนี้เริ่มต้นการเดินทางจริงด้วยการตอบคำถามพื้นฐานที่สุดสองข้อ ข้อแรกคือ วิทยาการข้อมูลคืออะไร และต่างจากสถิติศาสตร์หรือวิทยาการคอมพิวเตอร์อย่างไร ข้อที่สองคือ การสำรวจข้อมูลคืออะไร ทำไมจึงต้องทำก่อนการสรุปผลทุกครั้ง และทำแล้วได้อะไร</p>
+<p>คำตอบของบทนี้เป็นกรอบคิดที่ทุกบทหลังจากนี้ใช้ร่วมกัน เมื่อบทที่ 9 ให้ตรวจคุณภาพข้อมูล บทที่ 11 ให้วาดกราฟก่อนคำนวณ หรือบทที่ 13 เตือนให้ระวังการตีความ p-value เหตุผลเบื้องหลังล้วนมาจากแนวคิดในบทนี้ คือการแยก <em>การสำรวจ</em> ออกจาก <em>การยืนยัน</em> และการไม่เชื่อตัวเลขสรุปจนกว่าจะได้เห็นข้อมูลจริง</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายองค์ประกอบของวิทยาการข้อมูลและบทบาทของสถิติ วิทยาการคอมพิวเตอร์ และความรู้เชิงโดเมน</li>
+<li>อธิบายที่มาของแนวคิด Exploratory Data Analysis และเหตุผลที่ Tukey เปรียบงานนี้กับงานนักสืบ</li>
+<li>เปรียบเทียบการสำรวจข้อมูลกับการวิเคราะห์เชิงยืนยันในด้านเป้าหมาย วิธีการ และการตีความผล</li>
+<li>เปรียบเทียบแบบจำลองวงจรชีวิตข้อมูล CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้</li>
+<li>ใช้ Anscombe’s quartet และ Datasaurus Dozen อธิบายว่าทำไมสถิติสรุปอย่างเดียวไม่พอ</li>
+<li>ประเมินความเสี่ยงของการสรุปผลจากข้อมูล PM2.5 โดยไม่ได้สำรวจข้อมูลก่อน</li>
+</ol>
+</section>
+<section id="sec-ch01-what-is-ds" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-ch01-what-is-ds"><span class="header-section-number">1.1</span> วิทยาการข้อมูลคืออะไร: สถิติ วิทยาการคอมพิวเตอร์ และความรู้เชิงโดเมน</h2>
+<section id="นยามทใชในหนงสอเลมน" class="level3">
+<h3 class="anchored" data-anchor-id="นยามทใชในหนงสอเลมน">นิยามที่ใช้ในหนังสือเล่มนี้</h3>
+<p>วิทยาการข้อมูล (data science) มีนิยามหลากหลายตามมุมมองของผู้นิยาม นักสถิติมักมองว่าเป็นการขยายขอบเขตของสถิติศาสตร์ไปสู่การคำนวณและข้อมูลขนาดใหญ่ นักวิทยาการคอมพิวเตอร์มักมองว่าเป็นการนำอัลกอริทึมและระบบมาประมวลผลข้อมูล ส่วนผู้ใช้ในองค์กรมักมองว่าเป็นการนำข้อมูลมาช่วยตัดสินใจ ทุกมุมมองถูกต้องบางส่วน หนังสือเล่มนี้ใช้นิยามเชิงปฏิบัติดังนี้</p>
+<blockquote class="blockquote">
+<p>วิทยาการข้อมูลคือการนำข้อมูลมาตอบคำถามอย่างเป็นระบบ โดยใช้สถิติศาสตร์เพื่อจัดการกับความไม่แน่นอน ใช้การคำนวณเพื่อจัดการกับปริมาณและความซับซ้อนของข้อมูล และใช้ความรู้เชิงโดเมนเพื่อตั้งคำถามที่มีความหมายและตีความผลให้ถูกต้อง</p>
+</blockquote>
+<p>นิยามนี้มีคำสำคัญสามคำ คือ <em>ตอบคำถาม</em> <em>เป็นระบบ</em> และองค์ประกอบสามส่วน คำว่า <em>ตอบคำถาม</em> บอกว่าจุดเริ่มต้นคือคำถาม ไม่ใช่ข้อมูลหรือเครื่องมือ คำว่า <em>เป็นระบบ</em> บอกว่ากระบวนการต้องตรวจสอบและทำซ้ำได้ ไม่ใช่การลองผิดลองถูกที่ไม่มีใครตามได้</p>
+</section>
+<section id="ทมาของคำ" class="level3">
+<h3 class="anchored" data-anchor-id="ทมาของคำ">ที่มาของคำ</h3>
+<p>แนวคิดที่ว่าการวิเคราะห์ข้อมูลกว้างกว่าสถิติเชิงคณิตศาสตร์มีมานานแล้ว ในปี ค.ศ. 1962 John Tukey เขียนบทความ “The Future of Data Analysis” เสนอว่าการวิเคราะห์ข้อมูลควรถือเป็นศาสตร์เชิงประจักษ์ที่ตัดสินคุณค่าด้วยการใช้งานจริง มากกว่าเป็นสาขาย่อยของคณิตศาสตร์ <span class="citation" data-cites="tukey1962future">(<a href="../references.html#ref-tukey1962future" role="doc-biblioref">Tukey 1962</a>)</span> ในปี ค.ศ. 2001 William Cleveland เสนอแผนขยายขอบเขตทางเทคนิคของสถิติศาสตร์ และใช้คำว่า data science เป็นชื่อสาขาที่ขยายแล้ว ซึ่งรวมการคำนวณกับข้อมูล การสร้างแบบจำลอง และการสอน <span class="citation" data-cites="cleveland2001data">(<a href="../references.html#ref-cleveland2001data" role="doc-biblioref">Cleveland 2001</a>)</span> Donoho ทบทวนพัฒนาการเหล่านี้และสรุปว่า แก่นของสาขาคือ “การเรียนรู้จากข้อมูล” ทั้งในด้านการสำรวจ การเตรียมข้อมูล การคำนวณ การสร้างแบบจำลอง การนำเสนอ และการศึกษาวิทยาการข้อมูลเองในฐานะศาสตร์ <span class="citation" data-cites="donoho2017fifty">(<a href="../references.html#ref-donoho2017fifty" role="doc-biblioref">Donoho 2017</a>)</span></p>
+</section>
+<section id="องคประกอบทหนง-สถตศาสตร" class="level3">
+<h3 class="anchored" data-anchor-id="องคประกอบทหนง-สถตศาสตร">องค์ประกอบที่หนึ่ง: สถิติศาสตร์</h3>
+<p>สถิติศาสตร์ตอบคำถามว่า <em>สิ่งที่เห็นในข้อมูลน่าเชื่อถือแค่ไหน</em> สมมุติว่าค่าเฉลี่ย PM2.5 ของสถานีหนึ่งในเดือนมีนาคมปีนี้สูงกว่าปีที่แล้ว 5 µg/m³ คำถามทางสถิติคือ ความต่างนี้ใหญ่กว่าความแปรปรวนตามธรรมชาติจากปีหนึ่งไปอีกปีหนึ่งหรือไม่ ถ้าปีที่แล้วมีชั่วโมงที่ข้อมูลหายไปมาก ค่าเฉลี่ยนั้นยังเทียบกันได้หรือไม่ และถ้าเราดูหลายสถานีพร้อมกัน จะมีบางสถานีที่ต่างกันมากโดยบังเอิญได้มากเพียงใด</p>
+<p>ทักษะทางสถิติที่หนังสือเล่มนี้ใช้มากที่สุดไม่ใช่สูตร แต่เป็น <em>วิธีคิด</em> สามอย่าง คือ คิดถึงการแจกแจงแทนที่จะคิดถึงค่าเดียว คิดถึงกระบวนการที่สร้างข้อมูล และคิดถึงสิ่งที่จะเห็นได้แม้ไม่มีผลจริง (เช่น ความต่างที่เกิดจากความบังเอิญ)</p>
+</section>
+<section id="องคประกอบทสอง-วทยาการคอมพวเตอร" class="level3">
+<h3 class="anchored" data-anchor-id="องคประกอบทสอง-วทยาการคอมพวเตอร">องค์ประกอบที่สอง: วิทยาการคอมพิวเตอร์</h3>
+<p>วิทยาการคอมพิวเตอร์ตอบคำถามว่า <em>ทำอย่างไรให้การวิเคราะห์เป็นไปได้ ถูกต้อง และทำซ้ำได้</em> ข้อมูลรายชั่วโมงจากสถานีจำนวนมากตลอดหลายปีมีขนาดหลายล้านแถว การคำนวณค่าเฉลี่ยรายวันด้วยมือหรือด้วยสเปรดชีตเป็นไปไม่ได้ในทางปฏิบัติ และเสี่ยงต่อความผิดพลาดแบบที่เกิดในกรณี Reinhart–Rogoff ในบทที่ 0</p>
+<p>ทักษะจากวิทยาการคอมพิวเตอร์ที่หนังสือใช้มีหลายระดับ ได้แก่ การเขียนโปรแกรมด้วย Python การออกแบบตารางและเขียน SQL การจัดการเวอร์ชันของโค้ดด้วย Git การเลือกโครงสร้างข้อมูลที่มีประสิทธิภาพ เช่น การจัดเก็บแบบ columnar และการออกแบบ pipeline ที่แต่ละขั้นมีหน้าที่ชัดเจน</p>
+</section>
+<section id="องคประกอบทสาม-ความรเชงโดเมน" class="level3">
+<h3 class="anchored" data-anchor-id="องคประกอบทสาม-ความรเชงโดเมน">องค์ประกอบที่สาม: ความรู้เชิงโดเมน</h3>
+<p>ความรู้เชิงโดเมน (domain knowledge) ตอบคำถามว่า <em>คำถามใดมีความหมาย และผลที่ได้แปลว่าอะไรในโลกจริง</em> ผู้ที่มีความรู้ด้านคุณภาพอากาศจะรู้ว่า ค่า PM2.5 รายชั่วโมงมีรูปแบบรายวันที่ขึ้นกับการจราจรและชั้นบรรยากาศ รู้ว่ามาตรฐานกำหนดเป็นค่าเฉลี่ย 24 ชั่วโมง และรู้ว่าค่าที่สูงผิดปกติในบางช่วงอาจเป็นเหตุการณ์จริง เช่น การเผาในที่โล่งใกล้สถานี ไม่ใช่ความผิดพลาดของเครื่องวัด</p>
+<p>ผู้วิเคราะห์ที่ขาดความรู้เชิงโดเมนมักทำผิดพลาดสองแบบ แบบแรกคือ ตัดค่าที่ “ดูแปลก” ทิ้งทั้งที่เป็นข้อมูลสำคัญที่สุด แบบที่สองคือ ตั้งคำถามที่ตอบได้ด้วยข้อมูลแต่ไม่มีใครต้องการคำตอบ วิธีแก้ไม่ใช่การเป็นผู้เชี่ยวชาญทุกโดเมน แต่เป็นการอ่านเอกสารของแหล่งข้อมูล คุยกับผู้ใช้ผลลัพธ์ และถามผู้เชี่ยวชาญเมื่อไม่แน่ใจ</p>
+</section>
+<section id="เมอขาดองคประกอบใดองคประกอบหนง" class="level3">
+<h3 class="anchored" data-anchor-id="เมอขาดองคประกอบใดองคประกอบหนง">เมื่อขาดองค์ประกอบใดองค์ประกอบหนึ่ง</h3>
+<div id="tbl-ch01-missing-component" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-missing-component-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.1: อาการที่เกิดขึ้นเมื่องานข้อมูลขาดองค์ประกอบใดองค์ประกอบหนึ่ง
+</figcaption>
+<div aria-describedby="tbl-ch01-missing-component-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ขาดองค์ประกอบ</th>
+<th>อาการที่เห็น</th>
+<th>ตัวอย่างกับข้อมูล PM2.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สถิติศาสตร์</td>
+<td>สรุปจากความต่างที่เกิดจากความบังเอิญ หรือจากค่าเฉลี่ยที่ไม่ได้คำนึงถึงข้อมูลหาย</td>
+<td>ประกาศว่าเมืองหนึ่ง “แย่ลง” จากค่าเฉลี่ยสองเดือนที่ข้อมูลครบไม่เท่ากัน</td>
+</tr>
+<tr class="even">
+<td>วิทยาการคอมพิวเตอร์</td>
+<td>งานทำซ้ำไม่ได้ ผิดพลาดจากการคัดลอกวาง ทำงานกับข้อมูลใหญ่ไม่ได้</td>
+<td>คำนวณค่าเฉลี่ยรายวันในสเปรดชีต แล้วสูตรครอบคลุมแถวไม่ครบ</td>
+</tr>
+<tr class="odd">
+<td>ความรู้เชิงโดเมน</td>
+<td>ตั้งคำถามที่ไม่มีความหมาย ตีความผลผิด ตัดข้อมูลสำคัญทิ้ง</td>
+<td>ตัดค่าสูงในช่วงที่มีการเผาออกเพราะคิดว่าเป็น outlier จากเครื่องเสีย</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ใน <a href="#tbl-ch01-missing-component" class="quarto-xref">ตารางที่&nbsp;<span>1.1</span></a> ทุกแถวเป็นความผิดพลาดที่เกิดขึ้นจริงได้แม้ผู้วิเคราะห์เก่งเครื่องมือมาก จุดนี้สำคัญ เพราะผู้เริ่มต้นจำนวนมากคิดว่าการเป็นนักวิทยาการข้อมูลคือการใช้ไลบรารีได้คล่อง ซึ่งเป็นเพียงหนึ่งในสามส่วน</p>
+</section>
+<section id="วทยาการขอมลในฐานะงานของทม" class="level3">
+<h3 class="anchored" data-anchor-id="วทยาการขอมลในฐานะงานของทม">วิทยาการข้อมูลในฐานะงานของทีม</h3>
+<p>ในทางปฏิบัติ น้อยคนที่เชี่ยวชาญทั้งสามองค์ประกอบในระดับลึก งานข้อมูลในองค์กรจึงมักเป็นงานของทีมที่มีบทบาทต่างกัน ดังที่กล่าวไว้ในหัวข้อ 0.7 ทักษะที่ทุกบทบาทต้องมีร่วมกันคือ ความสามารถในการสื่อสารข้ามองค์ประกอบ นักสถิติต้องอ่านโค้ดของวิศวกรข้อมูลได้ วิศวกรต้องเข้าใจว่าทำไมนักวิเคราะห์ต้องการคอลัมน์จำนวนชั่วโมงที่มีข้อมูล และทุกคนต้องอธิบายผลให้ผู้เชี่ยวชาญโดเมนเข้าใจได้ หนังสือเล่มนี้จึงให้ผู้อ่านลงมือในทุกขั้น แม้ในอนาคตจะทำงานเพียงบางขั้นก็ตาม</p>
+</section>
+</section>
+<section id="sec-ch01-tukey" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-ch01-tukey"><span class="header-section-number">1.2</span> กำเนิด Exploratory Data Analysis: John Tukey กับ “งานนักสืบ”</h2>
+<section id="john-tukey" class="level3">
+<h3 class="anchored" data-anchor-id="john-tukey">John Tukey</h3>
+<p>John W. Tukey (ค.ศ. 1915–2000) เป็นนักสถิติชาวอเมริกันที่มีผลงานกว้างขวาง ทั้งในสถิติศาสตร์ทฤษฎีและการประยุกต์ เขาร่วมพัฒนาอัลกอริทึม Fast Fourier Transform กับ James Cooley <span class="citation" data-cites="cooley1965algorithm">(<a href="../references.html#ref-cooley1965algorithm" role="doc-biblioref">Cooley และ Tukey 1965</a>)</span> และเป็นผู้คิดค้นเครื่องมือที่ยังใช้กันทุกวันนี้ เช่น แผนภาพกล่อง (box plot) และแผนภาพลำต้นและใบ (stem-and-leaf display) ซึ่งเผยแพร่อย่างเป็นระบบในหนังสือ <em>Exploratory Data Analysis</em> ปี ค.ศ. 1977 <span class="citation" data-cites="tukey1977exploratory">(<a href="../references.html#ref-tukey1977exploratory" role="doc-biblioref">Tukey 1977</a>)</span></p>
+<p>สิ่งที่ทำให้ Tukey สำคัญต่อหนังสือเล่มนี้ไม่ใช่เครื่องมือแต่ละชิ้น แต่เป็นการเปลี่ยนมุมมองต่อการวิเคราะห์ข้อมูล ในยุคที่สถิติศาสตร์เน้นการพิสูจน์ทางคณิตศาสตร์และการทดสอบสมมติฐานที่กำหนดไว้ล่วงหน้า Tukey เสนอว่าก่อนจะทดสอบอะไร เราต้องรู้ก่อนว่าข้อมูลมีอะไรให้ทดสอบ</p>
+</section>
+<section id="งานนกสบ" class="level3">
+<h3 class="anchored" data-anchor-id="งานนกสบ">งานนักสืบ</h3>
+<p>Tukey เปรียบ <span class="idx">การสำรวจข้อมูล (EDA)</span> กับ <em>งานนักสืบ</em> นักสืบไม่ได้เริ่มจากการรู้ว่าใครเป็นคนร้าย นักสืบเริ่มจากการเก็บเบาะแส สังเกตสิ่งที่ผิดปกติ และสร้างข้อสันนิษฐานหลายแบบ เบาะแสบางอย่างนำไปสู่ทางตัน บางอย่างนำไปสู่ข้อสันนิษฐานที่น่าสนใจ แต่นักสืบไม่ได้เป็นผู้ตัดสินว่าใครผิด หน้าที่นั้นเป็นของศาล ซึ่งชั่งน้ำหนักหลักฐานตามกระบวนการที่เข้มงวด <span class="citation" data-cites="tukey1977exploratory">(<a href="../references.html#ref-tukey1977exploratory" role="doc-biblioref">Tukey 1977</a>)</span></p>
+<p>การเปรียบเทียบนี้บอกเราสามเรื่อง</p>
+<ol type="1">
+<li><strong>การสำรวจต้องการเครื่องมือที่ยืดหยุ่น</strong> นักสืบใช้แว่นขยาย สมุดบันทึก และสามัญสำนึก ไม่ได้ใช้แบบฟอร์มสำเร็จรูป ผู้สำรวจข้อมูลก็ต้องการกราฟ การสรุปตาราง และการแปลงข้อมูลที่ทำได้เร็ว ลองได้หลายแบบ และทิ้งได้ง่าย</li>
+<li><strong>การสำรวจต้องเปิดรับสิ่งที่ไม่คาดคิด</strong> ถ้านักสืบมองหาเฉพาะหลักฐานที่ยืนยันข้อสันนิษฐานแรก เขาจะพลาดคนร้ายตัวจริง ผู้สำรวจข้อมูลที่วาดเฉพาะกราฟที่ยืนยันสิ่งที่คิดไว้ก็เช่นกัน</li>
+<li><strong>ผลของการสำรวจคือข้อสันนิษฐาน ไม่ใช่คำตัดสิน</strong> เบาะแสที่พบระหว่างสำรวจต้องผ่านกระบวนการยืนยันก่อนจะกลายเป็นข้อสรุป ประเด็นนี้เป็นแกนของหัวข้อถัดไปและของบทที่ 4</li>
+</ol>
+</section>
+<section id="หลกการของ-tukey-ทยงใชไดในปจจบน" class="level3">
+<h3 class="anchored" data-anchor-id="หลกการของ-tukey-ทยงใชไดในปจจบน">หลักการของ Tukey ที่ยังใช้ได้ในปัจจุบัน</h3>
+<p>แม้หนังสือของ Tukey จะเขียนในยุคที่คำนวณด้วยมือ ดินสอ และกระดาษกราฟ หลักการหลายข้อยังใช้ได้โดยตรงกับเครื่องมือสมัยใหม่</p>
+<div id="tbl-ch01-tukey-principles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-tukey-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.2: หลักการของ Tukey และตำแหน่งที่ปรากฏในหนังสือเล่มนี้
+</figcaption>
+<div aria-describedby="tbl-ch01-tukey-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลักการ</th>
+<th>ความหมาย</th>
+<th>ในหนังสือเล่มนี้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ดูข้อมูลก่อนสรุป</td>
+<td>วาดกราฟและดูค่าจริงก่อนคำนวณสถิติสรุป</td>
+<td>กราฟการแจกแจงในบทที่ 11–13</td>
+</tr>
+<tr class="even">
+<td>ใช้สถิติที่ทนต่อค่าผิดปกติ</td>
+<td>มัธยฐานและควอร์ไทล์ไม่ถูกดึงด้วยค่าสุดโต่งเหมือนค่าเฉลี่ย</td>
+<td>สถิติแบบทนทานในบทที่ 13</td>
+</tr>
+<tr class="odd">
+<td>แปลงข้อมูลเพื่อให้เห็นรูปแบบ</td>
+<td>การแปลงด้วย log หรือรากที่สองทำให้การแจกแจงที่เบ้มากอ่านง่ายขึ้น</td>
+<td>การแปลงข้อมูลในบทที่ 13</td>
+</tr>
+<tr class="even">
+<td>ดูส่วนที่เหลือ</td>
+<td>หลังจากอธิบายรูปแบบหลักแล้ว ให้ดูส่วนที่ยังอธิบายไม่ได้</td>
+<td>ส่วนเหลือ (residual) ของการแยกองค์ประกอบอนุกรมเวลาในบทที่ 14</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>หลักการข้อสุดท้ายใน <a href="#tbl-ch01-tukey-principles" class="quarto-xref">ตารางที่&nbsp;<span>1.2</span></a> มักถูกมองข้าม Tukey เขียนความสัมพันธ์นี้ในรูป <em>ข้อมูล = ส่วนที่เรียบ + ส่วนที่หยาบ</em> (data = smooth + rough) ส่วนที่เรียบคือรูปแบบที่เราอธิบายได้ เช่น แนวโน้มหรือฤดูกาล ส่วนที่หยาบคือสิ่งที่เหลืออยู่ การสำรวจที่ดีไม่ได้หยุดที่การหารูปแบบหลัก แต่ดูต่อว่าส่วนที่หยาบมีอะไรซ่อนอยู่ เช่น ในข้อมูล PM2.5 เมื่อลบรูปแบบตามฤดูกาลออกแล้ว ส่วนที่เหลืออาจเผยให้เห็นวันที่มีเหตุการณ์พิเศษ หรือช่วงที่เครื่องวัดทำงานผิดปกติ</p>
+</section>
+<section id="ตวอยางวธคดแบบนกสบกบขอมล-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="ตวอยางวธคดแบบนกสบกบขอมล-pm2.5">ตัวอย่างวิธีคิดแบบนักสืบกับข้อมูล PM2.5</h3>
+<p>สมมุติว่าเราเปิดข้อมูลของสถานีหนึ่งและพบว่าค่า PM2.5 เท่ากับ 12.0 µg/m³ ติดต่อกัน 30 ชั่วโมง นักสืบจะไม่รีบสรุปว่าอากาศดีและนิ่งมาก แต่จะตั้งข้อสันนิษฐานหลายข้อ</p>
+<ul>
+<li>เครื่องวัดค้าง (stuck sensor) และส่งค่าเดิมซ้ำ</li>
+<li>ระบบส่งข้อมูลมีปัญหาและนำค่าล่าสุดมาเติมให้ช่วงที่ขาด</li>
+<li>อากาศนิ่งจริง แต่โอกาสที่ค่ารายชั่วโมงจะเท่ากันทุกตำแหน่งทศนิยมตลอด 30 ชั่วโมงต่ำมาก</li>
+</ul>
+<p>จากนั้นนักสืบจะหาเบาะแสเพิ่ม เช่น ดูสารมลพิษตัวอื่นของสถานีเดียวกันในช่วงเดียวกันว่าค้างด้วยหรือไม่ ดูสถานีใกล้เคียงว่าค่าเปลี่ยนแปลงตามปกติหรือไม่ และดูว่ารูปแบบนี้เกิดซ้ำในสถานีอื่นหรือไม่ เบาะแสเหล่านี้ไม่ได้ <em>พิสูจน์</em> ว่าเครื่องค้าง แต่ช่วยให้เราตัดสินใจได้อย่างมีเหตุผลว่าจะจัดการช่วงนี้อย่างไร บทที่ 9 จะเปลี่ยนวิธีคิดนี้ให้เป็นกฎตรวจข้อมูลที่รันอัตโนมัติ</p>
+</section>
+</section>
+<section id="sec-ch01-eda-cda" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-ch01-eda-cda"><span class="header-section-number">1.3</span> EDA กับ Confirmatory Data Analysis</h2>
+<section id="สองโหมดของการวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="สองโหมดของการวเคราะห">สองโหมดของการวิเคราะห์</h3>
+<p>Tukey ไม่ได้เสนอให้ใช้การสำรวจแทนการยืนยัน ในบทความปี ค.ศ. 1980 ที่มีชื่อตรงไปตรงมาว่า “We Need Both Exploratory and Confirmatory” เขาอธิบายว่าทั้งสองโหมดจำเป็นและเสริมกัน <span class="citation" data-cites="tukey1980we">(<a href="../references.html#ref-tukey1980we" role="doc-biblioref">Tukey 1980</a>)</span> การสำรวจโดยไม่ยืนยันทำให้ได้ข้อสันนิษฐานจำนวนมากที่ไม่มีใครรู้ว่าจริงหรือไม่ ส่วนการยืนยันโดยไม่สำรวจทำให้ทดสอบคำถามที่อาจไม่ใช่คำถามที่ควรถาม หรือทดสอบด้วยวิธีที่ข้อสมมุติไม่ตรงกับข้อมูล</p>
+<div id="tbl-ch01-eda-vs-cda" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-eda-vs-cda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.3: เปรียบเทียบการสำรวจข้อมูลกับการวิเคราะห์เชิงยืนยัน
+</figcaption>
+<div aria-describedby="tbl-ch01-eda-vs-cda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>การสำรวจข้อมูล (EDA)</th>
+<th>การวิเคราะห์เชิงยืนยัน (confirmatory analysis)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เป้าหมาย</td>
+<td>สร้างข้อสันนิษฐาน หาเบาะแส ทำความรู้จักข้อมูล</td>
+<td>ทดสอบข้อสันนิษฐานที่กำหนดไว้ล่วงหน้า</td>
+</tr>
+<tr class="even">
+<td>คำถาม</td>
+<td>“ข้อมูลมีอะไรน่าสนใจบ้าง”</td>
+<td>“ข้อสันนิษฐาน H เป็นจริงหรือไม่”</td>
+</tr>
+<tr class="odd">
+<td>ลำดับ</td>
+<td>ยืดหยุ่น ย้อนกลับได้ ลองได้หลายแบบ</td>
+<td>กำหนดล่วงหน้า ทำตามแผน</td>
+</tr>
+<tr class="even">
+<td>เครื่องมือหลัก</td>
+<td>กราฟ ตารางสรุป การแปลงข้อมูล</td>
+<td>การทดสอบสมมติฐาน ช่วงความเชื่อมั่น แบบจำลอง</td>
+</tr>
+<tr class="odd">
+<td>ผลลัพธ์</td>
+<td>ข้อสันนิษฐานและคำถามใหม่</td>
+<td>ข้อสรุปพร้อมระดับความไม่แน่นอน</td>
+</tr>
+<tr class="even">
+<td>ความเสี่ยงหลัก</td>
+<td>เห็นรูปแบบในสัญญาณรบกวน</td>
+<td>ทดสอบคำถามผิด หรือใช้วิธีที่ไม่เหมาะกับข้อมูล</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ทำไมตองแยกสองโหมดออกจากกน" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองแยกสองโหมดออกจากกน">ทำไมต้องแยกสองโหมดออกจากกัน</h3>
+<p>ปัญหาสำคัญที่สุดเกิดเมื่อนำผลการสำรวจไปรายงานราวกับเป็นผลการยืนยัน ลองพิจารณาสถานการณ์ต่อไปนี้ นักวิเคราะห์คนหนึ่งวาดกราฟค่า PM2.5 ของ 80 สถานี เทียบระหว่างวันธรรมดากับวันหยุด แล้วพบว่ามี 5 สถานีที่วันธรรมดาสูงกว่าวันหยุดอย่างชัดเจน เขาจึงทดสอบทางสถิติเฉพาะ 5 สถานีนั้น ได้ p-value ต่ำมาก และรายงานว่า “พบหลักฐานว่าการจราจรวันธรรมดาเพิ่มค่าฝุ่นในพื้นที่เหล่านี้”</p>
+<p>ข้อสรุปนี้มีปัญหา เพราะ 5 สถานีถูก <em>เลือก</em> มาจากการดูข้อมูลชุดเดียวกับที่ใช้ทดสอบ แม้ไม่มีผลจริงเลย การดูข้อมูล 80 สถานีก็มีโอกาสสูงที่จะเห็นบางสถานีต่างกันมากโดยบังเอิญ การทดสอบที่ตามมาจึงไม่ได้บอกอะไรเพิ่ม บทที่ 4 เรียกปัญหานี้ว่า garden of forking paths และบทที่ 13 อธิบายเรื่องการเปรียบเทียบหลายครั้ง (multiple comparisons) ในเชิงปริมาณ</p>
+<p>วิธีแก้มีหลายแบบ วิธีที่หนังสือเล่มนี้ใช้คือ <strong>แยกข้อมูลสำรวจกับข้อมูลยืนยัน</strong> ตามเวลา ข้อมูลปีเก่าใช้สำรวจและสร้างข้อสันนิษฐาน ข้อมูลปีล่าสุดเก็บไว้ทดสอบข้อสันนิษฐานที่ได้ บทที่ 4 อธิบายรายละเอียดและเหตุผล</p>
+</section>
+<section id="eda-ไมไดแปลวา-ไมมหลกการ" class="level3">
+<h3 class="anchored" data-anchor-id="eda-ไมไดแปลวา-ไมมหลกการ">EDA ไม่ได้แปลว่า “ไม่มีหลักการ”</h3>
+<p>ความยืดหยุ่นของการสำรวจไม่ได้แปลว่าทำอะไรก็ได้ การสำรวจที่ดีมีลักษณะดังนี้</p>
+<ul>
+<li><strong>มีคำถามนำ</strong> แม้จะเป็นคำถามกว้าง ๆ เช่น “ข้อมูลครอบคลุมช่วงเวลาใด” หรือ “ภาคใดมีค่าสูง” ก็ช่วยให้รู้ว่าควรดูอะไรก่อนและเมื่อไรควรหยุด</li>
+<li><strong>บันทึกสิ่งที่ทำ</strong> ทั้งสิ่งที่พบและสิ่งที่ลองแล้วไม่พบ เพราะสิ่งที่ไม่พบก็เป็นข้อมูล และช่วยให้ประเมินได้ภายหลังว่าเราลองไปกี่ทาง</li>
+<li><strong>ตรวจสอบสิ่งที่พบจากหลายมุม</strong> ถ้าพบรูปแบบในกราฟหนึ่ง ลองดูว่ายังเห็นอยู่หรือไม่เมื่อเปลี่ยนวิธีรวมกลุ่ม เปลี่ยนช่วงเวลา หรือตัดสถานีที่ข้อมูลไม่ครบออก</li>
+<li><strong>แยกข้อสันนิษฐานออกจากข้อสรุป</strong> ในรายงาน ใช้ภาษาที่บอกระดับหลักฐาน เช่น “ข้อมูลช่วงสำรวจบ่งชี้ว่า…” แทน “พิสูจน์ได้ว่า…” บทที่ 4 หัวข้อสุดท้ายอธิบายเรื่องนี้</li>
+</ul>
+</section>
+<section id="วงจรเลกของการสำรวจ" class="level3">
+<h3 class="anchored" data-anchor-id="วงจรเลกของการสำรวจ">วงจรเล็กของการสำรวจ</h3>
+<p>Peng และ Matsui อธิบายการวิเคราะห์ข้อมูลว่าเป็นวงจรเล็ก ๆ ที่หมุนซ้ำ (epicycles of analysis) ในทุกขั้นของงาน แต่ละรอบมีสี่ขั้น คือ ตั้งความคาดหวัง เก็บข้อมูลหรือคำนวณ เปรียบเทียบผลกับความคาดหวัง และปรับความคาดหวังหรือแก้ไขการวิเคราะห์ <span class="citation" data-cites="peng2015art">(<a href="../references.html#ref-peng2015art" role="doc-biblioref">Peng และ Matsui 2015</a>)</span> ตัวอย่างกับข้อมูล PM2.5 เช่น</p>
+<ol type="1">
+<li><strong>คาดหวัง:</strong> ข้อมูลรายชั่วโมงของสถานีหนึ่งตลอดปี ค.ศ. 2023 ควรมี 8,760 แถว</li>
+<li><strong>คำนวณ:</strong> นับแถวได้ 8,412 แถว</li>
+<li><strong>เปรียบเทียบ:</strong> ขาดไป 348 แถว ไม่ตรงกับความคาดหวัง</li>
+<li><strong>ปรับ:</strong> หาว่าแถวที่ขาดอยู่ช่วงไหน กระจายทั่วปีหรือรวมอยู่ช่วงเดียว แล้วตั้งความคาดหวังใหม่สำหรับรอบถัดไป</li>
+</ol>
+<p>ตัวเลขในตัวอย่างนี้เป็นตัวเลขสมมุติเพื่ออธิบายวิธีคิด ประเด็นคือการ <em>ตั้งความคาดหวังก่อนดูผล</em> เป็นนิสัยที่ทำให้เราสังเกตเห็นสิ่งที่ผิดปกติได้ ถ้าไม่ได้คาดหวังอะไรไว้ ตัวเลข 8,412 ก็เป็นเพียงตัวเลขหนึ่งที่ผ่านตาไป</p>
+</section>
+</section>
+<section id="sec-ch01-lifecycle" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-ch01-lifecycle"><span class="header-section-number">1.4</span> แบบจำลองวงจรชีวิตข้อมูล: CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้</h2>
+<section id="ทำไมตองมแบบจำลองวงจร" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองมแบบจำลองวงจร">ทำไมต้องมีแบบจำลองวงจร</h3>
+<p><span class="idx">วงจรชีวิตข้อมูล</span> (data lifecycle) คือลำดับขั้นที่ข้อมูลผ่านตั้งแต่ตั้งคำถามจนถึงสื่อสารผล การมีแบบจำลองวงจรช่วยในสามด้าน ด้านแรกคือ ช่วยวางแผนว่าโครงการต้องทำอะไรบ้าง ด้านที่สองคือ ช่วยให้ทีมใช้ภาษาเดียวกันเมื่อพูดถึงความคืบหน้า และด้านที่สามคือ ช่วยเตือนว่างานข้อมูลเป็นวงจร ไม่ใช่เส้นตรง ข้อค้นพบในขั้นปลายมักพาเรากลับไปขั้นต้น</p>
+</section>
+<section id="crisp-dm" class="level3">
+<h3 class="anchored" data-anchor-id="crisp-dm">CRISP-DM</h3>
+<p><span class="idx">CRISP-DM</span> (Cross-Industry Standard Process for Data Mining) พัฒนาขึ้นโดยกลุ่มบริษัทจากหลายอุตสาหกรรมช่วงปลายทศวรรษ 1990 และเผยแพร่เป็นคู่มือฉบับ 1.0 ในปี ค.ศ. 2000 <span class="citation" data-cites="chapman2000crisp">(<a href="../references.html#ref-chapman2000crisp" role="doc-biblioref">Chapman และคณะ 2000</a>)</span> แบ่งงานเป็น 6 ระยะ</p>
+<ol type="1">
+<li><strong>Business understanding</strong> ทำความเข้าใจเป้าหมายขององค์กรและเปลี่ยนเป็นโจทย์ข้อมูล</li>
+<li><strong>Data understanding</strong> เก็บข้อมูลเบื้องต้น สำรวจ และตรวจคุณภาพ</li>
+<li><strong>Data preparation</strong> เลือก ทำความสะอาด และแปลงข้อมูลให้พร้อมใช้</li>
+<li><strong>Modeling</strong> สร้างแบบจำลอง</li>
+<li><strong>Evaluation</strong> ประเมินว่าแบบจำลองตอบโจทย์ขององค์กรหรือไม่</li>
+<li><strong>Deployment</strong> นำผลไปใช้งานจริง</li>
+</ol>
+<p>จุดเด่นของ CRISP-DM คือการเริ่มจากความเข้าใจเป้าหมายและจบที่การนำไปใช้ และมีลูกศรย้อนกลับระหว่าง business understanding กับ data understanding ซึ่งยอมรับว่าการสำรวจข้อมูลมักเปลี่ยนความเข้าใจโจทย์ จุดที่ต้องระวังคือ CRISP-DM ออกแบบมาสำหรับโครงการที่มุ่งสร้างแบบจำลอง การสำรวจข้อมูลจึงถูกจัดเป็นขั้นเตรียมการก่อน modeling ขณะที่ในหลายโครงการ การสำรวจคือผลงานหลัก</p>
+</section>
+<section id="osemn" class="level3">
+<h3 class="anchored" data-anchor-id="osemn">OSEMN</h3>
+<p><span class="idx">OSEMN</span> (อ่านว่า “ออสซัม”) เสนอโดย Hilary Mason และ Chris Wiggins ในปี ค.ศ. 2010 เป็นอนุกรมวิธานของงานวิทยาการข้อมูลที่จำง่าย <span class="citation" data-cites="mason2010taxonomy">(<a href="../references.html#ref-mason2010taxonomy" role="doc-biblioref">Mason และ Wiggins 2010</a>)</span> ประกอบด้วย</p>
+<ul>
+<li><strong>O</strong>btain ได้มาซึ่งข้อมูล</li>
+<li><strong>S</strong>crub ทำความสะอาดข้อมูล</li>
+<li><strong>E</strong>xplore สำรวจข้อมูล</li>
+<li><strong>M</strong>odel สร้างแบบจำลอง</li>
+<li>I<strong>N</strong>terpret ตีความผล</li>
+</ul>
+<p>OSEMN เน้นงานของผู้ปฏิบัติมากกว่ามุมมองขององค์กร และให้ความสำคัญกับขั้น obtain และ scrub ซึ่งเป็นงานที่ใช้เวลามากในทางปฏิบัติ แต่ OSEMN ไม่ได้มีขั้นตั้งคำถามแยกไว้ชัดเจน และไม่ได้เน้นการจัดเก็บข้อมูลหรือการทำซ้ำได้</p>
+</section>
+<section id="วงจรของหนงสอเลมน" class="level3">
+<h3 class="anchored" data-anchor-id="วงจรของหนงสอเลมน">วงจรของหนังสือเล่มนี้</h3>
+<p>หนังสือเล่มนี้ใช้วงจรที่ปรับจากสองแบบข้างต้น ให้เหมาะกับโครงการสำรวจข้อมูลที่สร้างเป็นระบบ</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Q[ตั้งคำถาม&lt;br/&gt;บทที่ 4] --&gt; A[ได้มาซึ่งข้อมูล&lt;br/&gt;บทที่ 5]
+  A --&gt; S[จัดเก็บ&lt;br/&gt;บทที่ 6–7]
+  S --&gt; W[แปลงรูป&lt;br/&gt;บทที่ 8]
+  W --&gt; V[ตรวจคุณภาพ&lt;br/&gt;บทที่ 9–10]
+  V --&gt; E[สำรวจ&lt;br/&gt;บทที่ 11–18]
+  E --&gt; C[สื่อสารผล&lt;br/&gt;บทที่ 19–20]
+  E -. คำถามใหม่ .-&gt; Q
+  V -. พบปัญหา ต้องดึงใหม่ .-&gt; A
+  C -. ผู้ใช้ถามต่อ .-&gt; Q
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="tbl-ch01-lifecycle-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-lifecycle-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.4: เปรียบเทียบแบบจำลองวงจรชีวิตข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch01-lifecycle-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>CRISP-DM</th>
+<th>OSEMN</th>
+<th>วงจรของหนังสือเล่มนี้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>จุดเริ่มต้น</td>
+<td>เป้าหมายขององค์กร</td>
+<td>ได้มาซึ่งข้อมูล</td>
+<td>คำถามเชิงวิเคราะห์</td>
+</tr>
+<tr class="even">
+<td>การจัดเก็บ</td>
+<td>ไม่ได้แยกเป็นขั้น</td>
+<td>ไม่ได้แยกเป็นขั้น</td>
+<td>แยกเป็นขั้น (ฐานข้อมูล DuckDB)</td>
+</tr>
+<tr class="odd">
+<td>คุณภาพข้อมูล</td>
+<td>อยู่ใน data understanding</td>
+<td>อยู่ใน scrub</td>
+<td>แยกเป็นขั้นที่มีผลงานชัดเจน</td>
+</tr>
+<tr class="even">
+<td>บทบาทของการสำรวจ</td>
+<td>ขั้นเตรียมก่อน modeling</td>
+<td>หนึ่งในห้าขั้น</td>
+<td>ผลงานหลัก</td>
+</tr>
+<tr class="odd">
+<td>จุดสิ้นสุด</td>
+<td>deployment</td>
+<td>interpret</td>
+<td>รายงานและแดชบอร์ดที่ทำซ้ำได้</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ความต่างที่สำคัญของวงจรในเล่มนี้ ตามที่เห็นใน <a href="#tbl-ch01-lifecycle-compare" class="quarto-xref">ตารางที่&nbsp;<span>1.4</span></a> มีสามข้อ ข้อแรก <strong>เริ่มจากคำถาม</strong> ไม่ใช่จากข้อมูล เพราะคำถามกำหนดว่าต้องเก็บข้อมูลอะไร ละเอียดแค่ไหน และเมื่อไรถือว่าตอบได้แล้ว ข้อที่สอง <strong>แยกขั้นจัดเก็บ</strong> ออกมา เพราะการมีฐานข้อมูลกลางทำให้ทุกขั้นหลังจากนั้นอ่านข้อมูลชุดเดียวกัน และทำซ้ำได้ ข้อที่สาม <strong>แยกขั้นตรวจคุณภาพ</strong> ให้มีผลงานที่จับต้องได้ คือกฎตรวจและตารางข้อมูลสะอาด แทนที่จะเป็นกิจกรรมที่ทำแบบไม่เป็นทางการระหว่างทาง</p>
+</section>
+<section id="วงจรไมใชเสนตรง" class="level3">
+<h3 class="anchored" data-anchor-id="วงจรไมใชเสนตรง">วงจรไม่ใช่เส้นตรง</h3>
+<p>ลูกศรเส้นประในแผนภาพมีความสำคัญเท่ากับลูกศรเส้นทึบ ในโครงการจริง ผู้อ่านจะพบว่า</p>
+<ul>
+<li>ระหว่างตรวจคุณภาพ พบว่า API ส่งค่าบางสารมลพิษเป็นค่าว่างทั้งหมดในบางสถานี ต้องกลับไปแก้ script ดึงข้อมูลให้บันทึกข้อมูลนี้ไว้</li>
+<li>ระหว่างสำรวจ พบว่าค่าสูงสุดในแต่ละวันน่าสนใจกว่าค่าเฉลี่ย ต้องกลับไปเพิ่มคอลัมน์ <code>pm25_max</code> ในขั้นแปลงรูป</li>
+<li>หลังส่งรายงาน ผู้อ่านถามว่าวันที่เกินมาตรฐานกระจุกในช่วงเวลาใดของวัน เกิดเป็นคำถามใหม่</li>
+</ul>
+<p>การออกแบบ pipeline เป็นขั้น ๆ ที่แต่ละขั้นรันซ้ำได้ ตามที่บทที่ 2, 5 และ 7 อธิบาย ทำให้การย้อนกลับแบบนี้มีต้นทุนต่ำ ถ้าทุกอย่างอยู่ใน notebook เดียวที่รันข้ามลำดับ การย้อนกลับไปแก้ขั้นต้นอาจหมายถึงการเริ่มใหม่ทั้งหมด</p>
+</section>
+</section>
+<section id="sec-ch01-anscombe" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sec-ch01-anscombe"><span class="header-section-number">1.5</span> ทำไมต้องสำรวจก่อนสรุป: Anscombe’s quartet และ Datasaurus Dozen</h2>
+<section id="anscombes-quartet" class="level3">
+<h3 class="anchored" data-anchor-id="anscombes-quartet">Anscombe’s quartet</h3>
+<p>ในปี ค.ศ. 1973 Francis Anscombe นักสถิติชาวอังกฤษ เผยแพร่ชุดข้อมูลสี่ชุดที่สร้างขึ้นเพื่อแสดงว่ากราฟจำเป็นต่อการวิเคราะห์ทางสถิติ <span class="citation" data-cites="anscombe1973graphs">(<a href="../references.html#ref-anscombe1973graphs" role="doc-biblioref">Anscombe 1973</a>)</span> แต่ละชุดมี 11 จุด มีตัวแปร <span class="math inline">\(x\)</span> และ <span class="math inline">\(y\)</span> และมีสถิติสรุปที่แทบเท่ากันทุกตัว ชุดข้อมูลนี้รู้จักกันในชื่อ <span class="idx">Anscombe’s quartet</span></p>
+<p>โค้ดต่อไปนี้สร้างข้อมูลทั้งสี่ชุดจากค่าในบทความต้นฉบับ แล้วจัดเป็นรูปแบบยาว ซึ่งหนึ่งแถวคือหนึ่งจุด (บทที่ 8 อธิบายรูปแบบยาวอย่างละเอียด)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">14</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">12</span>, <span class="dv">7</span>, <span class="dv">5</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>anscombe <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x1"</span>: x, <span class="st">"y1"</span>: [<span class="fl">8.04</span>, <span class="fl">6.95</span>, <span class="fl">7.58</span>, <span class="fl">8.81</span>, <span class="fl">8.33</span>, <span class="fl">9.96</span>, <span class="fl">7.24</span>, <span class="fl">4.26</span>, <span class="fl">10.84</span>, <span class="fl">4.82</span>, <span class="fl">5.68</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x2"</span>: x, <span class="st">"y2"</span>: [<span class="fl">9.14</span>, <span class="fl">8.14</span>, <span class="fl">8.74</span>, <span class="fl">8.77</span>, <span class="fl">9.26</span>, <span class="fl">8.10</span>, <span class="fl">6.13</span>, <span class="fl">3.10</span>, <span class="fl">9.13</span>, <span class="fl">7.26</span>, <span class="fl">4.74</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x3"</span>: x, <span class="st">"y3"</span>: [<span class="fl">7.46</span>, <span class="fl">6.77</span>, <span class="fl">12.74</span>, <span class="fl">7.11</span>, <span class="fl">7.81</span>, <span class="fl">8.84</span>, <span class="fl">6.08</span>, <span class="fl">5.39</span>, <span class="fl">8.15</span>, <span class="fl">6.42</span>, <span class="fl">5.73</span>],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x4"</span>: [<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">19</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y4"</span>: [<span class="fl">6.58</span>, <span class="fl">5.76</span>, <span class="fl">7.71</span>, <span class="fl">8.84</span>, <span class="fl">8.47</span>, <span class="fl">7.04</span>, <span class="fl">5.25</span>, <span class="fl">12.50</span>, <span class="fl">5.56</span>, <span class="fl">7.91</span>, <span class="fl">6.89</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># แปลงเป็นรูปแบบยาว: หนึ่งแถวต่อหนึ่งจุด พร้อมคอลัมน์บอกชุด</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> pd.concat(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    [anscombe[[<span class="ss">f"x</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="ss">f"y</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>]].set_axis([<span class="st">"x"</span>, <span class="st">"y"</span>], axis<span class="op">=</span><span class="dv">1</span>).assign(dataset<span class="op">=</span><span class="ss">f"ชุดที่ </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>)],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>จากนั้นคำนวณสถิติสรุปของแต่ละชุด ได้แก่ ค่าเฉลี่ย ความแปรปรวน สัมประสิทธิ์สหสัมพันธ์ และสัมประสิทธิ์ของเส้นถดถอยเชิงเส้น</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize(d: pd.DataFrame) <span class="op">-&gt;</span> pd.Series:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    slope, intercept <span class="op">=</span> np.polyfit(d[<span class="st">"x"</span>], d[<span class="st">"y"</span>], <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mean_x"</span>: d[<span class="st">"x"</span>].mean(), <span class="st">"mean_y"</span>: d[<span class="st">"y"</span>].mean(),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"var_x"</span>: d[<span class="st">"x"</span>].var(), <span class="st">"var_y"</span>: d[<span class="st">"y"</span>].var(),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"corr"</span>: d[<span class="st">"x"</span>].corr(d[<span class="st">"y"</span>]),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"slope"</span>: slope, <span class="st">"intercept"</span>: intercept,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">long</span>.groupby(<span class="st">"dataset"</span>).<span class="bu">apply</span>(summarize, include_groups<span class="op">=</span><span class="va">False</span>).<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+          mean_x  mean_y  var_x  var_y  corr  slope  intercept
+dataset
+ชุดที่ 1     9.0     7.5   11.0   4.13  0.82    0.5        3.0
+ชุดที่ 2     9.0     7.5   11.0   4.13  0.82    0.5        3.0
+ชุดที่ 3     9.0     7.5   11.0   4.12  0.82    0.5        3.0
+ชุดที่ 4     9.0     7.5   11.0   4.12  0.82    0.5        3.0</code></pre>
+<p>ทุกชุดมีค่าเฉลี่ยของ <span class="math inline">\(x\)</span> เท่ากับ 9 ค่าเฉลี่ยของ <span class="math inline">\(y\)</span> เท่ากับ 7.5 สหสัมพันธ์ 0.82 และเส้นถดถอย <span class="math inline">\(y = 3 + 0.5x\)</span> ถ้าดูเฉพาะตารางนี้ เราจะสรุปว่าทั้งสี่ชุดเหมือนกัน แต่เมื่อวาด scatter plot</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.relplot(data<span class="op">=</span><span class="bu">long</span>, x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>, col<span class="op">=</span><span class="st">"dataset"</span>, col_wrap<span class="op">=</span><span class="dv">2</span>, height<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>g.savefig(<span class="st">"reports/figures/anscombe.png"</span>, dpi<span class="op">=</span><span class="dv">200</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>จะเห็นว่าทั้งสี่ชุดต่างกันโดยสิ้นเชิง</p>
+<div id="tbl-ch01-anscombe" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-anscombe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.5: สิ่งที่ scatter plot เปิดเผยใน Anscombe’s quartet
+</figcaption>
+<div aria-describedby="tbl-ch01-anscombe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชุด</th>
+<th>สิ่งที่เห็นในกราฟ</th>
+<th>ความหมายต่อการวิเคราะห์</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>จุดกระจายรอบเส้นตรง ความสัมพันธ์เชิงเส้นพร้อมความแปรปรวน</td>
+<td>เส้นถดถอยเชิงเส้นเหมาะสม</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>จุดเรียงเป็นเส้นโค้งอย่างสมบูรณ์</td>
+<td>ความสัมพันธ์ไม่เป็นเชิงเส้น เส้นตรงอธิบายผิด</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>จุดเรียงเป็นเส้นตรงเกือบสมบูรณ์ ยกเว้นจุดเดียวที่ลอยสูง</td>
+<td>ค่าผิดปกติจุดเดียวดึงเส้นถดถอยและลดสหสัมพันธ์</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>ทุกจุดมี <span class="math inline">\(x = 8\)</span> ยกเว้นจุดเดียวที่ <span class="math inline">\(x = 19\)</span></td>
+<td>ความสัมพันธ์ทั้งหมดมาจากจุดเดียว</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>บทเรียนจาก <a href="#tbl-ch01-anscombe" class="quarto-xref">ตารางที่&nbsp;<span>1.5</span></a> คือ สถิติสรุปเป็น <em>การบีบอัดข้อมูลแบบสูญเสีย</em> ข้อมูล 11 คู่ถูกบีบเหลือไม่กี่ตัวเลข และข้อมูลที่ต่างกันมากอาจถูกบีบเป็นตัวเลขชุดเดียวกันได้ กราฟไม่ได้บีบอัด จึงเผยรูปร่างที่ตัวเลขซ่อนไว้</p>
+</section>
+<section id="datasaurus-dozen" class="level3">
+<h3 class="anchored" data-anchor-id="datasaurus-dozen">Datasaurus Dozen</h3>
+<p>ในปี ค.ศ. 2017 Justin Matejka และ George Fitzmaurice ขยายแนวคิดของ Anscombe ไปอีกขั้น พวกเขาพัฒนาวิธีสร้างชุดข้อมูลที่มีสถิติสรุปเท่ากันตามที่กำหนด แต่มีรูปร่างตามที่ต้องการ โดยค่อย ๆ ขยับจุดทีละน้อยแบบสุ่ม และยอมรับการขยับเฉพาะเมื่อสถิติสรุปยังเท่าเดิมถึงทศนิยมสองตำแหน่ง ผลงานที่มีชื่อเสียงคือ <span class="idx">Datasaurus Dozen</span> ชุดข้อมูล 13 ชุดที่มีค่าเฉลี่ย ส่วนเบี่ยงเบนมาตรฐาน และสหสัมพันธ์เท่ากัน ชุดหนึ่งเมื่อวาดออกมาเป็นรูปไดโนเสาร์ อีกชุดเป็นวงกลม เส้นขนาน ดาว และรูปร่างอื่น <span class="citation" data-cites="matejka2017same">(<a href="../references.html#ref-matejka2017same" role="doc-biblioref">Matejka และ Fitzmaurice 2017</a>)</span></p>
+<p>Datasaurus Dozen สอนเรื่องที่ลึกกว่า Anscombe สองเรื่อง เรื่องแรกคือ ปรากฏการณ์นี้ไม่ใช่กรณีพิเศษที่ต้องจงใจสร้างอย่างประณีต แต่สร้างได้ง่ายด้วยอัลกอริทึมง่าย ๆ หมายความว่าข้อมูลจริงที่มีรูปร่างต่างกันแต่สถิติเหมือนกันอาจพบได้บ่อยกว่าที่คิด เรื่องที่สองคือ แม้แต่สถิติที่ดูครบถ้วนอย่างค่าเฉลี่ย ส่วนเบี่ยงเบนมาตรฐาน และสหสัมพันธ์ของทั้งสองตัวแปร ก็ยังไม่พอบอกรูปร่างของข้อมูล</p>
+</section>
+<section id="บทเรยนสำหรบขอมล-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="บทเรยนสำหรบขอมล-pm2.5">บทเรียนสำหรับข้อมูล PM2.5</h3>
+<p>ข้อมูล PM2.5 มีโอกาสเกิดปัญหาแบบ Anscombe ในหลายรูปแบบ ตัวอย่างเช่น</p>
+<ul>
+<li><strong>ค่าเฉลี่ยรายปีเท่ากัน แต่การแจกแจงต่างกัน</strong> สถานีหนึ่งมีค่าปานกลางเกือบทั้งปี อีกสถานีมีค่าต่ำเกือบทั้งปีแต่มีช่วงฝุ่นหนาสั้น ๆ ทั้งสองอาจมีค่าเฉลี่ยรายปีใกล้กัน แต่จำนวนวันที่เกินมาตรฐานต่างกันมาก และผลต่อสุขภาพของประชาชนก็ต่างกัน</li>
+<li><strong>สหสัมพันธ์ที่มาจากจุดเดียว</strong> ถ้าคำนวณสหสัมพันธ์ระหว่าง PM2.5 กับตัวแปรอื่นจากข้อมูลที่มีเหตุการณ์สุดโต่งเพียงไม่กี่วัน ค่าสหสัมพันธ์อาจถูกขับด้วยวันเหล่านั้นทั้งหมด เหมือนชุดที่ 4 ของ Anscombe</li>
+<li><strong>ความสัมพันธ์ไม่เป็นเชิงเส้น</strong> ความสัมพันธ์ระหว่างค่าฝุ่นกับปัจจัยอุตุนิยมวิทยามักไม่เป็นเส้นตรง การสรุปด้วยสัมประสิทธิ์สหสัมพันธ์เพียงตัวเดียวอาจทำให้เข้าใจผิด เหมือนชุดที่ 2</li>
+</ul>
+<p>ข้อปฏิบัติที่ได้จากหัวข้อนี้ คือ <strong>ก่อนรายงานสถิติสรุปใด ให้วาดกราฟของข้อมูลที่สถิตินั้นสรุปเสมอ</strong> ถ้ารายงานค่าเฉลี่ย ให้ดูฮิสโทแกรมหรือ box plot ถ้ารายงานสหสัมพันธ์ ให้ดู scatter plot ถ้ารายงานแนวโน้ม ให้ดูอนุกรมเวลาเต็ม</p>
+</section>
+</section>
+<section id="sec-ch01-policy" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="sec-ch01-policy"><span class="header-section-number">1.6</span> EDA ในบริบทการตัดสินใจเชิงนโยบาย: กรณีฝุ่น PM2.5 ของไทย ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>ข้อมูลคุณภาพอากาศไม่ได้ถูกใช้เฉพาะในงานวิชาการ แต่ถูกใช้ประกอบการตัดสินใจเชิงนโยบาย เช่น การประกาศเตือนประชาชน การออกมาตรการควบคุมแหล่งกำเนิด และการประเมินว่ามาตรการที่ผ่านมาได้ผลหรือไม่ ในบริบทนี้ ความผิดพลาดจากการไม่ได้สำรวจข้อมูลมีราคาสูงกว่าในงานวิชาการ เพราะผลกระทบตกอยู่กับประชาชนจำนวนมาก หัวข้อนี้วิเคราะห์ว่าคำถามเชิงนโยบายที่พบบ่อยต้องการการสำรวจอะไรบ้างก่อนตอบ</p>
+<section id="คำถามทหนง-ปนสถานการณแยกวาปกอนหรอไม" class="level3">
+<h3 class="anchored" data-anchor-id="คำถามทหนง-ปนสถานการณแยกวาปกอนหรอไม">คำถามที่หนึ่ง: ปีนี้สถานการณ์แย่กว่าปีก่อนหรือไม่</h3>
+<p>คำถามนี้ดูตรงไปตรงมา แต่การตอบด้วยการเทียบค่าเฉลี่ยของสองปีอาจผิดได้หลายทาง</p>
+<p><strong>เครือข่ายสถานีเปลี่ยนไป</strong> ถ้ามีการเพิ่มสถานีใหม่ในพื้นที่ที่ฝุ่นน้อยหรือฝุ่นมาก ค่าเฉลี่ยรวมของภาคจะเปลี่ยนไปแม้อากาศในแต่ละพื้นที่ไม่ได้เปลี่ยน การสำรวจที่ต้องทำก่อนคือ นับจำนวนสถานีที่มีข้อมูลในแต่ละปี และเปรียบเทียบเฉพาะสถานีที่มีข้อมูลครบทั้งสองปี</p>
+<p><strong>ความครบถ้วนของข้อมูลต่างกัน</strong> ถ้าปีหนึ่งมีช่วงที่เครื่องวัดหลายเครื่องหยุดทำงานในฤดูฝุ่น ค่าเฉลี่ยของปีนั้นจะต่ำลงเพราะข้อมูลช่วงที่ค่าสูงหายไป ไม่ใช่เพราะอากาศดีขึ้น การสำรวจที่ต้องทำคือ ดูสัดส่วนชั่วโมงที่มีข้อมูลแยกตามเดือน</p>
+<p><strong>ตัวชี้วัดต่างกันให้คำตอบต่างกัน</strong> ค่าเฉลี่ยรายปี จำนวนวันที่เกินมาตรฐาน และค่าสูงสุดรายวัน อาจให้ทิศทางไม่ตรงกัน ปีที่ค่าเฉลี่ยลดลงอาจมีช่วงวิกฤตที่รุนแรงกว่า การสำรวจที่ต้องทำคือ คำนวณหลายตัวชี้วัดและดูว่าสอดคล้องกันหรือไม่ ก่อนเลือกตัวชี้วัดที่จะรายงาน</p>
+</section>
+<section id="คำถามทสอง-มกวนทอากาศไมปลอดภย" class="level3">
+<h3 class="anchored" data-anchor-id="คำถามทสอง-มกวนทอากาศไมปลอดภย">คำถามที่สอง: มีกี่วันที่อากาศไม่ปลอดภัย</h3>
+<p>คำตอบของคำถามนี้ขึ้นกับเกณฑ์ที่ใช้ ประเทศไทยปรับมาตรฐาน PM2.5 เฉลี่ย 24 ชั่วโมงจาก 50 เป็น 37.5 µg/m³ โดยมีผลตั้งแต่ พ.ศ. 2566 <span class="citation" data-cites="neb2022pm25">(<a href="../references.html#ref-neb2022pm25" role="doc-biblioref">คณะกรรมการสิ่งแวดล้อมแห่งชาติ 2022</a>)</span> ขณะที่แนวทางขององค์การอนามัยโลกปี ค.ศ. 2021 อยู่ที่ 15 µg/m³ <span class="citation" data-cites="who2021global">(<a href="../references.html#ref-who2021global" role="doc-biblioref">World Health Organization 2021</a>)</span> การนับจำนวนวันที่เกินเกณฑ์ด้วยเกณฑ์ต่างกันจึงให้ตัวเลขต่างกันมาก</p>
+<p>ปัญหาที่พบบ่อยคือการเปรียบเทียบข้ามเวลาด้วยเกณฑ์ที่เปลี่ยนไป เช่น นับวันที่เกินมาตรฐานของปีก่อน พ.ศ. 2566 ด้วยเกณฑ์ 50 และนับของปีหลังด้วยเกณฑ์ 37.5 แล้วสรุปว่าสถานการณ์แย่ลง ทั้งที่ส่วนหนึ่งของความต่างมาจากเกณฑ์ที่เข้มงวดขึ้น ผู้วิเคราะห์ที่สำรวจข้อมูลอย่างรอบคอบจะคำนวณย้อนหลังด้วยเกณฑ์เดียวกันทุกปี และระบุเกณฑ์ที่ใช้ให้ชัดเจนในรายงาน</p>
+</section>
+<section id="คำถามทสาม-มาตรการทออกไปไดผลหรอไม" class="level3">
+<h3 class="anchored" data-anchor-id="คำถามทสาม-มาตรการทออกไปไดผลหรอไม">คำถามที่สาม: มาตรการที่ออกไปได้ผลหรือไม่</h3>
+<p>คำถามนี้เป็นคำถามเชิงสาเหตุ ซึ่งยากที่สุด ค่าฝุ่นหลังออกมาตรการที่ลดลงอาจเกิดจากมาตรการ จากสภาพอากาศที่เอื้อต่อการระบายฝุ่นมากกว่าปีก่อน หรือจากทั้งสองอย่าง การสำรวจข้อมูลช่วยได้ในการตั้งคำถามให้แคบลงและหาปัจจัยรบกวน (confounder) ที่ต้องคำนึงถึง แต่การสำรวจเพียงอย่างเดียวไม่พอสำหรับข้อสรุปเชิงสาเหตุ บทที่ 4 หัวข้อ ★ เรื่องความคิดเชิงสาเหตุอธิบายกรอบคิดเบื้องต้น</p>
+</section>
+<section id="บทบาททเหมาะสมของ-eda-ในงานนโยบาย" class="level3">
+<h3 class="anchored" data-anchor-id="บทบาททเหมาะสมของ-eda-ในงานนโยบาย">บทบาทที่เหมาะสมของ EDA ในงานนโยบาย</h3>
+<p>จากสามคำถามข้างต้น บทบาทของการสำรวจข้อมูลในงานนโยบายมีสามข้อ</p>
+<ol type="1">
+<li><strong>ตรวจว่าข้อมูลตอบคำถามได้หรือไม่</strong> ก่อนคำนวณตัวเลขใดไปประกอบการตัดสินใจ ต้องรู้ว่าข้อมูลครอบคลุมพื้นที่และเวลาที่ถามหรือไม่ และครบพอหรือไม่</li>
+<li><strong>แสดงความไม่แน่นอนและทางเลือกของตัวชี้วัด</strong> ผู้ตัดสินใจควรเห็นว่าตัวชี้วัดต่างกันให้ภาพต่างกันอย่างไร แทนที่จะได้รับตัวเลขเดียวที่ถูกเลือกมาแล้ว</li>
+<li><strong>ชี้ประเด็นที่ต้องวิเคราะห์เชิงยืนยันต่อ</strong> เช่น ถ้าการสำรวจพบว่าพื้นที่หนึ่งมีวันเกินมาตรฐานเพิ่มขึ้นมาก ประเด็นนี้ควรถูกตรวจสอบด้วยข้อมูลชุดใหม่หรือด้วยวิธีที่เข้มงวดกว่า ก่อนจะกลายเป็นฐานของมาตรการ</li>
+</ol>
+<p>สิ่งที่การสำรวจข้อมูลไม่ควรทำในงานนโยบาย คือการผลิตตัวเลขที่ดูแน่นอนเพื่อสนับสนุนข้อสรุปที่ตัดสินใจไว้แล้ว บทที่ 22 กลับมาพิจารณาประเด็นนี้ในมุมของจริยธรรมข้อมูล</p>
+</section>
+</section>
+<section id="sec-ch01-system" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="sec-ch01-system"><span class="header-section-number">1.7</span> ภาพรวมระบบที่จะสร้างตลอดเล่ม</h2>
+<section id="จากแนวคดสระบบ" class="level3">
+<h3 class="anchored" data-anchor-id="จากแนวคดสระบบ">จากแนวคิดสู่ระบบ</h3>
+<p>หัวข้อก่อนหน้าอธิบายว่า การสำรวจข้อมูลที่ดีต้องตรวจสอบได้ ทำซ้ำได้ และย้อนกลับได้เมื่อพบสิ่งใหม่ หัวข้อนี้แสดงว่าหลักการเหล่านั้นกลายเป็นระบบที่จับต้องได้อย่างไร ระบบนี้คือระบบสำรวจคุณภาพอากาศ PM2.5 ที่บทที่ 0 หัวข้อ 0.6 แนะนำไว้ ในบทนี้เราจะดูว่าแต่ละชั้นของระบบตอบหลักการใดของการสำรวจข้อมูล</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  subgraph acquire[ได้มาและจัดเก็บ]
+    F[src/fetch_air4thai.py] --&gt; R[data/raw/*.json]
+    R --&gt; L[src/load_duckdb.py]
+    L --&gt; DB[(data/pm25.duckdb)]
+  end
+  subgraph quality[ตรวจและทำความสะอาด]
+    DB --&gt; V[src/validate.py]
+    V --&gt; C[src/clean.py]
+    C --&gt; DB
+  end
+  subgraph explore[สำรวจและสื่อสาร]
+    DB --&gt; NB[notebooks/]
+    DB --&gt; RP[report/ Quarto]
+    DB --&gt; APP[app/ Streamlit]
+  end
+  RUN[src/run_pipeline.py] -.รันตามลำดับ.-&gt; F &amp; L &amp; V &amp; C
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="tbl-ch01-system-layers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-system-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.6: ชั้นของระบบและหลักการของการสำรวจข้อมูลที่แต่ละชั้นรองรับ
+</figcaption>
+<div aria-describedby="tbl-ch01-system-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชั้นของระบบ</th>
+<th>หลักการที่รองรับ</th>
+<th>บทที่สร้าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>src/fetch_air4thai.py</code> เก็บ JSON ดิบพร้อมเวลาที่ดึง</td>
+<td>ย้อนกลับได้: ถ้าแปลงผิด แปลงใหม่ได้โดยไม่ต้องดึงซ้ำ</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td><code>src/load_duckdb.py</code> โหลดแบบ idempotent</td>
+<td>ทำซ้ำได้: รันกี่ครั้งก็ได้ผลเท่าเดิม</td>
+<td>6–7</td>
+</tr>
+<tr class="odd">
+<td><code>src/validate.py</code> กฎตรวจข้อมูลเป็นโค้ด</td>
+<td>ตรวจสอบได้: กฎเขียนไว้ชัด ใครก็อ่านได้</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td><code>src/clean.py</code> บันทึกทุกการตัดสินใจ</td>
+<td>โปร่งใส: รู้ว่าค่าใดถูกเติม ค่าใดถูกตัด</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td><code>notebooks/</code></td>
+<td>ยืดหยุ่น: ลองได้หลายแบบ ทิ้งได้ง่าย</td>
+<td>11–18</td>
+</tr>
+<tr class="even">
+<td><code>report/</code> และ <code>app/</code></td>
+<td>สื่อสารได้: ผลลัพธ์สร้างจากโค้ดและข้อมูลชุดเดียวกัน</td>
+<td>19–20</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="การแบงงานระหวาง-script-กบ-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="การแบงงานระหวาง-script-กบ-notebook">การแบ่งงานระหว่าง script กับ notebook</h3>
+<p>ระบบนี้แบ่งโค้ดเป็นสองประเภทชัดเจน โค้ดใน <code>src/</code> เป็นโค้ดที่ต้องรันซ้ำได้เหมือนเดิมทุกครั้ง ส่วนโค้ดใน <code>notebooks/</code> เป็นโค้ดสำรวจที่เปลี่ยนแปลงบ่อย การแบ่งนี้สะท้อนสองโหมดของการวิเคราะห์ในหัวข้อ <a href="#sec-ch01-eda-cda" class="quarto-xref"><span>1.3</span></a> โดยตรง การสำรวจต้องการความยืดหยุ่น จึงเหมาะกับ notebook ส่วนสิ่งที่ผ่านการสำรวจแล้วและต้องเชื่อถือได้ เช่น กฎตรวจข้อมูลหรือขั้นตอนทำความสะอาด จะถูกย้ายไปอยู่ใน <code>src/</code></p>
+<p>เมื่อพบว่าโค้ดใน notebook ถูกนำไปใช้ซ้ำเกินสองครั้ง หรือผลของมันถูกนำไปใช้ในรายงาน นั่นคือสัญญาณว่าควรย้ายโค้ดนั้นไปเป็นฟังก์ชันใน <code>src/</code> บทที่ 2 อธิบายเหตุผลทางเทคนิคเรื่อง hidden state ของ notebook ซึ่งเป็นสาเหตุหลักที่ไม่ควรให้ notebook เป็นแหล่งของผลลัพธ์สุดท้าย</p>
+</section>
+<section id="ดขอมลครงแรก" class="level3">
+<h3 class="anchored" data-anchor-id="ดขอมลครงแรก">ดูข้อมูลครั้งแรก</h3>
+<p>เมื่อ pipeline ทำงานถึงขั้นโหลดข้อมูลแล้ว (บทที่ 7) สิ่งแรกที่ควรทำคือดูภาพรวมของข้อมูลก่อนตั้งคำถามใด ๆ ที่เจาะจง query ต่อไปนี้นับจำนวนสถานี จำนวนแถว และจำนวนค่า PM2.5 ที่ไม่หาย แยกตามภาค เฉพาะช่วงข้อมูลสำรวจ (ก่อน ค.ศ. 2024 ตามข้อตกลงในบทที่ 4)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>overview <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.region,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">           COUNT(DISTINCT m.station_id)          AS n_stations,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">           COUNT(*)                              AS n_rows,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">           COUNT(m.pm25)                         AS n_pm25,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">           ROUND(100 * COUNT(m.pm25) / COUNT(*), 1) AS pct_observed,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">           MIN(m.ts) AS ts_min, MAX(m.ts) AS ts_max</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM measurements AS m</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN stations AS s USING (station_id)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE m.ts &lt; TIMESTAMP '2024-01-01'</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY s.region</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY s.region</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(overview)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์ ตัวเลขจริงขึ้นกับข้อมูลที่ผู้อ่านดึงมา
+               region  n_stations  n_rows  n_pm25  pct_observed     ts_min              ts_max
+0                กลาง           2   70128   68041          97.0 2020-01-01 2023-12-31 23:00:00
+1  ตะวันออกเฉียงเหนือ           2   70128   67966          96.9 2020-01-01 2023-12-31 23:00:00
+2               เหนือ           3  105192  101461          96.5 2020-01-01 2023-12-31 23:00:00
+3                 ใต้           1   35064   33800          96.4 2020-01-01 2023-12-31 23:00:00</code></pre>
+<p>query นี้ยังไม่ได้ตอบคำถามเชิงวิเคราะห์ใด แต่ตอบคำถามที่ต้องรู้ก่อนเสมอ คือ ข้อมูลครอบคลุมช่วงเวลาใด แต่ละภาคมีกี่สถานี และมีข้อมูลหายมากน้อยเพียงใด ถ้าภาคหนึ่งมีสถานีเดียว ข้อสรุปเกี่ยวกับภาคนั้นทั้งภาคจะอ่อนกว่าภาคที่มีหลายสถานี ข้อสังเกตแบบนี้ควรจดไว้ตั้งแต่ตอนนี้ เพราะจะกลายเป็นข้อจำกัดที่ต้องเขียนในรายงาน</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>เปิดฐานข้อมูลด้วย <code>read_only=True</code> ทุกครั้งที่ไม่ได้ตั้งใจเขียนข้อมูล ป้องกันการแก้ไขข้อมูลโดยไม่ตั้งใจ และทำให้หลายโปรแกรมเปิดไฟล์เดียวกันพร้อมกันได้ เช่น notebook กับแดชบอร์ด</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ch01-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch01-case">กรณีศึกษา: สองสถานีที่ค่าเฉลี่ยใกล้กัน</h2>
+<p>กรณีศึกษานี้นำบทเรียนจาก Anscombe’s quartet มาใช้กับข้อมูล PM2.5 โดยตรง</p>
+<p><strong>คำถาม</strong> ถ้าสองสถานีมีค่าเฉลี่ย PM2.5 รายวันตลอดช่วงสำรวจใกล้เคียงกัน ประชาชนในพื้นที่ทั้งสองได้รับฝุ่นในลักษณะเดียวกันหรือไม่</p>
+<p><strong>ข้อมูล</strong> ตาราง <code>measurements</code> และ <code>stations</code> ช่วงสำรวจ (ก่อน ค.ศ. 2024) รวมค่ารายชั่วโมงเป็นค่าเฉลี่ยรายวันเฉพาะวันที่มีข้อมูลอย่างน้อย 18 ชั่วโมงตามเกณฑ์ของโครงการ (บทที่ 8 อธิบายการรวมรายวันอย่างละเอียด บทนี้ใช้ query อย่างง่ายเพื่อแสดงแนวคิด)</p>
+<p><strong>วิธีการ</strong> ขั้นแรก คำนวณสถิติสรุปของค่าเฉลี่ยรายวันของทุกสถานี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>daily_summary <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">    WITH daily AS (</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT station_id, CAST(ts AS DATE) AS date,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">               AVG(pm25) AS pm25_mean, COUNT(pm25) AS n_hours</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM measurements</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">        WHERE ts &lt; TIMESTAMP '2024-01-01'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">        GROUP BY station_id, CAST(ts AS DATE)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">        HAVING COUNT(pm25) &gt;= 18</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">    )</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT station_id,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">           COUNT(*)                                  AS n_days,</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">           ROUND(AVG(pm25_mean), 1)                  AS mean,</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">           ROUND(MEDIAN(pm25_mean), 1)               AS median,</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">           ROUND(STDDEV(pm25_mean), 1)               AS sd,</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">           ROUND(100 * AVG(CASE WHEN pm25_mean &gt; 37.5 THEN 1 ELSE 0 END), 1) AS pct_exceed</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY station_id</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY mean</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์ ตัวเลขจริงขึ้นกับข้อมูลที่ผู้อ่านดึงมา
+  station_id  n_days  mean  median    sd  pct_exceed
+0        63t    1453  12.7    12.3   3.3         0.0
+1        44t    1461  23.8    22.1   8.2         7.2
+2        46t    1458  24.0    22.5   8.2         6.8
+3        05t    1461  26.3    24.8   7.9         9.0
+4        02t    1461  26.4    25.1   7.5         8.3
+5        36t    1450  27.5    23.8  12.8        15.5
+6        57t    1461  27.6    23.8  12.5        17.0
+7        35t    1446  27.8    23.9  12.8        17.0</code></pre>
+<p>ในผลลัพธ์ตัวอย่างนี้ สถานี <code>02t</code> กับ <code>36t</code> มีค่าเฉลี่ยต่างกันเพียง 1.1 µg/m³ แต่ส่วนเบี่ยงเบนมาตรฐานของ <code>36t</code> สูงกว่าเกือบสองเท่า และสัดส่วนวันที่เกินมาตรฐานก็สูงกว่าเกือบสองเท่าเช่นกัน สังเกตด้วยว่ามัธยฐานของ <code>36t</code> ต่ำกว่าค่าเฉลี่ยมาก ซึ่งเป็นสัญญาณของการแจกแจงเบ้ขวา</p>
+<p>ขั้นที่สอง เลือกสองสถานีที่ค่า <code>mean</code> ใกล้กันแต่ <code>sd</code> หรือ <code>pct_exceed</code> ต่างกันชัดเจน แล้ววาดฮิสโทแกรมของค่าเฉลี่ยรายวันซ้อนกัน หรือวาดอนุกรมเวลาเทียบกัน (บทที่ 11 อธิบายการเลือกกราฟให้เหมาะกับการเปรียบเทียบ)</p>
+<p><strong>ผลที่คาดว่าจะเห็น</strong> ในข้อมูลคุณภาพอากาศ มักพบสถานีที่ค่าเฉลี่ยใกล้กันแต่รูปร่างการแจกแจงต่างกัน สถานีหนึ่งอาจมีการแจกแจงแคบ ค่าอยู่ในช่วงปานกลางเกือบตลอด อีกสถานีอาจมีการแจกแจงเบ้ขวามาก ค่าต่ำเกือบทั้งปีแต่มีช่วงที่ค่าสูงเกินมาตรฐานติดต่อกันหลายสัปดาห์ ผู้อ่านควรตรวจสอบกับข้อมูลจริงของตนเองว่าพบรูปแบบนี้หรือไม่</p>
+<p><strong>การตีความ</strong> ถ้าพบรูปแบบดังกล่าว คำตอบของคำถามคือ <em>ไม่</em> ค่าเฉลี่ยที่ใกล้กันไม่ได้แปลว่าการได้รับฝุ่นเหมือนกัน สำหรับการสื่อสารความเสี่ยงต่อสุขภาพ สัดส่วนวันที่เกินมาตรฐานหรือค่าสูงสุดในช่วงวิกฤตอาจมีความหมายมากกว่าค่าเฉลี่ยตลอดปี</p>
+<p><strong>ข้อจำกัด</strong> การวิเคราะห์นี้ยังเป็นการสำรวจ เราเลือกสองสถานีหลังจากดูข้อมูลแล้ว จึงยังสรุปไม่ได้ว่ารูปแบบนี้เป็นลักษณะทั่วไปของสถานีในภาคใดภาคหนึ่ง นอกจากนี้ เกณฑ์ 18 ชั่วโมงเป็นข้อกำหนดของโครงการ การเปลี่ยนเกณฑ์อาจเปลี่ยนจำนวนวันที่นับได้ และเปลี่ยนสถิติสรุปไปบ้าง ประเด็นที่น่าสนใจจากการสำรวจนี้ เช่น “สถานีภาคเหนือมีการแจกแจงเบ้กว่าภาคอื่น” ควรถูกบันทึกเป็นข้อสันนิษฐานใน <code>questions.md</code> เพื่อยืนยันด้วยข้อมูลปีล่าสุดต่อไป</p>
+</section>
+<section id="sec-ch01-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch01-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch01-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch01-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1.7: ข้อผิดพลาดที่พบบ่อยในบทที่ 1
+</figcaption>
+<div aria-describedby="tbl-ch01-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>รายงานค่าเฉลี่ยโดยไม่ได้ดูการแจกแจง</td>
+<td>ค่าเฉลี่ยเดียวกันอาจมาจากข้อมูลที่รูปร่างต่างกันโดยสิ้นเชิง (Anscombe, Datasaurus)</td>
+<td>วาดฮิสโทแกรมหรือ box plot ก่อนรายงานค่าเฉลี่ยทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>นำรูปแบบที่พบระหว่างสำรวจไปทดสอบด้วยข้อมูลชุดเดิม</td>
+<td>การทดสอบไม่ได้บอกอะไรเพิ่ม เพราะรูปแบบถูกเลือกมาจากข้อมูลชุดนั้น</td>
+<td>แยกข้อมูลสำรวจกับข้อมูลยืนยัน ทดสอบด้วยข้อมูลชุดใหม่ (บทที่ 4)</td>
+</tr>
+<tr class="odd">
+<td>เขียนรายงานผลการสำรวจด้วยภาษาของการพิสูจน์</td>
+<td>ผู้อ่านเข้าใจว่าข้อสันนิษฐานเป็นข้อสรุปที่ยืนยันแล้ว</td>
+<td>ใช้ภาษาที่ตรงกับระดับหลักฐาน เช่น “บ่งชี้” “น่าสนใจที่จะตรวจสอบต่อ”</td>
+</tr>
+<tr class="even">
+<td>ตัดค่าที่ “ดูแปลก” ทิ้งก่อนเข้าใจว่าเกิดจากอะไร</td>
+<td>ค่าสุดโต่งในข้อมูลคุณภาพอากาศมักเป็นเหตุการณ์จริงที่สำคัญที่สุด</td>
+<td>ตรวจสอบด้วยความรู้เชิงโดเมนและข้อมูลประกอบ ก่อนตัดสินใจ (บทที่ 9, 15)</td>
+</tr>
+<tr class="odd">
+<td>สำรวจโดยไม่มีคำถามนำ</td>
+<td>วาดกราฟไปเรื่อย ๆ ไม่รู้ว่าเมื่อไรควรหยุด และหลงไปกับรูปแบบที่ไม่สำคัญ</td>
+<td>เริ่มจากคำถามกว้างที่เขียนไว้ แล้วปรับให้แคบลงตามสิ่งที่พบ</td>
+</tr>
+<tr class="even">
+<td>ไม่ตั้งความคาดหวังก่อนดูผล</td>
+<td>ไม่สังเกตเห็นว่าผลผิดปกติ เพราะไม่มีอะไรให้เปรียบเทียบ</td>
+<td>ก่อนรัน query ให้คาดก่อนว่าผลควรเป็นเท่าไร แล้วเทียบ</td>
+</tr>
+<tr class="odd">
+<td>เทียบตัวชี้วัดข้ามปีโดยไม่ดูว่าเครือข่ายสถานีหรือเกณฑ์เปลี่ยน</td>
+<td>ความต่างที่เห็นอาจมาจากการเปลี่ยนวิธีวัด ไม่ใช่การเปลี่ยนของอากาศ</td>
+<td>เทียบเฉพาะสถานีที่มีข้อมูลครบทุกปี และใช้เกณฑ์เดียวกันทุกปี</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>วิทยาการข้อมูลคือการนำข้อมูลมาตอบคำถามอย่างเป็นระบบ โดยใช้สถิติศาสตร์ การคำนวณ และความรู้เชิงโดเมนร่วมกัน ขาดส่วนใดส่วนหนึ่งก็ทำให้ข้อสรุปผิดได้</li>
+<li>John Tukey เปรียบการสำรวจข้อมูลกับงานนักสืบที่หาเบาะแสและสร้างข้อสันนิษฐาน ส่วนการวิเคราะห์เชิงยืนยันเปรียบกับงานศาลที่ชั่งน้ำหนักหลักฐาน</li>
+<li>ทั้งสองโหมดจำเป็นและต้องแยกออกจากกัน การนำผลการสำรวจไปทดสอบด้วยข้อมูลชุดเดิมทำให้เชื่อผลที่เกิดจากความบังเอิญ</li>
+<li>CRISP-DM และ OSEMN เป็นแบบจำลองวงจรชีวิตข้อมูลที่เน้นต่างกัน หนังสือเล่มนี้ใช้วงจรที่เริ่มจากคำถาม แยกขั้นจัดเก็บและขั้นตรวจคุณภาพออกมาชัดเจน และให้การสำรวจเป็นผลงานหลัก</li>
+<li>Anscombe’s quartet และ Datasaurus Dozen แสดงว่าข้อมูลที่รูปร่างต่างกันมากอาจมีสถิติสรุปเท่ากัน จึงต้องวาดกราฟก่อนรายงานสถิติทุกครั้ง</li>
+<li>ในงานนโยบาย การสำรวจข้อมูลต้องตรวจว่าข้อมูลตอบคำถามได้หรือไม่ แสดงความไม่แน่นอนและทางเลือกของตัวชี้วัด และไม่ใช้ผลการสำรวจเป็นข้อสรุปเชิงสาเหตุ</li>
+<li>ระบบที่สร้างตลอดเล่มแยกโค้ดที่ต้องรันซ้ำ (<code>src/</code>) ออกจากโค้ดสำรวจ (<code>notebooks/</code>) สะท้อนการแยกสองโหมดของการวิเคราะห์</li>
+</ul>
+</section>
+<section id="sec-ch01-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch01-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>อธิบายบทบาทขององค์ประกอบทั้งสามของวิทยาการข้อมูล พร้อมยกตัวอย่างความผิดพลาดที่เกิดเมื่อขาดแต่ละองค์ประกอบ โดยใช้ตัวอย่างที่ไม่อยู่ใน <a href="#tbl-ch01-missing-component" class="quarto-xref">ตารางที่&nbsp;<span>1.1</span></a></li>
+<li>การเปรียบเทียบของ Tukey ระหว่างงานนักสืบกับงานศาลบอกอะไรเกี่ยวกับความสัมพันธ์ระหว่างการสำรวจข้อมูลกับการวิเคราะห์เชิงยืนยัน</li>
+<li>ระบุความต่างหลักสองข้อระหว่าง CRISP-DM กับวงจรของหนังสือเล่มนี้</li>
+<li>จาก Anscombe’s quartet ชุดที่ 3 อธิบายว่าเหตุใดค่าผิดปกติจุดเดียวจึงทำให้สหสัมพันธ์ลดลง ทั้งที่จุดอื่นเรียงเป็นเส้นตรงเกือบสมบูรณ์</li>
+<li>ทำไมโค้ดสำรวจจึงควรอยู่ใน <code>notebooks/</code> แต่โค้ดทำความสะอาดข้อมูลควรอยู่ใน <code>src/</code></li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>รันโค้ด Anscombe’s quartet ในหัวข้อ <a href="#sec-ch01-anscombe" class="quarto-xref"><span>1.5</span></a> แล้วคำนวณมัธยฐานของ <span class="math inline">\(y\)</span> ในแต่ละชุด มัธยฐานเท่ากันทุกชุดหรือไม่ ผลนี้บอกอะไรเกี่ยวกับสถิติแบบทนทาน</li>
+<li>ใช้วงจรเล็กของการสำรวจ (ตั้งความคาดหวัง → คำนวณ → เปรียบเทียบ → ปรับ) กับคำถาม “สถานีแต่ละแห่งมีข้อมูลรายชั่วโมงครบตลอดปี ค.ศ. 2022 หรือไม่” เขียนความคาดหวัง query ที่ใช้ตรวจ และสิ่งที่จะทำถ้าผลไม่ตรงกับความคาดหวัง</li>
+<li>รัน query ในกรณีศึกษา แล้วเลือกสองสถานีที่ค่าเฉลี่ยรายวันต่างกันไม่เกิน 3 µg/m³ เปรียบเทียบค่ามัธยฐาน ส่วนเบี่ยงเบนมาตรฐาน และสัดส่วนวันที่เกินมาตรฐาน แล้วอธิบายว่าสองสถานีนี้ “เหมือนกัน” หรือไม่</li>
+<li>เขียนคำถามเชิงนโยบายหนึ่งข้อเกี่ยวกับ PM2.5 ในจังหวัดของตน แล้วระบุสิ่งที่ต้องสำรวจก่อนตอบอย่างน้อยสามข้อ ตามแนวทางในหัวข้อ <a href="#sec-ch01-policy" class="quarto-xref"><span>1.6</span></a></li>
+<li>นับจำนวนสถานีที่มีข้อมูล PM2.5 อย่างน้อยหนึ่งค่าในแต่ละปีของช่วงสำรวจ แยกตามภาค จำนวนสถานีคงที่หรือเปลี่ยนไป และผลนี้ส่งผลต่อการเปรียบเทียบค่าเฉลี่ยของภาคข้ามปีอย่างไร</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ค้นหาชุดข้อมูล Datasaurus Dozen จากแหล่งที่เผยแพร่โดยผู้เขียนบทความ ดาวน์โหลด คำนวณสถิติสรุปของทั้ง 13 ชุด และวาด scatter plot แบบ small multiples แล้วเสนอสถิติสรุปเพิ่มเติมหนึ่งตัวที่แยกชุดข้อมูลเหล่านี้ออกจากกันได้ พร้อมอธิบายว่าทำไมสถิตินั้นจึงยังไม่พอแทนกราฟ</li>
+<li>เขียน script สร้างข้อมูล PM2.5 รายวันสมมุติของสองสถานีที่มีค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐานเท่ากัน (ถึงทศนิยมหนึ่งตำแหน่ง) แต่จำนวนวันที่เกิน 37.5 µg/m³ ต่างกันมากที่สุดเท่าที่ทำได้ อธิบายวิธีที่ใช้และข้อจำกัด</li>
+<li>เลือกรายงานหรือข่าวเกี่ยวกับสถานการณ์ PM2.5 ในประเทศไทยหนึ่งชิ้น วิเคราะห์ว่าตัวชี้วัดที่ใช้คืออะไร มีการสำรวจข้อมูลที่จำเป็นตามหัวข้อ <a href="#sec-ch01-policy" class="quarto-xref"><span>1.6</span></a> หรือไม่ และเสนอการวิเคราะห์เพิ่มเติมที่จะทำให้ข้อสรุปน่าเชื่อถือขึ้น</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch01">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="tukey1977exploratory">Tukey (<a href="../references.html#ref-tukey1977exploratory" role="doc-biblioref">1977</a>)</span> — หนังสือต้นฉบับของ EDA บทแรกอธิบายวิธีคิดแบบนักสืบ และบทเรื่อง box plot ยังเป็นคำอธิบายที่ดีที่สุดเรื่องหนึ่ง</li>
+<li><span class="citation" data-cites="tukey1980we">Tukey (<a href="../references.html#ref-tukey1980we" role="doc-biblioref">1980</a>)</span> — บทความสั้นเพียงไม่กี่หน้าที่อธิบายว่าทำไมต้องมีทั้งการสำรวจและการยืนยัน อ่านจบได้ในครั้งเดียว</li>
+<li><span class="citation" data-cites="anscombe1973graphs">Anscombe (<a href="../references.html#ref-anscombe1973graphs" role="doc-biblioref">1973</a>)</span> — บทความต้นฉบับของ Anscombe’s quartet สั้นและอ่านง่าย แสดงเหตุผลที่กราฟจำเป็นต่อสถิติ</li>
+<li><span class="citation" data-cites="matejka2017same">Matejka และ Fitzmaurice (<a href="../references.html#ref-matejka2017same" role="doc-biblioref">2017</a>)</span> — บทความ Datasaurus Dozen ที่อธิบายวิธีสร้างชุดข้อมูลที่สถิติเท่ากันแต่รูปร่างต่างกัน พร้อมภาพเคลื่อนไหวที่ช่วยให้เข้าใจ</li>
+<li><span class="citation" data-cites="peng2015art">Peng และ Matsui (<a href="../references.html#ref-peng2015art" role="doc-biblioref">2015</a>)</span> — หนังสือสั้นที่อธิบายวงจรเล็กของการวิเคราะห์ (epicycles) และกระบวนการคิดของนักวิเคราะห์ข้อมูล</li>
+<li><span class="citation" data-cites="chapman2000crisp">Chapman และคณะ (<a href="../references.html#ref-chapman2000crisp" role="doc-biblioref">2000</a>)</span> — คู่มือ CRISP-DM ฉบับต้นฉบับ อ่านเพื่อเห็นรายละเอียดของแต่ละระยะและงานย่อย</li>
+<li><span class="citation" data-cites="cleveland2001data">Cleveland (<a href="../references.html#ref-cleveland2001data" role="doc-biblioref">2001</a>)</span> — ข้อเสนอที่ใช้คำว่า data science เป็นชื่อสาขาที่ขยายจากสถิติศาสตร์ ช่วยให้เห็นที่มาของหลักสูตรวิทยาการข้อมูลในปัจจุบัน</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-anscombe1973graphs" class="csl-entry" role="listitem">
+Anscombe, Francis J. 1973. <span>“Graphs in Statistical Analysis”</span>. <em>The American Statistician</em> 27 (1): 17–21. <a href="https://doi.org/10.1080/00031305.1973.10478966">https://doi.org/10.1080/00031305.1973.10478966</a>.
+</div>
+<div id="ref-chapman2000crisp" class="csl-entry" role="listitem">
+Chapman, Pete, Julian Clinton, Randy Kerber, และคณะ. 2000. <em><span>CRISP-DM</span> 1.0: Step-by-Step Data Mining Guide</em>. SPSS.
+</div>
+<div id="ref-cleveland2001data" class="csl-entry" role="listitem">
+Cleveland, William S. 2001. <span>“Data Science: An Action Plan for Expanding the Technical Areas of the Field of Statistics”</span>. <em>International Statistical Review</em> 69 (1): 21–26. <a href="https://doi.org/10.1111/j.1751-5823.2001.tb00477.x">https://doi.org/10.1111/j.1751-5823.2001.tb00477.x</a>.
+</div>
+<div id="ref-cooley1965algorithm" class="csl-entry" role="listitem">
+Cooley, James W., และ John W. Tukey. 1965. <span>“An Algorithm for the Machine Calculation of Complex <span>Fourier</span> Series”</span>. <em>Mathematics of Computation</em> 19 (90): 297–301. <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1">https://doi.org/10.1090/S0025-5718-1965-0178586-1</a>.
+</div>
+<div id="ref-donoho2017fifty" class="csl-entry" role="listitem">
+Donoho, David. 2017. <span>“50 Years of Data Science”</span>. <em>Journal of Computational and Graphical Statistics</em> 26 (4): 745–66. <a href="https://doi.org/10.1080/10618600.2017.1384734">https://doi.org/10.1080/10618600.2017.1384734</a>.
+</div>
+<div id="ref-mason2010taxonomy" class="csl-entry" role="listitem">
+Mason, Hilary, และ Chris Wiggins. 2010. <em>A Taxonomy of Data Science</em>. บล็อก dataists. <a href="http://www.dataists.com/2010/09/a-taxonomy-of-data-science/">http://www.dataists.com/2010/09/a-taxonomy-of-data-science/</a>.
+</div>
+<div id="ref-matejka2017same" class="csl-entry" role="listitem">
+Matejka, Justin, และ George Fitzmaurice. 2017. <span>“Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing”</span>. <em>Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</em>, 1290–94. <a href="https://doi.org/10.1145/3025453.3025912">https://doi.org/10.1145/3025453.3025912</a>.
+</div>
+<div id="ref-peng2015art" class="csl-entry" role="listitem">
+Peng, Roger D., และ Elizabeth Matsui. 2015. <em>The Art of Data Science: A Guide for Anyone Who Works with Data</em>. Leanpub. <a href="https://leanpub.com/artofdatascience">https://leanpub.com/artofdatascience</a>.
+</div>
+<div id="ref-tukey1962future" class="csl-entry" role="listitem">
+Tukey, John W. 1962. <span>“The Future of Data Analysis”</span>. <em>The Annals of Mathematical Statistics</em> 33 (1): 1–67. <a href="https://doi.org/10.1214/aoms/1177704711">https://doi.org/10.1214/aoms/1177704711</a>.
+</div>
+<div id="ref-tukey1977exploratory" class="csl-entry" role="listitem">
+Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Addison-Wesley.
+</div>
+<div id="ref-tukey1980we" class="csl-entry" role="listitem">
+Tukey, John W. 1980. <span>“We Need Both Exploratory and Confirmatory”</span>. <em>The American Statistician</em> 34 (1): 23–25. <a href="https://doi.org/10.1080/00031305.1980.10482706">https://doi.org/10.1080/00031305.1980.10482706</a>.
+</div>
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality Guidelines: Particulate Matter (<span>PM2.5</span> and <span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon Monoxide</em>. World Health Organization.
+</div>
+<div id="ref-neb2022pm25" class="csl-entry" role="listitem">
+คณะกรรมการสิ่งแวดล้อมแห่งชาติ. 2022. <em>ประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ เรื่อง กำหนดมาตรฐานฝุ่นละอองขนาดไม่เกิน 2.5 ไมครอน ในบรรยากาศโดยทั่วไป</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/00-overview.html" class="pagination-link" aria-label="บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/02-reproducible-environment.html" class="pagination-link" aria-label="สภาพแวดล้อมการทำงานที่ทำซ้ำได้">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>19&nbsp; การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/20-dashboards.html" rel="next">
+<link href="../chapters/18-hierarchical-data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/19-storytelling-reports.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch19-audience" id="toc-sec-ch19-audience" class="nav-link" data-scroll-target="#sec-ch19-audience"><span class="header-section-number">19.1</span> ผู้อ่านและเป้าหมายของการสื่อสาร</a>
+  <ul class="collapse">
+  <li><a href="#เรมจากผอาน-ไมใชจากการวเคราะห" id="toc-เรมจากผอาน-ไมใชจากการวเคราะห" class="nav-link" data-scroll-target="#เรมจากผอาน-ไมใชจากการวเคราะห">เริ่มจากผู้อ่าน ไม่ใช่จากการวิเคราะห์</a></li>
+  <li><a href="#ผอานของโครงการ-pm2.5" id="toc-ผอานของโครงการ-pm2.5" class="nav-link" data-scroll-target="#ผอานของโครงการ-pm2.5">ผู้อ่านของโครงการ PM2.5</a></li>
+  <li><a href="#การสำรวจกบการอธบาย" id="toc-การสำรวจกบการอธบาย" class="nav-link" data-scroll-target="#การสำรวจกบการอธบาย">การสำรวจกับการอธิบาย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch19-structure" id="toc-sec-ch19-structure" class="nav-link" data-scroll-target="#sec-ch19-structure"><span class="header-section-number">19.2</span> โครงสร้างการเล่าเรื่อง: ข้อค้นพบก่อน หลักฐานตาม</a>
+  <ul class="collapse">
+  <li><a href="#พระมดควำ" id="toc-พระมดควำ" class="nav-link" data-scroll-target="#พระมดควำ">พีระมิดคว่ำ</a></li>
+  <li><a href="#โครงสรางรายงานโครงการ" id="toc-โครงสรางรายงานโครงการ" class="nav-link" data-scroll-target="#โครงสรางรายงานโครงการ">โครงสร้างรายงานโครงการ</a></li>
+  <li><a href="#ชอหวขอและชอกราฟคอขอคนพบ" id="toc-ชอหวขอและชอกราฟคอขอคนพบ" class="nav-link" data-scroll-target="#ชอหวขอและชอกราฟคอขอคนพบ">ชื่อหัวข้อและชื่อกราฟคือข้อค้นพบ</a></li>
+  <li><a href="#ตวเลขตองมบรบท" id="toc-ตวเลขตองมบรบท" class="nav-link" data-scroll-target="#ตวเลขตองมบรบท">ตัวเลขต้องมีบริบท</a></li>
+  </ul></li>
+  <li><a href="#sec-ch19-limitations" id="toc-sec-ch19-limitations" class="nav-link" data-scroll-target="#sec-ch19-limitations"><span class="header-section-number">19.3</span> การเขียนข้อจำกัดและความไม่แน่นอน</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองเขยนขอจำกด" id="toc-ทำไมตองเขยนขอจำกด" class="nav-link" data-scroll-target="#ทำไมตองเขยนขอจำกด">ทำไมต้องเขียนข้อจำกัด</a></li>
+  <li><a href="#ขอจำกดทเฉพาะเจาะจง" id="toc-ขอจำกดทเฉพาะเจาะจง" class="nav-link" data-scroll-target="#ขอจำกดทเฉพาะเจาะจง">ข้อจำกัดที่เฉพาะเจาะจง</a></li>
+  <li><a href="#ถอยคำทตรงกบระดบหลกฐาน" id="toc-ถอยคำทตรงกบระดบหลกฐาน" class="nav-link" data-scroll-target="#ถอยคำทตรงกบระดบหลกฐาน">ถ้อยคำที่ตรงกับระดับหลักฐาน</a></li>
+  <li><a href="#การสอสารความไมแนนอน" id="toc-การสอสารความไมแนนอน" class="nav-link" data-scroll-target="#การสอสารความไมแนนอน">การสื่อสารความไม่แน่นอน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch19-quarto" id="toc-sec-ch19-quarto" class="nav-link" data-scroll-target="#sec-ch19-quarto"><span class="header-section-number">19.4</span> literate programming และ Quarto</a>
+  <ul class="collapse">
+  <li><a href="#literate-programming" id="toc-literate-programming" class="nav-link" data-scroll-target="#literate-programming">literate programming</a></li>
+  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
+  <li><a href="#ตวอยางรายงาน" id="toc-ตวอยางรายงาน" class="nav-link" data-scroll-target="#ตวอยางรายงาน">ตัวอย่างรายงาน</a></li>
+  <li><a href="#ตวเลอกของ-code-cell" id="toc-ตวเลอกของ-code-cell" class="nav-link" data-scroll-target="#ตวเลอกของ-code-cell">ตัวเลือกของ code cell</a></li>
+  <li><a href="#render-และ-freeze" id="toc-render-และ-freeze" class="nav-link" data-scroll-target="#render-และ-freeze">render และ freeze</a></li>
+  <li><a href="#quarto-กบ-notebook" id="toc-quarto-กบ-notebook" class="nav-link" data-scroll-target="#quarto-กบ-notebook">Quarto กับ notebook</a></li>
+  </ul></li>
+  <li><a href="#sec-ch19-parameterized" id="toc-sec-ch19-parameterized" class="nav-link" data-scroll-target="#sec-ch19-parameterized"><span class="header-section-number">19.5</span> รายงานแบบมีพารามิเตอร์ ★</a>
+  <ul class="collapse">
+  <li><a href="#หลายรายงานจากแมแบบเดยว" id="toc-หลายรายงานจากแมแบบเดยว" class="nav-link" data-scroll-target="#หลายรายงานจากแมแบบเดยว">หลายรายงานจากแม่แบบเดียว</a></li>
+  <li><a href="#พารามเตอรใน-quarto-กบ-jupyter" id="toc-พารามเตอรใน-quarto-กบ-jupyter" class="nav-link" data-scroll-target="#พารามเตอรใน-quarto-กบ-jupyter">พารามิเตอร์ใน Quarto กับ Jupyter</a></li>
+  <li><a href="#render-หลายฉบบ" id="toc-render-หลายฉบบ" class="nav-link" data-scroll-target="#render-หลายฉบบ">render หลายฉบับ</a></li>
+  <li><a href="#ขอควรระวง" id="toc-ขอควรระวง" class="nav-link" data-scroll-target="#ขอควรระวง">ข้อควรระวัง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch19-checklist" id="toc-sec-ch19-checklist" class="nav-link" data-scroll-target="#sec-ch19-checklist"><span class="header-section-number">19.6</span> รายการตรวจสอบการทำซ้ำได้</a>
+  <ul class="collapse">
+  <li><a href="#ระดบของการทำซำได" id="toc-ระดบของการทำซำได" class="nav-link" data-scroll-target="#ระดบของการทำซำได">ระดับของการทำซ้ำได้</a></li>
+  <li><a href="#รายการตรวจสอบ" id="toc-รายการตรวจสอบ" class="nav-link" data-scroll-target="#รายการตรวจสอบ">รายการตรวจสอบ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch19-case" id="toc-sec-ch19-case" class="nav-link" data-scroll-target="#sec-ch19-case">กรณีศึกษา: เขียนรายงานสรุปหนึ่งหน้าสำหรับสำนักงานสิ่งแวดล้อมภาค</a></li>
+  <li><a href="#sec-ch19-pitfalls" id="toc-sec-ch19-pitfalls" class="nav-link" data-scroll-target="#sec-ch19-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch19-exercises" id="toc-sec-ch19-exercises" class="nav-link" data-scroll-target="#sec-ch19-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/19-storytelling-reports.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>การวิเคราะห์ที่ดีที่สุดไม่มีประโยชน์ถ้าผู้ที่ต้องตัดสินใจไม่เข้าใจ ไม่เชื่อ หรือไม่ได้อ่าน บทก่อนหน้าทั้งหมดสร้างข้อค้นพบ บทนี้ว่าด้วยการส่งต่อข้อค้นพบนั้นให้ถึงผู้อ่าน ทั้งในแง่ <em>เนื้อหา</em> คือการเลือกว่าจะบอกอะไร เรียงอย่างไร และพูดถึงความไม่แน่นอนอย่างไร และในแง่ <em>กระบวนการ</em> คือการสร้างรายงานที่ผู้อื่น (รวมถึงตัวเราในอีกหกเดือน) สร้างซ้ำได้จากข้อมูลและโค้ด โดยได้ตัวเลขเดิมทุกตัว</p>
+<p>สองแง่นี้เกี่ยวข้องกันมากกว่าที่คิด รายงานที่คัดลอกตัวเลขจาก notebook มาวางใน Word ด้วยมือ เมื่อข้อมูลอัปเดตหรือพบข้อผิดพลาด ตัวเลขในรายงานจะไม่ตรงกับการวิเคราะห์อีกต่อไป และความน่าเชื่อถือที่สร้างมาด้วยการวิเคราะห์อย่างรอบคอบก็พังลงด้วยตัวเลขผิดตัวเดียว บทนี้จึงจบด้วย Quarto ซึ่งรวมข้อความ โค้ด และผลลัพธ์ไว้ในไฟล์เดียว และรายการตรวจสอบการทำซ้ำได้ที่ใช้กับรายงานโครงการ</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>วิเคราะห์ผู้อ่านและเป้าหมายของการสื่อสาร แล้วเลือกเนื้อหาและระดับรายละเอียดให้เหมาะสม</li>
+<li>จัดโครงสร้างรายงานแบบข้อค้นพบก่อนหลักฐานตาม</li>
+<li>เขียนข้อจำกัดและความไม่แน่นอนด้วยถ้อยคำที่ตรงกับระดับหลักฐาน</li>
+<li>สร้างรายงานที่ทำซ้ำได้ด้วย Quarto ที่ดึงตัวเลขจากการคำนวณโดยตรง</li>
+<li>สร้างรายงานหลายฉบับจากแม่แบบเดียวด้วยพารามิเตอร์</li>
+<li>ประเมินรายงานด้วยรายการตรวจสอบการทำซ้ำได้</li>
+</ol>
+</section>
+<section id="sec-ch19-audience" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="sec-ch19-audience"><span class="header-section-number">19.1</span> ผู้อ่านและเป้าหมายของการสื่อสาร</h2>
+<section id="เรมจากผอาน-ไมใชจากการวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="เรมจากผอาน-ไมใชจากการวเคราะห">เริ่มจากผู้อ่าน ไม่ใช่จากการวิเคราะห์</h3>
+<p>ข้อผิดพลาดที่พบบ่อยที่สุดของรายงานวิเคราะห์ข้อมูลคือ เล่าตามลำดับที่ผู้วิเคราะห์ทำงาน เริ่มจากการดึงข้อมูล การทำความสะอาด การสำรวจ แล้วจึงถึงข้อค้นพบในหน้าสุดท้าย ลำดับนี้เป็นธรรมชาติสำหรับผู้เขียน แต่ผู้อ่านส่วนใหญ่ไม่ได้ต้องการรู้ว่าทำอะไรมาบ้าง ต้องการรู้ว่าพบอะไร และต้องทำอะไรต่อ <span class="citation" data-cites="knaflic2015storytelling">(<a href="../references.html#ref-knaflic2015storytelling" role="doc-biblioref">Knaflic 2015</a>)</span></p>
+<p>ก่อนเขียน ให้ตอบคำถามสามข้อ</p>
+<ol type="1">
+<li><strong>ผู้อ่านคือใคร</strong> รู้อะไรอยู่แล้ว และไม่รู้อะไร</li>
+<li><strong>ผู้อ่านต้องรู้อะไร หรือต้องทำอะไร</strong> หลังอ่าน</li>
+<li><strong>ผู้อ่านมีเวลาเท่าใด</strong> และจะอ่านในบริบทใด</li>
+</ol>
+</section>
+<section id="ผอานของโครงการ-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="ผอานของโครงการ-pm2.5">ผู้อ่านของโครงการ PM2.5</h3>
+<div id="tbl-ch19-audiences" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-audiences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.1: ผู้อ่านของโครงการ PM2.5 และความต้องการ
+</figcaption>
+<div aria-describedby="tbl-ch19-audiences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ผู้อ่าน</th>
+<th>ต้องการ</th>
+<th>ระดับรายละเอียด</th>
+<th>รูปแบบที่เหมาะ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ผู้บริหารหน่วยงาน</td>
+<td>ข้อสรุปและข้อเสนอที่นำไปตัดสินใจได้</td>
+<td>ต่ำ ตัวเลขสำคัญไม่กี่ตัว</td>
+<td>สรุปหนึ่งหน้า แดชบอร์ดเชิงกลยุทธ์</td>
+</tr>
+<tr class="even">
+<td>เจ้าหน้าที่สิ่งแวดล้อมระดับจังหวัด</td>
+<td>สถานการณ์ในพื้นที่ของตนเทียบกับที่อื่น</td>
+<td>ปานกลาง</td>
+<td>รายงานรายจังหวัด แดชบอร์ด</td>
+</tr>
+<tr class="odd">
+<td>ประชาชนทั่วไป</td>
+<td>อากาศวันนี้เป็นอย่างไร ต้องป้องกันตัวหรือไม่</td>
+<td>ต่ำ ภาษาไม่เป็นเทคนิค</td>
+<td>อินโฟกราฟิก โพสต์สั้น</td>
+</tr>
+<tr class="even">
+<td>นักวิทยาศาสตร์และผู้ตรวจสอบ</td>
+<td>วิธีการถูกต้องหรือไม่ ทำซ้ำได้หรือไม่</td>
+<td>สูง รวมโค้ดและข้อจำกัด</td>
+<td>รายงานเต็ม repository</td>
+</tr>
+<tr class="odd">
+<td>อาจารย์และเพื่อนร่วมชั้น</td>
+<td>เข้าใจและประเมินกระบวนการคิด</td>
+<td>สูง</td>
+<td>รายงานโครงการ การนำเสนอ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ผลการวิเคราะห์ชุดเดียวกันจึงอาจต้องมีหลายรูปแบบ แต่ทุกรูปแบบต้องมาจากตัวเลขชุดเดียวกัน ข้อนี้เป็นเหตุผลเชิงปฏิบัติที่ดีที่สุดข้อหนึ่งของรายงานที่สร้างจากโค้ด (หัวข้อ <a href="#sec-ch19-quarto" class="quarto-xref"><span>19.4</span></a>)</p>
+</section>
+<section id="การสำรวจกบการอธบาย" class="level3">
+<h3 class="anchored" data-anchor-id="การสำรวจกบการอธบาย">การสำรวจกับการอธิบาย</h3>
+<p>กราฟและข้อความในช่วงสำรวจ (บทที่ 11 ถึง 15) ทำเพื่อ <em>ผู้วิเคราะห์เอง</em> มีจำนวนมาก หยาบ และไม่จำเป็นต้องสวย ส่วนรายงานทำเพื่อ <em>อธิบาย</em> ให้ผู้อื่น ต้องเลือกเฉพาะสิ่งที่ตอบคำถามของผู้อ่าน และออกแบบอย่างประณีต <span class="citation" data-cites="wilke2019fundamentals">(<a href="../references.html#ref-wilke2019fundamentals" role="doc-biblioref">Wilke 2019</a>)</span> นักวิเคราะห์ที่นำกราฟจากช่วงสำรวจทั้งหมดมาใส่ในรายงาน กำลังผลักภาระการคัดเลือกไปให้ผู้อ่าน ซึ่งมีบริบทน้อยกว่าในการคัดเลือก กฎคร่าว ๆ คือ ทุกกราฟในรายงานต้องตอบได้ว่า “ผู้อ่านควรเห็นอะไรจากกราฟนี้” ในประโยคเดียว</p>
+</section>
+</section>
+<section id="sec-ch19-structure" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="sec-ch19-structure"><span class="header-section-number">19.2</span> โครงสร้างการเล่าเรื่อง: ข้อค้นพบก่อน หลักฐานตาม</h2>
+<section id="พระมดควำ" class="level3">
+<h3 class="anchored" data-anchor-id="พระมดควำ">พีระมิดคว่ำ</h3>
+<p>โครงสร้างที่ได้ผลที่สุดสำหรับรายงานวิเคราะห์คือ <strong><span class="idx">ข้อค้นพบก่อน หลักฐานตาม</span></strong> ซึ่งเป็นหลักเดียวกับพีระมิดคว่ำของงานข่าว และ “หลักการพีระมิด” ของ Minto ในงานเขียนทางธุรกิจ <span class="citation" data-cites="minto2009pyramid">(<a href="../references.html#ref-minto2009pyramid" role="doc-biblioref">Minto 2009</a>)</span> ข้อสรุปหลักอยู่ต้นสุด ตามด้วยประเด็นสนับสนุนสองถึงสี่ข้อ แต่ละข้อมีหลักฐานของตัวเอง และรายละเอียดทางวิธีการอยู่ท้ายสุดหรือในภาคผนวก</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  A["ข้อสรุปหลัก&lt;br/&gt;ภาคเหนือมีวันเกินมาตรฐานบ่อยที่สุด เกือบทั้งหมดในเดือนกุมภาพันธ์ถึงเมษายน"] --&gt; B["ประเด็นที่ 1&lt;br/&gt;สัดส่วนวันเกินมาตรฐานสูงกว่าภาคอื่น"]
+  A --&gt; C["ประเด็นที่ 2&lt;br/&gt;ความต่างกระจุกในฤดูแล้ง"]
+  A --&gt; D["ประเด็นที่ 3&lt;br/&gt;รูปแบบเกิดซ้ำทุกปี"]
+  B --&gt; E["หลักฐาน: กราฟแท่ง ช่วงความเชื่อมั่น"]
+  C --&gt; F["หลักฐาน: heatmap เดือน × ปี"]
+  D --&gt; G["หลักฐาน: STL ตัวคูณฤดูกาล"]
+  E --&gt; H["วิธีการ ข้อจำกัด และภาคผนวก"]
+  F --&gt; H
+  G --&gt; H
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ผู้อ่านที่มีเวลาเพียงหนึ่งนาทีได้ข้อสรุปหลัก ผู้อ่านที่มีเวลาห้านาทีได้ประเด็นสนับสนุน และผู้ตรวจสอบที่ต้องการความละเอียดอ่านได้ถึงวิธีการ ทุกคนได้สิ่งที่ต้องการโดยไม่ต้องอ่านส่วนที่ไม่ต้องการ</p>
+</section>
+<section id="โครงสรางรายงานโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="โครงสรางรายงานโครงการ">โครงสร้างรายงานโครงการ</h3>
+<div id="tbl-ch19-report-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-report-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.2: โครงสร้างรายงานโครงการ
+</figcaption>
+<div aria-describedby="tbl-ch19-report-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ส่วน</th>
+<th>เนื้อหา</th>
+<th>ความยาวโดยประมาณ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>บทสรุป</td>
+<td>ข้อค้นพบหลักสามถึงห้าข้อ แต่ละข้อหนึ่งประโยคพร้อมตัวเลข และข้อเสนอ</td>
+<td>ครึ่งถึงหนึ่งหน้า</td>
+</tr>
+<tr class="even">
+<td>คำถามและข้อมูล</td>
+<td>คำถามจาก <code>questions.md</code> แหล่งข้อมูล ช่วงเวลา การแยกช่วงสำรวจและยืนยัน</td>
+<td>ครึ่งหน้า</td>
+</tr>
+<tr class="odd">
+<td>ข้อค้นพบ</td>
+<td>หนึ่งหัวข้อต่อหนึ่งข้อค้นพบ ชื่อหัวข้อคือข้อค้นพบ ตามด้วยกราฟและคำอธิบาย</td>
+<td>ส่วนหลัก</td>
+</tr>
+<tr class="even">
+<td>ข้อจำกัด</td>
+<td>สิ่งที่ข้อมูลและวิธีการบอกไม่ได้ (หัวข้อ <a href="#sec-ch19-limitations" class="quarto-xref"><span>19.3</span></a>)</td>
+<td>ครึ่งถึงหนึ่งหน้า</td>
+</tr>
+<tr class="odd">
+<td>วิธีการ</td>
+<td>การทำความสะอาด การจัดการข้อมูลสูญหาย วิธีทางสถิติ</td>
+<td>ตามจำเป็น หรือภาคผนวก</td>
+</tr>
+<tr class="even">
+<td>การทำซ้ำได้</td>
+<td>ลิงก์ repository เวอร์ชันของซอฟต์แวร์ วิธีรัน</td>
+<td>สั้น</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ชอหวขอและชอกราฟคอขอคนพบ" class="level3">
+<h3 class="anchored" data-anchor-id="ชอหวขอและชอกราฟคอขอคนพบ">ชื่อหัวข้อและชื่อกราฟคือข้อค้นพบ</h3>
+<p>หลักการเดียวกับชื่อกราฟในบทที่ 11 ใช้กับชื่อหัวข้อด้วย ชื่อหัวข้อ “ผลการวิเคราะห์ตามฤดูกาล” บอกเพียงว่าหัวข้อนี้เกี่ยวกับอะไร ส่วน “ความต่างระหว่างภาคเกือบทั้งหมดเกิดในเดือนกุมภาพันธ์ถึงเมษายน” บอกข้อค้นพบ ผู้อ่านที่อ่านเฉพาะชื่อหัวข้อทั้งหมดของรายงาน ควรได้เรื่องราวครบถ้วน การทดสอบง่าย ๆ คือ อ่านเฉพาะชื่อหัวข้อและชื่อกราฟเรียงกัน ถ้าได้เรื่องที่ต่อเนื่องและเข้าใจได้ โครงสร้างของรายงานใช้ได้</p>
+</section>
+<section id="ตวเลขตองมบรบท" class="level3">
+<h3 class="anchored" data-anchor-id="ตวเลขตองมบรบท">ตัวเลขต้องมีบริบท</h3>
+<p>ตัวเลขโดด ๆ อย่าง “สัดส่วนวันเกินมาตรฐาน 16.9%” ไม่บอกผู้อ่านว่าสูงหรือต่ำ ตัวเลขทุกตัวในบทสรุปควรมีจุดเทียบอย่างน้อยหนึ่งอย่าง เช่น เทียบกับภาคอื่น (“สูงกว่าภาคกลางประมาณ 1.4 เท่า”) เทียบกับเวลา (“สูงขึ้นจากปีก่อน”) เทียบกับมาตรฐาน (“ประมาณหนึ่งวันในหกวัน”) หรือแปลเป็นสิ่งที่ผู้อ่านจับต้องได้ (“ประมาณ 60 วันต่อปี”) การแปลสัดส่วนเป็นความถี่ตามธรรมชาติ เช่น “หนึ่งวันในหกวัน” มักเข้าใจง่ายกว่าเปอร์เซ็นต์สำหรับผู้อ่านทั่วไป <span class="citation" data-cites="gigerenzer2002calculated">(<a href="../references.html#ref-gigerenzer2002calculated" role="doc-biblioref">Gigerenzer 2002</a>)</span></p>
+</section>
+</section>
+<section id="sec-ch19-limitations" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="sec-ch19-limitations"><span class="header-section-number">19.3</span> การเขียนข้อจำกัดและความไม่แน่นอน</h2>
+<section id="ทำไมตองเขยนขอจำกด" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองเขยนขอจำกด">ทำไมต้องเขียนข้อจำกัด</h3>
+<p>ส่วนข้อจำกัดมักถูกมองเป็นพิธีกรรมที่เขียนท้ายรายงานแบบลอก ๆ กันมา แต่ส่วนนี้มีหน้าที่สำคัญ คือบอกผู้อ่านว่า <em>ข้อสรุปใดใช้ได้ภายใต้เงื่อนไขใด</em> ข้อจำกัดที่ดีช่วยป้องกันการนำผลไปใช้ผิด และเพิ่มความน่าเชื่อถือ เพราะแสดงว่าผู้วิเคราะห์เข้าใจขอบเขตของงานตัวเอง ข้อจำกัดที่ไม่ดีมีสองแบบ แบบแรกกว้างจนไม่มีความหมาย เช่น “ข้อมูลอาจมีความคลาดเคลื่อน” แบบที่สองไม่ตรงกับจุดอ่อนจริงของการวิเคราะห์</p>
+</section>
+<section id="ขอจำกดทเฉพาะเจาะจง" class="level3">
+<h3 class="anchored" data-anchor-id="ขอจำกดทเฉพาะเจาะจง">ข้อจำกัดที่เฉพาะเจาะจง</h3>
+<p>ข้อจำกัดที่ดีระบุสามอย่าง คือ <em>อะไร</em> ที่เป็นข้อจำกัด <em>ส่งผลต่อข้อสรุปอย่างไร</em> และ <em>ได้ทำอะไรเพื่อตรวจหรือลดผล</em> ตัวอย่างจากโครงการ</p>
+<div id="tbl-ch19-limitations" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-limitations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.3: ตัวอย่างข้อจำกัดที่ไม่ดีและที่ดี
+</figcaption>
+<div aria-describedby="tbl-ch19-limitations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แบบที่ไม่ดี</th>
+<th>แบบที่ดี</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ข้อมูลอาจไม่สมบูรณ์</td>
+<td>สถานี 12% ของสถานี-วันข้อมูลไม่ครบ 18 ชั่วโมงและถูกตัดออก วันที่ถูกตัดกระจุกในเดือนมีนาคมของภาคเหนือ (บทที่ 10) การวิเคราะห์ความไวที่เติมค่าด้วย interpolation ให้สัดส่วนวันเกินมาตรฐานของภาคเหนือสูงขึ้น 1.2 จุด แต่ลำดับของภาคไม่เปลี่ยน</td>
+</tr>
+<tr class="even">
+<td>สถานีอาจไม่เป็นตัวแทน</td>
+<td>สถานีส่วนใหญ่อยู่ในเขตเมือง ข้อสรุปจึงใช้กับตำแหน่งของสถานี ไม่ใช่ทั้งภาค จังหวัดที่ไม่มีสถานี 10 แห่งไม่ได้อยู่ในการวิเคราะห์ (บทที่ 17)</td>
+</tr>
+<tr class="odd">
+<td>ผลอาจเกิดจากความบังเอิญ</td>
+<td>ข้อค้นพบนี้มาจากข้อมูลช่วงสำรวจ ค.ศ. 2020–2023 และคำถามถูกตั้งหลังเห็นกราฟ จึงต้องยืนยันด้วยข้อมูล ค.ศ. 2024–2025 ตามแผนในบทที่ 4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ถอยคำทตรงกบระดบหลกฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ถอยคำทตรงกบระดบหลกฐาน">ถ้อยคำที่ตรงกับระดับหลักฐาน</h3>
+<p>บทที่ 4 แยกระดับของข้อสรุปตามหลักฐาน ถ้อยคำในรายงานต้องสะท้อนระดับนั้น คำกริยาที่เลือกส่งสัญญาณระดับความมั่นใจให้ผู้อ่านเสมอ ไม่ว่าผู้เขียนจะตั้งใจหรือไม่</p>
+<div id="tbl-ch19-wording" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-wording-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.4: ถ้อยคำที่ตรงกับระดับหลักฐาน
+</figcaption>
+<div aria-describedby="tbl-ch19-wording-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระดับหลักฐาน</th>
+<th>ถ้อยคำที่เหมาะ</th>
+<th>ถ้อยคำที่เกินหลักฐาน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สังเกตจากข้อมูลช่วงสำรวจ</td>
+<td>“ข้อมูลบ่งชี้ว่า” “พบรูปแบบที่” “สอดคล้องกับ”</td>
+<td>“พิสูจน์ว่า” “ยืนยันว่า”</td>
+</tr>
+<tr class="even">
+<td>ยืนยันด้วยข้อมูลช่วงยืนยันที่ไม่ได้ใช้ตั้งคำถาม</td>
+<td>“ข้อมูลช่วงยืนยันสนับสนุนว่า”</td>
+<td>“เป็นที่แน่ชัดว่า”</td>
+</tr>
+<tr class="odd">
+<td>ความสัมพันธ์จากข้อมูลเชิงสังเกต</td>
+<td>“สัมพันธ์กับ” “เกิดพร้อมกับ”</td>
+<td>“ทำให้เกิด” “เป็นสาเหตุของ”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="การสอสารความไมแนนอน" class="level3">
+<h3 class="anchored" data-anchor-id="การสอสารความไมแนนอน">การสื่อสารความไม่แน่นอน</h3>
+<p>ตัวเลขทุกตัวที่มาจากข้อมูลมีความไม่แน่นอน การนำเสนอตัวเลขเดี่ยวโดยไม่มีความไม่แน่นอนทำให้ผู้อ่านเข้าใจว่าแม่นยำกว่าความจริง แนวปฏิบัติมีดังนี้ <span class="citation" data-cites="spiegelhalter2017risk vanderbles2019communicating">(<a href="../references.html#ref-spiegelhalter2017risk" role="doc-biblioref">Spiegelhalter 2017</a>; <a href="../references.html#ref-vanderbles2019communicating" role="doc-biblioref">Bles และคณะ 2019</a>)</span></p>
+<ul>
+<li><strong>รายงานช่วง ไม่ใช่เพียงค่าเดียว</strong> เช่น “สูงกว่าประมาณ 9 ถึง 13 µg/m³” แทน “สูงกว่า 11.2 µg/m³” (บทที่ 13)</li>
+<li><strong>ใช้ตัวเลขนัยสำคัญให้สอดคล้องกับความแม่นยำ</strong> การรายงานสัดส่วน “16.873%” สื่อความแม่นยำที่ไม่มีอยู่จริง “ประมาณ 17%” ซื่อตรงกว่า</li>
+<li><strong>แสดงความไม่แน่นอนในกราฟ</strong> ด้วยแถบช่วงความเชื่อมั่น แถบสีจางรอบเส้น หรือจุดของแต่ละสถานีแทนค่าเฉลี่ยอย่างเดียว</li>
+<li><strong>แยกความไม่แน่นอนแต่ละแหล่ง</strong> ช่วงความเชื่อมั่นสะท้อนเฉพาะความไม่แน่นอนจากการสุ่มตัวอย่าง ความไม่แน่นอนจากการเลือกวิธีจัดการข้อมูลสูญหายหรือการเลือกเกณฑ์ ต้องสื่อสารแยกด้วยการวิเคราะห์ความไว</li>
+<li><strong>ถ้าใช้คำบอกความน่าจะเป็น ให้นิยามไว้</strong> คำอย่าง “น่าจะ” หรือ “เป็นไปได้” ถูกตีความต่างกันมากระหว่างผู้อ่าน IPCC จึงกำหนดว่า “likely” หมายถึงความน่าจะเป็น 66–100% และ “very likely” หมายถึง 90–100% <span class="citation" data-cites="mastrandrea2010guidance">(<a href="../references.html#ref-mastrandrea2010guidance" role="doc-biblioref">Mastrandrea และคณะ 2010</a>)</span> รายงานที่ใช้คำเช่นนี้บ่อยควรนิยามไว้ในทำนองเดียวกัน</li>
+</ul>
+</section>
+</section>
+<section id="sec-ch19-quarto" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="sec-ch19-quarto"><span class="header-section-number">19.4</span> literate programming และ Quarto</h2>
+<section id="literate-programming" class="level3">
+<h3 class="anchored" data-anchor-id="literate-programming">literate programming</h3>
+<p>Donald Knuth เสนอแนวคิด <strong><span class="idx">literate programming</span></strong> ในปี ค.ศ. 1984 ว่า โปรแกรมควรเขียนเป็นงานเขียนที่อธิบายความคิดให้มนุษย์อ่าน โดยมีโค้ดแทรกอยู่ ไม่ใช่โค้ดที่มีความเห็นแทรกอยู่ <span class="citation" data-cites="knuth1984literate">(<a href="../references.html#ref-knuth1984literate" role="doc-biblioref">Knuth 1984</a>)</span> ในงานวิทยาการข้อมูล แนวคิดนี้กลายเป็นเอกสารที่รวมข้อความ โค้ด และผลลัพธ์ของโค้ดไว้ด้วยกัน เมื่อรันเอกสาร โค้ดจะคำนวณใหม่และผลลัพธ์จะถูกแทรกลงในเอกสารโดยอัตโนมัติ ตัวเลขในรายงานจึงตรงกับการคำนวณเสมอ ซึ่งเป็นหัวใจของการวิจัยที่ทำซ้ำได้ (บทที่ 2) <span class="citation" data-cites="peng2011reproducible">(<a href="../references.html#ref-peng2011reproducible" role="doc-biblioref">Peng 2011</a>)</span></p>
+</section>
+<section id="quarto" class="level3">
+<h3 class="anchored" data-anchor-id="quarto">Quarto</h3>
+<p><strong><span class="idx-tool">Quarto</span></strong> เป็นระบบเผยแพร่เอกสารทางเทคนิคแบบโอเพนซอร์สที่พัฒนาโดย Posit ต่อยอดจาก R Markdown แต่ใช้ได้กับหลายภาษา รวมถึง Python ผ่าน Jupyter <span class="citation" data-cites="quarto2026docs">(<a href="../references.html#ref-quarto2026docs" role="doc-biblioref">Posit Software 2026</a>)</span> เอกสาร Quarto (<code>.qmd</code>) ประกอบด้วยสามส่วน</p>
+<ol type="1">
+<li><strong><span class="idx">YAML header</span></strong> ระหว่างเส้น <code>---</code> กำหนดชื่อเรื่อง ผู้เขียน รูปแบบผลลัพธ์ และตัวเลือกการรัน</li>
+<li><strong>ข้อความ Markdown</strong> เนื้อหาของรายงาน</li>
+<li><strong><span class="idx">code cell</span></strong> โค้ดที่จะถูกรัน ระบุด้วย <code>```{python}</code></li>
+</ol>
+<p>จาก <code>.qmd</code> ไฟล์เดียว Quarto สร้างผลลัพธ์ได้หลายรูปแบบ เช่น HTML, PDF, Word และสไลด์ หนังสือเล่มนี้เองเขียนด้วย Quarto</p>
+</section>
+<section id="ตวอยางรายงาน" class="level3">
+<h3 class="anchored" data-anchor-id="ตวอยางรายงาน">ตัวอย่างรายงาน</h3>
+<p>ไฟล์ <code>report/pm25_report.qmd</code> เริ่มด้วย YAML header</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"รายงานสถานการณ์ PM2.5"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"ข้อมูลช่วงสำรวจ พ.ศ. 2563–2566"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"ทีมโครงการ"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">embed-resources</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">echo</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">warning</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">jupyter</span><span class="kw">:</span><span class="at"> python3</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตามด้วย code cell ที่คำนวณตัวเลขที่ต้องใช้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"../data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>share <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT COUNT(*) FILTER (WHERE d.pm25_mean &gt; 37.5) / COUNT(*) AS share_over</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete AND d.date &lt; DATE '2024-01-01' AND s.region = 'เหนือ'</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).fetchone()[<span class="dv">0</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>และข้อความที่ดึงตัวเลขจากการคำนวณ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## ภาคเหนือมีวันเกินมาตรฐานบ่อยที่สุด</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ในช่วงสำรวจ ภาคเหนือมีสัดส่วนวันเกินมาตรฐาน <span class="in">`{python} f"{share:.0%}"`</span> ของสถานี-วันที่ข้อมูลครบ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ส่วนสำคัญของตัวอย่าง</p>
+<ul>
+<li><strong><code>`{python} expr`</code></strong> คือ inline code ผลลัพธ์ของ expression ถูกแทรกลงในข้อความ ตัวเลขในประโยคจึงมาจากการคำนวณโดยตรง ไม่มีการคัดลอกด้วยมือ ต้องอยู่ในเครื่องหมาย backtick เสมอ ถ้าไม่มี backtick Quarto จะแสดงข้อความตามตัวอักษร</li>
+<li><strong><code>execute: echo: false</code></strong> ซ่อนโค้ดในรายงานสำหรับผู้อ่านทั่วไป ส่วน <code>code-fold: true</code> ทำให้ผู้อ่านคลิกดูโค้ดได้ถ้าต้องการ</li>
+<li><strong><code>embed-resources: true</code></strong> ฝังรูปภาพ CSS และ JavaScript ทั้งหมดลงในไฟล์ HTML เดียว ส่งต่อทางอีเมลได้ แต่ต้องเชื่อมต่ออินเทอร์เน็ตขณะ render เพื่อดาวน์โหลดไลบรารีอย่าง plotly.js มาฝัง</li>
+<li><strong>พาธสัมพัทธ์</strong> <code>../data/pm25.duckdb</code> สัมพัทธ์กับตำแหน่งของไฟล์ <code>.qmd</code> (ในที่นี้คือ <code>report/</code>) ไม่ใช่ตำแหน่งที่สั่ง render</li>
+</ul>
+</section>
+<section id="ตวเลอกของ-code-cell" class="level3">
+<h3 class="anchored" data-anchor-id="ตวเลอกของ-code-cell">ตัวเลือกของ code cell</h3>
+<p>ตัวเลือกของแต่ละ cell เขียนเป็นความเห็นพิเศษ <code>#|</code> ที่บรรทัดแรกของ cell</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-north-monthly</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "มัธยฐานรายเดือนของค่าเฉลี่ยรายวันในภาคเหนือ เดือนกุมภาพันธ์ถึงเมษายนเกินมาตรฐานทุกปี"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-alt: "กราฟแท่งสิบสองเดือน แท่งเดือนกุมภาพันธ์ถึงเมษายนสูงเกินเส้นมาตรฐาน"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(monthly, x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"pm25"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fig.add_hline(y<span class="op">=</span><span class="fl">37.5</span>, line_dash<span class="op">=</span><span class="st">"dash"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-ch19-cell-options" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-cell-options-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.5: ตัวเลือกของ code cell ที่ใช้บ่อย
+</figcaption>
+<div aria-describedby="tbl-ch19-cell-options-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ตัวเลือก</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>label: fig-...</code></td>
+<td>ตั้งชื่อรูปเพื่ออ้างอิงข้ามด้วย <code>@fig-...</code> Quarto ใส่เลขรูปให้เอง</td>
+</tr>
+<tr class="even">
+<td><code>fig-cap</code>, <code>fig-alt</code></td>
+<td>คำบรรยายรูปและข้อความทางเลือก (บทที่ 12)</td>
+</tr>
+<tr class="odd">
+<td><code>echo</code>, <code>output</code>, <code>warning</code></td>
+<td>แสดงหรือซ่อนโค้ด ผลลัพธ์ และคำเตือนของ cell นั้น</td>
+</tr>
+<tr class="even">
+<td><code>cache: true</code></td>
+<td>เก็บผลลัพธ์ไว้ ไม่รันใหม่ถ้าโค้ดไม่เปลี่ยน</td>
+</tr>
+<tr class="odd">
+<td><code>tbl-cap</code></td>
+<td>คำบรรยายตาราง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="render-และ-freeze" class="level3">
+<h3 class="anchored" data-anchor-id="render-และ-freeze">render และ freeze</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report/pm25_report.qmd          <span class="co"># สร้าง report/pm25_report.html</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview report/pm25_report.qmd         <span class="co"># เปิดดูในเบราว์เซอร์และ render ใหม่อัตโนมัติเมื่อแก้ไฟล์</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>สำหรับโครงการที่มีหลายเอกสาร Quarto มีตัวเลือก <code>freeze</code> ซึ่งเก็บผลลัพธ์ของการรันไว้ในโฟลเดอร์ <code>_freeze/</code> เอกสารจะไม่ถูกรันใหม่จนกว่าไฟล์ต้นฉบับจะเปลี่ยน ทำให้ render ทั้งโครงการเร็วขึ้น และ render บนเครื่องที่ไม่มีข้อมูลได้ ซึ่งมีประโยชน์เมื่อข้อมูลมีขนาดใหญ่หรือเข้าถึงได้เฉพาะบางเครื่อง</p>
+</section>
+<section id="quarto-กบ-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-กบ-notebook">Quarto กับ notebook</h3>
+<div id="tbl-ch19-notebook-quarto" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-notebook-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.6: เปรียบเทียบ notebook กับ Quarto
+</figcaption>
+<div aria-describedby="tbl-ch19-notebook-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>Jupyter notebook (<code>.ipynb</code>)</th>
+<th>Quarto (<code>.qmd</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>รูปแบบไฟล์</td>
+<td>JSON ที่มีผลลัพธ์ฝังอยู่</td>
+<td>ข้อความธรรมดา</td>
+</tr>
+<tr class="even">
+<td>diff ใน Git</td>
+<td>อ่านยาก (บทที่ 2)</td>
+<td>อ่านง่าย</td>
+</tr>
+<tr class="odd">
+<td>ลำดับการรัน</td>
+<td>รันทีละ cell ไม่เป็นลำดับได้</td>
+<td>รันจากบนลงล่างทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>เหมาะกับ</td>
+<td>การสำรวจแบบโต้ตอบ</td>
+<td>รายงานที่ทำซ้ำได้และเผยแพร่</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ข้อสำคัญที่สุดในตารางคือลำดับการรัน notebook ยอมให้รัน cell ในลำดับใดก็ได้ ผลลัพธ์ที่เห็นจึงอาจมาจากสถานะที่ไม่มีใครสร้างซ้ำได้ การศึกษา notebook บน GitHub ขนาดใหญ่พบว่ามีเพียงส่วนน้อยที่รันซ้ำได้และให้ผลเดิม <span class="citation" data-cites="pimentel2019large">(<a href="../references.html#ref-pimentel2019large" role="doc-biblioref">Pimentel และคณะ 2019</a>)</span> Quarto รันเอกสารใหม่ทั้งหมดจากบนลงล่างทุกครั้งที่ render จึงป้องกันปัญหานี้โดยโครงสร้าง แนวทางของรายวิชาคือ ใช้ notebook สำรวจ ย้ายโค้ดที่ใช้ซ้ำไป <code>src/</code> และเขียนรายงานสุดท้ายด้วย Quarto ที่ import จาก <code>src/</code></p>
+</section>
+</section>
+<section id="sec-ch19-parameterized" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="sec-ch19-parameterized"><span class="header-section-number">19.5</span> รายงานแบบมีพารามิเตอร์ ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="หลายรายงานจากแมแบบเดยว" class="level3">
+<h3 class="anchored" data-anchor-id="หลายรายงานจากแมแบบเดยว">หลายรายงานจากแม่แบบเดียว</h3>
+<p>หน่วยงานอาจต้องการรายงานแยกสำหรับแต่ละภาคหรือแต่ละจังหวัด ซึ่งมีโครงสร้างเหมือนกันแต่ข้อมูลต่างกัน การคัดลอกไฟล์แล้วแก้ทีละไฟล์ทำให้แก้ไขยาก และเสี่ยงต่อการลืมแก้บางไฟล์ <strong>รายงานแบบมีพารามิเตอร์</strong> (parameterized report) ใช้แม่แบบเดียวที่รับค่าพารามิเตอร์จากภายนอก แล้ว render ซ้ำด้วยค่าต่างกัน</p>
+</section>
+<section id="พารามเตอรใน-quarto-กบ-jupyter" class="level3">
+<h3 class="anchored" data-anchor-id="พารามเตอรใน-quarto-กบ-jupyter">พารามิเตอร์ใน Quarto กับ Jupyter</h3>
+<p>สำหรับเอกสารที่ใช้ Jupyter (Python) Quarto รับพารามิเตอร์ผ่านกลไกของ papermill คือ cell ที่มี tag <code>parameters</code> เป็นค่าเริ่มต้น และค่าที่ส่งเข้ามาตอน render จะถูกแทรกเป็น cell ใหม่ถัดจาก cell นั้น จึงต้องติดตั้งแพ็กเกจ <code>papermill</code> ในสภาพแวดล้อมด้วย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| tags: [parameters]</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>region <span class="op">=</span> <span class="st">"เหนือ"</span>          <span class="co"># ค่าเริ่มต้น ถูกแทนด้วยค่าที่ส่งเข้ามาตอน render</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>share <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT COUNT(*) FILTER (WHERE d.pm25_mean &gt; 37.5) / COUNT(*)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete AND d.date &lt; DATE '2024-01-01' AND s.region = ?</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>, [region]).fetchone()[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อสังเกตด้านความปลอดภัย ค่าของพารามิเตอร์ถูกส่งเข้า SQL ด้วยตัวยึดตำแหน่ง <code>?</code> และรายการค่า ไม่ใช่การต่อสตริงด้วย f-string วิธีนี้ป้องกัน SQL injection และปัญหาเครื่องหมายคำพูดในชื่อ (บทที่ 7 และ 20)</p>
+</section>
+<section id="render-หลายฉบบ" class="level3">
+<h3 class="anchored" data-anchor-id="render-หลายฉบบ">render หลายฉบับ</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render report/pm25_report.qmd <span class="at">-P</span> region:ใต้ <span class="at">--output</span> pm25_south.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>การสร้างรายงานของทุกภาคเขียนเป็น script ที่วนรายการภาคจากฐานข้อมูล</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""src/render_reports.py: สร้างรายงานแยกตามภาคจากแม่แบบเดียว"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span>), read_only<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> con:</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    regions <span class="op">=</span> [r[<span class="dv">0</span>] <span class="cf">for</span> r <span class="kw">in</span> con.execute(<span class="st">"SELECT DISTINCT region FROM stations ORDER BY region"</span>).fetchall()]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, region <span class="kw">in</span> <span class="bu">enumerate</span>(regions, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    subprocess.run(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        [<span class="st">"quarto"</span>, <span class="st">"render"</span>, <span class="st">"report/pm25_report.qmd"</span>, <span class="st">"-P"</span>, <span class="ss">f"region:</span><span class="sc">{</span>region<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">"--output"</span>, <span class="ss">f"pm25_region_</span><span class="sc">{</span>i<span class="sc">:02d}</span><span class="ss">.html"</span>],</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        cwd<span class="op">=</span>ROOT, check<span class="op">=</span><span class="va">True</span>,                  <span class="co"># ไฟล์ผลลัพธ์อยู่ที่ root ของโครงการ (cwd)</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ชื่อไฟล์ผลลัพธ์ใช้หมายเลขแทนชื่อภาคภาษาไทย เพื่อหลีกเลี่ยงปัญหาชื่อไฟล์ภาษาไทยบนบางระบบและบางบริการ (ภาคผนวก ฉ) และ <code>check=True</code> ทำให้ script หยุดทันทีถ้าการ render ฉบับใดล้มเหลว แทนที่จะสร้างรายงานที่เหลือต่อไปโดยไม่มีใครรู้ว่ามีฉบับหนึ่งหายไป เมื่อทดสอบกับ Quarto 1.10 และฐานข้อมูลสังเคราะห์ของหนังสือ script นี้สร้างรายงานสี่ฉบับ แต่ละฉบับมีสัดส่วนวันเกินมาตรฐานของภาคตนเองถูกต้อง</p>
+</section>
+<section id="ขอควรระวง" class="level3">
+<h3 class="anchored" data-anchor-id="ขอควรระวง">ข้อควรระวัง</h3>
+<ul>
+<li><strong>แม่แบบต้องทำงานกับทุกค่าของพารามิเตอร์</strong> ภาคที่มีข้อมูลน้อยอาจทำให้กราฟว่าง หรือข้อความอย่าง “ภาคนี้เกินมาตรฐานบ่อยที่สุด” ผิดสำหรับภาคอื่น ข้อความที่ขึ้นกับผลต้องสร้างจากโค้ด เช่น ใช้เงื่อนไขเลือกถ้อยคำ</li>
+<li><strong>ทดสอบกับค่าขอบ</strong> เช่น ภาคที่ไม่มีวันเกินมาตรฐานเลย ซึ่งอาจทำให้การหารด้วยศูนย์หรือกราฟที่แกนเพี้ยน</li>
+<li><strong>ตรวจรายงานทุกฉบับก่อนเผยแพร่</strong> อย่างน้อยดูผ่าน ๆ ว่าไม่มีข้อความผิดปกติ</li>
+</ul>
+</section>
+</section>
+<section id="sec-ch19-checklist" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="sec-ch19-checklist"><span class="header-section-number">19.6</span> รายการตรวจสอบการทำซ้ำได้</h2>
+<section id="ระดบของการทำซำได" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบของการทำซำได">ระดับของการทำซ้ำได้</h3>
+<p>บทที่ 2 แยก reproducibility (ข้อมูลเดิม โค้ดเดิม ได้ผลเดิม) ออกจาก replicability (ข้อมูลใหม่ วิธีเดิม ได้ข้อสรุปเดิม) รายงานโครงการต้องผ่านอย่างน้อยระดับแรก คือผู้อื่นที่ได้ repository และข้อมูลเดียวกัน สร้างรายงานซ้ำได้และได้ตัวเลขเดิมทุกตัว <span class="citation" data-cites="nasem2019reproducibility">(<a href="../references.html#ref-nasem2019reproducibility" role="doc-biblioref">National Academies of Sciences, Engineering, and Medicine 2019</a>)</span></p>
+</section>
+<section id="รายการตรวจสอบ" class="level3">
+<h3 class="anchored" data-anchor-id="รายการตรวจสอบ">รายการตรวจสอบ</h3>
+<div id="tbl-ch19-checklist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-checklist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.7: รายการตรวจสอบการทำซ้ำได้ของรายงานโครงการ
+</figcaption>
+<div aria-describedby="tbl-ch19-checklist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หมวด</th>
+<th>รายการ</th>
+<th>ตรวจอย่างไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ข้อมูล</td>
+<td>ระบุแหล่งที่มา วันที่ดึง และสัญญาอนุญาตของข้อมูลทุกชุด</td>
+<td>README และพจนานุกรมข้อมูล</td>
+</tr>
+<tr class="even">
+<td>ข้อมูล</td>
+<td>ข้อมูลดิบไม่ถูกแก้ด้วยมือ ทุกการแปลงอยู่ในโค้ด</td>
+<td><code>data/raw/</code> อ่านอย่างเดียว pipeline สร้างทุกอย่างจากข้อมูลดิบ</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูล</td>
+<td>มีวิธีได้ข้อมูลมาใหม่ หรือ snapshot ที่ระบุเวอร์ชัน</td>
+<td><code>src/fetch_air4thai.py</code> หรือ checksum ของไฟล์</td>
+</tr>
+<tr class="even">
+<td>โค้ด</td>
+<td>pipeline ทั้งหมดรันได้ด้วยคำสั่งเดียว</td>
+<td><code>python run_all.py</code> บนเครื่องใหม่ (บทที่ 20)</td>
+</tr>
+<tr class="odd">
+<td>โค้ด</td>
+<td>ไม่มีพาธแบบสัมบูรณ์หรือพาธเฉพาะเครื่อง</td>
+<td>ค้นหา <code>C:\</code> และ <code>/Users/</code> ในโค้ด</td>
+</tr>
+<tr class="even">
+<td>โค้ด</td>
+<td>การสุ่มทุกจุดกำหนด seed</td>
+<td>ค้นหา <code>random_state</code> และ <code>default_rng</code></td>
+</tr>
+<tr class="odd">
+<td>สภาพแวดล้อม</td>
+<td>ระบุเวอร์ชันของ Python และแพ็กเกจ</td>
+<td><code>environment.yml</code> หรือ lock file (บทที่ 2)</td>
+</tr>
+<tr class="even">
+<td>รายงาน</td>
+<td>ตัวเลขทุกตัวในข้อความมาจาก inline code ไม่ใช่การพิมพ์</td>
+<td>ค้นหาตัวเลขที่พิมพ์ตรง ๆ ในไฟล์ <code>.qmd</code></td>
+</tr>
+<tr class="odd">
+<td>รายงาน</td>
+<td>render ใหม่ทั้งหมดได้โดยไม่มีข้อผิดพลาด</td>
+<td><code>quarto render</code> บนเครื่องที่สะอาด</td>
+</tr>
+<tr class="even">
+<td>รายงาน</td>
+<td>ระบุช่วงข้อมูลที่ใช้และสถานะ สำรวจหรือยืนยัน</td>
+<td>ทุกกราฟและทุกข้อสรุป</td>
+</tr>
+<tr class="odd">
+<td>การทบทวน</td>
+<td>คนอื่นในทีมรันซ้ำได้</td>
+<td>ให้เพื่อนโคลน repository แล้วรันตาม README</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การทดสอบที่ดีที่สุดคือรายการสุดท้าย ให้คนที่ไม่ได้เขียนโค้ดโคลน repository บนเครื่องของตนเอง ทำตาม README และดูว่าได้รายงานที่ตัวเลขตรงกันหรือไม่ ปัญหาที่พบบ่อยที่สุดในการทดสอบนี้ ได้แก่ แพ็กเกจที่ไม่ได้ระบุใน <code>environment.yml</code> ไฟล์ข้อมูลที่อยู่บนเครื่องผู้เขียนเท่านั้น และขั้นตอนที่ผู้เขียนทำด้วยมือแต่ไม่ได้เขียนไว้</p>
+</section>
+</section>
+<section id="sec-ch19-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch19-case">กรณีศึกษา: เขียนรายงานสรุปหนึ่งหน้าสำหรับสำนักงานสิ่งแวดล้อมภาค</h2>
+<p><strong>สถานการณ์</strong> สำนักงานสิ่งแวดล้อมภาคขอสรุปหนึ่งหน้าเกี่ยวกับสถานการณ์ฝุ่นในภาคของตน เพื่อใช้ประกอบการประชุมวางแผนก่อนฤดูฝุ่น ทีมมีผลการวิเคราะห์จากบทที่ 11 ถึง 18 จำนวนมาก</p>
+<p><strong>ร่างแรก</strong> ทีมเขียนรายงานสามหน้า เริ่มจากการอธิบายแหล่งข้อมูล ขั้นตอนการทำความสะอาด และสถิติเชิงพรรณนาของทุกภาค มีกราฟเจ็ดภาพ ข้อสรุปอยู่ในย่อหน้าสุดท้ายว่า “จากการวิเคราะห์พบว่าภาคเหนือมีค่า PM2.5 สูงในช่วงฤดูแล้ง”</p>
+<p><strong>ปัญหาของร่างแรก</strong></p>
+<ol type="1">
+<li>ลำดับตามการทำงานของผู้วิเคราะห์ ไม่ใช่ตามความต้องการของผู้อ่าน</li>
+<li>ข้อสรุปคลุมเครือและไม่มีตัวเลข ผู้อ่านรู้อยู่แล้วว่าภาคเหนือมีฝุ่นในฤดูแล้ง</li>
+<li>ไม่มีข้อเสนอที่นำไปวางแผนได้</li>
+<li>กราฟเจ็ดภาพเกินกว่าที่ผู้อ่านจะใช้ในการประชุม</li>
+</ol>
+<p><strong>ร่างที่ปรับปรุง</strong> (โครงสร้าง)</p>
+<ol type="1">
+<li><em>ข้อค้นพบหลัก (สามบรรทัดแรก)</em> ข้อมูล พ.ศ. 2563–2566 บ่งชี้ว่าประมาณหนึ่งวันในหกวันของภาคเหนือเกินมาตรฐาน 37.5 µg/m³ และเกือบทั้งหมดอยู่ในเดือนกุมภาพันธ์ถึงเมษายน จังหวัด ก และ ข มีวันเกินมาตรฐานมากที่สุด</li>
+<li><em>กราฟเดียว</em> heatmap เดือน × จังหวัดของสัดส่วนวันเกินมาตรฐาน ชื่อกราฟเป็นข้อค้นพบ</li>
+<li><em>ข้อเสนอ</em> เริ่มมาตรการเตือนภัยตั้งแต่ปลายเดือนมกราคม และเน้นจังหวัด ก และ ข</li>
+<li><em>ข้อจำกัด (สองบรรทัด)</em> ผลใช้กับตำแหน่งของสถานีซึ่งส่วนใหญ่อยู่ในเมือง สามจังหวัดในภาคไม่มีสถานี และผลมาจากข้อมูลช่วงสำรวจ ซึ่งจะยืนยันด้วยข้อมูลปีล่าสุด</li>
+<li><em>ที่มา (หนึ่งบรรทัด)</em> แหล่งข้อมูล และลิงก์ไปยังรายงานเต็มกับ repository</li>
+</ol>
+<p><strong>การสร้าง</strong> รายงานหนึ่งหน้าเป็นไฟล์ Quarto แบบมีพารามิเตอร์ที่รับชื่อภาค ตัวเลขทุกตัวในข้อความมาจาก inline code และข้อความที่ขึ้นกับผล เช่น ชื่อจังหวัดที่มีวันเกินมาตรฐานมากที่สุด สร้างจากโค้ด สำนักงานภาคอื่นจึงได้สรุปของภาคตนจากแม่แบบเดียวกัน</p>
+<p><strong>ข้อจำกัดของการออกแบบ</strong> การย่อเหลือหนึ่งหน้าต้องตัดรายละเอียดหลายอย่าง เช่น ความแปรปรวนระหว่างปี ผู้อ่านที่ต้องการรายละเอียดต้องมีทางไปถึงรายงานเต็ม การเลือกว่าจะตัดอะไรเป็นการตัดสินใจเชิงบรรณาธิการที่ต้องรับผิดชอบ สิ่งที่ห้ามตัดคือข้อจำกัดที่เปลี่ยนการตีความข้อค้นพบหลัก</p>
+</section>
+<section id="sec-ch19-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch19-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch19-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch19-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;19.8: ข้อผิดพลาดที่พบบ่อยในบทที่ 19
+</figcaption>
+<div aria-describedby="tbl-ch19-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เล่าตามลำดับการทำงาน ข้อสรุปอยู่ท้ายสุด</td>
+<td>ผู้อ่านส่วนใหญ่ไม่อ่านถึงข้อสรุป</td>
+<td>ข้อค้นพบก่อน หลักฐานตาม</td>
+</tr>
+<tr class="even">
+<td>ใส่กราฟจากช่วงสำรวจทั้งหมดในรายงาน</td>
+<td>ผลักภาระการคัดเลือกให้ผู้อ่าน</td>
+<td>เลือกเฉพาะกราฟที่ตอบคำถามของผู้อ่าน</td>
+</tr>
+<tr class="odd">
+<td>ชื่อหัวข้อและชื่อกราฟเป็นแบบบรรยาย</td>
+<td>ผู้อ่านไม่รู้ว่าควรเห็นอะไร</td>
+<td>ใช้ข้อค้นพบเป็นชื่อ</td>
+</tr>
+<tr class="even">
+<td>ตัวเลขไม่มีจุดเทียบ</td>
+<td>ผู้อ่านไม่รู้ว่าสูงหรือต่ำ</td>
+<td>เทียบกับภาคอื่น เวลา หรือมาตรฐาน</td>
+</tr>
+<tr class="odd">
+<td>ข้อจำกัดกว้างและเป็นพิธีกรรม</td>
+<td>ไม่บอกว่าข้อสรุปใดใช้ได้ภายใต้เงื่อนไขใด</td>
+<td>ระบุข้อจำกัด ผลต่อข้อสรุป และสิ่งที่ทำเพื่อตรวจ</td>
+</tr>
+<tr class="even">
+<td>ใช้ถ้อยคำเกินหลักฐาน</td>
+<td>ผู้อ่านเข้าใจว่าพิสูจน์แล้วหรือเป็นเหตุและผล</td>
+<td>เลือกถ้อยคำตาม <a href="#tbl-ch19-wording" class="quarto-xref">ตารางที่&nbsp;<span>19.4</span></a></td>
+</tr>
+<tr class="odd">
+<td>รายงานตัวเลขทศนิยมมากเกินความแม่นยำ</td>
+<td>สื่อความแม่นยำที่ไม่มีอยู่จริง</td>
+<td>ปัดให้สอดคล้องกับความไม่แน่นอน และรายงานช่วง</td>
+</tr>
+<tr class="even">
+<td>คัดลอกตัวเลขจาก notebook ไปวางในรายงานด้วยมือ</td>
+<td>ตัวเลขไม่ตรงกันเมื่อข้อมูลหรือโค้ดเปลี่ยน</td>
+<td>ใช้ inline code ของ Quarto</td>
+</tr>
+<tr class="odd">
+<td>เขียน inline code โดยไม่มี backtick</td>
+<td>Quarto แสดงข้อความตามตัวอักษร ไม่คำนวณ</td>
+<td><code>`{python} expr`</code></td>
+</tr>
+<tr class="even">
+<td>render ได้เฉพาะบนเครื่องผู้เขียน</td>
+<td>พาธ แพ็กเกจ หรือข้อมูลอยู่บนเครื่องเดียว</td>
+<td>ทดสอบให้เพื่อนรันซ้ำจาก README</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>เริ่มจากผู้อ่าน: ใคร ต้องรู้หรือทำอะไร และมีเวลาเท่าใด ผลการวิเคราะห์ชุดเดียวกันอาจต้องมีหลายรูปแบบ แต่ต้องมาจากตัวเลขชุดเดียวกัน</li>
+<li>จัดโครงสร้างแบบข้อค้นพบก่อน หลักฐานตาม ชื่อหัวข้อและชื่อกราฟคือข้อค้นพบ และตัวเลขทุกตัวต้องมีจุดเทียบ</li>
+<li>ข้อจำกัดที่ดีระบุสิ่งที่จำกัด ผลต่อข้อสรุป และสิ่งที่ทำเพื่อตรวจ ถ้อยคำต้องตรงกับระดับหลักฐาน</li>
+<li>สื่อสารความไม่แน่นอนด้วยช่วง ตัวเลขนัยสำคัญที่เหมาะสม และการแสดงในกราฟ และแยกความไม่แน่นอนแต่ละแหล่ง</li>
+<li>literate programming รวมข้อความ โค้ด และผลลัพธ์ไว้ด้วยกัน Quarto ทำแนวคิดนี้ด้วยไฟล์ข้อความธรรมดาที่รันจากบนลงล่างทุกครั้ง inline code ทำให้ตัวเลขในข้อความมาจากการคำนวณโดยตรง</li>
+<li>รายงานแบบมีพารามิเตอร์สร้างหลายฉบับจากแม่แบบเดียว ใช้ papermill กับเอกสาร Python และต้องทดสอบกับทุกค่าของพารามิเตอร์</li>
+<li>รายการตรวจสอบการทำซ้ำได้ครอบคลุมข้อมูล โค้ด สภาพแวดล้อม และรายงาน การทดสอบที่ดีที่สุดคือให้ผู้อื่นรันซ้ำจาก README</li>
+</ul>
+</section>
+<section id="sec-ch19-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch19-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>เขียนชื่อกราฟแบบข้อค้นพบสำหรับกราฟต่อไปนี้: (ก) bar chart สัดส่วนวันเกินมาตรฐานแยกตามภาค (ข) heatmap มัธยฐานรายเดือน × ปีของภาคเหนือ (ค) อนุกรมเวลาค่าเฉลี่ยรายวันของสถานีหนึ่งที่มีช่วงข้อมูลขาดหาย</li>
+<li>แปลงข้อความ “สัดส่วนวันเกินมาตรฐานเท่ากับ 0.1687” ให้เข้าใจง่ายสำหรับผู้อ่านทั่วไปสองแบบ แบบหนึ่งใช้เปอร์เซ็นต์ อีกแบบใช้ความถี่ตามธรรมชาติ</li>
+<li>ปรับข้อจำกัด “ข้อมูลอาจมีความคลาดเคลื่อน” ให้เฉพาะเจาะจงตามแนวทางในหัวข้อ <a href="#sec-ch19-limitations" class="quarto-xref"><span>19.3</span></a> โดยใช้ข้อมูลจากโครงการของตน</li>
+<li>อธิบายว่าทำไม notebook ที่รันได้บนเครื่องผู้เขียนจึงอาจทำซ้ำไม่ได้ และ Quarto ช่วยแก้ปัญหาข้อใด</li>
+<li>ระบุข้อผิดพลาดในประโยคต่อไปนี้ในแง่ระดับหลักฐาน และเขียนใหม่: “การวิเคราะห์ข้อมูลปี 2563–2566 พิสูจน์ว่าการเผาในที่โล่งเป็นสาเหตุของค่าฝุ่นที่สูงในภาคเหนือ”</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>เขียนบทสรุปครึ่งหน้าของโครงการทีม ที่มีข้อค้นพบหลักสามข้อ แต่ละข้อมีตัวเลขพร้อมจุดเทียบ แล้วให้เพื่อนต่างทีมอ่านภายในหนึ่งนาที และเล่ากลับว่าได้อะไร</li>
+<li>แปลง notebook วิเคราะห์หนึ่งไฟล์ของทีมเป็นรายงาน Quarto ที่ซ่อนโค้ด มี inline code สำหรับตัวเลขทุกตัวในข้อความ และมีรูปพร้อม <code>label</code>, <code>fig-cap</code> และ <code>fig-alt</code> ที่อ้างอิงข้ามได้</li>
+<li>เพิ่มพารามิเตอร์ <code>region</code> ให้รายงานในข้อ 7 แล้วเขียน <code>src/render_reports.py</code> ที่สร้างรายงานของทุกภาค ทดสอบกับภาคที่มีข้อมูลน้อยที่สุด และแก้ส่วนที่ทำงานผิดพลาด</li>
+<li>ใช้รายการตรวจสอบใน <a href="#tbl-ch19-checklist" class="quarto-xref">ตารางที่&nbsp;<span>19.7</span></a> ประเมิน repository ของทีม ระบุรายการที่ยังไม่ผ่านและแผนแก้ไข</li>
+<li>ให้เพื่อนต่างทีมโคลน repository ของทีมบนเครื่องของเพื่อน แล้ว render รายงานตาม README บันทึกทุกปัญหาที่พบและวิธีแก้</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ออกแบบรายงานสามรูปแบบจากผลการวิเคราะห์ชุดเดียวกัน สำหรับผู้บริหาร เจ้าหน้าที่ระดับจังหวัด และประชาชน โดยทั้งสามรูปแบบสร้างจากโค้ดเดียวกันใน <code>src/</code> อภิปรายว่าเลือกตัดหรือเก็บอะไรในแต่ละรูปแบบ และเพราะอะไร</li>
+<li>ศึกษาแนวทางการสื่อสารความไม่แน่นอนของ IPCC หรือสถาบันอื่น แล้วเสนอแนวทางสำหรับรายงานคุณภาพอากาศของไทย รวมถึงคำภาษาไทยที่จะใช้แทนระดับความน่าจะเป็นแต่ละระดับ</li>
+<li>ตั้งค่า GitHub Actions (บทที่ 2) ที่ render รายงาน Quarto ของทีมใหม่ทุกครั้งที่มีการ push และแจ้งเตือนเมื่อ render ล้มเหลว อภิปรายว่าจะจัดการเรื่องข้อมูลที่ไม่อยู่ใน repository อย่างไร</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch19">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="knaflic2015storytelling">Knaflic (<a href="../references.html#ref-knaflic2015storytelling" role="doc-biblioref">2015</a>)</span> — หนังสือที่อ่านง่ายเรื่องการเล่าเรื่องด้วยข้อมูล ตั้งแต่การเข้าใจบริบทถึงการออกแบบกราฟเพื่ออธิบาย</li>
+<li><span class="citation" data-cites="minto2009pyramid">Minto (<a href="../references.html#ref-minto2009pyramid" role="doc-biblioref">2009</a>)</span> — หลักการพีระมิดสำหรับการจัดโครงสร้างงานเขียนเชิงวิเคราะห์ ใช้ได้ทั้งรายงานและอีเมล</li>
+<li><span class="citation" data-cites="vanderbles2019communicating">Bles และคณะ (<a href="../references.html#ref-vanderbles2019communicating" role="doc-biblioref">2019</a>)</span> — บทความทบทวนวิธีสื่อสารความไม่แน่นอนเกี่ยวกับข้อเท็จจริง ตัวเลข และวิทยาศาสตร์อย่างเป็นระบบ</li>
+<li><span class="citation" data-cites="knuth1984literate">Knuth (<a href="../references.html#ref-knuth1984literate" role="doc-biblioref">1984</a>)</span> — บทความต้นฉบับของ literate programming</li>
+<li><span class="citation" data-cites="quarto2026docs">Posit Software (<a href="../references.html#ref-quarto2026docs" role="doc-biblioref">2026</a>)</span> — เอกสารอ้างอิงของ Quarto โดยเฉพาะหน้าเกี่ยวกับ Python, parameters และ freeze</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-vanderbles2019communicating" class="csl-entry" role="listitem">
+Bles, Anne Marthe van der, Sander van der Linden, Alexandra L. J. Freeman, และคณะ. 2019. <span>“Communicating Uncertainty about Facts, Numbers and Science”</span>. <em>Royal Society Open Science</em> 6 (5): 181870. <a href="https://doi.org/10.1098/rsos.181870">https://doi.org/10.1098/rsos.181870</a>.
+</div>
+<div id="ref-gigerenzer2002calculated" class="csl-entry" role="listitem">
+Gigerenzer, Gerd. 2002. <em>Calculated Risks: How to Know When Numbers Deceive You</em>. Simon &amp; Schuster.
+</div>
+<div id="ref-knaflic2015storytelling" class="csl-entry" role="listitem">
+Knaflic, Cole Nussbaumer. 2015. <em>Storytelling with Data: A Data Visualization Guide for Business Professionals</em>. Wiley.
+</div>
+<div id="ref-knuth1984literate" class="csl-entry" role="listitem">
+Knuth, Donald E. 1984. <span>“Literate Programming”</span>. <em>The Computer Journal</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
+</div>
+<div id="ref-mastrandrea2010guidance" class="csl-entry" role="listitem">
+Mastrandrea, Michael D., Christopher B. Field, Thomas F. Stocker, และคณะ. 2010. <em>Guidance Note for Lead Authors of the <span>IPCC</span> Fifth Assessment Report on Consistent Treatment of Uncertainties</em>. Intergovernmental Panel on Climate Change (IPCC). <a href="https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf">https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf</a>.
+</div>
+<div id="ref-minto2009pyramid" class="csl-entry" role="listitem">
+Minto, Barbara. 2009. <em>The Pyramid Principle: Logic in Writing and Thinking</em>. 3 พิมพ์ครั้งที่. Pearson Education.
+</div>
+<div id="ref-nasem2019reproducibility" class="csl-entry" role="listitem">
+National Academies of Sciences, Engineering, and Medicine. 2019. <em>Reproducibility and Replicability in Science</em>. The National Academies Press. <a href="https://doi.org/10.17226/25303">https://doi.org/10.17226/25303</a>.
+</div>
+<div id="ref-peng2011reproducible" class="csl-entry" role="listitem">
+Peng, Roger D. 2011. <span>“Reproducible Research in Computational Science”</span>. <em>Science</em> 334 (6060): 1226–27. <a href="https://doi.org/10.1126/science.1213847">https://doi.org/10.1126/science.1213847</a>.
+</div>
+<div id="ref-pimentel2019large" class="csl-entry" role="listitem">
+Pimentel, João Felipe, Leonardo Murta, Vanessa Braganholo, และ Juliana Freire. 2019. <span>“A Large-Scale Study About Quality and Reproducibility of <span>Jupyter</span> Notebooks”</span>. <em>Proceedings of the 16th International Conference on Mining Software Repositories (MSR)</em>, 507–17. <a href="https://doi.org/10.1109/MSR.2019.00077">https://doi.org/10.1109/MSR.2019.00077</a>.
+</div>
+<div id="ref-quarto2026docs" class="csl-entry" role="listitem">
+Posit Software. 2026. <em>Quarto Documentation</em>. <a href="https://quarto.org/docs/">https://quarto.org/docs/</a>.
+</div>
+<div id="ref-spiegelhalter2017risk" class="csl-entry" role="listitem">
+Spiegelhalter, David. 2017. <span>“Risk and Uncertainty Communication”</span>. <em>Annual Review of Statistics and Its Application</em> 4: 31–60. <a href="https://doi.org/10.1146/annurev-statistics-010814-020148">https://doi.org/10.1146/annurev-statistics-010814-020148</a>.
+</div>
+<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. O’Reilly Media. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/18-hierarchical-data.html" class="pagination-link" aria-label="ข้อมูลลำดับชั้นและการ drill-down">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/20-dashboards.html" class="pagination-link" aria-label="การออกแบบและพัฒนาแดชบอร์ด">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

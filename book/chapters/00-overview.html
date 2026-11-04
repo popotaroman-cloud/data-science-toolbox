@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/01-data-science-eda.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/00-overview.html">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch00-about" id="toc-sec-ch00-about" class="nav-link" data-scroll-target="#sec-ch00-about">0.1 หนังสือเล่มนี้เกี่ยวกับอะไร: การเปลี่ยนข้อมูลดิบให้เป็นความเข้าใจที่เชื่อถือได้</a>
+  <ul class="collapse">
+  <li><a href="#สงทหนงสอเลมนเปน" id="toc-สงทหนงสอเลมนเปน" class="nav-link" data-scroll-target="#สงทหนงสอเลมนเปน">สิ่งที่หนังสือเล่มนี้เป็น</a></li>
+  <li><a href="#สงทหนงสอเลมนไมไดเปน" id="toc-สงทหนงสอเลมนไมไดเปน" class="nav-link" data-scroll-target="#สงทหนงสอเลมนไมไดเปน">สิ่งที่หนังสือเล่มนี้ไม่ได้เป็น</a></li>
+  <li><a href="#คำวา-สำรวจ-ในหนงสอเลมน" id="toc-คำวา-สำรวจ-ในหนงสอเลมน" class="nav-link" data-scroll-target="#คำวา-สำรวจ-ในหนงสอเลมน">คำว่า “สำรวจ” ในหนังสือเล่มนี้</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-why-explore" id="toc-sec-ch00-why-explore" class="nav-link" data-scroll-target="#sec-ch00-why-explore">0.2 ทำไมการสำรวจข้อมูลจึงสำคัญ: ตัวอย่างการตัดสินใจที่ผิดเพราะไม่เข้าใจข้อมูล</a>
+  <ul class="collapse">
+  <li><a href="#เครองบนทกลบมาได-ขอมลทหายไปอยางเปนระบบ" id="toc-เครองบนทกลบมาได-ขอมลทหายไปอยางเปนระบบ" class="nav-link" data-scroll-target="#เครองบนทกลบมาได-ขอมลทหายไปอยางเปนระบบ">เครื่องบินที่กลับมาได้: ข้อมูลที่หายไปอย่างเป็นระบบ</a></li>
+  <li><a href="#challenger-ขอมลทถกตดออกจากกราฟ" id="toc-challenger-ขอมลทถกตดออกจากกราฟ" class="nav-link" data-scroll-target="#challenger-ขอมลทถกตดออกจากกราฟ">Challenger: ข้อมูลที่ถูกตัดออกจากกราฟ</a></li>
+  <li><a href="#หนสาธารณะกบการเตบโต-แถวทหายไปในสเปรดชต" id="toc-หนสาธารณะกบการเตบโต-แถวทหายไปในสเปรดชต" class="nav-link" data-scroll-target="#หนสาธารณะกบการเตบโต-แถวทหายไปในสเปรดชต">หนี้สาธารณะกับการเติบโต: แถวที่หายไปในสเปรดชีต</a></li>
+  <li><a href="#google-flu-trends-ขอมลใหญไมไดแปลวาขอมลด" id="toc-google-flu-trends-ขอมลใหญไมไดแปลวาขอมลด" class="nav-link" data-scroll-target="#google-flu-trends-ขอมลใหญไมไดแปลวาขอมลด">Google Flu Trends: ข้อมูลใหญ่ไม่ได้แปลว่าข้อมูลดี</a></li>
+  <li><a href="#mars-climate-orbiter-หนวยทไมตรงกน" id="toc-mars-climate-orbiter-หนวยทไมตรงกน" class="nav-link" data-scroll-target="#mars-climate-orbiter-หนวยทไมตรงกน">Mars Climate Orbiter: หน่วยที่ไม่ตรงกัน</a></li>
+  <li><a href="#สงททกกรณมรวมกน" id="toc-สงททกกรณมรวมกน" class="nav-link" data-scroll-target="#สงททกกรณมรวมกน">สิ่งที่ทุกกรณีมีร่วมกัน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-disciplines" id="toc-sec-ch00-disciplines" class="nav-link" data-scroll-target="#sec-ch00-disciplines">0.3 ศาสตร์ที่หลอมรวมอยู่ในเล่ม</a>
+  <ul class="collapse">
+  <li><a href="#สถตศาสตร-การแจกแจง-การอนมาน-ความไมแนนอน" id="toc-สถตศาสตร-การแจกแจง-การอนมาน-ความไมแนนอน" class="nav-link" data-scroll-target="#สถตศาสตร-การแจกแจง-การอนมาน-ความไมแนนอน">สถิติศาสตร์: การแจกแจง การอนุมาน ความไม่แน่นอน</a></li>
+  <li><a href="#วทยาการคอมพวเตอรและวศวกรรมซอฟตแวร-การเขยนโปรแกรม-version-control-การทดสอบ-การทำซำได" id="toc-วทยาการคอมพวเตอรและวศวกรรมซอฟตแวร-การเขยนโปรแกรม-version-control-การทดสอบ-การทำซำได" class="nav-link" data-scroll-target="#วทยาการคอมพวเตอรและวศวกรรมซอฟตแวร-การเขยนโปรแกรม-version-control-การทดสอบ-การทำซำได">วิทยาการคอมพิวเตอร์และวิศวกรรมซอฟต์แวร์: การเขียนโปรแกรม version control การทดสอบ การทำซ้ำได้</a></li>
+  <li><a href="#ระบบฐานขอมล-แบบจำลองเชงสมพนธ-sql-การจดเกบแบบ-columnar" id="toc-ระบบฐานขอมล-แบบจำลองเชงสมพนธ-sql-การจดเกบแบบ-columnar" class="nav-link" data-scroll-target="#ระบบฐานขอมล-แบบจำลองเชงสมพนธ-sql-การจดเกบแบบ-columnar">ระบบฐานข้อมูล: แบบจำลองเชิงสัมพันธ์ SQL การจัดเก็บแบบ columnar</a></li>
+  <li><a href="#คณตศาสตร-พชคณตเชงเสนและความนาจะเปนทอยเบองหลง-pca-clustering-และการทดสอบ" id="toc-คณตศาสตร-พชคณตเชงเสนและความนาจะเปนทอยเบองหลง-pca-clustering-และการทดสอบ" class="nav-link" data-scroll-target="#คณตศาสตร-พชคณตเชงเสนและความนาจะเปนทอยเบองหลง-pca-clustering-และการทดสอบ">คณิตศาสตร์: พีชคณิตเชิงเส้นและความน่าจะเป็นที่อยู่เบื้องหลัง PCA clustering และการทดสอบ</a></li>
+  <li><a href="#จตวทยาการรบรและการออกแบบ-การมองเหน-ส-และการเลาเรองดวยภาพ" id="toc-จตวทยาการรบรและการออกแบบ-การมองเหน-ส-และการเลาเรองดวยภาพ" class="nav-link" data-scroll-target="#จตวทยาการรบรและการออกแบบ-การมองเหน-ส-และการเลาเรองดวยภาพ">จิตวิทยาการรับรู้และการออกแบบ: การมองเห็น สี และการเล่าเรื่องด้วยภาพ</a></li>
+  <li><a href="#ภมสารสนเทศ-ระบบพกด-แผนท-ขอมลเชงพนท" id="toc-ภมสารสนเทศ-ระบบพกด-แผนท-ขอมลเชงพนท" class="nav-link" data-scroll-target="#ภมสารสนเทศ-ระบบพกด-แผนท-ขอมลเชงพนท">ภูมิสารสนเทศ: ระบบพิกัด แผนที่ ข้อมูลเชิงพื้นที่</a></li>
+  <li><a href="#ความรเชงโดเมน-วทยาศาสตรสงแวดลอมและคณภาพอากาศ-pm2.5" id="toc-ความรเชงโดเมน-วทยาศาสตรสงแวดลอมและคณภาพอากาศ-pm2.5" class="nav-link" data-scroll-target="#ความรเชงโดเมน-วทยาศาสตรสงแวดลอมและคณภาพอากาศ-pm2.5">ความรู้เชิงโดเมน: วิทยาศาสตร์สิ่งแวดล้อมและคุณภาพอากาศ (PM2.5)</a></li>
+  <li><a href="#กฎหมายและจรยธรรม-pdpa-ความเปนสวนตว-ลขสทธ-การใช-ai-อยางรบผดชอบ" id="toc-กฎหมายและจรยธรรม-pdpa-ความเปนสวนตว-ลขสทธ-การใช-ai-อยางรบผดชอบ" class="nav-link" data-scroll-target="#กฎหมายและจรยธรรม-pdpa-ความเปนสวนตว-ลขสทธ-การใช-ai-อยางรบผดชอบ">กฎหมายและจริยธรรม: PDPA ความเป็นส่วนตัว ลิขสิทธิ์ การใช้ AI อย่างรับผิดชอบ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-toolbox-map" id="toc-sec-ch00-toolbox-map" class="nav-link" data-scroll-target="#sec-ch00-toolbox-map">0.4 แผนที่ชุดเครื่องมือ: เครื่องมือแต่ละตัวอยู่ตรงไหนในวงจรข้อมูล และเลือกใช้เมื่อใด</a>
+  <ul class="collapse">
+  <li><a href="#หลกการเลอกเครองมอ" id="toc-หลกการเลอกเครองมอ" class="nav-link" data-scroll-target="#หลกการเลอกเครองมอ">หลักการเลือกเครื่องมือ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-roadmap" id="toc-sec-ch00-roadmap" class="nav-link" data-scroll-target="#sec-ch00-roadmap">0.5 เส้นทางของเล่ม: สรุปทั้ง 7 ส่วนและความเชื่อมโยงระหว่างบท</a></li>
+  <li><a href="#sec-ch00-case-main" id="toc-sec-ch00-case-main" class="nav-link" data-scroll-target="#sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมเลอก-pm2.5" id="toc-ทำไมเลอก-pm2.5" class="nav-link" data-scroll-target="#ทำไมเลอก-pm2.5">ทำไมเลือก PM2.5</a></li>
+  <li><a href="#แนวคดพนฐานดานคณภาพอากาศทตองร" id="toc-แนวคดพนฐานดานคณภาพอากาศทตองร" class="nav-link" data-scroll-target="#แนวคดพนฐานดานคณภาพอากาศทตองร">แนวคิดพื้นฐานด้านคุณภาพอากาศที่ต้องรู้</a></li>
+  <li><a href="#สถาปตยกรรมของระบบ" id="toc-สถาปตยกรรมของระบบ" class="nav-link" data-scroll-target="#สถาปตยกรรมของระบบ">สถาปัตยกรรมของระบบ</a></li>
+  <li><a href="#ฐานขอมลกลาง-datapm25.duckdb" id="toc-ฐานขอมลกลาง-datapm25.duckdb" class="nav-link" data-scroll-target="#ฐานขอมลกลาง-datapm25.duckdb">ฐานข้อมูลกลาง <code>data/pm25.duckdb</code></a></li>
+  <li><a href="#โครงสราง-repository-โครงการ" id="toc-โครงสราง-repository-โครงการ" class="nav-link" data-scroll-target="#โครงสราง-repository-โครงการ">โครงสร้าง repository โครงการ</a></li>
+  <li><a href="#ผทเลอกโดเมนอน" id="toc-ผทเลอกโดเมนอน" class="nav-link" data-scroll-target="#ผทเลอกโดเมนอน">ผู้ที่เลือกโดเมนอื่น</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-applications" id="toc-sec-ch00-applications" class="nav-link" data-scroll-target="#sec-ch00-applications">0.7 การนำไปใช้ประโยชน์</a>
+  <ul class="collapse">
+  <li><a href="#ในการเรยน-โครงงาน-สหกจศกษา-และการเรยนวชาขนสง-machine-learning-big-data" id="toc-ในการเรยน-โครงงาน-สหกจศกษา-และการเรยนวชาขนสง-machine-learning-big-data" class="nav-link" data-scroll-target="#ในการเรยน-โครงงาน-สหกจศกษา-และการเรยนวชาขนสง-machine-learning-big-data">ในการเรียน: โครงงาน สหกิจศึกษา และการเรียนวิชาขั้นสูง (machine learning, big data)</a></li>
+  <li><a href="#ในอาชพ-data-analyst-data-engineer-data-scientist-analytics-engineer-และงานทตองใชขอมลในทกสาขา" id="toc-ในอาชพ-data-analyst-data-engineer-data-scientist-analytics-engineer-และงานทตองใชขอมลในทกสาขา" class="nav-link" data-scroll-target="#ในอาชพ-data-analyst-data-engineer-data-scientist-analytics-engineer-และงานทตองใชขอมลในทกสาขา">ในอาชีพ: data analyst, data engineer, data scientist, analytics engineer และงานที่ต้องใช้ข้อมูลในทุกสาขา</a></li>
+  <li><a href="#ในงานวจย-การสำรวจขอมลกอนตงสมมตฐานและการรายงานทตรวจสอบได" id="toc-ในงานวจย-การสำรวจขอมลกอนตงสมมตฐานและการรายงานทตรวจสอบได" class="nav-link" data-scroll-target="#ในงานวจย-การสำรวจขอมลกอนตงสมมตฐานและการรายงานทตรวจสอบได">ในงานวิจัย: การสำรวจข้อมูลก่อนตั้งสมมติฐานและการรายงานที่ตรวจสอบได้</a></li>
+  <li><a href="#ในภาครฐและชมชน-ขอมลเปด-การตดตามปญหาสงแวดลอม-การสอสารความเสยงตอสาธารณะ" id="toc-ในภาครฐและชมชน-ขอมลเปด-การตดตามปญหาสงแวดลอม-การสอสารความเสยงตอสาธารณะ" class="nav-link" data-scroll-target="#ในภาครฐและชมชน-ขอมลเปด-การตดตามปญหาสงแวดลอม-การสอสารความเสยงตอสาธารณะ">ในภาครัฐและชุมชน: ข้อมูลเปิด การติดตามปัญหาสิ่งแวดล้อม การสื่อสารความเสี่ยงต่อสาธารณะ</a></li>
+  <li><a href="#ในโดเมนอน-สาธารณสข-เกษตร-พลงงาน-การขนสง-ธรกจ-สถาปตยกรรมเดยวกน-เปลยนแหลงขอมล" id="toc-ในโดเมนอน-สาธารณสข-เกษตร-พลงงาน-การขนสง-ธรกจ-สถาปตยกรรมเดยวกน-เปลยนแหลงขอมล" class="nav-link" data-scroll-target="#ในโดเมนอน-สาธารณสข-เกษตร-พลงงาน-การขนสง-ธรกจ-สถาปตยกรรมเดยวกน-เปลยนแหลงขอมล">ในโดเมนอื่น: สาธารณสุข เกษตร พลังงาน การขนส่ง ธุรกิจ (สถาปัตยกรรมเดียวกัน เปลี่ยนแหล่งข้อมูล)</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-prerequisites" id="toc-sec-ch00-prerequisites" class="nav-link" data-scroll-target="#sec-ch00-prerequisites">0.8 ความรู้พื้นฐานที่ควรมีก่อนอ่าน และสิ่งที่ไม่ต้องมี</a>
+  <ul class="collapse">
+  <li><a href="#สงทควรม" id="toc-สงทควรม" class="nav-link" data-scroll-target="#สงทควรม">สิ่งที่ควรมี</a></li>
+  <li><a href="#สงทไมตองม" id="toc-สงทไมตองม" class="nav-link" data-scroll-target="#สงทไมตองม">สิ่งที่ไม่ต้องมี</a></li>
+  <li><a href="#ซอฟตแวรทใช" id="toc-ซอฟตแวรทใช" class="nav-link" data-scroll-target="#ซอฟตแวรทใช">ซอฟต์แวร์ที่ใช้</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-how-to-read" id="toc-sec-ch00-how-to-read" class="nav-link" data-scroll-target="#sec-ch00-how-to-read">0.9 วิธีอ่านหนังสือเล่มนี้: เส้นทางการอ่านสำหรับผู้เรียน ผู้สอน และผู้อ่านที่มีพื้นฐานแล้ว</a>
+  <ul class="collapse">
+  <li><a href="#สญลกษณและองคประกอบของแตละบท" id="toc-สญลกษณและองคประกอบของแตละบท" class="nav-link" data-scroll-target="#สญลกษณและองคประกอบของแตละบท">สัญลักษณ์และองค์ประกอบของแต่ละบท</a></li>
+  <li><a href="#เสนทางการอาน" id="toc-เสนทางการอาน" class="nav-link" data-scroll-target="#เสนทางการอาน">เส้นทางการอ่าน</a></li>
+  <li><a href="#ความสมพนธกบแผนการสอน" id="toc-ความสมพนธกบแผนการสอน" class="nav-link" data-scroll-target="#ความสมพนธกบแผนการสอน">ความสัมพันธ์กับแผนการสอน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch00-case" id="toc-sec-ch00-case" class="nav-link" data-scroll-target="#sec-ch00-case">กรณีศึกษา: คำถามหนึ่งข้อเดินทางผ่านทั้งเล่ม</a></li>
+  <li><a href="#sec-ch00-pitfalls" id="toc-sec-ch00-pitfalls" class="nav-link" data-scroll-target="#sec-ch00-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch00-exercises" id="toc-sec-ch00-exercises" class="nav-link" data-scroll-target="#sec-ch00-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ข้อมูลไม่ได้พูดแทนตัวเอง ตัวเลขค่าฝุ่น PM2.5 หนึ่งแถวในไฟล์ JSON ยังไม่ได้บอกว่าอากาศในเมืองหนึ่งแย่ลงหรือดีขึ้น ยังไม่ได้บอกว่าเครื่องวัดทำงานปกติหรือไม่ และยังไม่ได้บอกว่าควรเตือนประชาชนหรือไม่ ระหว่างข้อมูลดิบกับข้อสรุปที่เชื่อถือได้มีงานอีกหลายขั้น ได้แก่ การตั้งคำถาม การเก็บ การจัดเก็บ การตรวจคุณภาพ การสำรวจ และการสื่อสาร หนังสือเล่มนี้พาผู้อ่านเดินผ่านทุกขั้นนั้นด้วยเครื่องมือจริง และด้วยข้อมูลจริงชุดเดียวตลอดเล่ม</p>
+<p>บทนี้เป็นแผนที่ของทั้งเล่ม เล่าว่าหนังสือเกี่ยวกับอะไร ทำไมการสำรวจข้อมูลจึงสำคัญ ศาสตร์ใดบ้างที่หลอมรวมอยู่ในเล่ม เครื่องมือแต่ละตัวอยู่ตรงไหนในวงจรข้อมูล และผู้อ่านแต่ละกลุ่มควรอ่านเล่มนี้อย่างไร ผู้อ่านที่ต้องการเริ่มลงมือทันทีอ่านหัวข้อ <a href="#sec-ch00-case-main">0.6</a> และ <a href="#sec-ch00-how-to-read">0.9</a> ก่อน แล้วข้ามไปบทที่ 1 ได้เลย</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายเป้าหมายของหนังสือว่าเป็นการเปลี่ยนข้อมูลดิบให้เป็นความเข้าใจที่เชื่อถือได้</li>
+<li>ยกตัวอย่างการตัดสินใจที่ผิดพลาดเพราะไม่ได้สำรวจข้อมูลก่อน และระบุว่าขั้นตอนใดที่ขาดไป</li>
+<li>ระบุศาสตร์ที่เกี่ยวข้องกับงานสำรวจข้อมูล และบอกได้ว่าแต่ละศาสตร์ปรากฏในบทใด</li>
+<li>จัดเครื่องมือในชุดเครื่องมือของเล่มให้อยู่ในขั้นที่ถูกต้องของวงจรข้อมูล</li>
+<li>อธิบายสถาปัตยกรรมของระบบสำรวจคุณภาพอากาศ PM2.5 ที่จะสร้างตลอดเล่ม</li>
+<li>เลือกเส้นทางการอ่านที่เหมาะกับพื้นฐานและเป้าหมายของตนเอง</li>
+</ol>
+</section>
+<section id="sec-ch00-about" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-about">0.1 หนังสือเล่มนี้เกี่ยวกับอะไร: การเปลี่ยนข้อมูลดิบให้เป็นความเข้าใจที่เชื่อถือได้</h2>
+<p>หนังสือเล่มนี้เกี่ยวกับ <strong>กระบวนการ</strong> มากกว่า <strong>เครื่องมือ</strong> เครื่องมือเปลี่ยนเร็ว ไลบรารีที่ได้รับความนิยมวันนี้อาจถูกแทนที่ในอีกห้าปี แต่คำถามที่นักวิทยาการข้อมูลต้องตอบให้ได้ก่อนเชื่อผลการวิเคราะห์ใด ๆ แทบไม่เปลี่ยนเลย คำถามเหล่านั้นคือ ข้อมูลมาจากไหน วัดอะไร วัดอย่างไร ครบหรือไม่ ผิดปกติตรงไหน และสิ่งที่เห็นเป็นรูปแบบจริงหรือเป็นเพียงร่องรอยของวิธีเก็บข้อมูล</p>
+<p>คำว่า “ความเข้าใจที่เชื่อถือได้” ในชื่อหัวข้อมีสองส่วน ส่วนแรกคือ <strong>ความเข้าใจ</strong> หมายถึงคำอธิบายที่ตอบคำถามของคนที่ต้องตัดสินใจ ไม่ใช่ตารางตัวเลขหรือกราฟที่สวยแต่ไม่ตอบอะไร ส่วนที่สองคือ <strong>เชื่อถือได้</strong> หมายถึงคนอื่นตรวจสอบได้ว่าความเข้าใจนั้นได้มาอย่างไร ทำซ้ำได้ด้วยโค้ดและข้อมูลเดียวกัน และรู้ข้อจำกัดของมัน หนังสือเล่มนี้ให้น้ำหนักกับทั้งสองส่วนเท่ากัน บทที่ว่าด้วยการทำซ้ำได้ (บทที่ 2) version control (บทที่ 3) และคุณภาพข้อมูล (บทที่ 9) จึงไม่ใช่บทเสริม แต่เป็นแกนของเล่มพอ ๆ กับบทที่ว่าด้วยกราฟและสถิติ</p>
+<section id="สงทหนงสอเลมนเปน" class="level3">
+<h3 class="anchored" data-anchor-id="สงทหนงสอเลมนเปน">สิ่งที่หนังสือเล่มนี้เป็น</h3>
+<p>หนังสือเล่มนี้เป็นหนังสือประกอบการสอนรายวิชา 1145100 Data Science Toolbox ของมหาวิทยาลัยอุบลราชธานี เอกสารประกอบการสอนรายสัปดาห์ของรายวิชาตอบคำถามว่า <em>ทำอย่างไร</em> หนังสือตอบเพิ่มว่า <em>ทำไม</em> และ <em>ลึกลงไปเป็นอย่างไร</em> ผู้อ่านจึงใช้หนังสือคู่กับเอกสารรายสัปดาห์ได้ หรืออ่านหนังสือเล่มเดียวก็ได้ เพราะทุกบทอ่านจบในตัว</p>
+<p>ลักษณะสำคัญของเล่มมีสามข้อ</p>
+<ol type="1">
+<li><strong>ใช้กรณีศึกษาเดียวตลอดเล่ม</strong> คือข้อมูลคุณภาพอากาศ PM2.5 ของประเทศไทยจาก Air4Thai ของกรมควบคุมมลพิษ ผู้อ่านจะเห็นข้อมูลชุดเดียวกันเดินทางจาก API ไปเป็นไฟล์ดิบ ฐานข้อมูล ตาราง กราฟ และแดชบอร์ด ทำให้เห็นว่าการตัดสินใจในขั้นต้น (เช่น การจัดการค่าแทนข้อมูลหาย) ส่งผลต่อข้อสรุปในขั้นปลายอย่างไร</li>
+<li><strong>สร้างระบบจริงหนึ่งระบบ</strong> ไม่ใช่ตัวอย่างโค้ดที่ไม่ต่อกัน ทุกบทเพิ่มชิ้นส่วนหนึ่งเข้าไปในระบบเดียวกัน ตามโครงสร้าง repository ที่กำหนดไว้ในหัวข้อ <a href="#sec-ch00-case-main">0.6</a></li>
+<li><strong>มีเนื้อหาเกินกว่าที่สอนในชั้นเรียน</strong> หัวข้อที่มีเครื่องหมาย ★ เป็นเนื้อหาเชิงลึก ผู้อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป แต่ผู้ที่ต้องการทำโครงงานหรือเรียนต่อวิชาขั้นสูงควรกลับมาอ่าน</li>
+</ol>
+</section>
+<section id="สงทหนงสอเลมนไมไดเปน" class="level3">
+<h3 class="anchored" data-anchor-id="สงทหนงสอเลมนไมไดเปน">สิ่งที่หนังสือเล่มนี้ไม่ได้เป็น</h3>
+<p>หนังสือเล่มนี้ไม่ใช่ตำรา machine learning เรากล่าวถึงการจัดกลุ่ม (clustering) และการวิเคราะห์องค์ประกอบหลัก (PCA) ในบทที่ 15 ในฐานะเครื่องมือ <em>สำรวจ</em> ไม่ใช่เครื่องมือ <em>ทำนาย</em> หนังสือเล่มนี้ไม่ใช่ตำราสถิติฉบับสมบูรณ์ บทที่ 13 ครอบคลุมเฉพาะสถิติที่ใช้บ่อยในการสำรวจข้อมูลและการตีความที่ถูกต้อง และไม่ใช่คู่มืออ้างอิงของไลบรารีใดไลบรารีหนึ่ง เอกสารทางการของแต่ละไลบรารีละเอียดและทันสมัยกว่าเสมอ หนังสือนี้ทำหน้าที่ชี้ว่าควรใช้เครื่องมือใด เมื่อใด และใช้แล้วต้องระวังอะไร</p>
+</section>
+<section id="คำวา-สำรวจ-ในหนงสอเลมน" class="level3">
+<h3 class="anchored" data-anchor-id="คำวา-สำรวจ-ในหนงสอเลมน">คำว่า “สำรวจ” ในหนังสือเล่มนี้</h3>
+<p>การสำรวจข้อมูล (Exploratory Data Analysis หรือ EDA) เป็นคำที่ John Tukey ใช้เป็นชื่อหนังสือของเขาในปี ค.ศ. 1977 <span class="citation" data-cites="tukey1977exploratory">(<a href="../references.html#ref-tukey1977exploratory" role="doc-biblioref">Tukey 1977</a>)</span> Tukey เปรียบ EDA กับงานนักสืบที่ตามหาเบาะแส และเปรียบการวิเคราะห์เชิงยืนยันกับงานของศาลที่ชั่งน้ำหนักหลักฐาน บทที่ 1 เล่าประวัติและแนวคิดนี้อย่างละเอียด ในบทนี้ขอเน้นเพียงว่า หนังสือใช้คำว่า “สำรวจ” ในความหมายกว้าง ครอบคลุมทุกกิจกรรมที่ทำให้เรา <em>รู้จักข้อมูล</em> ก่อนสรุป ทั้งการอ่านเอกสารของแหล่งข้อมูล การนับแถว การดูค่าที่หายไป การวาดกราฟ และการคำนวณสถิติเชิงพรรณนา</p>
+</section>
+</section>
+<section id="sec-ch00-why-explore" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-why-explore">0.2 ทำไมการสำรวจข้อมูลจึงสำคัญ: ตัวอย่างการตัดสินใจที่ผิดเพราะไม่เข้าใจข้อมูล</h2>
+<p>ความผิดพลาดที่แพงที่สุดในงานข้อมูลมักไม่ได้เกิดจากการเลือกวิธีทางสถิติที่ซับซ้อนผิด แต่เกิดจากการไม่ได้ดูข้อมูลให้ดีพอตั้งแต่ต้น ตัวอย่างต่อไปนี้มาจากหลายสาขา และทุกกรณีมีเอกสารวิเคราะห์ย้อนหลังที่ตรวจสอบได้ แต่ละกรณีชี้ไปที่ขั้นตอนหนึ่งของวงจรข้อมูลที่หนังสือเล่มนี้สอน</p>
+<section id="เครองบนทกลบมาได-ขอมลทหายไปอยางเปนระบบ" class="level3">
+<h3 class="anchored" data-anchor-id="เครองบนทกลบมาได-ขอมลทหายไปอยางเปนระบบ">เครื่องบินที่กลับมาได้: ข้อมูลที่หายไปอย่างเป็นระบบ</h3>
+<p>ในช่วงสงครามโลกครั้งที่สอง Abraham Wald นักสถิติของ Statistical Research Group ที่มหาวิทยาลัยโคลัมเบีย ได้รับโจทย์ให้วิเคราะห์ว่าควรเสริมเกราะเครื่องบินทิ้งระเบิดตรงไหน ข้อมูลที่มีคือตำแหน่งรอยกระสุนบนเครื่องบินที่ <em>บินกลับมาได้</em> ข้อสังเกตสำคัญของ Wald คือ เครื่องบินที่ถูกยิงตรงจุดสำคัญไม่ได้กลับมาให้นับ ตำแหน่งที่ <em>ไม่มี</em> รอยกระสุนบนเครื่องที่รอดจึงอาจเป็นตำแหน่งที่อันตรายที่สุด งานของ Wald ซับซ้อนกว่าเรื่องเล่าที่แพร่หลาย แต่แก่นของมันคือการคิดอย่างเป็นระบบว่าข้อมูลส่วนใดหายไปและหายไปเพราะอะไร <span class="citation" data-cites="mangel1984abraham">(<a href="../references.html#ref-mangel1984abraham" role="doc-biblioref">Mangel และ Samaniego 1984</a>)</span></p>
+<p>ในข้อมูล PM2.5 ปัญหาแบบเดียวกันเกิดขึ้นได้ ถ้าเครื่องวัดมักหยุดทำงานในวันที่ฝุ่นหนามาก (เช่น ไฟฟ้าดับหรือตัวกรองอุดตัน) ค่าเฉลี่ยที่คำนวณจากชั่วโมงที่เหลือจะต่ำกว่าความจริง บทที่ 10 อธิบายกรอบแนวคิดของกลไกการสูญหายของข้อมูล และวิธีหาหลักฐานว่าข้อมูลของเราหายไปแบบใด</p>
+</section>
+<section id="challenger-ขอมลทถกตดออกจากกราฟ" class="level3">
+<h3 class="anchored" data-anchor-id="challenger-ขอมลทถกตดออกจากกราฟ">Challenger: ข้อมูลที่ถูกตัดออกจากกราฟ</h3>
+<p>ก่อนการปล่อยกระสวยอวกาศ Challenger ในเดือนมกราคม ค.ศ. 1986 วิศวกรได้หารือกันเรื่องความเสี่ยงที่ซีลยาง O-ring จะเสียหายเมื่ออากาศหนาว ข้อมูลที่นำมาพิจารณาในคืนก่อนปล่อยเน้นเฉพาะเที่ยวบินที่เคยพบความเสียหายของ O-ring เมื่อดูเฉพาะเที่ยวบินกลุ่มนี้ ความสัมพันธ์กับอุณหภูมิไม่ชัดเจน แต่เมื่อรวมเที่ยวบินที่ <em>ไม่พบ</em> ความเสียหายเข้าไปด้วย จะเห็นว่าเที่ยวบินที่ไม่มีปัญหาเกิดในวันที่อากาศอุ่นทั้งสิ้น Edward Tufte วิเคราะห์กรณีนี้ไว้ว่าการเลือกข้อมูลและวิธีแสดงผลที่ไม่เหมาะสมทำให้หลักฐานที่มีอยู่แล้วไม่ถูกมองเห็น <span class="citation" data-cites="tufte1997visual">(<a href="../references.html#ref-tufte1997visual" role="doc-biblioref">Tufte 1997</a>)</span></p>
+<p>บทเรียนสำหรับเล่มนี้คือ การเลือกแถวก่อนวาดกราฟเป็นการตัดสินใจเชิงวิเคราะห์ ไม่ใช่เรื่องเทคนิค บทที่ 11 อธิบายหลักความซื่อตรงของภาพ และบทที่ 4 อธิบายว่าทางเลือกระหว่างการวิเคราะห์ (garden of forking paths) ส่งผลต่อข้อสรุปอย่างไร</p>
+</section>
+<section id="หนสาธารณะกบการเตบโต-แถวทหายไปในสเปรดชต" class="level3">
+<h3 class="anchored" data-anchor-id="หนสาธารณะกบการเตบโต-แถวทหายไปในสเปรดชต">หนี้สาธารณะกับการเติบโต: แถวที่หายไปในสเปรดชีต</h3>
+<p>ในปี ค.ศ. 2010 Carmen Reinhart และ Kenneth Rogoff ตีพิมพ์งานที่รายงานว่า ประเทศที่มีหนี้สาธารณะเกินร้อยละ 90 ของผลิตภัณฑ์มวลรวมในประเทศ มีอัตราการเติบโตทางเศรษฐกิจเฉลี่ยต่ำมาก <span class="citation" data-cites="reinhart2010growth">(<a href="../references.html#ref-reinhart2010growth" role="doc-biblioref">Reinhart และ Rogoff 2010</a>)</span> งานนี้ถูกอ้างถึงอย่างกว้างขวางในการถกเถียงเรื่องนโยบายรัดเข็มขัด ต่อมา Thomas Herndon นักศึกษาปริญญาเอก พร้อมด้วย Michael Ash และ Robert Pollin ขอสเปรดชีตต้นฉบับมาทำซ้ำ แล้วพบว่าสูตรคำนวณค่าเฉลี่ยครอบคลุมแถวไม่ครบ ทำให้บางประเทศหลุดจากการคำนวณ ร่วมกับการตัดข้อมูลบางช่วงและวิธีถ่วงน้ำหนักที่มีผลต่อข้อสรุป เมื่อแก้ไขแล้ว อัตราการเติบโตเฉลี่ยของกลุ่มหนี้สูงไม่ได้ต่ำอย่างที่รายงานไว้เดิม <span class="citation" data-cites="herndon2014does">(<a href="../references.html#ref-herndon2014does" role="doc-biblioref">Herndon และคณะ 2014</a>)</span></p>
+<p>ข้อผิดพลาดนี้ถูกพบเพราะมีคน <em>ทำซ้ำ</em> งาน ถ้าการคำนวณอยู่ในโค้ดที่ทุกคนรันได้และมีประวัติการแก้ไข ข้อผิดพลาดแบบนี้จะถูกพบเร็วกว่ามาก นี่คือเหตุผลที่บทที่ 2 และ 3 มาก่อนบทที่ว่าด้วยการวิเคราะห์ และเหตุผลที่บทที่ 6–7 ให้ทำงานกับข้อมูลด้วย SQL ที่อ่านและตรวจสอบได้แทนการคลิกในสเปรดชีต</p>
+</section>
+<section id="google-flu-trends-ขอมลใหญไมไดแปลวาขอมลด" class="level3">
+<h3 class="anchored" data-anchor-id="google-flu-trends-ขอมลใหญไมไดแปลวาขอมลด">Google Flu Trends: ข้อมูลใหญ่ไม่ได้แปลว่าข้อมูลดี</h3>
+<p>Google Flu Trends เป็นระบบที่ประมาณการระบาดของไข้หวัดใหญ่จากคำค้นหาบนอินเทอร์เน็ต ระบบนี้ได้รับความสนใจมากในช่วงแรก แต่ต่อมาประมาณการสูงเกินจริงอย่างต่อเนื่อง ในฤดูไข้หวัดใหญ่ ค.ศ. 2012–2013 ระบบประมาณสัดส่วนผู้ป่วยที่มีอาการคล้ายไข้หวัดใหญ่สูงกว่าตัวเลขของศูนย์ควบคุมและป้องกันโรคของสหรัฐอเมริกาเกินสองเท่า Lazer และคณะวิเคราะห์ว่าสาเหตุส่วนหนึ่งมาจากการที่พฤติกรรมการค้นหาและอัลกอริทึมของเครื่องมือค้นหาเปลี่ยนไปตามเวลา ขณะที่แบบจำลองถือว่าความสัมพันธ์คงที่ <span class="citation" data-cites="lazer2014parable">(<a href="../references.html#ref-lazer2014parable" role="doc-biblioref">Lazer และคณะ 2014</a>)</span></p>
+<p>บทเรียนคือ ปริมาณข้อมูลไม่ได้ทดแทนความเข้าใจว่าข้อมูลถูกสร้างขึ้นอย่างไร ข้อมูลจากเซนเซอร์ PM2.5 ก็เปลี่ยนตามเวลาได้เช่นกัน เช่น เครื่องวัดถูกเปลี่ยนรุ่น ย้ายตำแหน่ง หรือค่าเพี้ยน (drift) ไปทีละน้อย บทที่ 9 อธิบายปัญหาเฉพาะของข้อมูลจากเซนเซอร์ และบทที่ 14 อธิบายการตรวจหาจุดเปลี่ยนในอนุกรมเวลา</p>
+</section>
+<section id="mars-climate-orbiter-หนวยทไมตรงกน" class="level3">
+<h3 class="anchored" data-anchor-id="mars-climate-orbiter-หนวยทไมตรงกน">Mars Climate Orbiter: หน่วยที่ไม่ตรงกัน</h3>
+<p>ยานสำรวจ Mars Climate Orbiter ของ NASA สูญหายในเดือนกันยายน ค.ศ. 1999 ขณะเข้าสู่วงโคจรของดาวอังคาร คณะกรรมการสอบสวนพบว่าซอฟต์แวร์ส่วนหนึ่งส่งข้อมูลแรงขับในหน่วยอังกฤษ (ปอนด์-แรง วินาที) ขณะที่ระบบปลายทางคาดว่าจะได้รับหน่วยเมตริก (นิวตัน วินาที) <span class="citation" data-cites="nasa1999mars">(<a href="../references.html#ref-nasa1999mars" role="doc-biblioref">Mars Climate Orbiter Mishap Investigation Board 1999</a>)</span> ข้อมูลไม่ได้ “ผิด” ในความหมายว่าเป็นค่าสุ่ม แต่ความหมายของตัวเลขไม่ตรงกับที่ผู้ใช้เข้าใจ</p>
+<p>ในงานข้อมูลประจำวัน ความผิดพลาดแบบเดียวกันเกิดได้บ่อยกว่าที่คิด เช่น เวลาที่บันทึกเป็น UTC แต่ถูกอ่านเป็นเวลาไทย ทำให้ช่วงพีกของฝุ่นตอนเช้าเลื่อนไปเจ็ดชั่วโมง หรือค่า <code>"-1"</code> ที่ Air4Thai ใช้แทนข้อมูลหาย ถูกนำไปคำนวณเป็นค่าฝุ่นจริง พจนานุกรมข้อมูล (data dictionary) ในบทที่ 9 และการจัดการวันเวลาในบทที่ 7–8 มีไว้ป้องกันปัญหาประเภทนี้</p>
+</section>
+<section id="สงททกกรณมรวมกน" class="level3">
+<h3 class="anchored" data-anchor-id="สงททกกรณมรวมกน">สิ่งที่ทุกกรณีมีร่วมกัน</h3>
+<div id="tbl-ch00-failures" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-failures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1: กรณีความผิดพลาดที่เกิดจากการไม่เข้าใจข้อมูล และบทในเล่มที่ช่วยป้องกัน
+</figcaption>
+<div aria-describedby="tbl-ch00-failures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>กรณี</th>
+<th>สิ่งที่ขาดไป</th>
+<th>บทที่ช่วยป้องกัน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เครื่องบินของ Wald</td>
+<td>การถามว่าข้อมูลส่วนใดหายไปและเพราะอะไร</td>
+<td>10 ข้อมูลสูญหาย</td>
+</tr>
+<tr class="even">
+<td>Challenger</td>
+<td>การดูข้อมูลทั้งหมดก่อนเลือกแถว และการแสดงผลที่ซื่อตรง</td>
+<td>4, 11</td>
+</tr>
+<tr class="odd">
+<td>Reinhart–Rogoff</td>
+<td>การทำซ้ำได้และการตรวจสอบโดยผู้อื่น</td>
+<td>2, 3, 7</td>
+</tr>
+<tr class="even">
+<td>Google Flu Trends</td>
+<td>ความเข้าใจว่าข้อมูลถูกสร้างอย่างไรและเปลี่ยนไปตามเวลา</td>
+<td>9, 14</td>
+</tr>
+<tr class="odd">
+<td>Mars Climate Orbiter</td>
+<td>เอกสารกำกับข้อมูลที่บอกหน่วยและความหมาย</td>
+<td>8, 9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ทุกกรณีใน <a href="#tbl-ch00-failures" class="quarto-xref">ตารางที่&nbsp;<span>1</span></a> ไม่ได้ต้องการเทคนิคขั้นสูงเพื่อป้องกัน สิ่งที่ต้องการคือ <em>นิสัย</em> ในการสำรวจข้อมูลก่อนสรุป ซึ่งเป็นสิ่งที่หนังสือเล่มนี้พยายามสร้าง</p>
+</section>
+</section>
+<section id="sec-ch00-disciplines" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-disciplines">0.3 ศาสตร์ที่หลอมรวมอยู่ในเล่ม</h2>
+<p>วิทยาการข้อมูล (data science) ไม่ใช่ศาสตร์เดี่ยว David Donoho ทบทวนประวัติของสาขานี้ไว้ว่า แนวคิดหลักหลายอย่างมีรากมาจากสถิติศาสตร์มานานก่อนจะมีคำว่า data science และสิ่งที่เพิ่มเข้ามาคือการคำนวณ การจัดการข้อมูล และการทำงานที่ทำซ้ำได้ในระดับใหญ่ <span class="citation" data-cites="donoho2017fifty">(<a href="../references.html#ref-donoho2017fifty" role="doc-biblioref">Donoho 2017</a>)</span> หัวข้อนี้แจกแจงว่าศาสตร์แต่ละแขนงเข้ามาในเล่มที่ตรงไหน เพื่อให้ผู้อ่านเห็นว่าทักษะที่เรียนในวิชาอื่นถูกนำมาใช้อย่างไร</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  Q[คำถามเกี่ยวกับ PM2.5] --&gt; S[สถิติศาสตร์]
+  Q --&gt; C[วิทยาการคอมพิวเตอร์&lt;br/&gt;และวิศวกรรมซอฟต์แวร์]
+  Q --&gt; D[ระบบฐานข้อมูล]
+  Q --&gt; M[คณิตศาสตร์]
+  Q --&gt; P[จิตวิทยาการรับรู้&lt;br/&gt;และการออกแบบ]
+  Q --&gt; G[ภูมิสารสนเทศ]
+  Q --&gt; E[ความรู้เชิงโดเมน&lt;br/&gt;คุณภาพอากาศ]
+  Q --&gt; L[กฎหมายและจริยธรรม]
+  S &amp; C &amp; D &amp; M &amp; P &amp; G &amp; E &amp; L --&gt; U[ความเข้าใจที่เชื่อถือได้]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="สถตศาสตร-การแจกแจง-การอนมาน-ความไมแนนอน" class="level3">
+<h3 class="anchored" data-anchor-id="สถตศาสตร-การแจกแจง-การอนมาน-ความไมแนนอน">สถิติศาสตร์: การแจกแจง การอนุมาน ความไม่แน่นอน</h3>
+<p>สถิติศาสตร์ให้ภาษาสำหรับพูดถึงความแปรปรวนและความไม่แน่นอน ค่าเฉลี่ย PM2.5 ของเดือนหนึ่งไม่ใช่ตัวเลขที่แน่นอน เพราะคำนวณจากชั่วโมงที่วัดได้ ซึ่งอาจไม่ครบ และค่าในแต่ละชั่วโมงก็มีความคลาดเคลื่อนจากการวัด สถิติศาสตร์บอกเราว่าตัวเลขนั้นน่าเชื่อถือแค่ไหน ในเล่มนี้ สถิติปรากฏตั้งแต่การแจกแจงและสถิติแบบทนทาน (robust statistics) ช่วงความเชื่อมั่น การทดสอบสมมติฐาน และขนาดอิทธิพล (effect size) ในบทที่ 13 ไปจนถึงการแยกองค์ประกอบของอนุกรมเวลาในบทที่ 14 และกรอบแนวคิดเรื่องกลไกการสูญหายของข้อมูลในบทที่ 10</p>
+</section>
+<section id="วทยาการคอมพวเตอรและวศวกรรมซอฟตแวร-การเขยนโปรแกรม-version-control-การทดสอบ-การทำซำได" class="level3">
+<h3 class="anchored" data-anchor-id="วทยาการคอมพวเตอรและวศวกรรมซอฟตแวร-การเขยนโปรแกรม-version-control-การทดสอบ-การทำซำได">วิทยาการคอมพิวเตอร์และวิศวกรรมซอฟต์แวร์: การเขียนโปรแกรม version control การทดสอบ การทำซ้ำได้</h3>
+<p>การวิเคราะห์ที่ดีแต่ทำซ้ำไม่ได้มีคุณค่าน้อยกว่าที่ควร ทักษะจากวิศวกรรมซอฟต์แวร์ เช่น การจัดการสภาพแวดล้อม (บทที่ 2) version control และการ review โค้ด (บทที่ 3) การดึงข้อมูลอย่างทนทาน (บทที่ 5) และการตรวจสอบความถูกต้อง (validation) เป็นโค้ด (บทที่ 9) ทำให้งานวิเคราะห์กลายเป็นผลงานที่ผู้อื่นตรวจสอบและต่อยอดได้ ภาคผนวก ก ทบทวน Python ที่จำเป็นสำหรับผู้ที่ยังไม่คล่อง</p>
+</section>
+<section id="ระบบฐานขอมล-แบบจำลองเชงสมพนธ-sql-การจดเกบแบบ-columnar" class="level3">
+<h3 class="anchored" data-anchor-id="ระบบฐานขอมล-แบบจำลองเชงสมพนธ-sql-การจดเกบแบบ-columnar">ระบบฐานข้อมูล: แบบจำลองเชิงสัมพันธ์ SQL การจัดเก็บแบบ columnar</h3>
+<p>ข้อมูลรายชั่วโมงจากสถานีตรวจวัดหลายสิบแห่งตลอดหลายปีมีจำนวนแถวมากเกินกว่าจะจัดการในสเปรดชีตได้สะดวก บทที่ 6 อธิบายแบบจำลองเชิงสัมพันธ์ การจัดเก็บแบบ columnar และเหตุผลที่เลือก DuckDB เป็นฐานข้อมูลเชิงวิเคราะห์ของเล่ม บทที่ 7 สอน SQL สำหรับการวิเคราะห์ ตั้งแต่ลำดับการประมวลผลของคำสั่ง <code>SELECT</code> จนถึง window function</p>
+</section>
+<section id="คณตศาสตร-พชคณตเชงเสนและความนาจะเปนทอยเบองหลง-pca-clustering-และการทดสอบ" class="level3">
+<h3 class="anchored" data-anchor-id="คณตศาสตร-พชคณตเชงเสนและความนาจะเปนทอยเบองหลง-pca-clustering-และการทดสอบ">คณิตศาสตร์: พีชคณิตเชิงเส้นและความน่าจะเป็นที่อยู่เบื้องหลัง PCA clustering และการทดสอบ</h3>
+<p>ผู้อ่านไม่จำเป็นต้องพิสูจน์ทฤษฎีบทใดเพื่ออ่านหนังสือเล่มนี้ แต่ควรเข้าใจว่าเครื่องมือทำอะไรเบื้องหลัง PCA ในบทที่ 15 คือการหาทิศทางที่ข้อมูลแปรผันมากที่สุดด้วยการแยกเมทริกซ์ การจัดกลุ่มแบบ k-means คือการหาจุดศูนย์กลางที่ทำให้ระยะทางรวมน้อยที่สุด และ p-value คือความน่าจะเป็นภายใต้สมมติฐานหนึ่ง ภาคผนวก จ รวบรวมคณิตศาสตร์พื้นฐานที่ใช้ในเล่มไว้ให้ทบทวน</p>
+</section>
+<section id="จตวทยาการรบรและการออกแบบ-การมองเหน-ส-และการเลาเรองดวยภาพ" class="level3">
+<h3 class="anchored" data-anchor-id="จตวทยาการรบรและการออกแบบ-การมองเหน-ส-และการเลาเรองดวยภาพ">จิตวิทยาการรับรู้และการออกแบบ: การมองเห็น สี และการเล่าเรื่องด้วยภาพ</h3>
+<p>กราฟเป็นเครื่องมือที่ทรงพลังที่สุดในการสำรวจข้อมูล เพราะใช้ระบบการมองเห็นของมนุษย์ที่ตรวจจับรูปแบบได้เร็ว แต่ระบบเดียวกันก็ถูกหลอกได้ง่าย บทที่ 11 อธิบายงานวิจัยด้านการรับรู้ที่บอกว่าการเข้ารหัสภาพแบบใดอ่านได้แม่นยำกว่า สีแบบใดเหมาะกับข้อมูลแบบใด และทำอย่างไรให้กราฟไม่บิดเบือนข้อมูล บทที่ 19 ต่อยอดไปยังการเล่าเรื่องด้วยข้อมูล</p>
+</section>
+<section id="ภมสารสนเทศ-ระบบพกด-แผนท-ขอมลเชงพนท" class="level3">
+<h3 class="anchored" data-anchor-id="ภมสารสนเทศ-ระบบพกด-แผนท-ขอมลเชงพนท">ภูมิสารสนเทศ: ระบบพิกัด แผนที่ ข้อมูลเชิงพื้นที่</h3>
+<p>สถานีตรวจวัดแต่ละแห่งมีพิกัด และค่าฝุ่นของสถานีใกล้กันมักคล้ายกัน บทที่ 17 อธิบายระบบพิกัดอ้างอิง (CRS) เส้นโครงแผนที่สำหรับประเทศไทย การรวมข้อมูลตามพื้นที่ และกับดักของแผนที่ choropleth</p>
+</section>
+<section id="ความรเชงโดเมน-วทยาศาสตรสงแวดลอมและคณภาพอากาศ-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="ความรเชงโดเมน-วทยาศาสตรสงแวดลอมและคณภาพอากาศ-pm2.5">ความรู้เชิงโดเมน: วิทยาศาสตร์สิ่งแวดล้อมและคุณภาพอากาศ (PM2.5)</h3>
+<p>ความรู้เชิงโดเมนช่วยแยกสิ่งที่ผิดปกติจริงออกจากสิ่งที่ปกติในบริบทนั้น เช่น ค่า PM2.5 ที่สูงมากในช่วงเวลาหนึ่งอาจเป็นเหตุการณ์จริงที่สอดคล้องกับฤดูกาลหรือแหล่งกำเนิดในพื้นที่ ไม่ใช่ความผิดพลาดของเครื่องวัด ผู้อ่านที่ไม่มีพื้นฐานวิทยาศาสตร์สิ่งแวดล้อมจะได้รู้จักแนวคิดที่จำเป็นในหัวข้อ <a href="#sec-ch00-case-main">0.6</a> และภาคผนวก ง ส่วนผู้ที่เลือกทำโครงการในโดเมนอื่นต้องหาความรู้เชิงโดเมนของตนเองในลักษณะเดียวกัน</p>
+</section>
+<section id="กฎหมายและจรยธรรม-pdpa-ความเปนสวนตว-ลขสทธ-การใช-ai-อยางรบผดชอบ" class="level3">
+<h3 class="anchored" data-anchor-id="กฎหมายและจรยธรรม-pdpa-ความเปนสวนตว-ลขสทธ-การใช-ai-อยางรบผดชอบ">กฎหมายและจริยธรรม: PDPA ความเป็นส่วนตัว ลิขสิทธิ์ การใช้ AI อย่างรับผิดชอบ</h3>
+<p>ข้อมูลคุณภาพอากาศเป็นข้อมูลเปิดและไม่มีข้อมูลส่วนบุคคล แต่โครงการข้อมูลส่วนใหญ่ในโลกจริงไม่ได้โชคดีเช่นนั้น พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) <span class="citation" data-cites="pdpa2019personal">(<a href="../references.html#ref-pdpa2019personal" role="doc-biblioref">ราชกิจจานุเบกษา 2019</a>)</span> กำหนดหน้าที่ของผู้เก็บและใช้ข้อมูลส่วนบุคคล บทที่ 5 กล่าวถึงข้อกำหนดการใช้งานและลิขสิทธิ์ของแหล่งข้อมูล บทที่ 16 กล่าวถึง PDPA และการสร้างข้อมูลสังเคราะห์ และบทที่ 22 กล่าวถึงจริยธรรมข้อมูลและการใช้ AI ช่วยเขียนโค้ดอย่างรับผิดชอบ</p>
+</section>
+</section>
+<section id="sec-ch00-toolbox-map" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-toolbox-map">0.4 แผนที่ชุดเครื่องมือ: เครื่องมือแต่ละตัวอยู่ตรงไหนในวงจรข้อมูล และเลือกใช้เมื่อใด</h2>
+<p>ผู้เริ่มต้นมักรู้สึกว่าเครื่องมือในวิทยาการข้อมูลมีมากจนไม่รู้จะเริ่มที่ไหน วิธีจัดระเบียบที่ได้ผลคือถามว่าเครื่องมือนั้นอยู่ใน <em>ขั้นใด</em> ของวงจรข้อมูล และแก้ปัญหาอะไรในขั้นนั้น เครื่องมือสองตัวที่อยู่ในขั้นเดียวกันมักเป็นทางเลือกแทนกันได้ ส่วนเครื่องมือที่อยู่ต่างขั้นมักใช้ร่วมกัน</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[ตั้งคำถาม] --&gt; B[ได้มาซึ่งข้อมูล]
+  B --&gt; C[จัดเก็บและสืบค้น]
+  C --&gt; D[จัดการและแปลงรูป]
+  D --&gt; E[ตรวจคุณภาพ]
+  E --&gt; F[สำรวจด้วยภาพและสถิติ]
+  F --&gt; G[สื่อสารผล]
+  F -.คำถามใหม่.-&gt; A
+  E -.พบปัญหา ต้องเก็บใหม่.-&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ตารางต่อไปนี้จัดเครื่องมือหลักของเล่มตามขั้นของวงจร คอลัมน์ “เลือกใช้เมื่อ” บอกสถานการณ์ที่เครื่องมือนั้นเหมาะที่สุด ภาคผนวก ซ มีตารางฉบับเต็มพร้อมทางเลือกอื่น</p>
+<div id="tbl-ch00-toolbox-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-toolbox-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2: แผนที่ชุดเครื่องมือ ส่วนที่ 1 ตั้งแต่สภาพแวดล้อมถึงข้อมูลสูญหาย
+</figcaption>
+<div aria-describedby="tbl-ch00-toolbox-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ขั้น</th>
+<th>เครื่องมือหลัก</th>
+<th>เครื่องมือเสริม</th>
+<th>เลือกใช้เมื่อ</th>
+<th>บท</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สภาพแวดล้อมและการทำงาน</td>
+<td>conda/uv, VS Code, Jupyter, Git/GitHub</td>
+<td>Google Colab</td>
+<td>ทุกโครงการ ตั้งแต่วันแรก</td>
+<td>2, 3</td>
+</tr>
+<tr class="even">
+<td>ได้มาซึ่งข้อมูล</td>
+<td>requests</td>
+<td>BeautifulSoup</td>
+<td>มี API ใช้ requests ถ้ามีแต่หน้าเว็บจึงใช้ BeautifulSoup</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>จัดเก็บและสืบค้น</td>
+<td>DuckDB, SQL, Parquet</td>
+<td>Apache Arrow</td>
+<td>ข้อมูลเกินกว่าสเปรดชีต และต้องการ query ที่ตรวจสอบได้</td>
+<td>6, 7</td>
+</tr>
+<tr class="even">
+<td>จัดการข้อมูล</td>
+<td>pandas</td>
+<td>Polars</td>
+<td>pandas สำหรับงานทั่วไป Polars เมื่อข้อมูลใหญ่หรือต้องการความเร็ว</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>คุณภาพข้อมูล</td>
+<td>ydata-profiling, pandera</td>
+<td>skimpy, Sweetviz</td>
+<td>profiling เพื่อสำรวจ pandera เพื่อบังคับกฎใน pipeline</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>ข้อมูลสูญหาย</td>
+<td>missingno</td>
+<td>—</td>
+<td>ดูรูปแบบการสูญหายก่อนตัดสินใจเติมค่าหรือตัดทิ้ง</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-ch00-toolbox-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-toolbox-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3: แผนที่ชุดเครื่องมือ ส่วนที่ 2 ตั้งแต่ visualization ถึงการสื่อสารผล
+</figcaption>
+<div aria-describedby="tbl-ch00-toolbox-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ขั้น</th>
+<th>เครื่องมือหลัก</th>
+<th>เครื่องมือเสริม</th>
+<th>เลือกใช้เมื่อ</th>
+<th>บท</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>visualization</td>
+<td>seaborn, Plotly</td>
+<td>Altair, PyGWalker, Datashader</td>
+<td>seaborn สำหรับกราฟสถิติแบบนิ่ง Plotly เมื่อต้องการโต้ตอบ</td>
+<td>11, 12</td>
+</tr>
+<tr class="even">
+<td>สถิติเชิงสำรวจ</td>
+<td>SciPy, statsmodels</td>
+<td>pingouin</td>
+<td>ทดสอบสมมติฐานและแยกองค์ประกอบอนุกรมเวลา</td>
+<td>13, 14</td>
+</tr>
+<tr class="odd">
+<td>สำรวจหลายมิติ</td>
+<td>scikit-learn</td>
+<td>UMAP, PyOD</td>
+<td>มีตัวแปรหลายตัวและต้องการเห็นโครงสร้างหรือกลุ่ม</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>ข้อมูลสังเคราะห์</td>
+<td>Faker</td>
+<td>SDV, SMOTE</td>
+<td>ต้องการข้อมูลทดสอบโดยไม่ใช้ข้อมูลส่วนบุคคลจริง</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูลเชิงพื้นที่</td>
+<td>GeoPandas</td>
+<td>Folium</td>
+<td>ข้อมูลมีพิกัดหรือขอบเขตพื้นที่</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>สื่อสารผล</td>
+<td>Quarto, Streamlit</td>
+<td>Power BI, Looker Studio</td>
+<td>Quarto สำหรับรายงาน Streamlit สำหรับแดชบอร์ด</td>
+<td>19, 20</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="หลกการเลอกเครองมอ" class="level3">
+<h3 class="anchored" data-anchor-id="หลกการเลอกเครองมอ">หลักการเลือกเครื่องมือ</h3>
+<p>เมื่อมีเครื่องมือหลายตัวให้เลือกในขั้นเดียวกัน หนังสือเล่มนี้ใช้หลักการสามข้อ</p>
+<ol type="1">
+<li><strong>เลือกเครื่องมือที่ทำให้ผลตรวจสอบได้ก่อนเครื่องมือที่สะดวก</strong> การคลิกในโปรแกรมสเปรดชีตเร็วกว่าการเขียน SQL ในครั้งแรก แต่ครั้งที่สองที่ต้องทำซ้ำกับข้อมูลชุดใหม่ SQL ชนะเสมอ และคนอื่นอ่าน SQL แล้วรู้ว่าเราทำอะไร</li>
+<li><strong>เลือกเครื่องมือที่น้อยที่สุดที่แก้ปัญหาได้</strong> DuckDB ไฟล์เดียวเพียงพอสำหรับข้อมูลระดับหลายสิบล้านแถวบนเครื่องคอมพิวเตอร์ส่วนตัว จึงยังไม่จำเป็นต้องตั้งเซิร์ฟเวอร์ฐานข้อมูล ทุกเครื่องมือที่เพิ่มเข้ามาคือสิ่งที่ต้องติดตั้ง ดูแล และอธิบายให้ผู้อื่นเข้าใจ</li>
+<li><strong>แยกเครื่องมือสำรวจออกจากเครื่องมือ production</strong> notebook และเครื่องมือสำรวจแบบลากวางเหมาะกับการหาเบาะแส แต่โค้ดที่ต้องรันซ้ำทุกวันควรอยู่ในไฟล์ <code>.py</code> ที่ทดสอบได้ บทที่ 2 อธิบายเหตุผลเรื่องนี้อย่างละเอียด</li>
+</ol>
+</section>
+</section>
+<section id="sec-ch00-roadmap" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-roadmap">0.5 เส้นทางของเล่ม: สรุปทั้ง 7 ส่วนและความเชื่อมโยงระหว่างบท</h2>
+<p>หนังสือแบ่งเป็น 7 ส่วน ตามลำดับที่ข้อมูลไหลผ่านระบบ แต่ละส่วนสร้างผลงานที่ส่วนถัดไปนำไปใช้ต่อ</p>
+<p><strong>ส่วนที่ 1 รากฐาน (บทที่ 1–4)</strong> วางพื้นฐานทั้งด้านแนวคิดและด้านเครื่องมือ บทที่ 1 อธิบายว่าการสำรวจข้อมูลคืออะไรและมาจากไหน บทที่ 2 สร้างสภาพแวดล้อมที่ทำซ้ำได้ บทที่ 3 สอน Git และการทำงานร่วมกันบน GitHub และบทที่ 4 สอนการตั้งคำถามเชิงวิเคราะห์และสมมติฐานโดยไม่หลอกตัวเอง ผลงานของส่วนนี้คือ repository โครงการที่พร้อมทำงาน และไฟล์ <code>questions.md</code> ที่ระบุคำถามที่จะตอบ</p>
+<p><strong>ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล (บทที่ 5–8)</strong> สร้างครึ่งแรกของ pipeline บทที่ 5 ดึงข้อมูลจาก API อย่างทนทานและถูกกฎหมาย บทที่ 6 อธิบายแบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์ บทที่ 7 ใช้ SQL วิเคราะห์ข้อมูล และบทที่ 8 แปลงรูปข้อมูลด้วย pandas และ Polars ผลงานคือฐานข้อมูล <code>data/pm25.duckdb</code> ที่มีตาราง <code>stations</code>, <code>measurements</code> และ <code>daily_pm25</code></p>
+<p><strong>ส่วนที่ 3 คุณภาพข้อมูล (บทที่ 9–10)</strong> ตรวจและแก้ปัญหาของข้อมูลก่อนนำไปวิเคราะห์ บทที่ 9 ว่าด้วยมิติของคุณภาพข้อมูลและการเขียนกฎตรวจเป็นโค้ด บทที่ 10 ว่าด้วยข้อมูลสูญหาย ผลงานคือตาราง <code>measurements_clean</code> และ <code>daily_pm25_clean</code> ซึ่งเป็นฐานของการวิเคราะห์ทั้งหมดตั้งแต่บทที่ 11</p>
+<p><strong>ส่วนที่ 4 การสำรวจด้วยภาพ (บทที่ 11–12)</strong> บทที่ 11 อธิบายหลักการรับรู้และการออกแบบกราฟ บทที่ 12 อธิบาย grammar of graphics และกราฟเชิงโต้ตอบ</p>
+<p><strong>ส่วนที่ 5 สถิติและการสำรวจหลายมิติ (บทที่ 13–16)</strong> บทที่ 13 ว่าด้วยสถิติเชิงพรรณนาและการอนุมาน บทที่ 14 ว่าด้วยอนุกรมเวลา บทที่ 15 ว่าด้วยข้อมูลหลายมิติ การจัดกลุ่ม และค่าผิดปกติ (outlier) บทที่ 16 ว่าด้วยข้อมูลสังเคราะห์และความเป็นส่วนตัว</p>
+<p><strong>ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร (บทที่ 17–20)</strong> บทที่ 17–18 ขยายการสำรวจไปยังมิติพื้นที่และลำดับชั้น ภาค → จังหวัด → สถานี บทที่ 19–20 เปลี่ยนข้อค้นพบให้เป็นรายงานที่ทำซ้ำได้และแดชบอร์ด</p>
+<p><strong>ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ (บทที่ 21–22)</strong> บทที่ 21 ร้อยทุกบทเข้าด้วยกันเป็นกรณีศึกษาครบวงจร และบทที่ 22 ปิดเล่มด้วยจริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  subgraph P1[ส่วนที่ 1 รากฐาน]
+    c1[1 EDA] --&gt; c4[4 คำถาม]
+    c2[2 สภาพแวดล้อม] --&gt; c3[3 Git]
+  end
+  subgraph P2[ส่วนที่ 2 ได้มาและจัดเก็บ]
+    c5[5 API] --&gt; c6[6 ฐานข้อมูล] --&gt; c7[7 SQL] --&gt; c8[8 แปลงรูป]
+  end
+  subgraph P3[ส่วนที่ 3 คุณภาพ]
+    c9[9 คุณภาพ] --&gt; c10[10 ข้อมูลสูญหาย]
+  end
+  subgraph P45[ส่วนที่ 4–5 สำรวจ]
+    c11[11–12 ภาพ] --&gt; c13[13–16 สถิติและหลายมิติ]
+  end
+  subgraph P6[ส่วนที่ 6 พื้นที่และสื่อสาร]
+    c17[17–18 พื้นที่ ลำดับชั้น] --&gt; c19[19–20 รายงาน แดชบอร์ด]
+  end
+  P1 --&gt; P2 --&gt; P3 --&gt; P45 --&gt; P6 --&gt; c21[21 กรณีศึกษาครบวงจร]
+  c22[22 จริยธรรมและ AI] -.อ่านคู่กับทุกส่วน.-&gt; P1
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ความเชื่อมโยงที่สำคัญที่สุดในเล่มคือ <strong>ทุกบทตั้งแต่บทที่ 11 ใช้ตาราง <code>daily_pm25_clean</code></strong> ที่สร้างในบทที่ 10 การตัดสินใจในบทที่ 9–10 เช่น เกณฑ์ความครบถ้วนรายวัน จึงส่งผลต่อกราฟ สถิติ และแดชบอร์ดทั้งหมดที่ตามมา ผู้อ่านที่กระโดดข้ามไปอ่านบทหลัง ๆ ควรรู้ว่าตารางนี้ผ่านการตัดสินใจอะไรมาบ้าง</p>
+</section>
+<section id="sec-ch00-case-main" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-case-main">0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย</h2>
+<section id="ทำไมเลอก-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมเลอก-pm2.5">ทำไมเลือก PM2.5</h3>
+<p>กรณีศึกษาที่ดีสำหรับหนังสือเรื่องการสำรวจข้อมูลควรมีลักษณะสี่ข้อ ข้อมูลคุณภาพอากาศ PM2.5 มีครบทุกข้อ</p>
+<ol type="1">
+<li><strong>เป็นข้อมูลจริงที่ดึงด้วยโค้ดได้</strong> <span class="idx-data">Air4Thai</span> ของ<span class="idx-data">กรมควบคุมมลพิษ</span> (คพ.) เผยแพร่ข้อมูลจากสถานีตรวจวัดทั่วประเทศผ่านเว็บไซต์และบริการข้อมูลในรูปแบบ JSON <span class="citation" data-cites="pcd2026air4thai">(<a href="../references.html#ref-pcd2026air4thai" role="doc-biblioref">กรมควบคุมมลพิษ 2026</a>)</span> ผู้อ่านจึงฝึกดึงข้อมูลจากแหล่งจริงได้ ไม่ใช่เพียงเปิดไฟล์ที่มีคนเตรียมไว้ให้</li>
+<li><strong>มีทั้งมิติเวลาและมิติพื้นที่</strong> ค่าวัดรายชั่วโมงจากสถานีที่มีพิกัด ทำให้ฝึกได้ทั้งการวิเคราะห์อนุกรมเวลา (บทที่ 14) และข้อมูลเชิงพื้นที่ (บทที่ 17)</li>
+<li><strong>ไม่สะอาดสมบูรณ์</strong> ข้อมูลจากเซนเซอร์มีค่าหาย ค่าแทน และค่าผิดปกติ ซึ่งเป็นวัตถุดิบที่ดีสำหรับฝึกตรวจคุณภาพข้อมูล</li>
+<li><strong>มีความหมายต่อสังคม</strong> ฝุ่นละอองขนาดเล็กเป็นปัจจัยเสี่ยงต่อสุขภาพ องค์การอนามัยโลกปรับแนวทางคุณภาพอากาศให้เข้มงวดขึ้นในปี ค.ศ. 2021 <span class="citation" data-cites="who2021global">(<a href="../references.html#ref-who2021global" role="doc-biblioref">World Health Organization 2021</a>)</span> และประเทศไทยปรับมาตรฐาน PM2.5 เฉลี่ย 24 ชั่วโมงจาก 50 เป็น 37.5 µg/m³ โดยมีผลตั้งแต่ พ.ศ. 2566 <span class="citation" data-cites="neb2022pm25">(<a href="../references.html#ref-neb2022pm25" role="doc-biblioref">คณะกรรมการสิ่งแวดล้อมแห่งชาติ 2022</a>)</span> คำถามที่ผู้อ่านตั้งจึงเป็นคำถามที่มีคนอยากรู้คำตอบจริง</li>
+</ol>
+</section>
+<section id="แนวคดพนฐานดานคณภาพอากาศทตองร" class="level3">
+<h3 class="anchored" data-anchor-id="แนวคดพนฐานดานคณภาพอากาศทตองร">แนวคิดพื้นฐานด้านคุณภาพอากาศที่ต้องรู้</h3>
+<p><span class="idx">PM2.5</span> คือฝุ่นละอองที่มีเส้นผ่านศูนย์กลางไม่เกิน 2.5 ไมโครเมตร วัดเป็นมวลต่อปริมาตรอากาศ หน่วย µg/m³ (ไมโครกรัมต่อลูกบาศก์เมตร) ค่าที่สถานีรายงานเป็นค่าเฉลี่ยรายชั่วโมง ส่วนมาตรฐานคุณภาพอากาศกำหนดเป็นค่าเฉลี่ย 24 ชั่วโมง การเปรียบเทียบค่ารายชั่วโมงกับมาตรฐานรายวันโดยตรงจึงเป็นความผิดพลาดที่พบบ่อย ค่าที่ต้องจำตลอดเล่มมีดังนี้</p>
+<div id="tbl-ch00-constants" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-constants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4: ค่าคงที่ที่ใช้ตลอดเล่ม
+</figcaption>
+<div aria-describedby="tbl-ch00-constants-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>รายการ</th>
+<th>ค่า</th>
+<th>ที่มา</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>มาตรฐาน PM2.5 เฉลี่ย 24 ชั่วโมงของไทย</td>
+<td>37.5 µg/m³</td>
+<td>ประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ มีผลตั้งแต่ พ.ศ. 2566 <span class="citation" data-cites="neb2022pm25">(<a href="../references.html#ref-neb2022pm25" role="doc-biblioref">คณะกรรมการสิ่งแวดล้อมแห่งชาติ 2022</a>)</span></td>
+</tr>
+<tr class="even">
+<td>แนวทาง WHO (2021) PM2.5 เฉลี่ย 24 ชั่วโมง</td>
+<td>15 µg/m³</td>
+<td><span class="citation" data-cites="who2021global">World Health Organization (<a href="../references.html#ref-who2021global" role="doc-biblioref">2021</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>เกณฑ์ความครบถ้วนรายวัน</td>
+<td>≥ 18 จาก 24 ชั่วโมง</td>
+<td>ข้อกำหนดของโครงการในเล่มนี้ ไม่ใช่มาตรฐานทางการ</td>
+</tr>
+<tr class="even">
+<td>ค่าแทนข้อมูลหายของ Air4Thai</td>
+<td><code>"-1"</code> (เป็นสตริง)</td>
+<td>ตรวจสอบกับข้อมูลจริงเมื่อ ต.ค. 2569</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>เกณฑ์ความครบถ้วนรายวันใน <a href="#tbl-ch00-constants" class="quarto-xref">ตารางที่&nbsp;<span>4</span></a> เป็นการตัดสินใจของโครงการ บทที่ 10 อภิปรายว่าเกณฑ์นี้มาจากไหน และถ้าเปลี่ยนเกณฑ์ ข้อสรุปจะเปลี่ยนไปอย่างไร</p>
+</section>
+<section id="สถาปตยกรรมของระบบ" class="level3">
+<h3 class="anchored" data-anchor-id="สถาปตยกรรมของระบบ">สถาปัตยกรรมของระบบ</h3>
+<p>ระบบที่ผู้อ่านจะสร้างมีสถาปัตยกรรมเป็น <span class="idx">pipeline</span> ห้าชั้น ข้อมูลไหลจากซ้ายไปขวา และแต่ละชั้นมีหน้าที่เดียว</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  API[Air4Thai API] --&gt;|src/fetch_air4thai.py| RAW[data/raw/*.json]
+  RAW --&gt;|src/load_duckdb.py| DB[(data/pm25.duckdb)]
+  DB --&gt;|SQL + pandas| PD[DataFrame]
+  PD --&gt; PL[กราฟ Plotly]
+  PL --&gt; ST[แดชบอร์ด Streamlit]
+  DB --&gt;|read-only + cache| ST
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>การแยกชั้นแบบนี้มีเหตุผล การเก็บ JSON ดิบไว้ใน <code>data/raw/</code> ก่อนโหลดเข้าฐานข้อมูล ทำให้ถ้าวันหนึ่งพบว่าโค้ดแปลงข้อมูลผิด เราย้อนกลับไปแปลงใหม่ได้โดยไม่ต้องดึงข้อมูลซ้ำ ซึ่งข้อมูลบางช่วงอาจดึงซ้ำไม่ได้อีกแล้ว การใช้ DuckDB เป็นที่เก็บกลาง ทำให้ทุกขั้นหลังจากนั้นอ่านข้อมูลชุดเดียวกัน และการให้แดชบอร์ดเปิดฐานข้อมูลแบบอ่านอย่างเดียว ป้องกันไม่ให้หน้าจอแสดงผลแก้ไขข้อมูลโดยไม่ตั้งใจ</p>
+</section>
+<section id="ฐานขอมลกลาง-datapm25.duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="ฐานขอมลกลาง-datapm25.duckdb">ฐานข้อมูลกลาง <code>data/pm25.duckdb</code></h3>
+<p>ตารางในฐานข้อมูลถูกสร้างขึ้นทีละบท ชื่อตารางและชื่อคอลัมน์ต่อไปนี้ใช้ตรงกันทั้งเล่มและตรงกับเอกสารรายสัปดาห์</p>
+<div id="tbl-ch00-tables" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5: ตารางในฐานข้อมูล <code>data/pm25.duckdb</code> และบทที่สร้าง
+</figcaption>
+<div aria-describedby="tbl-ch00-tables-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ตาราง/view</th>
+<th>คอลัมน์หลัก</th>
+<th>สร้างในบท</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="idx-data"><code>stations</code></span></td>
+<td><code>station_id, name_th, name_en, province, region, lat, lon, station_type</code></td>
+<td>6–7</td>
+</tr>
+<tr class="even">
+<td><span class="idx-data"><code>measurements</code></span></td>
+<td><code>station_id, ts, pm25, pm10, o3, co, no2, so2</code></td>
+<td>6–7</td>
+</tr>
+<tr class="odd">
+<td><span class="idx-data"><code>daily_pm25</code></span></td>
+<td><code>station_id, date, pm25_mean, pm25_max, n_hours</code></td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td><code>measurements_clean</code></td>
+<td>คอลัมน์ของ <code>measurements</code> + <code>status, pm25_filled, is_filled</code></td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td><span class="idx-data"><code>daily_pm25_clean</code></span></td>
+<td><code>station_id, date, pm25_mean, pm25_max, n_hours, n_hours_observed, is_complete</code></td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td><code>station_clusters</code>, <code>daily_outlier_flags</code></td>
+<td>ตามบทที่ 15</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ตาราง <code>measurements</code> เก็บค่ารายชั่วโมง คอลัมน์ <code>ts</code> เป็นชนิด <code>TIMESTAMP</code> ในเขตเวลา Asia/Bangkok และ primary key คือคู่ <code>(station_id, ts)</code> หมายความว่าสถานีหนึ่งมีค่าได้เพียงแถวเดียวต่อชั่วโมง ข้อกำหนดนี้ทำให้การโหลดข้อมูลซ้ำไม่สร้างแถวซ้ำ ซึ่งบทที่ 7 อธิบายวิธีทำ</p>
+</section>
+<section id="โครงสราง-repository-โครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="โครงสราง-repository-โครงการ">โครงสร้าง repository โครงการ</h3>
+<pre class="text"><code>pm25-explorer/
+├── README.md            ← โครงการนี้คืออะไร รันอย่างไร
+├── questions.md         ← คำถามเชิงวิเคราะห์ (บทที่ 4)
+├── AI_USAGE.md          ← บันทึกการใช้ AI (บทที่ 2, 22)
+├── data_dictionary.md   ← พจนานุกรมข้อมูล (บทที่ 9)
+├── environment.yml      ← หรือ pyproject.toml + uv.lock (บทที่ 2)
+├── src/                 ← fetch_air4thai.py → load_duckdb.py → validate.py → clean.py
+│   └── run_pipeline.py  ← รันทุกขั้นตามลำดับ
+├── notebooks/           ← การสำรวจข้อมูล
+├── app/                 ← แดชบอร์ด Streamlit (บทที่ 20)
+├── report/              ← รายงาน Quarto (บทที่ 19)
+├── reports/figures/     ← รูปที่ใช้ในรายงาน
+└── data/                ← ไม่ commit (อยู่ใน .gitignore)</code></pre>
+</section>
+<section id="ผทเลอกโดเมนอน" class="level3">
+<h3 class="anchored" data-anchor-id="ผทเลอกโดเมนอน">ผู้ที่เลือกโดเมนอื่น</h3>
+<p>สถาปัตยกรรมเดียวกันใช้ได้กับข้อมูลโดเมนอื่นที่มีลักษณะคล้ายกัน คือดึงด้วยโค้ดได้ มีมิติเวลา (และควรมีมิติพื้นที่) และไม่สะอาดสมบูรณ์ เช่น ข้อมูลปริมาณน้ำฝน ระดับน้ำในอ่างเก็บน้ำ อุบัติเหตุทางถนน หรือราคาสินค้าเกษตร ผู้อ่านที่เลือกโดเมนอื่นเปลี่ยนเพียงชั้นแรกของ pipeline และชื่อตาราง ส่วนหลักการในทุกบทยังใช้ได้เหมือนเดิม</p>
+</section>
+</section>
+<section id="sec-ch00-applications" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-applications">0.7 การนำไปใช้ประโยชน์</h2>
+<p>ทักษะในหนังสือเล่มนี้ไม่ได้ผูกกับข้อมูลฝุ่นหรือกับรายวิชาเดียว หัวข้อนี้แสดงว่าชุดเครื่องมือเดียวกันถูกนำไปใช้ในบริบทใดบ้าง</p>
+<section id="ในการเรยน-โครงงาน-สหกจศกษา-และการเรยนวชาขนสง-machine-learning-big-data" class="level3">
+<h3 class="anchored" data-anchor-id="ในการเรยน-โครงงาน-สหกจศกษา-และการเรยนวชาขนสง-machine-learning-big-data">ในการเรียน: โครงงาน สหกิจศึกษา และการเรียนวิชาขั้นสูง (machine learning, big data)</h3>
+<p>repository ที่ผู้อ่านสร้างตลอดเล่มเป็นแม่แบบของโครงงานทุกประเภท มีโครงสร้างโฟลเดอร์ที่ชัดเจน สภาพแวดล้อมที่ทำซ้ำได้ ประวัติ commit ที่อ่านได้ และรายงานที่สร้างจากโค้ด ในวิชา machine learning ผู้เรียนจะพบว่าเวลาส่วนใหญ่ของโครงการหมดไปกับการเตรียมและทำความเข้าใจข้อมูล ซึ่งเป็นเนื้อหาของบทที่ 5–10 ส่วนในวิชา big data แนวคิดเรื่องการจัดเก็บแบบ columnar การแบ่ง partition และ lazy evaluation ในบทที่ 6 และ 8 เป็นพื้นฐานของเครื่องมือระดับคลัสเตอร์</p>
+</section>
+<section id="ในอาชพ-data-analyst-data-engineer-data-scientist-analytics-engineer-และงานทตองใชขอมลในทกสาขา" class="level3">
+<h3 class="anchored" data-anchor-id="ในอาชพ-data-analyst-data-engineer-data-scientist-analytics-engineer-และงานทตองใชขอมลในทกสาขา">ในอาชีพ: data analyst, data engineer, data scientist, analytics engineer และงานที่ต้องใช้ข้อมูลในทุกสาขา</h3>
+<p>แต่ละอาชีพเน้นคนละส่วนของวงจร <strong>data engineer</strong> ทำงานหนักในส่วนที่ 2 คือ pipeline การจัดเก็บ และการโหลดข้อมูลแบบ idempotent <strong>analytics engineer</strong> ทำงานระหว่างส่วนที่ 2–3 คือแปลงข้อมูลด้วย SQL ให้เป็นตารางที่เชื่อถือได้และมีเอกสารกำกับ <strong>data analyst</strong> ทำงานในส่วนที่ 4–6 คือสำรวจ ตอบคำถาม และสื่อสารผล <strong>data scientist</strong> ใช้ทุกส่วนเป็นพื้นฐานก่อนสร้างแบบจำลอง นอกจากนี้ งานในสาขาอื่นจำนวนมาก เช่น นักวิทยาศาสตร์สิ่งแวดล้อม นักระบาดวิทยา หรือนักวิเคราะห์นโยบาย ก็ต้องการทักษะเดียวกันโดยไม่ได้ใช้ชื่อตำแหน่งว่า “data”</p>
+</section>
+<section id="ในงานวจย-การสำรวจขอมลกอนตงสมมตฐานและการรายงานทตรวจสอบได" class="level3">
+<h3 class="anchored" data-anchor-id="ในงานวจย-การสำรวจขอมลกอนตงสมมตฐานและการรายงานทตรวจสอบได">ในงานวิจัย: การสำรวจข้อมูลก่อนตั้งสมมติฐานและการรายงานที่ตรวจสอบได้</h3>
+<p>งานวิจัยเชิงประจักษ์ทุกสาขาเริ่มจากการทำความรู้จักข้อมูล บทที่ 4 อธิบายวิธีแยกข้อมูลที่ใช้สำรวจออกจากข้อมูลที่ใช้ยืนยัน เพื่อไม่ให้การสำรวจกลายเป็นการหาผลที่ต้องการ บทที่ 19 อธิบายการเขียนรายงานที่โค้ดและข้อความอยู่ด้วยกัน ซึ่งทำให้ผู้ตรวจสอบงานวิจัยทำซ้ำผลได้</p>
+</section>
+<section id="ในภาครฐและชมชน-ขอมลเปด-การตดตามปญหาสงแวดลอม-การสอสารความเสยงตอสาธารณะ" class="level3">
+<h3 class="anchored" data-anchor-id="ในภาครฐและชมชน-ขอมลเปด-การตดตามปญหาสงแวดลอม-การสอสารความเสยงตอสาธารณะ">ในภาครัฐและชุมชน: ข้อมูลเปิด การติดตามปัญหาสิ่งแวดล้อม การสื่อสารความเสี่ยงต่อสาธารณะ</h3>
+<p>หน่วยงานรัฐเผยแพร่ข้อมูลเปิดมากขึ้น แต่ข้อมูลเปิดมีคุณค่าก็ต่อเมื่อมีคนนำไปวิเคราะห์และสื่อสารต่อ ระบบที่สร้างในเล่มนี้เป็นตัวอย่างของการนำข้อมูลเปิดมาสร้างเครื่องมือติดตามปัญหาสิ่งแวดล้อม การสื่อสารความเสี่ยงต่อสาธารณะต้องการความระมัดระวังเป็นพิเศษ เพราะผู้อ่านอาจตัดสินใจเรื่องสุขภาพจากสิ่งที่เราแสดง บทที่ 19 จึงเน้นการเขียนข้อจำกัดและความไม่แน่นอน</p>
+</section>
+<section id="ในโดเมนอน-สาธารณสข-เกษตร-พลงงาน-การขนสง-ธรกจ-สถาปตยกรรมเดยวกน-เปลยนแหลงขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="ในโดเมนอน-สาธารณสข-เกษตร-พลงงาน-การขนสง-ธรกจ-สถาปตยกรรมเดยวกน-เปลยนแหลงขอมล">ในโดเมนอื่น: สาธารณสุข เกษตร พลังงาน การขนส่ง ธุรกิจ (สถาปัตยกรรมเดียวกัน เปลี่ยนแหล่งข้อมูล)</h3>
+<div id="tbl-ch00-domains" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-domains-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6: ตัวอย่างการนำสถาปัตยกรรมเดียวกันไปใช้ในโดเมนอื่น (ตัวอย่างประกอบแนวคิด)
+</figcaption>
+<div aria-describedby="tbl-ch00-domains-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>โดเมน</th>
+<th>แหล่งข้อมูลตัวอย่าง</th>
+<th>มิติเวลา</th>
+<th>มิติพื้นที่</th>
+<th>ปัญหาคุณภาพที่คาดได้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สาธารณสุข</td>
+<td>รายงานผู้ป่วยรายสัปดาห์</td>
+<td>รายสัปดาห์</td>
+<td>จังหวัด</td>
+<td>รายงานล่าช้า นิยามโรคเปลี่ยน</td>
+</tr>
+<tr class="even">
+<td>เกษตร</td>
+<td>ราคาสินค้าเกษตรรายวัน</td>
+<td>รายวัน</td>
+<td>ตลาด</td>
+<td>วันหยุดไม่มีราคา หน่วยต่างกัน</td>
+</tr>
+<tr class="odd">
+<td>พลังงาน</td>
+<td>การใช้ไฟฟ้ารายชั่วโมง</td>
+<td>รายชั่วโมง</td>
+<td>เขตจำหน่าย</td>
+<td>มิเตอร์ขัดข้อง ค่าซ้ำ</td>
+</tr>
+<tr class="even">
+<td>การขนส่ง</td>
+<td>จำนวนผู้โดยสารต่อสถานี</td>
+<td>รายชั่วโมง</td>
+<td>สถานี</td>
+<td>ระบบนับผิดพลาด เปลี่ยนสถานี</td>
+</tr>
+<tr class="odd">
+<td>ธุรกิจ</td>
+<td>ยอดขายรายวันต่อสาขา</td>
+<td>รายวัน</td>
+<td>สาขา</td>
+<td>สาขาเปิดปิด โปรโมชันพิเศษ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>สังเกตว่าทุกแถวใน <a href="#tbl-ch00-domains" class="quarto-xref">ตารางที่&nbsp;<span>6</span></a> มีโครงสร้างเดียวกับข้อมูล PM2.5 คือ หน่วยวัด × เวลา × ค่า และมีปัญหาคุณภาพที่ต้องตรวจก่อนวิเคราะห์ เมื่อเข้าใจกรณีศึกษาหลักแล้ว การย้ายไปโดเมนใหม่จึงเป็นการเปลี่ยนรายละเอียด ไม่ใช่การเริ่มใหม่</p>
+</section>
+</section>
+<section id="sec-ch00-prerequisites" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-prerequisites">0.8 ความรู้พื้นฐานที่ควรมีก่อนอ่าน และสิ่งที่ไม่ต้องมี</h2>
+<section id="สงทควรม" class="level3">
+<h3 class="anchored" data-anchor-id="สงทควรม">สิ่งที่ควรมี</h3>
+<ul>
+<li><strong>Python ระดับเบื้องต้น</strong> เขียนตัวแปร เงื่อนไข การวนซ้ำ และฟังก์ชันได้ รู้จัก list และ dict ถ้ายังไม่คล่อง ภาคผนวก ก ทบทวนเนื้อหาที่จำเป็นทั้งหมด</li>
+<li><strong>สถิติเบื้องต้นระดับมัธยมหรือปีหนึ่ง</strong> รู้จักค่าเฉลี่ย มัธยฐาน ส่วนเบี่ยงเบนมาตรฐาน และฮิสโทแกรม</li>
+<li><strong>การใช้คอมพิวเตอร์ทั่วไป</strong> ติดตั้งโปรแกรม จัดการไฟล์และโฟลเดอร์ได้</li>
+</ul>
+</section>
+<section id="สงทไมตองม" class="level3">
+<h3 class="anchored" data-anchor-id="สงทไมตองม">สิ่งที่ไม่ต้องมี</h3>
+<ul>
+<li><strong>ไม่ต้องรู้ SQL มาก่อน</strong> บทที่ 7 เริ่มจากศูนย์ และภาคผนวก ค เป็นฉบับอ้างอิงย่อ</li>
+<li><strong>ไม่ต้องเคยใช้ Git</strong> บทที่ 3 เริ่มจากแนวคิดพื้นฐาน</li>
+<li><strong>ไม่ต้องมีพื้นฐานคณิตศาสตร์ขั้นสูง</strong> หัวข้อที่ใช้พีชคณิตเชิงเส้นหรือความน่าจะเป็นมากมักเป็นหัวข้อ ★ และภาคผนวก จ ทบทวนสิ่งที่จำเป็น</li>
+<li><strong>ไม่ต้องรู้เรื่องวิทยาศาสตร์สิ่งแวดล้อม</strong> แนวคิดที่จำเป็นอธิบายไว้ในหัวข้อ <a href="#sec-ch00-case-main">0.6</a> และภาคผนวก ง</li>
+<li><strong>ไม่ต้องมีคอมพิวเตอร์สเปกสูง</strong> ข้อมูลในเล่มทำงานได้บนเครื่องคอมพิวเตอร์ส่วนตัวทั่วไป DuckDB และ Polars ถูกออกแบบให้ใช้หน่วยความจำอย่างมีประสิทธิภาพ</li>
+</ul>
+</section>
+<section id="ซอฟตแวรทใช" class="level3">
+<h3 class="anchored" data-anchor-id="ซอฟตแวรทใช">ซอฟต์แวร์ที่ใช้</h3>
+<p>เล่มนี้อ้างอิงซอฟต์แวร์รุ่นต่อไปนี้ ผู้อ่านที่ใช้รุ่นอื่นอาจพบความแตกต่างเล็กน้อยในผลลัพธ์หรือข้อความแจ้งเตือน</p>
+<div id="tbl-ch00-versions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;7: รุ่นซอฟต์แวร์อ้างอิงของเล่ม รายการเต็มอยู่ในไฟล์ <code>environment.yml</code> ของรายวิชา
+</figcaption>
+<div aria-describedby="tbl-ch00-versions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ซอฟต์แวร์</th>
+<th>รุ่นอ้างอิง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Python</td>
+<td>3.12</td>
+</tr>
+<tr class="even">
+<td>DuckDB</td>
+<td>1.x</td>
+</tr>
+<tr class="odd">
+<td>pandas</td>
+<td>2.x</td>
+</tr>
+<tr class="even">
+<td>Polars</td>
+<td>1.x</td>
+</tr>
+<tr class="odd">
+<td>Plotly</td>
+<td>5–6</td>
+</tr>
+<tr class="even">
+<td>Streamlit</td>
+<td>1.x</td>
+</tr>
+<tr class="odd">
+<td>Quarto</td>
+<td>≥ 1.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch00-how-to-read" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-how-to-read">0.9 วิธีอ่านหนังสือเล่มนี้: เส้นทางการอ่านสำหรับผู้เรียน ผู้สอน และผู้อ่านที่มีพื้นฐานแล้ว</h2>
+<section id="สญลกษณและองคประกอบของแตละบท" class="level3">
+<h3 class="anchored" data-anchor-id="สญลกษณและองคประกอบของแตละบท">สัญลักษณ์และองค์ประกอบของแต่ละบท</h3>
+<p>ทุกบทมีโครงสร้างเดียวกัน คือ วัตถุประสงค์การเรียนรู้ → เนื้อหา → กรณีศึกษา PM2.5 → ข้อผิดพลาดที่พบบ่อย → สรุป → แบบฝึกหัด → อ่านเพิ่มเติม ความสม่ำเสมอนี้ทำให้ผู้อ่านรู้ว่าจะหาอะไรได้ที่ไหน</p>
+<ul>
+<li><strong>★ เนื้อหาเชิงลึก</strong> หัวข้อที่ไม่ได้สอนในชั้นเรียนโดยตรง อ่านข้ามได้ บทอื่นที่ไม่ใช่ ★ จะไม่พึ่งเนื้อหาในหัวข้อเหล่านี้</li>
+<li><strong>กล่องข้อความ</strong> มีสี่แบบ กล่องหมายเหตุ (ข้อมูลเสริมหรือที่มา) กล่องเคล็ดลับ (คำแนะนำเชิงปฏิบัติ) กล่องคำเตือน (ข้อผิดพลาดที่ทำให้ผลผิดหรือข้อมูลเสียหาย) และกล่องสำคัญ (กฎหมาย จริยธรรม ความปลอดภัย)</li>
+<li><strong>โค้ด</strong> แสดงในกรอบ ผลลัพธ์ที่แสดงตามหลังโค้ดขึ้นต้นด้วย <code># ผลลัพธ์ (ตัวอย่าง)</code> เพราะผลจริงขึ้นกับข้อมูลที่ผู้อ่านดึงมาในวันที่รัน</li>
+<li><strong>แบบฝึกหัด</strong> มีสามระดับ ระดับพื้นฐานทบทวนแนวคิด ระดับประยุกต์ลงมือกับข้อมูล และระดับท้าทายเป็นโจทย์ปลายเปิด แนวคำตอบของสองระดับแรกอยู่ในภาคผนวก ช</li>
+<li><strong>ปีและเวลา</strong> ในเนื้อหาใช้ พ.ศ. และวงเล็บ ค.ศ. เมื่อจำเป็น ส่วนในโค้ดและข้อมูลใช้ ค.ศ. เสมอ ข้อมูลทั้งเล่มใช้เขตเวลา Asia/Bangkok</li>
+</ul>
+</section>
+<section id="เสนทางการอาน" class="level3">
+<h3 class="anchored" data-anchor-id="เสนทางการอาน">เส้นทางการอ่าน</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  S([เริ่ม]) --&gt; Q{ผู้อ่านคือใคร}
+  Q --&gt;|ผู้เรียนในรายวิชา| L[อ่านตามสัปดาห์&lt;br/&gt;บทหลักก่อนเรียน ★ หลังเรียน]
+  Q --&gt;|ผู้สอน| T[บทที่ 0, 1, 4, 22 ก่อน&lt;br/&gt;แล้วใช้ตารางสัปดาห์]
+  Q --&gt;|มีพื้นฐาน Python/SQL แล้ว| E[บทที่ 4 → 9 → 10 → 13&lt;br/&gt;แล้วเลือกตามโครงการ]
+  Q --&gt;|ต้องการทำโครงการเร็ว| P[บทที่ 21 ก่อน&lt;br/&gt;ย้อนอ่านบทที่อ้างถึง]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>ผู้เรียนในรายวิชา</strong> อ่านบทหลักของแต่ละสัปดาห์ก่อนเข้าเรียนตามตารางท้ายหัวข้อนี้ อ่านหัวข้อ ★ หลังจากทำปฏิบัติการแล้ว เมื่อพบปัญหาทางเทคนิคให้เปิดภาคผนวก ฉ ก่อนถามผู้อื่น</p>
+<p><strong>ผู้สอน</strong> อ่านบทที่ 0, 1, 4 และ 22 ก่อน เพราะเป็นบทที่กำหนดวิธีคิดของทั้งเล่ม แล้วใช้ตารางความสัมพันธ์กับแผนการสอนจัดการอ่าน แบบฝึกหัดระดับท้าทายใช้เป็นโจทย์โครงงานหรือข้อสอบปลายเปิดได้</p>
+<p><strong>ผู้อ่านที่มีพื้นฐาน Python และ SQL แล้ว</strong> อ่านบทที่ 4 เรื่องการตั้งคำถาม บทที่ 9–10 เรื่องคุณภาพข้อมูลและข้อมูลสูญหาย และบทที่ 13 เรื่องการตีความสถิติ บทเหล่านี้มีเนื้อหาที่ผู้ใช้เครื่องมือคล่องแล้วมักยังขาด จากนั้นเลือกอ่านบทอื่นตามความต้องการของโครงการ</p>
+<p><strong>ผู้อ่านที่ต้องการทำโครงการให้เสร็จเร็ว</strong> อ่านบทที่ 21 ก่อน เพราะเป็นภาพรวมของระบบทั้งระบบ แล้วย้อนไปอ่านบทที่บทที่ 21 อ้างถึงเมื่อต้องลงมือในขั้นนั้น</p>
+</section>
+<section id="ความสมพนธกบแผนการสอน" class="level3">
+<h3 class="anchored" data-anchor-id="ความสมพนธกบแผนการสอน">ความสัมพันธ์กับแผนการสอน</h3>
+<div id="tbl-ch00-weeks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-weeks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8: ความสัมพันธ์ระหว่างบทในเล่มกับแผนการสอน 15 สัปดาห์
+</figcaption>
+<div aria-describedby="tbl-ch00-weeks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>สัปดาห์</th>
+<th>บทหลัก</th>
+<th>บทอ่านเสริม</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0, 1, 2, 3</td>
+<td>22</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>13.8</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>5</td>
+<td>16.1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>6, 7</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>8</td>
+<td>7.7</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>9</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>10</td>
+<td>14.8</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>(Checkpoint 1)</td>
+<td>21.1–21.4</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>11</td>
+<td>12.1–12.2</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>12</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>13, 14</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>15, 16</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>17, 18</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>19, 20</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>(นำเสนอโครงการ)</td>
+<td>21, 22</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch00-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-case">กรณีศึกษา: คำถามหนึ่งข้อเดินทางผ่านทั้งเล่ม</h2>
+<p>เพื่อให้เห็นว่าทุกบทเชื่อมกันอย่างไร ลองติดตามคำถามเดียวตั้งแต่ต้นจนจบ คำถามคือ <strong>“ในปีที่ผ่านมา สถานีในภาคใดมีสัดส่วนวันที่ค่าเฉลี่ย PM2.5 รายวันเกิน 37.5 µg/m³ สูงที่สุด”</strong></p>
+<p><strong>ตั้งคำถาม (บทที่ 4)</strong> คำถามนี้เป็นคำถามเชิงพรรณนา ยังไม่ได้ถามว่า <em>ทำไม</em> ภาคนั้นจึงสูง เราต้องนิยามคำให้ชัดก่อนลงมือ “ปีที่ผ่านมา” คือช่วงวันที่ใด “วัน” นับเฉพาะวันที่ข้อมูลครบตามเกณฑ์หรือไม่ และ “สัดส่วน” คิดต่อสถานีแล้วเฉลี่ยตามภาค หรือรวมทุกสถานีในภาคแล้วคิดครั้งเดียว ทางเลือกสุดท้ายนี้อาจให้ผลต่างกัน ถ้าภาคหนึ่งมีสถานีในเมืองใหญ่มากเป็นพิเศษ</p>
+<p><strong>ได้มาซึ่งข้อมูล (บทที่ 5)</strong> เราต้องการค่ารายชั่วโมงของทุกสถานีตลอดปี script ดึงข้อมูลต้องจัดการกับ timeout การลองใหม่ และการบันทึก JSON ดิบพร้อมเวลาที่ดึง</p>
+<p><strong>จัดเก็บและสืบค้น (บทที่ 6–7)</strong> ค่ารายชั่วโมงถูกโหลดเข้าตาราง <code>measurements</code> และข้อมูลสถานีพร้อมภาคอยู่ในตาราง <code>stations</code> การตอบคำถามต้อง join สองตารางนี้ และค่า <code>"-1"</code> ต้องกลายเป็น <code>NULL</code> ก่อนคำนวณ ไม่เช่นนั้นค่าเฉลี่ยจะต่ำกว่าความจริง</p>
+<p><strong>แปลงรูป (บทที่ 8)</strong> ค่ารายชั่วโมงถูกรวมเป็นค่าเฉลี่ยรายวันในตาราง <code>daily_pm25</code> พร้อมจำนวนชั่วโมงที่มีข้อมูล ถ้าเวลาถูกตีความผิดเขตเวลา ขอบของ “วัน” จะเลื่อนไป และค่าเฉลี่ยรายวันจะผิดทั้งหมด</p>
+<p><strong>ตรวจคุณภาพและข้อมูลสูญหาย (บทที่ 9–10)</strong> บางสถานีมีช่วงที่เครื่องวัดหยุดทำงานนานหลายสัปดาห์ บางสถานีมีค่าคงที่ติดต่อกันผิดปกติ เราต้องตัดสินใจว่าจะนับวันที่ข้อมูลไม่ครบหรือไม่ และบันทึกการตัดสินใจนั้นไว้ ผลคือตาราง <code>daily_pm25_clean</code> ที่มีคอลัมน์ <code>is_complete</code></p>
+<p><strong>สำรวจ (บทที่ 11–17)</strong> กราฟแท่งแนวนอนของสัดส่วนวันที่เกินมาตรฐานแยกตามภาค พร้อมเส้นอ้างอิง (บทที่ 11) ช่วงความเชื่อมั่นแบบ bootstrap ของสัดส่วน (บทที่ 13) กราฟอนุกรมเวลาที่แสดงว่าวันที่เกินมาตรฐานกระจุกอยู่ในฤดูใด (บทที่ 14) และแผนที่ที่แสดงความแตกต่างระหว่างสถานีในภาคเดียวกัน (บทที่ 17)</p>
+<p><strong>สื่อสาร (บทที่ 19–20)</strong> รายงานที่ขึ้นต้นด้วยข้อค้นพบ ตามด้วยหลักฐาน และระบุข้อจำกัด เช่น จำนวนสถานีในแต่ละภาคไม่เท่ากัน และแดชบอร์ดที่ให้ผู้ใช้ drill-down จากภาคไปถึงสถานี</p>
+<p>คำถามที่ดูเรียบง่ายข้อเดียวต้องใช้ทุกบทในเล่ม และการตัดสินใจเล็ก ๆ ในแต่ละขั้น เช่น การนิยาม “วัน” หรือเกณฑ์ความครบถ้วน เปลี่ยนคำตอบสุดท้ายได้ นี่คือเหตุผลที่หนังสือเล่มนี้ให้ความสำคัญกับทุกขั้นเท่ากัน ไม่ใช่เฉพาะขั้นที่วาดกราฟ</p>
+</section>
+<section id="sec-ch00-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<p>ข้อผิดพลาดต่อไปนี้เป็นข้อผิดพลาดด้าน <em>วิธีเรียน</em> และ <em>วิธีทำงาน</em> ที่พบบ่อยในผู้เริ่มต้นวิทยาการข้อมูล บทต่อ ๆ ไปจะมีข้อผิดพลาดทางเทคนิคเฉพาะเรื่อง</p>
+<div id="tbl-ch00-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch00-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;9: ข้อผิดพลาดที่พบบ่อยในการเรียนและทำงานด้านวิทยาการข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch00-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เริ่มจากเครื่องมือ (“อยากใช้ Plotly”) แทนที่จะเริ่มจากคำถาม</td>
+<td>ได้กราฟจำนวนมากที่ไม่ตอบคำถามใด และไม่รู้ว่าเมื่อไรควรหยุด</td>
+<td>เขียนคำถามใน <code>questions.md</code> ก่อน แล้วเลือกเครื่องมือที่ตอบคำถามนั้น (บทที่ 4)</td>
+</tr>
+<tr class="even">
+<td>ข้ามขั้นตรวจคุณภาพข้อมูลเพราะ “ข้อมูลมาจากหน่วยงานรัฐ น่าจะถูกแล้ว”</td>
+<td>ข้อมูลจากเซนเซอร์มีค่าหายและค่าผิดปกติเสมอ ไม่ว่าใครเผยแพร่</td>
+<td>สำรวจและตรวจคุณภาพทุกครั้ง บันทึกสิ่งที่พบ (บทที่ 9)</td>
+</tr>
+<tr class="odd">
+<td>ทำทุกอย่างใน notebook เดียวที่รันข้ามลำดับ cell</td>
+<td>ผลลัพธ์ทำซ้ำไม่ได้ และผู้อื่นตรวจสอบไม่ได้</td>
+<td>ใช้ notebook เพื่อสำรวจ ย้ายโค้ดที่ต้องรันซ้ำไปเป็นไฟล์ <code>.py</code> (บทที่ 2)</td>
+</tr>
+<tr class="even">
+<td>commit ครั้งเดียวตอนส่งงาน</td>
+<td>ไม่มีประวัติให้ย้อนกลับ และผู้ตรวจไม่เห็นกระบวนการคิด</td>
+<td>commit บ่อยเป็นชิ้นเล็กที่มีความหมาย (บทที่ 3)</td>
+</tr>
+<tr class="odd">
+<td>เชื่อโค้ดที่ AI เขียนโดยไม่รันกับข้อมูลจริง</td>
+<td>AI มักสร้างชื่อคอลัมน์ ฟังก์ชัน หรือ endpoint ที่ไม่มีอยู่จริง</td>
+<td>รันและตรวจผลกับข้อมูลจริงทุกครั้ง บันทึกใน <code>AI_USAGE.md</code> (บทที่ 22)</td>
+</tr>
+<tr class="even">
+<td>เปรียบเทียบค่ารายชั่วโมงกับมาตรฐานรายวัน</td>
+<td>มาตรฐาน 37.5 µg/m³ กำหนดสำหรับค่าเฉลี่ย 24 ชั่วโมง</td>
+<td>รวมเป็นค่าเฉลี่ยรายวันก่อนเทียบกับมาตรฐาน (บทที่ 8)</td>
+</tr>
+<tr class="odd">
+<td>อ่านแต่หัวข้อ ★ และข้ามพื้นฐาน</td>
+<td>หัวข้อ ★ สมมุติว่าผู้อ่านเข้าใจเนื้อหาหลักของบทแล้ว</td>
+<td>อ่านเนื้อหาหลักให้เข้าใจก่อน แล้วจึงกลับมาอ่านหัวข้อ ★</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>หนังสือเล่มนี้เกี่ยวกับกระบวนการเปลี่ยนข้อมูลดิบให้เป็นความเข้าใจที่ทั้ง <em>ตอบคำถาม</em> และ <em>ตรวจสอบได้</em> เครื่องมือเป็นเพียงวิธีทำ</li>
+<li>กรณีความผิดพลาดที่มีชื่อเสียงหลายกรณีไม่ได้เกิดจากเทคนิคที่ซับซ้อนผิด แต่เกิดจากการไม่ได้สำรวจข้อมูล ไม่ได้ถามว่าข้อมูลส่วนใดหายไป หรือทำซ้ำงานไม่ได้</li>
+<li>งานสำรวจข้อมูลหลอมรวมสถิติศาสตร์ วิทยาการคอมพิวเตอร์ ฐานข้อมูล คณิตศาสตร์ การออกแบบ ภูมิสารสนเทศ ความรู้เชิงโดเมน และกฎหมายจริยธรรมเข้าด้วยกัน</li>
+<li>เครื่องมือแต่ละตัวจัดอยู่ในขั้นหนึ่งของวงจรข้อมูล เลือกเครื่องมือที่ทำให้ผลตรวจสอบได้ และใช้เครื่องมือน้อยที่สุดที่แก้ปัญหาได้</li>
+<li>ทั้งเล่มสร้างระบบเดียว: Air4Thai API → <code>data/raw/*.json</code> → <code>data/pm25.duckdb</code> → pandas → Plotly → Streamlit</li>
+<li>ตั้งแต่บทที่ 11 การวิเคราะห์ทั้งหมดใช้ตาราง <code>daily_pm25_clean</code> การตัดสินใจในบทที่ 9–10 จึงส่งผลต่อทั้งเล่ม</li>
+<li>ผู้อ่านแต่ละกลุ่มมีเส้นทางการอ่านต่างกัน และหัวข้อ ★ อ่านข้ามได้เสมอ</li>
+</ul>
+</section>
+<section id="sec-ch00-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch00-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>อธิบายความหมายของ “ความเข้าใจที่เชื่อถือได้” ตามที่ใช้ในหัวข้อ 0.1 และบอกว่าส่วนใดของคำนี้ที่บทที่ 2–3 ช่วยสร้าง</li>
+<li>จากกรณีเครื่องบินของ Wald อธิบายว่าเหตุใดตำแหน่งที่ <em>ไม่มี</em> รอยกระสุนจึงอาจเป็นตำแหน่งที่ควรเสริมเกราะ</li>
+<li>จัดเครื่องมือต่อไปนี้ให้อยู่ในขั้นของวงจรข้อมูล: requests, DuckDB, pandera, Plotly, Streamlit, missingno</li>
+<li>เรียงลำดับไฟล์และตารางต่อไปนี้ตามลำดับที่ข้อมูลไหลผ่าน pipeline: <code>daily_pm25_clean</code>, <code>data/raw/*.json</code>, <code>measurements</code>, <code>daily_pm25</code></li>
+<li>เหตุใดการเปรียบเทียบค่า PM2.5 รายชั่วโมงกับมาตรฐาน 37.5 µg/m³ โดยตรงจึงไม่ถูกต้อง</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>เลือกกรณีหนึ่งจาก <a href="#tbl-ch00-failures" class="quarto-xref">ตารางที่&nbsp;<span>1</span></a> แล้วอธิบายว่าถ้าเกิดปัญหาแบบเดียวกันกับข้อมูล PM2.5 จะเกิดในขั้นใดของ pipeline และจะสังเกตเห็นได้อย่างไร</li>
+<li>เลือกโดเมนอื่นหนึ่งโดเมนที่ไม่อยู่ใน <a href="#tbl-ch00-domains" class="quarto-xref">ตารางที่&nbsp;<span>6</span></a> ระบุแหล่งข้อมูล มิติเวลา มิติพื้นที่ และปัญหาคุณภาพที่คาดว่าจะพบ พร้อมอธิบายว่าเหตุใดโดเมนนี้จึงเหมาะกับสถาปัตยกรรมของเล่ม</li>
+<li>สำหรับคำถามในกรณีศึกษาของบทนี้ เขียนนิยามของ “ปีที่ผ่านมา” “วัน” และ “สัดส่วน” ที่ชัดเจนพอให้คนสองคนคำนวณได้ผลตรงกัน</li>
+<li>ประเมินตนเองตามหัวข้อ 0.8 แล้วเลือกเส้นทางการอ่านจากหัวข้อ 0.9 ที่เหมาะกับตนเอง พร้อมระบุภาคผนวกที่ควรอ่านก่อน</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="10" type="1">
+<li>ค้นคว้ากรณีความผิดพลาดจากข้อมูลที่ไม่อยู่ในหัวข้อ 0.2 หนึ่งกรณี (ควรเป็นกรณีในประเทศไทยถ้าหาได้) ระบุแหล่งอ้างอิงที่ตรวจสอบได้ และวิเคราะห์ว่าขั้นตอนใดในวงจรข้อมูลที่ขาดไป</li>
+<li>ออกแบบตารางแบบ <a href="#tbl-ch00-tables" class="quarto-xref">ตารางที่&nbsp;<span>5</span></a> สำหรับโครงการในโดเมนที่ตนเลือก ระบุชื่อตาราง คอลัมน์ primary key และบทที่จะสร้างแต่ละตาราง</li>
+<li>วิทยาการข้อมูลเป็นศาสตร์ใหม่ หรือเป็นสถิติศาสตร์ในชื่อใหม่ อ่าน <span class="citation" data-cites="donoho2017fifty">Donoho (<a href="../references.html#ref-donoho2017fifty" role="doc-biblioref">2017</a>)</span> แล้วเขียนความเห็นของตนเองประมาณหนึ่งหน้า โดยอ้างหลักฐานจากบทความ</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch00">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="tukey1977exploratory">Tukey (<a href="../references.html#ref-tukey1977exploratory" role="doc-biblioref">1977</a>)</span> — หนังสือต้นฉบับของแนวคิด EDA อ่านบทแรกเพื่อเข้าใจวิธีคิดของ Tukey แม้เครื่องมือในเล่มจะเป็นการคำนวณด้วยมือ</li>
+<li><span class="citation" data-cites="donoho2017fifty">Donoho (<a href="../references.html#ref-donoho2017fifty" role="doc-biblioref">2017</a>)</span> — บทความทบทวนประวัติและขอบเขตของวิทยาการข้อมูล ช่วยให้เห็นว่าเนื้อหาในเล่มนี้อยู่ตรงไหนในภาพใหญ่</li>
+<li><span class="citation" data-cites="wickham2023r">Wickham และคณะ (<a href="../references.html#ref-wickham2023r" role="doc-biblioref">2023</a>)</span> — ตำราที่วางกรอบวงจรการทำงานกับข้อมูลได้ชัดเจน แม้ใช้ภาษา R แต่แนวคิดใช้กับ Python ได้ทั้งหมด</li>
+<li><span class="citation" data-cites="mckinney2022python">McKinney (<a href="../references.html#ref-mckinney2022python" role="doc-biblioref">2022</a>)</span> — ตำรา pandas จากผู้สร้างไลบรารี ใช้เป็นคู่มืออ้างอิงคู่กับบทที่ 8</li>
+<li><span class="citation" data-cites="herndon2014does">Herndon และคณะ (<a href="../references.html#ref-herndon2014does" role="doc-biblioref">2014</a>)</span> — ตัวอย่างที่ชัดเจนที่สุดของคุณค่าของการทำซ้ำงานวิจัย อ่านแล้วจะเข้าใจว่าทำไมเล่มนี้ให้ความสำคัญกับบทที่ 2–3</li>
+<li><span class="citation" data-cites="lazer2014parable">Lazer และคณะ (<a href="../references.html#ref-lazer2014parable" role="doc-biblioref">2014</a>)</span> — บทความสั้นที่อธิบายกับดักของข้อมูลขนาดใหญ่ เมื่อข้อมูลเปลี่ยนไปตามเวลา</li>
+<li><span class="citation" data-cites="who2021global">World Health Organization (<a href="../references.html#ref-who2021global" role="doc-biblioref">2021</a>)</span> — แนวทางคุณภาพอากาศขององค์การอนามัยโลก แหล่งความรู้เชิงโดเมนหลักของกรณีศึกษา</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-donoho2017fifty" class="csl-entry" role="listitem">
+Donoho, David. 2017. <span>“50 Years of Data Science”</span>. <em>Journal of Computational and Graphical Statistics</em> 26 (4): 745–66. <a href="https://doi.org/10.1080/10618600.2017.1384734">https://doi.org/10.1080/10618600.2017.1384734</a>.
+</div>
+<div id="ref-herndon2014does" class="csl-entry" role="listitem">
+Herndon, Thomas, Michael Ash, และ Robert Pollin. 2014. <span>“Does High Public Debt Consistently Stifle Economic Growth? <span>A</span> Critique of <span>Reinhart</span> and <span>Rogoff</span>”</span>. <em>Cambridge Journal of Economics</em> 38 (2): 257–79. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>.
+</div>
+<div id="ref-lazer2014parable" class="csl-entry" role="listitem">
+Lazer, David, Ryan Kennedy, Gary King, และ Alessandro Vespignani. 2014. <span>“The Parable of <span>Google Flu</span>: Traps in Big Data Analysis”</span>. <em>Science</em> 343 (6176): 1203–5. <a href="https://doi.org/10.1126/science.1248506">https://doi.org/10.1126/science.1248506</a>.
+</div>
+<div id="ref-mangel1984abraham" class="csl-entry" role="listitem">
+Mangel, Marc, และ Francisco J. Samaniego. 1984. <span>“Abraham Wald’s Work on Aircraft Survivability”</span>. <em>Journal of the American Statistical Association</em> 79 (386): 259–67. <a href="https://doi.org/10.1080/01621459.1984.10478038">https://doi.org/10.1080/01621459.1984.10478038</a>.
+</div>
+<div id="ref-nasa1999mars" class="csl-entry" role="listitem">
+Mars Climate Orbiter Mishap Investigation Board. 1999. <em>Mars Climate Orbiter Mishap Investigation Board Phase <span>I</span> Report</em>. National Aeronautics; Space Administration.
+</div>
+<div id="ref-mckinney2022python" class="csl-entry" role="listitem">
+McKinney, Wes. 2022. <em>Python for Data Analysis: Data Wrangling with pandas, NumPy, and Jupyter</em>. 3 พิมพ์ครั้งที่. O’Reilly Media. <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>.
+</div>
+<div id="ref-reinhart2010growth" class="csl-entry" role="listitem">
+Reinhart, Carmen M., และ Kenneth S. Rogoff. 2010. <span>“Growth in a Time of Debt”</span>. <em>American Economic Review</em> 100 (2): 573–78. <a href="https://doi.org/10.1257/aer.100.2.573">https://doi.org/10.1257/aer.100.2.573</a>.
+</div>
+<div id="ref-tufte1997visual" class="csl-entry" role="listitem">
+Tufte, Edward R. 1997. <em>Visual Explanations: Images and Quantities, Evidence and Narrative</em>. Graphics Press.
+</div>
+<div id="ref-tukey1977exploratory" class="csl-entry" role="listitem">
+Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Addison-Wesley.
+</div>
+<div id="ref-wickham2023r" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, และ Garrett Grolemund. 2023. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 2 พิมพ์ครั้งที่. O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+</div>
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality Guidelines: Particulate Matter (<span>PM2.5</span> and <span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon Monoxide</em>. World Health Organization.
+</div>
+<div id="ref-pcd2026air4thai" class="csl-entry" role="listitem">
+กรมควบคุมมลพิษ. 2026. <em>Air4Thai: รายงานสถานการณ์และคุณภาพอากาศประเทศไทย</em>. <a href="http://air4thai.pcd.go.th">http://air4thai.pcd.go.th</a>.
+</div>
+<div id="ref-neb2022pm25" class="csl-entry" role="listitem">
+คณะกรรมการสิ่งแวดล้อมแห่งชาติ. 2022. <em>ประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ เรื่อง กำหนดมาตรฐานฝุ่นละอองขนาดไม่เกิน 2.5 ไมครอน ในบรรยากาศโดยทั่วไป</em>.
+</div>
+<div id="ref-pdpa2019personal" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019. <em>พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="คำนำ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">คำนำ</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/01-data-science-eda.html" class="pagination-link" aria-label="วิทยาการข้อมูลและการสำรวจข้อมูล">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

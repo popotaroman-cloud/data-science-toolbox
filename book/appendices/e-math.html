@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/f-troubleshooting.html" rel="next">
+<link href="../appendices/d-air4thai-open-data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/e-math.html">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#sec-appe-matrix" id="toc-sec-appe-matrix" class="nav-link active" data-scroll-target="#sec-appe-matrix">จ.1 เวกเตอร์ เมทริกซ์ และการคูณเมทริกซ์</a>
+  <ul class="collapse">
+  <li><a href="#เวกเตอร" id="toc-เวกเตอร" class="nav-link" data-scroll-target="#เวกเตอร">เวกเตอร์</a></li>
+  <li><a href="#เมทรกซ" id="toc-เมทรกซ" class="nav-link" data-scroll-target="#เมทรกซ">เมทริกซ์</a></li>
+  <li><a href="#การคณเมทรกซ" id="toc-การคณเมทรกซ" class="nav-link" data-scroll-target="#การคณเมทรกซ">การคูณเมทริกซ์</a></li>
+  </ul></li>
+  <li><a href="#sec-appe-eigen" id="toc-sec-appe-eigen" class="nav-link" data-scroll-target="#sec-appe-eigen">จ.2 eigenvalue, eigenvector และ SVD</a>
+  <ul class="collapse">
+  <li><a href="#eigenvalue-และ-eigenvector" id="toc-eigenvalue-และ-eigenvector" class="nav-link" data-scroll-target="#eigenvalue-และ-eigenvector">eigenvalue และ eigenvector</a></li>
+  <li><a href="#svd" id="toc-svd" class="nav-link" data-scroll-target="#svd">SVD</a></li>
+  </ul></li>
+  <li><a href="#sec-appe-probability" id="toc-sec-appe-probability" class="nav-link" data-scroll-target="#sec-appe-probability">จ.3 ความน่าจะเป็น ตัวแปรสุ่ม และการแจกแจงที่สำคัญ</a>
+  <ul class="collapse">
+  <li><a href="#ความนาจะเปนและตวแปรสม" id="toc-ความนาจะเปนและตวแปรสม" class="nav-link" data-scroll-target="#ความนาจะเปนและตวแปรสม">ความน่าจะเป็นและตัวแปรสุ่ม</a></li>
+  <li><a href="#การแจกแจงทใชในเลม" id="toc-การแจกแจงทใชในเลม" class="nav-link" data-scroll-target="#การแจกแจงทใชในเลม">การแจกแจงที่ใช้ในเล่ม</a></li>
+  </ul></li>
+  <li><a href="#sec-appe-expectation" id="toc-sec-appe-expectation" class="nav-link" data-scroll-target="#sec-appe-expectation">จ.4 ค่าคาดหวัง ความแปรปรวน และความแปรปรวนร่วม</a>
+  <ul class="collapse">
+  <li><a href="#คาคาดหวงและความแปรปรวน" id="toc-คาคาดหวงและความแปรปรวน" class="nav-link" data-scroll-target="#คาคาดหวงและความแปรปรวน">ค่าคาดหวังและความแปรปรวน</a></li>
+  <li><a href="#ความแปรปรวนรวมและสหสมพนธ" id="toc-ความแปรปรวนรวมและสหสมพนธ" class="nav-link" data-scroll-target="#ความแปรปรวนรวมและสหสมพนธ">ความแปรปรวนร่วมและสหสัมพันธ์</a></li>
+  </ul></li>
+  <li><a href="#sec-appe-clt" id="toc-sec-appe-clt" class="nav-link" data-scroll-target="#sec-appe-clt">จ.5 ทฤษฎีบทขีดจำกัดกลาง (CLT) และการแจกแจงของตัวอย่าง</a>
+  <ul class="collapse">
+  <li><a href="#การแจกแจงของตวอยาง" id="toc-การแจกแจงของตวอยาง" class="nav-link" data-scroll-target="#การแจกแจงของตวอยาง">การแจกแจงของตัวอย่าง</a></li>
+  <li><a href="#ทฤษฎบทขดจำกดกลาง" id="toc-ทฤษฎบทขดจำกดกลาง" class="nav-link" data-scroll-target="#ทฤษฎบทขดจำกดกลาง">ทฤษฎีบทขีดจำกัดกลาง</a></li>
+  </ul></li>
+  <li><a href="#sec-appe-distance" id="toc-sec-appe-distance" class="nav-link" data-scroll-target="#sec-appe-distance">จ.6 ระยะทางและ norm</a>
+  <ul class="collapse">
+  <li><a href="#norm" id="toc-norm" class="nav-link" data-scroll-target="#norm">norm</a></li>
+  <li><a href="#ระยะทางทใชในเลม" id="toc-ระยะทางทใชในเลม" class="nav-link" data-scroll-target="#ระยะทางทใชในเลม">ระยะทางที่ใช้ในเล่ม</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/e-math.html">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ภาคผนวกนี้ทบทวนคณิตศาสตร์ที่บทที่ 13 ถึง 17 ใช้ ได้แก่ พีชคณิตเชิงเส้นสำหรับ PCA และความน่าจะเป็นกับสถิติสำหรับการอนุมาน เน้นความหมายและตัวอย่างตัวเลขมากกว่าการพิสูจน์ ผู้ที่ต้องการพื้นฐานที่ลึกกว่านี้ควรอ่านตำราพีชคณิตเชิงเส้นและสถิติเบื้องต้น เช่น <span class="citation" data-cites="strang2016introduction">Strang (<a href="../references.html#ref-strang2016introduction" role="doc-biblioref">2016</a>)</span> และ <span class="citation" data-cites="wasserman2004all">Wasserman (<a href="../references.html#ref-wasserman2004all" role="doc-biblioref">2004</a>)</span> ตัวอย่างโค้ดใช้ NumPy <span class="citation" data-cites="harris2020array">(<a href="../references.html#ref-harris2020array" role="doc-biblioref"><span class="nocase">Harris และคณะ</span> 2020</a>)</span></p>
+<section id="sec-appe-matrix" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appe-matrix">จ.1 เวกเตอร์ เมทริกซ์ และการคูณเมทริกซ์</h2>
+<section id="เวกเตอร" class="level3">
+<h3 class="anchored" data-anchor-id="เวกเตอร">เวกเตอร์</h3>
+<p><strong>เวกเตอร์</strong> คือรายการของตัวเลขที่เรียงลำดับ ในงานข้อมูล เวกเตอร์มักแทนหนึ่งหน่วยข้อมูล เช่น โปรไฟล์รายเดือนของสถานีหนึ่ง (บทที่ 15) หรือหนึ่งตัวแปร เช่น ค่าเฉลี่ยรายวันทุกวันของสถานีหนึ่ง เวกเตอร์ <span class="math inline">\(\mathbf{x} = (x_1, \dots, x_p)\)</span> มี <span class="math inline">\(p\)</span> มิติ</p>
+<p><strong>ผลคูณภายใน</strong> (dot product) ของเวกเตอร์สองตัวคือ</p>
+<p><span id="eq-appe-dot"><span class="math display">\[
+\mathbf{x} \cdot \mathbf{y} = \mathbf{x}^\top \mathbf{y} = \sum_{j=1}^{p} x_j y_j
+\tag{1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(x_j\)</span> และ <span class="math inline">\(y_j\)</span> คือสมาชิกลำดับที่ <span class="math inline">\(j\)</span> ผลคูณภายในวัดว่าเวกเตอร์สองตัวชี้ไปทางเดียวกันเพียงใด ถ้าเท่ากับศูนย์ แปลว่าตั้งฉากกัน เช่น <span class="math inline">\((1, 2, 3) \cdot (4, 0, -1) = 4 + 0 - 3 = 1\)</span></p>
+</section>
+<section id="เมทรกซ" class="level3">
+<h3 class="anchored" data-anchor-id="เมทรกซ">เมทริกซ์</h3>
+<p><strong>เมทริกซ์</strong> คือตารางของตัวเลข <span class="math inline">\(n\)</span> แถว <span class="math inline">\(p\)</span> คอลัมน์ ตาราง <code>profile</code> ในบทที่ 15 ที่มี 50 สถานีและ 12 เดือนคือเมทริกซ์ขนาด <span class="math inline">\(50 \times 12\)</span> แถวคือหน่วย คอลัมน์คือตัวแปร <strong>ทรานสโพส</strong> <span class="math inline">\(\mathbf{X}^\top\)</span> สลับแถวกับคอลัมน์</p>
+</section>
+<section id="การคณเมทรกซ" class="level3">
+<h3 class="anchored" data-anchor-id="การคณเมทรกซ">การคูณเมทริกซ์</h3>
+<p>ผลคูณ <span class="math inline">\(\mathbf{C} = \mathbf{A}\mathbf{B}\)</span> ของเมทริกซ์ <span class="math inline">\(\mathbf{A}\)</span> ขนาด <span class="math inline">\(n \times k\)</span> กับ <span class="math inline">\(\mathbf{B}\)</span> ขนาด <span class="math inline">\(k \times m\)</span> เป็นเมทริกซ์ขนาด <span class="math inline">\(n \times m\)</span> ที่</p>
+<p><span id="eq-appe-matmul"><span class="math display">\[
+c_{ij} = \sum_{l=1}^{k} a_{il} b_{lj}
+\tag{2}\]</span></span></p>
+<p>คือผลคูณภายในของแถว <span class="math inline">\(i\)</span> ของ <span class="math inline">\(\mathbf{A}\)</span> กับคอลัมน์ <span class="math inline">\(j\)</span> ของ <span class="math inline">\(\mathbf{B}\)</span> จำนวนคอลัมน์ของ <span class="math inline">\(\mathbf{A}\)</span> ต้องเท่ากับจำนวนแถวของ <span class="math inline">\(\mathbf{B}\)</span> และโดยทั่วไป <span class="math inline">\(\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}\)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])          <span class="co"># 3 × 2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]])           <span class="co"># 2 × 3</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A <span class="op">@</span> B)                                    <span class="co"># 3 × 3</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((A.T <span class="op">@</span> A).shape, np.allclose((A <span class="op">@</span> B).T, B.T <span class="op">@</span> A.T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์
+[[ 5  2 -1]
+ [11  4 -3]
+ [17  6 -5]]
+(2, 2) True</code></pre>
+<p>เมทริกซ์ <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> ปรากฏบ่อยในสถิติ ถ้า <span class="math inline">\(\mathbf{X}\)</span> เป็นข้อมูลที่ลบค่าเฉลี่ยแล้ว <span class="math inline">\(\mathbf{X}^\top\mathbf{X}/(n-1)\)</span> คือเมทริกซ์ความแปรปรวนร่วม (<a href="#sec-appe-expectation">จ.4</a>) ซึ่งเป็นจุดเริ่มต้นของ PCA</p>
+</section>
+</section>
+<section id="sec-appe-eigen" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appe-eigen">จ.2 eigenvalue, eigenvector และ SVD</h2>
+<section id="eigenvalue-และ-eigenvector" class="level3">
+<h3 class="anchored" data-anchor-id="eigenvalue-และ-eigenvector">eigenvalue และ eigenvector</h3>
+<p>สำหรับเมทริกซ์จัตุรัส <span class="math inline">\(\mathbf{A}\)</span> ขนาด <span class="math inline">\(p \times p\)</span> ถ้ามีเวกเตอร์ <span class="math inline">\(\mathbf{v} \neq \mathbf{0}\)</span> และตัวเลข <span class="math inline">\(\lambda\)</span> ที่</p>
+<p><span id="eq-appe-eigen"><span class="math display">\[
+\mathbf{A}\mathbf{v} = \lambda \mathbf{v}
+\tag{3}\]</span></span></p>
+<p>เรียก <span class="math inline">\(\lambda\)</span> ว่า <strong>eigenvalue</strong> และ <span class="math inline">\(\mathbf{v}\)</span> ว่า <strong>eigenvector</strong> ความหมายเชิงเรขาคณิตคือ เมื่อนำ <span class="math inline">\(\mathbf{A}\)</span> ไปคูณ eigenvector ทิศทางของเวกเตอร์ไม่เปลี่ยน เปลี่ยนเพียงความยาวเป็น <span class="math inline">\(\lambda\)</span> เท่า</p>
+<p>ตัวอย่าง <span class="math inline">\(\mathbf{A} = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span> มี eigenvector <span class="math inline">\((1, 1)\)</span> เพราะ <span class="math inline">\(\mathbf{A}(1, 1)^\top = (3, 3)^\top = 3 \cdot (1, 1)^\top\)</span> จึงมี eigenvalue 3 และมี eigenvector <span class="math inline">\((1, -1)\)</span> ที่มี eigenvalue 1</p>
+<p>เมทริกซ์ <strong>สมมาตร</strong> (<span class="math inline">\(\mathbf{A} = \mathbf{A}^\top\)</span>) เช่น เมทริกซ์ความแปรปรวนร่วม มีคุณสมบัติสำคัญ คือ eigenvalue เป็นจำนวนจริงทั้งหมด และ eigenvector ของ eigenvalue ที่ต่างกันตั้งฉากกัน จึงเขียนได้ว่า <span class="math inline">\(\mathbf{A} = \mathbf{V}\boldsymbol{\Lambda}\mathbf{V}^\top\)</span> โดยที่คอลัมน์ของ <span class="math inline">\(\mathbf{V}\)</span> คือ eigenvector ที่มีความยาวหนึ่ง และ <span class="math inline">\(\boldsymbol{\Lambda}\)</span> เป็นเมทริกซ์ทแยงของ eigenvalue เรียกว่า <strong>eigen decomposition</strong> ใน PCA eigenvector ของเมทริกซ์ความแปรปรวนร่วมคือทิศทางขององค์ประกอบหลัก และ eigenvalue คือความแปรปรวนตามทิศนั้น (บทที่ 15)</p>
+</section>
+<section id="svd" class="level3">
+<h3 class="anchored" data-anchor-id="svd">SVD</h3>
+<p><strong>singular value decomposition</strong> (SVD) แยกเมทริกซ์ใดก็ได้ (ไม่จำเป็นต้องจัตุรัส) ขนาด <span class="math inline">\(n \times p\)</span> เป็น</p>
+<p><span id="eq-appe-svd"><span class="math display">\[
+\mathbf{X} = \mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^\top
+\tag{4}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(\mathbf{U}\)</span> และ <span class="math inline">\(\mathbf{V}\)</span> มีคอลัมน์ตั้งฉากกันและยาวหนึ่ง และ <span class="math inline">\(\boldsymbol{\Sigma}\)</span> เป็นเมทริกซ์ทแยงของ singular value <span class="math inline">\(\sigma_1 \ge \sigma_2 \ge \dots \ge 0\)</span> ความสัมพันธ์กับ eigen decomposition คือ <span class="math inline">\(\mathbf{X}^\top\mathbf{X} = \mathbf{V}\boldsymbol{\Sigma}^2\mathbf{V}^\top\)</span> คอลัมน์ของ <span class="math inline">\(\mathbf{V}\)</span> จึงเป็น eigenvector ของ <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> และ eigenvalue เท่ากับ <span class="math inline">\(\sigma_k^2\)</span> ไลบรารีส่วนใหญ่คำนวณ PCA ผ่าน SVD เพราะเสถียรทางตัวเลขกว่าการคำนวณ <span class="math inline">\(\mathbf{X}^\top\mathbf{X}\)</span> โดยตรง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([[<span class="fl">2.0</span>, <span class="fl">1.0</span>], [<span class="fl">1.0</span>, <span class="fl">2.0</span>]])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>values, vectors <span class="op">=</span> np.linalg.eigh(A)              <span class="co"># eigh สำหรับเมทริกซ์สมมาตร เรียงจากน้อยไปมาก</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(values, np.<span class="bu">round</span>(vectors, <span class="dv">3</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>U, s, Vt <span class="op">=</span> np.linalg.svd(A)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s, np.allclose(U <span class="op">@</span> np.diag(s) <span class="op">@</span> Vt, A))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์
+[1. 3.] [[-0.707  0.707]
+ [ 0.707  0.707]]
+[3. 1.] True</code></pre>
+<p>eigenvector ที่ได้คือ <span class="math inline">\((1, -1)/\sqrt{2}\)</span> และ <span class="math inline">\((1, 1)/\sqrt{2}\)</span> ซึ่งเป็นเวกเตอร์ในตัวอย่างข้างต้นที่ปรับให้ยาวหนึ่ง เครื่องหมายของ eigenvector อาจกลับได้ เพราะ <span class="math inline">\(-\mathbf{v}\)</span> ก็เป็น eigenvector เช่นกัน ซึ่งเป็นเหตุผลที่เครื่องหมายของ loading ใน PCA ไม่มีความหมายในตัว (บทที่ 15)</p>
+</section>
+</section>
+<section id="sec-appe-probability" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appe-probability">จ.3 ความน่าจะเป็น ตัวแปรสุ่ม และการแจกแจงที่สำคัญ</h2>
+<section id="ความนาจะเปนและตวแปรสม" class="level3">
+<h3 class="anchored" data-anchor-id="ความนาจะเปนและตวแปรสม">ความน่าจะเป็นและตัวแปรสุ่ม</h3>
+<p><strong>ตัวแปรสุ่ม</strong> คือปริมาณที่ค่าขึ้นกับผลของปรากฏการณ์สุ่ม เช่น ค่า PM2.5 เฉลี่ยของวันที่สุ่มมาหนึ่งวัน ตัวแปรสุ่มแบบไม่ต่อเนื่องบรรยายด้วยฟังก์ชันมวลความน่าจะเป็น <span class="math inline">\(P(X = x)\)</span> ส่วนแบบต่อเนื่องบรรยายด้วยฟังก์ชันความหนาแน่น <span class="math inline">\(f(x)\)</span> ซึ่งพื้นที่ใต้กราฟระหว่าง <span class="math inline">\(a\)</span> กับ <span class="math inline">\(b\)</span> คือ <span class="math inline">\(P(a \le X \le b)\)</span> <strong>ฟังก์ชันการแจกแจงสะสม</strong> <span class="math inline">\(F(x) = P(X \le x)\)</span> ใช้ได้กับทั้งสองแบบ และ ECDF ในบทที่ 11 คือค่าประมาณของ <span class="math inline">\(F\)</span> จากข้อมูล</p>
+</section>
+<section id="การแจกแจงทใชในเลม" class="level3">
+<h3 class="anchored" data-anchor-id="การแจกแจงทใชในเลม">การแจกแจงที่ใช้ในเล่ม</h3>
+<div id="tbl-appe-distributions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appe-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1: การแจกแจงที่ใช้ในเล่ม
+</figcaption>
+<div aria-describedby="tbl-appe-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>การแจกแจง</th>
+<th>ลักษณะ</th>
+<th>พารามิเตอร์</th>
+<th>ใช้ในเล่ม</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ปกติ (normal)</td>
+<td>ระฆังคว่ำสมมาตร</td>
+<td>ค่าเฉลี่ย <span class="math inline">\(\mu\)</span> ส่วนเบี่ยงเบนมาตรฐาน <span class="math inline">\(\sigma\)</span></td>
+<td>การแจกแจงของค่าเฉลี่ยตัวอย่าง (CLT) ช่วงความเชื่อมั่น (บทที่ 13)</td>
+</tr>
+<tr class="even">
+<td>log-normal</td>
+<td>เบ้ขวา <span class="math inline">\(\log X\)</span> มีการแจกแจงปกติ</td>
+<td><span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> ของ <span class="math inline">\(\log X\)</span></td>
+<td>ความเข้มข้นของมลพิษ (บทที่ 13)</td>
+</tr>
+<tr class="odd">
+<td>t</td>
+<td>คล้ายปกติแต่หางหนากว่า</td>
+<td>องศาอิสระ <span class="math inline">\(\nu\)</span></td>
+<td>ช่วงความเชื่อมั่นและ t-test เมื่อไม่รู้ <span class="math inline">\(\sigma\)</span></td>
+</tr>
+<tr class="even">
+<td>ไคกำลังสอง (<span class="math inline">\(\chi^2\)</span>)</td>
+<td>เบ้ขวา ค่าไม่ติดลบ</td>
+<td>องศาอิสระ <span class="math inline">\(k\)</span></td>
+<td>เกณฑ์ของ Mahalanobis distance (บทที่ 15)</td>
+</tr>
+<tr class="odd">
+<td>Bernoulli, binomial</td>
+<td>ผลสองค่า และจำนวนครั้งที่สำเร็จ</td>
+<td>ความน่าจะเป็น <span class="math inline">\(p\)</span>, จำนวนครั้ง <span class="math inline">\(n\)</span></td>
+<td>วันเกินหรือไม่เกินมาตรฐาน</td>
+</tr>
+<tr class="even">
+<td>Poisson</td>
+<td>จำนวนเหตุการณ์ในช่วงเวลา</td>
+<td>อัตรา <span class="math inline">\(\lambda\)</span></td>
+<td>จำนวนผู้ป่วยต่อวัน (บทที่ 16)</td>
+</tr>
+<tr class="odd">
+<td>Laplace</td>
+<td>ยอดแหลม สมมาตร</td>
+<td>สเกล <span class="math inline">\(b\)</span></td>
+<td>สัญญาณรบกวนของ differential privacy (บทที่ 16)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(stats.norm.cdf(<span class="fl">1.96</span>) <span class="op">-</span> stats.norm.cdf(<span class="op">-</span><span class="fl">1.96</span>), <span class="dv">3</span>))    <span class="co"># พื้นที่ระหว่าง ±1.96</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(stats.t.ppf(<span class="fl">0.975</span>, df<span class="op">=</span><span class="dv">11</span>), <span class="dv">3</span>))                         <span class="co"># ค่าวิกฤตของ t ที่ใช้ในบทที่ 13</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(stats.chi2.ppf(<span class="fl">0.999</span>, df<span class="op">=</span><span class="dv">2</span>), <span class="dv">2</span>))                       <span class="co"># เกณฑ์ของ Mahalanobis ในบทที่ 15</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> stats.lognorm(s<span class="op">=</span><span class="fl">0.5</span>, scale<span class="op">=</span>np.exp(<span class="fl">3.1</span>)).rvs(<span class="dv">100_000</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(np.mean(x), <span class="dv">1</span>), <span class="bu">round</span>(np.median(x), <span class="dv">1</span>))                 <span class="co"># log-normal: ค่าเฉลี่ย &gt; มัธยฐาน</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์
+0.95
+2.201
+13.82
+25.2 22.3</code></pre>
+<p>บรรทัดสุดท้ายแสดงคุณสมบัติของการแจกแจง log-normal ที่บทที่ 13 ใช้อธิบายข้อมูล PM2.5 มัธยฐานตามทฤษฎีเท่ากับ <span class="math inline">\(e^{\mu} = e^{3.1} \approx 22.2\)</span> ส่วนค่าเฉลี่ยเท่ากับ <span class="math inline">\(e^{\mu + \sigma^2/2} = e^{3.225} \approx 25.2\)</span> ซึ่งสูงกว่ามัธยฐานเสมอเมื่อ <span class="math inline">\(\sigma &gt; 0\)</span> ค่าจากการสุ่ม 100,000 ค่าใกล้เคียงทฤษฎี</p>
+</section>
+</section>
+<section id="sec-appe-expectation" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appe-expectation">จ.4 ค่าคาดหวัง ความแปรปรวน และความแปรปรวนร่วม</h2>
+<section id="คาคาดหวงและความแปรปรวน" class="level3">
+<h3 class="anchored" data-anchor-id="คาคาดหวงและความแปรปรวน">ค่าคาดหวังและความแปรปรวน</h3>
+<p><strong>ค่าคาดหวัง</strong> <span class="math inline">\(E[X]\)</span> คือค่าเฉลี่ยในระยะยาวของตัวแปรสุ่ม <strong>ความแปรปรวน</strong> วัดการกระจายรอบค่าคาดหวัง</p>
+<p><span id="eq-appe-variance"><span class="math display">\[
+\operatorname{Var}(X) = E\big[(X - E[X])^2\big] = E[X^2] - (E[X])^2
+\tag{5}\]</span></span></p>
+<p>โดยที่ส่วนเบี่ยงเบนมาตรฐานคือ <span class="math inline">\(\sqrt{\operatorname{Var}(X)}\)</span> ซึ่งมีหน่วยเดียวกับ <span class="math inline">\(X\)</span> คุณสมบัติที่ใช้บ่อยได้แก่ <span class="math inline">\(E[aX + b] = aE[X] + b\)</span> และ <span class="math inline">\(\operatorname{Var}(aX + b) = a^2\operatorname{Var}(X)\)</span> ตัวประมาณจากตัวอย่างใช้ตัวหาร <span class="math inline">\(n - 1\)</span> แทน <span class="math inline">\(n\)</span> เพื่อไม่ให้ประมาณต่ำเกินจริง</p>
+</section>
+<section id="ความแปรปรวนรวมและสหสมพนธ" class="level3">
+<h3 class="anchored" data-anchor-id="ความแปรปรวนรวมและสหสมพนธ">ความแปรปรวนร่วมและสหสัมพันธ์</h3>
+<p><strong>ความแปรปรวนร่วม</strong> (covariance) วัดว่าตัวแปรสองตัวเปลี่ยนไปด้วยกันเพียงใด และ <strong>สหสัมพันธ์</strong> (correlation) คือความแปรปรวนร่วมที่ปรับสเกลให้อยู่ระหว่าง −1 ถึง 1</p>
+<p><span id="eq-appe-covariance"><span class="math display">\[
+\operatorname{Cov}(X, Y) = E\big[(X - E[X])(Y - E[Y])\big], \qquad
+\rho = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}}
+\tag{6}\]</span></span></p>
+<p>ความแปรปรวนของผลรวมคือ <span class="math inline">\(\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X, Y)\)</span> ถ้าตัวแปรเป็นอิสระต่อกัน ความแปรปรวนร่วมเป็นศูนย์ และความแปรปรวนของผลรวมเท่ากับผลรวมของความแปรปรวน สูตรนี้อธิบายว่าทำไม autocorrelation จึงทำให้ความคลาดเคลื่อนมาตรฐานของค่าเฉลี่ยรายวันสูงกว่าที่สูตรสำหรับข้อมูลอิสระบอก (บทที่ 13 และ 14) ค่าของวันที่อยู่ติดกันมีความแปรปรวนร่วมเป็นบวก ทำให้ผลรวมแปรปรวนมากกว่ากรณีอิสระ</p>
+<p>เมทริกซ์ความแปรปรวนร่วม <span class="math inline">\(\boldsymbol{\Sigma}\)</span> ของเวกเตอร์สุ่ม <span class="math inline">\(p\)</span> มิติมีความแปรปรวนของแต่ละตัวแปรอยู่บนเส้นทแยง และความแปรปรวนร่วมของแต่ละคู่อยู่นอกเส้นทแยง ซึ่งเป็นเมทริกซ์ที่ PCA หา eigenvector (บทที่ 15) และ Mahalanobis distance ใช้หาตัวผกผัน</p>
+</section>
+</section>
+<section id="sec-appe-clt" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appe-clt">จ.5 ทฤษฎีบทขีดจำกัดกลาง (CLT) และการแจกแจงของตัวอย่าง</h2>
+<section id="การแจกแจงของตวอยาง" class="level3">
+<h3 class="anchored" data-anchor-id="การแจกแจงของตวอยาง">การแจกแจงของตัวอย่าง</h3>
+<p>ถ้าสุ่มตัวอย่างขนาด <span class="math inline">\(n\)</span> ซ้ำหลายครั้งแล้วคำนวณค่าเฉลี่ยของแต่ละครั้ง ค่าเฉลี่ยเหล่านั้นจะมีการแจกแจงของตัวเอง เรียกว่า <strong>การแจกแจงของตัวอย่าง</strong> (sampling distribution) ส่วนเบี่ยงเบนมาตรฐานของการแจกแจงนี้คือ <strong>ความคลาดเคลื่อนมาตรฐาน</strong> (standard error) ซึ่งสำหรับค่าเฉลี่ยของข้อมูลอิสระเท่ากับ <span class="math inline">\(\sigma/\sqrt{n}\)</span> ความคลาดเคลื่อนมาตรฐานลดลงตามรากที่สองของขนาดตัวอย่าง การเพิ่มตัวอย่างสี่เท่าจึงลดความไม่แน่นอนเพียงครึ่งเดียว</p>
+</section>
+<section id="ทฤษฎบทขดจำกดกลาง" class="level3">
+<h3 class="anchored" data-anchor-id="ทฤษฎบทขดจำกดกลาง">ทฤษฎีบทขีดจำกัดกลาง</h3>
+<p><strong>ทฤษฎีบทขีดจำกัดกลาง</strong> (central limit theorem, CLT) กล่าวว่า ถ้า <span class="math inline">\(X_1, \dots, X_n\)</span> เป็นอิสระและมีการแจกแจงเดียวกันที่มีค่าเฉลี่ย <span class="math inline">\(\mu\)</span> และความแปรปรวน <span class="math inline">\(\sigma^2\)</span> จำกัด เมื่อ <span class="math inline">\(n\)</span> ใหญ่ขึ้น</p>
+<p><span id="eq-appe-clt"><span class="math display">\[
+\frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \longrightarrow N(0, 1)
+\tag{7}\]</span></span></p>
+<p>ไม่ว่าการแจกแจงของ <span class="math inline">\(X\)</span> เองจะเป็นอย่างไร CLT เป็นเหตุผลที่ช่วงความเชื่อมั่นและ t-test ใช้ได้กับข้อมูลที่ไม่ได้มีการแจกแจงปกติ ถ้าตัวอย่างใหญ่พอ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>population <span class="op">=</span> rng.lognormal(<span class="fl">3.1</span>, <span class="fl">0.5</span>, <span class="dv">1_000_000</span>)                     <span class="co"># ประชากรที่เบ้ขวา</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> (<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">200</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    means <span class="op">=</span> rng.choice(population, size<span class="op">=</span>(<span class="dv">10_000</span>, n)).mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(n, <span class="bu">round</span>(stats.skew(means), <span class="dv">2</span>), <span class="bu">round</span>(means.std(), <span class="dv">2</span>), <span class="bu">round</span>(population.std() <span class="op">/</span> np.sqrt(n), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์
+5 0.81 6.03 6.0
+30 0.29 2.45 2.45
+200 0.16 0.95 0.95</code></pre>
+<p>ประชากรมีความเบ้สูง แต่ความเบ้ของการแจกแจงค่าเฉลี่ยลดลงจาก 0.81 เมื่อ <span class="math inline">\(n = 5\)</span> เหลือ 0.16 เมื่อ <span class="math inline">\(n = 200\)</span> และส่วนเบี่ยงเบนมาตรฐานของค่าเฉลี่ยตรงกับ <span class="math inline">\(\sigma/\sqrt{n}\)</span> ทุกขนาดตัวอย่าง ข้อควรจำสองข้อ ข้อแรก “ใหญ่พอ” ขึ้นกับความเบ้ ข้อมูลที่เบ้มากต้องการตัวอย่างใหญ่กว่า ข้อสอง CLT ต้องการความเป็นอิสระ ข้อมูลที่มี autocorrelation อย่าง PM2.5 รายวันละเมิดเงื่อนไขนี้ (บทที่ 13)</p>
+</section>
+</section>
+<section id="sec-appe-distance" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appe-distance">จ.6 ระยะทางและ norm</h2>
+<section id="norm" class="level3">
+<h3 class="anchored" data-anchor-id="norm">norm</h3>
+<p><strong>norm</strong> วัดขนาดของเวกเตอร์ norm ที่ใช้บ่อยเป็นกรณีเฉพาะของ <span class="math inline">\(L_q\)</span> norm</p>
+<p><span id="eq-appe-norm"><span class="math display">\[
+\lVert \mathbf{x} \rVert_q = \Big(\sum_{j=1}^{p} \lvert x_j \rvert^q\Big)^{1/q}
+\tag{8}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(q = 2\)</span> คือ norm แบบยุคลิด (ความยาวตามปกติ) <span class="math inline">\(q = 1\)</span> คือผลรวมค่าสัมบูรณ์ และเมื่อ <span class="math inline">\(q \to \infty\)</span> คือค่าสัมบูรณ์ที่มากที่สุด ระยะทางระหว่างสองจุดคือ norm ของผลต่าง <span class="math inline">\(d(\mathbf{x}, \mathbf{y}) = \lVert \mathbf{x} - \mathbf{y} \rVert\)</span></p>
+</section>
+<section id="ระยะทางทใชในเลม" class="level3">
+<h3 class="anchored" data-anchor-id="ระยะทางทใชในเลม">ระยะทางที่ใช้ในเล่ม</h3>
+<div id="tbl-appe-distances" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appe-distances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2: ระยะทางที่ใช้ในเล่ม
+</figcaption>
+<div aria-describedby="tbl-appe-distances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระยะทาง</th>
+<th>สูตร</th>
+<th>ใช้ในเล่ม</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ยุคลิด (<span class="math inline">\(L_2\)</span>)</td>
+<td><span class="math inline">\(\sqrt{\sum_j (x_j - y_j)^2}\)</span></td>
+<td>k-means, PCA, ระยะทางในระบบพิกัด UTM (บทที่ 15, 17)</td>
+</tr>
+<tr class="even">
+<td>แมนฮัตตัน (<span class="math inline">\(L_1\)</span>)</td>
+<td><span class="math inline">\(\sum_j \lvert x_j - y_j \rvert\)</span></td>
+<td>ทนต่อมิติที่ต่างมากเพียงมิติเดียว</td>
+</tr>
+<tr class="odd">
+<td>สหสัมพันธ์</td>
+<td><span class="math inline">\(1 - \rho(\mathbf{x}, \mathbf{y})\)</span></td>
+<td>เปรียบเทียบรูปร่างของโปรไฟล์ (บทที่ 15)</td>
+</tr>
+<tr class="even">
+<td>Mahalanobis</td>
+<td><span class="math inline">\(\sqrt{(\mathbf{x} - \mathbf{y})^\top \boldsymbol{\Sigma}^{-1} (\mathbf{x} - \mathbf{y})}\)</span></td>
+<td>ค่าผิดปกติหลายตัวแปร (บทที่ 15)</td>
+</tr>
+<tr class="odd">
+<td>geodesic</td>
+<td>ระยะบนผิว ellipsoid</td>
+<td>ระยะทางจริงระหว่างสถานี (บทที่ 17)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> distance</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> np.array([<span class="fl">30.0</span>, <span class="fl">60.0</span>, <span class="fl">20.0</span>]), np.array([<span class="fl">35.0</span>, <span class="fl">40.0</span>, <span class="fl">22.0</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(distance.euclidean(x, y), <span class="dv">2</span>), distance.cityblock(x, y), <span class="bu">round</span>(distance.chebyshev(x, y), <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์
+20.71 27.0 20.0</code></pre>
+<p>ตัวอย่างนี้ใช้โปรไฟล์สามเดือน (มกราคม มีนาคม กรกฎาคม) ของสองสถานีจาก<a href="../chapters/15-multivariate.html#sec-ch15-exercises">แบบฝึกหัดข้อ 1 ของบทที่ 15</a> ระยะยุคลิดเท่ากับ 20.71 ระยะแมนฮัตตันเท่ากับ <span class="math inline">\(5 + 20 + 2 = 27\)</span> และระยะ Chebyshev (<span class="math inline">\(L_\infty\)</span>) เท่ากับ 20 คือความต่างของเดือนที่ต่างมากที่สุด ทุกระยะถูกครอบงำด้วยมิติที่สอง (เดือนมีนาคม) ซึ่งเป็นเหตุผลของการปรับสเกลก่อนวิเคราะห์หลายมิติ (บทที่ 15)</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-harris2020array" class="csl-entry" role="listitem">
+<span class="nocase">Harris, Charles R., K. Jarrod Millman, Stéfan J. van der Walt, และคณะ</span>. 2020. <span>“Array Programming with <span>NumPy</span>”</span>. <em>Nature</em> 585: 357–62. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+</div>
+<div id="ref-strang2016introduction" class="csl-entry" role="listitem">
+Strang, Gilbert. 2016. <em>Introduction to Linear Algebra</em>. 5 พิมพ์ครั้งที่. Wellesley-Cambridge Press.
+</div>
+<div id="ref-wasserman2004all" class="csl-entry" role="listitem">
+Wasserman, Larry. 2004. <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer. <a href="https://doi.org/10.1007/978-0-387-21736-9">https://doi.org/10.1007/978-0-387-21736-9</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../appendices/d-air4thai-open-data.html" class="pagination-link" aria-label="ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/f-troubleshooting.html" class="pagination-link" aria-label="ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย">
+        <span class="nav-page-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

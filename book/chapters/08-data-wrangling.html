@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; การจัดการและแปลงรูปข้อมูล – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/09-data-quality.html" rel="next">
+<link href="../chapters/07-sql-analysis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/08-data-wrangling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch08-tidy" id="toc-sec-ch08-tidy" class="nav-link" data-scroll-target="#sec-ch08-tidy"><span class="header-section-number">8.1</span> tidy data: หลักการของ Wickham</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองมหลกการเรองรปของขอมล" id="toc-ทำไมตองมหลกการเรองรปของขอมล" class="nav-link" data-scroll-target="#ทำไมตองมหลกการเรองรปของขอมล">ทำไมต้องมีหลักการเรื่องรูปของข้อมูล</a></li>
+  <li><a href="#หาปญหาทพบบอย" id="toc-หาปญหาทพบบอย" class="nav-link" data-scroll-target="#หาปญหาทพบบอย">ห้าปัญหาที่พบบ่อย</a></li>
+  <li><a href="#tidy-ขนกบคำถาม" id="toc-tidy-ขนกบคำถาม" class="nav-link" data-scroll-target="#tidy-ขนกบคำถาม">tidy ขึ้นกับคำถาม</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-reshape" id="toc-sec-ch08-reshape" class="nav-link" data-scroll-target="#sec-ch08-reshape"><span class="header-section-number">8.2</span> reshaping: melt, pivot และ wide/long</a>
+  <ul class="collapse">
+  <li><a href="#รปแบบกวางและรปแบบยาว" id="toc-รปแบบกวางและรปแบบยาว" class="nav-link" data-scroll-target="#รปแบบกวางและรปแบบยาว">รูปแบบกว้างและรูปแบบยาว</a></li>
+  <li><a href="#melt-กวาง-ยาว" id="toc-melt-กวาง-ยาว" class="nav-link" data-scroll-target="#melt-กวาง-ยาว">melt: กว้าง → ยาว</a></li>
+  <li><a href="#pivot-ยาว-กวาง" id="toc-pivot-ยาว-กวาง" class="nav-link" data-scroll-target="#pivot-ยาว-กวาง">pivot: ยาว → กว้าง</a></li>
+  <li><a href="#ตวอยาง-ทำตารางทไม-tidy-ให-tidy" id="toc-ตวอยาง-ทำตารางทไม-tidy-ให-tidy" class="nav-link" data-scroll-target="#ตวอยาง-ทำตารางทไม-tidy-ให-tidy">ตัวอย่าง: ทำตารางที่ไม่ tidy ให้ tidy</a></li>
+  <li><a href="#reshape-ใน-sql" id="toc-reshape-ใน-sql" class="nav-link" data-scroll-target="#reshape-ใน-sql">reshape ใน SQL</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-pandas" id="toc-sec-ch08-pandas" class="nav-link" data-scroll-target="#sec-ch08-pandas"><span class="header-section-number">8.3</span> pandas เชิงลึก: index, dtype, copy-on-write และ Arrow-backed dtype</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองเขาใจภายในของ-pandas" id="toc-ทำไมตองเขาใจภายในของ-pandas" class="nav-link" data-scroll-target="#ทำไมตองเขาใจภายในของ-pandas">ทำไมต้องเข้าใจภายในของ pandas</a></li>
+  <li><a href="#index-และการจดแนวอตโนมต" id="toc-index-และการจดแนวอตโนมต" class="nav-link" data-scroll-target="#index-และการจดแนวอตโนมต">index และการจัดแนวอัตโนมัติ</a></li>
+  <li><a href="#dtype" id="toc-dtype" class="nav-link" data-scroll-target="#dtype">dtype</a></li>
+  <li><a href="#copy-on-write" id="toc-copy-on-write" class="nav-link" data-scroll-target="#copy-on-write">copy-on-write</a></li>
+  <li><a href="#arrow-backed-dtype" id="toc-arrow-backed-dtype" class="nav-link" data-scroll-target="#arrow-backed-dtype">Arrow-backed dtype</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-chaining" id="toc-sec-ch08-chaining" class="nav-link" data-scroll-target="#sec-ch08-chaining"><span class="header-section-number">8.4</span> method chaining และโค้ดที่อ่านง่าย</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของตวแปรกลางจำนวนมาก" id="toc-ปญหาของตวแปรกลางจำนวนมาก" class="nav-link" data-scroll-target="#ปญหาของตวแปรกลางจำนวนมาก">ปัญหาของตัวแปรกลางจำนวนมาก</a></li>
+  <li><a href="#method-chaining" id="toc-method-chaining" class="nav-link" data-scroll-target="#method-chaining">method chaining</a></li>
+  <li><a href="#ตรวจสอบระหวางสาย" id="toc-ตรวจสอบระหวางสาย" class="nav-link" data-scroll-target="#ตรวจสอบระหวางสาย">ตรวจสอบระหว่างสาย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-polars" id="toc-sec-ch08-polars" class="nav-link" data-scroll-target="#sec-ch08-polars"><span class="header-section-number">8.5</span> Polars: expression และ lazy evaluation</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองรจก-polars" id="toc-ทำไมตองรจก-polars" class="nav-link" data-scroll-target="#ทำไมตองรจก-polars">ทำไมต้องรู้จัก Polars</a></li>
+  <li><a href="#expression" id="toc-expression" class="nav-link" data-scroll-target="#expression">expression</a></li>
+  <li><a href="#lazy-evaluation" id="toc-lazy-evaluation" class="nav-link" data-scroll-target="#lazy-evaluation">lazy evaluation</a></li>
+  <li><a href="#เลอกใชอะไรเมอใด" id="toc-เลอกใชอะไรเมอใด" class="nav-link" data-scroll-target="#เลอกใชอะไรเมอใด">เลือกใช้อะไรเมื่อใด</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-datetime" id="toc-sec-ch08-datetime" class="nav-link" data-scroll-target="#sec-ch08-datetime"><span class="header-section-number">8.6</span> วันเวลา: timestamp, timezone, DST และปฏิทินไทย (พ.ศ.)</a>
+  <ul class="collapse">
+  <li><a href="#ขอตกลงของโครงการ" id="toc-ขอตกลงของโครงการ" class="nav-link" data-scroll-target="#ขอตกลงของโครงการ">ข้อตกลงของโครงการ</a></li>
+  <li><a href="#tz_localize-กบ-tz_convert" id="toc-tz_localize-กบ-tz_convert" class="nav-link" data-scroll-target="#tz_localize-กบ-tz_convert">tz_localize กับ tz_convert</a></li>
+  <li><a href="#เวลาออมแสง-dst" id="toc-เวลาออมแสง-dst" class="nav-link" data-scroll-target="#เวลาออมแสง-dst">เวลาออมแสง (DST)</a></li>
+  <li><a href="#ปฏทนไทย-พ.ศ." id="toc-ปฏทนไทย-พ.ศ." class="nav-link" data-scroll-target="#ปฏทนไทย-พ.ศ.">ปฏิทินไทย (พ.ศ.)</a></li>
+  <li><a href="#แยกสวนประกอบของเวลา" id="toc-แยกสวนประกอบของเวลา" class="nav-link" data-scroll-target="#แยกสวนประกอบของเวลา">แยกส่วนประกอบของเวลา</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-resample" id="toc-sec-ch08-resample" class="nav-link" data-scroll-target="#sec-ch08-resample"><span class="header-section-number">8.7</span> resampling และความครบถ้วนของข้อมูลเมื่อรวมกลุ่ม</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมความครบถวนตองเดนทางไปพรอมคาเฉลย" id="toc-ทำไมความครบถวนตองเดนทางไปพรอมคาเฉลย" class="nav-link" data-scroll-target="#ทำไมความครบถวนตองเดนทางไปพรอมคาเฉลย">ทำไมความครบถ้วนต้องเดินทางไปพร้อมค่าเฉลี่ย</a></li>
+  <li><a href="#view-daily_pm25" id="toc-view-daily_pm25" class="nav-link" data-scroll-target="#view-daily_pm25">view <code>daily_pm25</code></a></li>
+  <li><a href="#resample-ใน-pandas" id="toc-resample-ใน-pandas" class="nav-link" data-scroll-target="#resample-ใน-pandas">resample ใน pandas</a></li>
+  <li><a href="#resample-กบ-groupby-ตางกนอยางไร" id="toc-resample-กบ-groupby-ตางกนอยางไร" class="nav-link" data-scroll-target="#resample-กบ-groupby-ตางกนอยางไร">resample กับ groupby ต่างกันอย่างไร</a></li>
+  <li><a href="#เกณฑความครบถวน" id="toc-เกณฑความครบถวน" class="nav-link" data-scroll-target="#เกณฑความครบถวน">เกณฑ์ความครบถ้วน</a></li>
+  <li><a href="#ตารางรายวนพรอมใช" id="toc-ตารางรายวนพรอมใช" class="nav-link" data-scroll-target="#ตารางรายวนพรอมใช">ตารางรายวันพร้อมใช้</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-join-traps" id="toc-sec-ch08-join-traps" class="nav-link" data-scroll-target="#sec-ch08-join-traps"><span class="header-section-number">8.8</span> กับดักของการ join: fan-out และ key ไม่ตรงกัน</a>
+  <ul class="collapse">
+  <li><a href="#ทำไม-join-เปนจดเสยงทสด" id="toc-ทำไม-join-เปนจดเสยงทสด" class="nav-link" data-scroll-target="#ทำไม-join-เปนจดเสยงทสด">ทำไม join เป็นจุดเสี่ยงที่สุด</a></li>
+  <li><a href="#fan-out" id="toc-fan-out" class="nav-link" data-scroll-target="#fan-out">fan-out</a></li>
+  <li><a href="#ปองกน-fan-out-ดวย-validate" id="toc-ปองกน-fan-out-ดวย-validate" class="nav-link" data-scroll-target="#ปองกน-fan-out-ดวย-validate">ป้องกัน fan-out ด้วย validate</a></li>
+  <li><a href="#key-ไมตรงกน" id="toc-key-ไมตรงกน" class="nav-link" data-scroll-target="#key-ไมตรงกน">key ไม่ตรงกัน</a></li>
+  <li><a href="#ขนตอนตรวจ-join-ทควรทำทกครง" id="toc-ขนตอนตรวจ-join-ทควรทำทกครง" class="nav-link" data-scroll-target="#ขนตอนตรวจ-join-ทควรทำทกครง">ขั้นตอนตรวจ join ที่ควรทำทุกครั้ง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-performance" id="toc-sec-ch08-performance" class="nav-link" data-scroll-target="#sec-ch08-performance"><span class="header-section-number">8.9</span> ประสิทธิภาพ: vectorization, หน่วยความจำ และข้อมูลที่ใหญ่กว่า RAM ★</a>
+  <ul class="collapse">
+  <li><a href="#vectorization" id="toc-vectorization" class="nav-link" data-scroll-target="#vectorization">vectorization</a></li>
+  <li><a href="#หนวยความจำ" id="toc-หนวยความจำ" class="nav-link" data-scroll-target="#หนวยความจำ">หน่วยความจำ</a></li>
+  <li><a href="#ขอมลทใหญกวา-ram" id="toc-ขอมลทใหญกวา-ram" class="nav-link" data-scroll-target="#ขอมลทใหญกวา-ram">ข้อมูลที่ใหญ่กว่า RAM</a></li>
+  </ul></li>
+  <li><a href="#sec-ch08-case" id="toc-sec-ch08-case" class="nav-link" data-scroll-target="#sec-ch08-case">กรณีศึกษา: จากค่ารายชั่วโมงสู่ตารางรายวันที่พร้อมวิเคราะห์</a></li>
+  <li><a href="#sec-ch08-pitfalls" id="toc-sec-ch08-pitfalls" class="nav-link" data-scroll-target="#sec-ch08-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch08-exercises" id="toc-sec-ch08-exercises" class="nav-link" data-scroll-target="#sec-ch08-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ประยกต" id="toc-ประยกต" class="nav-link" data-scroll-target="#ประยกต">ประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/08-data-wrangling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 7 ตอบคำถามด้วย SQL ได้หลายข้อแล้ว แต่งานวิเคราะห์ส่วนใหญ่หลังจากนี้ ทั้งการตรวจคุณภาพในบทที่ 9 การวาดกราฟในบทที่ 11–12 และการคำนวณสถิติในบทที่ 13–15 ใช้ไลบรารีของ Python ซึ่งรับข้อมูลเป็น DataFrame ข้อมูลจึงต้องเดินทางจากฐานข้อมูลเข้าสู่ pandas และต้องอยู่ใน <em>รูป</em> ที่ไลบรารีเหล่านั้นใช้ได้ทันที บทนี้ว่าด้วยงานที่มักถูกเรียกว่า data wrangling คือการจัดรูป แปลง และรวมข้อมูลให้พร้อมวิเคราะห์</p>
+<p>งานนี้มีชื่อเสียงว่ากินเวลามากที่สุดในโครงการข้อมูล แต่ความเสี่ยงที่ใหญ่กว่าเวลาคือ <em>ความผิดพลาดที่มองไม่เห็น</em> การ join ที่ทำให้แถวเพิ่มขึ้นโดยไม่รู้ตัว การตัดวันผิดเขตเวลา หรือค่าเฉลี่ยรายวันที่คำนวณจากข้อมูลเพียงไม่กี่ชั่วโมง ล้วนรันผ่านโดยไม่มี error บทนี้จึงอธิบายทั้ง <em>วิธีทำ</em> และ <em>วิธีตรวจ</em> ไปพร้อมกัน ผลงานของบทคือ view <code>daily_pm25</code> ในฐานข้อมูล ซึ่งเป็นฐานของการตรวจคุณภาพในบทที่ 9–10</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายหลัก tidy data และประเมินว่าตารางหนึ่ง tidy สำหรับคำถามที่กำหนดหรือไม่</li>
+<li>แปลงข้อมูลระหว่างรูปแบบกว้างกับรูปแบบยาวด้วย <code>melt</code>, <code>pivot</code> และ <code>UNPIVOT</code></li>
+<li>อธิบายกลไกของ index, dtype และ copy-on-write ใน pandas และหลีกเลี่ยงกับดักที่เกี่ยวข้อง</li>
+<li>เขียนการแปลงข้อมูลหลายขั้นเป็น method chain ที่อ่านง่ายและตรวจสอบได้</li>
+<li>ใช้ Polars แบบ expression และ lazy evaluation และเปรียบเทียบกับ pandas</li>
+<li>จัดการ timestamp เขตเวลา เวลาออมแสง และปี พ.ศ. ได้ถูกต้อง</li>
+<li>รวมข้อมูลรายชั่วโมงเป็นรายวันพร้อมตัวชี้วัดความครบถ้วน และอธิบายความต่างระหว่าง <code>resample</code> กับ <code>groupby</code></li>
+<li>ตรวจจับ fan-out และ key ไม่ตรงกันในการ join ก่อนที่จะทำให้ผลผิด</li>
+</ol>
+</section>
+<section id="sec-ch08-tidy" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-ch08-tidy"><span class="header-section-number">8.1</span> tidy data: หลักการของ Wickham</h2>
+<section id="ทำไมตองมหลกการเรองรปของขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองมหลกการเรองรปของขอมล">ทำไมต้องมีหลักการเรื่องรูปของข้อมูล</h3>
+<p>ข้อมูลชุดเดียวกันจัดเป็นตารางได้หลายแบบ ตารางค่า PM2.5 รายเดือนของสถานีอาจมีหนึ่งแถวต่อสถานีและหนึ่งคอลัมน์ต่อเดือน หรือมีหนึ่งแถวต่อสถานีต่อเดือนก็ได้ ทั้งสองแบบมีข้อมูลเท่ากัน แต่แบบหนึ่งอาจวาดกราฟได้ทันที อีกแบบต้องแปลงก่อน ถ้าไม่มีหลักการ ทุกครั้งที่ได้ข้อมูลใหม่เราต้องคิดใหม่ว่าจะจัดการอย่างไร</p>
+<p>Hadley Wickham เสนอหลัก <span class="idx">tidy data</span> ในปี ค.ศ. 2014 เพื่อให้มีรูปมาตรฐานที่เครื่องมือวิเคราะห์ทุกตัวใช้ได้ <span class="citation" data-cites="wickham2014tidy">(<a href="../references.html#ref-wickham2014tidy" role="doc-biblioref">Wickham 2014</a>)</span> หลักการมีสามข้อ</p>
+<ol type="1">
+<li><strong>ตัวแปรหนึ่งตัวอยู่ในคอลัมน์หนึ่งคอลัมน์</strong></li>
+<li><strong>การสังเกตหนึ่งครั้งอยู่ในแถวหนึ่งแถว</strong></li>
+<li><strong>หน่วยการสังเกตหนึ่งชนิดอยู่ในตารางหนึ่งตาราง</strong></li>
+</ol>
+<p>ข้อที่สามคือหลัก normalization ในบทที่ 6 ที่แยก <code>stations</code> ออกจาก <code>measurements</code> ส่วนข้อหนึ่งและสองเป็นเรื่องของรูปภายในตาราง</p>
+</section>
+<section id="หาปญหาทพบบอย" class="level3">
+<h3 class="anchored" data-anchor-id="หาปญหาทพบบอย">ห้าปัญหาที่พบบ่อย</h3>
+<p>Wickham จำแนกรูปแบบของข้อมูลที่ไม่ tidy ไว้ห้าแบบ แต่ละแบบพบได้ในข้อมูลคุณภาพอากาศ</p>
+<div id="tbl-ch08-untidy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-untidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.1: ห้าปัญหาของข้อมูลที่ไม่ tidy (ปรับจาก Wickham, 2014)
+</figcaption>
+<div aria-describedby="tbl-ch08-untidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ปัญหา</th>
+<th>ตัวอย่าง</th>
+<th>แก้ด้วย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ชื่อคอลัมน์เป็นค่าของตัวแปร</td>
+<td>คอลัมน์ <code>pm25_2565</code>, <code>pm25_2566</code> (ปีอยู่ในชื่อคอลัมน์)</td>
+<td><code>melt</code></td>
+</tr>
+<tr class="even">
+<td>หลายตัวแปรอยู่ในคอลัมน์เดียว</td>
+<td>คอลัมน์ <code>area_th</code> ที่มีทั้งอำเภอและจังหวัด เช่น <code>"ต.ปากน้ำ อ.เมือง, กระบี่"</code></td>
+<td>แยกข้อความ</td>
+</tr>
+<tr class="odd">
+<td>ตัวแปรอยู่ทั้งในแถวและคอลัมน์</td>
+<td>แถว <code>pm25</code>, <code>pm10</code> สลับกับคอลัมน์วันที่</td>
+<td><code>melt</code> แล้ว <code>pivot</code></td>
+</tr>
+<tr class="even">
+<td>หลายหน่วยการสังเกตในตารางเดียว</td>
+<td>ชื่อและพิกัดสถานีซ้ำในทุกแถวของค่ารายชั่วโมง</td>
+<td>แยกตาราง</td>
+</tr>
+<tr class="odd">
+<td>หน่วยการสังเกตเดียวกระจายหลายตาราง</td>
+<td>ไฟล์ CSV แยกรายเดือน</td>
+<td>ต่อกัน (<code>concat</code>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="tidy-ขนกบคำถาม" class="level3">
+<h3 class="anchored" data-anchor-id="tidy-ขนกบคำถาม">tidy ขึ้นกับคำถาม</h3>
+<p>ตาราง <code>measurements</code> มีคอลัมน์ <code>pm25</code>, <code>pm10</code>, <code>o3</code>, <code>co</code>, <code>no2</code> และ <code>so2</code> แยกกัน ตารางนี้ tidy หรือไม่ คำตอบขึ้นกับว่า <em>หน่วยการสังเกต</em> คืออะไร</p>
+<ul>
+<li>ถ้าหน่วยการสังเกตคือ “สถานีหนึ่งในชั่วโมงหนึ่ง” และแต่ละสารมลพิษเป็นตัวแปรที่วัดในการสังเกตนั้น ตารางนี้ tidy และเหมาะกับคำถามเช่น “ความสัมพันธ์ระหว่าง PM2.5 กับ PM10 เป็นอย่างไร” ซึ่งต้องการสองตัวแปรในแถวเดียวกัน</li>
+<li>ถ้าหน่วยการสังเกตคือ “การวัดสารหนึ่งชนิดที่สถานีหนึ่งในชั่วโมงหนึ่ง” ตารางควรมีคอลัมน์ <code>pollutant</code> และ <code>value</code> ซึ่งเหมาะกับคำถามเช่น “วาดกราฟของทุกสารมลพิษแยกเป็นแผงย่อย” หรือ “สารใดเกินมาตรฐานบ่อยที่สุด”</li>
+</ul>
+<p>Wickham ยอมรับเองว่าการระบุว่าอะไรคือตัวแปรและอะไรคือการสังเกตไม่ได้ชัดเจนเสมอ หลักปฏิบัติคือ เลือกรูปที่ทำให้คำถามตอบง่ายที่สุด และรู้วิธีแปลงไปมาระหว่างรูปต่าง ๆ ซึ่งเป็นเนื้อหาของหัวข้อถัดไป</p>
+</section>
+</section>
+<section id="sec-ch08-reshape" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-ch08-reshape"><span class="header-section-number">8.2</span> reshaping: melt, pivot และ wide/long</h2>
+<section id="รปแบบกวางและรปแบบยาว" class="level3">
+<h3 class="anchored" data-anchor-id="รปแบบกวางและรปแบบยาว">รูปแบบกว้างและรูปแบบยาว</h3>
+<p><strong><span class="idx">รูปแบบกว้าง</span></strong> (wide format) มีหนึ่งแถวต่อหน่วยหลัก และกระจายค่าของตัวแปรหนึ่งออกเป็นหลายคอลัมน์ เช่น หนึ่งแถวต่อสถานี-ชั่วโมง มีคอลัมน์ <code>pm25</code> และ <code>pm10</code> <strong><span class="idx">รูปแบบยาว</span></strong> (long format) รวมคอลัมน์เหล่านั้นเป็นสองคอลัมน์ คือคอลัมน์บอกชื่อ และคอลัมน์บอกค่า</p>
+<div id="tbl-ch08-wide-long" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-wide-long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.2: เปรียบเทียบรูปแบบกว้างกับรูปแบบยาว
+</figcaption>
+<div aria-describedby="tbl-ch08-wide-long-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>รูปแบบกว้าง</th>
+<th>รูปแบบยาว</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>จำนวนแถว</td>
+<td>น้อย</td>
+<td>มาก (คูณด้วยจำนวนคอลัมน์ที่รวม)</td>
+</tr>
+<tr class="even">
+<td>เหมาะกับ</td>
+<td>เปรียบเทียบตัวแปรในแถวเดียวกัน คำนวณอัตราส่วน ตารางสรุปให้คนอ่าน</td>
+<td>กราฟแบบ grammar of graphics (facet, สีตามกลุ่ม) การรวมกลุ่มตามตัวแปร</td>
+</tr>
+<tr class="odd">
+<td>ตัวอย่าง</td>
+<td><code>pm25 / pm10</code></td>
+<td>กราฟเส้นของทุกสารแยกแผง</td>
+</tr>
+<tr class="even">
+<td>เพิ่มตัวแปรใหม่</td>
+<td>เพิ่มคอลัมน์</td>
+<td>เพิ่มแถว</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="melt-กวาง-ยาว" class="level3">
+<h3 class="anchored" data-anchor-id="melt-กวาง-ยาว">melt: กว้าง → ยาว</h3>
+<p><code>melt</code> รวมหลายคอลัมน์เป็นสองคอลัมน์ <span class="citation" data-cites="pandas2026reshaping">(<a href="../references.html#ref-pandas2026reshaping" role="doc-biblioref"><span class="nocase">pandas development team</span> 2026d</a>)</span> พารามิเตอร์ <code>id_vars</code> คือคอลัมน์ที่ระบุการสังเกตและต้องคงไว้ <code>var_name</code> คือชื่อคอลัมน์ใหม่ที่เก็บชื่อคอลัมน์เดิม และ <code>value_name</code> คือชื่อคอลัมน์ใหม่ที่เก็บค่า</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT station_id, ts, pm25, pm10 FROM measurements</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE station_id = '35t' AND ts &gt;= TIMESTAMP '2023-03-01'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY ts LIMIT 2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> wide.melt(id_vars<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"ts"</span>], var_name<span class="op">=</span><span class="st">"pollutant"</span>, value_name<span class="op">=</span><span class="st">"value"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">long</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+  station_id                  ts pollutant  value
+0        35t 2023-03-01 00:00:00      pm25   56.7
+1        35t 2023-03-01 01:00:00      pm25   47.2
+2        35t 2023-03-01 00:00:00      pm10   87.9
+3        35t 2023-03-01 01:00:00      pm10   77.7</code></pre>
+</section>
+<section id="pivot-ยาว-กวาง" class="level3">
+<h3 class="anchored" data-anchor-id="pivot-ยาว-กวาง">pivot: ยาว → กว้าง</h3>
+<p><code>pivot</code> ทำงานกลับกัน โดยกระจายค่าในคอลัมน์หนึ่งออกเป็นหลายคอลัมน์</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>back <span class="op">=</span> (<span class="bu">long</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        .pivot(index<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"ts"</span>], columns<span class="op">=</span><span class="st">"pollutant"</span>, values<span class="op">=</span><span class="st">"value"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        .reset_index())</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>back.columns.name <span class="op">=</span> <span class="va">None</span>        <span class="co"># ลบชื่อ "pollutant" ที่ติดมากับหัวคอลัมน์</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>pivot</code> มีเงื่อนไขสำคัญคือ คู่ของ <code>index</code> กับ <code>columns</code> ต้องไม่ซ้ำ ถ้ามีแถวซ้ำ เช่น ค่า PM2.5 ของสถานีเดียวกันในชั่วโมงเดียวกันสองแถว จะได้ <code>ValueError: Index contains duplicate entries, cannot reshape</code> ข้อผิดพลาดนี้มีประโยชน์ เพราะเป็นสัญญาณว่าข้อมูลมีแถวซ้ำที่ไม่ควรมี ถ้าการมีหลายค่าเป็นเรื่องปกติ เช่น ต้องการค่าเฉลี่ยรายเดือนของแต่ละภาค ให้ใช้ <code>pivot_table</code> ซึ่งรวมค่าด้วย <code>aggfunc</code> แต่ต้องแน่ใจว่าการรวมนั้นถูกต้อง ไม่ใช่ใช้ <code>pivot_table</code> เพียงเพื่อเลี่ยง error ของ <code>pivot</code></p>
+</section>
+<section id="ตวอยาง-ทำตารางทไม-tidy-ให-tidy" class="level3">
+<h3 class="anchored" data-anchor-id="ตวอยาง-ทำตารางทไม-tidy-ให-tidy">ตัวอย่าง: ทำตารางที่ไม่ tidy ให้ tidy</h3>
+<p>สมมุติว่าได้รับไฟล์สรุปจากหน่วยงานหนึ่ง ซึ่งมีปี พ.ศ. อยู่ในชื่อคอลัมน์ (ข้อมูลสมมุติ)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>messy <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"station_id"</span>: [<span class="st">"02t"</span>, <span class="st">"35t"</span>],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pm25_2565"</span>: [<span class="fl">24.1</span>, <span class="fl">30.2</span>],</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pm25_2566"</span>: [<span class="fl">25.0</span>, <span class="fl">31.5</span>],</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tidy <span class="op">=</span> (</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    messy</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    .melt(id_vars<span class="op">=</span><span class="st">"station_id"</span>, var_name<span class="op">=</span><span class="st">"col"</span>, value_name<span class="op">=</span><span class="st">"pm25_mean"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    .assign(year_be<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"col"</span>].<span class="bu">str</span>.removeprefix(<span class="st">"pm25_"</span>).astype(<span class="bu">int</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            year<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"year_be"</span>] <span class="op">-</span> <span class="dv">543</span>)          <span class="co"># คำนวณด้วย ค.ศ.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    .drop(columns<span class="op">=</span><span class="st">"col"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tidy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+  station_id  pm25_mean  year_be  year
+0        02t       24.1     2565  2022
+1        35t       30.2     2565  2022
+2        02t       25.0     2566  2023
+3        35t       31.5     2566  2023</code></pre>
+</section>
+<section id="reshape-ใน-sql" class="level3">
+<h3 class="anchored" data-anchor-id="reshape-ใน-sql">reshape ใน SQL</h3>
+<p>DuckDB มีคำสั่ง <code>UNPIVOT</code> และ <code>PIVOT</code> ที่ทำงานแบบเดียวกัน <span class="citation" data-cites="duckdb2026pivot">(<a href="../references.html#ref-duckdb2026pivot" role="doc-biblioref">DuckDB Foundation 2026</a>)</span> เหมาะเมื่อข้อมูลใหญ่จนไม่อยากดึงเข้า pandas ทั้งหมดก่อนแปลง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>UNPIVOT (<span class="kw">SELECT</span> station_id, ts, pm25, pm10 <span class="kw">FROM</span> measurements)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> pm25, pm10</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INTO</span> NAME pollutant <span class="fu">VALUE</span> <span class="fu">value</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-ch08-pandas" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-ch08-pandas"><span class="header-section-number">8.3</span> pandas เชิงลึก: index, dtype, copy-on-write และ Arrow-backed dtype</h2>
+<section id="ทำไมตองเขาใจภายในของ-pandas" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองเขาใจภายในของ-pandas">ทำไมต้องเข้าใจภายในของ pandas</h3>
+<p><span class="idx-tool">pandas</span> เป็นไลบรารี DataFrame ที่แพร่หลายที่สุดของ Python <span class="citation" data-cites="mckinney2022python">(<a href="../references.html#ref-mckinney2022python" role="doc-biblioref">McKinney 2022</a>)</span> ใช้ง่ายในระดับพื้นฐาน แต่มีพฤติกรรมหลายอย่างที่ทำให้ผลผิดโดยไม่มี error ถ้าไม่เข้าใจกลไกเบื้องหลัง หัวข้อนี้อธิบายสี่กลไกที่เป็นต้นเหตุของปัญหาส่วนใหญ่</p>
+</section>
+<section id="index-และการจดแนวอตโนมต" class="level3">
+<h3 class="anchored" data-anchor-id="index-และการจดแนวอตโนมต">index และการจัดแนวอัตโนมัติ</h3>
+<p>DataFrame และ Series ของ pandas มี <strong>index</strong> ซึ่งเป็นป้ายกำกับของแถว เมื่อคำนวณระหว่างสอง Series pandas จะ <em>จัดแนวตาม index</em> ก่อนเสมอ ไม่ได้จับคู่ตามตำแหน่ง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> pd.Series([<span class="fl">10.0</span>, <span class="fl">20.0</span>, <span class="fl">30.0</span>], index<span class="op">=</span>[<span class="st">"02t"</span>, <span class="st">"05t"</span>, <span class="st">"35t"</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> pd.Series([<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>], index<span class="op">=</span>[<span class="st">"05t"</span>, <span class="st">"35t"</span>, <span class="st">"44t"</span>])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">+</span> b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+02t     NaN
+05t    21.0
+35t    32.0
+44t     NaN
+dtype: float64</code></pre>
+<p>พฤติกรรมนี้มีประโยชน์เมื่อตั้งใจ เพราะป้องกันการบวกค่าของคนละสถานีเข้าด้วยกัน แต่สร้างปัญหาเมื่อไม่ได้ตั้งใจ เช่น หลังกรองแถวแล้ว index ไม่ต่อเนื่อง และนำไปกำหนดค่าให้คอลัมน์ของอีก DataFrame ผลคือได้ <code>NaN</code> ในตำแหน่งที่ index ไม่ตรงกัน แนวปฏิบัติที่ลดปัญหาคือ ใช้ <code>reset_index()</code> หลังการรวมกลุ่มหรือกรองเมื่อไม่ต้องการ index เป็นป้ายกำกับ และใช้ <code>merge</code> เมื่อต้องการจับคู่ตามคอลัมน์อย่างชัดเจน</p>
+</section>
+<section id="dtype" class="level3">
+<h3 class="anchored" data-anchor-id="dtype">dtype</h3>
+<p>ทุกคอลัมน์ของ DataFrame มีชนิดข้อมูล (dtype) ซึ่งกำหนดทั้งพฤติกรรมและการใช้หน่วยความจำ DataFrame ที่ได้จาก DuckDB มี dtype ดังนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> con.execute(<span class="st">"SELECT station_id, ts, pm25 FROM measurements"</span>).df()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(h.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+station_id            object
+ts            datetime64[us]
+pm25                 float64</code></pre>
+<p>dtype ที่ควรรู้จักและปัญหาที่พบบ่อยมีดังนี้</p>
+<div id="tbl-ch08-dtypes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-dtypes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.3: dtype ที่ใช้บ่อยใน pandas และปัญหาที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-ch08-dtypes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>dtype</th>
+<th>ใช้กับ</th>
+<th>ปัญหาที่พบบ่อย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>float64</code></td>
+<td>ตัวเลขทศนิยม ค่าหายเป็น <code>NaN</code></td>
+<td>ตัวเลขที่อ่านมาเป็นข้อความกลายเป็น <code>object</code> คำนวณไม่ได้</td>
+</tr>
+<tr class="even">
+<td><code>int64</code></td>
+<td>จำนวนเต็ม</td>
+<td>ไม่รองรับค่าหาย คอลัมน์จำนวนเต็มที่มีค่าหายกลายเป็น <code>float64</code></td>
+</tr>
+<tr class="odd">
+<td><code>Int64</code> (ตัว I ใหญ่)</td>
+<td>จำนวนเต็มที่มีค่าหายได้ (<code>pd.NA</code>)</td>
+<td>ต้องระบุเอง</td>
+</tr>
+<tr class="even">
+<td><code>object</code></td>
+<td>ข้อความ (ค่าเริ่มต้นใน pandas 2.x)</td>
+<td>ใช้หน่วยความจำมาก เก็บอะไรก็ได้ปนกัน</td>
+</tr>
+<tr class="odd">
+<td><code>category</code></td>
+<td>ข้อความที่มีค่าไม่ซ้ำไม่มาก เช่น <code>station_id</code>, <code>region</code></td>
+<td>การรวมกลุ่มแสดงหมวดที่ไม่มีข้อมูลด้วย ถ้าไม่ตั้ง <code>observed=True</code></td>
+</tr>
+<tr class="even">
+<td><code>datetime64[...]</code></td>
+<td>วันเวลา</td>
+<td>อ่านจาก CSV เป็น <code>object</code> ถ้าไม่สั่ง <code>parse_dates</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ความต่างของการใช้หน่วยความจำเห็นได้ชัดกับคอลัมน์ <code>station_id</code> ซึ่งมีค่าไม่ซ้ำไม่กี่สิบค่าแต่ซ้ำหลายแสนครั้ง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> h[<span class="st">"station_id"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(s.memory_usage(deep<span class="op">=</span><span class="va">True</span>) <span class="op">/</span> <span class="fl">1e6</span>, <span class="dv">1</span>), <span class="st">"MB  object"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(s.astype(<span class="st">"category"</span>).memory_usage(deep<span class="op">=</span><span class="va">True</span>) <span class="op">/</span> <span class="fl">1e6</span>, <span class="dv">1</span>), <span class="st">"MB  category"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติประมาณ 420,000 แถว
+21.9 MB  object
+0.4 MB  category</code></pre>
+<p><code>category</code> เก็บค่าไม่ซ้ำเพียงครั้งเดียวแล้วเก็บรหัสตัวเลขของแต่ละแถว ซึ่งเป็นหลักเดียวกับ dictionary encoding ของ Parquet ในบทที่ 6</p>
+</section>
+<section id="copy-on-write" class="level3">
+<h3 class="anchored" data-anchor-id="copy-on-write">copy-on-write</h3>
+<p>ปัญหาที่ทำให้ผู้ใช้ pandas สับสนมาที่สุดปัญหาหนึ่งคือ การแก้ไขข้อมูลที่ได้จากการกรอง บางครั้งแก้ DataFrame ต้นฉบับไปด้วย บางครั้งไม่แก้ ขึ้นกับรายละเอียดภายในว่าผลของการกรองเป็น “สำเนา” หรือ “มุมมอง” ของข้อมูลเดิม pandas เตือนด้วย <code>SettingWithCopyWarning</code> แต่ผู้ใช้จำนวนมากเพิกเฉยต่อคำเตือนนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"station_id"</span>: [<span class="st">"02t"</span>, <span class="st">"35t"</span>], <span class="st">"pm25"</span>: [<span class="op">-</span><span class="fl">1.0</span>, <span class="fl">30.0</span>]})</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sub <span class="op">=</span> df[df[<span class="st">"pm25"</span>] <span class="op">&lt;</span> <span class="dv">0</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sub[<span class="st">"pm25"</span>] <span class="op">=</span> np.nan          <span class="co"># SettingWithCopyWarning และ df ไม่เปลี่ยน</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>pandas จึงนำกลไก <strong><span class="idx">copy-on-write</span></strong> (CoW) มาใช้ ภายใต้ CoW ผลของการกรองหรือเลือกคอลัมน์ทุกครั้งทำตัวเหมือนสำเนาเสมอ การแก้ไขผลนั้นไม่กระทบต้นฉบับ พฤติกรรมจึงคาดเดาได้ <span class="citation" data-cites="pandas2026cow">(<a href="../references.html#ref-pandas2026cow" role="doc-biblioref"><span class="nocase">pandas development team</span> 2026a</a>)</span> ใน pandas 2.x เปิดใช้ได้ด้วย <code>pd.options.mode.copy_on_write = True</code> และ pandas 3.0 ใช้ CoW เป็นค่าเริ่มต้น ภายใต้ CoW การกำหนดค่าแบบต่อกัน (chained assignment) เช่น <code>df["pm25"][mask] = np.nan</code> จะไม่มีผลต่อ <code>df</code> และแจ้งเตือน <code>ChainedAssignmentError</code></p>
+<p>วิธีที่ถูกต้องในทุกเวอร์ชันคือ แก้ไขผ่าน <code>loc</code> ในคำสั่งเดียว หรือสร้างคอลัมน์ใหม่ด้วย <code>assign</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">"pm25"</span>] <span class="op">&lt;</span> <span class="dv">0</span>, <span class="st">"pm25"</span>] <span class="op">=</span> np.nan                             <span class="co"># แก้ต้นฉบับในคำสั่งเดียว</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.assign(pm25<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"pm25"</span>].where(d[<span class="st">"pm25"</span>] <span class="op">&gt;=</span> <span class="dv">0</span>))      <span class="co"># หรือสร้างคอลัมน์ใหม่</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="arrow-backed-dtype" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-backed-dtype">Arrow-backed dtype</h3>
+<p>บทที่ 6 แนะนำ Apache Arrow ในฐานะรูปแบบข้อมูลในหน่วยความจำที่หลายเครื่องมือใช้ร่วมกัน pandas 2.x รองรับ dtype ที่มี Arrow อยู่เบื้องหลัง ผ่าน <code>pd.ArrowDtype</code> <span class="citation" data-cites="pandas2026arrow">(<a href="../references.html#ref-pandas2026arrow" role="doc-biblioref"><span class="nocase">pandas development team</span> 2026c</a>)</span> ข้อดีหลักมีสามข้อ ข้อแรก ข้อความใช้หน่วยความจำน้อยกว่า <code>object</code> มาก ข้อสอง ทุกชนิดข้อมูลรองรับค่าหายได้อย่างสม่ำเสมอ รวมถึงจำนวนเต็ม และข้อสาม แลกเปลี่ยนข้อมูลกับ DuckDB และ Polars ได้เร็ว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tbl <span class="op">=</span> con.execute(<span class="st">"SELECT station_id, ts, pm25 FROM measurements"</span>).to_arrow_table()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>h_arrow <span class="op">=</span> tbl.to_pandas(types_mapper<span class="op">=</span>pd.ArrowDtype)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(h_arrow.dtypes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+station_id          string[pyarrow]
+ts            timestamp[us][pyarrow]
+pm25                 double[pyarrow]</code></pre>
+<p>ข้อเสียคือ ไลบรารีบางตัวที่ใช้ในบทหลัง ๆ ยังคาดหวัง dtype แบบ NumPy และอาจทำงานช้าลงหรือแจ้ง error กับ Arrow-backed dtype หนังสือเล่มนี้จึงใช้ dtype แบบ NumPy เป็นค่าเริ่มต้น และแนะนำ Arrow-backed dtype เมื่อหน่วยความจำเป็นข้อจำกัด</p>
+</section>
+</section>
+<section id="sec-ch08-chaining" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-ch08-chaining"><span class="header-section-number">8.4</span> method chaining และโค้ดที่อ่านง่าย</h2>
+<section id="ปญหาของตวแปรกลางจำนวนมาก" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของตวแปรกลางจำนวนมาก">ปัญหาของตัวแปรกลางจำนวนมาก</h3>
+<p>โค้ดแปลงข้อมูลที่เขียนทีละบรรทัดมักสร้างตัวแปรกลางจำนวนมาก เช่น <code>df1</code>, <code>df2</code>, <code>df_filtered</code>, <code>df_final</code> ซึ่งมีปัญหาสามข้อ ข้อแรก อ่านยาก เพราะต้องไล่ว่าตัวแปรไหนมาจากไหน ข้อสอง ใน notebook ตัวแปรกลางเหล่านี้ค้างอยู่ในหน่วยความจำและเป็นแหล่งของ hidden state (บทที่ 2) ข้อสาม แก้ขั้นกลางแล้วลืมรันขั้นถัดไปได้ง่าย</p>
+</section>
+<section id="method-chaining" class="level3">
+<h3 class="anchored" data-anchor-id="method-chaining">method chaining</h3>
+<p><strong><span class="idx">method chaining</span></strong> คือการเขียนการแปลงหลายขั้นต่อกันเป็นนิพจน์เดียว แต่ละบรรทัดเป็นหนึ่งขั้นที่รับผลของขั้นก่อนหน้า โค้ดจึงอ่านจากบนลงล่างเหมือน pipeline และเหมือนกับ CTE ใน SQL ที่บทที่ 7 แนะนำ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>st <span class="op">=</span> con.execute(<span class="st">"SELECT station_id, province, region FROM stations"</span>).df()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> con.execute(<span class="st">"""SELECT station_id, ts, pm25 FROM measurements</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">                   WHERE ts &lt; TIMESTAMP '2024-01-01'"""</span>).df()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>MIN_HOURS <span class="op">=</span> <span class="dv">18</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>exceed_by_region <span class="op">=</span> (</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    h</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    .assign(date<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"ts"</span>].dt.floor(<span class="st">"D"</span>))                   <span class="co"># ตัดวันตามเวลาไทย</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"station_id"</span>, <span class="st">"date"</span>], as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    .agg(pm25_mean<span class="op">=</span>(<span class="st">"pm25"</span>, <span class="st">"mean"</span>), n_hours<span class="op">=</span>(<span class="st">"pm25"</span>, <span class="st">"count"</span>))     <span class="co"># count ไม่นับ NaN</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"n_hours &gt;= @MIN_HOURS"</span>)                                  <span class="co"># เฉพาะวันที่ครบ</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    .merge(st, on<span class="op">=</span><span class="st">"station_id"</span>, how<span class="op">=</span><span class="st">"left"</span>, validate<span class="op">=</span><span class="st">"many_to_one"</span>)  <span class="co"># ตรวจว่าไม่เกิด fan-out</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    .assign(exceed<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"pm25_mean"</span>] <span class="op">&gt;</span> <span class="fl">37.5</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"region"</span>, as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    .agg(n_days<span class="op">=</span>(<span class="st">"exceed"</span>, <span class="st">"size"</span>), pct_exceed<span class="op">=</span>(<span class="st">"exceed"</span>, <span class="st">"mean"</span>))</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    .assign(pct_exceed<span class="op">=</span><span class="kw">lambda</span> d: (<span class="dv">100</span> <span class="op">*</span> d[<span class="st">"pct_exceed"</span>]).<span class="bu">round</span>(<span class="dv">1</span>))</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">"pct_exceed"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เครื่องมือที่ทำให้ method chaining เป็นไปได้มีดังนี้</p>
+<div id="tbl-ch08-chaining" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-chaining-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.4: เมธอดที่ใช้ใน method chaining
+</figcaption>
+<div aria-describedby="tbl-ch08-chaining-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>เมธอด</th>
+<th>ใช้ทำอะไร</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>assign(col=lambda d: ...)</code></td>
+<td>สร้างหรือแทนคอลัมน์</td>
+<td><code>lambda d</code> อ้างถึง DataFrame ณ ขั้นนั้น ไม่ใช่ตัวแปรภายนอก</td>
+</tr>
+<tr class="even">
+<td><code>query("...")</code></td>
+<td>กรองแถวด้วยนิพจน์</td>
+<td>อ้างตัวแปร Python ด้วย <code>@ชื่อ</code></td>
+</tr>
+<tr class="odd">
+<td><code>pipe(func, ...)</code></td>
+<td>เรียกฟังก์ชันที่รับ DataFrame</td>
+<td>ใช้แทรกฟังก์ชันของเราเองในสาย</td>
+</tr>
+<tr class="even">
+<td><code>agg(ชื่อใหม่=(คอลัมน์, ฟังก์ชัน))</code></td>
+<td>รวมกลุ่มพร้อมตั้งชื่อคอลัมน์ผลลัพธ์</td>
+<td>named aggregation อ่านง่ายกว่า dict</td>
+</tr>
+<tr class="odd">
+<td><code>rename</code>, <code>drop</code>, <code>sort_values</code></td>
+<td>จัดคอลัมน์และลำดับ</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ข้อสังเกตจากโค้ดนี้มีสองข้อ ข้อแรก ตัวชี้วัดที่ได้เป็นสัดส่วนของ <em>สถานี-วันทั้งหมดในภาครวมกัน</em> ซึ่งต่างจาก query ในบทที่ 7 ที่คำนวณต่อสถานีก่อนแล้วใช้มัธยฐาน ทั้งสองวิธีถูกต้องในตัวเอง แต่ตอบคำถามที่ต่างกันเล็กน้อย และอาจให้ผลต่างกันเมื่อภาคหนึ่งมีสถานีที่ข้อมูลครบไม่เท่ากัน นี่คือทางแยกหนึ่งใน garden of forking paths (บทที่ 4) ที่ต้องเลือกและบันทึกไว้ก่อนดูผล ข้อที่สอง <code>validate="many_to_one"</code> ใน <code>merge</code> เป็นการตรวจที่ไม่มีต้นทุน หัวข้อ <a href="#sec-ch08-join-traps" class="quarto-xref"><span>8.8</span></a> อธิบายเหตุผล</p>
+</section>
+<section id="ตรวจสอบระหวางสาย" class="level3">
+<h3 class="anchored" data-anchor-id="ตรวจสอบระหวางสาย">ตรวจสอบระหว่างสาย</h3>
+<p>ข้อวิจารณ์ของ method chaining คือ ดูผลของขั้นกลางได้ยาก วิธีแก้คือแทรกฟังก์ชันตรวจด้วย <code>pipe</code> ซึ่งพิมพ์ข้อมูลสรุปแล้วคืน DataFrame เดิมโดยไม่เปลี่ยนแปลง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check(df: pd.DataFrame, label: <span class="bu">str</span>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""พิมพ์จำนวนแถวและคอลัมน์ระหว่าง method chain แล้วคืน DataFrame เดิม"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">:,}</span><span class="ss"> แถว, คอลัมน์ </span><span class="sc">{</span><span class="bu">list</span>(df.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ใช้งาน: .pipe(check, "หลังรวมรายวัน") แทรกระหว่างขั้นใดก็ได้</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>การแทรก <code>.pipe(check, "หลัง merge")</code> ไว้หลัง <code>merge</code> ทำให้เห็นทันทีว่าจำนวนแถวเปลี่ยนไปหรือไม่ ซึ่งเป็นวิธีจับ fan-out ที่ง่ายที่สุด</p>
+</section>
+</section>
+<section id="sec-ch08-polars" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="sec-ch08-polars"><span class="header-section-number">8.5</span> Polars: expression และ lazy evaluation</h2>
+<section id="ทำไมตองรจก-polars" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองรจก-polars">ทำไมต้องรู้จัก Polars</h3>
+<p><span class="idx-tool">Polars</span> เป็นไลบรารี DataFrame ที่เขียนด้วยภาษา Rust และใช้ Apache Arrow เป็นรูปแบบข้อมูลภายใน <span class="citation" data-cites="polars2026guide">(<a href="../references.html#ref-polars2026guide" role="doc-biblioref">Polars developers 2026</a>)</span> ต่างจาก pandas ในสามด้านหลัก คือ ไม่มี index ทำงานบนหลายแกนของ CPU โดยอัตโนมัติ และมีโหมด lazy ที่วางแผนการทำงานทั้งหมดก่อนรัน คล้ายกับ optimizer ของฐานข้อมูลในบทที่ 7 รายวิชาใช้ pandas เป็นหลักเพราะไลบรารีในบทหลัง ๆ รับ pandas แต่ Polars เป็นทางเลือกที่ดีเมื่อข้อมูลใหญ่ขึ้น และแนวคิดของมันช่วยให้เข้าใจการประมวลผลข้อมูลสมัยใหม่</p>
+</section>
+<section id="expression" class="level3">
+<h3 class="anchored" data-anchor-id="expression">expression</h3>
+<p>หัวใจของ Polars คือ <strong>expression</strong> ซึ่งเป็นคำอธิบายการคำนวณบนคอลัมน์ที่ยังไม่ได้รันจริง เช่น <code>pl.col("pm25").mean()</code> หมายถึง “ค่าเฉลี่ยของคอลัมน์ pm25” expression ถูกนำไปใช้ใน context ต่าง ๆ เช่น <code>select</code>, <code>with_columns</code>, <code>filter</code> และ <code>group_by().agg()</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>hp <span class="op">=</span> con.execute(<span class="st">"SELECT station_id, ts, pm25 FROM measurements"</span>).pl()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>daily_pl <span class="op">=</span> (</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    hp</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"ts"</span>) <span class="op">&lt;</span> pl.datetime(<span class="dv">2024</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"station_id"</span>, pl.col(<span class="st">"ts"</span>).dt.date().alias(<span class="st">"date"</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"pm25"</span>).mean().alias(<span class="st">"pm25_mean"</span>),</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"pm25"</span>).count().alias(<span class="st">"n_hours"</span>),      <span class="co"># count ไม่นับ null</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"station_id"</span>, <span class="st">"date"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อควรระวังคือความหมายของการนับ ใน Polars <code>count()</code> ไม่นับค่า null เหมือน <code>COUNT(pm25)</code> ใน SQL ส่วน <code>len()</code> นับทุกแถวเหมือน <code>COUNT(*)</code> ชื่อเหล่านี้ต่างจาก pandas และเคยเปลี่ยนความหมายระหว่างเวอร์ชันของ Polars มาแล้ว จึงต้องตรวจกับเอกสารของเวอร์ชันที่ใช้เสมอ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pl.DataFrame({<span class="st">"x"</span>: [<span class="fl">1.0</span>, <span class="va">None</span>, <span class="fl">3.0</span>]})</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.select(pl.col(<span class="st">"x"</span>).count().alias(<span class="st">"count"</span>), pl.col(<span class="st">"x"</span>).<span class="bu">len</span>().alias(<span class="st">"len"</span>)))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># count = 2, len = 3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="lazy-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="lazy-evaluation">lazy evaluation</h3>
+<p>ในโหมด <strong><span class="idx">lazy</span></strong> Polars ไม่รันคำสั่งทันที แต่สร้างแผนการทำงานทั้งหมดก่อน แล้วปรับแผนให้เหมาะสม เช่น อ่านเฉพาะคอลัมน์ที่ใช้ (projection pushdown) และกรองตั้งแต่ตอนอ่านไฟล์ (predicate pushdown) จากนั้นจึงรันเมื่อเรียก <code>collect()</code> จุดเริ่มต้นของโหมด lazy คือฟังก์ชัน <code>scan_*</code> เช่น <code>scan_parquet</code> แทน <code>read_*</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lazy <span class="op">=</span> (</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    pl.scan_parquet(<span class="st">"data/parquet/measurements_by_ts.parquet"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"ts"</span>) <span class="op">&lt;</span> pl.datetime(<span class="dv">2024</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"station_id"</span>, pl.col(<span class="st">"ts"</span>).dt.date().alias(<span class="st">"date"</span>))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"pm25"</span>).mean().alias(<span class="st">"pm25_mean"</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         pl.col(<span class="st">"pm25"</span>).count().alias(<span class="st">"n_hours"</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"n_hours"</span>) <span class="op">&gt;=</span> <span class="dv">18</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lazy.explain())       <span class="co"># ดูแผนก่อนรัน</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> lazy.collect()      <span class="co"># รันจริง</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง) ของ lazy.explain()
+FILTER col("n_hours") &gt;= 18
+FROM
+  AGGREGATE ... BY [col("station_id"), col("ts").dt.date().alias("date")]
+    FROM
+    Parquet SCAN [data/parquet/measurements_by_ts.parquet]
+    PROJECT 3/8 COLUMNS
+    SELECTION: col("ts") &lt; 2024-01-01 00:00:00</code></pre>
+<p>แผนแสดงว่า Polars อ่านเพียง 3 จาก 8 คอลัมน์ และกรองเวลาตั้งแต่ตอนอ่านไฟล์ ซึ่งเป็นหลักการเดียวกับที่ DuckDB ทำในบทที่ 6–7</p>
+</section>
+<section id="เลอกใชอะไรเมอใด" class="level3">
+<h3 class="anchored" data-anchor-id="เลอกใชอะไรเมอใด">เลือกใช้อะไรเมื่อใด</h3>
+<div id="tbl-ch08-tool-choice" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-tool-choice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.5: แนวทางเลือกระหว่าง pandas, Polars และ DuckDB
+</figcaption>
+<div aria-describedby="tbl-ch08-tool-choice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สถานการณ์</th>
+<th>แนะนำ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ส่งต่อให้ seaborn, statsmodels, scikit-learn</td>
+<td>pandas หรือ Polars แล้วแปลงด้วย <code>.to_pandas()</code></td>
+</tr>
+<tr class="even">
+<td>ข้อมูลหลักล้านแถว งานทั่วไป</td>
+<td>pandas เพียงพอ</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูลใหญ่ ต้องการความเร็ว ไม่อยากเขียน SQL</td>
+<td>Polars แบบ lazy</td>
+</tr>
+<tr class="even">
+<td>งานรวมกลุ่มและ join จำนวนมาก</td>
+<td>DuckDB (SQL) ก่อน แล้วส่งผลที่เล็กลงให้ pandas</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวสุดท้ายของ <a href="#tbl-ch08-tool-choice" class="quarto-xref">ตารางที่&nbsp;<span>8.5</span></a> เป็นหลักที่เอกสารรายสัปดาห์ที่ 5 เน้นไว้ คือ <em>ลดขนาดข้อมูลด้วย SQL ก่อน แล้วค่อยปรับรูปด้วย pandas</em> เพราะ DuckDB จัดการข้อมูลขนาดใหญ่ได้ดีโดยไม่ต้องโหลดทั้งหมดเข้าหน่วยความจำ</p>
+</section>
+</section>
+<section id="sec-ch08-datetime" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="sec-ch08-datetime"><span class="header-section-number">8.6</span> วันเวลา: timestamp, timezone, DST และปฏิทินไทย (พ.ศ.)</h2>
+<section id="ขอตกลงของโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="ขอตกลงของโครงการ">ข้อตกลงของโครงการ</h3>
+<p>บทที่ 7 กำหนดว่าคอลัมน์ <code>ts</code> เป็น <code>TIMESTAMP</code> แบบไม่มีเขตเวลากำกับ และตกลงกันว่าเป็นเวลาท้องถิ่น Asia/Bangkok เมื่อดึงเข้า pandas คอลัมน์นี้กลายเป็น <code>datetime64</code> แบบไม่มีเขตเวลา (timezone-naive) ข้อตกลงนี้ทำงานได้ดีตราบที่ข้อมูลทุกชิ้นมาจากแหล่งที่ใช้เวลาไทย ปัญหาเกิดเมื่อต้องรวมกับข้อมูลจากแหล่งอื่น</p>
+</section>
+<section id="tz_localize-กบ-tz_convert" class="level3">
+<h3 class="anchored" data-anchor-id="tz_localize-กบ-tz_convert">tz_localize กับ tz_convert</h3>
+<p>pandas มีสองเมธอดที่มักสับสนกัน ความต่างอยู่ที่ว่า <em>ตัวเลข</em> หรือ <em>จุดเวลา</em> เปลี่ยน <span class="citation" data-cites="pandas2026timeseries">(<a href="../references.html#ref-pandas2026timeseries" role="doc-biblioref"><span class="nocase">pandas development team</span> 2026e</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> pd.Series(pd.to_datetime([<span class="st">"2026-01-15 00:00"</span>, <span class="st">"2026-01-15 08:00"</span>]))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ts_bkk <span class="op">=</span> ts.dt.tz_localize(<span class="st">"Asia/Bangkok"</span>)     <span class="co"># ติดป้ายว่าเป็นเวลาไทย ตัวเลขไม่เปลี่ยน</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>ts_utc <span class="op">=</span> ts_bkk.dt.tz_convert(<span class="st">"UTC"</span>)           <span class="co"># แปลงเป็น UTC ตัวเลขเปลี่ยน จุดเวลาเดิม</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.DataFrame({<span class="st">"ts"</span>: ts, <span class="st">"ts_bkk"</span>: ts_bkk, <span class="st">"ts_utc"</span>: ts_utc}))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+                   ts                    ts_bkk                    ts_utc
+0 2026-01-15 00:00:00 2026-01-15 00:00:00+07:00 2026-01-14 17:00:00+00:00
+1 2026-01-15 08:00:00 2026-01-15 08:00:00+07:00 2026-01-15 01:00:00+00:00</code></pre>
+<div id="tbl-ch08-tz-methods" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-tz-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.6: เมธอดจัดการเขตเวลาใน pandas
+</figcaption>
+<div aria-describedby="tbl-ch08-tz-methods-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>เมธอด</th>
+<th>ใช้กับ</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>tz_localize(tz)</code></td>
+<td>เวลาที่ยังไม่มีเขตเวลา</td>
+<td>ติดป้ายเขตเวลา ตัวเลขไม่เปลี่ยน</td>
+</tr>
+<tr class="even">
+<td><code>tz_convert(tz)</code></td>
+<td>เวลาที่มีเขตเวลาแล้ว</td>
+<td>แปลงไปอีกเขตเวลา ตัวเลขเปลี่ยน จุดเวลาเดิม</td>
+</tr>
+<tr class="odd">
+<td><code>tz_localize(None)</code></td>
+<td>เวลาที่มีเขตเวลาแล้ว</td>
+<td>ลบป้าย เก็บตัวเลขตามเขตเวลาปัจจุบัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ผลลัพธ์แถวแรกยืนยันข้อเท็จจริงที่บทที่ 7 กล่าวไว้ เที่ยงคืนของวันที่ 15 ตามเวลาไทย คือ 17:00 ของวันที่ 14 ตามเวลา UTC ถ้าเรียก <code>tz_localize</code> กับคอลัมน์ที่มีเขตเวลาแล้ว จะได้ <code>TypeError: Already tz-aware, use tz_convert to convert.</code> ซึ่งช่วยป้องกันการติดป้ายซ้ำ</p>
+<p>สูตรสำหรับนำข้อมูลที่บันทึกเป็น UTC มาเทียบกับ <code>ts</code> ของโครงการ คือ ติดป้าย UTC แปลงเป็นเวลาไทย แล้วลบป้าย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>other[<span class="st">"ts"</span>] <span class="op">=</span> (other[<span class="st">"ts_utc"</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>               .dt.tz_localize(<span class="st">"UTC"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>               .dt.tz_convert(<span class="st">"Asia/Bangkok"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>               .dt.tz_localize(<span class="va">None</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="เวลาออมแสง-dst" class="level3">
+<h3 class="anchored" data-anchor-id="เวลาออมแสง-dst">เวลาออมแสง (DST)</h3>
+<p>ประเทศไทยไม่ใช้เวลาออมแสง (daylight saving time) วันหนึ่งจึงมี 24 ชั่วโมงเสมอ แต่ข้อมูลจากประเทศที่ใช้เวลาออมแสงมีปัญหาสองแบบ ซึ่งผู้อ่านที่ทำงานกับข้อมูลต่างประเทศควรรู้</p>
+<ul>
+<li><strong>เวลาที่ไม่มีอยู่จริง</strong> วันที่เลื่อนนาฬิกาไปข้างหน้า ชั่วโมงหนึ่งหายไป เช่น ในเขตเวลา America/New_York วันที่ 8 มีนาคม ค.ศ. 2026 เวลา 02:30 ไม่มีอยู่จริง <code>tz_localize</code> แจ้ง <code>NonExistentTimeError</code></li>
+<li><strong>เวลาที่กำกวม</strong> วันที่เลื่อนนาฬิกากลับ ชั่วโมงหนึ่งเกิดซ้ำสองครั้ง เช่น วันที่ 1 พฤศจิกายน ค.ศ. 2026 เวลา 01:30 ในเขตเวลาเดียวกัน <code>tz_localize</code> แจ้ง <code>AmbiguousTimeError</code> และต้องระบุอาร์กิวเมนต์ <code>ambiguous</code></li>
+</ul>
+<p>ผลที่ตามมาคือ วันที่เลื่อนนาฬิกามี 23 หรือ 25 ชั่วโมง เกณฑ์ความครบถ้วน “18 จาก 24 ชั่วโมง” จึงต้องปรับเมื่อใช้กับข้อมูลเหล่านั้น ส่วนข้อมูลของไทยไม่มีปัญหานี้</p>
+</section>
+<section id="ปฏทนไทย-พ.ศ." class="level3">
+<h3 class="anchored" data-anchor-id="ปฏทนไทย-พ.ศ.">ปฏิทินไทย (พ.ศ.)</h3>
+<p>ข้อมูลจากหน่วยงานไทยจำนวนมากใช้ปี พ.ศ. เช่น <code>"15/01/2569"</code> การอ่านค่าแบบนี้ด้วย <code>pd.to_datetime</code> โดยตรงจะผิด เพราะ pandas ตีความ 2569 เป็นปี ค.ศ.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>raw <span class="op">=</span> pd.Series([<span class="st">"15/01/2569"</span>, <span class="st">"16/01/2569"</span>])</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pd.to_datetime(raw, <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%d</span><span class="st">/%m/%Y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+OutOfBoundsDatetime: Out of bounds nanosecond timestamp: 15/01/2569, at position 0. ...</code></pre>
+<p>ในกรณีนี้ error เกิดขึ้นเพราะปี ค.ศ. 2569 อยู่นอกช่วงที่ dtype <code>datetime64[ns]</code> เก็บได้ ซึ่งสิ้นสุดในปี ค.ศ. 2262 นับว่าโชคดีที่มี error ถ้าข้อมูลเป็นปีที่อยู่ในช่วงเช่น พ.ศ. 2100 ซึ่ง pandas อ่านเป็นปี ค.ศ. 2100 ได้ จะไม่มี error ใดเตือน วิธีที่ถูกต้องคือแยกส่วนแล้วลบ 543 ก่อนสร้างวันที่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>parts <span class="op">=</span> raw.<span class="bu">str</span>.split(<span class="st">"/"</span>, expand<span class="op">=</span><span class="va">True</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dates <span class="op">=</span> pd.to_datetime(<span class="bu">dict</span>(year<span class="op">=</span>parts[<span class="dv">2</span>] <span class="op">-</span> <span class="dv">543</span>, month<span class="op">=</span>parts[<span class="dv">1</span>], day<span class="op">=</span>parts[<span class="dv">0</span>]))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [Timestamp('2026-01-15'), Timestamp('2026-01-16')]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>หลักการของหนังสือคือ <strong>คำนวณด้วย ค.ศ. เสมอ และแปลงเป็น พ.ศ. เฉพาะตอนแสดงผล</strong> เช่น ในชื่อแกนหรือหัวตารางของรายงาน ปี พ.ศ. ที่เก็บเป็นคอลัมน์ตัวเลขแยก เช่น <code>year_be</code> ในตัวอย่างของหัวข้อ <a href="#sec-ch08-reshape" class="quarto-xref"><span>8.2</span></a> ไม่มีปัญหา เพราะไม่ได้นำไปสร้างวันที่</p>
+</section>
+<section id="แยกสวนประกอบของเวลา" class="level3">
+<h3 class="anchored" data-anchor-id="แยกสวนประกอบของเวลา">แยกส่วนประกอบของเวลา</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> h.assign(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    date<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"ts"</span>].dt.floor(<span class="st">"D"</span>),       <span class="co"># วันที่ (ยังเป็น datetime64 เพื่อใช้ต่อได้สะดวก)</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    hour<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"ts"</span>].dt.hour,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    month<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"ts"</span>].dt.month,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    dow<span class="op">=</span><span class="kw">lambda</span> d: d[<span class="st">"ts"</span>].dt.day_of_week,       <span class="co"># 0 = จันทร์ ... 6 = อาทิตย์</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ระวังว่า pandas นับวันในสัปดาห์โดยให้วันจันทร์เป็น 0 ซึ่งต่างจาก <code>dayofweek</code> ของ DuckDB ที่ให้วันอาทิตย์เป็น 0 (บทที่ 7) เมื่อย้ายตรรกะระหว่าง SQL กับ pandas ต้องตรวจเรื่องนี้ทุกครั้ง</p>
+</section>
+</section>
+<section id="sec-ch08-resample" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="sec-ch08-resample"><span class="header-section-number">8.7</span> resampling และความครบถ้วนของข้อมูลเมื่อรวมกลุ่ม</h2>
+<section id="ทำไมความครบถวนตองเดนทางไปพรอมคาเฉลย" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมความครบถวนตองเดนทางไปพรอมคาเฉลย">ทำไมความครบถ้วนต้องเดินทางไปพร้อมค่าเฉลี่ย</h3>
+<p>ค่าเฉลี่ยรายวันที่คำนวณจากข้อมูล 24 ชั่วโมง กับค่าเฉลี่ยที่คำนวณจากข้อมูล 4 ชั่วโมง ดูเหมือนตัวเลขชนิดเดียวกันในตาราง แต่มีความน่าเชื่อถือต่างกันมาก ถ้า 4 ชั่วโมงนั้นเป็นช่วงบ่ายซึ่งฝุ่นมักต่ำกว่าช่วงเช้า ค่าเฉลี่ยจะต่ำกว่าความจริงอย่างเป็นระบบ ตาราง <code>daily_pm25</code> จึงต้องมีคอลัมน์ <code>n_hours</code> คู่กับ <code>pm25_mean</code> เสมอ เพื่อให้ทุกการวิเคราะห์หลังจากนี้รู้ว่าค่าเฉลี่ยแต่ละค่าได้มาจากข้อมูลมากน้อยเพียงใด หลักการนี้เรียกว่า <strong><span class="idx">ความครบถ้วน</span></strong> (completeness) ซึ่งบทที่ 9 จัดเป็นมิติหนึ่งของคุณภาพข้อมูล</p>
+</section>
+<section id="view-daily_pm25" class="level3">
+<h3 class="anchored" data-anchor-id="view-daily_pm25">view <code>daily_pm25</code></h3>
+<p>ผลงานของบทนี้คือ view <span class="idx-data"><code>daily_pm25</code></span> ตามที่เอกสารรายสัปดาห์ที่ 5 กำหนด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> daily_pm25 <span class="kw">AS</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">CAST</span>(ts <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> <span class="dt">date</span>,         <span class="co">-- ตัดวันตามเวลาไทย (ts เป็นเวลาไทย)</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(pm25)        <span class="kw">AS</span> pm25_mean,    <span class="co">-- AVG ข้าม NULL</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MAX</span>(pm25)        <span class="kw">AS</span> pm25_max,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(pm25)      <span class="kw">AS</span> n_hours       <span class="co">-- นับเฉพาะชั่วโมงที่มีค่า</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> station_id, <span class="fu">CAST</span>(ts <span class="kw">AS</span> <span class="dt">DATE</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>คำสั่งนี้ต้องรันด้วยการเชื่อมต่อที่เขียนได้ เช่น ใน <code>src/load_duckdb.py</code> หรือ script แยก ไม่ใช่ใน notebook ที่เปิดฐานข้อมูลแบบ <code>read_only=True</code> view ไม่เก็บข้อมูลซ้ำ ทุกครั้งที่ query จะคำนวณจาก <code>measurements</code> ล่าสุด จึงไม่ต้องสร้างใหม่หลังโหลดข้อมูลเพิ่ม ถ้าข้อมูลใหญ่จนการคำนวณช้า ให้เปลี่ยนเป็น <code>CREATE OR REPLACE TABLE</code> แล้วสร้างใหม่ทุกครั้งที่ pipeline โหลดข้อมูล ซึ่งเป็นการ denormalize อย่างตั้งใจตามบทที่ 6 สำหรับแบบตาราง ให้สร้างใหม่ทั้งตารางจาก <code>measurements</code> ทุกครั้ง แทนการเพิ่มเฉพาะวันใหม่ เพื่อให้วันที่ได้ข้อมูลเพิ่มภายหลังถูกคำนวณใหม่ด้วย</p>
+</section>
+<section id="resample-ใน-pandas" class="level3">
+<h3 class="anchored" data-anchor-id="resample-ใน-pandas">resample ใน pandas</h3>
+<p>pandas รวมข้อมูลตามช่วงเวลาได้ด้วย <code>resample</code> ซึ่งต้องใช้คอลัมน์เวลาเป็น index</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>daily_pd <span class="op">=</span> (</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    h.set_index(<span class="st">"ts"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>     .groupby(<span class="st">"station_id"</span>)[<span class="st">"pm25"</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>     .resample(<span class="st">"D"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>     .agg([<span class="st">"mean"</span>, <span class="st">"max"</span>, <span class="st">"count"</span>])</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>     .rename(columns<span class="op">=</span>{<span class="st">"mean"</span>: <span class="st">"pm25_mean"</span>, <span class="st">"max"</span>: <span class="st">"pm25_max"</span>, <span class="st">"count"</span>: <span class="st">"n_hours"</span>})</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>     .reset_index()</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>     .rename(columns<span class="op">=</span>{<span class="st">"ts"</span>: <span class="st">"date"</span>})</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="resample-กบ-groupby-ตางกนอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="resample-กบ-groupby-ตางกนอยางไร">resample กับ groupby ต่างกันอย่างไร</h3>
+<p>ความต่างที่สำคัญมากคือ <code>resample</code> สร้างแถวให้ <em>ทุกช่วงเวลาตั้งแต่ต้นจนจบ</em> แม้ช่วงนั้นไม่มีข้อมูลเลย ส่วน <code>groupby</code> (และ <code>GROUP BY</code> ใน SQL) สร้างแถวเฉพาะกลุ่มที่มีข้อมูลอย่างน้อยหนึ่งแถว ตัวอย่างต่อไปนี้ใช้สถานีที่เครื่องวัดหยุดทำงานตั้งแต่วันที่ 18 เมษายน และจำลองกรณีที่แถวของชั่วโมงที่ไม่มีค่าไม่ถูกบันทึกเลย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>h35 <span class="op">=</span> con.execute(<span class="st">"""SELECT station_id, ts, pm25 FROM measurements</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="st">                     WHERE station_id = '35t'</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="st">                       AND ts &gt;= TIMESTAMP '2023-04-15' AND ts &lt; TIMESTAMP '2023-05-05'"""</span>).df()</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>h35_rows <span class="op">=</span> h35.dropna(subset<span class="op">=</span>[<span class="st">"pm25"</span>])      <span class="co"># จำลอง: ชั่วโมงที่ไม่มีค่าไม่มีแถวเลย</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>by_resample <span class="op">=</span> (h35_rows.set_index(<span class="st">"ts"</span>).groupby(<span class="st">"station_id"</span>)[<span class="st">"pm25"</span>]</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>               .resample(<span class="st">"D"</span>).agg([<span class="st">"mean"</span>, <span class="st">"count"</span>]))</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>by_groupby <span class="op">=</span> (h35_rows.assign(date<span class="op">=</span>h35_rows[<span class="st">"ts"</span>].dt.floor(<span class="st">"D"</span>))</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>              .groupby([<span class="st">"station_id"</span>, <span class="st">"date"</span>])[<span class="st">"pm25"</span>].agg([<span class="st">"mean"</span>, <span class="st">"count"</span>]))</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(by_resample), <span class="bu">len</span>(by_groupby))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+20 6</code></pre>
+<p>ช่วง 20 วันนี้ <code>resample</code> ให้ 20 แถว โดยวันที่ไม่มีข้อมูลมี <code>count = 0</code> และ <code>mean</code> เป็น <code>NaN</code> ส่วน <code>groupby</code> ให้เพียง 6 แถว วันที่ไม่มีข้อมูลหายไปทั้งแถว ถ้านำผลของ <code>groupby</code> ไปนับว่า “มีกี่วันที่ข้อมูลไม่ครบ” จะได้คำตอบต่ำกว่าความจริงมาก เพราะวันที่ไม่มีข้อมูลเลยไม่ปรากฏให้นับ ความต่างนี้คือความต่างระหว่างข้อมูลสูญหายแบบ explicit กับ implicit ซึ่งบทที่ 10 อธิบาย และเป็นเหตุผลที่บทที่ 7 ใช้ <code>generate_series</code> สร้างรายการเวลาที่คาดว่าจะมี</p>
+</section>
+<section id="เกณฑความครบถวน" class="level3">
+<h3 class="anchored" data-anchor-id="เกณฑความครบถวน">เกณฑ์ความครบถ้วน</h3>
+<div id="tbl-ch08-completeness" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-completeness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.7: การใช้ค่า n_hours ตามเกณฑ์ความครบถ้วนของโครงการ
+</figcaption>
+<div aria-describedby="tbl-ch08-completeness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>n_hours</code></th>
+<th>การใช้ในโครงการ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>24</td>
+<td>ครบ</td>
+</tr>
+<tr class="even">
+<td>18–23</td>
+<td>ใช้ได้ตามข้อกำหนดของโครงการ (≥ 18 ชั่วโมง หรือร้อยละ 75)</td>
+</tr>
+<tr class="odd">
+<td>1–17</td>
+<td>ไม่นำมานับวันเกินมาตรฐาน แต่ต้องรายงานจำนวนวันที่ตัดออก</td>
+</tr>
+<tr class="even">
+<td>0 หรือไม่มีแถว</td>
+<td>ไม่มีข้อมูล ต้องนับด้วยรายการวันที่คาดว่าจะมี ไม่ใช่จาก <code>daily_pm25</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>เกณฑ์ 18 ชั่วโมงเป็น <em>ข้อกำหนดของโครงการ</em> ไม่ใช่มาตรฐานทางการ ต้องบันทึกไว้ใน <code>questions.md</code> และพจนานุกรมข้อมูล บทที่ 10 ทดสอบว่าผลของการวิเคราะห์ไวต่อเกณฑ์นี้มากน้อยเพียงใด</p>
+</section>
+<section id="ตารางรายวนพรอมใช" class="level3">
+<h3 class="anchored" data-anchor-id="ตารางรายวนพรอมใช">ตารางรายวันพร้อมใช้</h3>
+<p>ตารางต่อไปนี้รวม <code>daily_pm25</code> กับข้อมูลสถานี และสร้างคอลัมน์ที่ใช้บ่อยไว้ล่วงหน้า เป็นจุดเริ่มต้นของการสำรวจในบทถัดไป</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT d.*, s.province, s.region,</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="st">           d.n_hours &gt;= 18                         AS is_complete,</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="st">           d.n_hours &gt;= 18 AND d.pm25_mean &gt; 37.5  AS exceed_th,    -- มาตรฐานไทย 24 ชม.</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="st">           d.n_hours &gt;= 18 AND d.pm25_mean &gt; 15    AS exceed_who    -- แนวทาง WHO 2021</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25 AS d</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="st">    LEFT JOIN stations AS s USING (station_id)</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-ch08-join-traps" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="sec-ch08-join-traps"><span class="header-section-number">8.8</span> กับดักของการ join: fan-out และ key ไม่ตรงกัน</h2>
+<section id="ทำไม-join-เปนจดเสยงทสด" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไม-join-เปนจดเสยงทสด">ทำไม join เป็นจุดเสี่ยงที่สุด</h3>
+<p>บทที่ 7 แสดงแล้วว่า inner join ทำให้แถวที่จับคู่ไม่ได้หายไปเงียบ ๆ หัวข้อนี้อธิบายปัญหาอีกสองแบบที่อันตรายพอกัน คือ แถวที่ <em>เพิ่มขึ้น</em> โดยไม่ตั้งใจ และ key ที่ดูเหมือนกันแต่ไม่ตรงกัน ทั้งสองแบบไม่ทำให้เกิด error และผลลัพธ์ดูปกติจนกว่าจะตรวจ</p>
+</section>
+<section id="fan-out" class="level3">
+<h3 class="anchored" data-anchor-id="fan-out">fan-out</h3>
+<p><strong><span class="idx">fan-out</span></strong> เกิดเมื่อ key ฝั่งที่ควรไม่ซ้ำกลับซ้ำ ทำให้แต่ละแถวฝั่งหนึ่งจับคู่กับหลายแถวของอีกฝั่ง จำนวนแถวหลัง join จึงเพิ่มขึ้น ตัวอย่างที่เกิดได้จริงคือ ตารางสถานีมีสถานีเดียวกันสองแถว เพราะชื่อจังหวัดสะกดสองแบบ คือ “กรุงเทพฯ” กับ “กรุงเทพมหานคร” (ข้อมูลสมมุติ)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"station_id"</span>: [<span class="st">"02t"</span>, <span class="st">"02t"</span>, <span class="st">"35t"</span>],</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"date"</span>: pd.to_datetime([<span class="st">"2023-03-01"</span>, <span class="st">"2023-03-02"</span>, <span class="st">"2023-03-01"</span>]),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pm25_mean"</span>: [<span class="fl">30.0</span>, <span class="fl">41.0</span>, <span class="fl">80.0</span>],</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>stations_dup <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"station_id"</span>: [<span class="st">"02t"</span>, <span class="st">"35t"</span>, <span class="st">"02t"</span>],</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"province"</span>: [<span class="st">"กรุงเทพฯ"</span>, <span class="st">"เชียงใหม่"</span>, <span class="st">"กรุงเทพมหานคร"</span>],   <span class="co"># 02t ซ้ำ</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> daily.merge(stations_dup, on<span class="op">=</span><span class="st">"station_id"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(daily), <span class="st">"-&gt;"</span>, <span class="bu">len</span>(m))</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ค่าเฉลี่ยก่อน:"</span>, <span class="bu">round</span>(daily[<span class="st">"pm25_mean"</span>].mean(), <span class="dv">2</span>), <span class="st">"หลัง:"</span>, <span class="bu">round</span>(m[<span class="st">"pm25_mean"</span>].mean(), <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+3 -&gt; 5
+ค่าเฉลี่ยก่อน: 50.33 หลัง: 44.4</code></pre>
+<p>แถวของสถานี 02t ถูกนับสองครั้ง ค่าเฉลี่ยรวมจึงเปลี่ยนจาก 50.33 เป็น 44.4 µg/m³ โดยไม่มี error ใดเตือน ในข้อมูลจริงที่มีหลายแสนแถว การเพิ่มขึ้นของจำนวนแถวไม่กี่เปอร์เซ็นต์สังเกตด้วยตาได้ยากมาก</p>
+</section>
+<section id="ปองกน-fan-out-ดวย-validate" class="level3">
+<h3 class="anchored" data-anchor-id="ปองกน-fan-out-ดวย-validate">ป้องกัน fan-out ด้วย validate</h3>
+<p>pandas มีพารามิเตอร์ <code>validate</code> ใน <code>merge</code> ที่ตรวจความสัมพันธ์ของ key ก่อน join <span class="citation" data-cites="pandas2026merge">(<a href="../references.html#ref-pandas2026merge" role="doc-biblioref"><span class="nocase">pandas development team</span> 2026b</a>)</span></p>
+<div id="tbl-ch08-validate" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-validate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.8: ค่าของพารามิเตอร์ validate ใน pandas.merge
+</figcaption>
+<div aria-describedby="tbl-ch08-validate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ค่า</th>
+<th>ตรวจว่า</th>
+<th>ใช้เมื่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"one_to_one"</code></td>
+<td>key ไม่ซ้ำทั้งสองฝั่ง</td>
+<td>join ตารางที่มีหน่วยเดียวกัน</td>
+</tr>
+<tr class="even">
+<td><code>"one_to_many"</code></td>
+<td>key ไม่ซ้ำฝั่งซ้าย</td>
+<td>ฝั่งซ้ายเป็นตาราง dimension</td>
+</tr>
+<tr class="odd">
+<td><code>"many_to_one"</code></td>
+<td>key ไม่ซ้ำฝั่งขวา</td>
+<td>join ค่าวัดกับข้อมูลสถานี (กรณีที่พบบ่อยที่สุด)</td>
+</tr>
+<tr class="even">
+<td><code>"many_to_many"</code></td>
+<td>ไม่ตรวจ</td>
+<td>แทบไม่มีกรณีที่ตั้งใจ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>daily.merge(stations_dup, on<span class="op">=</span><span class="st">"station_id"</span>, how<span class="op">=</span><span class="st">"left"</span>, validate<span class="op">=</span><span class="st">"many_to_one"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+MergeError: Merge keys are not unique in right dataset; not a many-to-one merge</code></pre>
+<p>การใส่ <code>validate</code> ไม่มีต้นทุนในโค้ด แต่เปลี่ยนความผิดพลาดที่มองไม่เห็นให้เป็น error ที่หยุด pipeline ทันที ใน SQL ไม่มีพารามิเตอร์แบบนี้ แต่ primary key ของตาราง <code>stations</code> (บทที่ 6) ป้องกันสถานีซ้ำได้ตั้งแต่ต้น และการตรวจจำนวนแถวก่อนและหลัง join ใช้ได้กับทุกเครื่องมือ</p>
+</section>
+<section id="key-ไมตรงกน" class="level3">
+<h3 class="anchored" data-anchor-id="key-ไมตรงกน">key ไม่ตรงกัน</h3>
+<p>ปัญหาแบบที่สองคือ key ที่คนอ่านแล้วเหมือนกัน แต่คอมพิวเตอร์เห็นว่าต่างกัน ทำให้จับคู่ไม่ได้ สาเหตุที่พบบ่อยมีดังนี้</p>
+<div id="tbl-ch08-key-mismatch" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-key-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.9: สาเหตุของ key ไม่ตรงกันและวิธีแก้
+</figcaption>
+<div aria-describedby="tbl-ch08-key-mismatch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สาเหตุ</th>
+<th>ตัวอย่าง</th>
+<th>แก้ไข</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ช่องว่างหัวท้าย</td>
+<td><code>"02t "</code> กับ <code>"02t"</code></td>
+<td><code>.str.strip()</code></td>
+</tr>
+<tr class="even">
+<td>ตัวพิมพ์เล็กใหญ่</td>
+<td><code>"35T"</code> กับ <code>"35t"</code></td>
+<td><code>.str.lower()</code></td>
+</tr>
+<tr class="odd">
+<td>ชนิดข้อมูลต่างกัน</td>
+<td><code>"01"</code> (ข้อความ) กับ <code>1</code> (ตัวเลข)</td>
+<td>กำหนด <code>dtype</code> ตั้งแต่ตอนอ่าน</td>
+</tr>
+<tr class="even">
+<td>เลขศูนย์นำหน้าหาย</td>
+<td>รหัส <code>"0123"</code> อ่านเป็นตัวเลข <code>123</code></td>
+<td><code>dtype={"code": "string"}</code></td>
+</tr>
+<tr class="odd">
+<td>สะกดต่างกัน</td>
+<td><code>"กรุงเทพฯ"</code> กับ <code>"กรุงเทพมหานคร"</code></td>
+<td>ตาราง mapping ที่ตรวจสอบแล้ว</td>
+</tr>
+<tr class="even">
+<td>อักขระที่มองไม่เห็นหรือรูปแบบ Unicode ต่างกัน</td>
+<td>ช่องว่างไม่ตัดบรรทัด สระที่พิมพ์ลำดับต่างกัน</td>
+<td>ปรับให้เป็นรูปมาตรฐานด้วย <code>unicodedata.normalize</code> แล้วตรวจ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>เครื่องมือตรวจที่มีประโยชน์ที่สุดคือ <code>indicator=True</code> ซึ่งเพิ่มคอลัมน์ <code>_merge</code> บอกว่าแต่ละแถวมาจากฝั่งใด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>stations_bad <span class="op">=</span> pd.DataFrame({<span class="st">"station_id"</span>: [<span class="st">"02t "</span>, <span class="st">"35T"</span>], <span class="st">"province"</span>: [<span class="st">"กรุงเทพฯ"</span>, <span class="st">"เชียงใหม่"</span>]})</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>check <span class="op">=</span> daily.merge(stations_bad, on<span class="op">=</span><span class="st">"station_id"</span>, how<span class="op">=</span><span class="st">"left"</span>, indicator<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(check[<span class="st">"_merge"</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+_merge
+left_only     3
+right_only    0
+both          0</code></pre>
+<p>ทุกแถวเป็น <code>left_only</code> แปลว่าไม่มีแถวใดจับคู่ได้เลย หลังจากปรับ key ด้วย <code>.str.strip().str.lower()</code> ทุกแถวจับคู่ได้ ส่วนกรณีชนิดข้อมูลต่างกัน pandas แจ้ง error ให้เอง เช่น <code>You are trying to merge on object and int64 columns</code> ซึ่งดีกว่ากรณีอื่นที่เงียบ</p>
+</section>
+<section id="ขนตอนตรวจ-join-ทควรทำทกครง" class="level3">
+<h3 class="anchored" data-anchor-id="ขนตอนตรวจ-join-ทควรทำทกครง">ขั้นตอนตรวจ join ที่ควรทำทุกครั้ง</h3>
+<ol type="1">
+<li>ตรวจว่า key ฝั่งที่ควรไม่ซ้ำไม่ซ้ำจริง (<code>validate</code> หรือ <code>df["key"].is_unique</code>)</li>
+<li>join ด้วย <code>how="left"</code> และ <code>indicator=True</code> ก่อน แล้วนับว่ามีแถวที่จับคู่ไม่ได้กี่แถว</li>
+<li>ถ้ามีแถวที่จับคู่ไม่ได้ ดูตัวอย่าง key ของแถวเหล่านั้น แล้วแก้ที่ต้นเหตุ</li>
+<li>เทียบจำนวนแถวก่อนและหลัง join</li>
+<li>เมื่อมั่นใจแล้วจึงใช้ join แบบที่ต้องการในการวิเคราะห์</li>
+</ol>
+</section>
+</section>
+<section id="sec-ch08-performance" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="sec-ch08-performance"><span class="header-section-number">8.9</span> ประสิทธิภาพ: vectorization, หน่วยความจำ และข้อมูลที่ใหญ่กว่า RAM ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="vectorization" class="level3">
+<h3 class="anchored" data-anchor-id="vectorization">vectorization</h3>
+<p><strong><span class="idx">vectorization</span></strong> คือการสั่งคำนวณกับทั้งคอลัมน์ในคำสั่งเดียว แทนการวนลูปทีละค่าใน Python เบื้องหลังคือโค้ดภาษา C ใน NumPy ที่วนลูปบนอาร์เรย์ของค่าชนิดเดียวกัน ซึ่งเป็นหลักการเดียวกับ vectorized execution ของ DuckDB ในบทที่ 6 <span class="citation" data-cites="harris2020array">(<a href="../references.html#ref-harris2020array" role="doc-biblioref"><span class="nocase">Harris และคณะ</span> 2020</a>)</span> ตัวอย่างต่อไปนี้นับจำนวนค่าที่เกิน 37.5 จากข้อมูลสมมุติหนึ่งล้านค่าด้วยสามวิธี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timeit</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">0</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> pd.Series(rng.gamma(<span class="dv">4</span>, <span class="dv">7</span>, size<span class="op">=</span><span class="dv">1_000_000</span>))      <span class="co"># ข้อมูลสมมุติ</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> loop():</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> v <span class="kw">in</span> pm:</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="op">&gt;</span> <span class="fl">37.5</span>:</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>            n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_():</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pm.<span class="bu">apply</span>(<span class="kw">lambda</span> v: v <span class="op">&gt;</span> <span class="fl">37.5</span>).<span class="bu">sum</span>()</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> vectorized():</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (pm <span class="op">&gt;</span> <span class="fl">37.5</span>).<span class="bu">sum</span>()</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> (loop, apply_, vectorized):</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f.<span class="va">__name__</span>, <span class="bu">round</span>(<span class="bu">min</span>(timeit.repeat(f, number<span class="op">=</span><span class="dv">1</span>, repeat<span class="op">=</span><span class="dv">3</span>)), <span class="dv">4</span>), <span class="st">"วินาที"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง) เวลาขึ้นกับเครื่อง
+loop 0.0568 วินาที
+apply_ 0.117 วินาที
+vectorized 0.001 วินาที</code></pre>
+<p>บนเครื่องที่ใช้ทดสอบ วิธี vectorized เร็วกว่าการวนลูปประมาณห้าสิบเท่า และเร็วกว่า <code>apply</code> ประมาณร้อยเท่า ข้อสังเกตที่หลายคนไม่คาดคิดคือ <code>apply</code> ช้ากว่าการวนลูปธรรมดาเสียอีก เพราะ <code>apply</code> ยังเรียกฟังก์ชัน Python ทีละค่า แถมมีต้นทุนของ pandas เพิ่มเข้ามา หลักปฏิบัติคือ หลีกเลี่ยง <code>apply</code> กับฟังก์ชันที่เขียนด้วย Python เมื่อมีเมธอดของ pandas หรือ NumPy ที่ทำงานเดียวกันได้ เช่น <code>np.where</code>, <code>.clip</code>, <code>.str.*</code>, <code>.dt.*</code></p>
+</section>
+<section id="หนวยความจำ" class="level3">
+<h3 class="anchored" data-anchor-id="หนวยความจำ">หน่วยความจำ</h3>
+<p>DataFrame ของ pandas อยู่ในหน่วยความจำทั้งหมด และการแปลงหลายขั้นมักสร้างสำเนาชั่วคราว ความต้องการหน่วยความจำจึงมักสูงกว่าขนาดข้อมูลหลายเท่า แนวทางลดการใช้หน่วยความจำมีดังนี้</p>
+<ul>
+<li><strong>ดึงเฉพาะคอลัมน์และแถวที่ต้องการ</strong> ด้วย SQL หรือพารามิเตอร์ <code>columns</code> ของ <code>read_parquet</code></li>
+<li><strong>ใช้ dtype ที่เหมาะสม</strong> เช่น <code>category</code> สำหรับรหัสสถานีและภาค หรือ <code>float32</code> เมื่อความละเอียดของ <code>float64</code> เกินความจำเป็น</li>
+<li><strong>ตรวจการใช้หน่วยความจำ</strong> ด้วย <code>df.memory_usage(deep=True)</code> หรือ <code>df.info(memory_usage="deep")</code></li>
+</ul>
+</section>
+<section id="ขอมลทใหญกวา-ram" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลทใหญกวา-ram">ข้อมูลที่ใหญ่กว่า RAM</h3>
+<p>เมื่อข้อมูลใหญ่กว่าหน่วยความจำของเครื่อง pandas ไม่สามารถโหลดทั้งหมดได้ ทางเลือกมีสามแบบ</p>
+<div id="tbl-ch08-larger-than-ram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-larger-than-ram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.10: ทางเลือกเมื่อข้อมูลใหญ่กว่าหน่วยความจำ
+</figcaption>
+<div aria-describedby="tbl-ch08-larger-than-ram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>วิธี</th>
+<th>ทำอย่างไร</th>
+<th>ข้อจำกัด</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ให้ DuckDB ประมวลผล</td>
+<td>query ไฟล์ Parquet หรือตารางโดยตรง DuckDB ประมวลผลเป็นช่วงและเขียนข้อมูลชั่วคราวลงดิสก์เมื่อหน่วยความจำไม่พอ</td>
+<td>ต้องเขียนเป็น SQL</td>
+</tr>
+<tr class="even">
+<td>Polars แบบ streaming</td>
+<td>ใช้ <code>scan_parquet</code> แบบ lazy แล้ว <code>collect</code> ด้วยโหมด streaming ซึ่งประมวลผลเป็นช่วง</td>
+<td>การดำเนินการบางแบบยังไม่รองรับ streaming</td>
+</tr>
+<tr class="odd">
+<td>อ่านเป็นช่วงใน pandas</td>
+<td><code>pd.read_csv(..., chunksize=100_000)</code> แล้วรวมผลของแต่ละช่วง</td>
+<td>ต้องออกแบบให้ผลของแต่ละช่วงรวมกันได้ (เช่น เก็บผลรวมและจำนวน ไม่ใช่ค่าเฉลี่ย)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ข้อสังเกตในแถวสุดท้ายสำคัญ ค่าเฉลี่ยของค่าเฉลี่ยรายช่วงไม่เท่ากับค่าเฉลี่ยของทั้งหมด ถ้าแต่ละช่วงมีจำนวนแถวไม่เท่ากัน ต้องเก็บผลรวมและจำนวนของแต่ละช่วง แล้วนำมาหารกันในตอนท้าย ซึ่งเป็นปัญหาเดียวกับความสอดคล้องของการรวมข้อมูลข้ามระดับในบทที่ 18</p>
+<p>สำหรับโครงการในเล่มนี้ ข้อมูลระดับหลายล้านแถวอยู่ในหน่วยความจำของเครื่องทั่วไปได้สบาย แนวทางที่แนะนำคือให้ DuckDB รวมข้อมูลรายชั่วโมงเป็นรายวันก่อน ซึ่งลดขนาดลงประมาณยี่สิบสี่เท่า แล้วจึงดึงผลเข้า pandas</p>
+</section>
+</section>
+<section id="sec-ch08-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch08-case">กรณีศึกษา: จากค่ารายชั่วโมงสู่ตารางรายวันที่พร้อมวิเคราะห์</h2>
+<p><strong>คำถาม</strong> จะสร้างตารางรายวันของค่า PM2.5 ที่ทุกบทหลังจากนี้ใช้ได้อย่างไร ให้ค่าเฉลี่ยรายวันถูกต้องตามเวลาไทย มีตัวชี้วัดความครบถ้วน และไม่มีแถวที่หายหรือซ้ำจากการ join</p>
+<p><strong>ข้อมูล</strong> ตาราง <code>measurements</code> (รายชั่วโมง) และ <code>stations</code> ใน <code>data/pm25.duckdb</code></p>
+<p><strong>วิธีการ</strong> ทำตามลำดับและตรวจทุกขั้น</p>
+<ol type="1">
+<li><strong>ยืนยันข้อตกลงเรื่องเวลา</strong> (หัวข้อ <a href="#sec-ch08-datetime" class="quarto-xref"><span>8.6</span></a>) ตรวจใน notebook ว่า <code>ts</code> เป็น <code>datetime64</code> แบบไม่มีเขตเวลา และตรวจรูปแบบรายวันของค่าเฉลี่ยรายชั่วโมงว่าสมเหตุสมผลกับเวลาไทย เช่น ค่าเฉลี่ยของแต่ละชั่วโมงของวันตลอดช่วงข้อมูล ถ้ารูปแบบเลื่อนไปจากที่คาดเจ็ดชั่วโมง อาจเป็นสัญญาณว่าเวลาถูกบันทึกเป็น UTC</li>
+<li><strong>สร้าง view <code>daily_pm25</code></strong> (หัวข้อ <a href="#sec-ch08-resample" class="quarto-xref"><span>8.7</span></a>) ด้วย SQL ใน script ที่เปิดฐานข้อมูลแบบเขียนได้ พร้อม <code>n_hours</code> ที่นับด้วย <code>COUNT(pm25)</code></li>
+<li><strong>ตรวจความครบถ้วน</strong> นับวันที่ควรมีด้วย <code>generate_series</code> (บทที่ 7) เทียบกับจำนวนแถวใน <code>daily_pm25</code> เพื่อหาวันที่ไม่มีข้อมูลเลย และนับวันที่ <code>n_hours</code> ต่ำกว่า 18 แยกตามสถานี</li>
+<li><strong>join กับ <code>stations</code> อย่างปลอดภัย</strong> (หัวข้อ <a href="#sec-ch08-join-traps" class="quarto-xref"><span>8.8</span></a>) ตรวจว่า <code>station_id</code> ใน <code>stations</code> ไม่ซ้ำ join แบบ left พร้อม <code>indicator=True</code> และยืนยันว่าจำนวนแถวไม่เปลี่ยน</li>
+<li><strong>สร้างคอลัมน์ที่ใช้บ่อย</strong> <code>is_complete</code>, <code>exceed_th</code> และ <code>exceed_who</code> ตามตัวอย่างในหัวข้อ resample</li>
+<li><strong>ตรวจการแจกแจงของ <code>n_hours</code></strong> ว่าวันที่ข้อมูลไม่ครบกระจุกในช่วงเวลาหรือสถานีใด และบันทึกสิ่งที่พบเป็นคำถามสำหรับบทที่ 10</li>
+</ol>
+<p><strong>ผล</strong> ได้ view <code>daily_pm25</code> ที่มีหนึ่งแถวต่อสถานีต่อวันที่มีข้อมูลอย่างน้อยหนึ่งชั่วโมง และ DataFrame รายวันที่มีภาคและคอลัมน์ตัวชี้วัด ผู้อ่านควรบันทึกผลการตรวจในขั้นที่ 3 และ 4 ลงใน notebook เช่น จำนวนวันที่ไม่มีข้อมูลเลยและจำนวนวันที่ไม่ครบของแต่ละสถานี เพราะเป็นข้อมูลตั้งต้นของบทที่ 9–10</p>
+<p><strong>การตีความ</strong> จากการทดลองกับข้อมูลสมมุติในบทนี้ วันที่ไม่มีข้อมูลเลยไม่ปรากฏใน <code>daily_pm25</code> และ <code>groupby</code> แต่ปรากฏใน <code>resample</code> ความต่างนี้ทำให้รู้ว่า ตัวเลข “จำนวนวันที่ข้อมูลไม่ครบ” ต้องคำนวณจากรายการวันที่คาดว่าจะมี ไม่ใช่จาก <code>daily_pm25</code> เพียงอย่างเดียว</p>
+<p><strong>ข้อจำกัด</strong> view นี้นับ <code>n_hours</code> จากชั่วโมงที่มีค่า PM2.5 เท่านั้น ถ้าคำถามใช้สารมลพิษอื่น ต้องมีตัวชี้วัดความครบถ้วนของสารนั้นแยกต่างหาก นอกจากนี้ ค่าเฉลี่ยรายวันของวันที่ข้อมูลไม่ครบยังอยู่ในตาราง และถูกตัดออกด้วยเกณฑ์ 18 ชั่วโมงในขั้นวิเคราะห์ ทางเลือกอื่น เช่น การเติมค่าในชั่วโมงที่หายไปก่อนรวมเป็นรายวัน เป็นเรื่องของบทที่ 10 ซึ่งจะสร้างตาราง <code>daily_pm25_clean</code> ที่ใช้ตั้งแต่บทที่ 11 เป็นต้นไป</p>
+</section>
+<section id="sec-ch08-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch08-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch08-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch08-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;8.11: ข้อผิดพลาดที่พบบ่อยในบทที่ 8
+</figcaption>
+<div aria-describedby="tbl-ch08-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>คำนวณค่าเฉลี่ยรายวันโดยไม่เก็บ <code>n_hours</code></td>
+<td>ค่าเฉลี่ยจาก 4 ชั่วโมงดูเหมือนค่าเฉลี่ยจาก 24 ชั่วโมง</td>
+<td>เก็บ <code>n_hours</code> คู่กับค่าเฉลี่ยเสมอ</td>
+</tr>
+<tr class="even">
+<td>นับวันที่ข้อมูลไม่ครบจากผลของ <code>groupby</code> หรือ <code>GROUP BY</code></td>
+<td>วันที่ไม่มีข้อมูลเลยไม่มีแถวให้นับ</td>
+<td>สร้างรายการวันที่คาดว่าจะมี แล้ว left join</td>
+</tr>
+<tr class="odd">
+<td><code>merge</code> โดยไม่ตรวจว่า key ไม่ซ้ำ</td>
+<td>fan-out ทำให้แถวเพิ่มและค่าสรุปผิด</td>
+<td>ใส่ <code>validate="many_to_one"</code> และเทียบจำนวนแถว</td>
+</tr>
+<tr class="even">
+<td>join ด้วย key ที่มีช่องว่างหรือตัวพิมพ์ต่างกัน</td>
+<td>จับคู่ไม่ได้ แถวหายหรือได้ <code>NaN</code></td>
+<td>ปรับ key ให้เป็นรูปมาตรฐาน และตรวจด้วย <code>indicator=True</code></td>
+</tr>
+<tr class="odd">
+<td>แก้ค่าด้วย <code>df["col"][mask] = ...</code></td>
+<td>ไม่มีผลภายใต้ copy-on-write และพฤติกรรมไม่แน่นอนในเวอร์ชันเก่า</td>
+<td>ใช้ <code>df.loc[mask, "col"] = ...</code> หรือ <code>assign</code></td>
+</tr>
+<tr class="even">
+<td><code>tz_localize</code> ข้อมูลที่บันทึกเป็น UTC ว่าเป็นเวลาไทย</td>
+<td>จุดเวลาเลื่อนไปเจ็ดชั่วโมง</td>
+<td><code>tz_localize("UTC")</code> แล้ว <code>tz_convert("Asia/Bangkok")</code></td>
+</tr>
+<tr class="odd">
+<td>อ่านวันที่ปี พ.ศ. ด้วย <code>pd.to_datetime</code> โดยตรง</td>
+<td>ได้ปีผิด 543 ปี หรือ error</td>
+<td>แยกส่วนแล้วลบ 543 ก่อนสร้างวันที่</td>
+</tr>
+<tr class="even">
+<td>ใช้ <code>pivot_table</code> เพื่อเลี่ยง error ของ <code>pivot</code></td>
+<td>แถวซ้ำที่ไม่ควรมีถูกเฉลี่ยรวมโดยไม่รู้ตัว</td>
+<td>หาสาเหตุของแถวซ้ำก่อน</td>
+</tr>
+<tr class="odd">
+<td>ใช้ <code>apply</code> กับฟังก์ชัน Python บนข้อมูลจำนวนมาก</td>
+<td>ช้ากว่าเมธอด vectorized หลายสิบถึงหลายร้อยเท่า</td>
+<td>ใช้เมธอดของ pandas/NumPy เช่น <code>np.where</code>, <code>.str.*</code>, <code>.dt.*</code></td>
+</tr>
+<tr class="even">
+<td>ย้ายตรรกะวันในสัปดาห์ระหว่าง SQL กับ pandas โดยไม่ตรวจ</td>
+<td>DuckDB <code>dayofweek</code> ให้อาทิตย์เป็น 0 แต่ pandas ให้จันทร์เป็น 0</td>
+<td>ใช้ <code>isodow</code> ใน SQL และตรวจกับวันที่ที่รู้คำตอบ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>tidy data มีหลักสามข้อ คือ ตัวแปรหนึ่งคอลัมน์ การสังเกตหนึ่งแถว และหน่วยการสังเกตหนึ่งตาราง แต่รูปที่ tidy ขึ้นกับว่าคำถามกำหนดหน่วยการสังเกตอย่างไร</li>
+<li><code>melt</code> แปลงรูปแบบกว้างเป็นยาว <code>pivot</code> แปลงกลับ และ error ของ <code>pivot</code> เมื่อมีแถวซ้ำเป็นสัญญาณที่มีประโยชน์ ไม่ควรเลี่ยงด้วย <code>pivot_table</code></li>
+<li>pandas จัดแนวตาม index ใช้ dtype ที่ส่งผลต่อพฤติกรรมและหน่วยความจำ และใช้ copy-on-write ที่ทำให้การแก้ไขต้องผ่าน <code>loc</code> หรือ <code>assign</code></li>
+<li>method chaining ทำให้การแปลงหลายขั้นอ่านเป็น pipeline ตรวจสอบได้ด้วย <code>pipe</code> และลด hidden state ใน notebook</li>
+<li>Polars ใช้ expression และ lazy evaluation ที่ปรับแผนก่อนรัน ความหมายของ <code>count()</code> กับ <code>len()</code> ต้องตรวจกับเอกสารของเวอร์ชันที่ใช้</li>
+<li><code>ts</code> เป็นเวลาไทยแบบไม่มีเขตเวลา ใช้ <code>tz_localize</code> กับ <code>tz_convert</code> เมื่อรวมกับแหล่งอื่น คำนวณด้วย ค.ศ. และแปลงเป็น พ.ศ. เฉพาะตอนแสดงผล</li>
+<li>view <code>daily_pm25</code> ต้องมี <code>n_hours</code> คู่กับค่าเฉลี่ย <code>resample</code> สร้างแถวของทุกช่วงเวลา ส่วน <code>groupby</code> สร้างเฉพาะกลุ่มที่มีข้อมูล</li>
+<li>ทุก join ต้องตรวจ fan-out ด้วย <code>validate</code> และตรวจ key ไม่ตรงกันด้วย <code>indicator=True</code> พร้อมเทียบจำนวนแถวก่อนและหลัง</li>
+</ul>
+</section>
+<section id="sec-ch08-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch08-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>ตารางที่มีคอลัมน์ <code>station_id</code>, <code>jan</code>, <code>feb</code>, …, <code>dec</code> เก็บค่าเฉลี่ยรายเดือน ไม่ tidy เพราะเหตุใด และควรแปลงเป็นรูปใด</li>
+<li>อธิบายว่าเมื่อใดที่ตาราง <code>measurements</code> ในรูปแบบกว้างเหมาะกว่ารูปแบบยาว และเมื่อใดที่รูปแบบยาวเหมาะกว่า โดยยกคำถามตัวอย่างอย่างละหนึ่งข้อ</li>
+<li>อธิบายความต่างระหว่าง <code>tz_localize</code> กับ <code>tz_convert</code> และบอกผลของ <code>pd.Timestamp("2026-03-01 00:00").tz_localize("Asia/Bangkok").tz_convert("UTC")</code></li>
+<li>ทำไม <code>resample("D")</code> กับ <code>groupby</code> ตามวันที่จึงอาจให้จำนวนแถวต่างกัน และความต่างนี้สำคัญต่อการนับวันที่ข้อมูลไม่ครบอย่างไร</li>
+<li>fan-out คืออะไร และพารามิเตอร์ <code>validate="many_to_one"</code> ป้องกันได้อย่างไร</li>
+</ol>
+</section>
+<section id="ประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ประยกต">ประยุกต์</h3>
+<ol start="6" type="1">
+<li>ดึงค่า <code>pm25</code> และ <code>pm10</code> ของสถานีหนึ่งในเดือนมีนาคม ค.ศ. 2023 แปลงเป็นรูปแบบยาวด้วย <code>melt</code> แล้วแปลงกลับด้วย <code>pivot</code> ตรวจว่าได้ DataFrame เท่ากับต้นฉบับด้วย <code>DataFrame.equals</code> (อาจต้องเรียงคอลัมน์และแถวให้ตรงกันก่อน)</li>
+<li>เขียน method chain ที่คำนวณค่าเฉลี่ย PM2.5 รายเดือนของแต่ละภาค เฉพาะวันที่ข้อมูลครบ จากข้อมูลรายชั่วโมงในช่วงสำรวจ แทรก <code>.pipe(check, ...)</code> อย่างน้อยสองจุด และใช้ <code>validate</code> ใน <code>merge</code></li>
+<li>เขียนโค้ดเดียวกับข้อ 7 ด้วย Polars แบบ lazy แล้วใช้ <code>explain()</code> ตรวจว่ามีการอ่านเฉพาะคอลัมน์ที่ใช้หรือไม่ เปรียบเทียบผลลัพธ์กับ pandas</li>
+<li>นับจำนวนวันที่ <em>ไม่มีข้อมูลเลย</em> และจำนวนวันที่ <code>n_hours</code> อยู่ระหว่าง 1–17 ของแต่ละสถานีในปี ค.ศ. 2023 ด้วย <code>resample</code> ใน pandas แล้วตรวจผลกับ query ที่ใช้ <code>generate_series</code> ใน SQL</li>
+<li>สร้างตาราง mapping จังหวัดกับภาคที่มีชื่อจังหวัดสะกดไม่ตรงกับตาราง <code>stations</code> อย่างน้อยสองแบบ (เช่น ช่องว่างท้ายคำ หรือชื่อย่อ) แล้วใช้ <code>indicator=True</code> หาแถวที่จับคู่ไม่ได้ และแก้ให้จับคู่ได้ครบ</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ได้ไฟล์ CSV จากหน่วยงานหนึ่งที่มีวันที่แบบ พ.ศ. ในรูปแบบผสม เช่น <code>"15/01/2569"</code>, <code>"2569-01-16"</code> และ <code>"17 ม.ค. 2569"</code> เขียนฟังก์ชันแปลงทุกรูปแบบเป็น <code>datetime64</code> พร้อมกรณีทดสอบที่ครอบคลุมทุกรูปแบบและกรณีที่ควรแจ้ง error</li>
+<li>สร้างข้อมูลสมมุติรายชั่วโมงขนาด 100 ล้านแถวเป็นไฟล์ Parquet แบบ partition แล้วเปรียบเทียบเวลาและหน่วยความจำสูงสุดของการคำนวณค่าเฉลี่ยรายวันด้วย pandas (อ่านเป็นช่วง), Polars แบบ streaming และ DuckDB อภิปรายผลด้วยแนวคิดในบทที่ 6 และ 8</li>
+<li>ออกแบบชุดการตรวจอัตโนมัติสำหรับขั้นสร้างตารางรายวัน ที่ตรวจได้ทั้ง fan-out, key ไม่ตรงกัน, วันที่ไม่มีข้อมูลเลย และการตัดวันผิดเขตเวลา (เช่น ตรวจรูปแบบรายวันของค่าเฉลี่ยรายชั่วโมง) แล้วอภิปรายว่าการตรวจใดควรหยุด pipeline และการตรวจใดควรเพียงเตือน (เชื่อมกับบทที่ 9)</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch08">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="wickham2014tidy">Wickham (<a href="../references.html#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span> — บทความต้นฉบับของ tidy data อธิบายห้าปัญหาของข้อมูลที่ไม่ tidy พร้อมตัวอย่างการแก้ไข</li>
+<li><span class="citation" data-cites="mckinney2022python">McKinney (<a href="../references.html#ref-mckinney2022python" role="doc-biblioref">2022</a>)</span> — ตำรา pandas จากผู้สร้างไลบรารี บทเรื่อง data wrangling และ time series ครอบคลุมเนื้อหาในบทนี้อย่างละเอียด</li>
+<li><span class="citation" data-cites="pandas2026cow"><span class="nocase">pandas development team</span> (<a href="../references.html#ref-pandas2026cow" role="doc-biblioref">2026a</a>)</span> — เอกสารทางการเรื่อง copy-on-write อธิบายพฤติกรรมใหม่และวิธีปรับโค้ดเดิม</li>
+<li><span class="citation" data-cites="polars2026guide">Polars developers (<a href="../references.html#ref-polars2026guide" role="doc-biblioref">2026</a>)</span> — คู่มือผู้ใช้ Polars อธิบาย expression, lazy API และการเปรียบเทียบกับ pandas</li>
+<li><span class="citation" data-cites="pandas2026timeseries"><span class="nocase">pandas development team</span> (<a href="../references.html#ref-pandas2026timeseries" role="doc-biblioref">2026e</a>)</span> — เอกสารทางการเรื่องการจัดการวันเวลาและเขตเวลาใน pandas รวมถึงเวลาออมแสง</li>
+<li><span class="citation" data-cites="harris2020array"><span class="nocase">Harris และคณะ</span> (<a href="../references.html#ref-harris2020array" role="doc-biblioref">2020</a>)</span> — บทความเรื่อง NumPy ใน <em>Nature</em> ที่อธิบายแนวคิดของการคำนวณแบบอาร์เรย์ซึ่งเป็นรากฐานของ vectorization</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-duckdb2026pivot" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026. <em><span>PIVOT</span> and <span>UNPIVOT</span> Statements</em>. <a href="https://duckdb.org/docs/stable/sql/statements/unpivot.html">https://duckdb.org/docs/stable/sql/statements/unpivot.html</a>.
+</div>
+<div id="ref-harris2020array" class="csl-entry" role="listitem">
+<span class="nocase">Harris, Charles R., K. Jarrod Millman, Stéfan J. van der Walt, และคณะ</span>. 2020. <span>“Array Programming with <span>NumPy</span>”</span>. <em>Nature</em> 585: 357–62. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+</div>
+<div id="ref-mckinney2022python" class="csl-entry" role="listitem">
+McKinney, Wes. 2022. <em>Python for Data Analysis: Data Wrangling with pandas, NumPy, and Jupyter</em>. 3 พิมพ์ครั้งที่. O’Reilly Media. <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>.
+</div>
+<div id="ref-pandas2026cow" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026a. <em>Copy-on-Write (<span>CoW</span>)</em>. <a href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html">https://pandas.pydata.org/docs/user_guide/copy_on_write.html</a>.
+</div>
+<div id="ref-pandas2026merge" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026b. <em>Merge, Join, Concatenate and Compare</em>. <a href="https://pandas.pydata.org/docs/user_guide/merging.html">https://pandas.pydata.org/docs/user_guide/merging.html</a>.
+</div>
+<div id="ref-pandas2026arrow" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026c. <em><span>PyArrow</span> Functionality</em>. <a href="https://pandas.pydata.org/docs/user_guide/pyarrow.html">https://pandas.pydata.org/docs/user_guide/pyarrow.html</a>.
+</div>
+<div id="ref-pandas2026reshaping" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026d. <em>Reshaping and Pivot Tables</em>. <a href="https://pandas.pydata.org/docs/user_guide/reshaping.html">https://pandas.pydata.org/docs/user_guide/reshaping.html</a>.
+</div>
+<div id="ref-pandas2026timeseries" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026e. <em>Time Series / Date Functionality</em>. <a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">https://pandas.pydata.org/docs/user_guide/timeseries.html</a>.
+</div>
+<div id="ref-polars2026guide" class="csl-entry" role="listitem">
+Polars developers. 2026. <em>Polars User Guide</em>. <a href="https://docs.pola.rs/">https://docs.pola.rs/</a>.
+</div>
+<div id="ref-wickham2014tidy" class="csl-entry" role="listitem">
+Wickham, Hadley. 2014. <span>“Tidy Data”</span>. <em>Journal of Statistical Software</em> 59 (10): 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/07-sql-analysis.html" class="pagination-link" aria-label="SQL เพื่อการวิเคราะห์">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/09-data-quality.html" class="pagination-link" aria-label="คุณภาพข้อมูลและการตรวจสอบ">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

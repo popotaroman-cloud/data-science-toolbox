@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; การวิเคราะห์อนุกรมเวลาเชิงสำรวจ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/15-multivariate.html" rel="next">
+<link href="../chapters/13-exploratory-statistics.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</a></li><li class="breadcrumb-item"><a href="../chapters/14-time-series.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch14-components" id="toc-sec-ch14-components" class="nav-link" data-scroll-target="#sec-ch14-components"><span class="header-section-number">14.1</span> องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual</a>
+  <ul class="collapse">
+  <li><a href="#สามองคประกอบ" id="toc-สามองคประกอบ" class="nav-link" data-scroll-target="#สามองคประกอบ">สามองค์ประกอบ</a></li>
+  <li><a href="#แบบจำลองแบบบวกและแบบคณ" id="toc-แบบจำลองแบบบวกและแบบคณ" class="nav-link" data-scroll-target="#แบบจำลองแบบบวกและแบบคณ">แบบจำลองแบบบวกและแบบคูณ</a></li>
+  <li><a href="#เตรยมขอมลใหเปนอนกรมเวลาทมความถแนนอน" id="toc-เตรยมขอมลใหเปนอนกรมเวลาทมความถแนนอน" class="nav-link" data-scroll-target="#เตรยมขอมลใหเปนอนกรมเวลาทมความถแนนอน">เตรียมข้อมูลให้เป็นอนุกรมเวลาที่มีความถี่แน่นอน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-stationarity" id="toc-sec-ch14-stationarity" class="nav-link" data-scroll-target="#sec-ch14-stationarity"><span class="header-section-number">14.2</span> stationarity และ ★ การทดสอบ (ADF, KPSS)</a>
+  <ul class="collapse">
+  <li><a href="#stationarity-คออะไร" id="toc-stationarity-คออะไร" class="nav-link" data-scroll-target="#stationarity-คออะไร">stationarity คืออะไร</a></li>
+  <li><a href="#ทำไมสำคญ" id="toc-ทำไมสำคญ" class="nav-link" data-scroll-target="#ทำไมสำคญ">ทำไมสำคัญ</a></li>
+  <li><a href="#การทดสอบ-adf-และ-kpss" id="toc-การทดสอบ-adf-และ-kpss" class="nav-link" data-scroll-target="#การทดสอบ-adf-และ-kpss">การทดสอบ ADF และ KPSS ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-acf" id="toc-sec-ch14-acf" class="nav-link" data-scroll-target="#sec-ch14-acf"><span class="header-section-number">14.3</span> autocorrelation: ACF และ ★ PACF</a>
+  <ul class="collapse">
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation">autocorrelation</a></li>
+  <li><a href="#อาน-acf" id="toc-อาน-acf" class="nav-link" data-scroll-target="#อาน-acf">อ่าน ACF</a></li>
+  <li><a href="#ผลตอการวเคราะห" id="toc-ผลตอการวเคราะห" class="nav-link" data-scroll-target="#ผลตอการวเคราะห">ผลต่อการวิเคราะห์</a></li>
+  <li><a href="#pacf" id="toc-pacf" class="nav-link" data-scroll-target="#pacf">PACF ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-decomposition" id="toc-sec-ch14-decomposition" class="nav-link" data-scroll-target="#sec-ch14-decomposition"><span class="header-section-number">14.4</span> การแยกองค์ประกอบ: classical decomposition และ STL</a>
+  <ul class="collapse">
+  <li><a href="#classical-decomposition" id="toc-classical-decomposition" class="nav-link" data-scroll-target="#classical-decomposition">classical decomposition</a></li>
+  <li><a href="#stl" id="toc-stl" class="nav-link" data-scroll-target="#stl">STL</a></li>
+  <li><a href="#ความแรงของแนวโนมและฤดกาล" id="toc-ความแรงของแนวโนมและฤดกาล" class="nav-link" data-scroll-target="#ความแรงของแนวโนมและฤดกาล">ความแรงของแนวโน้มและฤดูกาล</a></li>
+  <li><a href="#stl-กบขอมลรายวน" id="toc-stl-กบขอมลรายวน" class="nav-link" data-scroll-target="#stl-กบขอมลรายวน">STL กับข้อมูลรายวัน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-smoothing" id="toc-sec-ch14-smoothing" class="nav-link" data-scroll-target="#sec-ch14-smoothing"><span class="header-section-number">14.5</span> smoothing: moving average และ ★ LOESS</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองทำใหเรยบ" id="toc-ทำไมตองทำใหเรยบ" class="nav-link" data-scroll-target="#ทำไมตองทำใหเรยบ">ทำไมต้องทำให้เรียบ</a></li>
+  <li><a href="#moving-average" id="toc-moving-average" class="nav-link" data-scroll-target="#moving-average">moving average</a></li>
+  <li><a href="#เลอกขนาดหนาตาง" id="toc-เลอกขนาดหนาตาง" class="nav-link" data-scroll-target="#เลอกขนาดหนาตาง">เลือกขนาดหน้าต่าง</a></li>
+  <li><a href="#loess" id="toc-loess" class="nav-link" data-scroll-target="#loess">LOESS ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-change-point" id="toc-sec-ch14-change-point" class="nav-link" data-scroll-target="#sec-ch14-change-point"><span class="header-section-number">14.6</span> change point detection ★</a>
+  <ul class="collapse">
+  <li><a href="#change-point-คออะไร" id="toc-change-point-คออะไร" class="nav-link" data-scroll-target="#change-point-คออะไร">change point คืออะไร</a></li>
+  <li><a href="#ตรวจหาดวย-ruptures" id="toc-ตรวจหาดวย-ruptures" class="nav-link" data-scroll-target="#ตรวจหาดวย-ruptures">ตรวจหาด้วย ruptures</a></li>
+  <li><a href="#การเลอก-penalty" id="toc-การเลอก-penalty" class="nav-link" data-scroll-target="#การเลอก-penalty">การเลือก penalty</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-anomaly" id="toc-sec-ch14-anomaly" class="nav-link" data-scroll-target="#sec-ch14-anomaly"><span class="header-section-number">14.7</span> การตรวจหาความผิดปกติในอนุกรมเวลา ★</a>
+  <ul class="collapse">
+  <li><a href="#ผดปกตเมอเทยบกบอะไร" id="toc-ผดปกตเมอเทยบกบอะไร" class="nav-link" data-scroll-target="#ผดปกตเมอเทยบกบอะไร">ผิดปกติเมื่อเทียบกับอะไร</a></li>
+  <li><a href="#hampel-filter" id="toc-hampel-filter" class="nav-link" data-scroll-target="#hampel-filter">Hampel filter</a></li>
+  <li><a href="#ธงไมใชคำตดสน" id="toc-ธงไมใชคำตดสน" class="nav-link" data-scroll-target="#ธงไมใชคำตดสน">ธงไม่ใช่คำตัดสิน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-alignment" id="toc-sec-ch14-alignment" class="nav-link" data-scroll-target="#sec-ch14-alignment"><span class="header-section-number">14.8</span> การจัดแนวข้อมูลเซนเซอร์ที่เวลาไม่สม่ำเสมอ</a>
+  <ul class="collapse">
+  <li><a href="#ปญหา" id="toc-ปญหา" class="nav-link" data-scroll-target="#ปญหา">ปัญหา</a></li>
+  <li><a href="#ขนท-1-แปลงเวลาใหอยในระบบเดยวกน" id="toc-ขนท-1-แปลงเวลาใหอยในระบบเดยวกน" class="nav-link" data-scroll-target="#ขนท-1-แปลงเวลาใหอยในระบบเดยวกน">ขั้นที่ 1: แปลงเวลาให้อยู่ในระบบเดียวกัน</a></li>
+  <li><a href="#ขนท-2-รวมเปนรายชวโมงพรอมเกณฑความครบถวน" id="toc-ขนท-2-รวมเปนรายชวโมงพรอมเกณฑความครบถวน" class="nav-link" data-scroll-target="#ขนท-2-รวมเปนรายชวโมงพรอมเกณฑความครบถวน">ขั้นที่ 2: รวมเป็นรายชั่วโมงพร้อมเกณฑ์ความครบถ้วน</a></li>
+  <li><a href="#ขนท-3-จบคเวลาทใกลทสด-as-of-join" id="toc-ขนท-3-จบคเวลาทใกลทสด-as-of-join" class="nav-link" data-scroll-target="#ขนท-3-จบคเวลาทใกลทสด-as-of-join">ขั้นที่ 3: จับคู่เวลาที่ใกล้ที่สุด (as-of join)</a></li>
+  <li><a href="#เทยบกบการทำใน-duckdb" id="toc-เทยบกบการทำใน-duckdb" class="nav-link" data-scroll-target="#เทยบกบการทำใน-duckdb">เทียบกับการทำใน DuckDB</a></li>
+  </ul></li>
+  <li><a href="#sec-ch14-case" id="toc-sec-ch14-case" class="nav-link" data-scroll-target="#sec-ch14-case">กรณีศึกษา: ฤดูฝุ่นของสถานีในภาคเหนือรุนแรงขึ้นหรือลดลง</a></li>
+  <li><a href="#sec-ch14-pitfalls" id="toc-sec-ch14-pitfalls" class="nav-link" data-scroll-target="#sec-ch14-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch14-exercises" id="toc-sec-ch14-exercises" class="nav-link" data-scroll-target="#sec-ch14-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</a></li><li class="breadcrumb-item"><a href="../chapters/14-time-series.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ข้อมูล PM2.5 เป็นอนุกรมเวลาโดยธรรมชาติ ค่าของแต่ละชั่วโมงเรียงตามเวลา และค่าที่อยู่ติดกันสัมพันธ์กัน บทที่ 13 เตือนว่าความสัมพันธ์นี้ทำลายสมมติฐานความเป็นอิสระของสถิติดั้งเดิม บทนี้มองความสัมพันธ์เดียวกันจากอีกด้าน คือเป็น <em>ข้อมูล</em> ที่บอกเราเกี่ยวกับกลไกของปรากฏการณ์ ฤดูฝุ่นที่วนกลับมาทุกปี แนวโน้มระยะยาวที่อาจดีขึ้นหรือแย่ลง เหตุการณ์ไฟป่าที่ทำให้ค่าพุ่งขึ้นเป็นช่วง และการเปลี่ยนเครื่องวัดที่ทำให้ระดับค่าขยับ ล้วนเป็นรูปแบบตามเวลาที่ต้องใช้เครื่องมือเฉพาะ</p>
+<p>บทนี้เป็นการวิเคราะห์อนุกรมเวลา <em>เชิงสำรวจ</em> คือการแยกองค์ประกอบ อธิบายโครงสร้าง และตรวจหาสิ่งผิดปกติ ไม่ใช่การพยากรณ์ ซึ่งต้องใช้แบบจำลองอย่าง ARIMA หรือ machine learning และอยู่นอกขอบเขตของรายวิชา <span class="citation" data-cites="hyndman2021forecasting">(<a href="../references.html#ref-hyndman2021forecasting" role="doc-biblioref">Hyndman และ Athanasopoulos 2021</a>)</span> อย่างไรก็ตาม การสำรวจที่ดีเป็นขั้นแรกที่ขาดไม่ได้ของการพยากรณ์ทุกแบบ ตัวอย่างในบทนี้ใช้ค่าเฉลี่ยรายวันจาก <code>daily_pm25_clean</code> ของสถานี 35t (ศาลากลางจังหวัดเชียงใหม่) ในช่วงสำรวจ</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายองค์ประกอบ trend, seasonality และ residual และเลือกแบบจำลองแบบบวกหรือแบบคูณ</li>
+<li>อธิบายแนวคิด stationarity และเหตุผลที่สำคัญต่อการวิเคราะห์อนุกรมเวลา</li>
+<li>อ่านและตีความกราฟ ACF ของข้อมูล PM2.5</li>
+<li>แยกองค์ประกอบของอนุกรมเวลาด้วย STL และประเมินความแรงของฤดูกาลและแนวโน้ม</li>
+<li>เปรียบเทียบวิธีทำให้เรียบ และเลือกขนาดหน้าต่างให้เหมาะกับคำถาม</li>
+<li>จัดแนวข้อมูลเซนเซอร์ที่เวลาไม่สม่ำเสมอให้เป็นรายชั่วโมงอย่างถูกต้อง</li>
+</ol>
+</section>
+<section id="sec-ch14-components" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="sec-ch14-components"><span class="header-section-number">14.1</span> องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual</h2>
+<section id="สามองคประกอบ" class="level3">
+<h3 class="anchored" data-anchor-id="สามองคประกอบ">สามองค์ประกอบ</h3>
+<p>แนวคิดพื้นฐานของการสำรวจอนุกรมเวลาคือ มองค่าที่สังเกตได้ว่าประกอบจากส่วนที่มีโครงสร้างต่างกัน <span class="citation" data-cites="hyndman2021forecasting">(<a href="../references.html#ref-hyndman2021forecasting" role="doc-biblioref">Hyndman และ Athanasopoulos 2021</a>)</span></p>
+<ul>
+<li><strong><span class="idx">แนวโน้ม</span></strong> (trend, <span class="math inline">\(T_t\)</span>) การเปลี่ยนแปลงระยะยาวของระดับค่า เช่น ค่าเฉลี่ยรายปีค่อย ๆ ลดลงจากมาตรการควบคุมการเผา</li>
+<li><strong><span class="idx">ฤดูกาล</span></strong> (seasonality, <span class="math inline">\(S_t\)</span>) รูปแบบที่ซ้ำในคาบที่แน่นอน ข้อมูล PM2.5 มีฤดูกาลหลายระดับ ได้แก่ รายปี (ฤดูฝุ่นช่วงต้นปี) รายสัปดาห์ (การจราจรวันทำงาน) และรายวัน (ชั้นผสมอากาศที่ต่ำในช่วงกลางคืนและเช้า)</li>
+<li><strong><span class="idx">ส่วนเหลือ</span></strong> (residual หรือ remainder, <span class="math inline">\(R_t\)</span>) สิ่งที่เหลือเมื่อเอาแนวโน้มและฤดูกาลออก ประกอบด้วยความผันผวนจากสภาพอากาศรายวัน เหตุการณ์เฉพาะ และความคลาดเคลื่อนของการวัด</li>
+</ul>
+<div id="tbl-ch14-seasonality" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch14-seasonality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;14.1: ฤดูกาลหลายระดับของ PM2.5
+</figcaption>
+<div aria-describedby="tbl-ch14-seasonality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระดับเวลา</th>
+<th>ฤดูกาลที่คาดว่ามี</th>
+<th>กลไกทางกายภาพ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>รายชั่วโมง (ภายในวัน)</td>
+<td>สูงช่วงกลางคืนถึงเช้า ต่ำช่วงบ่าย</td>
+<td>ชั้นผสมอากาศ (mixing layer) ต่ำตอนกลางคืน การจราจรช่วงเช้า</td>
+</tr>
+<tr class="even">
+<td>รายวัน (ภายในสัปดาห์)</td>
+<td>วันทำงานอาจสูงกว่าวันหยุดเล็กน้อยในเมืองใหญ่</td>
+<td>การจราจรและกิจกรรมทางเศรษฐกิจ</td>
+</tr>
+<tr class="odd">
+<td>รายเดือน (ภายในปี)</td>
+<td>สูงมากในฤดูแล้ง (ภาคเหนือประมาณกุมภาพันธ์ถึงเมษายน)</td>
+<td>การเผาในที่โล่ง ความกดอากาศสูง ลมสงบ ไม่มีฝน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="แบบจำลองแบบบวกและแบบคณ" class="level3">
+<h3 class="anchored" data-anchor-id="แบบจำลองแบบบวกและแบบคณ">แบบจำลองแบบบวกและแบบคูณ</h3>
+<p>องค์ประกอบทั้งสามรวมกันได้สองแบบ</p>
+<p><span id="eq-ch14-decomposition"><span class="math display">\[
+y_t = T_t + S_t + R_t \quad \text{(แบบบวก)} \qquad\qquad y_t = T_t \times S_t \times R_t \quad \text{(แบบคูณ)}
+\tag{14.1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(y_t\)</span> คือค่าที่สังเกตได้ ณ เวลา <span class="math inline">\(t\)</span> ในแบบบวก ฤดูกาลเพิ่มหรือลดค่าเป็นจำนวนคงที่ เช่น เดือนมีนาคมสูงกว่าค่าปกติ 20 µg/m³ ทุกปี ในแบบคูณ ฤดูกาลเพิ่มหรือลดเป็นสัดส่วน เช่น เดือนมีนาคมสูงกว่าค่าปกติ 75% ทุกปี</p>
+<p>ข้อมูล PM2.5 มักเหมาะกับแบบคูณมากกว่า เพราะขนาดของยอดฤดูฝุ่นมักใหญ่ขึ้นตามระดับพื้นฐาน และการแจกแจงเบ้ขวา (<a href="13-exploratory-statistics.html#sec-ch13-distribution" class="quarto-xref"><span>หัวข้อ 13.1</span></a>) วิธีที่สะดวกคือแปลงข้อมูลด้วย log ก่อน แล้วใช้แบบบวก เพราะ <span class="math inline">\(\log(T \times S \times R) = \log T + \log S + \log R\)</span> เมื่อแปลงฤดูกาลกลับด้วยฟังก์ชันเอกซ์โพเนนเชียล จะได้ <em>ตัวคูณฤดูกาล</em> (seasonal factor) ที่ตีความง่าย เช่น 1.75 คือสูงกว่าระดับแนวโน้ม 75%</p>
+</section>
+<section id="เตรยมขอมลใหเปนอนกรมเวลาทมความถแนนอน" class="level3">
+<h3 class="anchored" data-anchor-id="เตรยมขอมลใหเปนอนกรมเวลาทมความถแนนอน">เตรียมข้อมูลให้เป็นอนุกรมเวลาที่มีความถี่แน่นอน</h3>
+<p>เครื่องมืออนุกรมเวลาส่วนใหญ่ต้องการข้อมูลที่ <em>มีความถี่แน่นอน</em> คือหนึ่งค่าต่อช่วงเวลาไม่ขาดไม่เกิน วันที่ไม่มีข้อมูลต้องปรากฏเป็นค่าว่าง ไม่ใช่หายไปจากตาราง (implicit missing ในบทที่ 10)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT date, pm25_mean FROM daily_pm25_clean</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE station_id = '35t' AND is_complete AND date &lt; DATE '2024-01-01'</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY date</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> s.set_index(pd.to_datetime(s[<span class="st">"date"</span>]))[<span class="st">"pm25_mean"</span>].asfreq(<span class="st">"D"</span>)   <span class="co"># วันที่ขาดกลายเป็น NaN</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(s), s.isna().<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+1461 15</code></pre>
+<p><code>asfreq("D")</code> สร้างดัชนีวันที่ครบทุกวัน ได้ 1,461 วัน (สี่ปีรวมปีอธิกสุรทิน ค.ศ. 2020) โดย 15 วันที่ข้อมูลไม่ครบ 18 ชั่วโมงหรือไม่มีแถวเลยกลายเป็นค่าว่าง วิธีทางอนุกรมเวลาหลายวิธี เช่น STL ไม่รับค่าว่าง ต้องเติมช่องว่างสั้น ๆ ก่อน การเติมด้วย interpolation สำหรับช่องว่างไม่เกินสามวันเป็นทางเลือกที่สมเหตุสมผลสำหรับการสำรวจ (บทที่ 10) ส่วนช่องว่างที่ยาวกว่านั้นต้องพิจารณาเป็นกรณี</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>filled <span class="op">=</span> s.interpolate(limit<span class="op">=</span><span class="dv">3</span>)                                          <span class="co"># ช่องว่างไม่เกิน 3 วัน</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>filled <span class="op">=</span> filled.fillna(filled.rolling(<span class="dv">15</span>, center<span class="op">=</span><span class="va">True</span>, min_periods<span class="op">=</span><span class="dv">1</span>).median())   <span class="co"># ช่องที่เหลือ</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>daily_log <span class="op">=</span> np.log(filled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-ch14-stationarity" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="sec-ch14-stationarity"><span class="header-section-number">14.2</span> stationarity และ ★ การทดสอบ (ADF, KPSS)</h2>
+<section id="stationarity-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="stationarity-คออะไร">stationarity คืออะไร</h3>
+<p>อนุกรมเวลาที่มี <strong><span class="idx">stationarity</span></strong> (แบบอ่อน) คืออนุกรมที่ค่าเฉลี่ย ความแปรปรวน และโครงสร้างความสัมพันธ์ระหว่างค่าที่ห่างกันเท่ากัน ไม่เปลี่ยนตามเวลา กล่าวอย่างง่าย คือ ถ้าตัดอนุกรมเป็นช่วง ๆ แต่ละช่วงจะมีลักษณะทางสถิติเหมือนกัน ไม่ว่าจะตัดที่ใด</p>
+<p>ข้อมูล PM2.5 ดิบไม่มี stationarity อย่างชัดเจน ค่าเฉลี่ยในเดือนมีนาคมสูงกว่าเดือนกรกฎาคมมาก และความแปรปรวนในฤดูฝุ่นก็สูงกว่า ข้อมูลที่มีแนวโน้มระยะยาวก็ไม่มี stationarity เช่นกัน เพราะค่าเฉลี่ยเลื่อนไปตามเวลา</p>
+</section>
+<section id="ทำไมสำคญ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมสำคญ">ทำไมสำคัญ</h3>
+<p>stationarity สำคัญด้วยเหตุผลสองข้อ ข้อแรก สถิติสรุปอย่างค่าเฉลี่ยหรือสหสัมพันธ์ของอนุกรมที่ไม่มี stationarity อาจไม่มีความหมาย ค่าเฉลี่ยทั้งปีของ PM2.5 ผสมฤดูฝุ่นกับฤดูฝนเข้าด้วยกัน ไม่ได้แทนช่วงใดเลย ข้อสอง อนุกรมสองชุดที่ต่างมีแนวโน้มจะมีสหสัมพันธ์สูงแม้ไม่มีความเกี่ยวข้องกันเลย เรียกว่า <strong><span class="idx">spurious correlation</span></strong> <span class="citation" data-cites="granger1974spurious">(<a href="../references.html#ref-granger1974spurious" role="doc-biblioref">Granger และ Newbold 1974</a>)</span> เช่น ค่า PM2.5 ที่ลดลงต่อเนื่องหลายปีอาจมีสหสัมพันธ์สูงกับจำนวนผู้ใช้สมาร์ตโฟนที่เพิ่มขึ้น ซึ่งไม่มีความหมาย</p>
+<p>วิธีทำให้อนุกรมใกล้ stationarity มากขึ้นได้แก่ การแปลง log เพื่อทำให้ความแปรปรวนคงที่ การเอาฤดูกาลออก (หัวข้อ <a href="#sec-ch14-decomposition" class="quarto-xref"><span>14.4</span></a>) และการหาผลต่าง (differencing) เช่น <span class="math inline">\(y_t - y_{t-1}\)</span> เพื่อเอาแนวโน้มออก หรือ <span class="math inline">\(y_t - y_{t-365}\)</span> เพื่อเอาฤดูกาลรายปีออก</p>
+</section>
+<section id="การทดสอบ-adf-และ-kpss" class="level3">
+<h3 class="anchored" data-anchor-id="การทดสอบ-adf-และ-kpss">การทดสอบ ADF และ KPSS ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>การทดสอบ stationarity ที่ใช้บ่อยมีสองแบบที่ตั้งสมมติฐานว่างกลับกัน</p>
+<div id="tbl-ch14-adf-kpss" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch14-adf-kpss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;14.2: การทดสอบ stationarity สองแบบ
+</figcaption>
+<div aria-describedby="tbl-ch14-adf-kpss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>การทดสอบ</th>
+<th>สมมติฐานว่าง (<span class="math inline">\(H_0\)</span>)</th>
+<th>p-value ต่ำแปลว่า</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Augmented Dickey-Fuller (ADF)</td>
+<td>มี unit root (ไม่ stationary)</td>
+<td>มีหลักฐานว่า stationary</td>
+</tr>
+<tr class="even">
+<td>KPSS</td>
+<td>stationary</td>
+<td>มีหลักฐานว่าไม่ stationary</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>เพราะสมมติฐานว่างกลับกัน การใช้ทั้งสองการทดสอบร่วมกันให้ข้อมูลมากกว่าการใช้แบบเดียว <span class="citation" data-cites="kwiatkowski1992testing">(<a href="../references.html#ref-kwiatkowski1992testing" role="doc-biblioref">Kwiatkowski และคณะ 1992</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> adfuller, kpss</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>monthly_log <span class="op">=</span> np.log(s.resample(<span class="st">"MS"</span>).mean())</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, x <span class="kw">in</span> [(<span class="st">"รายเดือน"</span>, monthly_log), (<span class="st">"รายวัน"</span>, daily_log)]:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    adf_stat, adf_p <span class="op">=</span> adfuller(x, autolag<span class="op">=</span><span class="st">"AIC"</span>)[:<span class="dv">2</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> warnings.catch_warnings():            <span class="co"># KPSS เตือนเมื่อ p-value อยู่นอกตาราง</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        warnings.simplefilter(<span class="st">"ignore"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        kpss_stat, kpss_p <span class="op">=</span> kpss(x, regression<span class="op">=</span><span class="st">"c"</span>, nlags<span class="op">=</span><span class="st">"auto"</span>)[:<span class="dv">2</span>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: ADF p = </span><span class="sc">{</span>adf_p<span class="sc">:.3f}</span><span class="ss">, KPSS p = </span><span class="sc">{</span>kpss_p<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+รายเดือน: ADF p = 0.271, KPSS p = 0.100
+รายวัน: ADF p = 0.009, KPSS p = 0.100</code></pre>
+<p>การตีความผลรายเดือน ADF ไม่ปฏิเสธ unit root และ KPSS ไม่ปฏิเสธ stationarity ผลขัดกันแบบนี้มักแปลว่า <em>ข้อมูลไม่พอให้สรุป</em> อนุกรมรายเดือนสี่ปีมีเพียง 48 ค่า และมีฤดูกาลแรง การทดสอบทั้งสองมีกำลังต่ำ ส่วนผลรายวัน ADF ปฏิเสธ unit root ขณะที่ KPSS ไม่ปฏิเสธ stationarity ทั้งสองชี้ไปทางเดียวกันว่าอนุกรมกลับเข้าหาระดับเฉลี่ย ไม่ได้ล่องลอยไปเรื่อย ๆ ค่า KPSS p = 0.100 เป็นขอบบนของตาราง ค่าจริงอาจสูงกว่า ซึ่ง statsmodels จะเตือนไว้</p>
+<p>ข้อควรระวังสามข้อ ข้อแรก การทดสอบเหล่านี้ไวต่อฤดูกาลและการเลือกจำนวน lag ข้อสอง การไม่ปฏิเสธ <span class="math inline">\(H_0\)</span> ไม่ใช่หลักฐานว่า <span class="math inline">\(H_0\)</span> เป็นจริง (<a href="13-exploratory-statistics.html#sec-ch13-testing" class="quarto-xref"><span>หัวข้อ 13.5</span></a>) ข้อสาม สำหรับการสำรวจ การดูกราฟอนุกรมและ ACF มักให้ข้อมูลมากกว่า p-value ของการทดสอบเหล่านี้</p>
+</section>
+</section>
+<section id="sec-ch14-acf" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="sec-ch14-acf"><span class="header-section-number">14.3</span> autocorrelation: ACF และ ★ PACF</h2>
+<section id="autocorrelation" class="level3">
+<h3 class="anchored" data-anchor-id="autocorrelation">autocorrelation</h3>
+<p><strong><span class="idx">autocorrelation</span></strong> (สหสัมพันธ์ในตัว) คือสหสัมพันธ์ระหว่างอนุกรมกับตัวเองที่เลื่อนไป <span class="math inline">\(k\)</span> ช่วงเวลา เรียก <span class="math inline">\(k\)</span> ว่า <strong><span class="idx">lag</span></strong></p>
+<p><span id="eq-ch14-acf"><span class="math display">\[
+r_k = \frac{\sum_{t=k+1}^{n} (y_t - \bar{y})(y_{t-k} - \bar{y})}{\sum_{t=1}^{n} (y_t - \bar{y})^2}
+\tag{14.2}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(y_t\)</span> คือค่า ณ เวลา <span class="math inline">\(t\)</span> <span class="math inline">\(\bar{y}\)</span> คือค่าเฉลี่ยของอนุกรม <span class="math inline">\(n\)</span> คือความยาวของอนุกรม และ <span class="math inline">\(r_k\)</span> คือ autocorrelation ที่ lag <span class="math inline">\(k\)</span> มีค่าตั้งแต่ −1 ถึง 1 กราฟของ <span class="math inline">\(r_k\)</span> เทียบกับ <span class="math inline">\(k\)</span> เรียกว่า <strong><span class="idx">ACF</span></strong> (autocorrelation function) หรือ correlogram</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.stattools <span class="im">import</span> acf, pacf</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ACF "</span>, np.<span class="bu">round</span>(acf(daily_log, nlags<span class="op">=</span><span class="dv">7</span>)[[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">7</span>]], <span class="dv">2</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"PACF"</span>, np.<span class="bu">round</span>(pacf(daily_log, nlags<span class="op">=</span><span class="dv">3</span>)[<span class="dv">1</span>:<span class="dv">4</span>], <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+ACF  [0.7  0.62 0.6  0.58]
+PACF [0.7  0.26 0.21]</code></pre>
+<p>autocorrelation ที่ lag 1 เท่ากับ 0.70 แปลว่า ค่าของวันนี้กับเมื่อวานสัมพันธ์กันสูง ซึ่งสอดคล้องกับกลไกทางกายภาพ มวลอากาศและสภาพอุตุนิยมวิทยาเปลี่ยนช้า ฝุ่นที่สะสมวันนี้ยังอยู่ในวันพรุ่งนี้ ค่าที่ lag 7 ยังสูงถึง 0.58 ส่วนหนึ่งเป็นเพราะฤดูกาลรายปี วันในฤดูฝุ่นอยู่ใกล้กับวันในฤดูฝุ่นด้วยกัน</p>
+<div id="fig-ch14-acf" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ภาพซ้าย ACF ลดลงช้า ๆ จากประมาณ 0.85 ที่ lag 1 และยังสูงกว่าแถบความเชื่อมั่นจนถึง lag 40 ภาพขวา PACF มีแท่งสูงเพียงที่ lag 1 ประมาณ 0.85 และ lag อื่นอยู่ในแถบใกล้ศูนย์">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch14-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/14/acf_pacf.png" class="img-fluid figure-img" alt="ภาพซ้าย ACF ลดลงช้า ๆ จากประมาณ 0.85 ที่ lag 1 และยังสูงกว่าแถบความเชื่อมั่นจนถึง lag 40 ภาพขวา PACF มีแท่งสูงเพียงที่ lag 1 ประมาณ 0.85 และ lag อื่นอยู่ในแถบใกล้ศูนย์">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch14-acf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;14.1: ACF และ PACF ของ log(ค่าเฉลี่ยรายวัน) ของสถานีสังเคราะห์ แถบสีฟ้าคือขอบเขตความเชื่อมั่น 95% ภายใต้สมมติฐานว่าไม่มี autocorrelation
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="อาน-acf" class="level3">
+<h3 class="anchored" data-anchor-id="อาน-acf">อ่าน ACF</h3>
+<div id="tbl-ch14-acf-reading" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch14-acf-reading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;14.3: การอ่านกราฟ ACF
+</figcaption>
+<div aria-describedby="tbl-ch14-acf-reading-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ลักษณะของ ACF</th>
+<th>สิ่งที่บ่งชี้</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ลดลงช้ามาก ยังสูงที่ lag ไกล</td>
+<td>มีแนวโน้มหรือฤดูกาลที่คาบยาวกว่าช่วง lag ที่ดู</td>
+</tr>
+<tr class="even">
+<td>ลดลงแบบเอกซ์โพเนนเชียล</td>
+<td>ความจำระยะสั้นแบบ AR (ค่าวันนี้ขึ้นกับเมื่อวาน)</td>
+</tr>
+<tr class="odd">
+<td>มียอดซ้ำที่ lag 7, 14, 21</td>
+<td>ฤดูกาลรายสัปดาห์</td>
+</tr>
+<tr class="even">
+<td>มียอดที่ lag 24, 48 (ข้อมูลรายชั่วโมง)</td>
+<td>ฤดูกาลรายวัน</td>
+</tr>
+<tr class="odd">
+<td>ทุก lag อยู่ในแถบความเชื่อมั่น</td>
+<td>ไม่พบ autocorrelation (white noise)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><a href="#fig-ch14-acf" class="quarto-xref">ภาพที่&nbsp;<span>14.1</span></a> แสดง ACF ที่ลดลงช้า ซึ่งบ่งชี้ทั้งความจำระยะสั้นและฤดูกาลรายปีที่ยังไม่ได้เอาออก การดู ACF ของ <em>ส่วนเหลือ</em> หลังแยกองค์ประกอบ (หัวข้อ <a href="#sec-ch14-decomposition" class="quarto-xref"><span>14.4</span></a>) จะบอกได้ชัดกว่าว่าความสัมพันธ์ระยะสั้นเหลืออยู่เท่าใด</p>
+</section>
+<section id="ผลตอการวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="ผลตอการวเคราะห">ผลต่อการวิเคราะห์</h3>
+<p>autocorrelation มีผลโดยตรงต่อการอนุมานในบทที่ 13 ถ้ามีข้อมูลรายวัน 1,461 ค่าที่มี autocorrelation lag 1 ประมาณ 0.7 <em>ขนาดตัวอย่างที่มีประสิทธิผล</em> (effective sample size) ต่ำกว่า 1,461 มาก ค่าประมาณคร่าว ๆ สำหรับกระบวนการ AR(1) คือ <span class="math inline">\(n_{\text{eff}} \approx n(1 - \rho)/(1 + \rho)\)</span> ซึ่งในที่นี้ได้ประมาณ <span class="math inline">\(1461 \times 0.3/1.7 \approx 258\)</span> เท่านั้น ช่วงความเชื่อมั่นที่คำนวณจาก <span class="math inline">\(n = 1{,}461\)</span> จึงแคบเกินจริงมากกว่าสองเท่า</p>
+</section>
+<section id="pacf" class="level3">
+<h3 class="anchored" data-anchor-id="pacf">PACF ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>autocorrelation ที่ lag 2 ส่วนหนึ่งเกิดจาก lag 1 ต่อกันสองทอด ถ้าวันนี้สัมพันธ์กับเมื่อวาน และเมื่อวานสัมพันธ์กับเมื่อวานซืน วันนี้ก็จะสัมพันธ์กับเมื่อวานซืนโดยอ้อม <strong><span class="idx">PACF</span></strong> (partial autocorrelation function) วัดความสัมพันธ์ที่ lag <span class="math inline">\(k\)</span> <em>หลังจากควบคุมผลของ lag ที่สั้นกว่าแล้ว</em> ใน <a href="#fig-ch14-acf" class="quarto-xref">ภาพที่&nbsp;<span>14.1</span></a> PACF มีค่าสูงเฉพาะที่ lag 1 แล้วตกลงใกล้ศูนย์ ซึ่งเป็นลักษณะของกระบวนการ AR(1) ข้อมูลสังเคราะห์ในรูปสร้างด้วยกระบวนการนี้จริง ส่วนข้อมูลของสถานี 35t ในผลลัพธ์ข้างต้นมี PACF ที่ lag 2 และ 3 ยังไม่เป็นศูนย์ (0.26 และ 0.21) แปลว่าความจำของอนุกรมยาวกว่าหนึ่งวัน รูปแบบของ ACF และ PACF เป็นเครื่องมือดั้งเดิมในการเลือกอันดับของแบบจำลอง ARIMA <span class="citation" data-cites="box2015time">(<a href="../references.html#ref-box2015time" role="doc-biblioref">Box และคณะ 2015</a>)</span> ซึ่งอยู่นอกขอบเขตของบทนี้</p>
+</section>
+</section>
+<section id="sec-ch14-decomposition" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="sec-ch14-decomposition"><span class="header-section-number">14.4</span> การแยกองค์ประกอบ: classical decomposition และ STL</h2>
+<section id="classical-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="classical-decomposition">classical decomposition</h3>
+<p><strong><span class="idx">classical decomposition</span></strong> เป็นวิธีแยกองค์ประกอบแบบดั้งเดิม ขั้นตอนคือ (1) ประมาณแนวโน้มด้วย moving average ที่มีความกว้างเท่าคาบฤดูกาล (2) เอาแนวโน้มออก แล้วเฉลี่ยค่าของแต่ละตำแหน่งในฤดูกาล เช่น ค่าเฉลี่ยของทุกเดือนมีนาคม ได้เป็นฤดูกาล (3) ส่วนที่เหลือคือ residual</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.seasonal <span class="im">import</span> seasonal_decompose</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>monthly <span class="op">=</span> s.resample(<span class="st">"MS"</span>).mean()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>classical <span class="op">=</span> seasonal_decompose(monthly, model<span class="op">=</span><span class="st">"additive"</span>, period<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classical.seasonal.iloc[:<span class="dv">12</span>].<span class="bu">round</span>(<span class="dv">1</span>).tolist())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+[-2.7, 10.8, 26.3, 12.9, -5.7, -5.8, -7.1, -5.3, -5.3, -6.0, -6.9, -5.0]</code></pre>
+<p>ฤดูกาลที่ได้บอกว่า เดือนมีนาคมสูงกว่าแนวโน้มประมาณ 26 µg/m³ และเดือนกุมภาพันธ์กับเมษายนสูงกว่าประมาณ 11 และ 13 µg/m³ ข้อจำกัดของวิธีนี้คือ ฤดูกาลเหมือนกันทุกปี ซึ่งไม่ตรงกับความจริงที่ความรุนแรงของฤดูฝุ่นต่างกันแต่ละปี แนวโน้มหายไปหกเดือนที่ต้นและท้ายอนุกรมเพราะ moving average ต้องการข้อมูลทั้งสองด้าน และค่าผิดปกติเพียงค่าเดียวดึงฤดูกาลของเดือนนั้นทุกปี</p>
+</section>
+<section id="stl" class="level3">
+<h3 class="anchored" data-anchor-id="stl">STL</h3>
+<p><strong><span class="idx">STL</span></strong> (Seasonal and Trend decomposition using Loess) ที่ Cleveland และคณะเสนอในปี ค.ศ. 1990 แก้ข้อจำกัดเหล่านี้ <span class="citation" data-cites="cleveland1990stl">(<a href="../references.html#ref-cleveland1990stl" role="doc-biblioref">Cleveland และคณะ 1990</a>)</span> STL ใช้ LOESS (หัวข้อ <a href="#sec-ch14-smoothing" class="quarto-xref"><span>14.5</span></a>) ประมาณแนวโน้มและฤดูกาลสลับกันซ้ำหลายรอบ ข้อดีคือ ฤดูกาลเปลี่ยนไปตามเวลาได้ ประมาณแนวโน้มได้จนสุดอนุกรม และมีตัวเลือก <code>robust=True</code> ที่ลดน้ำหนักของค่าผิดปกติ ไม่ให้ดึงองค์ประกอบอื่น</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.tsa.seasonal <span class="im">import</span> STL</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> STL(np.log(monthly), period<span class="op">=</span><span class="dv">12</span>, robust<span class="op">=</span><span class="va">True</span>).fit()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ตัวคูณฤดูกาล"</span>, np.exp(res.seasonal.iloc[:<span class="dv">12</span>]).<span class="bu">round</span>(<span class="dv">2</span>).tolist())</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"แนวโน้ม (µg/m³)"</span>, np.exp(res.trend.iloc[[<span class="dv">0</span>, <span class="dv">23</span>, <span class="dv">47</span>]]).<span class="bu">round</span>(<span class="dv">1</span>).tolist())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+ตัวคูณฤดูกาล [0.83, 1.51, 1.75, 1.52, 0.96, 0.82, 0.75, 0.9, 0.94, 0.85, 0.75, 0.9]
+แนวโน้ม (µg/m³) [26.6, 25.9, 26.4]</code></pre>
+<p>เพราะแยกองค์ประกอบในสเกล log ตัวคูณฤดูกาลจึงตีความเป็นสัดส่วน เดือนมีนาคมของปีแรกสูงกว่าระดับแนวโน้ม 75% ขณะที่กรกฎาคมต่ำกว่า 25% ส่วนแนวโน้มแทบคงที่ที่ประมาณ 26 µg/m³ ตลอดสี่ปี</p>
+<div id="fig-ch14-stl" class="quarto-float quarto-figure quarto-figure-center anchored" alt="สี่แผงเรียงจากบนลงล่าง ข้อมูลมียอดทุกต้นปี แนวโน้มเปลี่ยนเพียงเล็กน้อยและลดลงในปีท้าย ฤดูกาลมียอดทุกต้นปีที่สูงไม่เท่ากัน ส่วนเหลือส่วนใหญ่ใกล้ศูนย์แต่มีบางเดือนที่ห่างออกไป">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch14-stl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/14/stl.png" class="img-fluid figure-img" alt="สี่แผงเรียงจากบนลงล่าง ข้อมูลมียอดทุกต้นปี แนวโน้มเปลี่ยนเพียงเล็กน้อยและลดลงในปีท้าย ฤดูกาลมียอดทุกต้นปีที่สูงไม่เท่ากัน ส่วนเหลือส่วนใหญ่ใกล้ศูนย์แต่มีบางเดือนที่ห่างออกไป">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch14-stl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;14.2: STL ของค่าเฉลี่ยรายเดือนในสเกล log ของสถานีสังเคราะห์ แยกเป็นข้อมูล แนวโน้ม ฤดูกาล และส่วนเหลือ
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ch14-stl" class="quarto-xref">ภาพที่&nbsp;<span>14.2</span></a> แสดงจุดที่ควรสังเกตสองข้อ ข้อแรก ยอดของฤดูกาลสูงไม่เท่ากันในแต่ละปี STL ยอมให้ฤดูกาลเปลี่ยนได้ ความเร็วของการเปลี่ยนกำหนดด้วยพารามิเตอร์ <code>seasonal</code> (ความกว้างของ LOESS สำหรับฤดูกาล ต้องเป็นเลขคี่) ค่าที่ใหญ่ทำให้ฤดูกาลคงที่มากขึ้น เมื่อข้อมูลมีเพียงไม่กี่รอบฤดูกาล การให้ฤดูกาลเปลี่ยนเร็วเกินไปทำให้ฤดูกาลดูดซับความผันผวนของแต่ละปีไปหมด ข้อสอง ส่วนเหลือที่ห่างจากศูนย์มากในบางเดือนคือเดือนที่ผิดปกติเมื่อเทียบกับรูปแบบปกติ ซึ่งเป็นจุดเริ่มต้นของการตรวจหาความผิดปกติในหัวข้อ <a href="#sec-ch14-anomaly" class="quarto-xref"><span>14.7</span></a></p>
+</section>
+<section id="ความแรงของแนวโนมและฤดกาล" class="level3">
+<h3 class="anchored" data-anchor-id="ความแรงของแนวโนมและฤดกาล">ความแรงของแนวโน้มและฤดูกาล</h3>
+<p>ตัววัดความแรงขององค์ประกอบที่ใช้กับผลของ STL ได้ ตามแนวทางของ Hyndman และ Athanasopoulos ซึ่งพัฒนาจากงานของ Wang และคณะ <span class="citation" data-cites="hyndman2021forecasting wang2006characteristic">(<a href="../references.html#ref-hyndman2021forecasting" role="doc-biblioref">Hyndman และ Athanasopoulos 2021</a>; <a href="../references.html#ref-wang2006characteristic" role="doc-biblioref">Wang และคณะ 2006</a>)</span> เทียบความแปรปรวนของส่วนเหลือกับความแปรปรวนขององค์ประกอบบวกส่วนเหลือ</p>
+<p><span id="eq-ch14-strength"><span class="math display">\[
+F_S = \max\left(0,\ 1 - \frac{\operatorname{Var}(R_t)}{\operatorname{Var}(S_t + R_t)}\right), \qquad
+F_T = \max\left(0,\ 1 - \frac{\operatorname{Var}(R_t)}{\operatorname{Var}(T_t + R_t)}\right)
+\tag{14.3}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(F_S\)</span> คือความแรงของฤดูกาล และ <span class="math inline">\(F_T\)</span> คือความแรงของแนวโน้ม มีค่าระหว่าง 0 ถึง 1 ค่าใกล้ 1 แปลว่าองค์ประกอบนั้นอธิบายความผันผวนได้มากเมื่อเทียบกับส่วนเหลือ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f_s <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span> res.resid.var() <span class="op">/</span> (res.seasonal <span class="op">+</span> res.resid).var())</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f_t <span class="op">=</span> <span class="bu">max</span>(<span class="dv">0</span>, <span class="dv">1</span> <span class="op">-</span> res.resid.var() <span class="op">/</span> (res.trend <span class="op">+</span> res.resid).var())</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(f_s, <span class="dv">2</span>), <span class="bu">round</span>(f_t, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+0.97 0.05</code></pre>
+<p>สถานีนี้มีฤดูกาลแรงมาก (<span class="math inline">\(F_S = 0.97\)</span>) แต่แทบไม่มีแนวโน้ม (<span class="math inline">\(F_T = 0.05\)</span>) การคำนวณตัววัดนี้ของทุกสถานีแล้วเปรียบเทียบเป็นวิธีที่ดีในการจัดกลุ่มสถานีตามลักษณะอนุกรมเวลา ซึ่งเชื่อมกับการสำรวจหลายมิติในบทที่ 15</p>
+</section>
+<section id="stl-กบขอมลรายวน" class="level3">
+<h3 class="anchored" data-anchor-id="stl-กบขอมลรายวน">STL กับข้อมูลรายวัน</h3>
+<p>STL ใช้กับข้อมูลรายวันด้วย <code>period=365</code> ได้ แต่ต้องระวัง ข้อมูลสี่ปีมีเพียงสี่ค่าสำหรับแต่ละวันของปี ฤดูกาลที่ประมาณได้จึงไม่เสถียร และเมื่อใช้ <code>robust=True</code> ฤดูกาลอาจดูดซับความผันผวนรายวันไปจนส่วนเหลือเล็กผิดปกติ เมื่อทดลองกับข้อมูลของหนังสือ ส่วนเหลือของ STL รายวันแบบ robust มี MAD เพียง 0.03 ในสเกล log ขณะที่ส่วนเบี่ยงเบนมาตรฐานเท่ากับ 0.22 ซึ่งเป็นสัญญาณว่าแบบจำลองทำงานผิดปกติ สำหรับการสำรวจรูปแบบรายปี การแยกองค์ประกอบของข้อมูลรายเดือน หรือใช้ข้อมูลหลายปีมากขึ้น จึงน่าเชื่อถือกว่า</p>
+</section>
+</section>
+<section id="sec-ch14-smoothing" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="sec-ch14-smoothing"><span class="header-section-number">14.5</span> smoothing: moving average และ ★ LOESS</h2>
+<section id="ทำไมตองทำใหเรยบ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองทำใหเรยบ">ทำไมต้องทำให้เรียบ</h3>
+<p>ค่ารายวันของ PM2.5 ผันผวนมาก จนกราฟเส้นดูยุ่งเหยิงและมองไม่เห็นรูปแบบระดับสัปดาห์หรือเดือน การทำให้เรียบ (smoothing) ลดความผันผวนระยะสั้นเพื่อให้เห็นรูปแบบที่ช้ากว่า แต่ต้องเลือก <em>ระดับ</em> ความเรียบให้ตรงกับคำถาม เพราะความเรียบที่มากเกินไปลบรายละเอียดที่สำคัญ เช่น ยอดของเหตุการณ์ไฟป่าที่ยาวเพียงไม่กี่วัน</p>
+</section>
+<section id="moving-average" class="level3">
+<h3 class="anchored" data-anchor-id="moving-average">moving average</h3>
+<p><strong><span class="idx">moving average</span></strong> (ค่าเฉลี่ยเคลื่อนที่) คำนวณค่าเฉลี่ยของหน้าต่างขนาด <span class="math inline">\(w\)</span> ที่เลื่อนไปตามเวลา มีสองแบบที่ต้องแยกให้ออก</p>
+<ul>
+<li><strong>แบบกึ่งกลาง</strong> (centered) ใช้ค่าทั้งก่อนและหลังจุดนั้น ไม่ทำให้รูปแบบเลื่อนตามเวลา เหมาะกับการสำรวจข้อมูลในอดีต</li>
+<li><strong>แบบตามหลัง</strong> (trailing) ใช้เฉพาะค่าก่อนหน้า เหมาะกับการคำนวณแบบเวลาจริงที่ยังไม่มีข้อมูลอนาคต แต่ทำให้รูปแบบเลื่อนไปทางขวาประมาณครึ่งหนึ่งของหน้าต่าง</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ma7 <span class="op">=</span> s.rolling(<span class="dv">7</span>, center<span class="op">=</span><span class="va">True</span>, min_periods<span class="op">=</span><span class="dv">5</span>).mean()          <span class="co"># กึ่งกลาง ต้องมีอย่างน้อย 5 จาก 7 วัน</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ma7_trailing <span class="op">=</span> s.rolling(<span class="dv">7</span>, min_periods<span class="op">=</span><span class="dv">5</span>).mean()              <span class="co"># ตามหลัง</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>min_periods</code> กำหนดจำนวนค่าขั้นต่ำในหน้าต่างที่ต้องมี ถ้าไม่กำหนด pandas จะคืนค่าว่างทันทีที่มีค่าว่างเพียงหนึ่งค่าในหน้าต่าง ซึ่งทำให้ช่องว่างขยายกว้างขึ้น การกำหนดค่าที่ต่ำเกินไปก็ทำให้ค่าเฉลี่ยมาจากข้อมูลน้อยเกินไป หลักการเดียวกับเกณฑ์ความครบถ้วน 18 จาก 24 ชั่วโมงของโครงการ บทที่ 7 แสดงวิธีคำนวณแบบเดียวกันใน SQL ด้วย window function</p>
+</section>
+<section id="เลอกขนาดหนาตาง" class="level3">
+<h3 class="anchored" data-anchor-id="เลอกขนาดหนาตาง">เลือกขนาดหน้าต่าง</h3>
+<div id="tbl-ch14-window" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch14-window-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;14.4: ผลของขนาดหน้าต่างของ moving average
+</figcaption>
+<div aria-describedby="tbl-ch14-window-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>หน้าต่าง</th>
+<th>สิ่งที่เห็นชัดขึ้น</th>
+<th>สิ่งที่หายไป</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3 วัน</td>
+<td>เหตุการณ์ระยะสั้น ลดสัญญาณรบกวนเล็กน้อย</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>7 วัน</td>
+<td>รูปแบบรายสัปดาห์ถูกเฉลี่ยออก เห็นเหตุการณ์ระดับสัปดาห์</td>
+<td>ผลของวันในสัปดาห์</td>
+</tr>
+<tr class="odd">
+<td>30 วัน</td>
+<td>รูปแบบตามฤดูกาล</td>
+<td>เหตุการณ์ที่สั้นกว่าหนึ่งเดือน</td>
+</tr>
+<tr class="even">
+<td>365 วัน</td>
+<td>แนวโน้มระยะยาว</td>
+<td>ฤดูกาลทั้งหมด</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="fig-ch14-smoothing" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ค่ารายวันสีเทาผันผวนมาก เส้น moving average 7 วันยังขึ้นลงตามเหตุการณ์ระดับสัปดาห์ เส้น 30 วันและ LOESS เรียบและแสดงยอดในเดือนเมษายน มีเพียงค่ารายวันและเส้น 7 วันที่แตะเส้นมาตรฐาน">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch14-smoothing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/14/smoothing.png" class="img-fluid figure-img" alt="ค่ารายวันสีเทาผันผวนมาก เส้น moving average 7 วันยังขึ้นลงตามเหตุการณ์ระดับสัปดาห์ เส้น 30 วันและ LOESS เรียบและแสดงยอดในเดือนเมษายน มีเพียงค่ารายวันและเส้น 7 วันที่แตะเส้นมาตรฐาน">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch14-smoothing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;14.3: ค่ารายวันของสถานีสังเคราะห์หนึ่งปี พร้อม moving average 7 วัน 30 วัน และ LOESS
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-ch14-smoothing" class="quarto-xref">ภาพที่&nbsp;<span>14.3</span></a> แสดงประเด็นสำคัญ ค่ารายวันเกินมาตรฐาน 37.5 µg/m³ ในบางวันของเดือนเมษายน เส้น 7 วันยังแตะมาตรฐาน แต่เส้น 30 วันและ LOESS อยู่ต่ำกว่ามาก ผู้ที่ดูเฉพาะเส้นเรียบจะสรุปว่าไม่เคยเกินมาตรฐาน ข้อสรุปเกี่ยวกับการเกินมาตรฐานจึงต้องใช้ค่ารายวันเสมอ ไม่ใช่ค่าที่ทำให้เรียบแล้ว</p>
+</section>
+<section id="loess" class="level3">
+<h3 class="anchored" data-anchor-id="loess">LOESS ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p><strong><span class="idx">LOESS</span></strong> (locally estimated scatterplot smoothing) ประมาณค่าเรียบ ณ แต่ละจุดด้วยการ fit สมการถดถอยเชิงเส้นหรือพหุนามดีกรีต่ำกับข้อมูลในบริเวณใกล้เคียง โดยให้น้ำหนักกับจุดที่ใกล้มากกว่าจุดที่ไกล <span class="citation" data-cites="cleveland1979robust">(<a href="../references.html#ref-cleveland1979robust" role="doc-biblioref">Cleveland 1979</a>)</span> พารามิเตอร์หลักคือ <code>frac</code> สัดส่วนของข้อมูลที่ใช้ในแต่ละการ fit ค่าใหญ่ให้เส้นเรียบกว่า</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.nonparametric.smoothers_lowess <span class="im">import</span> lowess</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>x_num <span class="op">=</span> s.index.<span class="bu">map</span>(pd.Timestamp.toordinal)                     <span class="co"># วันที่เป็นตัวเลข</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>smooth <span class="op">=</span> lowess(s.to_numpy(), x_num, frac<span class="op">=</span><span class="fl">0.1</span>, missing<span class="op">=</span><span class="st">"drop"</span>, return_sorted<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อดีของ LOESS เมื่อเทียบกับ moving average คือ ประมาณได้จนสุดขอบของข้อมูล ไม่ต้องเลือกหน้าต่างกึ่งกลางหรือตามหลัง และมีแบบ robust ที่ลดน้ำหนักค่าผิดปกติ (พารามิเตอร์ <code>it</code> ใน statsmodels) ข้อเสียคือ คำนวณช้ากว่า และค่าที่ขอบของข้อมูลไม่เสถียรเท่าค่ากลาง เพราะมีข้อมูลเพียงด้านเดียว seaborn ใช้ LOESS เมื่อเรียก <code>sns.regplot(..., lowess=True)</code> และ STL ใช้ LOESS เป็นแกนหลัก</p>
+</section>
+</section>
+<section id="sec-ch14-change-point" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="sec-ch14-change-point"><span class="header-section-number">14.6</span> change point detection ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="change-point-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="change-point-คออะไร">change point คืออะไร</h3>
+<p><strong><span class="idx">change point</span></strong> คือจุดในเวลาที่คุณสมบัติทางสถิติของอนุกรมเปลี่ยนอย่างฉับพลัน เช่น ระดับค่าเฉลี่ยขยับขึ้น หรือความแปรปรวนเปลี่ยน ในข้อมูลเครือข่ายตรวจวัด change point มีสาเหตุได้สองแบบที่ต้องแยกให้ออก</p>
+<ul>
+<li><strong>เกิดจากปรากฏการณ์จริง</strong> เช่น มาตรการห้ามเผาที่เริ่มบังคับใช้ โรงงานขนาดใหญ่เริ่มเดินเครื่อง หรือการล็อกดาวน์ช่วงการระบาดของโควิด-19</li>
+<li><strong>เกิดจากระบบการวัด</strong> เช่น เปลี่ยนเครื่องวัดเป็นรุ่นใหม่ เปลี่ยนวิธีวัด สอบเทียบใหม่ หรือย้ายตำแหน่งสถานี change point แบบนี้ทำให้แนวโน้มที่คำนวณได้ผิดทั้งหมด ถ้าไม่ได้ตรวจพบและจัดการ</li>
+</ul>
+<p>การตรวจหา change point จึงเป็นส่วนหนึ่งของการตรวจคุณภาพข้อมูลอนุกรมเวลายาว (บทที่ 9) และเมื่อพบแล้ว ต้องหาคำอธิบายจาก metadata ของสถานีหรือข้อมูลภายนอกเสมอ ก่อนตัดสินว่าเป็นปรากฏการณ์จริง</p>
+</section>
+<section id="ตรวจหาดวย-ruptures" class="level3">
+<h3 class="anchored" data-anchor-id="ตรวจหาดวย-ruptures">ตรวจหาด้วย ruptures</h3>
+<p>ไลบรารี <code>ruptures</code> รวมอัลกอริทึมตรวจหา change point ไว้หลายแบบ <span class="citation" data-cites="truong2020selective">(<a href="../references.html#ref-truong2020selective" role="doc-biblioref">Truong และคณะ 2020</a>)</span> ตัวอย่างต่อไปนี้จำลองการเปลี่ยนเครื่องวัดที่ทำให้ค่าสูงขึ้น 8 µg/m³ ตั้งแต่มกราคม ค.ศ. 2022 แล้วทดสอบว่าอัลกอริทึม PELT ตรวจพบหรือไม่ ขั้นแรกต้องเอาฤดูกาลออกก่อน มิฉะนั้นอัลกอริทึมจะตรวจพบ “change point” ทุกต้นฤดูฝุ่น</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ruptures <span class="im">as</span> rpt</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>shifted <span class="op">=</span> monthly.copy()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>shifted[shifted.index <span class="op">&gt;=</span> <span class="st">"2022-01-01"</span>] <span class="op">+=</span> <span class="dv">8</span>                       <span class="co"># จำลองการเปลี่ยนเครื่องวัด</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, series <span class="kw">in</span> [(<span class="st">"เดิม"</span>, monthly), (<span class="st">"จำลองการเปลี่ยนเครื่อง"</span>, shifted)]:</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    deseasoned <span class="op">=</span> series <span class="op">-</span> STL(series, period<span class="op">=</span><span class="dv">12</span>, robust<span class="op">=</span><span class="va">True</span>).fit().seasonal</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    algo <span class="op">=</span> rpt.Pelt(model<span class="op">=</span><span class="st">"l2"</span>, min_size<span class="op">=</span><span class="dv">3</span>).fit(deseasoned.to_numpy())</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    breaks <span class="op">=</span> algo.predict(pen<span class="op">=</span><span class="dv">3</span> <span class="op">*</span> np.log(<span class="bu">len</span>(series)) <span class="op">*</span> deseasoned.var())</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name, [series.index[b].date() <span class="cf">for</span> b <span class="kw">in</span> breaks[:<span class="op">-</span><span class="dv">1</span>]])    <span class="co"># ตัวสุดท้ายคือจุดสิ้นสุดอนุกรม</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+เดิม []
+จำลองการเปลี่ยนเครื่อง [datetime.date(2022, 2, 1)]</code></pre>
+<p>อัลกอริทึมไม่พบ change point ในข้อมูลเดิม และพบ change point ที่กุมภาพันธ์ ค.ศ. 2022 ในข้อมูลที่จำลอง ซึ่งคลาดจากจุดจริงหนึ่งเดือน ส่วนหนึ่งเป็นเพราะ STL ดูดซับการเปลี่ยนระดับบางส่วนเข้าไปในแนวโน้มและฤดูกาล</p>
+</section>
+<section id="การเลอก-penalty" class="level3">
+<h3 class="anchored" data-anchor-id="การเลอก-penalty">การเลือก penalty</h3>
+<p>พารามิเตอร์ <code>pen</code> (penalty) ควบคุมจำนวน change point ค่าต่ำทำให้พบ change point มากเกินจริง ค่าสูงทำให้พลาด change point จริง ไม่มีค่าที่ถูกต้องสากล เกณฑ์ที่ใช้ในตัวอย่างนี้อิงแนวคิดของ BIC (penalty แปรตาม <span class="math inline">\(\log n\)</span> และความแปรปรวน) แต่ในทางปฏิบัติควรทดลองหลายค่าแล้วดูว่าผลเสถียรหรือไม่ และ change point ที่พบต้องมีคำอธิบายจากความรู้โดเมน การทดลองหลายค่าจนได้ผลที่ต้องการเป็นอีกรูปหนึ่งของ garden of forking paths</p>
+</section>
+</section>
+<section id="sec-ch14-anomaly" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="sec-ch14-anomaly"><span class="header-section-number">14.7</span> การตรวจหาความผิดปกติในอนุกรมเวลา ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ผดปกตเมอเทยบกบอะไร" class="level3">
+<h3 class="anchored" data-anchor-id="ผดปกตเมอเทยบกบอะไร">ผิดปกติเมื่อเทียบกับอะไร</h3>
+<p>ค่า 60 µg/m³ ในเดือนมีนาคมที่เชียงใหม่เป็นเรื่องปกติ แต่ค่าเดียวกันในเดือนกรกฎาคมผิดปกติมาก การตรวจหาความผิดปกติในอนุกรมเวลาจึงต้องเทียบกับ <em>ค่าที่คาดหวัง ณ เวลานั้น</em> ไม่ใช่กับการแจกแจงของข้อมูลทั้งหมด วิธีตรวจหาค่าผิดปกติแบบไม่คำนึงถึงเวลาในบทที่ 15 (เช่น z-score หรือ IQR ของทั้งชุดข้อมูล) จะติดธงค่าในฤดูฝุ่นเกือบทั้งหมด และพลาดค่าผิดปกติในฤดูฝน</p>
+</section>
+<section id="hampel-filter" class="level3">
+<h3 class="anchored" data-anchor-id="hampel-filter">Hampel filter</h3>
+<p>วิธีที่ง่ายและทนทานคือ <strong><span class="idx">Hampel filter</span></strong> คำนวณมัธยฐานเคลื่อนที่เป็นค่าที่คาดหวัง และ MAD เคลื่อนที่เป็นขนาดของความผันผวนปกติ แล้วติดธงค่าที่ห่างจากมัธยฐานมากกว่าเกณฑ์ <span class="citation" data-cites="pearson2016generalized">(<a href="../references.html#ref-pearson2016generalized" role="doc-biblioref">Pearson และคณะ 2016</a>)</span> การใช้มัธยฐานและ MAD (<a href="13-exploratory-statistics.html#sec-ch13-robust" class="quarto-xref"><span>หัวข้อ 13.2</span></a>) แทนค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐาน ทำให้ค่าผิดปกติไม่ดึงค่าที่คาดหวังและเกณฑ์ไปด้วย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hampel_flags(x: pd.Series, window: <span class="bu">int</span> <span class="op">=</span> <span class="dv">15</span>, n_sigma: <span class="bu">float</span> <span class="op">=</span> <span class="fl">3.5</span>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""ติดธงค่าที่ห่างจากมัธยฐานเคลื่อนที่เกิน n_sigma เท่าของ MAD ที่ปรับสเกล"""</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    med <span class="op">=</span> x.rolling(window, center<span class="op">=</span><span class="va">True</span>, min_periods<span class="op">=</span>window <span class="op">//</span> <span class="dv">2</span>).median()</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    mad <span class="op">=</span> (x <span class="op">-</span> med).<span class="bu">abs</span>().rolling(window, center<span class="op">=</span><span class="va">True</span>, min_periods<span class="op">=</span>window <span class="op">//</span> <span class="dv">2</span>).median()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> (x <span class="op">-</span> med) <span class="op">/</span> (<span class="fl">1.4826</span> <span class="op">*</span> mad)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame({<span class="st">"value"</span>: x, <span class="st">"baseline"</span>: med, <span class="st">"z"</span>: z, <span class="st">"is_anomaly"</span>: z.<span class="bu">abs</span>() <span class="op">&gt;</span> n_sigma})</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>flags <span class="op">=</span> hampel_flags(np.log(s))                 <span class="co"># ทำในสเกล log เพราะความผันผวนเป็นสัดส่วน</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flags[<span class="st">"is_anomaly"</span>].<span class="bu">sum</span>(), <span class="bu">round</span>(flags[<span class="st">"is_anomaly"</span>].mean(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+27 0.018</code></pre>
+<p>มี 27 วัน (1.8%) ที่ถูกติดธง วันที่ z สูงที่สุดในข้อมูลสังเคราะห์คือ 23 มกราคม ค.ศ. 2022 ค่าเฉลี่ย 50.4 µg/m³ ขณะที่มัธยฐานของ 15 วันรอบข้างอยู่ที่ 23.4 µg/m³</p>
+</section>
+<section id="ธงไมใชคำตดสน" class="level3">
+<h3 class="anchored" data-anchor-id="ธงไมใชคำตดสน">ธงไม่ใช่คำตัดสิน</h3>
+<p>ค่าที่ถูกติดธงเป็น <em>ผู้ต้องสงสัย</em> ไม่ใช่ข้อผิดพลาด ค่าที่สูงฉับพลันอาจเป็นไฟป่าใกล้สถานี การเผาในพื้นที่ใกล้เคียง หรือค่าผิดพลาดจากเครื่องวัด คำถามที่ช่วยแยกได้แก่ สถานีใกล้เคียงสูงขึ้นพร้อมกันหรือไม่ (ถ้าใช่ น่าจะเป็นเหตุการณ์จริง) PM10 สูงขึ้นตามหรือไม่ และมีข้อมูลจุดความร้อน (hotspot) จากดาวเทียมในบริเวณนั้นหรือไม่ บทที่ 15 อภิปรายคำถาม “outlier คือความผิดพลาดหรือเหตุการณ์จริง” อย่างละเอียด หลักสำคัญคือ อย่าลบค่าที่ถูกติดธงโดยอัตโนมัติ ให้เก็บธงไว้เป็นคอลัมน์ แล้วตัดสินใจอย่างมีเหตุผลและบันทึกไว้</p>
+</section>
+</section>
+<section id="sec-ch14-alignment" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="sec-ch14-alignment"><span class="header-section-number">14.8</span> การจัดแนวข้อมูลเซนเซอร์ที่เวลาไม่สม่ำเสมอ</h2>
+<section id="ปญหา" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหา">ปัญหา</h3>
+<p>ข้อมูลจาก Air4Thai เป็นรายชั่วโมงที่สม่ำเสมอ แต่โครงการจำนวนมากต้องใช้ข้อมูลจากแหล่งอื่นร่วมด้วย เช่น เซนเซอร์ราคาประหยัด (low-cost sensor) ที่โรงเรียนหรือชุมชนติดตั้งเอง ซึ่งส่งค่าทุกประมาณหนึ่งถึงสองนาทีโดยเวลาไม่แน่นอน หรือข้อมูลอุตุนิยมวิทยาที่บันทึกทุกสามชั่วโมง การนำข้อมูลเหล่านี้มาเปรียบเทียบหรือรวมกับข้อมูลรายชั่วโมงต้อง <em>จัดแนว</em> (align) ให้อยู่บนเส้นเวลาเดียวกัน</p>
+</section>
+<section id="ขนท-1-แปลงเวลาใหอยในระบบเดยวกน" class="level3">
+<h3 class="anchored" data-anchor-id="ขนท-1-แปลงเวลาใหอยในระบบเดยวกน">ขั้นที่ 1: แปลงเวลาให้อยู่ในระบบเดียวกัน</h3>
+<p>เซนเซอร์ส่วนใหญ่บันทึกเวลาเป็น Unix epoch (จำนวนวินาทีนับจาก 1 มกราคม ค.ศ. 1970 เวลา UTC) ต้องแปลงเป็นเวลาไทยแบบไม่มีเขตเวลา ให้ตรงกับคอลัมน์ <code>ts</code> ของโครงการ (บทที่ 6)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sensor <span class="op">=</span> pd.read_csv(<span class="st">"data/raw/lowcost_sensor.csv"</span>)              <span class="co"># คอลัมน์ epoch, pm25_lc</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sensor[<span class="st">"ts"</span>] <span class="op">=</span> (pd.to_datetime(sensor[<span class="st">"epoch"</span>], unit<span class="op">=</span><span class="st">"s"</span>, utc<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                  .dt.tz_convert(<span class="st">"Asia/Bangkok"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                  .dt.tz_localize(<span class="va">None</span>))                          <span class="co"># เวลาไทยแบบไม่มีเขตเวลา</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ขนท-2-รวมเปนรายชวโมงพรอมเกณฑความครบถวน" class="level3">
+<h3 class="anchored" data-anchor-id="ขนท-2-รวมเปนรายชวโมงพรอมเกณฑความครบถวน">ขั้นที่ 2: รวมเป็นรายชั่วโมงพร้อมเกณฑ์ความครบถ้วน</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hourly <span class="op">=</span> (sensor.set_index(<span class="st">"ts"</span>)[<span class="st">"pm25_lc"</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                .resample(<span class="st">"h"</span>, label<span class="op">=</span><span class="st">"left"</span>, closed<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>]))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>hourly[<span class="st">"pm25_lc"</span>] <span class="op">=</span> hourly[<span class="st">"mean"</span>].where(hourly[<span class="st">"count"</span>] <span class="op">&gt;=</span> <span class="dv">20</span>)  <span class="co"># ต้องมีอย่างน้อย 20 ค่าต่อชั่วโมง</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูลเซนเซอร์จริง
+                     mean  count  pm25_lc
+ts
+2023-03-01 07:00:00  32.8     28     32.8
+2023-03-01 08:00:00  28.6     21     28.6
+2023-03-01 09:00:00  33.0     32     33.0
+2023-03-01 10:00:00   NaN      0      NaN
+2023-03-01 11:00:00   NaN      0      NaN
+2023-03-01 12:00:00  30.2     29     30.2</code></pre>
+<p>ประเด็นที่ต้องตัดสินใจและบันทึกมีสามข้อ ข้อแรก <strong>การกำกับเวลา</strong> (<code>label</code>) ชั่วโมงที่กำกับว่า 08:00 หมายถึงค่าเฉลี่ยของ 08:00–08:59 หรือ 07:01–08:00 แหล่งข้อมูลต่างกันใช้แบบต่างกัน ก่อนรวมข้อมูลจากสองแหล่ง ต้องตรวจเอกสารของทั้งสองแหล่งว่าใช้แบบใด แล้วทำให้ตรงกัน มิฉะนั้นข้อมูลจะเหลื่อมกันหนึ่งชั่วโมง ข้อสอง <strong>เกณฑ์ความครบถ้วน</strong> ชั่วโมงที่มีเพียงสองค่าไม่ควรได้ค่าเฉลี่ยที่น่าเชื่อถือเท่าชั่วโมงที่มี 30 ค่า ตัวอย่างนี้กำหนดอย่างน้อย 20 ค่า ซึ่งเป็นการตัดสินใจของผู้วิเคราะห์ที่ต้องบันทึกไว้เช่นเดียวกับเกณฑ์ 18 จาก 24 ชั่วโมง ข้อสาม <strong>ช่วงที่เซนเซอร์ดับ</strong> ปรากฏเป็นชั่วโมงที่ <code>count</code> เป็นศูนย์ ซึ่ง <code>resample</code> สร้างให้ครบทุกชั่วโมงโดยอัตโนมัติ ข้อมูลสูญหายแบบ implicit จึงกลายเป็น explicit</p>
+</section>
+<section id="ขนท-3-จบคเวลาทใกลทสด-as-of-join" class="level3">
+<h3 class="anchored" data-anchor-id="ขนท-3-จบคเวลาทใกลทสด-as-of-join">ขั้นที่ 3: จับคู่เวลาที่ใกล้ที่สุด (as-of join)</h3>
+<p>เมื่อต้องการจับคู่ค่าแต่ละค่ากับค่าของอีกแหล่งที่ใกล้ที่สุดในเวลา โดยไม่รวมเป็นค่าเฉลี่ย ใช้ <code>pd.merge_asof</code> หรือ <code>ASOF JOIN</code> ของ DuckDB (บทที่ 7) สิ่งสำคัญคือต้องกำหนด <strong>ระยะห่างสูงสุดที่ยอมรับได้</strong> (tolerance)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> pd.DataFrame({<span class="st">"ts"</span>: pd.date_range(<span class="st">"2023-03-01 07:00"</span>, periods<span class="op">=</span><span class="dv">6</span>, freq<span class="op">=</span><span class="st">"h"</span>)})</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nearest <span class="op">=</span> pd.merge_asof(reference, sensor[[<span class="st">"ts"</span>, <span class="st">"pm25_lc"</span>]].sort_values(<span class="st">"ts"</span>), on<span class="op">=</span><span class="st">"ts"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                        direction<span class="op">=</span><span class="st">"nearest"</span>, tolerance<span class="op">=</span>pd.Timedelta(<span class="st">"10min"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าไม่กำหนด tolerance ชั่วโมงที่เซนเซอร์ดับจะได้ค่าจากเวลาที่ห่างออกไปหลายชั่วโมงโดยไม่มีสัญญาณเตือน ซึ่งเป็นข้อมูลปลอมที่ดูเหมือนจริง แม้มี tolerance ก็ยังต้องระวัง ในข้อมูลตัวอย่าง ชั่วโมง 10:00 ซึ่งเป็นชั่วโมงแรกที่เซนเซอร์ดับ ยังได้ค่าจากเวลา 09:5x ที่อยู่ภายใน 10 นาที <code>direction="backward"</code> ใช้เฉพาะค่าก่อนหน้า (เหมาะเมื่อต้องการค่าล่าสุดที่รู้ ณ เวลานั้น) ส่วน <code>"nearest"</code> ใช้ค่าที่ใกล้ที่สุดทั้งสองทิศ</p>
+</section>
+<section id="เทยบกบการทำใน-duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="เทยบกบการทำใน-duckdb">เทียบกับการทำใน DuckDB</h3>
+<p>การรวมเป็นรายชั่วโมงทำใน DuckDB ได้ด้วย <code>time_bucket</code> ซึ่งเหมาะเมื่อข้อมูลเซนเซอร์มีขนาดใหญ่หรือเก็บอยู่ในฐานข้อมูลแล้ว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> time_bucket(<span class="dt">INTERVAL</span> <span class="dv">1</span> <span class="kw">HOUR</span>, ts) <span class="kw">AS</span> <span class="kw">hour</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_readings,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(pm25_lc) <span class="kw">AS</span> pm25_lc</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> sensor</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">hour</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">&gt;=</span> <span class="dv">20</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="kw">hour</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อแตกต่างจาก <code>resample</code> คือ <code>GROUP BY</code> ไม่สร้างแถวของชั่วโมงที่ไม่มีข้อมูล ชั่วโมงที่เซนเซอร์ดับจึงหายไปจากผลลัพธ์ (implicit missing) ถ้าต้องการให้ปรากฏ ต้อง LEFT JOIN กับตารางชั่วโมงที่สร้างด้วย <code>generate_series</code> ตามวิธีในบทที่ 7</p>
+</section>
+</section>
+<section id="sec-ch14-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch14-case">กรณีศึกษา: ฤดูฝุ่นของสถานีในภาคเหนือรุนแรงขึ้นหรือลดลง</h2>
+<p><strong>คำถาม</strong> ข้อมูลช่วงสำรวจบ่งชี้ว่าค่า PM2.5 ของสถานีในภาคเหนือมีแนวโน้มเปลี่ยนแปลงหรือไม่ และความรุนแรงของฤดูฝุ่นแตกต่างกันระหว่างปีอย่างไร</p>
+<p><strong>ขั้นตอน</strong></p>
+<ol type="1">
+<li><em>ตรวจความครบถ้วนและความต่อเนื่อง</em> นับจำนวนวันที่ข้อมูลครบต่อเดือนของแต่ละสถานี สถานีที่มีช่องว่างยาวหลายเดือนไม่เหมาะกับการแยกองค์ประกอบ ให้แยกไว้ต่างหาก</li>
+<li><em>ตรวจ change point</em> ของแต่ละสถานีหลังเอาฤดูกาลออก (★ หัวข้อ <a href="#sec-ch14-change-point" class="quarto-xref"><span>14.6</span></a>) ถ้าพบ ให้ตรวจ metadata ของสถานีว่ามีการเปลี่ยนเครื่องหรือย้ายตำแหน่งหรือไม่ ก่อนตีความแนวโน้ม</li>
+<li><em>แยกองค์ประกอบ</em> ด้วย STL ของค่าเฉลี่ยรายเดือนในสเกล log คำนวณ <span class="math inline">\(F_S\)</span> และ <span class="math inline">\(F_T\)</span> ของแต่ละสถานี</li>
+<li><em>สรุปแนวโน้ม</em> ด้วยการเปลี่ยนแปลงของแนวโน้มจากต้นถึงปลายช่วงเป็นร้อยละ และสรุปความรุนแรงของฤดูฝุ่นด้วยค่าสูงสุดของตัวคูณฤดูกาลในแต่ละปี</li>
+<li><em>ตรวจความทนทาน</em> ทำซ้ำด้วย <code>seasonal</code> สองถึงสามค่า และเปรียบเทียบกับวิธีง่าย คือ ค่ามัธยฐานของเดือนกุมภาพันธ์ถึงเมษายนแต่ละปี</li>
+</ol>
+<p><strong>ผลสำหรับสถานี 35t</strong> (ข้อมูลสังเคราะห์) <span class="math inline">\(F_S = 0.97\)</span> และ <span class="math inline">\(F_T = 0.05\)</span> แนวโน้มอยู่ที่ประมาณ 26 µg/m³ ตลอดช่วง ตัวคูณฤดูกาลสูงสุดอยู่ที่เดือนมีนาคม ประมาณ 1.75 ไม่พบ change point</p>
+<p><strong>การตีความ</strong> สำหรับสถานีนี้ ความผันผวนเกือบทั้งหมดอธิบายได้ด้วยฤดูกาล แนวโน้มสี่ปีแทบไม่เปลี่ยน ข้อมูลสี่ปีสั้นเกินกว่าจะสรุปเรื่องแนวโน้มระยะยาวได้อย่างมั่นใจ เพราะความแปรปรวนระหว่างปีจากสภาพอากาศ (เช่น ปีที่ฝนมาเร็วหรือช้า) อาจใหญ่กว่าแนวโน้มจริง ข้อความในรายงานควรเป็น “ข้อมูลสี่ปีของช่วงสำรวจไม่แสดงแนวโน้มที่ชัดเจน” ไม่ใช่ “ค่าฝุ่นไม่เปลี่ยนแปลง”</p>
+<p><strong>ข้อจำกัด</strong> แนวโน้มของ PM2.5 ได้รับผลจากสภาพอุตุนิยมวิทยามาก การแยกผลของมาตรการออกจากผลของสภาพอากาศต้องใช้แบบจำลองที่ปรับผลของอุตุนิยมวิทยา (meteorological normalization) ซึ่งอยู่นอกขอบเขตของรายวิชา และข้อสรุปเกี่ยวกับทั้งภาคต้องระวัง Simpson’s paradox ถ้าเครือข่ายสถานีเปลี่ยนในช่วงที่ศึกษา (<a href="13-exploratory-statistics.html#sec-ch13-correlation" class="quarto-xref"><span>หัวข้อ 13.9</span></a>)</p>
+</section>
+<section id="sec-ch14-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch14-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch14-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch14-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;14.5: ข้อผิดพลาดที่พบบ่อยในบทที่ 14
+</figcaption>
+<div aria-describedby="tbl-ch14-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ใช้ข้อมูลที่ไม่มีแถวของวันที่ขาดกับเครื่องมืออนุกรมเวลา</td>
+<td>lag และหน้าต่างนับตามแถว ไม่ใช่ตามเวลา ผลเลื่อนผิดตำแหน่ง</td>
+<td><code>asfreq("D")</code> ก่อนเสมอ ให้วันที่ขาดเป็นค่าว่าง</td>
+</tr>
+<tr class="even">
+<td>ใช้ moving average แบบตามหลังในการสำรวจข้อมูลอดีต</td>
+<td>รูปแบบเลื่อนไปทางขวาครึ่งหน้าต่าง</td>
+<td>ใช้แบบกึ่งกลาง (<code>center=True</code>)</td>
+</tr>
+<tr class="odd">
+<td>ตัดสินการเกินมาตรฐานจากเส้นที่ทำให้เรียบ</td>
+<td>การทำให้เรียบลบยอดที่เกินมาตรฐาน</td>
+<td>ใช้ค่าเฉลี่ยรายวันในการนับวันเกินมาตรฐาน</td>
+</tr>
+<tr class="even">
+<td>แยกองค์ประกอบแบบบวกกับข้อมูลที่ฤดูกาลเป็นสัดส่วน</td>
+<td>ฤดูกาลและส่วนเหลือผิดรูป</td>
+<td>แปลง log ก่อน แล้วแปลงฤดูกาลกลับเป็นตัวคูณ</td>
+</tr>
+<tr class="odd">
+<td>สรุปแนวโน้มจากข้อมูลไม่กี่ปี</td>
+<td>ความแปรปรวนระหว่างปีจากสภาพอากาศใหญ่กว่าแนวโน้ม</td>
+<td>รายงานความไม่แน่นอน และระบุว่าช่วงข้อมูลสั้น</td>
+</tr>
+<tr class="even">
+<td>หาสหสัมพันธ์ระหว่างอนุกรมสองชุดที่มีแนวโน้มหรือฤดูกาล</td>
+<td>spurious correlation</td>
+<td>เอาแนวโน้มและฤดูกาลออกก่อน หรือใช้ผลต่าง</td>
+</tr>
+<tr class="odd">
+<td>ใช้ z-score ของข้อมูลทั้งชุดหาความผิดปกติในอนุกรมเวลา</td>
+<td>ติดธงฤดูฝุ่นทั้งหมด พลาดความผิดปกติในฤดูฝน</td>
+<td>เทียบกับค่าที่คาดหวัง ณ เวลานั้น เช่น Hampel filter</td>
+</tr>
+<tr class="even">
+<td>ลบค่าที่ถูกติดธงโดยอัตโนมัติ</td>
+<td>อาจลบเหตุการณ์จริงที่สำคัญที่สุด</td>
+<td>เก็บธงเป็นคอลัมน์ ตรวจกับสถานีใกล้เคียงและข้อมูลภายนอก</td>
+</tr>
+<tr class="odd">
+<td><code>merge_asof</code> โดยไม่กำหนด tolerance</td>
+<td>ช่วงที่เซนเซอร์ดับได้ค่าจากเวลาที่ห่างไกล</td>
+<td>กำหนด tolerance และตรวจจำนวนค่าที่จับคู่ได้</td>
+</tr>
+<tr class="even">
+<td>รวมข้อมูลสองแหล่งโดยไม่ตรวจการกำกับเวลา</td>
+<td>ข้อมูลเหลื่อมกันหนึ่งชั่วโมง</td>
+<td>ตรวจเอกสารของแหล่งข้อมูลว่ากำกับต้นหรือท้ายช่วง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>อนุกรมเวลาประกอบด้วยแนวโน้ม ฤดูกาล และส่วนเหลือ PM2.5 มีฤดูกาลหลายระดับ และเหมาะกับแบบจำลองแบบคูณ ซึ่งทำได้ด้วยการแปลง log แล้วใช้แบบบวก</li>
+<li>ต้องเตรียมข้อมูลให้มีความถี่แน่นอนด้วย <code>asfreq</code> ก่อน และเติมช่องว่างสั้น ๆ อย่างมีเหตุผลเมื่อวิธีที่ใช้ไม่รับค่าว่าง</li>
+<li>stationarity คือคุณสมบัติทางสถิติที่ไม่เปลี่ยนตามเวลา อนุกรมที่มีแนวโน้มหรือฤดูกาลอาจให้สหสัมพันธ์ปลอม การทดสอบ ADF และ KPSS ใช้ร่วมกันได้ แต่มีกำลังต่ำเมื่อข้อมูลสั้น</li>
+<li>ACF แสดง autocorrelation ซึ่งในข้อมูล PM2.5 สูงมาก ทำให้ขนาดตัวอย่างที่มีประสิทธิผลต่ำกว่าจำนวนวันมาก</li>
+<li>STL แยกองค์ประกอบได้ดีกว่า classical decomposition เพราะฤดูกาลเปลี่ยนได้และทนต่อค่าผิดปกติ ตัววัด <span class="math inline">\(F_S\)</span> และ <span class="math inline">\(F_T\)</span> สรุปความแรงของฤดูกาลและแนวโน้ม</li>
+<li>เลือกวิธีและขนาดหน้าต่างของการทำให้เรียบให้ตรงกับคำถาม ใช้แบบกึ่งกลางในการสำรวจ และไม่ตัดสินการเกินมาตรฐานจากเส้นที่ทำให้เรียบ</li>
+<li>change point และความผิดปกติต้องเทียบกับค่าที่คาดหวัง ณ เวลานั้น และต้องหาคำอธิบายจากความรู้โดเมนก่อนตัดสิน</li>
+<li>การจัดแนวข้อมูลเวลาไม่สม่ำเสมอต้องแปลงเขตเวลา ตรวจการกำกับเวลา กำหนดเกณฑ์ความครบถ้วน และกำหนด tolerance ของการจับคู่</li>
+</ul>
+</section>
+<section id="sec-ch14-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch14-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>ระบุว่ารูปแบบต่อไปนี้เป็นแนวโน้ม ฤดูกาล หรือส่วนเหลือ: (ก) ค่าสูงทุกเดือนมีนาคม (ข) ค่าสูงผิดปกติสามวันจากไฟป่าใกล้สถานี (ค) ค่าเฉลี่ยรายปีลดลงทีละน้อยตลอดสิบปี (ง) ค่าสูงช่วงเช้ามืดทุกวัน</li>
+<li>ถ้าตัวคูณฤดูกาลของเดือนมีนาคมจาก STL ในสเกล log เท่ากับ 1.6 และระดับแนวโน้มเท่ากับ 25 µg/m³ ค่าที่คาดหวังในเดือนมีนาคม (ไม่รวมส่วนเหลือ) ประมาณเท่าใด และเกินมาตรฐาน 37.5 µg/m³ หรือไม่</li>
+<li>อธิบายด้วยตัวอย่างว่าทำไมอนุกรมสองชุดที่มีแนวโน้มลดลงทั้งคู่ จึงมีสหสัมพันธ์สูงแม้ไม่เกี่ยวข้องกัน</li>
+<li>ถ้า ACF ของข้อมูลรายชั่วโมงมียอดที่ lag 24, 48 และ 72 บ่งชี้อะไร และมีกลไกทางกายภาพใดอธิบายได้</li>
+<li>คำนวณขนาดตัวอย่างที่มีประสิทธิผลโดยประมาณของข้อมูลรายวัน 730 วันที่มี autocorrelation lag 1 เท่ากับ 0.8 ตามสูตร AR(1) ในหัวข้อ <a href="#sec-ch14-acf" class="quarto-xref"><span>14.3</span></a></li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>เขียนโค้ดดึงค่าเฉลี่ยรายวันของสถานีหนึ่ง ทำให้มีความถี่รายวันด้วย <code>asfreq</code> แล้วรายงานจำนวนช่องว่าง ความยาวของช่องว่างที่ยาวที่สุด และจำนวนช่องว่างที่ยาวเกินสามวัน</li>
+<li>แยกองค์ประกอบด้วย STL ของค่าเฉลี่ยรายเดือนในสเกล log ของทุกสถานีในช่วงสำรวจ คำนวณ <span class="math inline">\(F_S\)</span> และ <span class="math inline">\(F_T\)</span> แล้ววาด scatter plot ของสองค่านี้ ระบายสีตามภาค อภิปรายรูปแบบที่เห็น</li>
+<li>วาด ACF ของข้อมูลรายชั่วโมงของสถานีหนึ่งในเดือนมีนาคมและเดือนกรกฎาคม ถึง lag 72 เปรียบเทียบรูปแบบรายวันของสองเดือน</li>
+<li>ใช้ Hampel filter กับทุกสถานีในช่วงสำรวจ นับจำนวนวันที่ถูกติดธงต่อสถานี แล้วตรวจห้าวันที่ z สูงที่สุดว่าสถานีใกล้เคียง (ในจังหวัดหรือภาคเดียวกัน) สูงขึ้นพร้อมกันหรือไม่</li>
+<li>สร้างข้อมูลเซนเซอร์จำลองที่ส่งค่าทุกประมาณสองนาทีพร้อมช่วงดับ แล้วรวมเป็นรายชั่วโมงด้วยทั้ง pandas <code>resample</code> และ DuckDB <code>time_bucket</code> เปรียบเทียบผลลัพธ์ โดยเฉพาะชั่วโมงที่เซนเซอร์ดับ</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ใช้ข้อมูลหลายปีที่สุดที่หาได้ของสถานีหนึ่ง ทำ STL ของข้อมูลรายวันด้วย <code>period=365</code> เทียบกับ STL ของข้อมูลรายเดือน ทดลอง <code>seasonal</code> หลายค่า และอภิปรายว่าเมื่อใดการแยกองค์ประกอบรายวันจึงน่าเชื่อถือ</li>
+<li>ค้นหาเหตุการณ์ที่อาจเป็น change point จริงในข้อมูล Air4Thai เช่น การล็อกดาวน์ช่วงต้นปี ค.ศ. 2020 แล้วออกแบบการวิเคราะห์ที่แยกผลของเหตุการณ์ออกจากความแปรปรวนตามฤดูกาลและระหว่างปี อภิปรายข้อจำกัด</li>
+<li>ศึกษาแนวคิด meteorological normalization ของแนวโน้มคุณภาพอากาศ แล้วเสนอว่าจะใช้ข้อมูลอุตุนิยมวิทยาจากกรมอุตุนิยมวิทยาร่วมกับข้อมูลของโครงการได้อย่างไร รวมถึงปัญหาการจัดแนวเวลาและตำแหน่งที่ต้องแก้</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch14">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="hyndman2021forecasting">Hyndman และ Athanasopoulos (<a href="../references.html#ref-hyndman2021forecasting" role="doc-biblioref">2021</a>)</span> — ตำราอนุกรมเวลาที่อ่านฟรีออนไลน์ บทเรื่องการแยกองค์ประกอบและลักษณะของอนุกรมเวลาอธิบาย STL และตัววัดความแรงอย่างเข้าใจง่าย</li>
+<li><span class="citation" data-cites="cleveland1990stl">Cleveland และคณะ (<a href="../references.html#ref-cleveland1990stl" role="doc-biblioref">1990</a>)</span> — บทความต้นฉบับของ STL อธิบายอัลกอริทึมและเหตุผลของการออกแบบ</li>
+<li><span class="citation" data-cites="box2015time">Box และคณะ (<a href="../references.html#ref-box2015time" role="doc-biblioref">2015</a>)</span> — ตำราคลาสสิกของการวิเคราะห์อนุกรมเวลา สำหรับผู้ต้องการต่อยอดไปยัง ARIMA และการพยากรณ์</li>
+<li><span class="citation" data-cites="truong2020selective">Truong และคณะ (<a href="../references.html#ref-truong2020selective" role="doc-biblioref">2020</a>)</span> — บทความทบทวนวิธีตรวจหา change point แบบ offline ซึ่งเป็นพื้นฐานของไลบรารี ruptures</li>
+<li><span class="citation" data-cites="granger1974spurious">Granger และ Newbold (<a href="../references.html#ref-granger1974spurious" role="doc-biblioref">1974</a>)</span> — บทความคลาสสิกที่แสดงอันตรายของการหาความสัมพันธ์ระหว่างอนุกรมที่ไม่มี stationarity</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-box2015time" class="csl-entry" role="listitem">
+Box, George E. P., Gwilym M. Jenkins, Gregory C. Reinsel, และ Greta M. Ljung. 2015. <em>Time Series Analysis: Forecasting and Control</em>. 5 พิมพ์ครั้งที่. Wiley.
+</div>
+<div id="ref-cleveland1990stl" class="csl-entry" role="listitem">
+Cleveland, Robert B., William S. Cleveland, Jean E. McRae, และ Irma Terpenning. 1990. <span>“<span>STL</span>: A Seasonal-Trend Decomposition Procedure Based on Loess”</span>. <em>Journal of Official Statistics</em> 6 (1): 3–73.
+</div>
+<div id="ref-cleveland1979robust" class="csl-entry" role="listitem">
+Cleveland, William S. 1979. <span>“Robust Locally Weighted Regression and Smoothing Scatterplots”</span>. <em>Journal of the American Statistical Association</em> 74 (368): 829–36. <a href="https://doi.org/10.1080/01621459.1979.10481038">https://doi.org/10.1080/01621459.1979.10481038</a>.
+</div>
+<div id="ref-granger1974spurious" class="csl-entry" role="listitem">
+Granger, Clive W. J., และ Paul Newbold. 1974. <span>“Spurious Regressions in Econometrics”</span>. <em>Journal of Econometrics</em> 2 (2): 111–20. <a href="https://doi.org/10.1016/0304-4076(74)90034-7">https://doi.org/10.1016/0304-4076(74)90034-7</a>.
+</div>
+<div id="ref-hyndman2021forecasting" class="csl-entry" role="listitem">
+Hyndman, Rob J., และ George Athanasopoulos. 2021. <em>Forecasting: Principles and Practice</em>. 3 พิมพ์ครั้งที่. OTexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>.
+</div>
+<div id="ref-kwiatkowski1992testing" class="csl-entry" role="listitem">
+Kwiatkowski, Denis, Peter C. B. Phillips, Peter Schmidt, และ Yongcheol Shin. 1992. <span>“Testing the Null Hypothesis of Stationarity against the Alternative of a Unit Root”</span>. <em>Journal of Econometrics</em> 54 (1–3): 159–78. <a href="https://doi.org/10.1016/0304-4076(92)90104-Y">https://doi.org/10.1016/0304-4076(92)90104-Y</a>.
+</div>
+<div id="ref-pearson2016generalized" class="csl-entry" role="listitem">
+Pearson, Ronald K., Yrjö Neuvo, Jaakko Astola, และ Moncef Gabbouj. 2016. <span>“Generalized <span>Hampel</span> Filters”</span>. <em>EURASIP Journal on Advances in Signal Processing</em> 2016: 87. <a href="https://doi.org/10.1186/s13634-016-0383-6">https://doi.org/10.1186/s13634-016-0383-6</a>.
+</div>
+<div id="ref-truong2020selective" class="csl-entry" role="listitem">
+Truong, Charles, Laurent Oudre, และ Nicolas Vayatis. 2020. <span>“Selective Review of Offline Change Point Detection Methods”</span>. <em>Signal Processing</em> 167: 107299. <a href="https://doi.org/10.1016/j.sigpro.2019.107299">https://doi.org/10.1016/j.sigpro.2019.107299</a>.
+</div>
+<div id="ref-wang2006characteristic" class="csl-entry" role="listitem">
+Wang, Xiaozhe, Kate Smith, และ Rob Hyndman. 2006. <span>“Characteristic-Based Clustering for Time Series Data”</span>. <em>Data Mining and Knowledge Discovery</em> 13 (3): 335–64. <a href="https://doi.org/10.1007/s10618-005-0039-x">https://doi.org/10.1007/s10618-005-0039-x</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/13-exploratory-statistics.html" class="pagination-link" aria-label="สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/15-multivariate.html" class="pagination-link" aria-label="การสำรวจข้อมูลหลายมิติ">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

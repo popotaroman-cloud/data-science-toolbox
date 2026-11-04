@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>บรรณานุกรม – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./book-index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="./references.html">บรรณานุกรม</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="./../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="./references.html">บรรณานุกรม</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">บรรณานุกรม</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-abadi2008column" class="csl-entry" role="listitem">
+Abadi, Daniel J., Samuel R. Madden, and Nabil Hachem. 2008.
+<span>“Column-Stores Vs. Row-Stores: How Different Are They
+Really?”</span> <em>Proceedings of the 2008 ACM SIGMOD International
+Conference on Management of Data</em>, 967–80. <a href="https://doi.org/10.1145/1376616.1376712">https://doi.org/10.1145/1376616.1376712</a>.
+</div>
+<div id="ref-abedjan2015profiling" class="csl-entry" role="listitem">
+Abedjan, Ziawasch, Lukasz Golab, and Felix Naumann. 2015.
+<span>“Profiling Relational Data: A Survey.”</span> <em>The VLDB
+Journal</em> 24 (4): 557–81. <a href="https://doi.org/10.1007/s00778-015-0389-y">https://doi.org/10.1007/s00778-015-0389-y</a>.
+</div>
+<div id="ref-abowd2018census" class="csl-entry" role="listitem">
+Abowd, John M. 2018. <span>“The <span>U.S.</span> Census Bureau Adopts
+Differential Privacy.”</span> <em>Proceedings of the 24th ACM SIGKDD
+International Conference on Knowledge Discovery &amp; Data Mining</em>,
+2867. <a href="https://doi.org/10.1145/3219819.3226070">https://doi.org/10.1145/3219819.3226070</a>.
+</div>
+<div id="ref-altman1995absence" class="csl-entry" role="listitem">
+Altman, Douglas G., and J. Martin Bland. 1995. <span>“Absence of
+Evidence Is Not Evidence of Absence.”</span> <em>BMJ</em> 311 (7003):
+485. <a href="https://doi.org/10.1136/bmj.311.7003.485">https://doi.org/10.1136/bmj.311.7003.485</a>.
+</div>
+<div id="ref-asa2022ethical" class="csl-entry" role="listitem">
+American Statistical Association. 2022. <em>Ethical Guidelines for
+Statistical Practice</em>. <a href="https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice">https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice</a>.
+</div>
+<div id="ref-anscombe1973graphs" class="csl-entry" role="listitem">
+Anscombe, Francis J. 1973. <span>“Graphs in Statistical
+Analysis.”</span> <em>The American Statistician</em> 27 (1): 17–21. <a href="https://doi.org/10.1080/00031305.1973.10478966">https://doi.org/10.1080/00031305.1973.10478966</a>.
+</div>
+<div id="ref-anselin1995local" class="csl-entry" role="listitem">
+Anselin, Luc. 1995. <span>“Local Indicators of Spatial
+Association—<span>LISA</span>.”</span> <em>Geographical Analysis</em> 27
+(2): 93–115. <a href="https://doi.org/10.1111/j.1538-4632.1995.tb00338.x">https://doi.org/10.1111/j.1538-4632.1995.tb00338.x</a>.
+</div>
+<div id="ref-apache2026arrow" class="csl-entry" role="listitem">
+Apache Software Foundation. 2026a. <em>Apache Arrow Columnar
+Format</em>. <a href="https://arrow.apache.org/docs/format/Columnar.html">https://arrow.apache.org/docs/format/Columnar.html</a>.
+</div>
+<div id="ref-apache2026parquet" class="csl-entry" role="listitem">
+Apache Software Foundation. 2026b. <em>Apache Parquet
+Documentation</em>. <a href="https://parquet.apache.org/docs/">https://parquet.apache.org/docs/</a>.
+</div>
+<div id="ref-armbrust2021lakehouse" class="csl-entry" role="listitem">
+Armbrust, Michael, Ali Ghodsi, Reynold Xin, and Matei Zaharia. 2021.
+<span>“Lakehouse: A New Generation of Open Platforms That Unify Data
+Warehousing and Advanced Analytics.”</span> <em>Proceedings of the 11th
+Conference on Innovative Data Systems Research (CIDR)</em>.
+</div>
+<div id="ref-acm2018code" class="csl-entry" role="listitem">
+Association for Computing Machinery. 2018. <em><span>ACM</span> Code of
+Ethics and Professional Conduct</em>. <a href="https://www.acm.org/code-of-ethics">https://www.acm.org/code-of-ethics</a>.
+</div>
+<div id="ref-astral2026uv" class="csl-entry" role="listitem">
+Astral. 2026. <em>Uv Documentation</em>. <a href="https://docs.astral.sh/uv/">https://docs.astral.sh/uv/</a>.
+</div>
+<div id="ref-ruff2026docs" class="csl-entry" role="listitem">
+Astral Software. 2026. <em>Ruff Documentation</em>. <a href="https://docs.astral.sh/ruff/">https://docs.astral.sh/ruff/</a>.
+</div>
+<div id="ref-bacchelli2013expectations" class="csl-entry" role="listitem">
+Bacchelli, Alberto, and Christian Bird. 2013. <span>“Expectations,
+Outcomes, and Challenges of Modern Code Review.”</span> <em>Proceedings
+of the 35th International Conference on Software Engineering
+(ICSE)</em>, 712–21. <a href="https://doi.org/10.1109/ICSE.2013.6606617">https://doi.org/10.1109/ICSE.2013.6606617</a>.
+</div>
+<div id="ref-bach2023dashboard" class="csl-entry" role="listitem">
+Bach, Benjamin, Euan Freeman, Alfie Abdul-Rahman, et al. 2023.
+<span>“Dashboard Design Patterns.”</span> <em>IEEE Transactions on
+Visualization and Computer Graphics</em> 29 (1): 342–52. <a href="https://doi.org/10.1109/TVCG.2022.3209448">https://doi.org/10.1109/TVCG.2022.3209448</a>.
+</div>
+<div id="ref-baker2016reproducibility" class="csl-entry" role="listitem">
+Baker, Monya. 2016. <span>“1,500 Scientists Lift the Lid on
+Reproducibility.”</span> <em>Nature</em> 533 (7604): 452–54. <a href="https://doi.org/10.1038/533452a">https://doi.org/10.1038/533452a</a>.
+</div>
+<div id="ref-bantilan2020pandera" class="csl-entry" role="listitem">
+Bantilan, Niels. 2020. <span>“Pandera: Statistical Data Validation of
+Pandas Dataframes.”</span> <em>Proceedings of the 19th Python in Science
+Conference</em>, 116–24. <a href="https://doi.org/10.25080/Majora-342d178e-010">https://doi.org/10.25080/Majora-342d178e-010</a>.
+</div>
+<div id="ref-bateman2010useful" class="csl-entry" role="listitem">
+Bateman, Scott, Regan L. Mandryk, Carl Gutwin, Aaron Genest, David
+McDine, and Christopher Brooks. 2010. <span>“Useful Junk? The Effects of
+Visual Embellishment on Comprehension and Memorability of
+Charts.”</span> <em>Proceedings of the SIGCHI Conference on Human
+Factors in Computing Systems (CHI ’10)</em>, 2573–82. <a href="https://doi.org/10.1145/1753326.1753716">https://doi.org/10.1145/1753326.1753716</a>.
+</div>
+<div id="ref-beams2014how" class="csl-entry" role="listitem">
+Beams, Chris. 2014. <em>How to Write a <span>Git</span> Commit
+Message</em>. <a href="https://cbea.ms/git-commit/">https://cbea.ms/git-commit/</a>.
+</div>
+<div id="ref-bengan2015tsql" class="csl-entry" role="listitem">
+Ben-Gan, Itzik, Adam Machanic, Dejan Sarka, and Kevin Farlee. 2015.
+<em>T-SQL Querying</em>. Microsoft Press.
+</div>
+<div id="ref-benjamini1995controlling" class="csl-entry" role="listitem">
+Benjamini, Yoav, and Yosef Hochberg. 1995. <span>“Controlling the False
+Discovery Rate: A Practical and Powerful Approach to Multiple
+Testing.”</span> <em>Journal of the Royal Statistical Society: Series
+B</em> 57 (1): 289–300. <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x">https://doi.org/10.1111/j.2517-6161.1995.tb02031.x</a>.
+</div>
+<div id="ref-beyer1999nearest" class="csl-entry" role="listitem">
+Beyer, Kevin, Jonathan Goldstein, Raghu Ramakrishnan, and Uri Shaft.
+1999. <span>“When Is <span>‘Nearest Neighbor’</span> Meaningful?”</span>
+<em>Database Theory — ICDT’99</em>, Lecture notes in computer science,
+vol. 1540: 217–35. <a href="https://doi.org/10.1007/3-540-49257-7_15">https://doi.org/10.1007/3-540-49257-7_15</a>.
+</div>
+<div id="ref-bilogur2018missingno" class="csl-entry" role="listitem">
+Bilogur, Aleksey. 2018. <span>“Missingno: A Missing Data Visualization
+Suite.”</span> <em>Journal of Open Source Software</em> 3 (22): 547. <a href="https://doi.org/10.21105/joss.00547">https://doi.org/10.21105/joss.00547</a>.
+</div>
+<div id="ref-birch2012worldwide" class="csl-entry" role="listitem">
+Birch, Jennifer. 2012. <span>“Worldwide Prevalence of Red-Green Color
+Deficiency.”</span> <em>Journal of the Optical Society of America A</em>
+29 (3): 313–20. <a href="https://doi.org/10.1364/JOSAA.29.000313">https://doi.org/10.1364/JOSAA.29.000313</a>.
+</div>
+<div id="ref-vanderbles2019communicating" class="csl-entry" role="listitem">
+Bles, Anne Marthe van der, Sander van der Linden, Alexandra L. J.
+Freeman, et al. 2019. <span>“Communicating Uncertainty about Facts,
+Numbers and Science.”</span> <em>Royal Society Open Science</em> 6 (5):
+181870. <a href="https://doi.org/10.1098/rsos.181870">https://doi.org/10.1098/rsos.181870</a>.
+</div>
+<div id="ref-blischak2016quick" class="csl-entry" role="listitem">
+Blischak, John D., Emily R. Davenport, and Greg Wilson. 2016. <span>“A
+Quick Introduction to Version Control with <span>Git</span> and
+<span>GitHub</span>.”</span> <em>PLoS Computational Biology</em> 12 (1):
+e1004668. <a href="https://doi.org/10.1371/journal.pcbi.1004668">https://doi.org/10.1371/journal.pcbi.1004668</a>.
+</div>
+<div id="ref-boettiger2015introduction" class="csl-entry" role="listitem">
+Boettiger, Carl. 2015. <span>“An Introduction to <span>Docker</span> for
+Reproducible Research.”</span> <em>ACM SIGOPS Operating Systems
+Review</em> 49 (1): 71–79. <a href="https://doi.org/10.1145/2723872.2723882">https://doi.org/10.1145/2723872.2723882</a>.
+</div>
+<div id="ref-boncz2005monetdb" class="csl-entry" role="listitem">
+Boncz, Peter, Marcin Zukowski, and Niels Nes. 2005.
+<span>“<span>MonetDB/X100</span>: Hyper-Pipelining Query
+Execution.”</span> <em>Proceedings of the Second Biennial Conference on
+Innovative Data Systems Research (CIDR)</em>.
+</div>
+<div id="ref-borland2007rainbow" class="csl-entry" role="listitem">
+Borland, David, and Russell M. Taylor II. 2007. <span>“Rainbow Color Map
+(Still) Considered Harmful.”</span> <em>IEEE Computer Graphics and
+Applications</em> 27 (2): 14–17. <a href="https://doi.org/10.1109/MCG.2007.323435">https://doi.org/10.1109/MCG.2007.323435</a>.
+</div>
+<div id="ref-box1964analysis" class="csl-entry" role="listitem">
+Box, George E. P., and David R. Cox. 1964. <span>“An Analysis of
+Transformations.”</span> <em>Journal of the Royal Statistical Society:
+Series B</em> 26 (2): 211–52. <a href="https://doi.org/10.1111/j.2517-6161.1964.tb00553.x">https://doi.org/10.1111/j.2517-6161.1964.tb00553.x</a>.
+</div>
+<div id="ref-box2015time" class="csl-entry" role="listitem">
+Box, George E. P., Gwilym M. Jenkins, Gregory C. Reinsel, and Greta M.
+Ljung. 2015. <em>Time Series Analysis: Forecasting and Control</em>. 5th
+ed. Wiley.
+</div>
+<div id="ref-rfc8259json" class="csl-entry" role="listitem">
+Bray, Tim. 2017. <em>The <span>JavaScript</span> Object Notation
+(<span>JSON</span>) Data Interchange Format</em>. RFC No. 8259. Internet
+Engineering Task Force. <a href="https://doi.org/10.17487/RFC8259">https://doi.org/10.17487/RFC8259</a>.
+</div>
+<div id="ref-breunig2000lof" class="csl-entry" role="listitem">
+Breunig, Markus M., Hans-Peter Kriegel, Raymond T. Ng, and Jörg Sander.
+2000. <span>“<span>LOF</span>: Identifying Density-Based Local
+Outliers.”</span> <em>Proceedings of the 2000 ACM SIGMOD International
+Conference on Management of Data</em>, 93–104. <a href="https://doi.org/10.1145/342009.335388">https://doi.org/10.1145/342009.335388</a>.
+</div>
+<div id="ref-brooker2015exponential" class="csl-entry" role="listitem">
+Brooker, Marc. 2015. <em>Exponential Backoff and Jitter</em>. AWS
+Architecture Blog. <a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/">https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/</a>.
+</div>
+<div id="ref-bruls2000squarified" class="csl-entry" role="listitem">
+Bruls, Mark, Kees Huizing, and Jarke J. van Wijk. 2000.
+<span>“Squarified Treemaps.”</span> <em>Data Visualization 2000:
+Proceedings of the Joint EUROGRAPHICS and IEEE TCVG Symposium on
+Visualization</em>, 33–42. <a href="https://doi.org/10.1007/978-3-7091-6783-0_4">https://doi.org/10.1007/978-3-7091-6783-0_4</a>.
+</div>
+<div id="ref-bryan2018excuse" class="csl-entry" role="listitem">
+Bryan, Jennifer. 2018. <span>“Excuse Me, Do You Have a Moment to Talk
+about Version Control?”</span> <em>The American Statistician</em> 72
+(1): 20–27. <a href="https://doi.org/10.1080/00031305.2017.1399928">https://doi.org/10.1080/00031305.2017.1399928</a>.
+</div>
+<div id="ref-vanbuuren2018flexible" class="csl-entry" role="listitem">
+Buuren, Stef van. 2018. <em>Flexible Imputation of Missing Data</em>.
+2nd ed. CRC Press. <a href="https://stefvanbuuren.name/fimd/">https://stefvanbuuren.name/fimd/</a>.
+</div>
+<div id="ref-vanbuuren2011mice" class="csl-entry" role="listitem">
+Buuren, Stef van, and Karin Groothuis-Oudshoorn. 2011. <span>“Mice:
+Multivariate Imputation by Chained Equations in <span>R</span>.”</span>
+<em>Journal of Statistical Software</em> 45 (3): 1–67. <a href="https://doi.org/10.18637/jss.v045.i03">https://doi.org/10.18637/jss.v045.i03</a>.
+</div>
+<div id="ref-pep621metadata" class="csl-entry" role="listitem">
+<span class="nocase">Cannon, Brett et al.</span> 2020.
+<em><span>PEP</span> 621 – Storing Project Metadata in
+Pyproject.toml</em>. <a href="https://peps.python.org/pep-0621/">https://peps.python.org/pep-0621/</a>.
+</div>
+<div id="ref-chacon2014pro" class="csl-entry" role="listitem">
+Chacon, Scott, and Ben Straub. 2014. <em>Pro Git</em>. 2nd ed. Apress.
+<a href="https://git-scm.com/book">https://git-scm.com/book</a>.
+</div>
+<div id="ref-chapman2000crisp" class="csl-entry" role="listitem">
+Chapman, Pete, Julian Clinton, Randy Kerber, et al. 2000.
+<em><span>CRISP-DM</span> 1.0: Step-by-Step Data Mining Guide</em>.
+SPSS.
+</div>
+<div id="ref-chaudhuri1997overview" class="csl-entry" role="listitem">
+Chaudhuri, Surajit, and Umeshwar Dayal. 1997. <span>“An Overview of Data
+Warehousing and <span>OLAP</span> Technology.”</span> <em>ACM SIGMOD
+Record</em> 26 (1): 65–74. <a href="https://doi.org/10.1145/248603.248616">https://doi.org/10.1145/248603.248616</a>.
+</div>
+<div id="ref-chawla2002smote" class="csl-entry" role="listitem">
+Chawla, Nitesh V., Kevin W. Bowyer, Lawrence O. Hall, and W. Philip
+Kegelmeyer. 2002. <span>“<span>SMOTE</span>: Synthetic Minority
+over-Sampling Technique.”</span> <em>Journal of Artificial Intelligence
+Research</em> 16: 321–57. <a href="https://doi.org/10.1613/jair.953">https://doi.org/10.1613/jair.953</a>.
+</div>
+<div id="ref-cleveland1990stl" class="csl-entry" role="listitem">
+Cleveland, Robert B., William S. Cleveland, Jean E. McRae, and Irma
+Terpenning. 1990. <span>“<span>STL</span>: A Seasonal-Trend
+Decomposition Procedure Based on Loess.”</span> <em>Journal of Official
+Statistics</em> 6 (1): 3–73.
+</div>
+<div id="ref-cleveland1979robust" class="csl-entry" role="listitem">
+Cleveland, William S. 1979. <span>“Robust Locally Weighted Regression
+and Smoothing Scatterplots.”</span> <em>Journal of the American
+Statistical Association</em> 74 (368): 829–36. <a href="https://doi.org/10.1080/01621459.1979.10481038">https://doi.org/10.1080/01621459.1979.10481038</a>.
+</div>
+<div id="ref-cleveland2001data" class="csl-entry" role="listitem">
+Cleveland, William S. 2001. <span>“Data Science: An Action Plan for
+Expanding the Technical Areas of the Field of Statistics.”</span>
+<em>International Statistical Review</em> 69 (1): 21–26. <a href="https://doi.org/10.1111/j.1751-5823.2001.tb00477.x">https://doi.org/10.1111/j.1751-5823.2001.tb00477.x</a>.
+</div>
+<div id="ref-cleveland1984graphical" class="csl-entry" role="listitem">
+Cleveland, William S., and Robert McGill. 1984. <span>“Graphical
+Perception: Theory, Experimentation, and Application to the Development
+of Graphical Methods.”</span> <em>Journal of the American Statistical
+Association</em> 79 (387): 531–54. <a href="https://doi.org/10.1080/01621459.1984.10478080">https://doi.org/10.1080/01621459.1984.10478080</a>.
+</div>
+<div id="ref-cliff1993dominance" class="csl-entry" role="listitem">
+Cliff, Norman. 1993. <span>“Dominance Statistics: Ordinal Analyses to
+Answer Ordinal Questions.”</span> <em>Psychological Bulletin</em> 114
+(3): 494–509. <a href="https://doi.org/10.1037/0033-2909.114.3.494">https://doi.org/10.1037/0033-2909.114.3.494</a>.
+</div>
+<div id="ref-codd1970relational" class="csl-entry" role="listitem">
+Codd, Edgar F. 1970. <span>“A Relational Model of Data for Large Shared
+Data Banks.”</span> <em>Communications of the ACM</em> 13 (6): 377–87.
+<a href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a>.
+</div>
+<div id="ref-cohen1988statistical" class="csl-entry" role="listitem">
+Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral
+Sciences</em>. 2nd ed. Lawrence Erlbaum Associates.
+</div>
+<div id="ref-conda2026docs" class="csl-entry" role="listitem">
+<span class="nocase">conda Contributors</span>. 2026. <em>Conda
+Documentation: Managing Environments</em>. <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html</a>.
+</div>
+<div id="ref-conventionalcommits2026" class="csl-entry" role="listitem">
+Conventional Commits. 2026. <em>Conventional Commits Specification
+1.0.0</em>. <a href="https://www.conventionalcommits.org/">https://www.conventionalcommits.org/</a>.
+</div>
+<div id="ref-cooley1965algorithm" class="csl-entry" role="listitem">
+Cooley, James W., and John W. Tukey. 1965. <span>“An Algorithm for the
+Machine Calculation of Complex <span>Fourier</span> Series.”</span>
+<em>Mathematics of Computation</em> 19 (90): 297–301. <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1">https://doi.org/10.1090/S0025-5718-1965-0178586-1</a>.
+</div>
+<div id="ref-cc2026licenses" class="csl-entry" role="listitem">
+Creative Commons. 2026. <em>About <span>CC</span> Licenses</em>. <a href="https://creativecommons.org/share-your-work/cclicenses/">https://creativecommons.org/share-your-work/cclicenses/</a>.
+</div>
+<div id="ref-cressie1993statistics" class="csl-entry" role="listitem">
+Cressie, Noel A. C. 1993. <em>Statistics for Spatial Data</em>. Revised.
+Wiley. <a href="https://doi.org/10.1002/9781119115151">https://doi.org/10.1002/9781119115151</a>.
+</div>
+<div id="ref-dignazio2020data" class="csl-entry" role="listitem">
+D’Ignazio, Catherine, and Lauren F. Klein. 2020. <em>Data Feminism</em>.
+MIT Press.
+</div>
+<div id="ref-dama2017dmbok" class="csl-entry" role="listitem">
+DAMA International. 2017. <em><span>DAMA-DMBOK</span>: Data Management
+Body of Knowledge</em>. 2nd ed. Technics Publications.
+</div>
+<div id="ref-datacontract2026spec" class="csl-entry" role="listitem">
+Data Contract Specification. 2026. <em>Data Contract Specification</em>.
+<a href="https://datacontract.com/">https://datacontract.com/</a>.
+</div>
+<div id="ref-devcontainers2026spec" class="csl-entry" role="listitem">
+Development Containers. 2026. <em>Development Container
+Specification</em>. <a href="https://containers.dev/">https://containers.dev/</a>.
+</div>
+<div id="ref-donoho2017fifty" class="csl-entry" role="listitem">
+Donoho, David. 2017. <span>“50 Years of Data Science.”</span>
+<em>Journal of Computational and Graphical Statistics</em> 26 (4):
+745–66. <a href="https://doi.org/10.1080/10618600.2017.1384734">https://doi.org/10.1080/10618600.2017.1384734</a>.
+</div>
+<div id="ref-duckdb2026asof" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026a. <em><span>AsOf</span> Join</em>. <a href="https://duckdb.org/docs/stable/guides/sql_features/asof_join.html">https://duckdb.org/docs/stable/guides/sql_features/asof_join.html</a>.
+</div>
+<div id="ref-duckdb2026concurrency" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026b. <em>Concurrency</em>. <a href="https://duckdb.org/docs/stable/connect/concurrency">https://duckdb.org/docs/stable/connect/concurrency</a>.
+</div>
+<div id="ref-duckdb2026datefunctions" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026c. <em>Date Functions and Timestamp
+Functions</em>. <a href="https://duckdb.org/docs/stable/sql/functions/timestamp.html">https://duckdb.org/docs/stable/sql/functions/timestamp.html</a>.
+</div>
+<div id="ref-duckdb2026docs" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026d. <em><span>DuckDB</span> Documentation</em>. <a href="https://duckdb.org/docs/">https://duckdb.org/docs/</a>.
+</div>
+<div id="ref-duckdb2026friendly" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026e. <em>Friendly <span>SQL</span></em>. <a href="https://duckdb.org/docs/stable/sql/dialect/friendly_sql.html">https://duckdb.org/docs/stable/sql/dialect/friendly_sql.html</a>.
+</div>
+<div id="ref-duckdb2026insert" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026f. <em><span>INSERT</span> Statement</em>. <a href="https://duckdb.org/docs/stable/sql/statements/insert.html">https://duckdb.org/docs/stable/sql/statements/insert.html</a>.
+</div>
+<div id="ref-duckdb2026pivot" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026g. <em><span>PIVOT</span> and
+<span>UNPIVOT</span> Statements</em>. <a href="https://duckdb.org/docs/stable/sql/statements/unpivot.html">https://duckdb.org/docs/stable/sql/statements/unpivot.html</a>.
+</div>
+<div id="ref-duckdb2026profiling" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026h. <em>Profiling</em>. <a href="https://duckdb.org/docs/stable/dev/profiling.html">https://duckdb.org/docs/stable/dev/profiling.html</a>.
+</div>
+<div id="ref-duckdb2026python" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026i. <em>Python <span>DB</span> <span>API</span>:
+Concurrency and Cursors</em>. <a href="https://duckdb.org/docs/stable/clients/python/dbapi.html">https://duckdb.org/docs/stable/clients/python/dbapi.html</a>.
+</div>
+<div id="ref-duckdb2026storage" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026j. <em>Storage Versions and Format</em>. <a href="https://duckdb.org/docs/stable/internals/storage">https://duckdb.org/docs/stable/internals/storage</a>.
+</div>
+<div id="ref-duckdb2026summarize" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026k. <em><span>SUMMARIZE</span></em>. <a href="https://duckdb.org/docs/stable/guides/meta/summarize.html">https://duckdb.org/docs/stable/guides/meta/summarize.html</a>.
+</div>
+<div id="ref-duckdb2026timezone" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026l. <em>Timestamp with Time Zone Functions</em>.
+<a href="https://duckdb.org/docs/stable/sql/functions/timestamptz.html">https://duckdb.org/docs/stable/sql/functions/timestamptz.html</a>.
+</div>
+<div id="ref-dwork2006calibrating" class="csl-entry" role="listitem">
+Dwork, Cynthia, Frank McSherry, Kobbi Nissim, and Adam Smith. 2006.
+<span>“Calibrating Noise to Sensitivity in Private Data
+Analysis.”</span> <em>Theory of Cryptography (TCC 2006)</em>, Lecture
+notes in computer science, vol. 3876: 265–84. <a href="https://doi.org/10.1007/11681878_14">https://doi.org/10.1007/11681878_14</a>.
+</div>
+<div id="ref-dwork2014algorithmic" class="csl-entry" role="listitem">
+Dwork, Cynthia, and Aaron Roth. 2014. <span>“The Algorithmic Foundations
+of Differential Privacy.”</span> <em>Foundations and Trends in
+Theoretical Computer Science</em> 9 (3–4): 211–407. <a href="https://doi.org/10.1561/0400000042">https://doi.org/10.1561/0400000042</a>.
+</div>
+<div id="ref-efron1979bootstrap" class="csl-entry" role="listitem">
+Efron, Bradley. 1979. <span>“Bootstrap Methods: Another Look at the
+Jackknife.”</span> <em>The Annals of Statistics</em> 7 (1): 1–26. <a href="https://doi.org/10.1214/aos/1176344552">https://doi.org/10.1214/aos/1176344552</a>.
+</div>
+<div id="ref-efron1993introduction" class="csl-entry" role="listitem">
+Efron, Bradley, and Robert J. Tibshirani. 1993. <em>An Introduction to
+the Bootstrap</em>. Chapman &amp; Hall.
+</div>
+<div id="ref-elmasri2016fundamentals" class="csl-entry" role="listitem">
+Elmasri, Ramez, and Shamkant B. Navathe. 2016. <em>Fundamentals of
+Database Systems</em>. 7th ed. Pearson.
+</div>
+<div id="ref-ester1996density" class="csl-entry" role="listitem">
+Ester, Martin, Hans-Peter Kriegel, Jörg Sander, and Xiaowei Xu. 1996.
+<span>“A Density-Based Algorithm for Discovering Clusters in Large
+Spatial Databases with Noise.”</span> <em>Proceedings of the Second
+International Conference on Knowledge Discovery and Data Mining
+(KDD-96)</em>, 226–31.
+</div>
+<div id="ref-eu2016gdpr" class="csl-entry" role="listitem">
+European Parliament and Council of the European Union. 2016.
+<em>Regulation (<span>EU</span>) 2016/679 on the Protection of Natural
+Persons with Regard to the Processing of Personal Data and on the Free
+Movement of Such Data (General Data Protection Regulation)</em>.
+Official Journal of the European Union, L 119, 4 May 2016. <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a>.
+</div>
+<div id="ref-faker2026docs" class="csl-entry" role="listitem">
+Faker Contributors. 2026. <em>Faker Documentation</em>. <a href="https://faker.readthedocs.io/">https://faker.readthedocs.io/</a>.
+</div>
+<div id="ref-fanelli2009how" class="csl-entry" role="listitem">
+Fanelli, Daniele. 2009. <span>“How Many Scientists Fabricate and Falsify
+Research? <span>A</span> Systematic Review and Meta-Analysis of Survey
+Data.”</span> <em>PLoS ONE</em> 4 (5): e5738. <a href="https://doi.org/10.1371/journal.pone.0005738">https://doi.org/10.1371/journal.pone.0005738</a>.
+</div>
+<div id="ref-farman1985large" class="csl-entry" role="listitem">
+Farman, Joseph C., Brian G. Gardiner, and Jonathan D. Shanklin. 1985.
+<span>“Large Losses of Total Ozone in <span>Antarctica</span> Reveal
+Seasonal <span>ClOx/NOx</span> Interaction.”</span> <em>Nature</em> 315:
+207–10. <a href="https://doi.org/10.1038/315207a0">https://doi.org/10.1038/315207a0</a>.
+</div>
+<div id="ref-few2013information" class="csl-entry" role="listitem">
+Few, Stephen. 2013. <em>Information Dashboard Design: Displaying Data
+for at-a-Glance Monitoring</em>. 2nd ed. Analytics Press.
+</div>
+<div id="ref-fielding2000architectural" class="csl-entry" role="listitem">
+Fielding, Roy Thomas. 2000. <span>“Architectural Styles and the Design
+of Network-Based Software Architectures.”</span> PhD thesis, University
+of California, Irvine.
+</div>
+<div id="ref-rfc9110http" class="csl-entry" role="listitem">
+Fielding, Roy T., Mark Nottingham, and Julian Reschke. 2022.
+<em><span>HTTP</span> Semantics</em>. RFC No. 9110. Internet Engineering
+Task Force. <a href="https://doi.org/10.17487/RFC9110">https://doi.org/10.17487/RFC9110</a>.
+</div>
+<div id="ref-floridi2016what" class="csl-entry" role="listitem">
+Floridi, Luciano, and Mariarosaria Taddeo. 2016. <span>“What Is Data
+Ethics?”</span> <em>Philosophical Transactions of the Royal Society
+A</em> 374 (2083): 20160360. <a href="https://doi.org/10.1098/rsta.2016.0360">https://doi.org/10.1098/rsta.2016.0360</a>.
+</div>
+<div id="ref-folium2026docs" class="csl-entry" role="listitem">
+Folium Developers. 2026. <em>Folium Documentation</em>. <a href="https://python-visualization.github.io/folium/">https://python-visualization.github.io/folium/</a>.
+</div>
+<div id="ref-gebru2021datasheets" class="csl-entry" role="listitem">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, et al. 2021.
+<span>“Datasheets for Datasets.”</span> <em>Communications of the
+ACM</em> 64 (12): 86–92. <a href="https://doi.org/10.1145/3458723">https://doi.org/10.1145/3458723</a>.
+</div>
+<div id="ref-gelman2013garden" class="csl-entry" role="listitem">
+Gelman, Andrew, and Eric Loken. 2013. <em>The Garden of Forking Paths:
+Why Multiple Comparisons Can Be a Problem, Even When There Is No
+<span>“Fishing Expedition”</span> or <span>“p-Hacking”</span> and the
+Research Hypothesis Was Posited Ahead of Time</em>. Unpublished
+manuscript, Department of Statistics, Columbia University. <a href="http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf">http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf</a>.
+</div>
+<div id="ref-gigerenzer2002calculated" class="csl-entry" role="listitem">
+Gigerenzer, Gerd. 2002. <em>Calculated Risks: How to Know When Numbers
+Deceive You</em>. Simon &amp; Schuster.
+</div>
+<div id="ref-gitlfs2026" class="csl-entry" role="listitem">
+Git LFS. 2026. <em>Git Large File Storage</em>. <a href="https://git-lfs.com/">https://git-lfs.com/</a>.
+</div>
+<div id="ref-githubactions2026" class="csl-entry" role="listitem">
+GitHub. 2026a. <em><span>GitHub Actions</span> Documentation</em>. <a href="https://docs.github.com/actions">https://docs.github.com/actions</a>.
+</div>
+<div id="ref-github2026cli" class="csl-entry" role="listitem">
+GitHub. 2026b. <em><span>GitHub CLI</span> Manual</em>. <a href="https://cli.github.com/manual/">https://cli.github.com/manual/</a>.
+</div>
+<div id="ref-pep257docstring" class="csl-entry" role="listitem">
+Goodger, David, and Guido van Rossum. 2001. <em><span>PEP</span> 257 –
+Docstring Conventions</em>. <a href="https://peps.python.org/pep-0257/">https://peps.python.org/pep-0257/</a>.
+</div>
+<div id="ref-google2026engpractices" class="csl-entry" role="listitem">
+Google. 2026. <em>Google Engineering Practices Documentation: Code
+Review</em>. <a href="https://google.github.io/eng-practices/review/">https://google.github.io/eng-practices/review/</a>.
+</div>
+<div id="ref-vandengoorbergh2022harm" class="csl-entry" role="listitem">
+Goorbergh, Ruben van den, Maarten van Smeden, Dirk Timmerman, and Ben
+Van Calster. 2022. <span>“The Harm of Class Imbalance Corrections for
+Risk Prediction Models: Illustration and Simulation Using Logistic
+Regression.”</span> <em>Journal of the American Medical Informatics
+Association</em> 29 (9): 1525–34. <a href="https://doi.org/10.1093/jamia/ocac093">https://doi.org/10.1093/jamia/ocac093</a>.
+</div>
+<div id="ref-granger1974spurious" class="csl-entry" role="listitem">
+Granger, Clive W. J., and Paul Newbold. 1974. <span>“Spurious
+Regressions in Econometrics.”</span> <em>Journal of Econometrics</em> 2
+(2): 111–20. <a href="https://doi.org/10.1016/0304-4076(74)90034-7">https://doi.org/10.1016/0304-4076(74)90034-7</a>.
+</div>
+<div id="ref-gray1997data" class="csl-entry" role="listitem">
+Gray, Jim, Surajit Chaudhuri, Adam Bosworth, et al. 1997. <span>“Data
+Cube: A Relational Aggregation Operator Generalizing Group-by,
+Cross-Tab, and Sub-Totals.”</span> <em>Data Mining and Knowledge
+Discovery</em> 1 (1): 29–53. <a href="https://doi.org/10.1023/A:1009726021843">https://doi.org/10.1023/A:1009726021843</a>.
+</div>
+<div id="ref-greenland2016statistical" class="csl-entry" role="listitem">
+Greenland, Sander, Stephen J. Senn, Kenneth J. Rothman, et al. 2016.
+<span>“Statistical Tests, <span>P</span> Values, Confidence Intervals,
+and Power: A Guide to Misinterpretations.”</span> <em>European Journal
+of Epidemiology</em> 31 (4): 337–50. <a href="https://doi.org/10.1007/s10654-016-0149-3">https://doi.org/10.1007/s10654-016-0149-3</a>.
+</div>
+<div id="ref-harris2020array" class="csl-entry" role="listitem">
+<span class="nocase">Harris, Charles R., K. Jarrod Millman, Stéfan J.
+van der Walt, et al.</span> 2020. <span>“Array Programming with
+<span>NumPy</span>.”</span> <em>Nature</em> 585: 357–62. <a href="https://doi.org/10.1038/s41586-020-2649-2">https://doi.org/10.1038/s41586-020-2649-2</a>.
+</div>
+<div id="ref-harrower2003colorbrewer" class="csl-entry" role="listitem">
+Harrower, Mark, and Cynthia A. Brewer. 2003. <span>“ColorBrewer.org: An
+Online Tool for Selecting Colour Schemes for Maps.”</span> <em>The
+Cartographic Journal</em> 40 (1): 27–37. <a href="https://doi.org/10.1179/000870403235002042">https://doi.org/10.1179/000870403235002042</a>.
+</div>
+<div id="ref-hastie2009elements" class="csl-entry" role="listitem">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The
+Elements of Statistical Learning: Data Mining, Inference, and
+Prediction</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/978-0-387-84858-7">https://doi.org/10.1007/978-0-387-84858-7</a>.
+</div>
+<div id="ref-hawkins1980identification" class="csl-entry" role="listitem">
+Hawkins, Douglas M. 1980. <em>Identification of Outliers</em>. Chapman;
+Hall. <a href="https://doi.org/10.1007/978-94-015-3994-4">https://doi.org/10.1007/978-94-015-3994-4</a>.
+</div>
+<div id="ref-healey2012attention" class="csl-entry" role="listitem">
+Healey, Christopher G., and James T. Enns. 2012. <span>“Attention and
+Visual Memory in Visualization and Computer Graphics.”</span> <em>IEEE
+Transactions on Visualization and Computer Graphics</em> 18 (7):
+1170–88. <a href="https://doi.org/10.1109/TVCG.2011.127">https://doi.org/10.1109/TVCG.2011.127</a>.
+</div>
+<div id="ref-heer2010crowdsourcing" class="csl-entry" role="listitem">
+Heer, Jeffrey, and Michael Bostock. 2010. <span>“Crowdsourcing Graphical
+Perception: Using Mechanical Turk to Assess Visualization
+Design.”</span> <em>Proceedings of the SIGCHI Conference on Human
+Factors in Computing Systems (CHI ’10)</em>, 203–12. <a href="https://doi.org/10.1145/1753326.1753357">https://doi.org/10.1145/1753326.1753357</a>.
+</div>
+<div id="ref-hennig2007cluster" class="csl-entry" role="listitem">
+Hennig, Christian. 2007. <span>“Cluster-Wise Assessment of Cluster
+Stability.”</span> <em>Computational Statistics &amp; Data Analysis</em>
+52 (1): 258–71. <a href="https://doi.org/10.1016/j.csda.2006.11.025">https://doi.org/10.1016/j.csda.2006.11.025</a>.
+</div>
+<div id="ref-hernan2020causal" class="csl-entry" role="listitem">
+Hernán, Miguel A., and James M. Robins. 2020. <em>Causal Inference: What
+If</em>. Chapman &amp; Hall/CRC. <a href="https://miguelhernan.org/whatifbook">https://miguelhernan.org/whatifbook</a>.
+</div>
+<div id="ref-herndon2014does" class="csl-entry" role="listitem">
+Herndon, Thomas, Michael Ash, and Robert Pollin. 2014. <span>“Does High
+Public Debt Consistently Stifle Economic Growth? <span>A</span> Critique
+of <span>Reinhart</span> and <span>Rogoff</span>.”</span> <em>Cambridge
+Journal of Economics</em> 38 (2): 257–79. <a href="https://doi.org/10.1093/cje/bet075">https://doi.org/10.1093/cje/bet075</a>.
+</div>
+<div id="ref-holm1979simple" class="csl-entry" role="listitem">
+Holm, Sture. 1979. <span>“A Simple Sequentially Rejective Multiple Test
+Procedure.”</span> <em>Scandinavian Journal of Statistics</em> 6 (2):
+65–70.
+</div>
+<div id="ref-bednar2026datashader" class="csl-entry" role="listitem">
+HoloViz Developers. 2026. <em>Datashader Documentation</em>. <a href="https://datashader.org/">https://datashader.org/</a>.
+</div>
+<div id="ref-pep427wheel" class="csl-entry" role="listitem">
+Holth, Daniel. 2012. <em><span>PEP</span> 427 – the Wheel Binary Package
+Format 1.0</em>. <a href="https://peps.python.org/pep-0427/">https://peps.python.org/pep-0427/</a>.
+</div>
+<div id="ref-huber2009robust" class="csl-entry" role="listitem">
+Huber, Peter J., and Elvezio M. Ronchetti. 2009. <em>Robust
+Statistics</em>. 2nd ed. Wiley. <a href="https://doi.org/10.1002/9780470434697">https://doi.org/10.1002/9780470434697</a>.
+</div>
+<div id="ref-hubert1985comparing" class="csl-entry" role="listitem">
+Hubert, Lawrence, and Phipps Arabie. 1985. <span>“Comparing
+Partitions.”</span> <em>Journal of Classification</em> 2 (1): 193–218.
+<a href="https://doi.org/10.1007/BF01908075">https://doi.org/10.1007/BF01908075</a>.
+</div>
+<div id="ref-hyndman2021forecasting" class="csl-entry" role="listitem">
+Hyndman, Rob J., and George Athanasopoulos. 2021. <em>Forecasting:
+Principles and Practice</em>. 3rd ed. OTexts. <a href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a>.
+</div>
+<div id="ref-iglewicz1993how" class="csl-entry" role="listitem">
+Iglewicz, Boris, and David C. Hoaglin. 1993. <em>How to Detect and
+Handle Outliers</em>. Vol. 16. ASQC Basic References in Quality Control.
+ASQC Quality Press.
+</div>
+<div id="ref-iogp2026epsg" class="csl-entry" role="listitem">
+International Association of Oil &amp; Gas Producers. 2026.
+<em><span>EPSG</span> Geodetic Parameter Dataset</em>. <a href="https://epsg.org/">https://epsg.org/</a>.
+</div>
+<div id="ref-iso2008data" class="csl-entry" role="listitem">
+International Organization for Standardization. 2008.
+<em><span>ISO/IEC</span> 25012:2008 Software Engineering – Software
+Product Quality Requirements and Evaluation (<span>SQuaRE</span>) – Data
+Quality Model</em>.
+</div>
+<div id="ref-dvc2026" class="csl-entry" role="listitem">
+Iterative. 2026. <em><span>DVC</span> Documentation</em>. <a href="https://dvc.org/doc">https://dvc.org/doc</a>.
+</div>
+<div id="ref-ji2023survey" class="csl-entry" role="listitem">
+Ji, Ziwei, Nayeon Lee, Rita Frieske, et al. 2023. <span>“Survey of
+Hallucination in Natural Language Generation.”</span> <em>ACM Computing
+Surveys</em> 55 (12): 248:1–38. <a href="https://doi.org/10.1145/3571730">https://doi.org/10.1145/3571730</a>.
+</div>
+<div id="ref-jolliffe2016principal" class="csl-entry" role="listitem">
+Jolliffe, Ian T., and Jorge Cadima. 2016. <span>“Principal Component
+Analysis: A Review and Recent Developments.”</span> <em>Philosophical
+Transactions of the Royal Society A</em> 374 (2065): 20150202. <a href="https://doi.org/10.1098/rsta.2015.0202">https://doi.org/10.1098/rsta.2015.0202</a>.
+</div>
+<div id="ref-jordahl2020geopandas" class="csl-entry" role="listitem">
+<span class="nocase">Jordahl, Kelsey, Joris Van den Bossche, Martin
+Fleischmann, et al.</span> 2020. <em>Geopandas/Geopandas: V0.8.1</em>.
+Zenodo. <a href="https://doi.org/10.5281/zenodo.3946761">https://doi.org/10.5281/zenodo.3946761</a>.
+</div>
+<div id="ref-jordon2022synthetic" class="csl-entry" role="listitem">
+Jordon, James, Lukasz Szpruch, Florimond Houssiau, et al. 2022.
+<em>Synthetic Data — What, Why and How?</em> arXiv preprint
+arXiv:2205.03257. <a href="https://doi.org/10.48550/arXiv.2205.03257">https://doi.org/10.48550/arXiv.2205.03257</a>.
+</div>
+<div id="ref-kanaries2026pygwalker" class="csl-entry" role="listitem">
+Kanaries. 2026. <em><span>PyGWalker</span>: Turn Your DataFrame into an
+Interactive <span>UI</span> for Visual Analysis</em>. <a href="https://github.com/Kanaries/pygwalker">https://github.com/Kanaries/pygwalker</a>.
+</div>
+<div id="ref-karney2013algorithms" class="csl-entry" role="listitem">
+Karney, Charles F. F. 2013. <span>“Algorithms for Geodesics.”</span>
+<em>Journal of Geodesy</em> 87 (1): 43–55. <a href="https://doi.org/10.1007/s00190-012-0578-z">https://doi.org/10.1007/s00190-012-0578-z</a>.
+</div>
+<div id="ref-kerr1998harking" class="csl-entry" role="listitem">
+Kerr, Norbert L. 1998. <span>“<span>HARKing</span>: Hypothesizing After
+the Results Are Known.”</span> <em>Personality and Social Psychology
+Review</em> 2 (3): 196–217. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.
+</div>
+<div id="ref-kimball2013data" class="csl-entry" role="listitem">
+Kimball, Ralph, and Margy Ross. 2013. <em>The Data Warehouse Toolkit:
+The Definitive Guide to Dimensional Modeling</em>. 3rd ed. Wiley.
+</div>
+<div id="ref-kluyver2016jupyter" class="csl-entry" role="listitem">
+<span class="nocase">Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando
+Pérez, et al.</span> 2016. <span>“Jupyter Notebooks – a Publishing
+Format for Reproducible Computational Workflows.”</span> In
+<em>Positioning and Power in Academic Publishing: Players, Agents and
+Agendas</em>, edited by Fernando Loizides and Birgit Schmidt. IOS Press.
+<a href="https://doi.org/10.3233/978-1-61499-649-1-87">https://doi.org/10.3233/978-1-61499-649-1-87</a>.
+</div>
+<div id="ref-knaflic2015storytelling" class="csl-entry" role="listitem">
+Knaflic, Cole Nussbaumer. 2015. <em>Storytelling with Data: A Data
+Visualization Guide for Business Professionals</em>. Wiley.
+</div>
+<div id="ref-knuth1984literate" class="csl-entry" role="listitem">
+Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>The
+Computer Journal</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
+</div>
+<div id="ref-rfc9309robots" class="csl-entry" role="listitem">
+Koster, Martijn, Gary Illyes, Henner Zeller, and Lizzi Sassman. 2022.
+<em>Robots Exclusion Protocol</em>. RFC No. 9309. Internet Engineering
+Task Force. <a href="https://doi.org/10.17487/RFC9309">https://doi.org/10.17487/RFC9309</a>.
+</div>
+<div id="ref-pythondotenv2026" class="csl-entry" role="listitem">
+<span class="nocase">Kumar, Saurabh et al.</span> 2026.
+<em>Python-Dotenv</em>. <a href="https://pypi.org/project/python-dotenv/">https://pypi.org/project/python-dotenv/</a>.
+</div>
+<div id="ref-kunsch1989jackknife" class="csl-entry" role="listitem">
+Künsch, Hans R. 1989. <span>“The Jackknife and the Bootstrap for General
+Stationary Observations.”</span> <em>The Annals of Statistics</em> 17
+(3): 1217–41. <a href="https://doi.org/10.1214/aos/1176347265">https://doi.org/10.1214/aos/1176347265</a>.
+</div>
+<div id="ref-kwiatkowski1992testing" class="csl-entry" role="listitem">
+Kwiatkowski, Denis, Peter C. B. Phillips, Peter Schmidt, and Yongcheol
+Shin. 1992. <span>“Testing the Null Hypothesis of Stationarity Against
+the Alternative of a Unit Root.”</span> <em>Journal of Econometrics</em>
+54 (1–3): 159–78. <a href="https://doi.org/10.1016/0304-4076(92)90104-Y">https://doi.org/10.1016/0304-4076(92)90104-Y</a>.
+</div>
+<div id="ref-truststore2026" class="csl-entry" role="listitem">
+<span class="nocase">Larson, Seth et al.</span> 2026. <em>Truststore:
+Verify Certificates Using <span>OS</span> Trust Stores</em>. <a href="https://truststore.readthedocs.io/">https://truststore.readthedocs.io/</a>.
+</div>
+<div id="ref-lazer2014parable" class="csl-entry" role="listitem">
+Lazer, David, Ryan Kennedy, Gary King, and Alessandro Vespignani. 2014.
+<span>“The Parable of <span>Google Flu</span>: Traps in Big Data
+Analysis.”</span> <em>Science</em> 343 (6176): 1203–5. <a href="https://doi.org/10.1126/science.1248506">https://doi.org/10.1126/science.1248506</a>.
+</div>
+<div id="ref-leek2015question" class="csl-entry" role="listitem">
+Leek, Jeffery T., and Roger D. Peng. 2015. <span>“What Is the
+Question?”</span> <em>Science</em> 347 (6228): 1314–15. <a href="https://doi.org/10.1126/science.aaa6146">https://doi.org/10.1126/science.aaa6146</a>.
+</div>
+<div id="ref-little1988test" class="csl-entry" role="listitem">
+Little, Roderick J. A. 1988. <span>“A Test of Missing Completely at
+Random for Multivariate Data with Missing Values.”</span> <em>Journal of
+the American Statistical Association</em> 83 (404): 1198–202. <a href="https://doi.org/10.1080/01621459.1988.10478722">https://doi.org/10.1080/01621459.1988.10478722</a>.
+</div>
+<div id="ref-liu2008isolation" class="csl-entry" role="listitem">
+Liu, Fei Tony, Kai Ming Ting, and Zhi-Hua Zhou. 2008. <span>“Isolation
+Forest.”</span> <em>2008 Eighth IEEE International Conference on Data
+Mining</em>, 413–22. <a href="https://doi.org/10.1109/ICDM.2008.17">https://doi.org/10.1109/ICDM.2008.17</a>.
+</div>
+<div id="ref-lloyd1982least" class="csl-entry" role="listitem">
+Lloyd, Stuart P. 1982. <span>“Least Squares Quantization in
+<span>PCM</span>.”</span> <em>IEEE Transactions on Information
+Theory</em> 28 (2): 129–37. <a href="https://doi.org/10.1109/TIT.1982.1056489">https://doi.org/10.1109/TIT.1982.1056489</a>.
+</div>
+<div id="ref-vandermaaten2008visualizing" class="csl-entry" role="listitem">
+Maaten, Laurens van der, and Geoffrey Hinton. 2008. <span>“Visualizing
+Data Using t-<span>SNE</span>.”</span> <em>Journal of Machine Learning
+Research</em> 9: 2579–605.
+</div>
+<div id="ref-machanavajjhala2007ldiversity" class="csl-entry" role="listitem">
+Machanavajjhala, Ashwin, Daniel Kifer, Johannes Gehrke, and
+Muthuramakrishnan Venkitasubramaniam. 2007. <span>“L-Diversity: Privacy
+Beyond k-Anonymity.”</span> <em>ACM Transactions on Knowledge Discovery
+from Data</em> 1 (1): 3. <a href="https://doi.org/10.1145/1217299.1217302">https://doi.org/10.1145/1217299.1217302</a>.
+</div>
+<div id="ref-mahalanobis1936generalized" class="csl-entry" role="listitem">
+Mahalanobis, Prasanta Chandra. 1936. <span>“On the Generalized Distance
+in Statistics.”</span> <em>Proceedings of the National Institute of
+Sciences of India</em> 2 (1): 49–55.
+</div>
+<div id="ref-majors2022observability" class="csl-entry" role="listitem">
+Majors, Charity, Liz Fong-Jones, and George Miranda. 2022.
+<em>Observability Engineering: Achieving Production Excellence</em>.
+O’Reilly Media.
+</div>
+<div id="ref-mangel1984abraham" class="csl-entry" role="listitem">
+Mangel, Marc, and Francisco J. Samaniego. 1984. <span>“Abraham Wald’s
+Work on Aircraft Survivability.”</span> <em>Journal of the American
+Statistical Association</em> 79 (386): 259–67. <a href="https://doi.org/10.1080/01621459.1984.10478038">https://doi.org/10.1080/01621459.1984.10478038</a>.
+</div>
+<div id="ref-nasa1999mars" class="csl-entry" role="listitem">
+Mars Climate Orbiter Mishap Investigation Board. 1999. <em>Mars Climate
+Orbiter Mishap Investigation Board Phase <span>I</span> Report</em>.
+National Aeronautics; Space Administration.
+</div>
+<div id="ref-mason2010taxonomy" class="csl-entry" role="listitem">
+Mason, Hilary, and Chris Wiggins. 2010. <em>A Taxonomy of Data
+Science</em>. บล็อก dataists. <a href="http://www.dataists.com/2010/09/a-taxonomy-of-data-science/">http://www.dataists.com/2010/09/a-taxonomy-of-data-science/</a>.
+</div>
+<div id="ref-mastrandrea2010guidance" class="csl-entry" role="listitem">
+Mastrandrea, Michael D., Christopher B. Field, Thomas F. Stocker, et al.
+2010. <em>Guidance Note for Lead Authors of the <span>IPCC</span> Fifth
+Assessment Report on Consistent Treatment of Uncertainties</em>.
+Intergovernmental Panel on Climate Change (IPCC). <a href="https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf">https://www.ipcc.ch/site/assets/uploads/2017/08/AR5_Uncertainty_Guidance_Note.pdf</a>.
+</div>
+<div id="ref-matejka2017same" class="csl-entry" role="listitem">
+Matejka, Justin, and George Fitzmaurice. 2017. <span>“Same Stats,
+Different Graphs: Generating Datasets with Varied Appearance and
+Identical Statistics Through Simulated Annealing.”</span>
+<em>Proceedings of the 2017 CHI Conference on Human Factors in Computing
+Systems</em>, 1290–94. <a href="https://doi.org/10.1145/3025453.3025912">https://doi.org/10.1145/3025453.3025912</a>.
+</div>
+<div id="ref-mcinnes2018umap" class="csl-entry" role="listitem">
+McInnes, Leland, John Healy, and James Melville. 2018.
+<em><span>UMAP</span>: Uniform Manifold Approximation and Projection for
+Dimension Reduction</em>. arXiv preprint arXiv:1802.03426. <a href="https://doi.org/10.48550/arXiv.1802.03426">https://doi.org/10.48550/arXiv.1802.03426</a>.
+</div>
+<div id="ref-mckinney2022python" class="csl-entry" role="listitem">
+McKinney, Wes. 2022. <em>Python for Data Analysis: Data Wrangling with
+Pandas, NumPy, and Jupyter</em>. 3rd ed. O’Reilly Media. <a href="https://wesmckinney.com/book/">https://wesmckinney.com/book/</a>.
+</div>
+<div id="ref-melnik2010dremel" class="csl-entry" role="listitem">
+Melnik, Sergey, Andrey Gubarev, Jing Jing Long, et al. 2010.
+<span>“Dremel: Interactive Analysis of Web-Scale Datasets.”</span>
+<em>Proceedings of the VLDB Endowment</em> 3 (1–2): 330–39.
+</div>
+<div id="ref-merkel2014docker" class="csl-entry" role="listitem">
+Merkel, Dirk. 2014. <span>“Docker: Lightweight <span>Linux</span>
+Containers for Consistent Development and Deployment.”</span> <em>Linux
+Journal</em> 2014 (239): 2.
+</div>
+<div id="ref-pep405venv" class="csl-entry" role="listitem">
+Meyer, Carl. 2011. <em><span>PEP</span> 405 – Python Virtual
+Environments</em>. <a href="https://peps.python.org/pep-0405/">https://peps.python.org/pep-0405/</a>.
+</div>
+<div id="ref-minto2009pyramid" class="csl-entry" role="listitem">
+Minto, Barbara. 2009. <em>The Pyramid Principle: Logic in Writing and
+Thinking</em>. 3rd ed. Pearson Education.
+</div>
+<div id="ref-moran1950notes" class="csl-entry" role="listitem">
+Moran, Patrick A. P. 1950. <span>“Notes on Continuous Stochastic
+Phenomena.”</span> <em>Biometrika</em> 37 (1/2): 17–23. <a href="https://doi.org/10.2307/2332142">https://doi.org/10.2307/2332142</a>.
+</div>
+<div id="ref-narayanan2008robust" class="csl-entry" role="listitem">
+Narayanan, Arvind, and Vitaly Shmatikov. 2008. <span>“Robust
+de-Anonymization of Large Sparse Datasets.”</span> <em>2008 IEEE
+Symposium on Security and Privacy</em>, 111–25. <a href="https://doi.org/10.1109/SP.2008.33">https://doi.org/10.1109/SP.2008.33</a>.
+</div>
+<div id="ref-nasem2019reproducibility" class="csl-entry" role="listitem">
+National Academies of Sciences, Engineering, and Medicine. 2019.
+<em>Reproducibility and Replicability in Science</em>. The National
+Academies Press. <a href="https://doi.org/10.17226/25303">https://doi.org/10.17226/25303</a>.
+</div>
+<div id="ref-belmont1979" class="csl-entry" role="listitem">
+National Commission for the Protection of Human Subjects of Biomedical
+and Behavioral Research. 1979. <em>The Belmont Report: Ethical
+Principles and Guidelines for the Protection of Human Subjects of
+Research</em>. U.S. Department of Health, Education,; Welfare.
+</div>
+<div id="ref-nga2014wgs84" class="csl-entry" role="listitem">
+National Geospatial-Intelligence Agency. 2014. <em>Department of Defense
+World Geodetic System 1984: Its Definition and Relationships with Local
+Geodetic Systems</em>. NGA.STND.0036_1.0.0_WGS84. National
+Geospatial-Intelligence Agency.
+</div>
+<div id="ref-nosek2018preregistration" class="csl-entry" role="listitem">
+Nosek, Brian A., Charles R. Ebersole, Alexander C. DeHaven, and David T.
+Mellor. 2018. <span>“The Preregistration Revolution.”</span>
+<em>Proceedings of the National Academy of Sciences</em> 115 (11):
+2600–2606. <a href="https://doi.org/10.1073/pnas.1708274114">https://doi.org/10.1073/pnas.1708274114</a>.
+</div>
+<div id="ref-rfc6585additional" class="csl-entry" role="listitem">
+Nottingham, Mark, and Roy T. Fielding. 2012. <em>Additional
+<span>HTTP</span> Status Codes</em>. RFC No. 6585. Internet Engineering
+Task Force. <a href="https://doi.org/10.17487/RFC6585">https://doi.org/10.17487/RFC6585</a>.
+</div>
+<div id="ref-nygard2011documenting" class="csl-entry" role="listitem">
+Nygard, Michael. 2011. <em>Documenting Architecture Decisions</em>. <a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions</a>.
+</div>
+<div id="ref-ogc2011simple" class="csl-entry" role="listitem">
+Open Geospatial Consortium. 2011. <em><span>OpenGIS</span>
+Implementation Standard for Geographic Information — Simple Feature
+Access — Part 1: Common Architecture</em>. OGC 06-103r4, version 1.2.1.
+Open Geospatial Consortium.
+</div>
+<div id="ref-okfn2026opendefinition" class="csl-entry" role="listitem">
+Open Knowledge Foundation. 2026. <em>The Open Definition</em>. <a href="https://opendefinition.org/">https://opendefinition.org/</a>.
+</div>
+<div id="ref-osc2015estimating" class="csl-entry" role="listitem">
+Open Science Collaboration. 2015. <span>“Estimating the Reproducibility
+of Psychological Science.”</span> <em>Science</em> 349 (6251): aac4716.
+<a href="https://doi.org/10.1126/science.aac4716">https://doi.org/10.1126/science.aac4716</a>.
+</div>
+<div id="ref-osi2026licenses" class="csl-entry" role="listitem">
+Open Source Initiative. 2026. <em><span>OSI</span> Approved
+Licenses</em>. <a href="https://opensource.org/licenses">https://opensource.org/licenses</a>.
+</div>
+<div id="ref-openshaw1984modifiable" class="csl-entry" role="listitem">
+Openshaw, Stan. 1984. <em>The Modifiable Areal Unit Problem</em>.
+Concepts and Techniques in Modern Geography 38. Geo Books.
+</div>
+<div id="ref-ott1990physical" class="csl-entry" role="listitem">
+Ott, Wayne R. 1990. <span>“A Physical Explanation of the Lognormality of
+Pollutant Concentrations.”</span> <em>Journal of the Air &amp; Waste
+Management Association</em> 40 (10): 1378–83. <a href="https://doi.org/10.1080/10473289.1990.10466789">https://doi.org/10.1080/10473289.1990.10466789</a>.
+</div>
+<div id="ref-owasp2021injection" class="csl-entry" role="listitem">
+OWASP Foundation. 2021. <em><span>A03:2021</span> – Injection</em>. <a href="https://owasp.org/Top10/A03_2021-Injection/">https://owasp.org/Top10/A03_2021-Injection/</a>.
+</div>
+<div id="ref-pandas2026cow" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026a.
+<em>Copy-on-Write (<span>CoW</span>)</em>. <a href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html">https://pandas.pydata.org/docs/user_guide/copy_on_write.html</a>.
+</div>
+<div id="ref-pandas2026merge" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026b. <em>Merge,
+Join, Concatenate and Compare</em>. <a href="https://pandas.pydata.org/docs/user_guide/merging.html">https://pandas.pydata.org/docs/user_guide/merging.html</a>.
+</div>
+<div id="ref-pandas2026arrow" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026c.
+<em><span>PyArrow</span> Functionality</em>. <a href="https://pandas.pydata.org/docs/user_guide/pyarrow.html">https://pandas.pydata.org/docs/user_guide/pyarrow.html</a>.
+</div>
+<div id="ref-pandas2026reshaping" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026d.
+<em>Reshaping and Pivot Tables</em>. <a href="https://pandas.pydata.org/docs/user_guide/reshaping.html">https://pandas.pydata.org/docs/user_guide/reshaping.html</a>.
+</div>
+<div id="ref-pandas2026timeseries" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026e. <em>Time
+Series / Date Functionality</em>. <a href="https://pandas.pydata.org/docs/user_guide/timeseries.html">https://pandas.pydata.org/docs/user_guide/timeseries.html</a>.
+</div>
+<div id="ref-pandas2026missing" class="csl-entry" role="listitem">
+<span class="nocase">pandas development team</span>. 2026f. <em>Working
+with Missing Data</em>. <a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">https://pandas.pydata.org/docs/user_guide/missing_data.html</a>.
+</div>
+<div id="ref-patki2016synthetic" class="csl-entry" role="listitem">
+Patki, Neha, Roy Wedge, and Kalyan Veeramachaneni. 2016. <span>“The
+Synthetic Data Vault.”</span> <em>2016 IEEE International Conference on
+Data Science and Advanced Analytics (DSAA)</em>, 399–410. <a href="https://doi.org/10.1109/DSAA.2016.49">https://doi.org/10.1109/DSAA.2016.49</a>.
+</div>
+<div id="ref-pearl2018book" class="csl-entry" role="listitem">
+Pearl, Judea, and Dana Mackenzie. 2018. <em>The Book of Why: The New
+Science of Cause and Effect</em>. Basic Books.
+</div>
+<div id="ref-pearson2016generalized" class="csl-entry" role="listitem">
+Pearson, Ronald K., Yrjö Neuvo, Jaakko Astola, and Moncef Gabbouj. 2016.
+<span>“Generalized <span>Hampel</span> Filters.”</span> <em>EURASIP
+Journal on Advances in Signal Processing</em> 2016: 87. <a href="https://doi.org/10.1186/s13634-016-0383-6">https://doi.org/10.1186/s13634-016-0383-6</a>.
+</div>
+<div id="ref-pedregosa2011scikit" class="csl-entry" role="listitem">
+<span class="nocase">Pedregosa, Fabian, Gaël Varoquaux, Alexandre
+Gramfort, et al.</span> 2011. <span>“Scikit-Learn: Machine Learning in
+<span>Python</span>.”</span> <em>Journal of Machine Learning
+Research</em> 12: 2825–30.
+</div>
+<div id="ref-peng2011reproducible" class="csl-entry" role="listitem">
+Peng, Roger D. 2011. <span>“Reproducible Research in Computational
+Science.”</span> <em>Science</em> 334 (6060): 1226–27. <a href="https://doi.org/10.1126/science.1213847">https://doi.org/10.1126/science.1213847</a>.
+</div>
+<div id="ref-peng2015art" class="csl-entry" role="listitem">
+Peng, Roger D., and Elizabeth Matsui. 2015. <em>The Art of Data Science:
+A Guide for Anyone Who Works with Data</em>. Leanpub. <a href="https://leanpub.com/artofdatascience">https://leanpub.com/artofdatascience</a>.
+</div>
+<div id="ref-perry2023users" class="csl-entry" role="listitem">
+Perry, Neil, Megha Srivastava, Deepak Kumar, and Dan Boneh. 2023.
+<span>“Do Users Write More Insecure Code with <span>AI</span>
+Assistants?”</span> <em>Proceedings of the 2023 ACM SIGSAC Conference on
+Computer and Communications Security (CCS ’23)</em>, 2785–99. <a href="https://doi.org/10.1145/3576915.3623157">https://doi.org/10.1145/3576915.3623157</a>.
+</div>
+<div id="ref-pimentel2019large" class="csl-entry" role="listitem">
+Pimentel, João Felipe, Leonardo Murta, Vanessa Braganholo, and Juliana
+Freire. 2019. <span>“A Large-Scale Study about Quality and
+Reproducibility of <span>Jupyter</span> Notebooks.”</span>
+<em>Proceedings of the 16th International Conference on Mining Software
+Repositories (MSR)</em>, 507–17. <a href="https://doi.org/10.1109/MSR.2019.00077">https://doi.org/10.1109/MSR.2019.00077</a>.
+</div>
+<div id="ref-plotly2026python" class="csl-entry" role="listitem">
+Plotly Technologies. 2026. <em>The Figure Data Structure in Python</em>.
+<a href="https://plotly.com/python/figure-structure/">https://plotly.com/python/figure-structure/</a>.
+</div>
+<div id="ref-polars2026guide" class="csl-entry" role="listitem">
+Polars developers. 2026. <em>Polars User Guide</em>. <a href="https://docs.pola.rs/">https://docs.pola.rs/</a>.
+</div>
+<div id="ref-quarto2026docs" class="csl-entry" role="listitem">
+Posit Software. 2026. <em>Quarto Documentation</em>. <a href="https://quarto.org/docs/">https://quarto.org/docs/</a>.
+</div>
+<div id="ref-pytest2026docs" class="csl-entry" role="listitem">
+<span class="nocase">pytest-dev</span>. 2026. <em>Pytest
+Documentation</em>. <a href="https://docs.pytest.org/">https://docs.pytest.org/</a>.
+</div>
+<div id="ref-python2026logging" class="csl-entry" role="listitem">
+Python Software Foundation. 2026a. <em>Logging – Logging Facility for
+<span>Python</span></em>. <a href="https://docs.python.org/3/library/logging.html">https://docs.python.org/3/library/logging.html</a>.
+</div>
+<div id="ref-python2026pathlib" class="csl-entry" role="listitem">
+Python Software Foundation. 2026b. <em>Pathlib — Object-Oriented
+Filesystem Paths</em>. <a href="https://docs.python.org/3/library/pathlib.html">https://docs.python.org/3/library/pathlib.html</a>.
+</div>
+<div id="ref-python2026tutorial" class="csl-entry" role="listitem">
+Python Software Foundation. 2026c. <em>The <span>Python</span>
+Tutorial</em>. <a href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a>.
+</div>
+<div id="ref-raasveldt2019duckdb" class="csl-entry" role="listitem">
+Raasveldt, Mark, and Hannes Mühleisen. 2019. <span>“<span>DuckDB</span>:
+An Embeddable Analytical Database.”</span> <em>Proceedings of the 2019
+International Conference on Management of Data (SIGMOD)</em>, 1981–84.
+<a href="https://doi.org/10.1145/3299869.3320212">https://doi.org/10.1145/3299869.3320212</a>.
+</div>
+<div id="ref-ram2013git" class="csl-entry" role="listitem">
+Ram, Karthik. 2013. <span>“Git Can Facilitate Greater Reproducibility
+and Increased Transparency in Science.”</span> <em>Source Code for
+Biology and Medicine</em> 8: 7. <a href="https://doi.org/10.1186/1751-0473-8-7">https://doi.org/10.1186/1751-0473-8-7</a>.
+</div>
+<div id="ref-nbstripout2026" class="csl-entry" role="listitem">
+<span class="nocase">Rathgeber, Florian et al.</span> 2026.
+<em>Nbstripout: Strip Output from <span>Jupyter</span> Notebooks</em>.
+<a href="https://github.com/kynan/nbstripout">https://github.com/kynan/nbstripout</a>.
+</div>
+<div id="ref-reinhart2010growth" class="csl-entry" role="listitem">
+Reinhart, Carmen M., and Kenneth S. Rogoff. 2010. <span>“Growth in a
+Time of Debt.”</span> <em>American Economic Review</em> 100 (2): 573–78.
+<a href="https://doi.org/10.1257/aer.100.2.573">https://doi.org/10.1257/aer.100.2.573</a>.
+</div>
+<div id="ref-requests2026docs" class="csl-entry" role="listitem">
+<span class="nocase">Reitz, Kenneth et al.</span> 2026. <em>Requests:
+<span>HTTP</span> for Humans – Documentation</em>. <a href="https://requests.readthedocs.io/">https://requests.readthedocs.io/</a>.
+</div>
+<div id="ref-rfc8446tls" class="csl-entry" role="listitem">
+Rescorla, Eric. 2018. <em>The Transport Layer Security
+(<span>TLS</span>) Protocol Version 1.3</em>. RFC No. 8446. Internet
+Engineering Task Force. <a href="https://doi.org/10.17487/RFC8446">https://doi.org/10.17487/RFC8446</a>.
+</div>
+<div id="ref-richardson2026beautifulsoup" class="csl-entry" role="listitem">
+Richardson, Leonard. 2026. <em>Beautiful Soup Documentation</em>. <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">https://www.crummy.com/software/BeautifulSoup/bs4/doc/</a>.
+</div>
+<div id="ref-roberts2007state" class="csl-entry" role="listitem">
+Roberts, Jonathan C. 2007. <span>“State of the Art: Coordinated &amp;
+Multiple Views in Exploratory Visualization.”</span> <em>Fifth
+International Conference on Coordinated and Multiple Views in
+Exploratory Visualization (CMV 2007)</em>, 61–71. <a href="https://doi.org/10.1109/CMV.2007.20">https://doi.org/10.1109/CMV.2007.20</a>.
+</div>
+<div id="ref-robinson1950ecological" class="csl-entry" role="listitem">
+Robinson, W. S. 1950. <span>“Ecological Correlations and the Behavior of
+Individuals.”</span> <em>American Sociological Review</em> 15 (3):
+351–57. <a href="https://doi.org/10.2307/2087176">https://doi.org/10.2307/2087176</a>.
+</div>
+<div id="ref-rocher2019estimating" class="csl-entry" role="listitem">
+Rocher, Luc, Julien M. Hendrickx, and Yves-Alexandre de Montjoye. 2019.
+<span>“Estimating the Success of Re-Identifications in Incomplete
+Datasets Using Generative Models.”</span> <em>Nature Communications</em>
+10: 3069. <a href="https://doi.org/10.1038/s41467-019-10933-3">https://doi.org/10.1038/s41467-019-10933-3</a>.
+</div>
+<div id="ref-pep484types" class="csl-entry" role="listitem">
+Rossum, Guido van, Jukka Lehtosalo, and Łukasz Langa. 2014.
+<em><span>PEP</span> 484 – Type Hints</em>. <a href="https://peps.python.org/pep-0484/">https://peps.python.org/pep-0484/</a>.
+</div>
+<div id="ref-pep8style" class="csl-entry" role="listitem">
+Rossum, Guido van, Barry Warsaw, and Alyssa Coghlan. 2001.
+<em><span>PEP</span> 8 – Style Guide for <span>Python</span> Code</em>.
+<a href="https://peps.python.org/pep-0008/">https://peps.python.org/pep-0008/</a>.
+</div>
+<div id="ref-rousseeuw1987silhouettes" class="csl-entry" role="listitem">
+Rousseeuw, Peter J. 1987. <span>“Silhouettes: A Graphical Aid to the
+Interpretation and Validation of Cluster Analysis.”</span> <em>Journal
+of Computational and Applied Mathematics</em> 20: 53–65. <a href="https://doi.org/10.1016/0377-0427(87)90125-7">https://doi.org/10.1016/0377-0427(87)90125-7</a>.
+</div>
+<div id="ref-rubin1976inference" class="csl-entry" role="listitem">
+Rubin, Donald B. 1976. <span>“Inference and Missing Data.”</span>
+<em>Biometrika</em> 63 (3): 581–92. <a href="https://doi.org/10.1093/biomet/63.3.581">https://doi.org/10.1093/biomet/63.3.581</a>.
+</div>
+<div id="ref-rubin1987multiple" class="csl-entry" role="listitem">
+Rubin, Donald B. 1987. <em>Multiple Imputation for Nonresponse in
+Surveys</em>. Wiley.
+</div>
+<div id="ref-sandve2013ten" class="csl-entry" role="listitem">
+Sandve, Geir Kjetil, Anton Nekrutenko, James Taylor, and Eivind Hovig.
+2013. <span>“Ten Simple Rules for Reproducible Computational
+Research.”</span> <em>PLoS Computational Biology</em> 9 (10): e1003285.
+<a href="https://doi.org/10.1371/journal.pcbi.1003285">https://doi.org/10.1371/journal.pcbi.1003285</a>.
+</div>
+<div id="ref-satyanarayan2017vegalite" class="csl-entry" role="listitem">
+Satyanarayan, Arvind, Dominik Moritz, Kanit Wongsuphasawat, and Jeffrey
+Heer. 2017. <span>“Vega-Lite: A Grammar of Interactive Graphics.”</span>
+<em>IEEE Transactions on Visualization and Computer Graphics</em> 23
+(1): 341–50. <a href="https://doi.org/10.1109/TVCG.2016.2599030">https://doi.org/10.1109/TVCG.2016.2599030</a>.
+</div>
+<div id="ref-rfc4180csv" class="csl-entry" role="listitem">
+Shafranovich, Yakov. 2005. <em>Common Format and <span>MIME</span> Type
+for Comma-Separated Values (<span>CSV</span>) Files</em>. RFC No. 4180.
+Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC4180">https://doi.org/10.17487/RFC4180</a>.
+</div>
+<div id="ref-shepard1968two" class="csl-entry" role="listitem">
+Shepard, Donald. 1968. <span>“A Two-Dimensional Interpolation Function
+for Irregularly-Spaced Data.”</span> <em>Proceedings of the 1968 23rd
+ACM National Conference</em>, 517–24. <a href="https://doi.org/10.1145/800186.810616">https://doi.org/10.1145/800186.810616</a>.
+</div>
+<div id="ref-shneiderman1992tree" class="csl-entry" role="listitem">
+Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d
+Space-Filling Approach.”</span> <em>ACM Transactions on Graphics</em> 11
+(1): 92–99. <a href="https://doi.org/10.1145/102377.115768">https://doi.org/10.1145/102377.115768</a>.
+</div>
+<div id="ref-shneiderman1996eyes" class="csl-entry" role="listitem">
+Shneiderman, Ben. 1996. <span>“The Eyes Have It: A Task by Data Type
+Taxonomy for Information Visualizations.”</span> <em>Proceedings of the
+1996 IEEE Symposium on Visual Languages</em>, 336–43. <a href="https://doi.org/10.1109/VL.1996.545307">https://doi.org/10.1109/VL.1996.545307</a>.
+</div>
+<div id="ref-simmons2011false" class="csl-entry" role="listitem">
+Simmons, Joseph P., Leif D. Nelson, and Uri Simonsohn. 2011.
+<span>“False-Positive Psychology: Undisclosed Flexibility in Data
+Collection and Analysis Allows Presenting Anything as
+Significant.”</span> <em>Psychological Science</em> 22 (11): 1359–66. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>.
+</div>
+<div id="ref-simpson1951interpretation" class="csl-entry" role="listitem">
+Simpson, Edward H. 1951. <span>“The Interpretation of Interaction in
+Contingency Tables.”</span> <em>Journal of the Royal Statistical
+Society: Series B</em> 13 (2): 238–41. <a href="https://doi.org/10.1111/j.2517-6161.1951.tb00088.x">https://doi.org/10.1111/j.2517-6161.1951.tb00088.x</a>.
+</div>
+<div id="ref-sklar1959fonctions" class="csl-entry" role="listitem">
+Sklar, Abe. 1959. <span>“Fonctions de r<span>é</span>partition <span class="nocase">à</span> n Dimensions Et Leurs Marges.”</span>
+<em>Publications de l’Institut de Statistique de
+l’Universit<span>é</span> de Paris</em> 8: 229–31.
+</div>
+<div id="ref-streamlit2026docs" class="csl-entry" role="listitem">
+Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.streamlit.io/">https://docs.streamlit.io/</a>.
+</div>
+<div id="ref-snyder1987map" class="csl-entry" role="listitem">
+Snyder, John P. 1987. <em>Map Projections: A Working Manual</em>. U.s.
+Geological Survey Professional Paper 1395. U.S. Government Printing
+Office. <a href="https://doi.org/10.3133/pp1395">https://doi.org/10.3133/pp1395</a>.
+</div>
+<div id="ref-spiegelhalter2017risk" class="csl-entry" role="listitem">
+Spiegelhalter, David. 2017. <span>“Risk and Uncertainty
+Communication.”</span> <em>Annual Review of Statistics and Its
+Application</em> 4: 31–60. <a href="https://doi.org/10.1146/annurev-statistics-010814-020148">https://doi.org/10.1146/annurev-statistics-010814-020148</a>.
+</div>
+<div id="ref-spracklen2025we" class="csl-entry" role="listitem">
+Spracklen, Joseph, Raveen Wijewickrama, A. H. M. Nazmus Sakib, Anindya
+Maiti, Bimal Viswanath, and Murtuza Jadliwala. 2025. <span>“We Have a
+Package for You! <span>A</span> Comprehensive Analysis of Package
+Hallucinations by Code Generating <span>LLMs</span>.”</span>
+<em>Proceedings of the 34th USENIX Security Symposium</em>.
+</div>
+<div id="ref-sqlite2026about" class="csl-entry" role="listitem">
+SQLite. 2026. <em>About <span>SQLite</span></em>. <a href="https://www.sqlite.org/about.html">https://www.sqlite.org/about.html</a>.
+</div>
+<div id="ref-stadler2022synthetic" class="csl-entry" role="listitem">
+Stadler, Theresa, Bristena Oprisanu, and Carmela Troncoso. 2022.
+<span>“Synthetic Data — Anonymisation Groundhog Day.”</span> <em>31st
+USENIX Security Symposium (USENIX Security 22)</em>, 1451–68.
+</div>
+<div id="ref-strang2016introduction" class="csl-entry" role="listitem">
+Strang, Gilbert. 2016. <em>Introduction to Linear Algebra</em>. 5th ed.
+Wellesley-Cambridge Press.
+</div>
+<div id="ref-sullivan2012using" class="csl-entry" role="listitem">
+Sullivan, Gail M., and Richard Feinn. 2012. <span>“Using Effect Size—or
+Why the <span>P</span> Value Is Not Enough.”</span> <em>Journal of
+Graduate Medical Education</em> 4 (3): 279–82. <a href="https://doi.org/10.4300/JGME-D-12-00156.1">https://doi.org/10.4300/JGME-D-12-00156.1</a>.
+</div>
+<div id="ref-suresh2021framework" class="csl-entry" role="listitem">
+Suresh, Harini, and John Guttag. 2021. <span>“A Framework for
+Understanding Sources of Harm Throughout the Machine Learning Life
+Cycle.”</span> <em>Equity and Access in Algorithms, Mechanisms, and
+Optimization (EAAMO ’21)</em>, 17:1–9. <a href="https://doi.org/10.1145/3465416.3483305">https://doi.org/10.1145/3465416.3483305</a>.
+</div>
+<div id="ref-sweeney2000simple" class="csl-entry" role="listitem">
+Sweeney, Latanya. 2000. <em>Simple Demographics Often Identify People
+Uniquely</em>. Data Privacy Working Paper No. 3. Carnegie Mellon
+University.
+</div>
+<div id="ref-sweeney2002kanonymity" class="csl-entry" role="listitem">
+Sweeney, Latanya. 2002. <span>“K-Anonymity: A Model for Protecting
+Privacy.”</span> <em>International Journal of Uncertainty, Fuzziness and
+Knowledge-Based Systems</em> 10 (5): 557–70. <a href="https://doi.org/10.1142/S0218488502001648">https://doi.org/10.1142/S0218488502001648</a>.
+</div>
+<div id="ref-tessum2021pm25" class="csl-entry" role="listitem">
+Tessum, Christopher W., David A. Paolella, Sarah E. Chambliss, Joshua S.
+Apte, Jason D. Hill, and Julian D. Marshall. 2021.
+<span>“<span>PM2.5</span> Polluters Disproportionately and Systemically
+Affect People of Color in the <span>United States</span>.”</span>
+<em>Science Advances</em> 7 (18): eabf4491. <a href="https://doi.org/10.1126/sciadv.abf4491">https://doi.org/10.1126/sciadv.abf4491</a>.
+</div>
+<div id="ref-postgresql2026docs" class="csl-entry" role="listitem">
+The PostgreSQL Global Development Group. 2026.
+<em><span>PostgreSQL</span> Documentation</em>. <a href="https://www.postgresql.org/docs/">https://www.postgresql.org/docs/</a>.
+</div>
+<div id="ref-tobler1970computer" class="csl-entry" role="listitem">
+Tobler, Waldo R. 1970. <span>“A Computer Movie Simulating Urban Growth
+in the <span>Detroit</span> Region.”</span> <em>Economic Geography</em>
+46: 234–40. <a href="https://doi.org/10.2307/143141">https://doi.org/10.2307/143141</a>.
+</div>
+<div id="ref-truong2020selective" class="csl-entry" role="listitem">
+Truong, Charles, Laurent Oudre, and Nicolas Vayatis. 2020.
+<span>“Selective Review of Offline Change Point Detection
+Methods.”</span> <em>Signal Processing</em> 167: 107299. <a href="https://doi.org/10.1016/j.sigpro.2019.107299">https://doi.org/10.1016/j.sigpro.2019.107299</a>.
+</div>
+<div id="ref-tse2016why" class="csl-entry" role="listitem">
+Tse, Archie. 2016. <em>Why We Are Doing Fewer Interactives</em>. Talk at
+the Malofiej 24 Infographics Conference, Pamplona.
+</div>
+<div id="ref-tufte1990envisioning" class="csl-entry" role="listitem">
+Tufte, Edward R. 1990. <em>Envisioning Information</em>. Graphics Press.
+</div>
+<div id="ref-tufte1997visual" class="csl-entry" role="listitem">
+Tufte, Edward R. 1997. <em>Visual Explanations: Images and Quantities,
+Evidence and Narrative</em>. Graphics Press.
+</div>
+<div id="ref-tufte2001visual" class="csl-entry" role="listitem">
+Tufte, Edward R. 2001. <em>The Visual Display of Quantitative
+Information</em>. 2nd ed. Graphics Press.
+</div>
+<div id="ref-tukey1962future" class="csl-entry" role="listitem">
+Tukey, John W. 1962. <span>“The Future of Data Analysis.”</span> <em>The
+Annals of Mathematical Statistics</em> 33 (1): 1–67. <a href="https://doi.org/10.1214/aoms/1177704711">https://doi.org/10.1214/aoms/1177704711</a>.
+</div>
+<div id="ref-tukey1977exploratory" class="csl-entry" role="listitem">
+Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Addison-Wesley.
+</div>
+<div id="ref-tukey1980we" class="csl-entry" role="listitem">
+Tukey, John W. 1980. <span>“We Need Both Exploratory and
+Confirmatory.”</span> <em>The American Statistician</em> 34 (1): 23–25.
+<a href="https://doi.org/10.1080/00031305.1980.10482706">https://doi.org/10.1080/00031305.1980.10482706</a>.
+</div>
+<div id="ref-urllib32026retry" class="csl-entry" role="listitem">
+<span class="nocase">urllib3 contributors</span>. 2026. <em>Urllib3
+Documentation: <span>Retry</span></em>. <a href="https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html">https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html</a>.
+</div>
+<div id="ref-vanderplas2018altair" class="csl-entry" role="listitem">
+VanderPlas, Jacob, Brian E. Granger, Jeffrey Heer, et al. 2018.
+<span>“Altair: Interactive Statistical Visualizations for
+Python.”</span> <em>Journal of Open Source Software</em> 3 (32): 1057.
+<a href="https://doi.org/10.21105/joss.01057">https://doi.org/10.21105/joss.01057</a>.
+</div>
+<div id="ref-wainer2007most" class="csl-entry" role="listitem">
+Wainer, Howard. 2007. <span>“The Most Dangerous Equation.”</span>
+<em>American Scientist</em> 95 (3): 249–56. <a href="https://doi.org/10.1511/2007.65.249">https://doi.org/10.1511/2007.65.249</a>.
+</div>
+<div id="ref-vanderwalt2015viridis" class="csl-entry" role="listitem">
+Walt, Stéfan van der, and Nathaniel Smith. 2015. <em>A Better Default
+Colormap for Matplotlib</em>. Talk at SciPy 2015 Conference. <a href="https://bids.github.io/colormap/">https://bids.github.io/colormap/</a>.
+</div>
+<div id="ref-wang1996beyond" class="csl-entry" role="listitem">
+Wang, Richard Y., and Diane M. Strong. 1996. <span>“Beyond Accuracy:
+What Data Quality Means to Data Consumers.”</span> <em>Journal of
+Management Information Systems</em> 12 (4): 5–33. <a href="https://doi.org/10.1080/07421222.1996.11518099">https://doi.org/10.1080/07421222.1996.11518099</a>.
+</div>
+<div id="ref-wang2006characteristic" class="csl-entry" role="listitem">
+Wang, Xiaozhe, Kate Smith, and Rob Hyndman. 2006.
+<span>“Characteristic-Based Clustering for Time Series Data.”</span>
+<em>Data Mining and Knowledge Discovery</em> 13 (3): 335–64. <a href="https://doi.org/10.1007/s10618-005-0039-x">https://doi.org/10.1007/s10618-005-0039-x</a>.
+</div>
+<div id="ref-ward1963hierarchical" class="csl-entry" role="listitem">
+Ward, Jr., Joe H. 1963. <span>“Hierarchical Grouping to Optimize an
+Objective Function.”</span> <em>Journal of the American Statistical
+Association</em> 58 (301): 236–44. <a href="https://doi.org/10.1080/01621459.1963.10500845">https://doi.org/10.1080/01621459.1963.10500845</a>.
+</div>
+<div id="ref-ware2020information" class="csl-entry" role="listitem">
+Ware, Colin. 2020. <em>Information Visualization: Perception for
+Design</em>. 4th ed. Morgan Kaufmann.
+</div>
+<div id="ref-waskom2021seaborn" class="csl-entry" role="listitem">
+Waskom, Michael L. 2021. <span>“Seaborn: Statistical Data
+Visualization.”</span> <em>Journal of Open Source Software</em> 6 (60):
+3021. <a href="https://doi.org/10.21105/joss.03021">https://doi.org/10.21105/joss.03021</a>.
+</div>
+<div id="ref-wasserman2004all" class="csl-entry" role="listitem">
+Wasserman, Larry. 2004. <em>All of Statistics: A Concise Course in
+Statistical Inference</em>. Springer. <a href="https://doi.org/10.1007/978-0-387-21736-9">https://doi.org/10.1007/978-0-387-21736-9</a>.
+</div>
+<div id="ref-wasserstein2016asa" class="csl-entry" role="listitem">
+Wasserstein, Ronald L., and Nicole A. Lazar. 2016. <span>“The
+<span>ASA</span> Statement on p-Values: Context, Process, and
+Purpose.”</span> <em>The American Statistician</em> 70 (2): 129–33. <a href="https://doi.org/10.1080/00031305.2016.1154108">https://doi.org/10.1080/00031305.2016.1154108</a>.
+</div>
+<div id="ref-wattenberg2016how" class="csl-entry" role="listitem">
+Wattenberg, Martin, Fernanda Viégas, and Ian Johnson. 2016. <span>“How
+to Use t-<span>SNE</span> Effectively.”</span> <em>Distill</em>, ahead
+of print. <a href="https://doi.org/10.23915/distill.00002">https://doi.org/10.23915/distill.00002</a>.
+</div>
+<div id="ref-wickham2010layered" class="csl-entry" role="listitem">
+Wickham, Hadley. 2010. <span>“A Layered Grammar of Graphics.”</span>
+<em>Journal of Computational and Graphical Statistics</em> 19 (1): 3–28.
+<a href="https://doi.org/10.1198/jcgs.2009.07098">https://doi.org/10.1198/jcgs.2009.07098</a>.
+</div>
+<div id="ref-wickham2014tidy" class="csl-entry" role="listitem">
+Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of
+Statistical Software</em> 59 (10): 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
+</div>
+<div id="ref-wickham2023r" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.
+<em>R for Data Science: Import, Tidy, Transform, Visualize, and Model
+Data</em>. 2nd ed. O’Reilly Media. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+</div>
+<div id="ref-wiggins2011twelve" class="csl-entry" role="listitem">
+Wiggins, Adam. 2011. <em>The Twelve-Factor App</em>. <a href="https://12factor.net/">https://12factor.net/</a>.
+</div>
+<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
+Wilke, Claus O. 2019. <em>Fundamentals of Data Visualization: A Primer
+on Making Informative and Compelling Figures</em>. O’Reilly Media. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>.
+</div>
+<div id="ref-wilkinson2005grammar" class="csl-entry" role="listitem">
+Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. 2nd ed.
+Springer. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>.
+</div>
+<div id="ref-wilson2017good" class="csl-entry" role="listitem">
+Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex
+Nederbragt, and Tracy K. Teal. 2017. <span>“Good Enough Practices in
+Scientific Computing.”</span> <em>PLoS Computational Biology</em> 13
+(6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
+</div>
+<div id="ref-winand2012sql" class="csl-entry" role="listitem">
+Winand, Markus. 2012. <em>SQL Performance Explained</em>. Markus Winand.
+<a href="https://use-the-index-luke.com/">https://use-the-index-luke.com/</a>.
+</div>
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality
+Guidelines: Particulate Matter (<span>PM2.5</span> and
+<span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon
+Monoxide</em>. World Health Organization.
+</div>
+<div id="ref-w3c2023wcag22" class="csl-entry" role="listitem">
+World Wide Web Consortium. 2023. <em>Web Content Accessibility
+Guidelines (<span>WCAG</span>) 2.2</em>. <a href="https://www.w3.org/TR/WCAG22/">https://www.w3.org/TR/WCAG22/</a>.
+</div>
+<div id="ref-jupytext2026" class="csl-entry" role="listitem">
+<span class="nocase">Wouts, Marc et al.</span> 2026. <em>Jupytext
+Documentation</em>. <a href="https://jupytext.readthedocs.io/">https://jupytext.readthedocs.io/</a>.
+</div>
+<div id="ref-xu2019modeling" class="csl-entry" role="listitem">
+Xu, Lei, Maria Skoularidou, Alfredo Cuesta-Infante, and Kalyan
+Veeramachaneni. 2019. <span>“Modeling Tabular Data Using Conditional
+<span>GAN</span>.”</span> <em>Advances in Neural Information Processing
+Systems 32 (NeurIPS 2019)</em>, 7335–45.
+</div>
+<div id="ref-ydata2026profiling" class="csl-entry" role="listitem">
+YData. 2026. <em>Ydata-Profiling Documentation</em>. <a href="https://docs.profiling.ydata.ai/">https://docs.profiling.ydata.ai/</a>.
+</div>
+<div id="ref-zong2022rich" class="csl-entry" role="listitem">
+Zong, Jonathan, Crystal Lee, Alan Lundgard, JiWoong Jang, Daniel Hajas,
+and Arvind Satyanarayan. 2022. <span>“Rich Screen Reader Experiences for
+Accessible Data Visualization.”</span> <em>Computer Graphics Forum</em>
+41 (3): 15–27. <a href="https://doi.org/10.1111/cgf.14519">https://doi.org/10.1111/cgf.14519</a>.
+</div>
+<div id="ref-pcd2026air4thai" class="csl-entry" role="listitem">
+กรมควบคุมมลพิษ. 2026. <em>Air4Thai:
+รายงานสถานการณ์และคุณภาพอากาศประเทศไทย</em>. <a href="http://air4thai.pcd.go.th">http://air4thai.pcd.go.th</a>.
+</div>
+<div id="ref-neb2022pm25" class="csl-entry" role="listitem">
+คณะกรรมการสิ่งแวดล้อมแห่งชาติ. 2022. <em>ประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ เรื่อง
+กำหนดมาตรฐานฝุ่นละอองขนาดไม่เกิน 2.5 ไมครอน ในบรรยากาศโดยทั่วไป</em>.
+</div>
+<div id="ref-copyright1994thai" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 1994. <em>พระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537</em>.
+</div>
+<div id="ref-oic1997official" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 1997. <em>พระราชบัญญัติข้อมูลข่าวสารของราชการ พ.ศ. 2540</em>.
+</div>
+<div id="ref-dga2019digital" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019a.
+<em>พระราชบัญญัติการบริหารงานและการให้บริการภาครัฐผ่านระบบดิจิทัล พ.ศ. 2562</em>.
+</div>
+<div id="ref-pdpa2019personal" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019b. <em>พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</em>.
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./book-index.html" class="pagination-link" aria-label="ดัชนี">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ดัชนี</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

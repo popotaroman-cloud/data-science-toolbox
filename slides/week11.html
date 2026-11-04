@@ -779,6 +779,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/15-multivariate.html">บทที่ 15</a> และ <a href="../book/chapters/16-synthetic-privacy.html">บทที่ 16</a> ก่อนเข้าเรียน</li>
 <li>อ่าน <em>Forecasting: Principles and Practice</em> บท “Time series decomposition” หัวข้อ STL</li>
 <li>ทบทวน PCA และ k-means หรืออ่าน scikit-learn User Guide หัวข้อ “Clustering”</li>
 <li>จดสถานีที่มีพฤติกรรม “ผิดจากกลุ่ม” จากผลสัปดาห์นี้ ไว้ใช้เรื่อง outlier สัปดาห์ที่ 12</li>
@@ -1071,7 +1072,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

@@ -593,6 +593,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/19-storytelling-reports.html">บทที่ 19</a> และ <a href="../book/chapters/20-dashboards.html">บทที่ 20</a> ก่อนเข้าเรียน</li>
 <li>ติดตั้ง Quarto CLI แล้วทดสอบ <code>quarto check</code></li>
 <li>เลือก 3–4 คำถามใน <code>questions.md</code> ที่ตอบได้ชัดที่สุด + ข้อค้นพบหลักคำถามละ 1 ประโยค</li>
 <li>ร่าง wireframe แดชบอร์ดบนกระดาษ: แต่ละระดับ (ประเทศ / ภาค / จังหวัด / สถานี) แสดงอะไร มีตัวกรองอะไร</li>
@@ -885,7 +886,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

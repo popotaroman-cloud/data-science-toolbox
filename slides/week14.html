@@ -742,6 +742,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/21-case-study-pm25.html">บทที่ 21</a> และ <a href="../book/chapters/22-ethics-ai.html">บทที่ 22</a> ก่อนเข้าเรียน</li>
 <li>ทำรายงานและแดชบอร์ดให้เสร็จ แก้ตามผล fresh-clone test</li>
 <li>อ่านคู่มือการนำเสนอสัปดาห์ที่ 15 และเกณฑ์ 30 คะแนน</li>
 <li>ร่างลำดับการนำเสนอ 10 นาที</li>
@@ -1035,7 +1036,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

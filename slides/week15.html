@@ -736,6 +736,7 @@
 <li>ทบทวนโค้ดส่วนที่ตนเองอธิบายได้ยากที่สุด</li>
 <li>เตรียมภาพหน้าจอแดชบอร์ดแต่ละระดับ + <code>report.html</code> เปิดแบบ offline</li>
 </ul>
+<p><strong>อ่านต่อ:</strong> หนังสือ<a href="../book/chapters/21-case-study-pm25.html">บทที่ 21</a> (กรณีศึกษาครบวงจร) และ <a href="../book/chapters/22-ethics-ai.html">บทที่ 22</a> (จริยธรรมและการใช้ AI)</p>
 <p><strong>หลังจบรายวิชา:</strong> ปรับ README เป็น portfolio · พิจารณา deploy (ตรวจสัญญาอนุญาตและไม่มีข้อมูลส่วนบุคคล) · ต่อยอดคำถามที่ยังตอบไม่ได้</p>
 
 
@@ -1025,7 +1026,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

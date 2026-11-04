@@ -662,6 +662,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/21-case-study-pm25.html">บทที่ 21 หัวข้อ 21.1–21.4</a> เป็นตัวอย่างการนำเสนอ pipeline</li>
 <li>อ่านเอกสารสัปดาห์ที่ 8 (Checkpoint 1) โดยเฉพาะเกณฑ์การให้คะแนน</li>
 <li>ลบ <code>data/</code> (หรือ clone ใหม่) แล้วรัน pipeline ตาม README ตั้งแต่ต้น จดทุกขั้นที่ติด</li>
 <li>ปรับ <code>README.md</code> ให้มีขั้นตอนรันครบทุก script ตามลำดับ</li>
@@ -954,7 +955,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

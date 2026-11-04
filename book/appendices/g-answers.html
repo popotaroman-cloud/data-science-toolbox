@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/h-toolbox-reference.html" rel="next">
+<link href="../appendices/f-troubleshooting.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/g-answers.html">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#sec-appg-ch00" id="toc-sec-appg-ch00" class="nav-link active" data-scroll-target="#sec-appg-ch00">บทที่ 0</a></li>
+  <li><a href="#sec-appg-ch01" id="toc-sec-appg-ch01" class="nav-link" data-scroll-target="#sec-appg-ch01">บทที่ 1</a></li>
+  <li><a href="#sec-appg-ch02" id="toc-sec-appg-ch02" class="nav-link" data-scroll-target="#sec-appg-ch02">บทที่ 2</a></li>
+  <li><a href="#sec-appg-ch03" id="toc-sec-appg-ch03" class="nav-link" data-scroll-target="#sec-appg-ch03">บทที่ 3</a></li>
+  <li><a href="#sec-appg-ch04" id="toc-sec-appg-ch04" class="nav-link" data-scroll-target="#sec-appg-ch04">บทที่ 4</a></li>
+  <li><a href="#sec-appg-ch05" id="toc-sec-appg-ch05" class="nav-link" data-scroll-target="#sec-appg-ch05">บทที่ 5</a></li>
+  <li><a href="#sec-appg-ch06" id="toc-sec-appg-ch06" class="nav-link" data-scroll-target="#sec-appg-ch06">บทที่ 6</a></li>
+  <li><a href="#sec-appg-ch07" id="toc-sec-appg-ch07" class="nav-link" data-scroll-target="#sec-appg-ch07">บทที่ 7</a></li>
+  <li><a href="#sec-appg-ch08" id="toc-sec-appg-ch08" class="nav-link" data-scroll-target="#sec-appg-ch08">บทที่ 8</a></li>
+  <li><a href="#sec-appg-ch09" id="toc-sec-appg-ch09" class="nav-link" data-scroll-target="#sec-appg-ch09">บทที่ 9</a></li>
+  <li><a href="#sec-appg-ch10" id="toc-sec-appg-ch10" class="nav-link" data-scroll-target="#sec-appg-ch10">บทที่ 10</a></li>
+  <li><a href="#sec-appg-ch11" id="toc-sec-appg-ch11" class="nav-link" data-scroll-target="#sec-appg-ch11">บทที่ 11</a></li>
+  <li><a href="#sec-appg-ch12" id="toc-sec-appg-ch12" class="nav-link" data-scroll-target="#sec-appg-ch12">บทที่ 12</a></li>
+  <li><a href="#sec-appg-ch13" id="toc-sec-appg-ch13" class="nav-link" data-scroll-target="#sec-appg-ch13">บทที่ 13</a></li>
+  <li><a href="#sec-appg-ch14" id="toc-sec-appg-ch14" class="nav-link" data-scroll-target="#sec-appg-ch14">บทที่ 14</a></li>
+  <li><a href="#sec-appg-ch15" id="toc-sec-appg-ch15" class="nav-link" data-scroll-target="#sec-appg-ch15">บทที่ 15</a></li>
+  <li><a href="#sec-appg-ch16" id="toc-sec-appg-ch16" class="nav-link" data-scroll-target="#sec-appg-ch16">บทที่ 16</a></li>
+  <li><a href="#sec-appg-ch17" id="toc-sec-appg-ch17" class="nav-link" data-scroll-target="#sec-appg-ch17">บทที่ 17</a></li>
+  <li><a href="#sec-appg-ch18" id="toc-sec-appg-ch18" class="nav-link" data-scroll-target="#sec-appg-ch18">บทที่ 18</a></li>
+  <li><a href="#sec-appg-ch19" id="toc-sec-appg-ch19" class="nav-link" data-scroll-target="#sec-appg-ch19">บทที่ 19</a></li>
+  <li><a href="#sec-appg-ch20" id="toc-sec-appg-ch20" class="nav-link" data-scroll-target="#sec-appg-ch20">บทที่ 20</a></li>
+  <li><a href="#sec-appg-ch21" id="toc-sec-appg-ch21" class="nav-link" data-scroll-target="#sec-appg-ch21">บทที่ 21</a></li>
+  <li><a href="#sec-appg-ch22" id="toc-sec-appg-ch22" class="nav-link" data-scroll-target="#sec-appg-ch22">บทที่ 22</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/g-answers.html">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>แนวคำตอบของแบบฝึกหัดระดับพื้นฐานและประยุกต์ ส่วนระดับท้าทายเว้นไว้ให้ผู้อ่านคิดเอง</p>
+<section id="sec-appg-ch00" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch00">บทที่ 0</h2>
+<p><strong>0.1</strong> ความเข้าใจที่เชื่อถือได้มีสองส่วน ส่วนแรกคือ <em>ความเข้าใจ</em> หมายถึงคำอธิบายที่ตอบคำถามของผู้ตัดสินใจ ส่วนที่สองคือ <em>เชื่อถือได้</em> หมายถึงผู้อื่นตรวจสอบได้ว่าได้มาอย่างไร ทำซ้ำได้ และรู้ข้อจำกัด บทที่ 2 (สภาพแวดล้อมที่ทำซ้ำได้) และบทที่ 3 (version control) สร้างส่วนที่สอง เพราะทำให้ผู้อื่นรันโค้ดเดียวกันในสภาพแวดล้อมเดียวกันได้ และเห็นประวัติการเปลี่ยนแปลงทั้งหมด</p>
+<p><strong>0.2</strong> ข้อมูลที่มีมาจากเครื่องบินที่บินกลับมาได้เท่านั้น เครื่องบินที่ถูกยิงตรงจุดสำคัญตกและไม่ได้ถูกนับ ตำแหน่งที่ไม่มีรอยกระสุนบนเครื่องที่รอดจึงไม่ได้แปลว่าไม่เคยถูกยิง แต่อาจแปลว่าเครื่องที่ถูกยิงตรงนั้นไม่รอดกลับมา ข้อมูลจึงหายไปอย่างเป็นระบบ ไม่ใช่แบบสุ่ม</p>
+<p><strong>0.3</strong> requests → ได้มาซึ่งข้อมูล · DuckDB → จัดเก็บและสืบค้น · pandera → ตรวจคุณภาพ · missingno → ตรวจคุณภาพ (ข้อมูลสูญหาย) · Plotly → สำรวจด้วยภาพ · Streamlit → สื่อสารผล</p>
+<p><strong>0.4</strong> <code>data/raw/*.json</code> → <code>measurements</code> → <code>daily_pm25</code> → <code>daily_pm25_clean</code></p>
+<p><strong>0.5</strong> มาตรฐาน 37.5 µg/m³ กำหนดสำหรับค่าเฉลี่ย 24 ชั่วโมง ค่ารายชั่วโมงแกว่งขึ้นลงตามช่วงเวลาของวัน ค่ารายชั่วโมงที่เกิน 37.5 ในบางชั่วโมงไม่ได้แปลว่าค่าเฉลี่ยของวันนั้นเกินมาตรฐาน ต้องรวมเป็นค่าเฉลี่ยรายวันก่อนเปรียบเทียบ</p>
+<p><strong>0.6</strong> ตัวอย่างคำตอบ (กรณี Mars Climate Orbiter): ปัญหาหน่วยไม่ตรงกันกับข้อมูล PM2.5 อาจเกิดที่ขั้นโหลดข้อมูล (<code>src/load_duckdb.py</code>) ถ้าเวลาที่ API ส่งมาถูกตีความเป็น UTC แทนเวลาไทย หรือถ้าข้อมูลจากแหล่งที่สองรายงานในหน่วยอื่น สังเกตได้จากการวาดค่าเฉลี่ยรายชั่วโมงของวัน (diurnal pattern) แล้วพบว่าพีกเลื่อนไปจากช่วงเวลาที่คาดไว้ หรือค่าเฉลี่ยของแหล่งที่สองต่างจากแหล่งแรกเป็นสัดส่วนคงที่ คำตอบที่ดีต้องระบุทั้งขั้นที่เกิดปัญหาและวิธีตรวจพบที่ทำได้จริง</p>
+<p><strong>0.7</strong> คำตอบแตกต่างกันได้ ตัวอย่าง: ระดับน้ำในแม่น้ำจากสถานีวัดน้ำ แหล่งข้อมูลคือบริการข้อมูลของหน่วยงานที่ดูแลทรัพยากรน้ำ มิติเวลาเป็นรายชั่วโมงหรือรายวัน มิติพื้นที่คือสถานีวัดที่มีพิกัด ปัญหาคุณภาพที่คาดคือเครื่องวัดขัดข้องช่วงน้ำหลาก ค่าคงที่ผิดปกติ และการเปลี่ยนจุดอ้างอิงระดับ เหมาะกับสถาปัตยกรรมของเล่มเพราะดึงด้วยโค้ดได้ มีเวลาและพื้นที่ และไม่สะอาดสมบูรณ์</p>
+<p><strong>0.8</strong> ตัวอย่างนิยาม: “ปีที่ผ่านมา” คือวันที่ 1 มกราคม ถึง 31 ธันวาคม ค.ศ. 2025 ตามเวลา Asia/Bangkok · “วัน” คือวันปฏิทินตามเวลา Asia/Bangkok ที่มีค่ารายชั่วโมงอย่างน้อย 18 ชั่วโมง (<code>is_complete = TRUE</code>) · “สัดส่วน” คือ จำนวนวันที่ <code>pm25_mean &gt; 37.5</code> หารด้วยจำนวนวันที่ครบถ้วน คำนวณแยกแต่ละสถานีก่อน แล้วรายงานค่ามัธยฐานของสถานีในแต่ละภาค นิยามอื่นยอมรับได้ถ้าชัดเจนพอให้คำนวณซ้ำได้ผลตรงกัน</p>
+<p><strong>0.9</strong> คำตอบขึ้นกับผู้เรียน คำตอบที่ดีต้องระบุจุดแข็งและจุดอ่อนของตนตามรายการในหัวข้อ 0.8 เลือกเส้นทางจากหัวข้อ 0.9 ที่สอดคล้องกัน และระบุภาคผนวกที่ควรอ่านก่อน เช่น ผู้ที่ยังไม่คล่อง Python ควรอ่านภาคผนวก ก ก่อนบทที่ 5</p>
+</section>
+<section id="sec-appg-ch01" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch01">บทที่ 1</h2>
+<p><strong>1.1</strong> สถิติศาสตร์บอกว่าสิ่งที่เห็นน่าเชื่อถือแค่ไหน การคำนวณทำให้การวิเคราะห์เป็นไปได้ ถูกต้อง และทำซ้ำได้ ความรู้เชิงโดเมนบอกว่าคำถามใดมีความหมายและผลแปลว่าอะไร ตัวอย่างความผิดพลาด: ขาดสถิติ เช่น สรุปว่าร้านค้าสาขาหนึ่งขายดีขึ้นจากยอดขายสองสัปดาห์ ทั้งที่ยอดขายรายสัปดาห์แกว่งมากตามปกติ · ขาดการคำนวณ เช่น รวมยอดจากหลายไฟล์ด้วยการคัดลอกวางแล้วลืมไฟล์หนึ่ง · ขาดความรู้เชิงโดเมน เช่น ตัดยอดขายที่สูงผิดปกติช่วงเทศกาลทิ้งเพราะคิดว่าเป็นข้อมูลผิด</p>
+<p><strong>1.2</strong> นักสืบหาเบาะแสและสร้างข้อสันนิษฐาน แต่ไม่ได้ตัดสินว่าใครผิด ศาลเป็นผู้ชั่งน้ำหนักหลักฐานตามกระบวนการที่เข้มงวด ทั้งสองงานจำเป็นและเสริมกัน ผลของการสำรวจข้อมูลจึงเป็นข้อสันนิษฐานที่ต้องผ่านการวิเคราะห์เชิงยืนยันก่อนจะเป็นข้อสรุป และการวิเคราะห์เชิงยืนยันที่ไม่มีการสำรวจก่อนอาจทดสอบคำถามผิด</p>
+<p><strong>1.3</strong> (1) วงจรของหนังสือเริ่มจากคำถามเชิงวิเคราะห์ ส่วน CRISP-DM เริ่มจากเป้าหมายขององค์กร (2) วงจรของหนังสือแยกขั้นจัดเก็บและขั้นตรวจคุณภาพออกมาเป็นขั้นที่มีผลงานชัดเจน และให้การสำรวจเป็นผลงานหลัก ขณะที่ CRISP-DM มองการสำรวจเป็นส่วนหนึ่งของ data understanding ก่อน modeling</p>
+<p><strong>1.4</strong> สหสัมพันธ์วัดว่าจุดทั้งหมดอยู่ใกล้เส้นตรงเส้นเดียวแค่ไหน จุดผิดปกติที่อยู่ห่างจากเส้นมากทำให้ผลรวมของความเบี่ยงเบนกำลังสองจากเส้นเพิ่มขึ้นมาก ค่าสหสัมพันธ์จึงลดลงจากเกือบ 1 เหลือ 0.82 และยังดึงเส้นถดถอยให้ชันขึ้นด้วย ทั้งที่จุดอื่น 10 จุดเรียงเป็นเส้นตรงเกือบสมบูรณ์</p>
+<p><strong>1.5</strong> การสำรวจต้องการความยืดหยุ่น ลองได้หลายแบบและทิ้งได้ง่าย notebook เหมาะกับงานนี้ ส่วนโค้ดทำความสะอาดข้อมูลต้องให้ผลเหมือนเดิมทุกครั้ง ผู้อื่นต้องตรวจสอบได้ และถูกเรียกใช้ซ้ำใน pipeline จึงควรเป็นไฟล์ <code>.py</code> ใน <code>src/</code> ที่รันตามลำดับได้และไม่มีปัญหา hidden state</p>
+<p><strong>1.6</strong> มัธยฐานของ <span class="math inline">\(y\)</span> ไม่เท่ากันทุกชุด (ชุดที่ 1 = 7.58, ชุดที่ 2 = 8.14, ชุดที่ 3 = 7.11, ชุดที่ 4 = 7.04) แสดงว่าสถิติแบบทนทานอย่างมัธยฐานจับความต่างของรูปร่างข้อมูลได้บางส่วน เพราะไม่ถูกดึงด้วยค่าผิดปกติเหมือนค่าเฉลี่ย แต่มัธยฐานก็ยังเป็นตัวเลขเดียวที่บอกรูปร่างทั้งหมดไม่ได้ จึงยังต้องวาดกราฟ</p>
+<p><strong>1.7</strong> ความคาดหวัง: ปี ค.ศ. 2022 มี 365 วัน แต่ละสถานีควรมี 8,760 แถว และค่า <code>pm25</code> ไม่หายเกินร้อยละ 5 query ตัวอย่าง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_rows, <span class="fu">COUNT</span>(pm25) <span class="kw">AS</span> n_pm25</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> ts <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2022-01-01'</span> <span class="kw">AND</span> ts <span class="op">&lt;</span> <span class="dt">TIMESTAMP</span> <span class="st">'2023-01-01'</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> station_id</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n_rows;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าผลไม่ตรงกับความคาดหวัง ให้แยกว่าแถวหาย (n_rows &lt; 8,760) หรือค่าหาย (n_pm25 &lt; n_rows) แล้วหาว่าส่วนที่ขาดอยู่ช่วงใด เช่น นับรายเดือน จากนั้นตั้งความคาดหวังใหม่ เช่น “สถานีที่เปิดกลางปีควรมีแถวเริ่มจากวันเปิด” แล้วตรวจต่อ</p>
+<p><strong>1.8</strong> คำตอบขึ้นกับข้อมูลจริง คำตอบที่ดีต้องรายงานค่าเฉลี่ย มัธยฐาน ส่วนเบี่ยงเบนมาตรฐาน และสัดส่วนวันที่เกินมาตรฐานของทั้งสองสถานี และสรุปว่าถ้าส่วนเบี่ยงเบนมาตรฐานหรือสัดส่วนวันที่เกินมาตรฐานต่างกันชัดเจน สองสถานีไม่ได้ “เหมือนกัน” ในแง่การได้รับฝุ่นของประชาชน แม้ค่าเฉลี่ยใกล้กัน และควรระบุข้อจำกัดว่าเป็นการเลือกสถานีหลังดูข้อมูล</p>
+<p><strong>1.9</strong> ตัวอย่าง: คำถาม “ปี ค.ศ. 2023 จังหวัดอุบลราชธานีมีวันที่ PM2.5 เกินมาตรฐานมากกว่าปี ค.ศ. 2022 หรือไม่” สิ่งที่ต้องสำรวจก่อน: (1) จำนวนสถานีในจังหวัดที่มีข้อมูลทั้งสองปี (2) สัดส่วนชั่วโมงที่มีข้อมูลในแต่ละเดือนของทั้งสองปี โดยเฉพาะช่วงฤดูฝุ่น (3) เกณฑ์ที่ใช้นับวันเกินมาตรฐานต้องเป็นเกณฑ์เดียวกันทั้งสองปี (4) ตัวชี้วัดอื่น เช่น ค่าสูงสุดรายวัน ให้ทิศทางเดียวกันหรือไม่</p>
+<p><strong>1.10</strong> query ตัวอย่าง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, <span class="dt">year</span>(m.ts) <span class="kw">AS</span> <span class="dt">year</span>, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> m.station_id) <span class="kw">AS</span> n_stations</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements <span class="kw">AS</span> m</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> m.ts <span class="op">&lt;</span> <span class="dt">TIMESTAMP</span> <span class="st">'2024-01-01'</span> <span class="kw">AND</span> m.pm25 <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> s.region, <span class="dt">year</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าจำนวนสถานีเปลี่ยนไป ค่าเฉลี่ยของภาคในแต่ละปีมาจากกลุ่มสถานีต่างกัน ความต่างระหว่างปีจึงอาจเกิดจากการเปลี่ยนองค์ประกอบของเครือข่าย ไม่ใช่การเปลี่ยนของอากาศ ควรเปรียบเทียบเฉพาะสถานีที่มีข้อมูลครบทุกปี หรือคำนวณแยกรายสถานีก่อนแล้วจึงสรุประดับภาค</p>
+</section>
+<section id="sec-appg-ch02" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch02">บทที่ 2</h2>
+<p><strong>2.1</strong> reproducibility คือได้ผลสอดคล้องกันเมื่อใช้ข้อมูลเดียวกันและโค้ดเดียวกัน replicability คือได้ผลสอดคล้องกันเมื่อศึกษาคำถามเดียวกันด้วยข้อมูลชุดใหม่ ตัวอย่าง: อาจารย์รัน notebook ของนักศึกษากับไฟล์ตัวอย่าง <code>pm25_sample.duckdb</code> แล้วได้กราฟสัดส่วนวันเกินมาตรฐานรายภาคตรงกับในรายงาน (reproducibility) · นักศึกษาอีกกลุ่มใช้ข้อมูลของปีถัดไปแล้วพบว่าภาคเหนือยังมีสัดส่วนสูงสุดเหมือนเดิม (replicability)</p>
+<p><strong>2.2</strong> shell ค้นหาไฟล์ชื่อ <code>python</code> ในโฟลเดอร์ตามลำดับที่ระบุในตัวแปร <code>PATH</code> และใช้ไฟล์แรกที่พบ การ activate สภาพแวดล้อมนำโฟลเดอร์ <code>bin/</code> (หรือ <code>Scripts\</code> บน Windows) ของสภาพแวดล้อมไปไว้หน้าสุดของ <code>PATH</code> ทำให้ shell พบ <code>python</code> ของสภาพแวดล้อมก่อนตัวอื่น</p>
+<p><strong>2.3</strong> wheel เป็นแพ็กเกจที่สร้างเสร็จแล้วสำหรับระบบปฏิบัติการและเวอร์ชัน Python ที่ระบุ ติดตั้งได้ทันที ส่วน source distribution ต้อง build บนเครื่องผู้ติดตั้ง และถ้ามีส่วนภาษา C ต้องมี compiler เมื่อใช้ Python เวอร์ชันใหม่มาก แพ็กเกจอาจยังไม่ได้ออก wheel สำหรับเวอร์ชันนั้น pip จึงย้อนไปใช้ source distribution ซึ่งอาจ build ไม่สำเร็จ</p>
+<p><strong>2.4</strong> (1) รัน cell ข้ามลำดับ ป้องกันด้วย Restart and Run All ก่อน commit (2) ลบ cell ที่สร้างตัวแปรแต่ตัวแปรยังอยู่ในหน่วยความจำ ป้องกันด้วย restart kernel เป็นระยะและประกาศค่าคงที่ไว้ที่ cell แรก (3) cell ที่แก้ค่าตัวแปรเดิม เช่น <code>df["pm25"] = df["pm25"] * 1.1</code> รันซ้ำแล้วคูณซ้ำ ป้องกันด้วยการเขียน cell ให้ idempotent โดยสร้างตัวแปรใหม่แทนการแก้ตัวแปรเดิม</p>
+<p><strong>2.5</strong> ยกเลิกหรือเปลี่ยน key นั้นที่ผู้ให้บริการทันที เพราะ key อยู่ในประวัติของ repository แล้ว ทุกคนที่เข้าถึง repository ดู commit เก่าได้ และ repository สาธารณะอาจถูกสแกนหา key โดยอัตโนมัติ การลบไฟล์ใน commit ถัดไปไม่ได้ลบ commit เดิมออกจากประวัติ จากนั้นจึงลบไฟล์ออกจากการติดตาม (<code>git rm --cached .env</code>) และเพิ่ม <code>.env</code> ใน <code>.gitignore</code></p>
+<p><strong>2.6</strong> ถ้าทั้งสองที่แสดง <code>sys.executable</code> ชี้ไปที่ไฟล์เดียวกัน (เช่น <code>.../envs/dstoolbox/bin/python</code>) แปลว่าใช้สภาพแวดล้อมเดียวกัน ถ้าใน notebook ชี้ไปที่อื่น ต้องเปลี่ยน kernel ใน VS Code หรือ JupyterLab ให้เป็น <code>dstoolbox</code> หรือ <code>.venv</code> ของโครงการ ค่า <code>sys.prefix != sys.base_prefix</code> เป็น <code>True</code> เมื่ออยู่ใน virtual environment แบบ venv/uv ส่วนสภาพแวดล้อม conda อาจให้ค่าเท่ากัน เพราะ conda ไม่ได้ใช้กลไก <code>pyvenv.cfg</code> ให้ดูจาก path ของ <code>sys.prefix</code> แทน</p>
+<p><strong>2.7</strong> จำนวนแพ็กเกจขึ้นกับเวอร์ชันและระบบปฏิบัติการ แต่จะมากกว่าสองตัวเสมอ เพราะ pandas พึ่งพาแพ็กเกจอื่น เช่น NumPy, python-dateutil, pytz และ tzdata ซึ่งก็พึ่งพาแพ็กเกจอื่นต่อไปอีก ไฟล์ lock บันทึกทั้งแพ็กเกจที่เราระบุโดยตรงและแพ็กเกจที่ถูกพึ่งพาทางอ้อม</p>
+<p><strong>2.8</strong> เมื่อเรียกจาก notebook ใน <code>notebooks/</code> ฟังก์ชันไล่ขึ้นไปหนึ่งระดับและพบ <code>environment.yml</code> ที่ root เมื่อเรียกจาก script ที่รันจาก root ก็พบที่โฟลเดอร์ปัจจุบันทันที ทั้งสองได้ <code>ROOT / "data" / "pm25.duckdb"</code> เป็น path เดียวกัน ข้อสังเกตคือ <code>project_root()</code> ใช้ <code>Path.cwd()</code> จึงขึ้นกับโฟลเดอร์ที่รัน ถ้ารัน script จากโฟลเดอร์ที่อยู่นอกโครงการจะหาไม่พบ สำหรับ script ใน <code>src/</code> จึงอาจใช้ <code>Path(__file__).resolve().parent.parent</code> แทน</p>
+<p><strong>2.9</strong> ตัวอย่าง: cell 1 สร้าง <code>x = 10</code> แล้วรัน cell 2 ที่มี <code>print(x * 2)</code> จากนั้นลบ cell 1 ทิ้ง cell 2 ยังรันได้เพราะ <code>x</code> อยู่ในหน่วยความจำ เมื่อสั่ง Restart and Run All จะได้ <code>NameError: name 'x' is not defined</code> ที่ cell 2 แสดงว่ามีตัวแปรที่ไม่ได้สร้างจากโค้ดในไฟล์</p>
+<p><strong>2.10</strong> คำตอบขึ้นกับผลที่ได้จาก AI สิ่งที่ควรตรวจคือ ชื่อ key ในโค้ด (เช่น <code>stations</code>, <code>stationID</code>, <code>AQILast</code>) ตรงกับไฟล์ JSON จริงหรือไม่ โค้ดจัดการค่า <code>"-1"</code> เป็นค่าหายหรือไม่ การรวมวันที่กับเวลาเป็น timestamp ถูกต้องหรือไม่ และ URL ที่ใช้ตรงกับเอกสารของ Air4Thai หรือไม่ บันทึกใน <code>AI_USAGE.md</code> ต้องระบุว่าตรวจอะไรไปและพบอะไร ถ้าพบชื่อ key ที่ไม่มีอยู่จริงให้ระบุว่าเป็น hallucination</p>
+</section>
+<section id="sec-appg-ch03" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch03">บทที่ 3</h2>
+<p><strong>3.1</strong> blob เก็บเนื้อหาของไฟล์หนึ่งไฟล์โดยไม่มีชื่อ tree เก็บรายการชื่อไฟล์และโฟลเดอร์พร้อม hash ของ blob หรือ tree ที่แต่ละชื่อชี้ไป commit เก็บ hash ของ tree ระดับบนสุด hash ของ commit แม่ ผู้เขียน เวลา และข้อความ วัตถุที่เก็บชื่อไฟล์คือ tree</p>
+<p><strong>3.2</strong> commit แต่ละตัวเก็บ hash ของ commit แม่ไว้ในเนื้อหา และ hash ของ commit คำนวณจากเนื้อหาทั้งหมด เมื่อแก้ข้อความของ commit หนึ่ง hash ของมันเปลี่ยน commit ลูกที่เก็บ hash ของแม่ไว้จึงมีเนื้อหาเปลี่ยน hash ของลูกก็เปลี่ยนตาม และเป็นเช่นนี้ต่อไปจนถึง commit ล่าสุด</p>
+<p><strong>3.3</strong> branch คือไฟล์เล็ก ๆ ใน <code>.git/refs/heads/</code> ที่เก็บ hash ของ commit หนึ่งตัว การสร้าง branch ใหม่จึงเป็นเพียงการเขียนไฟล์ข้อความ 40 ตัวอักษร ไม่ได้คัดลอกไฟล์ใดของโครงการ</p>
+<p><strong>3.4</strong> ตัวอย่าง:</p>
+<pre class="text"><code>ตรวจว่าค่า PM2.5 ต้องไม่ติดลบใน validate.py
+
+ค่าติดลบเป็นไปไม่ได้ทางกายภาพ ถ้าพบแปลว่าค่าแทนอย่าง -1
+หลุดผ่านขั้นโหลดมา ให้ pipeline หยุดพร้อมแจ้งสถานีและเวลาที่พบ</code></pre>
+<p><strong>3.5</strong> fast-forward เกิดเมื่อ branch ปลายทาง (เช่น <code>main</code>) ไม่มี commit ใหม่เลยตั้งแต่แตก branch ออกไป Git จึงเลื่อนป้าย <code>main</code> ไปชี้ commit ล่าสุดของ branch ได้ทันที ส่วน merge commit เกิดเมื่อทั้งสองฝั่งมี commit ใหม่ Git ต้องรวมแบบ three-way จากจุดแยกและสร้าง commit ที่มี parent สองตัว</p>
+<p><strong>3.6</strong> ใน commit ที่สอง hash ของ blob ของ <code>README.md</code> เปลี่ยน เพราะเนื้อหาเปลี่ยน hash ของ tree ระดับบนก็เปลี่ยน เพราะ tree ชี้ไปยัง blob ใหม่ ถ้ามีโฟลเดอร์ <code>src/</code> ที่ไม่ได้แก้ hash ของ tree ของ <code>src</code> จะเหมือนเดิมในทั้งสอง commit และ commit ที่สองมีบรรทัด <code>parent</code> ชี้ไปยัง commit แรก</p>
+<p><strong>3.7</strong> ผลของ <code>git log --oneline --graph</code> หลังแก้ conflict และ commit ควรแสดง merge commit ที่มีสองเส้นมาบรรจบ คล้ายตัวอย่างในหัวข้อ 3.3 ไฟล์ <code>src/config.py</code> หลังแก้ต้องไม่มีเครื่องหมาย <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> หรือ <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> เหลืออยู่ และควรมีทั้ง <code>THRESHOLD = 37.5</code> และ <code>WHO_GUIDELINE = 15.0</code></p>
+<p><strong>3.8</strong> คำตอบขึ้นกับ PR ที่ review ความคิดเห็นที่ดีต้องเจาะจงบรรทัด บอกปัญหาและเหตุผล ตัวอย่างความคิดเห็นด้านข้อมูล: “query นี้ join <code>measurements</code> กับ <code>stations</code> แบบ <code>INNER JOIN</code> สถานีที่ไม่มีใน <code>stations</code> จะหายไปโดยไม่รู้ตัว ช่วยตรวจด้วย <code>LEFT JOIN</code> ก่อนว่ามีกี่แถวที่ไม่ตรงกัน (ต้องแก้)” และควรระบุข้อเสนอที่ไม่บังคับแยกไว้ชัดเจน</p>
+<p><strong>3.9</strong> คำตอบขึ้นกับ repository ของผู้เรียน คำสั่งคือ <code>git log -S "37.5" --oneline</code> แล้ว <code>git show &lt;hash&gt;</code> commit message ที่ดีควรบอกว่าเปลี่ยนเป็น 37.5 เพราะเป็นมาตรฐานของไทยที่มีผลตั้งแต่ พ.ศ. 2566 ถ้าข้อความไม่ได้บอกเหตุผล ควรบันทึกเป็นบทเรียนสำหรับ commit ต่อไป</p>
+<p><strong>3.10</strong> คำตอบขึ้นกับโครงการ <code>git status --ignored</code> แสดงไฟล์ที่ถูกละเว้นในส่วน “Ignored files” ไฟล์ที่ควรถูกละเว้นได้แก่ <code>data/</code>, <code>*.duckdb</code>, <code>*.duckdb.wal</code>, <code>.env</code>, <code>.venv/</code>, <code>__pycache__/</code>, <code>.ipynb_checkpoints/</code> และผลการ render ของรายงาน ถ้าไฟล์เหล่านี้ปรากฏใน “Untracked files” แทน ต้องเพิ่มกฎใน <code>.gitignore</code></p>
+</section>
+<section id="sec-appg-ch04" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch04">บทที่ 4</h2>
+<p><strong>4.1</strong> (ก) เชิงพรรณนา สรุปข้อมูลที่มีโดยตรง (ข) เชิงสาเหตุ ถามผลของการเปลี่ยนแปลง (ค) เชิงสำรวจ หารูปแบบเพื่อสร้างข้อสันนิษฐาน (ง) เชิงทำนาย คาดค่าในอนาคตโดยไม่จำเป็นต้องรู้สาเหตุ</p>
+<p><strong>4.2</strong> ไม่ผ่านเกณฑ์ “มีคำตอบได้มากกว่าหนึ่งแบบ” เพราะเป็นจริงโดยนิยาม วันที่ค่าเฉลี่ยเกิน 37.5 µg/m³ ย่อมมีค่าเฉลี่ยสูงกว่า 37.5 µg/m³ เสมอ ไม่มีผลใดที่จะทำให้คำตอบเป็น “ไม่”</p>
+<p><strong>4.3</strong> HARKing คือการเห็นผลก่อนแล้วรายงานราวกับตั้งสมมติฐานไว้ล่วงหน้า เช่น ดูกราฟ 77 จังหวัด พบจังหวัดหนึ่งค่าลดลง แล้วเขียนว่า “เราตั้งสมมติฐานว่ามาตรการของจังหวัดนี้ลดฝุ่น” ส่วน garden of forking paths คือการตัดสินใจที่ทางแยกหลายจุดหลังเห็นข้อมูล แม้มีสมมติฐานไว้ก่อนและทดสอบครั้งเดียว เช่น ตั้งใจทดสอบว่าภาคเหนือสูงกว่าภาคอื่น แต่เลือกใช้มัธยฐานแทนค่าเฉลี่ยและตัดสถานีที่ข้อมูลไม่ครบหลังจากเห็นว่าวิธีนั้นให้ความต่างชัดกว่า</p>
+<p><strong>4.4</strong> ค่า PM2.5 ของวันใกล้กันสัมพันธ์กันสูง (สหสัมพันธ์ในตัว) ถ้าสุ่มแบ่งรายวัน วันในช่วงยืนยันจะอยู่ติดกับวันในช่วงสำรวจ ข้อมูลจึงรั่วระหว่างสองช่วง ทำให้การยืนยันดูดีเกินจริง การแบ่งตามเวลายังตรงกับคำถามที่ผู้ใช้สนใจ คือรูปแบบในอดีตยังเป็นจริงในปัจจุบันหรือไม่</p>
+<p><strong>4.5</strong> 10 สถานี: <span class="math inline">\(1 - 0.95^{10} \approx 0.401\)</span> · 100 สถานี: <span class="math inline">\(1 - 0.95^{100} \approx 0.994\)</span> หมายความว่าเมื่อทดสอบ 100 สถานี แทบแน่นอนว่าจะพบผล “มีนัยสำคัญ” อย่างน้อยหนึ่งสถานีแม้ไม่มีผลจริงเลย</p>
+<p><strong>4.6</strong> ตัวอย่างการปรับ: (1) เฉพาะเจาะจง: “ค่า PM2.5 ของสถานีในจังหวัดอุบลราชธานีช่วง ค.ศ. 2020–2023” (2) วัดได้: “…มีจำนวนวันที่ค่าเฉลี่ย 24 ชม. เกิน 37.5 µg/m³ ปีละกี่วัน เฉพาะวันที่ข้อมูลครบ ≥ 18 ชม.” (3) มีคำตอบได้หลายแบบ: จำนวนวันอาจเป็นศูนย์หรือหลายสิบวัน และอาจต่างกันระหว่างปี (4) นำไปใช้ได้: “…และกระจุกในเดือนใด เพื่อให้สำนักงานสาธารณสุขจังหวัดเตรียมการแจ้งเตือนประชาชนล่วงหน้า”</p>
+<p><strong>4.7</strong> จำนวนสถานีที่ p &lt; 0.05 แตกต่างกันในแต่ละ seed เช่น 0, 1 หรือ 2 สถานี ค่าเฉลี่ยจาก 10 seed ควรอยู่ใกล้ 2 แต่อาจคลาดเคลื่อนได้เพราะจำนวนรอบน้อย ข้อสังเกตสำคัญคือ แม้ไม่มีผลจริงเลย ก็มักพบสถานี “มีนัยสำคัญ” อย่างน้อยหนึ่งแห่ง</p>
+<p><strong>4.8</strong> ตัวอย่าง query ตรวจ:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_leak <span class="kw">FROM</span> measurements_explore <span class="kw">WHERE</span> ts <span class="op">&gt;=</span> <span class="dt">TIMESTAMP</span> <span class="st">'2024-01-01'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ผลต้องเป็น 0 ถ้าไม่ใช่ แปลว่าเงื่อนไขใน view ผิด เช่น ใช้ <code>&lt;=</code> แทน <code>&lt;</code> หรือเปรียบเทียบเป็นข้อความแทน timestamp</p>
+<p><strong>4.9</strong> คำตอบขึ้นกับโครงการของผู้เรียน ตรวจได้ด้วยเกณฑ์ใน <a href="../chapters/04-questions-hypotheses.html#tbl-ch04-good-question" class="quarto-xref">ตารางที่&nbsp;<span>4.2</span></a> ทุกข้อต้องระบุประเภทตาม <a href="../chapters/04-questions-hypotheses.html#tbl-ch04-question-types" class="quarto-xref">ตารางที่&nbsp;<span>4.1</span></a> ระบุเกณฑ์ (เช่น 37.5 µg/m³) และ commit ก่อน notebook first look ตามประวัติใน Git</p>
+<p><strong>4.10</strong> ตัวอย่าง: “ข้อมูลปี พ.ศ. 2563–2566 บ่งชี้ว่าค่า PM2.5 ในกรุงเทพฯ ช่วงวันหยุดยาวต่ำกว่าสัปดาห์ก่อนหน้าโดยเฉลี่ยประมาณร้อยละ 15 ความต่างนี้อาจเกี่ยวข้องกับการจราจรที่ลดลง แต่อาจมาจากสภาพอากาศหรือปัจจัยอื่นด้วย ผลนี้มาจากข้อมูลช่วงสำรวจ และจะตรวจสอบต่อด้วยข้อมูลปี พ.ศ. 2567–2568” ประเด็นคือ เปลี่ยน “พิสูจน์” เป็น “บ่งชี้” เปลี่ยน “ทำให้” เป็นถ้อยคำที่บอกความสัมพันธ์ และระบุว่าเป็นผลจากช่วงสำรวจ</p>
+</section>
+<section id="sec-appg-ch05" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch05">บทที่ 5</h2>
+<p><strong>5.1</strong> <code>404 Not Found</code> แปลว่าไม่พบทรัพยากร เป็นความผิดพลาดถาวรจากฝั่งเรา (เช่น URL ผิด) script ควรหยุดและแจ้ง error ไม่ลองซ้ำ · <code>429 Too Many Requests</code> แปลว่าขอถี่เกินไป script ควรรอตาม header <code>Retry-After</code> (ถ้ามี) แล้วลองใหม่ และพิจารณาลดความถี่ · <code>503 Service Unavailable</code> แปลว่าเซิร์ฟเวอร์ใช้งานไม่ได้ชั่วคราว script ควรรอด้วย backoff แล้วลองใหม่</p>
+<p><strong>5.2</strong> เบราว์เซอร์บางตัวและระบบปฏิบัติการบางระบบหาใบรับรองระดับกลางที่เซิร์ฟเวอร์ไม่ได้ส่งมาได้เอง จึงไล่ certificate chain ถึง root CA ได้ ส่วน requests ใช้ trust store ของ <code>certifi</code> และไม่หาใบรับรองที่ขาดให้ จึงไล่ไม่ถึง root CA <code>verify=False</code> ปิดการยืนยันตัวตนของเซิร์ฟเวอร์ทั้งหมด script จะรับข้อมูลจากผู้ที่แอบอ้างเป็นเซิร์ฟเวอร์ได้ ข้อมูลจึงเชื่อถือไม่ได้</p>
+<p><strong>5.3</strong> ระยะรอครั้งที่ <span class="math inline">\(k\)</span> สุ่มจาก <span class="math inline">\([0, \min(30, 2 \cdot 2^{k-1})]\)</span>: ครั้งที่ 1: 0–2 วินาที · ครั้งที่ 2: 0–4 วินาที · ครั้งที่ 3: 0–8 วินาที · ครั้งที่ 4: 0–16 วินาที · ครั้งที่ 5: 0–30 วินาที (ถูกจำกัดด้วย <span class="math inline">\(c\)</span> เพราะ <span class="math inline">\(2 \cdot 2^4 = 32 &gt; 30\)</span>)</p>
+<p><strong>5.4</strong> (1) ตัวเลขเป็น string ถ้าไม่แปลง การคำนวณจะ error หรือเรียงลำดับผิด (เรียงแบบข้อความ เช่น <code>"100"</code> มาก่อน <code>"9"</code>) (2) ค่าหายเป็น <code>"-1"</code> ถ้าไม่แปลงเป็นค่าว่าง ค่าเฉลี่ยจะต่ำกว่าความจริง และค่าต่ำสุดจะเป็น -1 ซึ่งเป็นไปไม่ได้ทางกายภาพ (3) มีทั้ง <code>value</code> และ <code>aqi</code> ถ้าใช้ผิดตัว จะได้ค่าดัชนีแทนความเข้มข้น และเทียบกับมาตรฐาน 37.5 µg/m³ ไม่ได้</p>
+<p><strong>5.5</strong> ยังเป็น PDPA มาตรา 6 นิยามข้อมูลส่วนบุคคลจากความสามารถในการระบุตัวบุคคลได้ทั้งทางตรงและทางอ้อม ไม่ได้ขึ้นกับว่าข้อมูลเผยแพร่แล้วหรือไม่ การเก็บรวบรวมจึงต้องมีฐานทางกฎหมายตามมาตรา 24 และถ้าเป็นข้อมูลที่มีความอ่อนไหวต้องเป็นไปตามมาตรา 26</p>
+<p><strong>5.6</strong> คำตอบขึ้นกับ response ที่ได้ในวันที่ทดลอง ถ้าโครงสร้างตรงกับที่บันทึกไว้เมื่อ ต.ค. 2569 จะเห็น <code>stationID</code>, <code>nameTH</code>, <code>nameEN</code>, <code>areaTH</code>, <code>areaEN</code>, <code>stationType</code>, <code>lat</code>, <code>long</code> และ <code>AQILast</code> ที่ซ้อน <code>date</code>, <code>time</code> และสารมลพิษ ถ้าพบความต่าง ให้บันทึกวันที่ตรวจและความต่างไว้ในพจนานุกรมข้อมูล และแก้โค้ดโหลดให้ตรงกับโครงสร้างจริง</p>
+<p><strong>5.7</strong> ตัวอย่างโค้ด:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> json.load(<span class="bu">open</span>(<span class="st">"data/sample/air4thai_sample.json"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="bu">float</span>(s[<span class="st">"AQILast"</span>][<span class="st">"PM25"</span>][<span class="st">"value"</span>]) <span class="cf">for</span> s <span class="kw">in</span> data[<span class="st">"stations"</span>]]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>n_missing <span class="op">=</span> <span class="bu">sum</span>(v <span class="op">==</span> <span class="op">-</span><span class="dv">1</span> <span class="cf">for</span> v <span class="kw">in</span> values)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mean_all <span class="op">=</span> <span class="bu">sum</span>(values) <span class="op">/</span> <span class="bu">len</span>(values)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>valid <span class="op">=</span> [v <span class="cf">for</span> v <span class="kw">in</span> values <span class="cf">if</span> v <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mean_valid <span class="op">=</span> <span class="bu">sum</span>(valid) <span class="op">/</span> <span class="bu">len</span>(valid)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(n_missing, <span class="bu">round</span>(mean_all, <span class="dv">1</span>), <span class="bu">round</span>(mean_valid, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ค่าเฉลี่ยที่รวม -1 จะต่ำกว่าค่าเฉลี่ยที่ตัดออกเสมอเมื่อมีค่าหาย และยิ่งมีค่าหายมาก ความต่างยิ่งมาก แสดงว่าการลืมแปลงค่าแทนเป็นค่าว่างทำให้ผลเอียงอย่างเป็นระบบ ไม่ใช่ความคลาดเคลื่อนแบบสุ่ม</p>
+<p><strong>5.8</strong> แนวทาง: ดัดแปลงเซิร์ฟเวอร์ทดสอบให้ตอบ <code>self.send_response(429)</code> พร้อม <code>self.send_header("Retry-After", "2")</code> ในครั้งแรก แล้วเรียก <code>get_with_backoff(url, base=0.5)</code> log ต้องแสดงว่ารออย่างน้อย 2.0 วินาที แม้ระยะรอแบบสุ่มจาก backoff จะน้อยกว่านั้น เพราะโค้ดใช้ <code>max(delay, float(retry_after))</code></p>
+<p><strong>5.9</strong> เมื่อไม่ระบุ encoding pandas ใช้ UTF-8 เป็นค่าเริ่มต้น จะได้ <code>UnicodeDecodeError</code> เมื่ออ่านไฟล์ cp874 เมื่อระบุ <code>encoding="cp874"</code> จะอ่านภาษาไทยได้ถูกต้อง ถ้าใช้ <code>encoding_errors="replace"</code> จะไม่ error แต่ได้อักขระ � ปนอยู่ ซึ่งทำให้ข้อมูลเสียหายโดยไม่รู้ตัว</p>
+<p><strong>5.10</strong> คำตอบขึ้นกับแหล่งข้อมูลของโครงการ README ที่ดีต้องระบุ URL ของแหล่งข้อมูล วันที่ตรวจสอบ ผลการตรวจ <code>robots.txt</code> ข้อกำหนดการใช้งานหรือสัญญาอนุญาต วิธีอ้างอิงที่แหล่งข้อมูลกำหนด ความถี่ที่ script ดึงข้อมูล และผลการประเมินว่ามีข้อมูลส่วนบุคคลหรือไม่</p>
+</section>
+<section id="sec-appg-ch06" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch06">บทที่ 6</h2>
+<p><strong>6.1</strong> สถานีหนึ่งมีค่าวัดได้หนึ่งแถวต่อหนึ่งชั่วโมง แต่ในชั่วโมงเดียวกันมีค่าวัดจากหลายสถานี ลำพัง <code>station_id</code> หรือ <code>ts</code> จึงระบุแถวไม่ได้ ต้องใช้ทั้งคู่ ถ้าใช้ <code>ts</code> อย่างเดียวเป็น primary key ฐานข้อมูลจะยอมให้มีได้เพียงหนึ่งแถวต่อชั่วโมงทั้งประเทศ การเพิ่มค่าวัดของสถานีที่สองในชั่วโมงเดียวกันจะถูกปฏิเสธ</p>
+<p><strong>6.2</strong> update anomaly เกิดเมื่อข้อเท็จจริงเดียวถูกเก็บหลายที่แล้วแก้ไม่ครบ เช่น ถ้าเก็บภาคของสถานีไว้ในทุกแถวของค่าวัดรายชั่วโมง แล้วพบว่าภาคของสถานีหนึ่งบันทึกผิด ต้องแก้หลายพันแถว ถ้าแก้ไม่ครบ สถานีเดียวกันจะอยู่สองภาค การแยกตาราง <code>stations</code> ทำให้ภาคของสถานีถูกเก็บเพียงแถวเดียว แก้ที่เดียวก็ถูกต้องทั้งหมด</p>
+<p><strong>6.3</strong> (ก) OLTP (ข) OLAP (ค) OLTP (ง) OLAP</p>
+<p><strong>6.4</strong> ใน column store ค่าของ <code>station_id</code> อยู่ติดกัน มีชนิดเดียวกัน และซ้ำกันเป็นช่วงยาว จึงใช้ dictionary encoding และ run-length encoding ได้ดีมาก ใน row store ค่า <code>station_id</code> ถูกคั่นด้วยค่าของคอลัมน์อื่นในแต่ละแถว ความซ้ำจึงไม่อยู่ติดกัน และอัลกอริทึมบีบอัดใช้ประโยชน์ได้น้อยกว่า</p>
+<p><strong>6.5</strong> Parquet เป็นรูปแบบบนดิสก์ที่เน้นความเล็กและการอ่านเฉพาะส่วนที่ต้องการ เหมาะกับการเก็บ สำรอง และแลกเปลี่ยนไฟล์ Arrow เป็นรูปแบบในหน่วยความจำที่เน้นการคำนวณเร็วและส่งต่อระหว่างเครื่องมือได้โดยไม่ต้องแปลง เหมาะกับการส่งข้อมูลระหว่าง DuckDB, pandas และ Polars</p>
+<p><strong>6.6</strong> แถวที่มีค่า -1 และ 1,500 ถูกปฏิเสธด้วย <code>Constraint Error: CHECK constraint failed</code> ส่วน 0 ผ่าน ขอบบน 1,000 µg/m³ ใช้ได้เป็นการกันค่าที่เป็นไปไม่ได้จากความผิดพลาดของการวัดหรือการแปลงหน่วย แต่ต้องมีเหตุผลรองรับ และควรระวังว่าเหตุการณ์ฝุ่นรุนแรงมากอาจให้ค่ารายชั่วโมงสูงเกินที่คาด ถ้าไม่แน่ใจ ควรใช้กฎแบบเตือน (warn) ในขั้นตรวจคุณภาพ (บทที่ 9) แทนการปฏิเสธในฐานข้อมูล</p>
+<p><strong>6.7</strong> ผลขึ้นกับข้อมูลและเครื่อง โดยทั่วไป Parquet เล็กกว่า CSV หลายเท่า ZSTD มักบีบอัดได้เล็กกว่า Snappy แต่ใช้เวลาเขียนนานกว่าเล็กน้อย การอ่านคอลัมน์เดียวจาก Parquet เร็วกว่า CSV มาก เพราะ CSV ต้องอ่านและแยกข้อความทุกคอลัมน์ทุกแถว ส่วน Parquet อ่านเฉพาะ column chunk ของ <code>pm25</code></p>
+<p><strong>6.8</strong> query ตัวอย่าง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> row_group_id) <span class="kw">AS</span> n_row_groups <span class="kw">FROM</span> parquet_metadata(<span class="st">'data/parquet/measurements.parquet'</span>);</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> encodings <span class="kw">FROM</span> parquet_metadata(<span class="st">'data/parquet/measurements.parquet'</span>) <span class="kw">WHERE</span> path_in_schema <span class="op">=</span> <span class="st">'station_id'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>คอลัมน์ <code>station_id</code> ได้ encoding แบบ dictionary (เช่น <code>PLAIN_DICTIONARY</code>) เพราะมีค่าไม่ซ้ำเพียงไม่กี่สิบค่าแต่ปรากฏหลายแสนครั้ง การเก็บพจนานุกรมของค่าไม่ซ้ำแล้วเก็บเพียงหมายเลขอ้างอิงจึงประหยัดพื้นที่มาก</p>
+<p><strong>6.9</strong> query ที่กรอง <code>year = 2023</code> แสดง <code>Scanning Files: 1/6</code> ใน <code>EXPLAIN</code> เพราะ <code>year</code> เป็นคอลัมน์ partition ตัวอ่านข้ามโฟลเดอร์อื่นได้ทั้งโฟลเดอร์ ส่วน query ที่กรองด้วย <code>ts</code> ไม่แสดงบรรทัดนี้ แปลว่าต้องเปิดทุกไฟล์ เพราะ DuckDB ไม่รู้ว่าค่า <code>ts</code> ในโฟลเดอร์ <code>year=2023</code> ทั้งหมดอยู่ในปี 2023 จากชื่อโฟลเดอร์ ตัวกรองของ <code>ts</code> ถูกส่งลงไปใช้กับ statistics ของ row group ภายในแต่ละไฟล์แทน บทเรียนคือ เมื่อข้อมูลถูก partition ตามคอลัมน์ใด ควรใส่เงื่อนไขของคอลัมน์นั้นใน query ด้วย</p>
+<p><strong>6.10</strong> ผลของสองวิธีต้องตรงกัน เพราะ view เป็นเพียง query ที่ตั้งชื่อไว้ query ตัวอย่าง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> region, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_rows <span class="kw">FROM</span> measurements_with_station <span class="kw">GROUP</span> <span class="kw">BY</span> region <span class="kw">ORDER</span> <span class="kw">BY</span> region;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_rows <span class="kw">FROM</span> measurements <span class="kw">AS</span> m <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> s.region <span class="kw">ORDER</span> <span class="kw">BY</span> s.region;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าผลไม่ตรงกัน ให้ตรวจว่า view ถูกสร้างจากฐานข้อมูลเดียวกันหรือไม่ และมีสถานีใน <code>measurements</code> ที่ไม่อยู่ใน <code>stations</code> หรือไม่ ซึ่ง inner join ทั้งสองแบบจะตัดทิ้งเหมือนกัน</p>
+</section>
+<section id="sec-appg-ch07" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch07">บทที่ 7</h2>
+<p><strong>7.1</strong> <code>WHERE</code> ทำงานในขั้นที่ 2 ซึ่งยังไม่มีการจัดกลุ่ม ฟังก์ชันรวมอย่าง <code>COUNT(pm25)</code> จึงยังไม่มีความหมาย ต้องย้ายเงื่อนไขไปไว้ใน <code>HAVING</code> ซึ่งทำงานหลัง <code>GROUP BY</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, <span class="fu">CAST</span>(ts <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> <span class="dt">date</span>, <span class="fu">AVG</span>(pm25) <span class="kw">AS</span> pm25_mean</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> station_id, <span class="fu">CAST</span>(ts <span class="kw">AS</span> <span class="dt">DATE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(pm25) <span class="op">&gt;=</span> <span class="dv">18</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>7.2</strong> (ก) <code>NULL</code> (ข) <code>TRUE</code> (ค) <code>NULL</code> (ง) <code>TRUE</code> (จ) <code>NULL</code> เพราะเท่ากับ <code>5 &lt;&gt; 1 AND 5 &lt;&gt; 2 AND 5 &lt;&gt; NULL</code> และส่วนสุดท้ายเป็น <code>NULL</code> ถ้าใช้ใน <code>WHERE</code> แถวนั้นจะถูกตัดทิ้ง</p>
+<p><strong>7.3</strong> (ก) <code>INNER JOIN</code> (หรือ <code>LEFT JOIN</code> ถ้าต้องการเก็บค่าวัดที่ไม่มีข้อมูลสถานี) (ข) <code>ANTI JOIN</code> จาก <code>stations</code> ไปยังค่าวัดปี ค.ศ. 2023 (ค) <code>SEMI JOIN</code> กับตารางรายวันที่กรองค่าเฉลี่ยเกิน 75 µg/m³ (ง) <code>ASOF LEFT JOIN</code> ด้วยเงื่อนไข <code>m.ts &gt;= w.obs_ts</code></p>
+<p><strong>7.4</strong> <code>ROW_NUMBER</code> ให้เลขไม่ซ้ำเสมอ ค่าที่เท่ากันได้ลำดับที่ฐานข้อมูลเลือก <code>RANK</code> ให้อันดับเท่ากันแล้วข้ามอันดับถัดไป เช่น 1, 2, 2, 4 ส่วน <code>DENSE_RANK</code> ให้อันดับเท่ากันโดยไม่ข้าม เช่น 1, 2, 2, 3</p>
+<p><strong>7.5</strong> ถ้า <code>ts</code> เป็น UTC วันที่ 1 มีนาคมตาม UTC คือ 00:00–23:59 UTC ซึ่งเท่ากับเวลาไทย 07:00 ของวันที่ 1 มีนาคม ถึง 06:59 ของวันที่ 2 มีนาคม ค่าเฉลี่ยจึงปนช่วงเช้าของวันที่ 2 และขาดช่วง 00:00–06:59 ของวันที่ 1 ตามเวลาไทย</p>
+<p><strong>7.6</strong> query ตัวอย่าง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id, date_trunc(<span class="st">'month'</span>, ts) <span class="kw">AS</span> <span class="dt">month</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_rows,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> pm25 <span class="kw">IS</span> <span class="kw">NULL</span>) <span class="kw">AS</span> n_null,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fl">100.0</span> <span class="op">*</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> pm25 <span class="kw">IS</span> <span class="kw">NULL</span>) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>), <span class="dv">1</span>) <span class="kw">AS</span> pct_null</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> ts <span class="op">&lt;</span> <span class="dt">TIMESTAMP</span> <span class="st">'2024-01-01'</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ALL</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> pct_null <span class="kw">DESC</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>คำสั่งนี้นับเฉพาะค่าหายแบบ explicit คือแถวที่มีแต่ค่าเป็น <code>NULL</code> ชั่วโมงที่ไม่มีแถวเลยไม่ถูกนับ (ดูแบบฝึกหัด 7.10)</p>
+<p><strong>7.7</strong> วันที่สองแบบต่างกันมากคือวันที่อยู่หลังช่วงที่ข้อมูลขาดหาย <code>ROWS</code> นำค่าของวันที่อยู่ก่อนช่วงขาดหายซึ่งห่างออกไปมากกว่า 7 วันมาเฉลี่ยด้วย ส่วน <code>RANGE</code> ใช้เฉพาะวันที่อยู่ในช่วง 7 วันจริง ถ้าค่าฝุ่นก่อนช่วงขาดหายต่างจากหลังช่วงมาก (เช่น ข้ามฤดู) ความต่างจะเกิน 5 µg/m³ ได้ง่าย query ตัวอย่างให้เพิ่มคอลัมน์ <code>ABS(ma7_rows - ma7_range) AS diff</code> แล้ว <code>QUALIFY diff &gt; 5</code></p>
+<p><strong>7.8</strong> คำตอบขึ้นกับข้อมูล เมื่อเกณฑ์ต่ำ (12 ชั่วโมง) วันที่ข้อมูลไม่ครบจำนวนมากถูกนับรวม ค่าเฉลี่ยรายวันของวันเหล่านั้นอาจเอียงตามช่วงเวลาที่มีข้อมูล เมื่อเกณฑ์สูง (22 ชั่วโมง) จำนวนวันลดลง สถานีที่ข้อมูลหายบ่อยอาจถูกตัดเกือบทั้งหมด ถ้าลำดับของภาคไม่เปลี่ยน ข้อสรุปค่อนข้างทนทานต่อทางเลือกนี้ ถ้าเปลี่ยน ต้องรายงานว่าข้อสรุปขึ้นกับเกณฑ์ (sensitivity analysis ในบทที่ 10)</p>
+<p><strong>7.9</strong> แบบไม่ขจัดข้อมูลซ้ำ ผลขึ้นกับลำดับของแถวนำเข้า เมื่อทดสอบกับ DuckDB 1.5 คำสั่งเก็บแถวที่มาก่อน ถ้าสลับลำดับ ค่าที่ได้จะเปลี่ยน (ฐานข้อมูลบางรุ่นอาจแจ้ง error แทน) ส่วนแบบที่ใช้ <code>QUALIFY ROW_NUMBER() OVER (PARTITION BY station_id, ts ORDER BY fetched_at DESC) = 1</code> ได้ค่าจากไฟล์ที่ดึงล่าสุดเสมอ ไม่ว่าลำดับนำเข้าจะเป็นอย่างไร</p>
+<p><strong>7.10</strong> query ตัวอย่างสำหรับทุกสถานี:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> expected <span class="kw">AS</span> (</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> s.station_id, t.ts</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> stations <span class="kw">AS</span> s</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">CROSS</span> <span class="kw">JOIN</span> generate_series(<span class="dt">TIMESTAMP</span> <span class="st">'2023-01-01 00:00'</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                               <span class="dt">TIMESTAMP</span> <span class="st">'2023-12-31 23:00'</span>, <span class="dt">INTERVAL</span> <span class="dv">1</span> <span class="kw">HOUR</span>) <span class="kw">AS</span> t(ts)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> e.station_id,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> m.ts <span class="kw">IS</span> <span class="kw">NULL</span>)                         <span class="kw">AS</span> n_no_row,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> m.ts <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">AND</span> m.pm25 <span class="kw">IS</span> <span class="kw">NULL</span>)  <span class="kw">AS</span> n_null_value</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> expected <span class="kw">AS</span> e</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> measurements <span class="kw">AS</span> m <span class="kw">USING</span> (station_id, ts)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> e.station_id</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> e.station_id;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>n_no_row</code> คือข้อมูลสูญหายแบบ implicit (ไม่มีแถว) และ <code>n_null_value</code> คือแบบ explicit (มีแถวแต่ค่าว่าง) การนับเพียง <code>COUNT(pm25)</code> จากตาราง <code>measurements</code> มองเห็นเฉพาะแบบหลัง บทที่ 10 อธิบายความสำคัญของการแยกสองแบบนี้</p>
+</section>
+<section id="sec-appg-ch08" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch08">บทที่ 8</h2>
+<p><strong>8.1</strong> ชื่อเดือนซึ่งเป็นค่าของตัวแปร “เดือน” ไปอยู่ในชื่อคอลัมน์ ผิดหลักข้อที่หนึ่ง ควรแปลงด้วย <code>melt(id_vars="station_id", var_name="month", value_name="pm25_mean")</code> ให้เป็นรูปแบบยาวที่มีคอลัมน์ <code>station_id</code>, <code>month</code> และ <code>pm25_mean</code></p>
+<p><strong>8.2</strong> รูปแบบกว้างเหมาะเมื่อคำถามต้องการหลายสารมลพิษในแถวเดียวกัน เช่น “อัตราส่วน PM2.5/PM10 ช่วงฤดูแล้งเป็นเท่าไร” ส่วนรูปแบบยาวเหมาะเมื่อต้องปฏิบัติกับทุกสารเหมือนกัน เช่น “วาดกราฟอนุกรมเวลาของทุกสารแยกแผงย่อย” หรือ “สารใดมีสัดส่วนค่าหายสูงสุด”</p>
+<p><strong>8.3</strong> <code>tz_localize</code> ติดป้ายเขตเวลาให้เวลาที่ยังไม่มีเขตเวลา ตัวเลขไม่เปลี่ยน <code>tz_convert</code> แปลงเวลาที่มีเขตเวลาแล้วไปอีกเขตเวลา ตัวเลขเปลี่ยนแต่เป็นจุดเวลาเดิม ผลของตัวอย่างคือ <code>Timestamp('2026-02-28 17:00:00+0000', tz='UTC')</code></p>
+<p><strong>8.4</strong> <code>resample("D")</code> สร้างแถวของทุกวันตั้งแต่วันแรกถึงวันสุดท้ายในข้อมูล แม้วันนั้นไม่มีข้อมูลเลย (<code>count = 0</code>) ส่วน <code>groupby</code> สร้างแถวเฉพาะวันที่มีข้อมูลอย่างน้อยหนึ่งแถว ถ้านับวันที่ข้อมูลไม่ครบจากผลของ <code>groupby</code> วันที่ไม่มีข้อมูลเลยจะไม่ถูกนับ จำนวนที่ได้จึงต่ำกว่าความจริง</p>
+<p><strong>8.5</strong> fan-out คือการที่ key ฝั่งที่ควรไม่ซ้ำกลับซ้ำ ทำให้แถวหนึ่งจับคู่ได้หลายแถว จำนวนแถวหลัง join เพิ่มขึ้นและค่าสรุปผิด <code>validate="many_to_one"</code> ตรวจว่า key ฝั่งขวาไม่ซ้ำก่อน join ถ้าซ้ำจะแจ้ง <code>MergeError</code> และหยุดทันที</p>
+<p><strong>8.6</strong> ตัวอย่างโค้ด:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> con.execute(<span class="st">"""SELECT station_id, ts, pm25, pm10 FROM measurements</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">                      WHERE station_id = '35t' AND ts &gt;= TIMESTAMP '2023-03-01'</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">                        AND ts &lt; TIMESTAMP '2023-04-01' ORDER BY ts"""</span>).df()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> wide.melt(id_vars<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"ts"</span>], var_name<span class="op">=</span><span class="st">"pollutant"</span>, value_name<span class="op">=</span><span class="st">"value"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>back <span class="op">=</span> (<span class="bu">long</span>.pivot(index<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"ts"</span>], columns<span class="op">=</span><span class="st">"pollutant"</span>, values<span class="op">=</span><span class="st">"value"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            .reset_index()[[<span class="st">"station_id"</span>, <span class="st">"ts"</span>, <span class="st">"pm25"</span>, <span class="st">"pm10"</span>]])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>back.columns.name <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(back.equals(wide))   <span class="co"># True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าได้ <code>False</code> ให้ตรวจลำดับคอลัมน์ ลำดับแถว และ dtype ซึ่ง <code>pivot</code> อาจเปลี่ยนได้</p>
+<p><strong>8.7</strong> โครงของคำตอบ: เริ่มจากรายชั่วโมง <code>assign(date=...)</code> → <code>groupby(["station_id", "date"]).agg(pm25_mean, n_hours)</code> → <code>query("n_hours &gt;= 18")</code> → <code>pipe(check, "หลังกรองวันครบ")</code> → <code>merge(st, validate="many_to_one")</code> → <code>pipe(check, "หลัง merge")</code> → <code>assign(month=lambda d: d["date"].dt.to_period("M"))</code> → <code>groupby(["region", "month"]).agg(pm25_mean=("pm25_mean", "mean"))</code> จำนวนแถวหลัง merge ต้องเท่ากับก่อน merge</p>
+<p><strong>8.8</strong> ผลของ <code>explain()</code> ควรมีบรรทัด <code>PROJECT k/8 COLUMNS</code> ที่ k เท่ากับจำนวนคอลัมน์ที่ใช้จริง และ <code>SELECTION</code> ของเงื่อนไขเวลา ผลลัพธ์ของ Polars กับ pandas ควรตรงกัน (อาจต่างในตำแหน่งทศนิยมสุดท้ายเพราะลำดับการบวกต่างกัน) ถ้าต่างกันมาก ให้ตรวจความหมายของ <code>count()</code> และการตัดวัน</p>
+<p><strong>8.9</strong> ใน pandas นับวันที่ไม่มีข้อมูลเลยด้วย <code>(daily_resampled["n_hours"] == 0)</code> และวันที่ไม่ครบด้วย <code>daily_resampled["n_hours"].between(1, 17)</code> แยกตาม <code>station_id</code> ข้อควรระวังคือ <code>resample</code> สร้างแถวเฉพาะช่วงระหว่างวันแรกกับวันสุดท้ายที่มีข้อมูลของแต่ละสถานี ถ้าสถานีไม่มีข้อมูลตั้งแต่ต้นปี วันเหล่านั้นจะไม่ถูกนับ ส่วน SQL ที่ใช้ <code>generate_series</code> ครอบคลุมทั้งปีที่กำหนดเสมอ ผลจึงอาจต่างกันที่ขอบของช่วง</p>
+<p><strong>8.10</strong> คำตอบขึ้นกับตารางที่สร้าง ขั้นตอนคือ <code>stations.merge(region_map, on="province", how="left", indicator=True)</code> แล้วดูแถว <code>left_only</code> ซึ่งเป็นจังหวัดที่จับคู่ไม่ได้ แก้ด้วย <code>.str.strip()</code> สำหรับช่องว่าง และเพิ่มแถวในตาราง mapping สำหรับชื่อย่อ เช่น <code>"กรุงเทพฯ"</code> ให้ชี้ไปยังภาคเดียวกับ <code>"กรุงเทพมหานคร"</code> แล้วตรวจซ้ำจนไม่มีแถว <code>left_only</code></p>
+</section>
+<section id="sec-appg-ch09" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch09">บทที่ 9</h2>
+<p><strong>9.1</strong> (ก) ความครบถ้วน (ข) ความถูกต้องตามรูปแบบ (ค) ความไม่ซ้ำ (ง) ความแม่นยำ (จ) ความทันเวลา</p>
+<p><strong>9.2</strong> ค่าที่เครื่องวัดค้างส่งมาอยู่ในช่วงปกติ เช่น 25.3 µg/m³ จึงผ่านกฎ <code>0 &lt;= pm25 &lt;= 1000</code> ได้ ต้องตรวจจากลำดับเวลา โดยหาช่วงของค่าที่ซ้ำติดกันในสถานีเดียวกันและความยาวของช่วงนั้น หรือหาหน้าต่างเวลาที่ส่วนเบี่ยงเบนมาตรฐานเป็นศูนย์</p>
+<p><strong>9.3</strong> ตัวอย่าง: (1) เครื่องวัดรายงานค่าสูงกว่าจริงอย่างสม่ำเสมอหลังเปลี่ยนเครื่อง ทุกค่ายังอยู่ในช่วงปกติ (2) เวลาถูกเลื่อนไปเจ็ดชั่วโมงทั้งชุด ทุกค่ามีชนิดและช่วงถูกต้อง (3) เครื่องวัดค้างที่ค่าปกติ ทั้งหมดนี้เป็นปัญหาของความแม่นยำซึ่ง schema ตรวจไม่ได้</p>
+<p><strong>9.4</strong> key ซ้ำทำให้ค่าเฉลี่ยรายวันถ่วงน้ำหนักผิดแน่นอน และบอกว่าขั้นโหลดมีข้อบกพร่องที่ต้องแก้ จึงควรหยุด ส่วนค่าว่างที่สูงขึ้นเกิดได้ตามธรรมชาติ เช่น เครื่องวัดซ่อมบำรุง การหยุด pipeline ไม่ได้แก้ปัญหา แต่ทำให้ข้อมูลส่วนที่ดีไม่ถูกอัปเดต จึงควรเตือนและบันทึก แล้วจัดการในขั้นข้อมูลสูญหาย</p>
+<p><strong>9.5</strong> schema บอกเครื่องว่าข้อมูลที่ดีต้องมีชนิดและค่าแบบใด ตรวจได้อัตโนมัติ แต่ไม่บอกความหมาย ส่วนพจนานุกรมข้อมูลบอกคนว่าแต่ละคอลัมน์หมายถึงอะไร หน่วยอะไร เขตเวลาใด และผ่านการตัดสินใจอะไรมา ซึ่งเครื่องตรวจไม่ได้ ต้องมีทั้งสองอย่างเพราะตอบคำถามต่างกัน</p>
+<p><strong>9.6</strong> คำตอบขึ้นกับข้อมูล บันทึกที่ดีมีรูปแบบ “พบว่า… → ตรวจต่อด้วย… → ตัดสินใจว่า…” เช่น “พบว่า <code>pm10</code> มีค่าต่ำสุดติดลบ → ตรวจแล้วพบ 12 แถวในสถานีเดียวช่วงเดือนเดียว → ตัดสินใจเพิ่มการแปลงค่าติดลบของ <code>pm10</code> เป็น NULL ในขั้นโหลด และเพิ่มกฎ <code>pm10 &gt;= 0</code> แบบ fail”</p>
+<p><strong>9.7</strong> ฮิสโทแกรมของความยาวช่วงค่าซ้ำมักมีจำนวนมากที่ 1 ชั่วโมงและลดลงอย่างรวดเร็ว ช่วงที่ยาวผิดปกติจะอยู่ห่างจากส่วนหลักของการแจกแจงชัดเจน เกณฑ์ที่เหมาะสมควรอยู่เลยจุดที่การแจกแจงตามธรรมชาติหมดไป เช่น ถ้าช่วงยาว 4 ชั่วโมงเกิดหลายสิบครั้งแต่ช่วงยาวเกิน 6 ชั่วโมงเกิดแทบไม่เคย อาจใช้ 6 ชั่วโมง และต้องอธิบายว่าความละเอียดของค่า (ทศนิยมหนึ่งตำแหน่ง) ทำให้ช่วงสั้นเกิดได้ตามธรรมชาติ</p>
+<p><strong>9.8</strong> ตัวอย่าง schema:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>daily_schema <span class="op">=</span> pa.DataFrameSchema(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>{</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"station_id"</span>: pa.Column(<span class="bu">str</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"date"</span>: pa.Column(<span class="st">"datetime64[ns]"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pm25_mean"</span>: pa.Column(<span class="bu">float</span>, pa.Check.ge(<span class="dv">0</span>), nullable<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pm25_max"</span>: pa.Column(<span class="bu">float</span>, pa.Check.ge(<span class="dv">0</span>), nullable<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"n_hours"</span>: pa.Column(<span class="bu">int</span>, pa.Check.in_range(<span class="dv">0</span>, <span class="dv">24</span>)),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    checks<span class="op">=</span>pa.Check(<span class="kw">lambda</span> d: (d[<span class="st">"pm25_max"</span>] <span class="op">&gt;=</span> d[<span class="st">"pm25_mean"</span>]) <span class="op">|</span> d[<span class="st">"pm25_mean"</span>].isna(),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                    name<span class="op">=</span><span class="st">"max_ge_mean"</span>),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    unique<span class="op">=</span>[<span class="st">"station_id"</span>, <span class="st">"date"</span>],</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">coerce</span><span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ทดสอบโดยสร้าง DataFrame ที่มี <code>n_hours = 25</code> หนึ่งแถว <code>pm25_max &lt; pm25_mean</code> หนึ่งแถว และแถวซ้ำหนึ่งแถว แล้วตรวจว่า <code>failure_cases</code> แสดงครบทั้งสามปัญหา</p>
+<p><strong>9.9</strong> รูปแบบรายวันที่สอดคล้องกับเวลาไทยควรมีพีกและจุดต่ำในช่วงเวลาที่อธิบายได้ด้วยความรู้เชิงโดเมนของพื้นที่นั้น เมื่อเลื่อน <code>ts</code> ไปเจ็ดชั่วโมง เช่น <code>m["ts"] + pd.Timedelta(hours=7)</code> รูปแบบทั้งหมดจะเลื่อนไปเจ็ดตำแหน่งบนแกนชั่วโมง พีกที่เคยอยู่ช่วงเช้าจะไปอยู่ช่วงบ่าย ซึ่งแสดงว่ารูปแบบรายวันเป็นเบาะแสที่ใช้ตรวจความผิดพลาดของเขตเวลาได้</p>
+<p><strong>9.10</strong> คำตอบขึ้นกับโครงการ พจนานุกรมที่ดีต้องมีทุกคอลัมน์ของทั้งสามตาราง พร้อมชนิด หน่วย ความหมาย และหมายเหตุ และมีส่วนการตัดสินใจ เช่น การแปลงค่าแทน การเติมภาคจากตาราง mapping เขตเวลาของ <code>ts</code> และเกณฑ์ความครบถ้วน</p>
+</section>
+<section id="sec-appg-ch10" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch10">บทที่ 10</h2>
+<p><strong>10.1</strong> ตัวอย่าง: MCAR — ระบบรับส่งข้อมูลของหน่วยงานขัดข้องแบบสุ่มเป็นครั้งคราวโดยไม่สัมพันธ์กับเวลาหรือระดับฝุ่น · MAR — สถานีที่ตั้งในพื้นที่ห่างไกลมีไฟฟ้าดับบ่อยกว่าในฤดูฝนที่มีพายุ ซึ่งรู้ได้จากที่ตั้งและเดือน · MNAR — เครื่องวัดหยุดอัตโนมัติเมื่อค่าเกินช่วงที่วัดได้ ทำให้ค่าสูงสุดหายไปเสมอ</p>
+<p><strong>10.2</strong> เพราะ <code>isna()</code> มองเห็นเฉพาะแถวที่มีอยู่แต่ค่าว่าง แถวของชั่วโมงที่ไม่ถูกบันทึกเลยไม่อยู่ในตารางให้นับ ต้องสร้างตารางเวลาเต็มของทุกสถานีกับทุกชั่วโมงที่ควรมี แล้ว reindex หรือ left join ข้อมูลจริงเข้าไป</p>
+<p><strong>10.3</strong> สรุปได้ว่าการสูญหายสัมพันธ์กับระดับมลพิษ ข้อมูลจึงไม่น่าจะเป็น MCAR และการตัดค่าหายทิ้งอาจทำให้ค่าสรุปต่ำกว่าความจริง แต่ไม่ควรสรุปว่าพิสูจน์ได้ว่าเป็น MNAR เพราะอาจเป็น MAR ที่ขึ้นกับตัวแปรที่เห็น (เช่น ฤดูกาล) และไม่ควรสรุปว่าค่าที่หายสูงเท่ากับค่าของชั่วโมงก่อนหน้า</p>
+<p><strong>10.4</strong> ช่องว่าง 6 ชั่วโมง: <code>interpolate(limit=3)</code> เติม 3 ชั่วโมงแรกด้วยเส้นตรงระหว่างค่าสองฝั่ง แล้วปล่อย 3 ชั่วโมงหลังว่าง ซึ่งทำให้ได้ค่าที่สร้างจากช่องว่างยาว ส่วน <code>fill_short_gaps(max_gap=3)</code> วัดความยาวช่องว่างได้ 6 ซึ่งเกิน 3 จึงไม่เติมเลยทั้ง 6 ชั่วโมง</p>
+<p><strong>10.5</strong> ถ้าทุกชุดให้ค่าประมาณเท่ากัน <span class="math inline">\(B = 0\)</span> และ <span class="math inline">\(T = W\)</span> แปลว่าการเติมค่าไม่ได้เพิ่มความไม่แน่นอน ซึ่งเกิดได้เมื่อค่าที่หายไม่มีผลต่อค่าประมาณที่สนใจ หรือเมื่อการเติมค่าไม่ได้สุ่มจริง (เช่น ลืมตั้ง <code>sample_posterior=True</code>) ในกรณีหลัง ความแปรปรวนรวมจะต่ำเกินจริง</p>
+<p><strong>10.6</strong> คำตอบขึ้นกับข้อมูล ให้คำนวณจากคอลัมน์ <code>status</code> หรือจากการเปรียบเทียบตารางเวลาเต็มกับตารางเดิม สัดส่วน implicit = จำนวนแถวที่ไม่มีในตารางเดิม / จำนวนแถวที่ควรมี สถานีที่มีสัดส่วน implicit สูงมักเป็นสถานีที่เปิดใหม่กลางช่วง (ควรตรวจวันเริ่มต้น) หรือมีช่วงหยุดทำงานยาวที่ระบบไม่ได้บันทึกแถวไว้</p>
+<p><strong>10.7</strong> คำตอบขึ้นกับภาพที่ได้ การตีความที่ดีต้องเชื่อมรูปแบบกับสาเหตุที่เป็นไปได้ เช่น “แถบขาวแนวนอนช่วงวันที่ X ตัดทุกสถานีพร้อมกัน น่าจะเป็นปัญหาของ script ดึงข้อมูลหรือระบบส่วนกลาง ตรวจได้จาก <code>fetch.log</code> ของวันนั้น”</p>
+<p><strong>10.8</strong> เมื่อความรุนแรงเพิ่มขึ้น วันที่ฝุ่นหนาสูญเสียชั่วโมงมากขึ้นจนไม่ผ่านเกณฑ์ความครบถ้วน และวันที่ผ่านเกณฑ์ก็มีค่าเฉลี่ยต่ำลง สัดส่วนวันเกินมาตรฐานจึงลดลงตามความรุนแรง แม้สัดส่วนค่าหายรวมจะไม่มาก ผลนี้ยืนยันว่ากลไกสำคัญกว่าปริมาณ</p>
+<p><strong>10.9</strong> คำตอบขึ้นกับข้อมูล ให้สร้างตาราง 8 คอลัมน์ (4 เกณฑ์ × เติม/ไม่เติม) แถวละภาค แล้วตรวจว่าภาคที่อยู่อันดับหนึ่งเปลี่ยนหรือไม่ ถ้าลำดับคงที่ทุกแบบ ข้อสรุปเรื่องลำดับทนทาน ถ้าเปลี่ยน ต้องรายงานว่าข้อสรุปขึ้นกับการตัดสินใจใด</p>
+<p><strong>10.10</strong> คำตอบขึ้นกับโครงการ บันทึกที่ดีต้องครอบคลุมการแปลงค่าแทน เกณฑ์เครื่องวัดค้าง ความยาวช่องว่างที่เติม เกณฑ์ความครบถ้วน และผลของ sensitivity analysis โดยแต่ละข้อมีเหตุผลหรือหลักฐาน และระบุทิศทางที่อาจเอนเอียง</p>
+</section>
+<section id="sec-appg-ch11" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch11">บทที่ 11</h2>
+<p><strong>11.1</strong> สีที่ต่างจากส่วนที่เหลือเป็น preattentive attribute ที่ระบบการมองเห็นตรวจจับได้ทันที เมื่อมีสถานีเดียวที่เป็นสีส้มท่ามกลางสีเทา ความต่างนั้นโดดออกมาโดยไม่ต้องไล่หา แต่ถ้าทุกสถานีมีสีต่างกัน ไม่มีสีใดต่างจาก “ส่วนที่เหลือ” อีกต่อไป สีจึงไม่ได้ชี้อะไร และผู้อ่านต้องอ่าน legend ทีละสี</p>
+<p><strong>11.2</strong> ตำแหน่งบนแกนร่วม → ความยาว → มุม → พื้นที่ → ความเข้มสี</p>
+<p><strong>11.3</strong> (ก) categorical เพราะภาคไม่มีลำดับ (ข) sequential เพราะค่าต่อเนื่องจากต่ำไปสูง (ค) diverging โดยตั้งจุดกลางที่ศูนย์ (<code>center=0</code>) เพราะทั้งค่าบวกและค่าลบมีความหมาย</p>
+<p><strong>11.4</strong> ขนาดของผลในข้อมูลคือ <span class="math inline">\((30 - 20)/20 = 0.5\)</span> ความสูงของแท่งในภาพคือ <span class="math inline">\(20 - 15 = 5\)</span> และ <span class="math inline">\(30 - 15 = 15\)</span> ขนาดของผลในภาพคือ <span class="math inline">\((15 - 5)/5 = 2\)</span> lie factor เท่ากับ <span class="math inline">\(2 / 0.5 = 4\)</span> กราฟขยายความต่างประมาณสี่เท่า</p>
+<p><strong>11.5</strong> มาตรฐาน 37.5 µg/m³ กำหนดสำหรับค่าเฉลี่ย 24 ชั่วโมง ค่ารายชั่วโมงผันผวนกว่ามาก วันหนึ่งอาจมีหลายชั่วโมงที่เกิน 37.5 แต่ค่าเฉลี่ยทั้งวันไม่เกิน ผู้อ่านที่เห็นเส้นบนกราฟรายชั่วโมงจะเข้าใจผิดว่าทุกชั่วโมงที่เกินเส้นคือการละเมิดมาตรฐาน</p>
+<p><strong>11.6</strong> คำตอบขึ้นกับเครื่อง โดยทั่วไป Windows ได้ Tahoma หรือ Leelawadee UI macOS ได้ Thonburi หรือ Tahoma ส่วน Colab และ Linux ส่วนใหญ่ไม่มีฟอนต์ไทย ต้องดาวน์โหลด Sarabun แล้วเพิ่มด้วย <code>font_manager.fontManager.addfont(path)</code> ก่อนเรียก <code>viz_style.setup()</code> ในบางระบบอาจต้องเริ่ม kernel ใหม่หลังติดตั้งฟอนต์ในระดับระบบ</p>
+<p><strong>11.7</strong> histogram แกนเชิงเส้นอัดค่าส่วนใหญ่ไว้ทางซ้าย histogram แกน log เห็นรูปร่างของช่วงค่าต่ำชัดขึ้น แต่ทั้งสองแบบต้องประมาณพื้นที่ทางขวาของเส้น 37.5 ด้วยตา ECDF ตอบคำถามได้ตรงที่สุด เพราะอ่านค่า <span class="math inline">\(1 - F(37.5)\)</span> ได้จากแกน y โดยตรง และเปรียบเทียบหลายภาคบนแกนเดียวกันได้โดยไม่ต้องเลือกจำนวน bin</p>
+<p><strong>11.8</strong> กราฟเดียวหลายสีมีเส้นพันกันและสีมากเกินจะแยก จึงตอบคำถามไม่ได้ small multiples ที่มีเส้นของทุกสถานีในภาคเดียวกันเป็นสีเทาในแผงเดียว ทำให้สถานีที่มีรูปแบบต่างออกไปโดดออกมาจากกลุ่ม (หลัก similarity และ continuity) จึงตอบได้ดีกว่า ถ้าต้องการชี้สถานีนั้น ให้ระบายเป็นสีเข้มเพียงเส้นเดียว</p>
+<p><strong>11.9</strong> heatmap ที่ใช้ jet มีแถบสีเหลืองเขียวกลางช่วงที่ดูสว่างและโดดเด่น ทำให้เกิดขอบปลอมระหว่างเดือนที่ค่าต่างกันเพียงเล็กน้อย ส่วน viridis มีความสว่างเพิ่มขึ้นสม่ำเสมอ เดือนที่ฝุ่นสูงจึงดูสว่างกว่าอย่างต่อเนื่อง สำหรับส่วนต่างจากมาตรฐาน ใช้ <code>sns.heatmap(heat - 37.5, cmap="RdBu_r", center=0)</code> เพื่อให้สีขาวตรงกับค่าเท่ามาตรฐาน</p>
+<p><strong>11.10</strong> คำตอบขึ้นกับกราฟที่เลือก ด้านที่ควรประเมินได้แก่ ชนิดกราฟตรงกับคำถามหรือไม่ แกนเริ่มที่ศูนย์หรือไม่ (ถ้าเป็นแท่ง) ชุดสีตรงชนิดข้อมูลและอ่านได้สำหรับผู้มีภาวะตาบอดสีหรือไม่ มีหน่วยและแหล่งข้อมูลหรือไม่ เส้นมาตรฐานตรงกับชนิดของค่าหรือไม่ ช่วงเวลาที่เลือกแสดงเป็นตัวแทนหรือไม่ และชื่อกราฟใช้ถ้อยคำเกินหลักฐานหรือไม่ ถ้าวาดใหม่ด้วยข้อมูลสมมุติ ต้องระบุในคำบรรยายภาพ</p>
+</section>
+<section id="sec-appg-ch12" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch12">บทที่ 12</h2>
+<p><strong>12.1</strong> ข้อมูล: มัธยฐานรายเดือนของภาคหนึ่ง หนึ่งแถวต่อปี-เดือน การจับคู่: <code>month</code> → x, <code>year</code> → y, ค่ามัธยฐาน → สีของช่อง และค่าเดียวกันเป็นข้อความกำกับ เครื่องหมาย: สี่เหลี่ยม (tile) การแปลงทางสถิติ: มัธยฐานที่คำนวณด้วย <code>pivot_table</code> ก่อนวาด สเกล: แกน x และ y เป็นหมวดหมู่มีลำดับ สีเป็นชุดสี sequential (<code>rocket_r</code>)</p>
+<p><strong>12.2</strong> ต่างกันที่ระบบพิกัด stacked bar แท่งเดียวใช้พิกัดฉาก ส่วน pie chart คือแท่งเดียวกันในพิกัดเชิงขั้ว ความสูงของแต่ละส่วนจึงกลายเป็นมุม ข้อมูล การจับคู่ และเครื่องหมายเหมือนกันทุกประการ</p>
+<p><strong>12.3</strong> <code>data</code> คือรายการ trace ซึ่งเก็บข้อมูลและวิธีวาดของแต่ละชุด <code>layout</code> คือทุกอย่างที่ไม่ใช่ข้อมูล (ก) layout (<code>yaxis.title</code>) (ข) data (คุณสมบัติ <code>line.color</code> ของ trace ของสถานี 35t) (ค) layout (<code>shapes</code> และ <code>annotations</code>) (ง) data (<code>hovertemplate</code> หรือ <code>customdata</code> ของ trace) แม้ <code>hovermode</code> ซึ่งกำหนดพฤติกรรมของ tooltip จะอยู่ใน layout</p>
+<p><strong>12.4</strong> ตัวอย่างเช่น แดชบอร์ดที่เปิดมาแล้วให้ผู้ใช้เลือกสถานีจาก dropdown ก่อนจึงจะเห็นกราฟใด ๆ ผู้ใช้ไม่รู้ว่าควรเลือกสถานีใด และเมื่อเห็นกราฟของสถานีหนึ่งก็ไม่รู้ว่าสูงหรือต่ำเมื่อเทียบกับสถานีอื่น ควรเริ่มด้วยภาพรวม เช่น แผนที่หรือกราฟสรุปทุกภาค แล้วให้ผู้ใช้คลิกเพื่อลงรายละเอียด</p>
+<p><strong>12.5</strong> Altair ฝังข้อมูลทั้งหมดลงใน JSON ที่ส่งไปยังเบราว์เซอร์ ข้อมูลจำนวนมากทำให้ notebook และไฟล์ HTML ใหญ่และช้า ขีดจำกัดนี้เป็นสัญญาณเตือน ทางแก้ที่ดีที่สุดคือรวมข้อมูลใน DuckDB ให้เหลือระดับที่ต้องการแสดงก่อนส่งให้ Altair เช่น รายเดือนต่อสถานี ทางเลือกรองคือ VegaFusion ซึ่งคำนวณการแปลงฝั่ง Python</p>
+<p><strong>12.6</strong> คำตอบขึ้นกับผู้ทำ โดยทั่วไป seaborn objects และ Plotly Express ใช้โค้ดสั้นใกล้เคียงกัน Altair ยาวกว่าเล็กน้อยเพราะต้องระบุชนิดข้อมูล แต่ปรับแต่งได้เป็นระบบ seaborn ต้องตั้งฟอนต์ไทยก่อน (<a href="../chapters/11-visual-perception.html#sec-ch11-thai-fonts" class="quarto-xref"><span>ตัวอักษรไทยในกราฟ</span></a>) ส่วน Altair และ Plotly แสดงภาษาไทยได้ทันทีเพราะวาดในเบราว์เซอร์</p>
+<p><strong>12.7</strong> แนวทาง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>st <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT date, pm25_mean, n_hours_observed FROM daily_pm25_clean</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE station_id = '35t' AND is_complete AND date &lt; DATE '2024-01-01'</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY date</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(st, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"pm25_mean"</span>, hover_data<span class="op">=</span>[<span class="st">"n_hours_observed"</span>],</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>              labels<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"วันที่"</span>, <span class="st">"pm25_mean"</span>: <span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"n_hours_observed"</span>: <span class="st">"ชั่วโมงที่มีข้อมูล"</span>})</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>fig.add_hline(y<span class="op">=</span><span class="fl">37.5</span>, line_dash<span class="op">=</span><span class="st">"dash"</span>, annotation_text<span class="op">=</span><span class="st">"มาตรฐาน 37.5 µg/m³"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>fig.update_xaxes(rangeslider_visible<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>12.8</strong> แนวทาง: สร้างตารางรายปีต่อสถานีด้วย DuckDB (ค่าเฉลี่ยและสัดส่วนวันเกินมาตรฐาน) ใช้ <code>brush = alt.selection_interval()</code> (ไม่ระบุ <code>encodings</code> เพื่อลากได้ทั้งสองแกน) ใส่ <code>.add_params(brush)</code> ให้ scatter plot แล้วใส่ <code>.transform_filter(brush)</code> ให้กราฟแท่งที่ใช้ <code>y="region:N"</code> และ <code>x="count():Q"</code> (ถ้าต้องการนับสถานีไม่ซ้ำ ให้ใช้ <code>distinct(station_id):Q</code>) วางด้วย <code>scatter | bars</code></p>
+<p><strong>12.9</strong> ผลขึ้นกับเครื่อง โดยทั่วไป (ก) ช้าที่สุดและไฟล์ใหญ่ที่สุด เพราะส่งทุกจุดเป็น SVG (ข) วาดเร็วขึ้นมากเพราะใช้การ์ดจอ แต่ไฟล์ยังใหญ่เพราะข้อมูลทุกจุดยังอยู่ในไฟล์ และยังมี overplotting (ค) เร็วที่สุดและไฟล์เล็กที่สุด เพราะส่งเพียงตารางจำนวนต่อช่อง และแสดงความหนาแน่นได้ดีที่สุด แต่เสีย tooltip ของแต่ละจุด</p>
+<p><strong>12.10</strong> คำตอบขึ้นกับกราฟของทีม alt text ที่ดีควรทำให้เพื่อนเล่าข้อค้นพบหลักได้ตรงกับกราฟจริง ถ้าเพื่อนเล่าได้เพียงว่า “เป็นกราฟเส้น” แปลว่า alt text ยังไม่บอกข้อค้นพบ</p>
+</section>
+<section id="sec-appg-ch13" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch13">บทที่ 13</h2>
+<p><strong>13.1</strong> ค่าเฉลี่ย ≈ 33.1 µg/m³ มัธยฐาน = 24 µg/m³ ควอร์ไทล์ที่หนึ่งและสามด้วยวิธีค่าเริ่มต้นของ <code>np.percentile</code> คือ 21.5 และ 26.0 จึงได้ IQR = 4.5 µg/m³ ค่าเบี่ยงเบนสัมบูรณ์จากมัธยฐานคือ 6, 3, 2, 0, 1, 3, 71 MAD = 3 µg/m³ ค่าเฉลี่ยได้รับผลมากที่สุด เพราะค่า 95 ดึงค่าเฉลี่ยขึ้นเกือบ 9 µg/m³ เหนือมัธยฐาน ส่วนมัธยฐาน IQR และ MAD แทบไม่ได้รับผล (ส่วนเบี่ยงเบนมาตรฐานก็ได้รับผลมากเช่นกัน)</p>
+<p><strong>13.2</strong> <span class="math inline">\(e^{0.3} \approx 1.35\)</span> สถานี ก สูงกว่าประมาณ 35% ในแง่ค่าเฉลี่ยเรขาคณิต</p>
+<p><strong>13.3</strong> ค่ารายวันของสถานีเดียวกันในวันติดกันสัมพันธ์กันสูง (autocorrelation) และสถานีใกล้กันก็สัมพันธ์กัน ข้อมูลหลายพันค่าจึงมีข้อมูลอิสระน้อยกว่าจำนวนแถวมาก t-test ที่ถือว่าทุกค่าเป็นอิสระจะคำนวณความคลาดเคลื่อนมาตรฐานจาก <span class="math inline">\(n\)</span> ที่ใหญ่เกินจริง ช่วงความเชื่อมั่นจึงแคบเกินไป และ p-value เล็กเกินไป</p>
+<p><strong>13.4</strong> ในกรอบแนวคิดแบบความถี่ ค่าจริงเป็นค่าคงที่ จึงอยู่หรือไม่อยู่ในช่วงนี้ ไม่มีความน่าจะเป็น 95% ความน่าจะเป็น 95% เป็นคุณสมบัติของ <em>วิธี</em> สร้างช่วง ควรเขียนว่า “ช่วงความเชื่อมั่น 95% คือ 42.8 ถึง 45.3 µg/m³” หรือ “ข้อมูลสอดคล้องกับค่าเฉลี่ยประมาณ 43 ถึง 45 µg/m³” และระบุว่าสะท้อนเฉพาะความไม่แน่นอนจากการสุ่มตัวอย่าง</p>
+<p><strong>13.5</strong> (ก) Bonferroni เกณฑ์ <span class="math inline">\(0.05/5 = 0.01\)</span> มีนัยสำคัญเฉพาะ 0.004 (ข) Holm เทียบ 0.004 กับ 0.01 ผ่าน เทียบ 0.011 กับ 0.0125 ผ่าน เทียบ 0.02 กับ 0.0167 ไม่ผ่านจึงหยุด มีนัยสำคัญสองค่า คือ 0.004 และ 0.011 (ค) Benjamini–Hochberg เทียบ <span class="math inline">\(p_{(k)}\)</span> กับ <span class="math inline">\(0.01k\)</span> ได้ 0.004 ≤ 0.01, 0.011 ≤ 0.02, 0.02 ≤ 0.03, 0.04 ≤ 0.04, 0.3 &gt; 0.05 จึงมีนัยสำคัญสี่ค่าแรก</p>
+<p><strong>13.6</strong> แนวทาง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, <span class="dt">MONTH</span>(d.<span class="dt">date</span>) <span class="kw">AS</span> <span class="dt">month</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MEDIAN</span>(d.pm25_mean) <span class="kw">AS</span> <span class="fu">median</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>       QUANTILE_CONT(d.pm25_mean, <span class="fl">0.75</span>) <span class="op">-</span> QUANTILE_CONT(d.pm25_mean, <span class="fl">0.25</span>) <span class="kw">AS</span> iqr,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       MAD(d.pm25_mean) <span class="kw">AS</span> mad,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>       QUANTILE_CONT(d.pm25_mean, <span class="fl">0.95</span>) <span class="kw">AS</span> p95</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> d.is_complete <span class="kw">AND</span> d.<span class="dt">date</span> <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">'2024-01-01'</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> s.region, <span class="dt">MONTH</span>(d.<span class="dt">date</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">month</span>, <span class="fu">median</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ลำดับมักเปลี่ยนในฤดูฝุ่น ภาคที่มีวันสูงมากเป็นช่วง ๆ จะมี P95 สูงแม้มัธยฐานไม่สูงที่สุด</p>
+<p><strong>13.7</strong> คำตอบขึ้นกับข้อมูล ถ้า <span class="math inline">\(\lambda\)</span> ใกล้ 0 ให้ใช้ log ถ้าใกล้ 0.5 ให้ใช้รากที่สอง ถ้า <span class="math inline">\(\lambda\)</span> ของแต่ละภาคต่างกันเล็กน้อย ควรใช้การแปลงเดียวกันทุกภาคเพื่อให้เปรียบเทียบกันได้</p>
+<p><strong>13.8</strong> คำตอบขึ้นกับคู่ภาค รายงานต้องมีขนาดผลในหน่วยเดิม ช่วงความเชื่อมั่น หน่วยของการวิเคราะห์และขนาดตัวอย่าง การทดสอบ และสถานะของข้อมูลช่วงสำรวจ</p>
+<p><strong>13.9</strong> แนวทาง: สร้างรายชื่อสถานีของแต่ละภาค สุ่มสถานีแบบใส่คืนเท่าจำนวนเดิม ดึงทุกสถานี-ปีของสถานีที่ถูกเลือก (สถานีที่ถูกเลือกซ้ำให้ใส่ข้อมูลซ้ำ) แล้วคำนวณผลต่างมัธยฐาน ทำซ้ำหลายพันครั้ง ช่วงที่ได้มักกว้างกว่าแบบสถานี-ปี เพราะคำนึงว่าค่าของสถานีเดียวกันในปีต่างกันสัมพันธ์กัน ข้อมูลอิสระจริงจึงมีเท่าจำนวนสถานี ไม่ใช่จำนวนสถานี-ปี เมื่อมีสถานีน้อย ช่วงจาก cluster bootstrap จะไม่เสถียร ซึ่งก็สะท้อนความไม่แน่นอนที่แท้จริง</p>
+<p><strong>13.10</strong> คำตอบขึ้นกับข้อมูล โดยทั่วไปจำนวนสถานีที่มีนัยสำคัญลดลงมากหลังปรับด้วย Holm และลดลงน้อยกว่าเมื่อใช้ Benjamini–Hochberg ต้องรายงานจำนวนการทดสอบทั้งหมดและวิธีปรับ และถือว่าผลเป็นการคัดกรองสถานีสำหรับตรวจสอบต่อ</p>
+</section>
+<section id="sec-appg-ch14" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch14">บทที่ 14</h2>
+<p><strong>14.1</strong> (ก) ฤดูกาลรายปี (ข) ส่วนเหลือ (เหตุการณ์เฉพาะที่ไม่ซ้ำตามคาบ) (ค) แนวโน้ม (ง) ฤดูกาลรายวัน</p>
+<p><strong>14.2</strong> ค่าที่คาดหวังประมาณ <span class="math inline">\(25 \times 1.6 = 40\)</span> µg/m³ ซึ่งเกินมาตรฐาน 37.5 µg/m³ แต่ค่านี้เป็นระดับที่คาดหวังของค่าเฉลี่ยรายเดือนในสเกลค่าเฉลี่ยเรขาคณิต (เพราะแยกองค์ประกอบในสเกล log) ไม่ใช่การนับวันที่เกินมาตรฐาน ซึ่งต้องนับจากค่าเฉลี่ยรายวัน</p>
+<p><strong>14.3</strong> ตัวอย่างเช่น ค่า PM2.5 เฉลี่ยรายปีที่ลดลงตลอดสิบปี กับจำนวนร้านถ่ายรูปฟิล์มที่ลดลงในช่วงเดียวกัน ทั้งสองลดลงตามเวลาจากสาเหตุที่ไม่เกี่ยวกัน แต่เมื่อนำมาหาสหสัมพันธ์จะได้ค่าบวกสูง เพราะทั้งคู่ขึ้นกับเวลา ไม่ใช่ขึ้นกับกันและกัน การเอาแนวโน้มออกก่อน (เช่น หาผลต่างปีต่อปี) จะทำให้สหสัมพันธ์ปลอมหายไป</p>
+<p><strong>14.4</strong> ฤดูกาลรายวัน ค่าของชั่วโมงเดียวกันในวันต่างกันสัมพันธ์กัน กลไกได้แก่ ชั้นผสมอากาศที่ต่ำในช่วงกลางคืนถึงเช้าทำให้ฝุ่นสะสมใกล้พื้น และการจราจรช่วงเช้าและเย็นที่เกิดในเวลาเดียวกันทุกวัน</p>
+<p><strong>14.5</strong> <span class="math inline">\(n_{\text{eff}} \approx 730 \times (1 - 0.8)/(1 + 0.8) = 730 \times 0.2/1.8 \approx 81\)</span> วัน</p>
+<p><strong>14.6</strong> แนวทาง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT date, pm25_mean FROM daily_pm25_clean</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE station_id = '35t' AND is_complete AND date &lt; DATE '2024-01-01' ORDER BY date</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> s.set_index(pd.to_datetime(s[<span class="st">"date"</span>]))[<span class="st">"pm25_mean"</span>].asfreq(<span class="st">"D"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>is_gap <span class="op">=</span> s.isna()</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>run_id <span class="op">=</span> (is_gap <span class="op">!=</span> is_gap.shift()).cumsum()                 <span class="co"># หมายเลขของแต่ละช่วงที่ติดกัน</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>gap_lengths <span class="op">=</span> is_gap.groupby(run_id).<span class="bu">sum</span>()[is_gap.groupby(run_id).first()]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_gap.<span class="bu">sum</span>(), gap_lengths.<span class="bu">max</span>(), (gap_lengths <span class="op">&gt;</span> <span class="dv">3</span>).<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>14.7</strong> คำตอบขึ้นกับข้อมูล โดยทั่วไปสถานีภาคเหนือมี <span class="math inline">\(F_S\)</span> สูงที่สุดเพราะฤดูฝุ่นชัดเจน สถานีภาคใต้มี <span class="math inline">\(F_S\)</span> ต่ำกว่า ส่วน <span class="math inline">\(F_T\)</span> ของข้อมูลไม่กี่ปีมักต่ำ สถานีที่ <span class="math inline">\(F_T\)</span> สูงผิดปกติควรตรวจ change point ก่อนตีความว่าเป็นแนวโน้มจริง</p>
+<p><strong>14.8</strong> ทั้งสองเดือนมักมียอดที่ lag 24, 48, 72 จากฤดูกาลรายวัน เดือนมีนาคมมักมี autocorrelation สูงตลอดทุก lag เพราะฝุ่นสะสมหลายวันในสภาพอากาศนิ่ง ส่วนเดือนกรกฎาคม autocorrelation ลดลงเร็วกว่าเพราะฝนและลมชะล้างฝุ่นบ่อย</p>
+<p><strong>14.9</strong> คำตอบขึ้นกับข้อมูล ถ้าสถานีใกล้เคียงสูงขึ้นพร้อมกันในวันเดียวกัน น่าจะเป็นเหตุการณ์ระดับภูมิภาค (เช่น หมอกควันข้ามแดนหรือไฟป่าขนาดใหญ่) ถ้าสูงขึ้นเพียงสถานีเดียว อาจเป็นแหล่งกำเนิดเฉพาะที่หรือปัญหาของเครื่องวัด ต้องตรวจ PM10 และข้อมูลจุดความร้อนประกอบ</p>
+<p><strong>14.10</strong> ผลของสองวิธีควรตรงกันในชั่วโมงที่มีข้อมูล ข้อต่างคือ <code>resample</code> สร้างแถวของชั่วโมงที่เซนเซอร์ดับเป็นค่าว่างพร้อม <code>count</code> เท่ากับศูนย์ ส่วน <code>time_bucket</code> กับ <code>GROUP BY</code> ไม่สร้างแถวของชั่วโมงเหล่านั้น ต้อง LEFT JOIN กับตารางชั่วโมงจาก <code>generate_series</code> ถ้าต้องการเห็นช่องว่าง และต้องตรวจว่าทั้งสองวิธีกำกับเวลาด้วยต้นชั่วโมงเหมือนกัน</p>
+</section>
+<section id="sec-appg-ch15" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch15">บทที่ 15</h2>
+<p><strong>15.1</strong> <span class="math inline">\(d = \sqrt{(30-35)^2 + (60-40)^2 + (20-22)^2} = \sqrt{25 + 400 + 4} = \sqrt{429} \approx 20.7\)</span> µg/m³ เดือนมีนาคมมีผลมากที่สุด (400 จาก 429) เพราะเป็นมิติที่สองสถานีต่างกันมากที่สุด ซึ่งเป็นลักษณะทั่วไปของโปรไฟล์ PM2.5 ที่ไม่ได้ปรับสเกล เดือนในฤดูฝุ่นครอบงำระยะทาง</p>
+<p><strong>15.2</strong> ความแปรปรวนของข้อมูลเมื่อฉายลงบนทิศทาง <span class="math inline">\(\mathbf{w}\)</span> คือ <span class="math inline">\(\mathbf{w}^\top \mathbf{C} \mathbf{w}\)</span> การหาทิศทางหนึ่งหน่วยที่ทำให้ค่านี้สูงสุดนำไปสู่สมการ <span class="math inline">\(\mathbf{C}\mathbf{w} = \lambda \mathbf{w}\)</span> ทิศทางที่ดีที่สุดจึงเป็น eigenvector และเมื่อแทนกลับจะได้ <span class="math inline">\(\mathbf{w}^\top \mathbf{C} \mathbf{w} = \lambda\)</span> eigenvalue จึงเท่ากับความแปรปรวนของข้อมูลตามทิศทางนั้น</p>
+<p><strong>15.3</strong> ผลรวม eigenvalue คือ 5.0 สัดส่วนคือ 0.60, 0.24, 0.10, 0.04, 0.02 สัดส่วนสะสมของสององค์ประกอบแรกคือ 0.84 จึงต้องใช้สององค์ประกอบเพื่ออธิบายอย่างน้อย 80%</p>
+<p><strong>15.4</strong> <span class="math inline">\(s = (2.0 - 2.5)/\max(2.5, 2.0) = -0.2\)</span> ค่าติดลบแปลว่าจุดนี้อยู่ใกล้กลุ่มอื่นมากกว่ากลุ่มของตนโดยเฉลี่ย จึงน่าจะถูกจัดผิดกลุ่ม หรืออยู่ระหว่างกลุ่ม</p>
+<p><strong>15.5</strong> ตัวอย่างความผิดพลาด: ค่าเฉลี่ยรายวัน 400 µg/m³ ในเดือนกรกฎาคมที่สถานีหนึ่ง ขณะที่สถานีอื่นในจังหวัดเดียวกันปกติ และค่า PM2.5 สูงกว่า PM10 หลักฐานคือสถานีใกล้เคียงไม่สูงตาม และความไม่สอดคล้องทางกายภาพ ตัวอย่างเหตุการณ์จริง: ค่าสูงขึ้นสามเท่าพร้อมกันทุกสถานีในลำปางในเดือนกุมภาพันธ์ หลักฐานคือสถานีใกล้เคียงสูงขึ้นพร้อมกัน PM10 สูงตาม และมีจุดความร้อนจากดาวเทียมในบริเวณนั้น</p>
+<p><strong>15.6</strong> คำตอบขึ้นกับข้อมูล แบบปรับสเกลมักได้ PC1 ที่มี loading บวกใกล้เคียงกันทุกเดือน (ระดับโดยรวม) และ PC2 ที่ตัดกันระหว่างต้นปีกับกลางฤดูฝุ่น (จังหวะ) แบบไม่ปรับสเกลมักได้ PC1 ที่ถูกครอบงำด้วยเดือนในฤดูฝุ่น เพราะเป็นเดือนที่ความแปรปรวนระหว่างสถานีสูงที่สุด ต้องเขียนเหตุผลของการจัดการค่าว่าง เช่น ตัดสถานีที่ขาดเกินสองเดือน และเติมค่าเฉลี่ยของคอลัมน์สำหรับสถานีที่ขาดไม่เกินสองเดือน</p>
+<p><strong>15.7</strong> คำตอบขึ้นกับข้อมูล เหตุผลในการเลือก <span class="math inline">\(k\)</span> ควรอ้างทั้ง silhouette, elbow และความหมายของกลุ่ม ชื่อกลุ่มควรบอกลักษณะของโปรไฟล์ เช่น “ยอดฤดูฝุ่นช้าและแรง” แทนชื่อภาค เพราะกลุ่มอาจไม่ตรงกับภาค</p>
+<p><strong>15.8</strong> แนวทาง: ในแต่ละรอบ สุ่มสถานีแบบใส่คืน จัดกลุ่มใหม่ แล้วใช้ <code>predict</code> กับทุกสถานี เพื่อเทียบกับการจัดกลุ่มเดิม เนื่องจากหมายเลขกลุ่มอาจสลับกันระหว่างรอบ ต้องจับคู่หมายเลขกลุ่มก่อนนับการย้าย เช่น จับคู่แต่ละกลุ่มใหม่กับกลุ่มเดิมที่มีสมาชิกซ้อนกันมากที่สุด (หรือใช้ <code>scipy.optimize.linear_sum_assignment</code> กับตาราง crosstab) สถานีที่ย้ายบ่อยมักมีโปรไฟล์อยู่ระหว่างสองกลุ่ม เช่น สถานีในจังหวัดที่อยู่รอยต่อระหว่างภาค</p>
+<p><strong>15.9</strong> คำตอบขึ้นกับข้อมูล ARI มักต่ำถึงปานกลาง เพราะรูปแบบรายชั่วโมงสะท้อนแหล่งกำเนิดท้องถิ่น (การจราจร ชั้นผสมอากาศในเมือง) ขณะที่รูปแบบรายเดือนสะท้อนแหล่งกำเนิดระดับภูมิภาค (การเผาในที่โล่ง) สถานีริมถนนในเมืองใหญ่อาจอยู่กลุ่มเดียวกันตามรูปแบบรายชั่วโมง แม้อยู่คนละภาค</p>
+<p><strong>15.10</strong> คำตอบขึ้นกับข้อมูล ข้อสรุปของแต่ละกรณีควรอ้างหลักฐานจาก <a href="../chapters/15-multivariate.html#tbl-ch15-evidence" class="quarto-xref">ตารางที่&nbsp;<span>15.4</span></a> อย่างน้อยสองด้าน และระบุว่าจะทำอย่างไรกับค่านั้นในการวิเคราะห์ต่อไป เช่น เก็บไว้และรายงานผลทั้งแบบรวมและไม่รวม</p>
+</section>
+<section id="sec-appg-ch16" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch16">บทที่ 16</h2>
+<p><strong>16.1</strong> (ก) ตัวระบุโดยตรง (ข) quasi-identifier (ค) ข้อมูลอ่อนไหว (ข้อมูลสุขภาพตามมาตรา 26) (ง) ไม่ใช่ข้อมูลส่วนบุคคล (จ) quasi-identifier (ฉ) ข้อมูลส่วนบุคคล เพราะพิกัดละเอียดของบ้านระบุตัวเจ้าของได้ทางอ้อม และอาจบอกพฤติกรรมได้</p>
+<p><strong>16.2</strong> pseudonymization แทนตัวระบุโดยตรงด้วยรหัสแฝง แต่ยังกลับไปหาตัวตนได้ผ่านตารางจับคู่หรือกุญแจ หรือผ่าน quasi-identifier ที่เหลือ ข้อมูลจึงยังเป็นข้อมูลส่วนบุคคลและต้องปฏิบัติตาม PDPA ทุกประการ ส่วน anonymization แปลงข้อมูลจนไม่สามารถระบุตัวได้อีกด้วยวิธีที่มีเหตุผลตามสมควร ข้อมูลที่เป็นนิรนามแท้จริงจึงไม่ใช่ข้อมูลส่วนบุคคล แต่ต้องพิสูจน์ได้ว่าระบุตัวไม่ได้จริง ซึ่งทำได้ยาก</p>
+<p><strong>16.3</strong> เลขประจำตัวประชาชนมี 13 หลักที่มีรูปแบบแน่นอน (รวมหลักตรวจสอบ) จำนวนค่าที่เป็นไปได้จึงจำกัด ผู้โจมตีคำนวณ SHA-256 ของทุกค่าที่เป็นไปได้ล่วงหน้า แล้วจับคู่กับ hash ในข้อมูลเพื่อย้อนกลับเป็นเลขจริงได้ HMAC ที่ใช้กุญแจลับป้องกันได้ เพราะผู้โจมตีที่ไม่มีกุญแจคำนวณ hash ล่วงหน้าไม่ได้</p>
+<p><strong>16.4</strong> ใช้ทดสอบโครงสร้างของ pipeline ได้ เช่น ชื่อและชนิดของคอลัมน์ การเชื่อมกับ <code>daily_pm25_clean</code> ด้วยจังหวัดและวันที่ จำนวนแถวหลังเชื่อม และโค้ดสร้างกราฟ ห้ามใช้วิเคราะห์หรือรายงานความสัมพันธ์ เช่น ค่าฝุ่นกับจำนวนผู้ป่วย เพราะทุกคอลัมน์สุ่มอย่างอิสระ</p>
+<p><strong>16.5</strong> ข้อแรก ค่าสุดโต่งไม่เกินค่าสูงสุดของข้อมูลจริง เพราะแปลงกลับด้วยควอนไทล์ของข้อมูลจริง จึงไม่เหมาะกับการศึกษาเหตุการณ์ฝุ่นรุนแรง ซึ่งสำคัญที่สุดในโดเมนนี้ ข้อสอง มีแถวที่เป็นไปไม่ได้ เช่น ค่าสูงสุดรายชั่วโมงต่ำกว่าค่าเฉลี่ยรายวัน จึงต้องตรวจด้วย schema ก่อนใช้ (นอกจากนี้ยังมีแถวที่ซ้ำกับข้อมูลจริงทุกประการ ซึ่งเป็นปัญหาด้านความเป็นส่วนตัวถ้าข้อมูลต้นฉบับเป็นข้อมูลส่วนบุคคล)</p>
+<p><strong>16.6</strong> คำตอบขึ้นกับโครงการ ตัวอย่าง: “ข้อมูลที่ใช้คือค่าคุณภาพอากาศรายชั่วโมงจาก Air4Thai และข้อมูลสถานี ไม่ใช่ข้อมูลส่วนบุคคล เพราะไม่เกี่ยวกับบุคคลใด ถ้าต่อยอดกับข้อมูลสุขภาพ ข้อมูลจะเป็นข้อมูลอ่อนไหวตามมาตรา 26 โครงการจะใช้เฉพาะจำนวนผู้ป่วยรวมระดับจังหวัดต่อสัปดาห์ที่เผยแพร่แล้ว quasi-identifier ที่ต้องระวังได้แก่ อายุ เพศ ตำบล และวันที่เข้ารับบริการ ไฟล์ <code>data/synthetic/fake_visits.csv</code> สร้างด้วย Faker ใช้ทดสอบโค้ดเท่านั้น”</p>
+<p><strong>16.7</strong> แนวทาง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> v <span class="kw">AS</span> (</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> province, <span class="fu">CAST</span>(visit_date <span class="kw">AS</span> <span class="dt">DATE</span>) <span class="kw">AS</span> <span class="dt">date</span>, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_visits</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> <span class="st">'data/synthetic/fake_visits.csv'</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> province, <span class="fu">CAST</span>(visit_date <span class="kw">AS</span> <span class="dt">DATE</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>p <span class="kw">AS</span> (</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> s.province, d.<span class="dt">date</span>, <span class="fu">AVG</span>(d.pm25_mean) <span class="kw">AS</span> pm25</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> d.is_complete</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> s.province, d.<span class="dt">date</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> v <span class="kw">LEFT</span> <span class="kw">JOIN</span> p <span class="kw">USING</span> (province, <span class="dt">date</span>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>จำนวนแถวหลังเชื่อมต้องเท่ากับจำนวนแถวของ <code>v</code> (ใช้ LEFT JOIN และ <code>p</code> มีหนึ่งแถวต่อจังหวัดต่อวัน) ถ้ามากกว่าแปลว่าเกิด fan-out ถ้ามีแถวที่ <code>pm25</code> เป็นค่าว่าง แปลว่าวันนั้นจังหวัดนั้นไม่มีข้อมูลฝุ่นที่ครบ</p>
+<p><strong>16.8</strong> คำตอบขึ้นกับข้อมูล แนวทางคือทำให้หยาบทีละขั้นแล้วตรวจ <span class="math inline">\(k\)</span> ใหม่ทุกครั้ง เช่น เปลี่ยนวันที่เป็นสัปดาห์หรือเดือนก่อน (วันที่เป็น quasi-identifier ที่ละเอียดที่สุด) แล้วจึงเปลี่ยนอายุเป็นช่วง และจังหวัดเป็นภาคถ้ายังไม่พอ การแลกเปลี่ยนคือ ยิ่งหยาบ <span class="math inline">\(k\)</span> ยิ่งสูง แต่คำถามที่ตอบได้ก็ยิ่งหยาบตาม ควรเลือกมิติที่จะทำให้หยาบตามคำถามของโครงการ เช่น ถ้าคำถามเป็นระดับจังหวัด ให้คงจังหวัดไว้และทำให้วันที่และอายุหยาบแทน</p>
+<p><strong>16.9</strong> คำตอบขึ้นกับข้อมูล โดยทั่วไป marginal และสหสัมพันธ์ใกล้เคียงข้อมูลจริง แต่จะพบแถวที่ <code>pm25_max</code> ต่ำกว่า <code>pm25_mean</code> บ้าง ส่วน <code>n_hours_observed</code> จะไม่เกิน 24 เพราะแปลงกลับด้วยควอนไทล์ของข้อมูลจริง แต่อาจได้ค่าทศนิยม ซึ่งผิดชนิด (จำนวนชั่วโมงต้องเป็นจำนวนเต็ม) และความสัมพันธ์ระหว่าง <code>n_hours_observed</code> กับค่าฝุ่นอาจไม่ถูกต้อง เพราะ Gaussian copula จับได้เฉพาะความสัมพันธ์แบบทางเดียว</p>
+<p><strong>16.10</strong> แนวทาง: คำนวณจำนวนวันเกินมาตรฐานต่อจังหวัดต่อปีด้วย SQL เพิ่มสัญญาณรบกวนด้วย <code>laplace_count</code> แล้วเรียงลำดับใหม่ เปรียบเทียบกับลำดับเดิมด้วยสหสัมพันธ์ของ Spearman ที่ <span class="math inline">\(\varepsilon = 10\)</span> ลำดับแทบไม่เปลี่ยน ที่ <span class="math inline">\(\varepsilon = 1\)</span> เปลี่ยนเล็กน้อยเฉพาะจังหวัดที่จำนวนใกล้กัน ที่ <span class="math inline">\(\varepsilon = 0.1\)</span> จังหวัดที่จำนวนน้อยเปลี่ยนลำดับมาก ซึ่งแสดงว่า DP กระทบกลุ่มที่มีจำนวนน้อยมากที่สุด</p>
+</section>
+<section id="sec-appg-ch17" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch17">บทที่ 17</h2>
+<p><strong>17.1</strong> ellipsoid คือแบบจำลองทางคณิตศาสตร์ของรูปร่างโลก กำหนดด้วยรัศมีที่เส้นศูนย์สูตรและความแบน ส่วน datum คือการผูก ellipsoid เข้ากับโลกจริง กำหนดว่าจุดศูนย์กลางและการวางแนวอยู่ที่ใด ตัวอย่างปัญหา: ถ้านำพิกัดสถานีที่บันทึกด้วย GPS (WGS 84) มาซ้อนกับแผนที่ขอบเขตอำเภอยุคเก่าที่ใช้ Indian 1975 โดยไม่แปลง จุดจะคลาดเคลื่อนหลายร้อยเมตร สถานีที่อยู่ใกล้ขอบเขตอาจตกไปอยู่ผิดอำเภอ</p>
+<p><strong>17.2</strong> ประมาณ <span class="math inline">\(111.32 \times \cos(15°) \approx 107.5\)</span> กิโลเมตร ต่างจากหนึ่งองศาละติจูด (ประมาณ 111 กิโลเมตรเสมอ) เพราะเส้นลองจิจูดลู่เข้าหากันที่ขั้วโลก ระยะระหว่างเส้นลองจิจูดจึงแคบลงตามโคไซน์ของละติจูด ส่วนเส้นละติจูดขนานกันตลอด</p>
+<p><strong>17.3</strong> (ก) EPSG:4326 (ข) EPSG:32647 เพราะเชียงใหม่อยู่ในโซน 47N (ค) EPSG:32648 เพราะทั้งอุดรธานีและขอนแก่นอยู่ทางตะวันออกของ 102° ตะวันออก (หรือใช้ระยะทาง geodesic)</p>
+<p><strong>17.4</strong> ผลของขนาด: สัดส่วนวันเกินมาตรฐานระดับภาคอาจดูใกล้กันระหว่างภาคเหนือกับภาคกลาง แต่เมื่อแยกเป็นระดับจังหวัด จะเห็นว่าบางจังหวัดในภาคเหนือสูงกว่ามาก ผลของการแบ่งเขต: ถ้ารวมสถานีเป็นเขตตามลุ่มน้ำแทนตามจังหวัด แม้จำนวนเขตเท่ากัน รูปแบบบนแผนที่และจังหวัดที่ดู “แย่ที่สุด” อาจเปลี่ยนไป เพราะสถานีที่ค่าสูงถูกรวมกับสถานีต่างชุดกัน</p>
+<p><strong>17.5</strong> น้ำหนักคือ <span class="math inline">\(1/25\)</span>, <span class="math inline">\(1/100\)</span>, <span class="math inline">\(1/400\)</span> ค่าประมาณคือ <span class="math inline">\((50/25 + 30/100 + 20/400)/(1/25 + 1/100 + 1/400) = 2.35/0.0525 \approx 44.8\)</span> µg/m³ ค่าประมาณใกล้ค่าของสถานีที่ใกล้ที่สุดมาก เพราะน้ำหนักแปรผกผันกับระยะยกกำลังสอง</p>
+<p><strong>17.6</strong> คำตอบขึ้นกับข้อมูล สาเหตุที่พบบ่อยได้แก่ การสะกดชื่อจังหวัดต่างกัน (แก้ด้วย <code>NAME_FIX</code>) สถานีอยู่ใกล้รอยต่อและไฟล์ขอบเขตหยาบ พิกัดคลาดเคลื่อน (เช่น ปัดเศษทศนิยมน้อยเกินไป) หรือคอลัมน์จังหวัดในตาราง <code>stations</code> ผิด แต่ละกรณีต้องตรวจกับแหล่งต้นทาง</p>
+<p><strong>17.7</strong> ระยะทางจากพิกัดองศาไม่มีหน่วยที่มีความหมาย UTM 47N มักคลาดจาก geodesic ไม่ถึง 0.1% สำหรับคู่สถานีในภาคเหนือและภาคกลาง แต่คู่สถานีในภาคตะวันออกเฉียงเหนือซึ่งอยู่นอกโซน 47N จะคลาดมากขึ้นตามระยะห่างจากเส้นเมริเดียนกลางของโซน (99° ตะวันออก) ซึ่งยังมักน้อยกว่า 1% แต่ควรใช้ 48N หรือ geodesic เมื่อต้องการความแม่นยำ</p>
+<p><strong>17.8</strong> แนวทางตามหัวข้อ <a href="../chapters/17-spatial-data.html#sec-ch17-choropleth" class="quarto-xref"><span>แผนที่ choropleth และปัญหา MAUP</span></a> โดยใช้ <code>missing_kwds</code> หรือ <code>nan_fill_color</code> สำหรับจังหวัดที่ไม่มีสถานี และใส่ <code>n_stations</code> ใน <code>hover_data</code> สำหรับระดับภาค ให้ใช้ <code>prov.merge(...).dissolve(by="region")</code> สำหรับขอบเขต และคำนวณค่าระดับภาคจากระดับสถานีโดยตรง ไม่ใช่เฉลี่ยค่าของจังหวัด (บทที่ 18) ระดับภาคมักซ่อนความต่างภายในภาคที่ระดับจังหวัดแสดงให้เห็น</p>
+<p><strong>17.9</strong> แนวทาง: <code>stations.merge(station_clusters, on="station_id").explore(column="cluster", categorical=True)</code> คำตอบเรื่องการกระจุกขึ้นกับข้อมูล ถ้ากลุ่มกระจุกตามภูมิศาสตร์ชัดเจน แสดงว่ารูปแบบฤดูกาลถูกกำหนดโดยปัจจัยระดับภูมิภาค ถ้ามีสถานีที่อยู่ต่างกลุ่มกับเพื่อนบ้าน ควรตรวจว่าเป็นสถานีริมถนนหรือมีแหล่งกำเนิดเฉพาะที่</p>
+<p><strong>17.10</strong> แนวทาง: สร้าง buffer ในระบบพิกัดเมตรสามขนาด แล้ว <code>sjoin</code> นับจำนวนสถานีที่อยู่ภายในลบหนึ่ง (ตัวเอง) สถานีที่โดดเดี่ยวไม่มีสถานีอ้างอิงในจังหวัดหรือในรัศมีใกล้ การตรวจค่าผิดปกติตามบริบทจึงทำไม่ได้ ธงของสถานีเหล่านี้จะเป็น “uncertain” เสมอ และต้องใช้หลักฐานอื่น เช่น PM10 หรือข้อมูลจุดความร้อน</p>
+</section>
+<section id="sec-appg-ch18" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch18">บทที่ 18</h2>
+<p><strong>18.1</strong> (ก) distributive (ข) algebraic (ค) distributive (ง) holistic (จ) algebraic (คำนวณจากจำนวนวันเกินมาตรฐานและจำนวนวันทั้งหมด) (ฉ) algebraic (คำนวณได้จากจำนวน ผลรวม และผลรวมกำลังสอง)</p>
+<p><strong>18.2</strong> แบบ pooled: <span class="math inline">\((1200 \times 25 + 300 \times 40 + 500 \times 30)/2000 = 57{,}000/2{,}000 = 28.5\)</span> µg/m³ ตอบคำถามว่า “สถานี-วันทั่วไปในภาคมีค่าเท่าใด” ค่าเฉลี่ยของค่าเฉลี่ยจังหวัด: <span class="math inline">\((25 + 40 + 30)/3 \approx 31.7\)</span> µg/m³ ตอบคำถามว่า “จังหวัดทั่วไปในภาคมีค่าเท่าใด” ซึ่งให้น้ำหนักจังหวัดที่สองที่มีข้อมูลน้อยเท่ากับจังหวัดแรกที่มีข้อมูลมากที่สุด</p>
+<p><strong>18.3</strong> พื้นที่ของหน่วยแม่ใน treemap เท่ากับผลรวมของพื้นที่หน่วยลูก ถ้าใช้ค่าเฉลี่ยเป็นขนาด พื้นที่ของภาคจะเป็นผลรวมของค่าเฉลี่ยจังหวัด ซึ่งไม่มีความหมาย และภาคที่มีจังหวัดมากจะดูใหญ่เพียงเพราะมีจังหวัดมาก ควรใช้ค่าเฉลี่ยเป็นสี และใช้ค่าที่บวกกันได้ เช่น จำนวนสถานี-วัน เป็นขนาด</p>
+<p><strong>18.4</strong> <code>ROLLUP (region, province)</code> คำนวณกลุ่ม (region, province), (region) และ () ส่วน <code>CUBE (region, province)</code> คำนวณเพิ่มกลุ่ม (province) ด้วย สำหรับลำดับชั้นที่จังหวัดอยู่ในภาคเดียว กลุ่ม (province) ให้ผลเหมือน (region, province) จึงซ้ำซ้อน <code>ROLLUP</code> จึงเหมาะกว่า ส่วน <code>CUBE</code> เหมาะกับมิติที่ไม่เป็นลำดับชั้นของกันและกัน เช่น ภาคกับปี</p>
+<p><strong>18.5</strong> slice: ตรึงปี ค.ศ. 2023 ด้วย <code>WHERE YEAR(date) = 2023</code> dice: เลือกภาคเหนือและภาคกลางในฤดูแล้ง ด้วย <code>WHERE region IN ('เหนือ', 'กลาง') AND MONTH(date) BETWEEN 2 AND 4</code></p>
+<p><strong>18.6</strong> แนวทาง: นำ query ตรวจจังหวัดที่มีมากกว่าหนึ่งภาคและสถานีที่ไม่มีภาคหรือจังหวัดในหัวข้อ <a href="../chapters/18-hierarchical-data.html#sec-ch18-hierarchy" class="quarto-xref"><span>โครงสร้างลำดับชั้น: ภาค → จังหวัด → สถานี</span></a> มาเขียนเป็นฟังก์ชันที่ <code>raise</code> เมื่อผลไม่ว่าง เช่น</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_hierarchy(con) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    bad <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT province FROM stations GROUP BY province HAVING COUNT(DISTINCT region) &gt; 1</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>).df()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(bad) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"จังหวัดที่มีมากกว่าหนึ่งภาค: </span><span class="sc">{</span>bad[<span class="st">'province'</span>]<span class="sc">.</span>tolist()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>18.7</strong> คำตอบขึ้นกับข้อมูล ถ้าข้อมูลไม่สมดุลมาก ลำดับอาจเปลี่ยน เช่น ภาคที่มีจังหวัดหนึ่งมีสถานีจำนวนมากที่ค่าต่ำ จะมีค่าแบบ pooled ต่ำกว่าค่าเฉลี่ยของจังหวัด วิธีที่ใช้ต้องตรงกับนิยามใน <code>questions.md</code></p>
+<p><strong>18.8</strong> สีของภาคใน treemap ควรตรงกับ <code>share_over</code> ของแถวระดับภาคจาก <code>ROLLUP</code> เพราะ Plotly คำนวณสีของหน่วยแม่เป็นค่าเฉลี่ยถ่วงน้ำหนักด้วย <code>values</code> ซึ่งเมื่อสีคือสัดส่วนและน้ำหนักคือจำนวนวัน จะได้สัดส่วนแบบ pooled ตรวจได้จาก <code>fig.data[0].ids</code> และ <code>fig.data[0].marker.colors</code></p>
+<p><strong>18.9</strong> แนวทาง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, <span class="dt">YEAR</span>(d.<span class="dt">date</span>) <span class="kw">AS</span> <span class="dt">year</span>,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>((d.pm25_mean <span class="op">&gt;</span> <span class="fl">37.5</span>):<span class="ch">:INT</span>), <span class="dv">3</span>) <span class="kw">AS</span> share_over</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> d.is_complete <span class="kw">AND</span> d.<span class="dt">date</span> <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">'2024-01-01'</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">CUBE</span> (s.region, <span class="dt">YEAR</span>(d.<span class="dt">date</span>))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> s.region <span class="kw">NULLS</span> <span class="fu">LAST</span>, <span class="dt">year</span> <span class="kw">NULLS</span> <span class="fu">LAST</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>แล้วใช้ pandas <code>pivot</code> โดยแทน <code>NULL</code> ด้วย “รวม” <code>PIVOT</code> ของ DuckDB ให้ตารางภาค × ปีได้โดยตรง แต่ไม่มีแถวและคอลัมน์ผลรวม ต้องคำนวณเพิ่ม ข้อดีของ <code>CUBE</code> คือผลรวมของทุกระดับคำนวณจากข้อมูลรายวันโดยตรง จึงสอดคล้องกันเสมอ</p>
+<p><strong>18.10</strong> แนวทาง:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_counts_are_consistent(con):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT s.region, s.province, COUNT(*) FILTER (WHERE d.pm25_mean &gt; 37.5) AS n_over</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">        WHERE d.is_complete</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="st">        GROUP BY ROLLUP (s.region, s.province)</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>).df()</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    national <span class="op">=</span> df.query(<span class="st">"region.isna()"</span>)[<span class="st">"n_over"</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    regions <span class="op">=</span> df.query(<span class="st">"region.notna() and province.isna()"</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    provinces <span class="op">=</span> df.query(<span class="st">"province.notna()"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> national <span class="op">==</span> regions[<span class="st">"n_over"</span>].<span class="bu">sum</span>()</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> region, total <span class="kw">in</span> regions.set_index(<span class="st">"region"</span>)[<span class="st">"n_over"</span>].items():</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> total <span class="op">==</span> provinces.query(<span class="st">"region == @region"</span>)[<span class="st">"n_over"</span>].<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ฟิกซ์เจอร์ <code>con</code> สร้างการเชื่อมต่อแบบอ่านอย่างเดียวกับฐานข้อมูลทดสอบ</p>
+</section>
+<section id="sec-appg-ch19" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch19">บทที่ 19</h2>
+<p><strong>19.1</strong> ตัวอย่าง (ต้องปรับตัวเลขตามข้อมูลจริง): (ก) “ภาคเหนือมีวันเกินมาตรฐานบ่อยที่สุด ประมาณหนึ่งวันในหกวัน” (ข) “ภาคเหนือเกินมาตรฐานในเดือนกุมภาพันธ์ถึงเมษายนทุกปีที่มีข้อมูล” (ค) “ข้อมูลของสถานีนี้ขาดหายเกือบทั้งเดือนมีนาคม พ.ศ. 2566 ซึ่งเป็นช่วงที่ค่าน่าจะสูงที่สุด” ชื่อกราฟแบบข้อค้นพบต้องตรวจกับข้อมูลจริงเสมอ และใช้ถ้อยคำตามระดับหลักฐาน</p>
+<p><strong>19.2</strong> เปอร์เซ็นต์: “ประมาณ 17% ของวัน” ความถี่ตามธรรมชาติ: “ประมาณหนึ่งวันในหกวัน” หรือ “ประมาณ 60 วันต่อปี”</p>
+<p><strong>19.3</strong> ตัวอย่าง: “สถานี-วันประมาณ 7% มีข้อมูลไม่ครบ 18 ชั่วโมงและถูกตัดออก วันที่ถูกตัดไม่ได้กระจายสม่ำเสมอ แต่กระจุกในเดือนมีนาคมของสถานีในภาคเหนือ ซึ่งอาจทำให้สัดส่วนวันเกินมาตรฐานของภาคเหนือต่ำกว่าความจริง การวิเคราะห์ความไวที่เติมช่องว่างสั้นด้วย interpolation ให้ผลสูงขึ้นเล็กน้อย แต่ลำดับของภาคไม่เปลี่ยน” (ตัวเลขต้องมาจากข้อมูลของทีม)</p>
+<p><strong>19.4</strong> notebook ยอมให้รัน cell ในลำดับใดก็ได้ และเก็บสถานะของตัวแปรไว้ใน kernel ผลลัพธ์ที่เห็นจึงอาจมาจาก cell ที่ถูกลบหรือแก้ไปแล้ว หรือจากลำดับการรันที่ไม่มีใครบันทึก นอกจากนี้ notebook อาจพึ่งไฟล์หรือแพ็กเกจที่มีเฉพาะบนเครื่องผู้เขียน Quarto แก้ปัญหาแรกโดยตรง เพราะรันเอกสารใหม่ทั้งหมดจากบนลงล่างในกระบวนการใหม่ทุกครั้งที่ render ส่วนปัญหาไฟล์และแพ็กเกจต้องแก้ด้วยพาธสัมพัทธ์และ <code>environment.yml</code></p>
+<p><strong>19.5</strong> “พิสูจน์ว่า” เกินระดับหลักฐานของข้อมูลช่วงสำรวจ และ “เป็นสาเหตุของ” สรุปเหตุและผลจากข้อมูลเชิงสังเกตที่ไม่ได้วัดการเผาเลย เขียนใหม่ว่า “ข้อมูลปี 2563–2566 บ่งชี้ว่าค่าฝุ่นในภาคเหนือสูงในช่วงเดือนกุมภาพันธ์ถึงเมษายน ซึ่งตรงกับช่วงที่มีการเผาในที่โล่งมาก การยืนยันความสัมพันธ์กับการเผาต้องใช้ข้อมูลจุดความร้อนและการวิเคราะห์เพิ่มเติม”</p>
+<p><strong>19.6</strong> คำตอบขึ้นกับโครงการ ถ้าเพื่อนเล่ากลับได้ไม่ครบสามข้อภายในหนึ่งนาที ให้ตรวจว่าข้อค้นพบอยู่ต้นประโยคหรือไม่ ตัวเลขมีจุดเทียบหรือไม่ และมีศัพท์เทคนิคที่ผู้อ่านไม่เข้าใจหรือไม่</p>
+<p><strong>19.7</strong> แนวทาง: ย้ายโค้ดที่ใช้ซ้ำไป <code>src/</code> แล้ว import ในเอกสาร ตั้ง <code>execute: echo: false</code> ใน YAML header แทนตัวเลขที่พิมพ์ในข้อความด้วย <code>`{python} ...`</code> และใส่ <code>#| label: fig-...</code>, <code>#| fig-cap:</code> และ <code>#| fig-alt:</code> ที่บรรทัดแรกของ cell ที่สร้างรูป แล้วอ้างอิงด้วย <code>@fig-...</code> ทดสอบด้วย <code>quarto render</code></p>
+<p><strong>19.8</strong> แนวทางตามหัวข้อ <a href="../chapters/19-storytelling-reports.html#sec-ch19-parameterized" class="quarto-xref"><span>รายงานแบบมีพารามิเตอร์ ★</span></a> ปัญหาที่พบบ่อยกับภาคที่มีข้อมูลน้อย ได้แก่ กราฟว่าง ข้อความที่สมมติว่าภาคนั้นสูงที่สุด และการหารด้วยศูนย์เมื่อไม่มีวันที่ข้อมูลครบ แก้ด้วยการตรวจจำนวนข้อมูลก่อน แล้วแสดงข้อความแจ้งแทนกราฟเมื่อข้อมูลไม่พอ และสร้างข้อความที่ขึ้นกับผลด้วยเงื่อนไขในโค้ด อย่าลืมติดตั้ง <code>papermill</code></p>
+<p><strong>19.9</strong> คำตอบขึ้นกับ repository ของทีม รายการที่มักยังไม่ผ่าน ได้แก่ ตัวเลขที่พิมพ์ตรงในรายงาน การสุ่มที่ไม่กำหนด seed แพ็กเกจที่ไม่ได้ระบุใน <code>environment.yml</code> และขั้นตอนดึงข้อมูลที่ทำด้วยมือ แผนแก้ไขควรระบุผู้รับผิดชอบและกำหนดเวลา</p>
+<p><strong>19.10</strong> คำตอบขึ้นกับ repository ของทีม ปัญหาที่พบบ่อยได้แก่ README ไม่บอกว่าต้องสร้างฐานข้อมูลก่อน render พาธที่ขึ้นกับระบบปฏิบัติการ ฟอนต์ไทยที่ไม่มีบนเครื่องเพื่อน (บทที่ 11) และ Quarto หรือ kernel ของ Jupyter ที่ไม่ได้ติดตั้ง ทุกปัญหาที่พบควรแก้ใน repository หรือ README ไม่ใช่แก้เฉพาะบนเครื่องเพื่อน</p>
+</section>
+<section id="sec-appg-ch20" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch20">บทที่ 20</h2>
+<p><strong>20.1</strong> (ก) เชิงปฏิบัติการ ตัวชี้วัดหลัก: จำนวนสถานีที่ค่าล่าสุดเกินเกณฑ์เตือนภัย (ข) เชิงกลยุทธ์ ตัวชี้วัดหลัก: จำนวนวันเกินมาตรฐานรายปีเทียบกับเป้าหมายของแผน (ค) เชิงวิเคราะห์ ตัวชี้วัดหลัก: สัดส่วนวันเกินมาตรฐานแยกตามเดือนและพื้นที่ที่เลือกได้</p>
+<p><strong>20.2</strong> เมื่อผู้ใช้เลือกภาค เบราว์เซอร์ส่งค่าใหม่ของ selectbox ไปยังเซิร์ฟเวอร์ Streamlit เรียก callback <code>drill</code> ก่อน ซึ่งบันทึกภาคลงใน <code>st.session_state["region"]</code> และล้างค่าของ selectbox จากนั้น rerun script ทั้งไฟล์ตั้งแต่บรรทัดแรก รอบนี้ <code>region</code> ไม่ใช่ค่าว่าง เงื่อนไข <code>WHERE</code> จึงมี <code>s.region = ?</code> และ <code>depth</code> เท่ากับ 1 ตัวชี้วัดคำนวณเฉพาะภาคนั้น (ผลของ query ที่เคยรันแล้วมาจาก cache) breadcrumb แสดงปุ่มของภาค และ bar chart กับ selectbox แสดงจังหวัดในภาคนั้น</p>
+<p><strong>20.3</strong> <code>cache_data</code> คืน <em>สำเนา</em> ของค่าที่เก็บไว้ทุกครั้ง ซึ่งต้อง serialize ค่านั้นได้ การเชื่อมต่อฐานข้อมูลเป็นทรัพยากรที่มีสถานะ คัดลอกไม่ได้ และควรมีเพียงตัวเดียวที่ใช้ร่วมกันทุก session <code>cache_resource</code> คืนวัตถุเดิมตัวเดียวกันทุกครั้ง จึงเหมาะกว่า</p>
+<p><strong>20.4</strong> ปัญหาคือ (1) SQL injection ถ้าค่า <code>province</code> มาจากผู้ใช้ (2) ชื่อที่มีเครื่องหมายคำพูดจะทำให้ SQL ผิดรูป (3) query กับ cache ใช้สตริง SQL ที่ต่างกันทุกจังหวัด ซึ่งยังทำงานได้แต่ไม่จำเป็น ควรเขียนเป็น <code>query("SELECT * FROM stations WHERE province = ?", (province,))</code></p>
+<p><strong>20.5</strong> ฟังก์ชันอ่าน <code>st.session_state.region</code> ภายใน แต่ไม่มีอาร์กิวเมนต์ กุญแจของ cache จึงเหมือนกันทุกครั้ง ผู้ใช้คนแรกที่เรียกจะทำให้ผลของภาคที่ตนเลือกถูกเก็บไว้ และผู้ใช้คนอื่นที่เลือกภาคอื่นจะได้ผลของภาคแรกไปด้วย ควรรับภาคเป็นอาร์กิวเมนต์ เช่น <code>def region_summary(region: str)</code> แล้วเรียก <code>region_summary(ss.region)</code></p>
+<p><strong>20.6</strong> แนวทาง: query สัดส่วนของทั้งประเทศในช่วงวันที่เดียวกัน (เงื่อนไขเฉพาะ <code>d.is_complete AND d.date BETWEEN ? AND ?</code>) แล้วใช้ <code>m[2].metric(..., delta=f"{(kpi['share'] - national) * 100:+.1f} จุด", delta_color="inverse")</code> ตั้ง <code>delta_color="inverse"</code> เพราะค่าที่สูงขึ้นหมายถึงแย่ลง ซึ่งตรงข้ามกับค่าเริ่มต้นของ Streamlit</p>
+<p><strong>20.7</strong> แนวทาง: query พิกัดและสัดส่วนของแต่ละสถานีด้วยเงื่อนไขเดียวกับระดับปัจจุบัน แล้วใช้ <code>px.scatter_map</code> (Plotly รุ่นใหม่) หรือ <code>px.scatter_mapbox</code> (รุ่นเก่า) โดยให้ <code>color="share"</code> และ <code>hover_data=["n_days"]</code> ถ้าใช้ Folium ให้แสดงด้วย <code>streamlit-folium</code> หรือ <code>st.components.v1.html</code> และ cache การสร้างแผนที่ตามพารามิเตอร์</p>
+<p><strong>20.8</strong> แนวทาง: เพิ่ม <code>months = st.sidebar.multiselect("เดือน", list(range(1, 13)), default=list(range(1, 13)))</code> แล้วเพิ่มเงื่อนไข <code>MONTH(d.date) IN (...)</code> โดยสร้างตัวยึดตำแหน่งตามจำนวนเดือน เช่น <code>"MONTH(d.date) IN (" + ", ".join("?" * len(months)) + ")"</code> และเพิ่มค่าลงใน <code>params</code> ต้องจัดการกรณีที่ไม่เลือกเดือนใดเลยด้วย <code>st.stop()</code> พร้อมข้อความ</p>
+<p><strong>20.9</strong> แนวทาง: selectbox ของสถานีมี <code>format_func</code> จึงต้องส่ง <em>รหัสสถานี</em> ให้ <code>select</code> ไม่ใช่ชื่อที่แสดง จึง query รหัสสถานีจากฐานข้อมูลก่อน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>DB <span class="op">=</span> <span class="bu">str</span>(Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>] <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_drill_down_to_station():</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    at <span class="op">=</span> AppTest.from_file(APP, default_timeout<span class="op">=</span><span class="dv">60</span>).run()</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    at.selectbox[<span class="dv">0</span>].select(at.selectbox[<span class="dv">0</span>].options[<span class="dv">0</span>]).run()          <span class="co"># ภาค</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    province <span class="op">=</span> at.selectbox[<span class="dv">0</span>].options[<span class="dv">0</span>]</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    at.selectbox[<span class="dv">0</span>].select(province).run()                            <span class="co"># จังหวัด</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> duckdb.<span class="ex">connect</span>(DB, read_only<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> con:</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        station <span class="op">=</span> con.execute(<span class="st">"SELECT MIN(station_id) FROM stations WHERE province = ?"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>                              [province]).fetchone()[<span class="dv">0</span>]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    at.selectbox[<span class="dv">0</span>].select(station).run()                             <span class="co"># สถานี</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="kw">not</span> at.exception</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> at.session_state[<span class="st">"station"</span>] <span class="op">==</span> station</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(at.dataframe) <span class="op">==</span> <span class="dv">1</span>                                     <span class="co"># ตารางธงค่าผิดปกติ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>20.10</strong> คำตอบขึ้นกับเครื่องมือที่เลือก ตัวเลขควรตรงกันถ้าเครื่องมือ BI ใช้ข้อมูลที่กรอง <code>is_complete</code> แล้ว และคำนวณสัดส่วนจากจำนวนนับ ไม่ใช่ค่าเฉลี่ยของค่าเฉลี่ย ถ้าไม่ตรงกัน ให้ตรวจนิยามของการรวมข้อมูลตามบทที่ 18 ก่อน</p>
+</section>
+<section id="sec-appg-ch21" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch21">บทที่ 21</h2>
+<p><strong>21.1</strong> คำตอบขึ้นกับโครงการ แผนภาพควรมีอย่างน้อยหกส่วน ได้แก่ การดึงข้อมูล (<code>src/fetch_air4thai.py</code> → <code>data/raw/</code>) การโหลด (<code>src/load_duckdb.py</code> → <code>stations</code>, <code>measurements</code>) การตรวจ (<code>src/validate.py</code>) การทำความสะอาด (<code>src/clean.py</code> → <code>measurements_clean</code>, <code>daily_pm25_clean</code>) การสำรวจและตารางผลวิเคราะห์ (<code>station_clusters</code>, <code>daily_outlier_flags</code>) และการสื่อสาร (<code>report/report.qmd</code>, <code>app/app.py</code>) ใช้ <code>{mermaid}</code> แทนการวาดด้วยอักขระ</p>
+<p><strong>21.2</strong> ตัวอย่างหนึ่งรายการ บริบท: ข้อมูลรายชั่วโมงขาดหายเป็นช่วง ๆ และต้องสรุปเป็นรายวัน สิ่งที่ตัดสินใจ: ใช้วันที่มีข้อมูลอย่างน้อย 18 จาก 24 ชั่วโมง ทางเลือกที่พิจารณา: 12 ชั่วโมง (เก็บวันได้มากแต่ค่าเฉลี่ยอาจเอนตามช่วงเวลาที่มีข้อมูล) 22 ชั่วโมง (น่าเชื่อถือแต่ตัดวันมาก โดยเฉพาะสถานีที่ข้อมูลหายบ่อย) ผลที่ตามมา: ตัดสถานี-วันประมาณร้อยละหนึ่งหลักหน่วย การวิเคราะห์ความไวแสดงว่าลำดับของภาคไม่เปลี่ยน</p>
+<p><strong>21.3</strong> <code>sys.executable</code> คือพาธของ Python ที่กำลังรัน <code>run_all.py</code> อยู่ ซึ่งเป็น Python ของสภาพแวดล้อมของโครงการที่ activate ไว้ คำสั่ง <code>python</code> อาจชี้ไป Python ตัวอื่นของระบบที่ไม่มีแพ็กเกจที่ต้องใช้ โดยเฉพาะบน Windows และ macOS ส่วน <code>check=True</code> ทำให้ <code>subprocess.run</code> แจ้งข้อผิดพลาดและหยุด pipeline ทันทีเมื่อขั้นใดจบด้วยสถานะผิดพลาด ขั้นถัดไปจึงไม่ทำงานกับข้อมูลที่ไม่สมบูรณ์</p>
+<p><strong>21.4</strong> ถ้าเลือกตัวชี้วัดหรือวิธีหลังเห็นข้อมูลช่วงยืนยัน ผู้วิเคราะห์อาจเลือกวิธีที่ให้ผลตรงกับช่วงสำรวจโดยไม่รู้ตัว (garden of forking paths) การยืนยันจะไม่เป็นอิสระจากความคาดหวังอีกต่อไป และไม่ได้ให้หลักฐานเพิ่ม การกำหนดล่วงหน้าทำให้ผลของช่วงยืนยันเป็นการทดสอบที่ข้อค้นพบอาจล้มเหลวได้จริง ซึ่งเป็นสิ่งที่ทำให้การยืนยันมีความหมาย</p>
+<p><strong>21.5</strong> ตัวอย่าง: การแปลงค่าแทน <code>"-1"</code> เป็น <code>NULL</code> กระทบ Q1 ถ้าไม่แปลง ค่า −1 จะถูกนำไปเฉลี่ยด้วย ทำให้ค่าเฉลี่ยรายวันต่ำกว่าความจริง และสัดส่วนวันเกินมาตรฐานต่ำลง โดยเฉพาะสถานีที่มีค่าแทนมาก ซึ่งอาจเปลี่ยนลำดับของภาคได้</p>
+<p><strong>21.6</strong> แนวทาง: หลังรันครั้งแรก บันทึกจำนวนแถวของทุกตารางด้วย <code>SELECT COUNT(*)</code> แล้วรัน <code>python run_all.py --skip-fetch</code> อีกครั้ง จำนวนแถวต้องเท่าเดิมทุกตาราง ถ้า <code>measurements</code> เพิ่มขึ้น แปลว่าการโหลดไม่ใช้ upsert หรือ primary key ไม่ทำงาน ถ้าตารางวิเคราะห์เปลี่ยน แปลว่ามีการสุ่มที่ไม่กำหนด seed</p>
+<p><strong>21.7</strong> คำตอบขึ้นกับข้อมูล ตารางควรมีแถวเป็นทางเลือก (เกณฑ์ 12, 18, 22 ชั่วโมง × รวมหรือไม่รวมค่าที่เป็นข้อผิดพลาด) และคอลัมน์เป็นสัดส่วนวันเกินมาตรฐานของแต่ละภาคและลำดับ ข้อสรุปเขียนว่าลำดับเปลี่ยนหรือไม่ และขนาดของการเปลี่ยนแปลงเทียบกับความต่างระหว่างภาค</p>
+<p><strong>21.8</strong> แนวทางตามโค้ดในหัวข้อ <a href="../chapters/21-case-study-pm25.html#sec-ch21-findings" class="quarto-xref"><span>การสำรวจและข้อค้นพบ</span></a> และฟังก์ชัน cluster bootstrap ที่สุ่มสถานีแบบใส่คืนในแต่ละภาค แล้วคำนวณสัดส่วนแบบ pooled ของสถานีที่สุ่มได้ (แบบฝึกหัด 13.9) รายงานค่าประมาณและช่วงความเชื่อมั่นของทั้งสองช่วง ถ้าช่วงยืนยันไม่สอดคล้อง ให้รายงานเป็นสมมติฐานที่ไม่ได้รับการยืนยัน</p>
+<p><strong>21.9</strong> คำตอบขึ้นกับโครงการ แต่ละแถวต้องระบุสถานะ (ยืนยันแล้ว สำรวจ หรือข้อเท็จจริง) ระดับความมั่นใจ และข้อจำกัดหลักหนึ่งข้อที่เฉพาะเจาะจงกับข้อค้นพบนั้น ไม่ใช่ข้อจำกัดทั่วไป</p>
+<p><strong>21.10</strong> คำตอบขึ้นกับการซ้อม จุดที่มักต้องปรับได้แก่ ใช้เวลากับ demo นานเกินไปจนไม่มีเวลาพูดเรื่องข้อจำกัด และเริ่มด้วยรายละเอียดทางเทคนิคแทนข้อค้นพบ คำถามที่ตอบไม่ได้ระหว่างซ้อมควรนำไปเตรียมคำตอบและตรวจโค้ดส่วนนั้นอีกครั้ง</p>
+</section>
+<section id="sec-appg-ch22" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appg-ch22">บทที่ 22</h2>
+<p><strong>22.1</strong> ด้านประโยชน์และการไม่ก่อความเสียหาย: การจัดอันดับจากสถานีเดียวริมถนนอาจทำให้จังหวัดถูกมองว่าแย่ที่สุดโดยไม่เป็นธรรม และกระทบเศรษฐกิจหรือการท่องเที่ยว ด้านความยุติธรรม: จังหวัดที่มีสถานีมากถูกประเมินด้วยหลักฐานที่ดีกว่าจังหวัดที่มีสถานีเดียว ด้านความโปร่งใส: แดชบอร์ดไม่บอกจำนวนสถานีและตำแหน่งของสถานี ผู้ใช้จึงประเมินความน่าเชื่อถือไม่ได้ แนวทางแก้คือแสดงจำนวนสถานีและประเภทของสถานีคู่กับอันดับ แยกสถานีริมถนนออก หรือไม่จัดอันดับจังหวัดที่มีข้อมูลน้อยเกินเกณฑ์</p>
+<p><strong>22.2</strong> (ก) การเลือกตัวอย่าง สถานีที่มีข้อมูลครบทุกปีอาจต่างจากสถานีอื่นอย่างเป็นระบบ เช่น อยู่ในเมืองที่ดูแลเครื่องได้ดี (แม้วิธีนี้จะช่วยป้องกัน Simpson’s paradox ก็ต้องรายงานข้อจำกัด) (ข) การวัด เซนเซอร์ราคาประหยัดมักอ่านค่าเพี้ยนเมื่อความชื้นสูง (ค) การรายงาน การเลือกรายงานเฉพาะผลที่มีนัยสำคัญทำให้ผลที่เห็นเกินจริง</p>
+<p><strong>22.3</strong> ตัวอย่าง: (1) ชื่อคอลัมน์ที่ไม่มีจริง เช่น <code>pm25_avg</code> ตรวจพบเมื่อรันกับข้อมูลจริงแล้วเกิดข้อผิดพลาด หรือตรวจด้วย <code>DESCRIBE</code> (2) ฟังก์ชันหรือพารามิเตอร์ของไลบรารีรุ่นเก่า เช่น API ของ SDV 1.x ตรวจพบด้วยการอ่านเอกสารของรุ่นที่ติดตั้งและตรวจ <code>__version__</code> (3) ตรรกะที่ผิดแต่รันได้ เช่น ค่าเฉลี่ยของค่าเฉลี่ย ตรวจพบด้วยการทดสอบกับข้อมูลเล็กที่คำนวณด้วยมือได้</p>
+<p><strong>22.4</strong> ทั้งสองสัญญาอนุญาตให้ใช้และดัดแปลงได้โดยต้องระบุที่มา แต่ CC BY-NC ห้ามใช้เชิงพาณิชย์ ข้อมูลที่ใช้ CC BY นำไปใช้ในแอปพลิเคชันเชิงพาณิชย์ได้ถ้าระบุที่มา ส่วนข้อมูลที่ใช้ CC BY-NC นำไปใช้ในแอปพลิเคชันเชิงพาณิชย์ไม่ได้ ต้องขออนุญาตเจ้าของเพิ่มเติม</p>
+<p><strong>22.5</strong> ผู้อ่านจะเข้าใจว่าตัวเลขบอกข้อเท็จจริงเกี่ยวกับโลกจริง และอาจนำไปตัดสินใจหรืออ้างอิงต่อ ผลของการกระทำจึงเหมือนการสร้างข้อมูลเท็จ ไม่ว่าจะตั้งใจหรือไม่ ความรับผิดชอบของผู้นำเสนอคือทำให้ผู้อ่านเข้าใจถูกต้อง การติดป้ายจึงเป็นหน้าที่ ไม่ใช่ทางเลือก</p>
+<p><strong>22.6</strong> คำตอบขึ้นกับโครงการ ตารางควรครอบคลุมอย่างน้อยคำถาม ข้อมูล คุณภาพข้อมูล การวิเคราะห์ และการสื่อสาร แต่ละแถวต้องมีสิ่งที่พบจริงในโครงการ ไม่ใช่ข้อความทั่วไป ถ้าทุกแถวเขียนว่า “ไม่พบปัญหา” ให้ทบทวนใหม่ เพราะโครงการจริงแทบทุกโครงการมีประเด็นอย่างน้อยในด้านความเป็นตัวแทนของข้อมูล</p>
+<p><strong>22.7</strong> คำตอบขึ้นกับโครงการ รายการที่ดีระบุไฟล์และวันที่ สิ่งที่ขอให้ AI ช่วย สิ่งที่ AI ทำผิด วิธีที่ตรวจพบ และสิ่งที่แก้ ถ้าไม่พบว่า AI ทำผิดเลย ให้อธิบายว่าตรวจอย่างไรจึงมั่นใจว่าถูก</p>
+<p><strong>22.8</strong> แนวทาง: สร้าง DataFrame เล็ก ๆ ที่รู้คำตอบ เช่น สถานีสองแห่ง วันละไม่กี่ค่า แล้วคำนวณผลที่คาดหวังด้วยมือ เขียนการทดสอบด้วย pytest ที่เปรียบเทียบผลของฟังก์ชันกับค่าที่คาดหวัง รวมกรณีขอบ เช่น ไม่มีวันเกินมาตรฐานเลย มีค่าว่าง และมีสถานีเดียว (ภาคผนวก ก)</p>
+<p><strong>22.9</strong> คำตอบขึ้นกับโครงการ รายการควรรวมข้อมูล Air4Thai (เงื่อนไขของกรมควบคุมมลพิษ) ไฟล์ขอบเขตจังหวัด (เช่น geoBoundaries หรือ GADM ซึ่งมีเงื่อนไขต่างกัน) และไลบรารีหลัก (DuckDB MIT, pandas BSD-3-Clause, Plotly MIT, Streamlit Apache-2.0 เป็นต้น) ตรวจจากไฟล์ LICENSE ใน repository หรือหน้าเงื่อนไขของแหล่งข้อมูล</p>
+<p><strong>22.10</strong> ตัวอย่าง: โค้ดใช้ MIT เพราะเปิดกว้างและเข้าใจง่าย เนื้อหาของรายงานและกราฟใช้ CC BY 4.0 เพื่อให้ผู้อื่นนำไปใช้ได้พร้อมระบุที่มา ไม่ขัดกับเงื่อนไขของข้อมูลเพราะ repository ไม่มีข้อมูลดิบ (อยู่ใน <code>data/</code> ที่ไม่ commit) แต่ถ้ากราฟแสดงข้อมูลที่ห้ามใช้เชิงพาณิชย์ เช่น ขอบเขตจาก GADM ต้องระบุเงื่อนไขนั้นในคำบรรยายของกราฟด้วย</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../appendices/f-troubleshooting.html" class="pagination-link" aria-label="ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/h-toolbox-reference.html" class="pagination-link" aria-label="ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว">
+        <span class="nav-page-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

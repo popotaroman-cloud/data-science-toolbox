@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/e-math.html" rel="next">
+<link href="../appendices/c-sql-reference.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/d-air4thai-open-data.html">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#sec-appd-json" id="toc-sec-appd-json" class="nav-link active" data-scroll-target="#sec-appd-json">ง.1 โครงสร้าง JSON ของ Air4Thai และความหมายของแต่ละฟิลด์</a>
+  <ul class="collapse">
+  <li><a href="#endpoint" id="toc-endpoint" class="nav-link" data-scroll-target="#endpoint">endpoint</a></li>
+  <li><a href="#ฟลดหลก" id="toc-ฟลดหลก" class="nav-link" data-scroll-target="#ฟลดหลก">ฟิลด์หลัก</a></li>
+  <li><a href="#ลกษณะทตองจดการ" id="toc-ลกษณะทตองจดการ" class="nav-link" data-scroll-target="#ลกษณะทตองจดการ">ลักษณะที่ต้องจัดการ</a></li>
+  </ul></li>
+  <li><a href="#sec-appd-stations" id="toc-sec-appd-stations" class="nav-link" data-scroll-target="#sec-appd-stations">ง.2 รายชื่อสถานีตรวจวัด ประเภทสถานี และพิกัด</a>
+  <ul class="collapse">
+  <li><a href="#ดงรายชอสถานจากขอมลจรง" id="toc-ดงรายชอสถานจากขอมลจรง" class="nav-link" data-scroll-target="#ดงรายชอสถานจากขอมลจรง">ดึงรายชื่อสถานีจากข้อมูลจริง</a></li>
+  <li><a href="#ตรวจคณภาพของขอมลสถาน" id="toc-ตรวจคณภาพของขอมลสถาน" class="nav-link" data-scroll-target="#ตรวจคณภาพของขอมลสถาน">ตรวจคุณภาพของข้อมูลสถานี</a></li>
+  <li><a href="#ประเภทของสถาน" id="toc-ประเภทของสถาน" class="nav-link" data-scroll-target="#ประเภทของสถาน">ประเภทของสถานี</a></li>
+  </ul></li>
+  <li><a href="#sec-appd-standards" id="toc-sec-appd-standards" class="nav-link" data-scroll-target="#sec-appd-standards">ง.3 มาตรฐานคุณภาพอากาศของไทยและแนวทางของ WHO (PM2.5, PM10, O3, CO, NO2, SO2)</a>
+  <ul class="collapse">
+  <li><a href="#มาตรฐานของไทย" id="toc-มาตรฐานของไทย" class="nav-link" data-scroll-target="#มาตรฐานของไทย">มาตรฐานของไทย</a></li>
+  <li><a href="#ขอควรระวงเมอเทยบกบมาตรฐาน" id="toc-ขอควรระวงเมอเทยบกบมาตรฐาน" class="nav-link" data-scroll-target="#ขอควรระวงเมอเทยบกบมาตรฐาน">ข้อควรระวังเมื่อเทียบกับมาตรฐาน</a></li>
+  </ul></li>
+  <li><a href="#sec-appd-aqi" id="toc-sec-appd-aqi" class="nav-link" data-scroll-target="#sec-appd-aqi">ง.4 ดัชนีคุณภาพอากาศ (AQI) ของไทย: วิธีคำนวณและระดับสี</a>
+  <ul class="collapse">
+  <li><a href="#ระดบของดชน" id="toc-ระดบของดชน" class="nav-link" data-scroll-target="#ระดบของดชน">ระดับของดัชนี</a></li>
+  <li><a href="#วธคำนวณ" id="toc-วธคำนวณ" class="nav-link" data-scroll-target="#วธคำนวณ">วิธีคำนวณ</a></li>
+  </ul></li>
+  <li><a href="#sec-appd-open-data" id="toc-sec-appd-open-data" class="nav-link" data-scroll-target="#sec-appd-open-data">ง.5 แหล่งข้อมูลเปิดอื่นที่ใช้ทำโครงการได้: data.go.th, กรมอุตุนิยมวิทยา, GISTDA, สำนักงานสถิติแห่งชาติ</a></li>
+  <li><a href="#sec-appd-samples" id="toc-sec-appd-samples" class="nav-link" data-scroll-target="#sec-appd-samples">ง.6 ไฟล์ข้อมูลตัวอย่างประกอบหนังสือ</a>
+  <ul class="collapse">
+  <li><a href="#ไฟลตวอยางของรายวชา" id="toc-ไฟลตวอยางของรายวชา" class="nav-link" data-scroll-target="#ไฟลตวอยางของรายวชา">ไฟล์ตัวอย่างของรายวิชา</a></li>
+  <li><a href="#ขอมลสงเคราะหทใชในหนงสอ" id="toc-ขอมลสงเคราะหทใชในหนงสอ" class="nav-link" data-scroll-target="#ขอมลสงเคราะหทใชในหนงสอ">ข้อมูลสังเคราะห์ที่ใช้ในหนังสือ</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../appendices/a-python.html">ภาคผนวก</a></li><li class="breadcrumb-item"><a href="../appendices/d-air4thai-open-data.html">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ภาคผนวกนี้รวบรวมข้อเท็จจริงเกี่ยวกับข้อมูลหลักของเล่ม ได้แก่ โครงสร้างข้อมูลของ Air4Thai มาตรฐานคุณภาพอากาศ และดัชนีคุณภาพอากาศ พร้อมแหล่งข้อมูลเปิดอื่นที่ใช้ทำโครงการได้ ข้อมูลในภาคผนวกนี้ตรวจสอบเมื่อเดือนตุลาคม พ.ศ. 2569 มาตรฐานและโครงสร้างของ API เปลี่ยนแปลงได้ ก่อนนำไปใช้ในงานจริงให้ตรวจกับแหล่งต้นทางเสมอ โดยเฉพาะประกาศในราชกิจจานุเบกษาและเว็บไซต์ของกรมควบคุมมลพิษ <span class="citation" data-cites="pcd2026air4thai">(<a href="../references.html#ref-pcd2026air4thai" role="doc-biblioref">กรมควบคุมมลพิษ 2026</a>)</span></p>
+<section id="sec-appd-json" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appd-json">ง.1 โครงสร้าง JSON ของ Air4Thai และความหมายของแต่ละฟิลด์</h2>
+<section id="endpoint" class="level3">
+<h3 class="anchored" data-anchor-id="endpoint">endpoint</h3>
+<p>Air4Thai ของกรมควบคุมมลพิษเผยแพร่ค่าล่าสุดของทุกสถานีผ่าน endpoint <code>http://air4thai.pcd.go.th/services/getNewAQI_JSON.php</code> ซึ่งบทที่ 5 ใช้ดึงข้อมูล response เป็น JSON ที่มีรายการสถานีอยู่ใต้ key <code>stations</code> แต่ละสถานีมีค่าล่าสุดของสารมลพิษแต่ละชนิด ข้อมูลรายชั่วโมงย้อนหลังต้องสะสมจากการดึงซ้ำตามรอบ หรือขอจากกรมควบคุมมลพิษ (บทที่ 5)</p>
+</section>
+<section id="ฟลดหลก" class="level3">
+<h3 class="anchored" data-anchor-id="ฟลดหลก">ฟิลด์หลัก</h3>
+<div id="tbl-appd-fields" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appd-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;1: ฟิลด์หลักของ response จาก Air4Thai
+</figcaption>
+<div aria-describedby="tbl-appd-fields-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ฟิลด์</th>
+<th>ชนิดใน JSON</th>
+<th>ความหมาย</th>
+<th>คอลัมน์ในโครงการ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>stationID</code></td>
+<td>string</td>
+<td>รหัสสถานี เช่น <code>"35t"</code></td>
+<td><code>stations.station_id</code></td>
+</tr>
+<tr class="even">
+<td><code>nameTH</code>, <code>nameEN</code></td>
+<td>string</td>
+<td>ชื่อสถานีภาษาไทยและอังกฤษ</td>
+<td><code>name_th</code>, <code>name_en</code></td>
+</tr>
+<tr class="odd">
+<td><code>areaTH</code>, <code>areaEN</code></td>
+<td>string</td>
+<td>ที่ตั้งเป็นข้อความ รวมชื่อจังหวัด</td>
+<td>ใช้สกัด <code>province</code></td>
+</tr>
+<tr class="even">
+<td><code>stationType</code></td>
+<td>string</td>
+<td>ประเภทของสถานี เช่น <code>"GROUND"</code></td>
+<td><code>station_type</code></td>
+</tr>
+<tr class="odd">
+<td><code>lat</code>, <code>long</code></td>
+<td>string</td>
+<td>ละติจูดและลองจิจูด</td>
+<td><code>lat</code>, <code>lon</code> (แปลงเป็นตัวเลข)</td>
+</tr>
+<tr class="even">
+<td><code>AQILast.date</code>, <code>AQILast.time</code></td>
+<td>string</td>
+<td>วันที่และเวลาของค่าล่าสุด (เวลาไทย)</td>
+<td>รวมเป็น <code>measurements.ts</code></td>
+</tr>
+<tr class="odd">
+<td><code>AQILast.PM25.value</code></td>
+<td>string</td>
+<td>ความเข้มข้นของ PM2.5 (µg/m³)</td>
+<td><code>measurements.pm25</code></td>
+</tr>
+<tr class="even">
+<td><code>AQILast.PM25.aqi</code></td>
+<td>string</td>
+<td>ดัชนีคุณภาพอากาศของ PM2.5</td>
+<td>ไม่เก็บ (คำนวณได้เอง)</td>
+</tr>
+<tr class="odd">
+<td><code>AQILast.PM10</code>, <code>O3</code>, <code>CO</code>, <code>NO2</code>, <code>SO2</code></td>
+<td>object</td>
+<td>โครงสร้างเดียวกับ <code>PM25</code> ของสารแต่ละชนิด</td>
+<td><code>pm10</code>, <code>o3</code>, <code>co</code>, <code>no2</code>, <code>so2</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ลกษณะทตองจดการ" class="level3">
+<h3 class="anchored" data-anchor-id="ลกษณะทตองจดการ">ลักษณะที่ต้องจัดการ</h3>
+<ol type="1">
+<li><strong>ตัวเลขทั้งหมดเป็น string</strong> ต้องแปลงเป็นตัวเลขขณะโหลด (บทที่ 6)</li>
+<li><strong>ค่าแทนข้อมูลหายคือ <code>"-1"</code></strong> ไม่ใช่ <code>null</code> ต้องแปลงเป็น <code>NULL</code> ก่อนคำนวณทุกครั้ง มิฉะนั้นค่าเฉลี่ยจะต่ำกว่าความจริง (บทที่ 9)</li>
+<li><strong>จังหวัดไม่ได้มาเป็นฟิลด์แยก</strong> ต้องสกัดจาก <code>areaTH</code> และการสะกดอาจไม่สม่ำเสมอ เช่น “กรุงเทพฯ” กับ “กรุงเทพมหานคร” (บทที่ 17)</li>
+<li><strong>ไม่มีภาค</strong> โครงการต้องสร้างตาราง mapping จังหวัดกับภาคเอง และเลือกระบบการแบ่งภาคให้ชัด (บทที่ 6 และ 18)</li>
+<li><strong>หน่วยของแต่ละสารต่างกัน</strong> PM2.5 และ PM10 เป็น µg/m³ ส่วนก๊าซมักรายงานเป็น ppm หรือ ppb ต้องตรวจหน่วยจากเอกสารหรือข้อมูลจริงก่อนเทียบกับมาตรฐาน (<a href="#sec-appd-standards">ง.3</a>)</li>
+<li><strong>โครงสร้างเปลี่ยนได้</strong> ตรวจชื่อ key จาก response จริงด้วยฟังก์ชัน <code>show_keys</code> ในบทที่ 5 และตั้งกฎตรวจ schema ในบทที่ 9 ให้ pipeline หยุดเมื่อโครงสร้างเปลี่ยน</li>
+</ol>
+</section>
+</section>
+<section id="sec-appd-stations" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appd-stations">ง.2 รายชื่อสถานีตรวจวัด ประเภทสถานี และพิกัด</h2>
+<section id="ดงรายชอสถานจากขอมลจรง" class="level3">
+<h3 class="anchored" data-anchor-id="ดงรายชอสถานจากขอมลจรง">ดึงรายชื่อสถานีจากข้อมูลจริง</h3>
+<p>รายชื่อสถานีเปลี่ยนแปลงเมื่อมีการติดตั้ง ย้าย หรือยกเลิกสถานี หนังสือจึงไม่พิมพ์รายชื่อตายตัว แต่ให้ดึงจากข้อมูลล่าสุดและเก็บเป็นตาราง <code>stations</code> ตามบทที่ 6 แล้วสรุปด้วย SQL</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> region, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_stations, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> province) <span class="kw">AS</span> n_provinces,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">MIN</span>(lat), <span class="dv">2</span>) <span class="kw">AS</span> min_lat, <span class="fu">ROUND</span>(<span class="fu">MAX</span>(lat), <span class="dv">2</span>) <span class="kw">AS</span> max_lat</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> stations</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> region</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n_stations <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ตรวจคณภาพของขอมลสถาน" class="level3">
+<h3 class="anchored" data-anchor-id="ตรวจคณภาพของขอมลสถาน">ตรวจคุณภาพของข้อมูลสถานี</h3>
+<div id="tbl-appd-station-checks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appd-station-checks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2: การตรวจคุณภาพของข้อมูลสถานี
+</figcaption>
+<div aria-describedby="tbl-appd-station-checks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สิ่งที่ตรวจ</th>
+<th>วิธี</th>
+<th>บท</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>พิกัดอยู่ในประเทศไทย</td>
+<td>ละติจูดประมาณ 5.6–20.5 และลองจิจูด 97.3–105.6</td>
+<td>9, 17</td>
+</tr>
+<tr class="even">
+<td>ละติจูดและลองจิจูดไม่สลับกัน</td>
+<td><code>total_bounds</code> ของ GeoDataFrame</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td>จังหวัดตรงกับพิกัด</td>
+<td>spatial join กับขอบเขตจังหวัด</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>จังหวัดหนึ่งอยู่ภาคเดียว</td>
+<td><code>GROUP BY province HAVING COUNT(DISTINCT region) &gt; 1</code></td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>รหัสสถานีไม่ซ้ำ</td>
+<td>primary key ของตาราง <code>stations</code></td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>สถานีที่ไม่มีข้อมูลนาน</td>
+<td>วันที่ล่าสุดของ <code>measurements</code> ต่อสถานี</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ประเภทของสถาน" class="level3">
+<h3 class="anchored" data-anchor-id="ประเภทของสถาน">ประเภทของสถานี</h3>
+<p>ฟิลด์ <code>stationType</code> แยกประเภทของสถานี เช่น สถานีภาคพื้นดินแบบถาวร (<code>GROUND</code>) ประเภทของสถานีมีผลต่อการตีความ สถานีที่ตั้งริมถนนวัดผลของการจราจรโดยตรง จึงมักมีค่าสูงกว่าสถานีในพื้นที่ทั่วไปของเมืองเดียวกัน การเปรียบเทียบระหว่างพื้นที่ควรเทียบสถานีประเภทเดียวกัน หรือรายงานประเภทของสถานีไว้ด้วย (บทที่ 17 และ 22) ค่าที่เป็นไปได้ของ <code>stationType</code> และความหมาย ให้ตรวจจากข้อมูลจริงและเอกสารของกรมควบคุมมลพิษ</p>
+</section>
+</section>
+<section id="sec-appd-standards" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appd-standards">ง.3 มาตรฐานคุณภาพอากาศของไทยและแนวทางของ WHO (PM2.5, PM10, O3, CO, NO2, SO2)</h2>
+<section id="มาตรฐานของไทย" class="level3">
+<h3 class="anchored" data-anchor-id="มาตรฐานของไทย">มาตรฐานของไทย</h3>
+<p>มาตรฐานคุณภาพอากาศในบรรยากาศโดยทั่วไปของไทยกำหนดโดยประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ คณะกรรมการฯ ปรับมาตรฐาน PM2.5 เฉลี่ย 24 ชั่วโมงจาก 50 เป็น 37.5 µg/m³ และเฉลี่ยรายปีจาก 25 เป็น 15 µg/m³ โดยประกาศในราชกิจจานุเบกษาในปี พ.ศ. 2565 และมีผลตั้งแต่วันที่ 1 มิถุนายน พ.ศ. 2566 <span class="citation" data-cites="neb2022pm25">(<a href="../references.html#ref-neb2022pm25" role="doc-biblioref">คณะกรรมการสิ่งแวดล้อมแห่งชาติ 2022</a>)</span></p>
+<div id="tbl-appd-standards" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appd-standards-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3: มาตรฐานคุณภาพอากาศของไทยและแนวทางของ WHO
+</figcaption>
+<div aria-describedby="tbl-appd-standards-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>สาร</th>
+<th>ค่าเฉลี่ย</th>
+<th>มาตรฐานไทย</th>
+<th>แนวทาง WHO 2021</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PM2.5</td>
+<td>24 ชั่วโมง</td>
+<td>37.5 µg/m³</td>
+<td>15 µg/m³</td>
+</tr>
+<tr class="even">
+<td>PM2.5</td>
+<td>1 ปี</td>
+<td>15 µg/m³</td>
+<td>5 µg/m³</td>
+</tr>
+<tr class="odd">
+<td>PM10</td>
+<td>24 ชั่วโมง</td>
+<td>120 µg/m³</td>
+<td>45 µg/m³</td>
+</tr>
+<tr class="even">
+<td>PM10</td>
+<td>1 ปี</td>
+<td>50 µg/m³</td>
+<td>15 µg/m³</td>
+</tr>
+<tr class="odd">
+<td>O3</td>
+<td>1 ชั่วโมง</td>
+<td>0.10 ppm</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>O3</td>
+<td>8 ชั่วโมง</td>
+<td>0.07 ppm</td>
+<td>100 µg/m³ (ประมาณ 0.05 ppm)</td>
+</tr>
+<tr class="odd">
+<td>CO</td>
+<td>1 ชั่วโมง</td>
+<td>30 ppm</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>CO</td>
+<td>8 ชั่วโมง</td>
+<td>9 ppm</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>CO</td>
+<td>24 ชั่วโมง</td>
+<td>—</td>
+<td>4 mg/m³</td>
+</tr>
+<tr class="even">
+<td>NO2</td>
+<td>1 ชั่วโมง</td>
+<td>0.17 ppm</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>NO2</td>
+<td>24 ชั่วโมง</td>
+<td>—</td>
+<td>25 µg/m³</td>
+</tr>
+<tr class="even">
+<td>NO2</td>
+<td>1 ปี</td>
+<td>0.03 ppm</td>
+<td>10 µg/m³</td>
+</tr>
+<tr class="odd">
+<td>SO2</td>
+<td>1 ชั่วโมง</td>
+<td>0.30 ppm</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>SO2</td>
+<td>24 ชั่วโมง</td>
+<td>0.12 ppm</td>
+<td>40 µg/m³</td>
+</tr>
+<tr class="odd">
+<td>SO2</td>
+<td>1 ปี</td>
+<td>0.04 ppm</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แนวทางของ WHO ปี ค.ศ. 2021 มาจาก <span class="citation" data-cites="who2021global">World Health Organization (<a href="../references.html#ref-who2021global" role="doc-biblioref">2021</a>)</span> ค่าของ WHO เป็นแนวทางเพื่อปกป้องสุขภาพ ไม่ใช่มาตรฐานทางกฎหมาย และ WHO กำหนดเป้าหมายระหว่างทาง (interim target) ไว้หลายระดับสำหรับประเทศที่ยังไม่บรรลุแนวทาง ในช่วงที่เขียนหนังสือ กรมควบคุมมลพิษอยู่ระหว่างพิจารณาปรับปรุงมาตรฐานของก๊าซบางชนิด เช่น NO2 และ SO2 ผู้อ่านจึงควรตรวจค่าที่มีผลบังคับใช้ ณ เวลาที่ใช้งาน</p>
+</section>
+<section id="ขอควรระวงเมอเทยบกบมาตรฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ขอควรระวงเมอเทยบกบมาตรฐาน">ข้อควรระวังเมื่อเทียบกับมาตรฐาน</h3>
+<ul>
+<li><strong>ช่วงเวลาเฉลี่ยต้องตรงกัน</strong> มาตรฐาน 37.5 µg/m³ ใช้กับค่าเฉลี่ย 24 ชั่วโมง ไม่ใช่ค่ารายชั่วโมง (บทที่ 11)</li>
+<li><strong>เกณฑ์ความครบถ้วน</strong> ค่าเฉลี่ย 24 ชั่วโมงที่คำนวณจากข้อมูลไม่กี่ชั่วโมงไม่ควรนำไปเทียบกับมาตรฐาน เกณฑ์ 18 จาก 24 ชั่วโมงในเล่มนี้เป็นข้อกำหนดของโครงการ ไม่ใช่ข้อกำหนดทางการ (บทที่ 10)</li>
+<li><strong>หน่วย</strong> การแปลงระหว่าง ppm กับ µg/m³ ขึ้นกับน้ำหนักโมเลกุล อุณหภูมิ และความดันอ้างอิง ที่ 25 °C และ 1 บรรยากาศ ค่า µg/m³ ≈ ppm × น้ำหนักโมเลกุล × 1000 / 24.45 เช่น โอโซน (น้ำหนักโมเลกุลประมาณ 48) 0.05 ppm ≈ 98 µg/m³</li>
+<li><strong>การเปรียบเทียบข้ามช่วงเวลา</strong> ข้อมูลก่อนเดือนมิถุนายน พ.ศ. 2566 ที่รายงานว่า “เกินมาตรฐาน” อาจใช้เกณฑ์ 50 µg/m³ ถ้าคำนวณสัดส่วนวันเกินมาตรฐานย้อนหลัง ต้องใช้เกณฑ์เดียวกันตลอดช่วง และระบุว่าใช้เกณฑ์ใด</li>
+</ul>
+</section>
+</section>
+<section id="sec-appd-aqi" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appd-aqi">ง.4 ดัชนีคุณภาพอากาศ (AQI) ของไทย: วิธีคำนวณและระดับสี</h2>
+<section id="ระดบของดชน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบของดชน">ระดับของดัชนี</h3>
+<p>ดัชนีคุณภาพอากาศ (air quality index, AQI) แปลงความเข้มข้นของสารมลพิษแต่ละชนิดเป็นตัวเลขระดับเดียวกัน และกำหนดระดับสีพร้อมคำแนะนำสำหรับประชาชน กรมควบคุมมลพิษปรับเกณฑ์ของ PM2.5 ให้สอดคล้องกับมาตรฐานใหม่ตั้งแต่เดือนมิถุนายน พ.ศ. 2566</p>
+<div id="tbl-appd-aqi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appd-aqi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;4: ระดับดัชนีคุณภาพอากาศของไทยสำหรับ PM2.5
+</figcaption>
+<div aria-describedby="tbl-appd-aqi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>AQI</th>
+<th>ระดับ</th>
+<th>สี</th>
+<th>PM2.5 เฉลี่ย 24 ชม. (µg/m³)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0–25</td>
+<td>คุณภาพอากาศดีมาก</td>
+<td>ฟ้า</td>
+<td>0–15.0</td>
+</tr>
+<tr class="even">
+<td>26–50</td>
+<td>คุณภาพอากาศดี</td>
+<td>เขียว</td>
+<td>15.1–25.0</td>
+</tr>
+<tr class="odd">
+<td>51–100</td>
+<td>ปานกลาง</td>
+<td>เหลือง</td>
+<td>25.1–37.5</td>
+</tr>
+<tr class="even">
+<td>101–200</td>
+<td>เริ่มมีผลกระทบต่อสุขภาพ</td>
+<td>ส้ม</td>
+<td>37.6–75.0</td>
+</tr>
+<tr class="odd">
+<td>มากกว่า 200</td>
+<td>มีผลกระทบต่อสุขภาพ</td>
+<td>แดง</td>
+<td>75.1 ขึ้นไป</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="วธคำนวณ" class="level3">
+<h3 class="anchored" data-anchor-id="วธคำนวณ">วิธีคำนวณ</h3>
+<p>ภายในแต่ละช่วง AQI คำนวณด้วยการประมาณค่าในช่วงแบบเส้นตรง</p>
+<p><span id="eq-appd-aqi"><span class="math display">\[
+I = \frac{I_{\text{hi}} - I_{\text{lo}}}{C_{\text{hi}} - C_{\text{lo}}}\,(C - C_{\text{lo}}) + I_{\text{lo}}
+\tag{1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(C\)</span> คือความเข้มข้นที่วัดได้ <span class="math inline">\(C_{\text{lo}}\)</span> และ <span class="math inline">\(C_{\text{hi}}\)</span> คือขอบล่างและขอบบนของช่วงความเข้มข้นที่ <span class="math inline">\(C\)</span> ตกอยู่ และ <span class="math inline">\(I_{\text{lo}}\)</span> กับ <span class="math inline">\(I_{\text{hi}}\)</span> คือ AQI ที่ขอบของช่วงนั้น ตัวอย่าง PM2.5 เฉลี่ย 24 ชั่วโมง 50 µg/m³ อยู่ในช่วง 37.6–75.0 ซึ่งตรงกับ AQI 101–200 จึงได้ <span class="math inline">\(I = (200 - 101)/(75.0 - 37.6) \times (50 - 37.6) + 101 \approx 133.8\)</span> ปัดเป็น 134 อยู่ในระดับสีส้ม ค่า AQI รวมของสถานีคือค่าสูงสุดของ AQI จากสารทุกชนิดที่วัด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>PM25_BREAKS <span class="op">=</span> [  <span class="co"># (C_lo, C_hi, I_lo, I_hi) ของ PM2.5 ค่าเฉลี่ย 24 ชั่วโมง ตามเกณฑ์ตั้งแต่ มิ.ย. 2566</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    (<span class="fl">0.0</span>, <span class="fl">15.0</span>, <span class="dv">0</span>, <span class="dv">25</span>), (<span class="fl">15.1</span>, <span class="fl">25.0</span>, <span class="dv">26</span>, <span class="dv">50</span>), (<span class="fl">25.1</span>, <span class="fl">37.5</span>, <span class="dv">51</span>, <span class="dv">100</span>), (<span class="fl">37.6</span>, <span class="fl">75.0</span>, <span class="dv">101</span>, <span class="dv">200</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pm25_aqi(c: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">int</span> <span class="op">|</span> <span class="va">None</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""AQI ของ PM2.5 จากค่าเฉลี่ย 24 ชั่วโมง (ปัดทศนิยมหนึ่งตำแหน่งก่อน) ค่าเกิน 75.0 คืน None ให้รายงานว่า &gt; 200"""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> <span class="bu">round</span>(c, <span class="dv">1</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c_lo, c_hi, i_lo, i_hi <span class="kw">in</span> PM25_BREAKS:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c_lo <span class="op">&lt;=</span> c <span class="op">&lt;=</span> c_hi:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="bu">round</span>((i_hi <span class="op">-</span> i_lo) <span class="op">/</span> (c_hi <span class="op">-</span> c_lo) <span class="op">*</span> (c <span class="op">-</span> c_lo) <span class="op">+</span> i_lo)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>([pm25_aqi(v) <span class="cf">for</span> v <span class="kw">in</span> (<span class="fl">10.0</span>, <span class="fl">20.0</span>, <span class="fl">37.5</span>, <span class="fl">50.0</span>, <span class="fl">90.0</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์
+[17, 38, 100, 134, None]</code></pre>
+<p>ฟังก์ชันนี้มีไว้เพื่ออธิบายหลักการ เกณฑ์ของช่วงบนสุดเหนือ 200 และของสารอื่น รวมถึงรายละเอียดการปัดเศษ ให้ใช้ตามเอกสารของกรมควบคุมมลพิษ ข้อควรรู้อีกข้อคือ AQI ของแต่ละประเทศใช้เกณฑ์ต่างกัน ค่า PM2.5 เดียวกันอาจอยู่ในระดับ “ปานกลาง” ตาม AQI ของไทย แต่อยู่ในระดับ “มีผลต่อสุขภาพ” ตาม AQI ของสหรัฐอเมริกา เว็บไซต์และแอปพลิเคชันที่แสดง AQI ของประเทศไทยจึงอาจแสดงตัวเลขต่างกัน ขึ้นกับว่าใช้มาตรฐานใด การวิเคราะห์ในเล่มนี้จึงใช้ความเข้มข้น (<code>value</code>) แทน AQI</p>
+</section>
+</section>
+<section id="sec-appd-open-data" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appd-open-data">ง.5 แหล่งข้อมูลเปิดอื่นที่ใช้ทำโครงการได้: data.go.th, กรมอุตุนิยมวิทยา, GISTDA, สำนักงานสถิติแห่งชาติ</h2>
+<div id="tbl-appd-open-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appd-open-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5: แหล่งข้อมูลเปิดที่ใช้ต่อยอดโครงการได้
+</figcaption>
+<div aria-describedby="tbl-appd-open-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แหล่ง</th>
+<th>ข้อมูลที่เกี่ยวข้อง</th>
+<th>การเข้าถึง</th>
+<th>ใช้ต่อยอดโครงการ PM2.5 อย่างไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ศูนย์กลางข้อมูลเปิดภาครัฐ (data.go.th)</td>
+<td>ชุดข้อมูลของหน่วยงานรัฐจำนวนมาก เช่น สถิติสาธารณสุข การเกษตร การคมนาคม</td>
+<td>ดาวน์โหลดไฟล์และ API (บางชุดต้องลงทะเบียนเพื่อรับ API key)</td>
+<td>ข้อมูลประชากร พื้นที่เกษตร จำนวนยานพาหนะต่อจังหวัด</td>
+</tr>
+<tr class="even">
+<td>กรมอุตุนิยมวิทยา (tmd.go.th)</td>
+<td>อุณหภูมิ ฝน ความเร็วและทิศทางลม ความชื้น</td>
+<td>บริการข้อมูลผ่านเว็บไซต์และ API ตามเงื่อนไขของกรม</td>
+<td>อธิบายความผันผวนของฝุ่นด้วยสภาพอากาศ (บทที่ 14 และ 21)</td>
+</tr>
+<tr class="odd">
+<td>GISTDA (gistda.or.th)</td>
+<td>จุดความร้อนจากดาวเทียม พื้นที่เผาไหม้ ข้อมูลภูมิสารสนเทศ</td>
+<td>แพลตฟอร์มข้อมูลภัยพิบัติและบริการข้อมูลของสำนักงาน</td>
+<td>เทียบวันฝุ่นสูงกับจำนวนจุดความร้อน ตรวจค่าผิดปกติ (บทที่ 15)</td>
+</tr>
+<tr class="even">
+<td>สำนักงานสถิติแห่งชาติ (nso.go.th)</td>
+<td>สถิติประชากร เศรษฐกิจ สังคม ระดับจังหวัด</td>
+<td>ตารางสถิติและระบบสืบค้นข้อมูล</td>
+<td>น้ำหนักประชากรสำหรับการสัมผัสฝุ่น ความยุติธรรมเชิงสิ่งแวดล้อม (บทที่ 22)</td>
+</tr>
+<tr class="odd">
+<td>NASA FIRMS</td>
+<td>จุดความร้อนจากดาวเทียมทั่วโลกแบบเกือบเวลาจริง</td>
+<td>ดาวน์โหลดและ API (ต้องลงทะเบียนเพื่อรับ key)</td>
+<td>จุดความร้อนในประเทศเพื่อนบ้านสำหรับศึกษาหมอกควันข้ามแดน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ก่อนใช้แหล่งข้อมูลใด ให้ตรวจสามเรื่อง ได้แก่ เงื่อนไขการใช้และสัญญาอนุญาต (บทที่ 22) ความถี่และช่วงเวลาที่มีข้อมูล และหน่วยกับนิยามของตัวแปร ซึ่งมักต่างจากที่คาด การรวมข้อมูลต่างแหล่งยังต้องจัดแนวเวลาและพื้นที่ให้ตรงกัน (บทที่ 14 และ 17) และต้องตรวจ robots.txt กับเงื่อนไขการใช้ก่อน scrape เว็บไซต์ใด (บทที่ 5) กฎหมายที่เกี่ยวข้องกับการเปิดเผยข้อมูลภาครัฐ ได้แก่ พ.ร.บ.ข้อมูลข่าวสารของราชการ พ.ศ. 2540 และ พ.ร.บ.การบริหารงานและการให้บริการภาครัฐผ่านระบบดิจิทัล พ.ศ. 2562 <span class="citation" data-cites="oic1997official dga2019digital">(<a href="../references.html#ref-oic1997official" role="doc-biblioref">ราชกิจจานุเบกษา 1997</a>, <a href="../references.html#ref-dga2019digital" role="doc-biblioref">2019</a>)</span></p>
+</section>
+<section id="sec-appd-samples" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-appd-samples">ง.6 ไฟล์ข้อมูลตัวอย่างประกอบหนังสือ</h2>
+<section id="ไฟลตวอยางของรายวชา" class="level3">
+<h3 class="anchored" data-anchor-id="ไฟลตวอยางของรายวชา">ไฟล์ตัวอย่างของรายวิชา</h3>
+<p>ผู้สอนแจกไฟล์ตัวอย่างผ่านระบบส่งงานของรายวิชา (ไม่อยู่ใน repository) สำหรับใช้แทนข้อมูลจริงเมื่อ API ของ Air4Thai ใช้งานไม่ได้ ให้วางไว้ที่ <code>data/sample/</code> ของโครงการ</p>
+<div id="tbl-appd-samples" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-appd-samples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6: ไฟล์ข้อมูลตัวอย่างของรายวิชา
+</figcaption>
+<div aria-describedby="tbl-appd-samples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ไฟล์</th>
+<th>เนื้อหา</th>
+<th>ใช้ในสัปดาห์</th>
+<th>บท</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>air4thai_sample.json</code></td>
+<td>response ของ Air4Thai หนึ่งครั้ง</td>
+<td>2–3</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td><code>stations_sample.csv</code></td>
+<td>ตารางสถานีพร้อมจังหวัด ภาค และพิกัด</td>
+<td>3–5, 13</td>
+<td>6, 17</td>
+</tr>
+<tr class="odd">
+<td><code>pm25_hourly_sample.csv</code></td>
+<td>ค่ารายชั่วโมงหลายสถานี</td>
+<td>4–7</td>
+<td>6–10</td>
+</tr>
+<tr class="even">
+<td><code>pm25_sample.duckdb</code></td>
+<td>ฐานข้อมูลที่ผ่านขั้นทำความสะอาดแล้ว</td>
+<td>9 เป็นต้นไป</td>
+<td>11–21</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ขอมลสงเคราะหทใชในหนงสอ" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลสงเคราะหทใชในหนงสอ">ข้อมูลสังเคราะห์ที่ใช้ในหนังสือ</h3>
+<p>ผลลัพธ์ตัวอย่างในหนังสือที่ระบุว่า “ข้อมูลสังเคราะห์” มาจากฐานข้อมูลที่สร้างด้วยโปรแกรมให้มีโครงสร้างตรงกับ <code>data/pm25.duckdb</code> ของโครงการ ไม่ใช่ข้อมูลจริงของ Air4Thai มีสองชุด ชุดแรกมีแปดสถานีและข้อมูลรายชั่วโมง ใช้ในบทที่ 6 ถึง 14 ชุดที่สองมี 50 สถานีและข้อมูลรายวัน ใช้ในบทที่ 15 ถึง 21 ทั้งสองชุดสร้างให้มีฤดูกาล ความสัมพันธ์ตามเวลา ข้อมูลสูญหาย และค่าผิดปกติที่ใส่ไว้โดยเจตนา เพื่อให้ทดสอบโค้ดได้ครบทุกกรณี แต่ความต่างระหว่างภาคถูกสร้างให้ชัดเจนกว่าข้อมูลจริง ตัวเลขจากข้อมูลสังเคราะห์จึงห้ามใช้สรุปเกี่ยวกับคุณภาพอากาศของประเทศไทย (บทที่ 16 และ 22)</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality Guidelines: Particulate Matter (<span>PM2.5</span> and <span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon Monoxide</em>. World Health Organization.
+</div>
+<div id="ref-pcd2026air4thai" class="csl-entry" role="listitem">
+กรมควบคุมมลพิษ. 2026. <em>Air4Thai: รายงานสถานการณ์และคุณภาพอากาศประเทศไทย</em>. <a href="http://air4thai.pcd.go.th">http://air4thai.pcd.go.th</a>.
+</div>
+<div id="ref-neb2022pm25" class="csl-entry" role="listitem">
+คณะกรรมการสิ่งแวดล้อมแห่งชาติ. 2022. <em>ประกาศคณะกรรมการสิ่งแวดล้อมแห่งชาติ เรื่อง กำหนดมาตรฐานฝุ่นละอองขนาดไม่เกิน 2.5 ไมครอน ในบรรยากาศโดยทั่วไป</em>.
+</div>
+<div id="ref-oic1997official" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 1997. <em>พระราชบัญญัติข้อมูลข่าวสารของราชการ พ.ศ. 2540</em>.
+</div>
+<div id="ref-dga2019digital" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019. <em>พระราชบัญญัติการบริหารงานและการให้บริการภาครัฐผ่านระบบดิจิทัล พ.ศ. 2562</em>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../appendices/c-sql-reference.html" class="pagination-link" aria-label="ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/e-math.html" class="pagination-link" aria-label="ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม">
+        <span class="nav-page-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>16&nbsp; ข้อมูลสังเคราะห์และความเป็นส่วนตัว – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/17-spatial-data.html" rel="next">
+<link href="../chapters/15-multivariate.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</a></li><li class="breadcrumb-item"><a href="../chapters/16-synthetic-privacy.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch16-pdpa" id="toc-sec-ch16-pdpa" class="nav-link" data-scroll-target="#sec-ch16-pdpa"><span class="header-section-number">16.1</span> พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 สำหรับนักวิทยาการข้อมูล</a>
+  <ul class="collapse">
+  <li><a href="#ภาพรวม" id="toc-ภาพรวม" class="nav-link" data-scroll-target="#ภาพรวม">ภาพรวม</a></li>
+  <li><a href="#บทบาทตามกฎหมาย" id="toc-บทบาทตามกฎหมาย" class="nav-link" data-scroll-target="#บทบาทตามกฎหมาย">บทบาทตามกฎหมาย</a></li>
+  <li><a href="#หลกการทเกยวของกบงานวเคราะห" id="toc-หลกการทเกยวของกบงานวเคราะห" class="nav-link" data-scroll-target="#หลกการทเกยวของกบงานวเคราะห">หลักการที่เกี่ยวข้องกับงานวิเคราะห์</a></li>
+  <li><a href="#การวจยและสถต" id="toc-การวจยและสถต" class="nav-link" data-scroll-target="#การวจยและสถต">การวิจัยและสถิติ</a></li>
+  <li><a href="#หลกปฏบตสำหรบโครงการในรายวชา" id="toc-หลกปฏบตสำหรบโครงการในรายวชา" class="nav-link" data-scroll-target="#หลกปฏบตสำหรบโครงการในรายวชา">หลักปฏิบัติสำหรับโครงการในรายวิชา</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-personal-data" id="toc-sec-ch16-personal-data" class="nav-link" data-scroll-target="#sec-ch16-personal-data"><span class="header-section-number">16.2</span> ข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว</a>
+  <ul class="collapse">
+  <li><a href="#นยาม" id="toc-นยาม" class="nav-link" data-scroll-target="#นยาม">นิยาม</a></li>
+  <li><a href="#ตวระบสามประเภท" id="toc-ตวระบสามประเภท" class="nav-link" data-scroll-target="#ตวระบสามประเภท">ตัวระบุสามประเภท</a></li>
+  <li><a href="#ขอมล-pm2.5-กบขอมลสวนบคคล" id="toc-ขอมล-pm2.5-กบขอมลสวนบคคล" class="nav-link" data-scroll-target="#ขอมล-pm2.5-กบขอมลสวนบคคล">ข้อมูล PM2.5 กับข้อมูลส่วนบุคคล</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-anonymization" id="toc-sec-ch16-anonymization" class="nav-link" data-scroll-target="#sec-ch16-anonymization"><span class="header-section-number">16.3</span> anonymization กับ pseudonymization</a>
+  <ul class="collapse">
+  <li><a href="#pseudonymization" id="toc-pseudonymization" class="nav-link" data-scroll-target="#pseudonymization">pseudonymization</a></li>
+  <li><a href="#anonymization" id="toc-anonymization" class="nav-link" data-scroll-target="#anonymization">anonymization</a></li>
+  <li><a href="#ขอมลรวมกรวได" id="toc-ขอมลรวมกรวได" class="nav-link" data-scroll-target="#ขอมลรวมกรวได">ข้อมูลรวมก็รั่วได้</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-k-anonymity" id="toc-sec-ch16-k-anonymity" class="nav-link" data-scroll-target="#sec-ch16-k-anonymity"><span class="header-section-number">16.4</span> k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ ★</a>
+  <ul class="collapse">
+  <li><a href="#การโจมตเพอระบตวตนซำ" id="toc-การโจมตเพอระบตวตนซำ" class="nav-link" data-scroll-target="#การโจมตเพอระบตวตนซำ">การโจมตีเพื่อระบุตัวตนซ้ำ</a></li>
+  <li><a href="#k-anonymity" id="toc-k-anonymity" class="nav-link" data-scroll-target="#k-anonymity">k-anonymity</a></li>
+  <li><a href="#l-diversity" id="toc-l-diversity" class="nav-link" data-scroll-target="#l-diversity">l-diversity</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-dp" id="toc-sec-ch16-dp" class="nav-link" data-scroll-target="#sec-ch16-dp"><span class="header-section-number">16.5</span> differential privacy เบื้องต้น ★</a>
+  <ul class="collapse">
+  <li><a href="#นยาม-1" id="toc-นยาม-1" class="nav-link" data-scroll-target="#นยาม-1">นิยาม</a></li>
+  <li><a href="#laplace-mechanism" id="toc-laplace-mechanism" class="nav-link" data-scroll-target="#laplace-mechanism">Laplace mechanism</a></li>
+  <li><a href="#งบความเปนสวนตวสะสม" id="toc-งบความเปนสวนตวสะสม" class="nav-link" data-scroll-target="#งบความเปนสวนตวสะสม">งบความเป็นส่วนตัวสะสม</a></li>
+  <li><a href="#การใชงานจรงและขอจำกด" id="toc-การใชงานจรงและขอจำกด" class="nav-link" data-scroll-target="#การใชงานจรงและขอจำกด">การใช้งานจริงและข้อจำกัด</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-synthetic" id="toc-sec-ch16-synthetic" class="nav-link" data-scroll-target="#sec-ch16-synthetic"><span class="header-section-number">16.6</span> ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), ★ แบบ deep learning (CTGAN)</a>
+  <ul class="collapse">
+  <li><a href="#ขอมลสงเคราะหใชทำอะไร" id="toc-ขอมลสงเคราะหใชทำอะไร" class="nav-link" data-scroll-target="#ขอมลสงเคราะหใชทำอะไร">ข้อมูลสังเคราะห์ใช้ทำอะไร</a></li>
+  <li><a href="#แบบกฎ-faker" id="toc-แบบกฎ-faker" class="nav-link" data-scroll-target="#แบบกฎ-faker">แบบกฎ: Faker</a></li>
+  <li><a href="#แบบสถต-gaussian-copula" id="toc-แบบสถต-gaussian-copula" class="nav-link" data-scroll-target="#แบบสถต-gaussian-copula">แบบสถิติ: Gaussian copula</a></li>
+  <li><a href="#แบบ-deep-learning-ctgan" id="toc-แบบ-deep-learning-ctgan" class="nav-link" data-scroll-target="#แบบ-deep-learning-ctgan">แบบ deep learning: CTGAN ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-evaluation" id="toc-sec-ch16-evaluation" class="nav-link" data-scroll-target="#sec-ch16-evaluation"><span class="header-section-number">16.7</span> การประเมินข้อมูลสังเคราะห์: utility กับ privacy</a>
+  <ul class="collapse">
+  <li><a href="#สองดานทขดกน" id="toc-สองดานทขดกน" class="nav-link" data-scroll-target="#สองดานทขดกน">สองด้านที่ขัดกัน</a></li>
+  <li><a href="#utility" id="toc-utility" class="nav-link" data-scroll-target="#utility">utility</a></li>
+  <li><a href="#privacy" id="toc-privacy" class="nav-link" data-scroll-target="#privacy">privacy</a></li>
+  <li><a href="#การตดสนใจเผยแพร" id="toc-การตดสนใจเผยแพร" class="nav-link" data-scroll-target="#การตดสนใจเผยแพร">การตัดสินใจเผยแพร่</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-smote" id="toc-sec-ch16-smote" class="nav-link" data-scroll-target="#sec-ch16-smote"><span class="header-section-number">16.8</span> class imbalance และ SMOTE ★</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของกลมทมนอย" id="toc-ปญหาของกลมทมนอย" class="nav-link" data-scroll-target="#ปญหาของกลมทมนอย">ปัญหาของกลุ่มที่มีน้อย</a></li>
+  <li><a href="#smote" id="toc-smote" class="nav-link" data-scroll-target="#smote">SMOTE</a></li>
+  <li><a href="#ขอควรระวง" id="toc-ขอควรระวง" class="nav-link" data-scroll-target="#ขอควรระวง">ข้อควรระวัง</a></li>
+  </ul></li>
+  <li><a href="#sec-ch16-case" id="toc-sec-ch16-case" class="nav-link" data-scroll-target="#sec-ch16-case">กรณีศึกษา: เตรียมโครงการให้พร้อมเชื่อมกับข้อมูลสุขภาพอย่างรับผิดชอบ</a></li>
+  <li><a href="#sec-ch16-pitfalls" id="toc-sec-ch16-pitfalls" class="nav-link" data-scroll-target="#sec-ch16-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch16-exercises" id="toc-sec-ch16-exercises" class="nav-link" data-scroll-target="#sec-ch16-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/13-exploratory-statistics.html">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</a></li><li class="breadcrumb-item"><a href="../chapters/16-synthetic-privacy.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ข้อมูล PM2.5 จาก Air4Thai ไม่ใช่ข้อมูลส่วนบุคคล ค่าความเข้มข้นของฝุ่นที่สถานีหนึ่งไม่ได้บอกอะไรเกี่ยวกับบุคคลใด แต่คำถามที่น่าสนใจที่สุดของโครงการมักนำไปสู่ข้อมูลที่เกี่ยวกับคน ค่าฝุ่นที่สูงขึ้นสัมพันธ์กับจำนวนผู้ป่วยโรคทางเดินหายใจหรือไม่ กลุ่มอายุใดได้รับผลกระทบมากที่สุด เมื่อใดที่โครงการเชื่อมข้อมูลคุณภาพอากาศกับข้อมูลการเข้ารับบริการของโรงพยาบาล นักวิทยาการข้อมูลก็กำลังทำงานกับข้อมูลสุขภาพ ซึ่งเป็นข้อมูลอ่อนไหวที่กฎหมายคุ้มครองเข้มงวดที่สุด</p>
+<p>บทนี้เริ่มจากกรอบกฎหมาย คือ พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ในมุมที่นักวิทยาการข้อมูลต้องรู้ ต่อด้วยเทคนิคการปกป้องข้อมูล ตั้งแต่การแฝงข้อมูลไปจนถึง differential privacy และจบด้วยข้อมูลสังเคราะห์ ซึ่งมีบทบาทสองอย่างในรายวิชานี้ คือ เป็นข้อมูลปลอมสำหรับทดสอบ pipeline โดยไม่ต้องแตะข้อมูลจริง และเป็นทางเลือกในการแบ่งปันข้อมูลที่รักษารูปแบบทางสถิติไว้ บทนี้ไม่ใช่คำแนะนำทางกฎหมาย การนำข้อมูลส่วนบุคคลจริงมาใช้ต้องปรึกษาเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (DPO) และคณะกรรมการจริยธรรมการวิจัยของหน่วยงานเสมอ</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายหลักการสำคัญของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ที่เกี่ยวข้องกับงานวิทยาการข้อมูล</li>
+<li>จำแนกข้อมูลส่วนบุคคล ข้อมูลอ่อนไหว และ quasi-identifier ในชุดข้อมูลของโครงการ</li>
+<li>เปรียบเทียบ anonymization กับ pseudonymization และผลทางกฎหมายของแต่ละแบบ</li>
+<li>สร้างข้อมูลสังเคราะห์แบบกฎด้วย Faker และแบบสถิติด้วย Gaussian copula</li>
+<li>ประเมินข้อมูลสังเคราะห์ทั้งด้าน utility และด้านความเป็นส่วนตัว</li>
+<li>ออกแบบการใช้ข้อมูลที่เกี่ยวกับบุคคลในโครงการอย่างรับผิดชอบ</li>
+</ol>
+</section>
+<section id="sec-ch16-pdpa" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="sec-ch16-pdpa"><span class="header-section-number">16.1</span> พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 สำหรับนักวิทยาการข้อมูล</h2>
+<section id="ภาพรวม" class="level3">
+<h3 class="anchored" data-anchor-id="ภาพรวม">ภาพรวม</h3>
+<p><span class="idx">พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</span> (PDPA) เป็นกฎหมายหลักของไทยที่กำกับการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล <span class="citation" data-cites="pdpa2019personal">(<a href="../references.html#ref-pdpa2019personal" role="doc-biblioref">ราชกิจจานุเบกษา 2019</a>)</span> ประกาศในราชกิจจานุเบกษาในปี พ.ศ. 2562 และบังคับใช้เต็มรูปแบบตั้งแต่วันที่ 1 มิถุนายน พ.ศ. 2565 หลังจากเลื่อนมาสองครั้ง แนวคิดของกฎหมายได้รับอิทธิพลจาก GDPR (General Data Protection Regulation) ของสหภาพยุโรป <span class="citation" data-cites="eu2016gdpr">(<a href="../references.html#ref-eu2016gdpr" role="doc-biblioref">European Parliament and Council of the European Union 2016</a>)</span> ผู้ที่คุ้นกับ GDPR จะพบหลักการที่คล้ายกันมาก</p>
+</section>
+<section id="บทบาทตามกฎหมาย" class="level3">
+<h3 class="anchored" data-anchor-id="บทบาทตามกฎหมาย">บทบาทตามกฎหมาย</h3>
+<div id="tbl-ch16-roles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-roles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.1: บทบาทตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล
+</figcaption>
+<div aria-describedby="tbl-ch16-roles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>บทบาท</th>
+<th>ความหมาย</th>
+<th>ตัวอย่างในโครงการที่เชื่อมข้อมูลสุขภาพ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เจ้าของข้อมูลส่วนบุคคล (data subject)</td>
+<td>บุคคลที่ข้อมูลนั้นระบุถึง</td>
+<td>ผู้ป่วยที่มารับบริการ</td>
+</tr>
+<tr class="even">
+<td>ผู้ควบคุมข้อมูลส่วนบุคคล (data controller)</td>
+<td>ผู้มีอำนาจตัดสินใจเกี่ยวกับการเก็บ ใช้ หรือเปิดเผย</td>
+<td>โรงพยาบาล หรือมหาวิทยาลัยที่เป็นเจ้าของโครงการวิจัย</td>
+</tr>
+<tr class="odd">
+<td>ผู้ประมวลผลข้อมูลส่วนบุคคล (data processor)</td>
+<td>ผู้ดำเนินการตามคำสั่งของผู้ควบคุม</td>
+<td>บริษัทที่รับจ้างวิเคราะห์ หรือผู้ให้บริการคลาวด์</td>
+</tr>
+<tr class="even">
+<td>เจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (DPO)</td>
+<td>ผู้ให้คำแนะนำและตรวจสอบการปฏิบัติตามกฎหมายภายในองค์กร</td>
+<td>DPO ของโรงพยาบาลหรือมหาวิทยาลัย</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>นักศึกษาที่ทำโครงการในรายวิชามักไม่ใช่ผู้ควบคุมข้อมูลเอง แต่ทำงานภายใต้ผู้ควบคุม เช่น อาจารย์ที่ได้รับอนุญาตให้ใช้ข้อมูล หรือหน่วยงานที่ให้ข้อมูล จึงต้องปฏิบัติตามเงื่อนไขที่ผู้ควบคุมกำหนดอย่างเคร่งครัด</p>
+</section>
+<section id="หลกการทเกยวของกบงานวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="หลกการทเกยวของกบงานวเคราะห">หลักการที่เกี่ยวข้องกับงานวิเคราะห์</h3>
+<div id="tbl-ch16-principles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.2: หลักการของ PDPA ที่เกี่ยวข้องกับงานวิเคราะห์
+</figcaption>
+<div aria-describedby="tbl-ch16-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลักการ</th>
+<th>ความหมาย</th>
+<th>ผลต่อการทำงาน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ฐานทางกฎหมาย (lawful basis)</td>
+<td>การประมวลผลต้องมีฐานรองรับ เช่น ความยินยอม หรือฐานอื่นตามมาตรา 24</td>
+<td>ต้องรู้ว่าข้อมูลที่ได้มาเก็บด้วยฐานใด และใช้ได้ภายใต้เงื่อนไขใด</td>
+</tr>
+<tr class="even">
+<td>การใช้ตามวัตถุประสงค์ (purpose limitation)</td>
+<td>ใช้ข้อมูลตามวัตถุประสงค์ที่แจ้งไว้</td>
+<td>ข้อมูลที่เก็บเพื่อการรักษา ไม่ได้ใช้เพื่อการวิจัยได้โดยอัตโนมัติ</td>
+</tr>
+<tr class="odd">
+<td>การเก็บเท่าที่จำเป็น (data minimization)</td>
+<td>เก็บและใช้เฉพาะข้อมูลที่จำเป็น</td>
+<td>ขอเฉพาะคอลัมน์ที่ต้องใช้ ไม่ขอ “ทั้งหมดไว้ก่อน”</td>
+</tr>
+<tr class="even">
+<td>การจำกัดระยะเวลาการเก็บ</td>
+<td>เก็บไว้เท่าที่จำเป็นตามวัตถุประสงค์</td>
+<td>กำหนดวันลบข้อมูลเมื่อโครงการจบ</td>
+</tr>
+<tr class="odd">
+<td>มาตรการรักษาความมั่นคงปลอดภัย</td>
+<td>ต้องมีมาตรการที่เหมาะสม และแจ้งเหตุละเมิดภายใน 72 ชั่วโมงเมื่อมีความเสี่ยง</td>
+<td>ห้ามเก็บข้อมูลบนเครื่องส่วนตัวที่ไม่เข้ารหัส ห้าม commit ขึ้น Git</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="การวจยและสถต" class="level3">
+<h3 class="anchored" data-anchor-id="การวจยและสถต">การวิจัยและสถิติ</h3>
+<p>มาตรา 24 ของ พ.ร.บ. ระบุฐานที่เก็บรวบรวมข้อมูลได้โดยไม่ต้องขอความยินยอม ซึ่งรวมถึงการดำเนินการ “ที่เกี่ยวกับการศึกษาวิจัยหรือสถิติ ซึ่งได้จัดให้มีมาตรการปกป้องที่เหมาะสม” ข้อนี้ไม่ได้แปลว่างานวิจัยทำอะไรกับข้อมูลส่วนบุคคลก็ได้ เงื่อนไขสำคัญคือ <em>มาตรการปกป้องที่เหมาะสม</em> ซึ่งในทางปฏิบัติรวมถึงการผ่านคณะกรรมการจริยธรรมการวิจัยในมนุษย์ การใช้ข้อมูลที่แฝงหรือรวมแล้วแทนข้อมูลระบุตัว และการจำกัดการเข้าถึง สำหรับข้อมูลอ่อนไหวอย่างข้อมูลสุขภาพ มาตรา 26 มีเงื่อนไขเพิ่มเติมที่เข้มงวดกว่า</p>
+</section>
+<section id="หลกปฏบตสำหรบโครงการในรายวชา" class="level3">
+<h3 class="anchored" data-anchor-id="หลกปฏบตสำหรบโครงการในรายวชา">หลักปฏิบัติสำหรับโครงการในรายวิชา</h3>
+<ol type="1">
+<li><strong>ใช้ข้อมูลที่ไม่ใช่ข้อมูลส่วนบุคคลเป็นหลัก</strong> ข้อมูลคุณภาพอากาศ ข้อมูลอุตุนิยมวิทยา และข้อมูลสถิติรวมระดับจังหวัดที่เผยแพร่แล้ว เพียงพอสำหรับคำถามส่วนใหญ่ของโครงการ</li>
+<li><strong>ถ้าต้องเชื่อมกับข้อมูลสุขภาพ ให้ใช้ข้อมูลรวม</strong> เช่น จำนวนผู้ป่วยต่อจังหวัดต่อสัปดาห์ที่หน่วยงานเผยแพร่ ไม่ใช่ข้อมูลรายบุคคล</li>
+<li><strong>ทดสอบ pipeline ด้วยข้อมูลสังเคราะห์</strong> (หัวข้อ <a href="#sec-ch16-synthetic" class="quarto-xref"><span>16.6</span></a>) ก่อนเข้าถึงข้อมูลจริง</li>
+<li><strong>ไม่เก็บข้อมูลส่วนบุคคลไว้ใน repository</strong> ไฟล์ใน <code>data/</code> ไม่ถูก commit ตามโครงสร้างของโครงการ (บทที่ 2) แต่ต้องตรวจซ้ำก่อนทุก push</li>
+<li><strong>เขียนหัวข้อเกี่ยวกับข้อมูลส่วนบุคคลใน README</strong> ระบุว่าข้อมูลที่ใช้เป็นข้อมูลส่วนบุคคลหรือไม่ เพราะอะไร และมีมาตรการอย่างไร</li>
+</ol>
+</section>
+</section>
+<section id="sec-ch16-personal-data" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="sec-ch16-personal-data"><span class="header-section-number">16.2</span> ข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว</h2>
+<section id="นยาม" class="level3">
+<h3 class="anchored" data-anchor-id="นยาม">นิยาม</h3>
+<p>มาตรา 6 ของ พ.ร.บ. นิยาม <strong><span class="idx">ข้อมูลส่วนบุคคล</span></strong> ว่า ข้อมูลเกี่ยวกับบุคคลซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้ ไม่ว่าทางตรงหรือทางอ้อม แต่ไม่รวมถึงข้อมูลของผู้ถึงแก่กรรมโดยเฉพาะ คำว่า “ทางอ้อม” สำคัญมาก ข้อมูลที่ไม่มีชื่อก็อาจเป็นข้อมูลส่วนบุคคลได้ ถ้านำไปรวมกับข้อมูลอื่นแล้วระบุตัวบุคคลได้</p>
+<p>มาตรา 26 กำหนด <strong><span class="idx">ข้อมูลส่วนบุคคลที่มีความอ่อนไหว</span></strong> ซึ่งการเก็บรวบรวมมีเงื่อนไขเข้มงวดกว่า ได้แก่ ข้อมูลเกี่ยวกับเชื้อชาติ เผ่าพันธุ์ ความคิดเห็นทางการเมือง ความเชื่อในลัทธิ ศาสนาหรือปรัชญา พฤติกรรมทางเพศ ประวัติอาชญากรรม ข้อมูลสุขภาพ ความพิการ ข้อมูลสหภาพแรงงาน ข้อมูลพันธุกรรม ข้อมูลชีวภาพ และข้อมูลอื่นที่คณะกรรมการประกาศกำหนด ข้อมูลการเข้ารับบริการทางการแพทย์และรหัสโรค (ICD-10) จึงเป็นข้อมูลอ่อนไหว</p>
+</section>
+<section id="ตวระบสามประเภท" class="level3">
+<h3 class="anchored" data-anchor-id="ตวระบสามประเภท">ตัวระบุสามประเภท</h3>
+<p>การวิเคราะห์ความเสี่ยงของชุดข้อมูลแบ่งคอลัมน์เป็นสามประเภท</p>
+<div id="tbl-ch16-identifiers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-identifiers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.3: ตัวระบุสามประเภท
+</figcaption>
+<div aria-describedby="tbl-ch16-identifiers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ประเภท</th>
+<th>ความหมาย</th>
+<th>ตัวอย่างในข้อมูลการเข้ารับบริการ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ตัวระบุโดยตรง (direct identifier)</td>
+<td>ระบุตัวบุคคลได้ด้วยตัวเอง</td>
+<td>ชื่อ-นามสกุล เลขประจำตัวประชาชน เลขประจำตัวผู้ป่วย (HN) เบอร์โทรศัพท์</td>
+</tr>
+<tr class="even">
+<td>quasi-identifier</td>
+<td>ระบุตัวไม่ได้ด้วยตัวเอง แต่ระบุได้เมื่อรวมกันหรือรวมกับข้อมูลภายนอก</td>
+<td>อายุ เพศ ตำบลที่อยู่ วันที่เข้ารับบริการ อาชีพ</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูลอ่อนไหว (sensitive attribute)</td>
+<td>สิ่งที่ต้องปกป้องไม่ให้เชื่อมกับบุคคล</td>
+<td>รหัสโรค ผลการตรวจ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ความเสี่ยงที่มักถูกประเมินต่ำคือ quasi-identifier Latanya Sweeney ประมาณจากข้อมูลสำมะโนประชากรของสหรัฐอเมริกาว่า ประชากรประมาณ 87% ระบุตัวได้โดยไม่ซ้ำกับใครด้วยข้อมูลเพียงสามอย่าง คือ รหัสไปรษณีย์ห้าหลัก เพศ และวันเกิด <span class="citation" data-cites="sweeney2000simple">(<a href="../references.html#ref-sweeney2000simple" role="doc-biblioref">Sweeney 2000</a>)</span> ในบริบทของไทย อายุ เพศ ตำบล และวันที่เข้ารับบริการ ก็อาจระบุตัวผู้ป่วยในชุมชนเล็กได้เช่นกัน โดยเฉพาะเมื่อผู้ที่เห็นข้อมูลรู้จักคนในชุมชนนั้น</p>
+</section>
+<section id="ขอมล-pm2.5-กบขอมลสวนบคคล" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมล-pm2.5-กบขอมลสวนบคคล">ข้อมูล PM2.5 กับข้อมูลส่วนบุคคล</h3>
+<p>ข้อมูลของโครงการหลักเองไม่ใช่ข้อมูลส่วนบุคคล แต่มีสถานการณ์ที่ต้องระวัง</p>
+<ul>
+<li><strong>เซนเซอร์ส่วนบุคคล</strong> ข้อมูลจากเครื่องวัดฝุ่นที่บุคคลติดตั้งที่บ้าน ซึ่งมีพิกัดละเอียดและเวลา อาจบอกที่อยู่และพฤติกรรมของเจ้าของ เช่น เวลาที่อยู่บ้าน (เปิดเครื่องฟอกอากาศ) ข้อมูลนี้เป็นข้อมูลส่วนบุคคล</li>
+<li><strong>การเชื่อมกับข้อมูลสุขภาพ</strong> ตามที่กล่าวไว้ข้างต้น</li>
+<li><strong>ข้อมูลจากแบบสอบถาม</strong> เช่น การสำรวจพฤติกรรมการป้องกันฝุ่นของนักศึกษา ซึ่งมีข้อมูลส่วนบุคคลและอาจมีข้อมูลสุขภาพ (โรคประจำตัว)</li>
+</ul>
+</section>
+</section>
+<section id="sec-ch16-anonymization" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="sec-ch16-anonymization"><span class="header-section-number">16.3</span> anonymization กับ pseudonymization</h2>
+<section id="pseudonymization" class="level3">
+<h3 class="anchored" data-anchor-id="pseudonymization">pseudonymization</h3>
+<p><strong><span class="idx">pseudonymization</span></strong> (การแฝงข้อมูล) คือการแทนตัวระบุโดยตรงด้วยรหัสแฝง เช่น แทนเลขประจำตัวผู้ป่วยด้วยรหัสสุ่ม โดยมีตารางจับคู่ระหว่างรหัสแฝงกับตัวตนจริงเก็บแยกไว้อย่างปลอดภัย ข้อดีคือยังเชื่อมข้อมูลของคนเดียวกันข้ามตารางหรือข้ามเวลาได้ และกลับไปหาตัวตนได้เมื่อจำเป็น เช่น ติดต่อผู้ป่วยที่ผลตรวจผิดปกติ</p>
+<p>ประเด็นทางกฎหมายที่สำคัญคือ <strong>ข้อมูลที่แฝงแล้วยังเป็นข้อมูลส่วนบุคคล</strong> เพราะยังระบุตัวได้ทางอ้อมผ่านตารางจับคู่ หรือผ่าน quasi-identifier ที่เหลืออยู่ GDPR ระบุเรื่องนี้ไว้อย่างชัดเจน <span class="citation" data-cites="eu2016gdpr">(<a href="../references.html#ref-eu2016gdpr" role="doc-biblioref">European Parliament and Council of the European Union 2016</a>)</span> และแนวทางของไทยก็ตีความในทางเดียวกัน pseudonymization จึงเป็น <em>มาตรการลดความเสี่ยง</em> ไม่ใช่การทำให้พ้นจากกฎหมาย</p>
+<p>การสร้างรหัสแฝงต้องทำอย่างถูกวิธี การใช้ hash ของเลขประจำตัวประชาชนโดยตรง เช่น <code>sha256(citizen_id)</code> ไม่ปลอดภัย เพราะเลขประจำตัวประชาชนมีรูปแบบที่แน่นอน 13 หลัก ผู้โจมตีคำนวณ hash ของเลขที่เป็นไปได้ทั้งหมดแล้วจับคู่กลับได้ วิธีที่เหมาะสมกว่าคือใช้ keyed hash (HMAC) ที่เก็บกุญแจลับแยกไว้ หรือใช้รหัสสุ่มพร้อมตารางจับคู่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hashlib</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hmac</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>SECRET_KEY <span class="op">=</span> os.environ[<span class="st">"PSEUDONYM_KEY"</span>].encode()      <span class="co"># กุญแจลับเก็บนอก repository (บทที่ 5)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pseudonymize(identifier: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""รหัสแฝงที่คงที่สำหรับตัวระบุเดียวกัน แต่ย้อนกลับไม่ได้ถ้าไม่มีกุญแจ"""</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> hmac.new(SECRET_KEY, identifier.encode(), hashlib.sha256).hexdigest()[:<span class="dv">16</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="anonymization" class="level3">
+<h3 class="anchored" data-anchor-id="anonymization">anonymization</h3>
+<p><strong><span class="idx">anonymization</span></strong> (การทำให้เป็นข้อมูลนิรนาม) คือการแปลงข้อมูลจนไม่สามารถระบุตัวบุคคลได้อีก ไม่ว่าทางตรงหรือทางอ้อม โดยใช้วิธีที่มีเหตุผลตามสมควร ข้อมูลที่ทำให้เป็นนิรนามอย่างแท้จริงไม่ใช่ข้อมูลส่วนบุคคลอีกต่อไป พ.ร.บ. ใช้แนวคิดนี้ในหลายมาตรา เช่น สิทธิของเจ้าของข้อมูลที่จะขอให้ทำข้อมูลเป็นข้อมูลที่ไม่สามารถระบุตัวบุคคลได้ ปัญหาคือ anonymization ที่แท้จริงทำได้ยากกว่าที่คิดมาก เทคนิคที่ใช้บ่อยได้แก่</p>
+<div id="tbl-ch16-anon-techniques" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-anon-techniques-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.4: เทคนิคการทำให้เป็นข้อมูลนิรนาม
+</figcaption>
+<div aria-describedby="tbl-ch16-anon-techniques-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>เทคนิค</th>
+<th>วิธีการ</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>การลบ (suppression)</td>
+<td>ลบคอลัมน์หรือค่าที่เสี่ยง</td>
+<td>ลบชื่อและเลขประจำตัว ลบแถวที่มีลักษณะเฉพาะมาก</td>
+</tr>
+<tr class="even">
+<td>การทำให้หยาบ (generalization)</td>
+<td>ลดความละเอียด</td>
+<td>อายุ 37 → ช่วง 30–44 ปี ตำบล → จังหวัด → ภาค วันที่ → เดือน</td>
+</tr>
+<tr class="odd">
+<td>การรวม (aggregation)</td>
+<td>เผยแพร่เฉพาะค่าสรุป</td>
+<td>จำนวนผู้ป่วยต่อจังหวัดต่อสัปดาห์</td>
+</tr>
+<tr class="even">
+<td>การเพิ่มสัญญาณรบกวน (noise)</td>
+<td>เพิ่มค่าสุ่มที่ควบคุมได้</td>
+<td>differential privacy (★ หัวข้อ <a href="#sec-ch16-dp" class="quarto-xref"><span>16.5</span></a>)</td>
+</tr>
+<tr class="odd">
+<td>การสลับ (swapping)</td>
+<td>สลับค่าบางคอลัมน์ระหว่างแถว</td>
+<td>สลับจังหวัดระหว่างผู้ป่วยที่มีลักษณะคล้ายกัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ขอมลรวมกรวได" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลรวมกรวได">ข้อมูลรวมก็รั่วได้</h3>
+<p>การเผยแพร่เฉพาะข้อมูลรวมไม่ได้ปลอดภัยเสมอ ถ้าตารางสรุปมีช่องที่มีจำนวนน้อย เช่น “ผู้ป่วยโรคหัวใจอายุ 90 ปีขึ้นไปในอำเภอ ก ในเดือนมีนาคม: 1 ราย” คนในชุมชนอาจรู้ว่าเป็นใคร หน่วยงานสถิติจึงมักมีกฎ <strong><span class="idx">small cell suppression</span></strong> คือไม่เผยแพร่ช่องที่มีจำนวนต่ำกว่าเกณฑ์ เช่น น้อยกว่า 5 หรือ 10 นอกจากนี้ การเผยแพร่ตารางหลายตารางจากข้อมูลชุดเดียวกัน อาจให้ผู้โจมตีนำมาลบกันจนได้ค่าของกลุ่มเล็ก (differencing attack) ปัญหานี้เป็นแรงจูงใจของ differential privacy</p>
+</section>
+</section>
+<section id="sec-ch16-k-anonymity" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="sec-ch16-k-anonymity"><span class="header-section-number">16.4</span> k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="การโจมตเพอระบตวตนซำ" class="level3">
+<h3 class="anchored" data-anchor-id="การโจมตเพอระบตวตนซำ">การโจมตีเพื่อระบุตัวตนซ้ำ</h3>
+<p><strong><span class="idx">การระบุตัวตนซ้ำ</span></strong> (re-identification) คือการนำข้อมูลที่ถูกลบตัวระบุโดยตรงแล้วมาเชื่อมกับข้อมูลภายนอกจนรู้ว่าแถวใดเป็นของใคร กรณีที่มีชื่อเสียงได้แก่ ในปี ค.ศ. 1997 Sweeney เชื่อมข้อมูลการรักษาพยาบาลของพนักงานรัฐแมสซาชูเซตส์ที่ลบชื่อแล้ว เข้ากับทะเบียนผู้มีสิทธิเลือกตั้งด้วยรหัสไปรษณีย์ เพศ และวันเกิด จนระบุเวชระเบียนของผู้ว่าการรัฐได้ <span class="citation" data-cites="sweeney2002kanonymity">(<a href="../references.html#ref-sweeney2002kanonymity" role="doc-biblioref">Sweeney 2002</a>)</span> และในปี ค.ศ. 2008 Narayanan และ Shmatikov แสดงว่าข้อมูลการให้คะแนนภาพยนตร์ของ Netflix ที่เผยแพร่เพื่อการแข่งขัน ระบุตัวผู้ใช้ได้เมื่อเทียบกับคะแนนที่ผู้ใช้โพสต์ในเว็บไซต์อื่น แม้รู้เพียงไม่กี่ภาพยนตร์ <span class="citation" data-cites="narayanan2008robust">(<a href="../references.html#ref-narayanan2008robust" role="doc-biblioref">Narayanan และ Shmatikov 2008</a>)</span> งานภายหลังประเมินว่าข้อมูลเชิงประชากรเพียง 15 คุณลักษณะ ก็ระบุตัวชาวอเมริกันได้เกือบทั้งหมด <span class="citation" data-cites="rocher2019estimating">(<a href="../references.html#ref-rocher2019estimating" role="doc-biblioref">Rocher และคณะ 2019</a>)</span></p>
+</section>
+<section id="k-anonymity" class="level3">
+<h3 class="anchored" data-anchor-id="k-anonymity">k-anonymity</h3>
+<p><strong><span class="idx">k-anonymity</span></strong> กำหนดว่า ทุกแถวในชุดข้อมูลต้องมีแถวอื่นอย่างน้อย <span class="math inline">\(k - 1\)</span> แถวที่มีค่าของ quasi-identifier เหมือนกันทุกประการ <span class="citation" data-cites="sweeney2002kanonymity">(<a href="../references.html#ref-sweeney2002kanonymity" role="doc-biblioref">Sweeney 2002</a>)</span> กลุ่มของแถวที่มี quasi-identifier เหมือนกันเรียกว่า <strong><span class="idx">equivalence class</span></strong> ผู้โจมตีที่รู้ quasi-identifier ของเป้าหมายจะเหลือผู้ต้องสงสัยอย่างน้อย <span class="math inline">\(k\)</span> คน</p>
+<p>ตัวอย่างต่อไปนี้ใช้ข้อมูลการเข้ารับบริการ <em>สังเคราะห์</em> ที่สร้างด้วย Faker (หัวข้อ <a href="#sec-ch16-synthetic" class="quarto-xref"><span>16.6</span></a>) ตรวจ k-anonymity ก่อนและหลังทำให้หยาบ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>province_to_region <span class="op">=</span> con.execute(<span class="st">"SELECT DISTINCT province, region FROM stations"</span>).df().set_index(<span class="st">"province"</span>)[<span class="st">"region"</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>qi <span class="op">=</span> [<span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="st">"province"</span>]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>k_raw <span class="op">=</span> visits.groupby(qi).size()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"k ต่ำสุด"</span>, k_raw.<span class="bu">min</span>(), <span class="st">"สัดส่วนแถวที่ไม่ซ้ำใคร"</span>, <span class="bu">round</span>((k_raw <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(visits), <span class="dv">3</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>age_band <span class="op">=</span> pd.cut(visits[<span class="st">"age"</span>], bins<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">75</span>, <span class="dv">120</span>], right<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  labels<span class="op">=</span>[<span class="st">"0-14"</span>, <span class="st">"15-29"</span>, <span class="st">"30-44"</span>, <span class="st">"45-59"</span>, <span class="st">"60-74"</span>, <span class="st">"75+"</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>generalized <span class="op">=</span> visits.assign(age_band<span class="op">=</span>age_band, region<span class="op">=</span>visits[<span class="st">"province"</span>].<span class="bu">map</span>(province_to_region))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>k_gen <span class="op">=</span> generalized.groupby([<span class="st">"age_band"</span>, <span class="st">"sex"</span>, <span class="st">"region"</span>], observed<span class="op">=</span><span class="va">True</span>).size()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"k ต่ำสุดหลังทำให้หยาบ"</span>, k_gen.<span class="bu">min</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลการเข้ารับบริการสังเคราะห์ 5,000 แถว ไม่ใช่ข้อมูลจริง
+k ต่ำสุด 1 สัดส่วนแถวที่ไม่ซ้ำใคร 0.377
+k ต่ำสุดหลังทำให้หยาบ 51</code></pre>
+<p>ก่อนทำให้หยาบ 37.7% ของแถวมีอายุ เพศ และจังหวัดไม่ซ้ำกับใครเลย (k = 1) ผู้ที่รู้ข้อมูลสามอย่างนี้ของเป้าหมายจะรู้รหัสโรคของเป้าหมายทันที หลังเปลี่ยนอายุเป็นช่วง 15 ปีและจังหวัดเป็นภาค ทุก equivalence class มีอย่างน้อย 51 แถว ราคาที่จ่ายคือความละเอียดของข้อมูล คำถามระดับจังหวัดตอบไม่ได้อีกต่อไป</p>
+</section>
+<section id="l-diversity" class="level3">
+<h3 class="anchored" data-anchor-id="l-diversity">l-diversity</h3>
+<p>k-anonymity มีจุดอ่อน ถ้าทุกแถวใน equivalence class หนึ่งมีรหัสโรคเดียวกัน ผู้โจมตีไม่ต้องรู้ว่าเป้าหมายคือแถวใด ก็รู้โรคของเป้าหมายแล้ว (homogeneity attack) <strong><span class="idx">l-diversity</span></strong> แก้ด้วยการกำหนดให้แต่ละ equivalence class มีค่าของข้อมูลอ่อนไหวที่ต่างกันอย่างน้อย <span class="math inline">\(l\)</span> ค่า <span class="citation" data-cites="machanavajjhala2007ldiversity">(<a href="../references.html#ref-machanavajjhala2007ldiversity" role="doc-biblioref">Machanavajjhala และคณะ 2007</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>l_div <span class="op">=</span> generalized.groupby([<span class="st">"age_band"</span>, <span class="st">"sex"</span>, <span class="st">"region"</span>], observed<span class="op">=</span><span class="va">True</span>)[<span class="st">"icd10"</span>].nunique()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"l ต่ำสุด"</span>, l_div.<span class="bu">min</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลการเข้ารับบริการสังเคราะห์ 5,000 แถว ไม่ใช่ข้อมูลจริง
+l ต่ำสุด 4</code></pre>
+<p>ทุก equivalence class มีรหัสโรคครบทั้งสี่ค่าที่เป็นไปได้ในข้อมูลสังเคราะห์ ข้อมูลจริงมักไม่สมดุลแบบนี้ ข้อจำกัดของ l-diversity คือ แม้มีหลายค่า ถ้าค่าหนึ่งมีสัดส่วนสูงมาก ผู้โจมตีก็ยังเดาได้แม่น แนวคิดที่พัฒนาต่อ เช่น t-closeness จึงพิจารณาการแจกแจงของค่าอ่อนไหวในแต่ละ class เทียบกับทั้งชุด ข้อจำกัดร่วมของทุกแนวคิดตระกูลนี้คือ ต้องสมมติว่ารู้ล่วงหน้าว่าคอลัมน์ใดเป็น quasi-identifier ซึ่งในโลกที่ข้อมูลภายนอกมีมากขึ้นเรื่อย ๆ สมมติฐานนี้อ่อนลงเรื่อย ๆ</p>
+</section>
+</section>
+<section id="sec-ch16-dp" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="sec-ch16-dp"><span class="header-section-number">16.5</span> differential privacy เบื้องต้น ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="นยาม-1" class="level3">
+<h3 class="anchored" data-anchor-id="นยาม-1">นิยาม</h3>
+<p><strong><span class="idx">differential privacy</span></strong> (DP) เปลี่ยนคำถามจาก “ข้อมูลนี้ระบุตัวได้หรือไม่” ซึ่งขึ้นกับข้อมูลภายนอกที่ผู้โจมตีมี เป็นคำถามเกี่ยวกับ <em>กระบวนการ</em> ที่สร้างผลลัพธ์ กระบวนการสุ่ม <span class="math inline">\(\mathcal{M}\)</span> มี <span class="math inline">\(\varepsilon\)</span>-differential privacy ถ้าสำหรับชุดข้อมูลสองชุด <span class="math inline">\(D\)</span> และ <span class="math inline">\(D'\)</span> ที่ต่างกันเพียงหนึ่งคน และสำหรับผลลัพธ์ <span class="math inline">\(S\)</span> ใด ๆ <span class="citation" data-cites="dwork2006calibrating dwork2014algorithmic">(<a href="../references.html#ref-dwork2006calibrating" role="doc-biblioref">Dwork และคณะ 2006</a>; <a href="../references.html#ref-dwork2014algorithmic" role="doc-biblioref">Dwork และ Roth 2014</a>)</span></p>
+<p><span id="eq-ch16-dp"><span class="math display">\[
+\Pr[\mathcal{M}(D) \in S] \le e^{\varepsilon} \cdot \Pr[\mathcal{M}(D') \in S]
+\tag{16.1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(\varepsilon\)</span> (epsilon) คือ <strong><span class="idx">งบความเป็นส่วนตัว</span></strong> (privacy budget) ค่ายิ่งเล็กยิ่งเป็นส่วนตัวมาก ความหมายเชิงปฏิบัติคือ ผลลัพธ์ของกระบวนการแทบไม่เปลี่ยนไม่ว่าข้อมูลของคนใดคนหนึ่งจะอยู่ในชุดข้อมูลหรือไม่ ผู้ที่เห็นผลลัพธ์จึงอนุมานเกี่ยวกับคนใดคนหนึ่งได้จำกัด ไม่ว่าจะมีข้อมูลภายนอกมากเพียงใด</p>
+</section>
+<section id="laplace-mechanism" class="level3">
+<h3 class="anchored" data-anchor-id="laplace-mechanism">Laplace mechanism</h3>
+<p>วิธีพื้นฐานในการทำให้การนับมี DP คือเพิ่มสัญญาณรบกวนจากการแจกแจง Laplace ที่มีสเกล <span class="math inline">\(\Delta f/\varepsilon\)</span> โดย <span class="math inline">\(\Delta f\)</span> คือ <strong>sensitivity</strong> ซึ่งเท่ากับการเปลี่ยนแปลงสูงสุดของผลลัพธ์เมื่อเพิ่มหรือลบคนหนึ่งคน สำหรับการนับจำนวน <span class="math inline">\(\Delta f = 1\)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> laplace_count(true_count: <span class="bu">int</span>, epsilon: <span class="bu">float</span>, rng: np.random.Generator) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""จำนวนที่มี epsilon-DP สำหรับ query การนับ (sensitivity = 1)"""</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> true_count <span class="op">+</span> rng.laplace(<span class="dv">0</span>, <span class="dv">1</span> <span class="op">/</span> epsilon)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>([<span class="bu">round</span>(laplace_count(<span class="dv">37</span>, eps, rng), <span class="dv">1</span>) <span class="cf">for</span> eps <span class="kw">in</span> (<span class="fl">0.1</span>, <span class="fl">1.0</span>, <span class="fl">10.0</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# จำนวนจริงสมมุติ 37 ราย
+[44.9, 36.9, 37.1]</code></pre>
+<p>ที่ <span class="math inline">\(\varepsilon = 0.1\)</span> สัญญาณรบกวนมีส่วนเบี่ยงเบนมาตรฐานประมาณ <span class="math inline">\(\sqrt{2} \times 10 \approx 14\)</span> ราย ซึ่งใหญ่เมื่อเทียบกับจำนวนจริง 37 ราย ที่ <span class="math inline">\(\varepsilon = 1\)</span> ส่วนเบี่ยงเบนมาตรฐานประมาณ 1.4 ราย และที่ <span class="math inline">\(\varepsilon = 10\)</span> ประมาณ 0.14 ราย ซึ่งแทบไม่ปกป้องอะไร นี่คือการแลกเปลี่ยนพื้นฐานระหว่างความเป็นส่วนตัวกับความแม่นยำ</p>
+</section>
+<section id="งบความเปนสวนตวสะสม" class="level3">
+<h3 class="anchored" data-anchor-id="งบความเปนสวนตวสะสม">งบความเป็นส่วนตัวสะสม</h3>
+<p>คุณสมบัติสำคัญของ DP คือ <strong>composition</strong> ถ้าตอบ query หลายครั้งจากข้อมูลชุดเดียวกัน แต่ละครั้งใช้ <span class="math inline">\(\varepsilon_i\)</span> งบรวมคือ <span class="math inline">\(\sum_i \varepsilon_i\)</span> (ในกรณีพื้นฐาน) การเผยแพร่ตารางหลายตารางจึงต้องแบ่งงบกัน ซึ่งป้องกัน differencing attack ได้โดยตรง ข้อดีอีกข้อคือ <strong>post-processing</strong> การนำผลลัพธ์ที่มี DP ไปคำนวณต่ออย่างไรก็ตาม ไม่ทำให้ความเป็นส่วนตัวลดลง</p>
+</section>
+<section id="การใชงานจรงและขอจำกด" class="level3">
+<h3 class="anchored" data-anchor-id="การใชงานจรงและขอจำกด">การใช้งานจริงและข้อจำกัด</h3>
+<p>สำนักงานสำมะโนประชากรของสหรัฐอเมริกาใช้ differential privacy กับการเผยแพร่ผลสำมะโนประชากรปี ค.ศ. 2020 <span class="citation" data-cites="abowd2018census">(<a href="../references.html#ref-abowd2018census" role="doc-biblioref">Abowd 2018</a>)</span> ซึ่งเป็นการใช้งานขนาดใหญ่ที่สุดในภาครัฐ และก่อให้เกิดการถกเถียงว่าความแม่นยำที่ลดลงส่งผลต่อการจัดสรรงบประมาณและการวิจัยในพื้นที่เล็กมากน้อยเพียงใด ข้อจำกัดหลักของ DP ได้แก่ การเลือกค่า <span class="math inline">\(\varepsilon\)</span> ไม่มีคำตอบทางเทคนิค เป็นการตัดสินใจเชิงนโยบาย ความแม่นยำลดลงมากสำหรับกลุ่มเล็ก ซึ่งมักเป็นกลุ่มเปราะบางที่ต้องการข้อมูลมากที่สุด และการใช้งานที่ถูกต้องต้องอาศัยความเชี่ยวชาญ การเขียนเองมักมีข้อผิดพลาดที่ทำลายการรับประกัน ควรใช้ไลบรารีที่ผ่านการตรวจสอบ เช่น OpenDP</p>
+</section>
+</section>
+<section id="sec-ch16-synthetic" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="sec-ch16-synthetic"><span class="header-section-number">16.6</span> ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), ★ แบบ deep learning (CTGAN)</h2>
+<section id="ขอมลสงเคราะหใชทำอะไร" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลสงเคราะหใชทำอะไร">ข้อมูลสังเคราะห์ใช้ทำอะไร</h3>
+<p><strong><span class="idx">ข้อมูลสังเคราะห์</span></strong> (synthetic data) คือข้อมูลที่สร้างขึ้นด้วยกระบวนการคำนวณแทนการเก็บจากโลกจริง <span class="citation" data-cites="jordon2022synthetic">(<a href="../references.html#ref-jordon2022synthetic" role="doc-biblioref">Jordon และคณะ 2022</a>)</span> ในงานวิทยาการข้อมูลมีบทบาทหลักสามอย่าง</p>
+<div id="tbl-ch16-synthetic-roles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-synthetic-roles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.5: บทบาทของข้อมูลสังเคราะห์
+</figcaption>
+<div aria-describedby="tbl-ch16-synthetic-roles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>บทบาท</th>
+<th>ต้องการความเหมือนข้อมูลจริงแค่ไหน</th>
+<th>วิธีที่เหมาะ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ทดสอบโค้ดและ pipeline</td>
+<td>ต้องถูกโครงสร้าง (ชื่อคอลัมน์ ชนิด ช่วงค่า) ไม่ต้องถูกความสัมพันธ์</td>
+<td>แบบกฎ (Faker)</td>
+</tr>
+<tr class="even">
+<td>แบ่งปันข้อมูลแทนข้อมูลจริง</td>
+<td>ต้องรักษาการแจกแจงและความสัมพันธ์</td>
+<td>แบบสถิติหรือ deep learning</td>
+</tr>
+<tr class="odd">
+<td>เพิ่มข้อมูลของกลุ่มที่มีน้อย</td>
+<td>ต้องสมจริงในกลุ่มนั้น</td>
+<td>SMOTE หรือแบบจำลองเชิงกำเนิด (★ หัวข้อ <a href="#sec-ch16-smote" class="quarto-xref"><span>16.8</span></a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>หนังสือเล่มนี้เองใช้ข้อมูลสังเคราะห์ในบทบาทแรก ผลลัพธ์ตัวอย่างทุกบล็อกที่ระบุว่า “ข้อมูลสังเคราะห์” มาจากฐานข้อมูลที่สร้างขึ้นให้มีโครงสร้างตรงกับ <code>data/pm25.duckdb</code> ของโครงการ เพื่อทดสอบว่าโค้ดทำงานได้ถูกต้อง ไม่ใช่เพื่อสรุปเกี่ยวกับคุณภาพอากาศจริง</p>
+</section>
+<section id="แบบกฎ-faker" class="level3">
+<h3 class="anchored" data-anchor-id="แบบกฎ-faker">แบบกฎ: Faker</h3>
+<p><strong><span class="idx-tool">Faker</span></strong> สร้างค่าที่ดูสมจริงตามกฎของแต่ละชนิด เช่น ชื่อ ที่อยู่ วันที่ เบอร์โทรศัพท์ รองรับภาษาไทยด้วย locale <code>th_TH</code> <span class="citation" data-cites="faker2026docs">(<a href="../references.html#ref-faker2026docs" role="doc-biblioref">Faker Contributors 2026</a>)</span> ค่าแต่ละคอลัมน์สุ่มแยกกัน จึงไม่มีความสัมพันธ์ระหว่างคอลัมน์ ซึ่งเป็นข้อดีสำหรับการทดสอบ เพราะไม่มีทางรั่วข้อมูลจริง และเป็นข้อจำกัด เพราะห้ามนำไปวิเคราะห์หาความสัมพันธ์</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""src/make_fake_visits.py: สร้างตารางการเข้ารับบริการปลอม (ไม่ใช่ข้อมูลจริง) สำหรับทดสอบ pipeline"""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> faker <span class="im">import</span> Faker</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>Faker.seed(<span class="dv">42</span>)                                          <span class="co"># ให้ได้ข้อมูลเดิมทุกครั้งที่รัน</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>fake <span class="op">=</span> Faker(<span class="st">"th_TH"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span>), read_only<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> con:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    provinces <span class="op">=</span> con.execute(<span class="st">"SELECT DISTINCT province FROM stations ORDER BY province"</span>).df()[<span class="st">"province"</span>].tolist()</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    dmin, dmax <span class="op">=</span> con.execute(<span class="st">"SELECT MIN(date), MAX(date) FROM daily_pm25_clean"</span>).fetchone()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>visits <span class="op">=</span> pd.DataFrame([{</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"visit_id"</span>: <span class="ss">f"V</span><span class="sc">{</span>i<span class="sc">:06d}</span><span class="ss">"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"patient_name"</span>: fake.name(),                        <span class="co"># ชื่อปลอม</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: fake.random_int(<span class="bu">min</span><span class="op">=</span><span class="dv">1</span>, <span class="bu">max</span><span class="op">=</span><span class="dv">95</span>),</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sex"</span>: fake.random_element([<span class="st">"M"</span>, <span class="st">"F"</span>]),</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"province"</span>: fake.random_element(provinces),</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"visit_date"</span>: fake.date_between(start_date<span class="op">=</span>dmin, end_date<span class="op">=</span>dmax),</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"icd10"</span>: fake.random_element([<span class="st">"J44"</span>, <span class="st">"J45"</span>, <span class="st">"J18"</span>, <span class="st">"I21"</span>]),</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>} <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5000</span>)])</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"synthetic"</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>out.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>visits.to_csv(out <span class="op">/</span> <span class="st">"fake_visits.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง): สามแถวแรกของ fake_visits.csv
+# ข้อมูลปลอมทั้งหมด ชื่อไม่ใช่บุคคลจริง
+  visit_id      patient_name  age sex province  visit_date icd10
+0  V000000    เกษมชัย บุญส่ง   36   M  นนทบุรี  2023-02-20   J44
+1  V000001  ณัฐธภรณ์ ทองอยู่    5   M  ขอนแก่น  2023-03-21   J44
+2  V000002  พรชีวิน นิระหานี   90   F  นนทบุรี  2023-06-13   J18</code></pre>
+<p>ข้อมูลนี้ใช้ทดสอบว่าการเชื่อมกับ <code>daily_pm25_clean</code> ด้วยจังหวัดและวันที่ได้จำนวนแถวตามที่คาด ไม่ซ้ำและไม่หาย (บทที่ 8) แต่ <strong>ห้ามตีความความสัมพันธ์</strong> ระหว่างค่าฝุ่นกับจำนวนผู้ป่วย เพราะทุกค่าสุ่มอย่างอิสระ รหัส ICD-10 สี่ค่าที่ใช้ (J44 โรคปอดอุดกั้นเรื้อรัง J45 โรคหืด J18 ปอดอักเสบ และ I21 กล้ามเนื้อหัวใจตายเฉียบพลัน) เลือกให้สมจริงในบริบทของผลกระทบจากฝุ่น</p>
+</section>
+<section id="แบบสถต-gaussian-copula" class="level3">
+<h3 class="anchored" data-anchor-id="แบบสถต-gaussian-copula">แบบสถิติ: Gaussian copula</h3>
+<p>เมื่อต้องการข้อมูลสังเคราะห์ที่รักษาทั้งการแจกแจงของแต่ละคอลัมน์และความสัมพันธ์ระหว่างคอลัมน์ วิธีทางสถิติที่ใช้บ่อยคือ <strong>copula</strong> ทฤษฎีบทของ Sklar แสดงว่า การแจกแจงร่วมของหลายตัวแปรแยกได้เป็นสองส่วน คือ การแจกแจงของแต่ละตัวแปร (marginal) และ copula ซึ่งบรรยายโครงสร้างความสัมพันธ์ <span class="citation" data-cites="sklar1959fonctions">(<a href="../references.html#ref-sklar1959fonctions" role="doc-biblioref">Sklar 1959</a>)</span> <strong><span class="idx">Gaussian copula</span></strong> ใช้การแจกแจงปกติหลายตัวแปรบรรยายโครงสร้างความสัมพันธ์ ขั้นตอนมีดังนี้</p>
+<ol type="1">
+<li>แปลงแต่ละคอลัมน์เป็นลำดับ แล้วแปลงลำดับเป็นค่าของการแจกแจงปกติมาตรฐาน (normal score)</li>
+<li>ประมาณเมทริกซ์สหสัมพันธ์ของ normal score</li>
+<li>สุ่มจากการแจกแจงปกติหลายตัวแปรที่มีเมทริกซ์สหสัมพันธ์นั้น</li>
+<li>แปลงกลับเป็นสเกลเดิมด้วยควอนไทล์ของข้อมูลจริงแต่ละคอลัมน์</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gaussian_copula_sample(df: pd.DataFrame, n: <span class="bu">int</span>, rng: np.random.Generator) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""สร้างข้อมูลสังเคราะห์ที่รักษา marginal และสหสัมพันธ์เชิงลำดับของ df"""</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> df.rank(method<span class="op">=</span><span class="st">"average"</span>) <span class="op">/</span> (<span class="bu">len</span>(df) <span class="op">+</span> <span class="dv">1</span>)               <span class="co"># ขั้น 1: ลำดับเป็นสัดส่วนในช่วง (0, 1)</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    corr <span class="op">=</span> np.corrcoef(stats.norm.ppf(u), rowvar<span class="op">=</span><span class="va">False</span>)          <span class="co"># ขั้น 2</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> rng.multivariate_normal(np.zeros(df.shape[<span class="dv">1</span>]), corr, size<span class="op">=</span>n)   <span class="co"># ขั้น 3</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    u_new <span class="op">=</span> stats.norm.cdf(z)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame({c: np.quantile(df[c], u_new[:, j])     <span class="co"># ขั้น 4</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                         <span class="cf">for</span> j, c <span class="kw">in</span> <span class="bu">enumerate</span>(df.columns)})</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>real <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT pm25_mean, pm25_max FROM daily_pm25_clean</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE station_id = '35t' AND is_complete AND date &lt; DATE '2024-01-01'</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>synthetic <span class="op">=</span> gaussian_copula_sample(real, <span class="bu">len</span>(real), np.random.default_rng(<span class="dv">42</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ไลบรารี SDV (Synthetic Data Vault) มี <code>GaussianCopulaSynthesizer</code> ที่ทำขั้นตอนเดียวกันพร้อมจัดการชนิดข้อมูลและข้อจำกัดต่าง ๆ ให้ <span class="citation" data-cites="patki2016synthetic">(<a href="../references.html#ref-patki2016synthetic" role="doc-biblioref">Patki และคณะ 2016</a>)</span> การเขียนเองข้างต้นช่วยให้เห็นว่าเกิดอะไรขึ้นภายใน และเห็นข้อจำกัดที่หัวข้อถัดไปจะตรวจ</p>
+<div id="fig-ch16-synthetic" class="quarto-float quarto-figure quarto-figure-center anchored" alt="scatter plot สองภาพที่มีรูปร่างคล้ายกัน ภาพซ้ายมีจุดที่อยู่ห่างออกไปถึงเส้นประสีแดงที่ประมาณ 90 µg/m³ ภาพขวาไม่มีจุดใดเกินเส้นประ และจุดที่อยู่ห่างที่สุดอยู่ที่ประมาณ 80 µg/m³">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ch16-synthetic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/16/real_vs_synthetic.png" class="img-fluid figure-img" alt="scatter plot สองภาพที่มีรูปร่างคล้ายกัน ภาพซ้ายมีจุดที่อยู่ห่างออกไปถึงเส้นประสีแดงที่ประมาณ 90 µg/m³ ภาพขวาไม่มีจุดใดเกินเส้นประ และจุดที่อยู่ห่างที่สุดอยู่ที่ประมาณ 80 µg/m³">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ch16-synthetic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ภาพที่&nbsp;16.1: การกระจายของค่าเฉลี่ยกับค่าสูงสุดรายวันในข้อมูลต้นฉบับ (ซ้าย) และข้อมูลสังเคราะห์จาก Gaussian copula (ขวา) เส้นประสีแดงคือค่าเฉลี่ยรายวันสูงสุดของต้นฉบับ
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="แบบ-deep-learning-ctgan" class="level3">
+<h3 class="anchored" data-anchor-id="แบบ-deep-learning-ctgan">แบบ deep learning: CTGAN ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p><strong><span class="idx">CTGAN</span></strong> (conditional tabular GAN) ใช้ generative adversarial network ซึ่งประกอบด้วยเครือข่ายสองตัวที่แข่งกัน ตัวสร้าง (generator) พยายามสร้างแถวที่ดูเหมือนจริง ส่วนตัวแยก (discriminator) พยายามแยกแถวจริงออกจากแถวปลอม เมื่อฝึกไปเรื่อย ๆ ตัวสร้างจะสร้างแถวที่แยกจากของจริงได้ยากขึ้น CTGAN เพิ่มเทคนิคสำหรับข้อมูลตาราง เช่น การจัดการคอลัมน์หมวดหมู่ที่ไม่สมดุล และการแปลงคอลัมน์ต่อเนื่องที่มีหลายยอด <span class="citation" data-cites="xu2019modeling">(<a href="../references.html#ref-xu2019modeling" role="doc-biblioref">Xu และคณะ 2019</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sdv.metadata <span class="im">import</span> Metadata</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sdv.single_table <span class="im">import</span> CTGANSynthesizer</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">"daily"</span>: real}                                   <span class="co"># SDV 2.x รับข้อมูลเป็น dict ของตาราง</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>metadata <span class="op">=</span> Metadata.detect_from_dataframes(data)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ctgan <span class="op">=</span> CTGANSynthesizer(metadata, epochs<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>ctgan.fit(data)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>synthetic_ctgan <span class="op">=</span> ctgan.sample(num_rows<span class="op">=</span><span class="bu">len</span>(real))[<span class="st">"daily"</span>]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(synthetic_ctgan.corr().iloc[<span class="dv">0</span>, <span class="dv">1</span>], <span class="dv">3</span>),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="bu">int</span>((synthetic_ctgan[<span class="st">"pm25_max"</span>] <span class="op">&lt;</span> synthetic_ctgan[<span class="st">"pm25_mean"</span>]).<span class="bu">sum</span>()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง (SDV 2.0)
+0.134 333</code></pre>
+<p>ผลลัพธ์นี้น่าผิดหวังและให้บทเรียน ข้อมูลจริงมีสหสัมพันธ์ระหว่างค่าเฉลี่ยกับค่าสูงสุดรายวัน 0.969 แต่ข้อมูลจาก CTGAN มีเพียง 0.134 และมี 333 แถวจากประมาณ 1,400 แถวที่ค่าสูงสุดต่ำกว่าค่าเฉลี่ย CTGAN เรียนรู้การแจกแจงของแต่ละคอลัมน์ได้ แต่ข้อมูลประมาณ 1,400 แถวน้อยเกินกว่าจะเรียนรู้ความสัมพันธ์ ข้อดีของ CTGAN คือจับความสัมพันธ์ที่ซับซ้อนและไม่เป็นเชิงเส้นได้ <em>เมื่อมีข้อมูลมากพอ</em> ข้อเสียคือต้องการข้อมูลมาก ฝึกช้า ผลขึ้นกับพารามิเตอร์ และต้องติดตั้ง PyTorch ซึ่งมีขนาดใหญ่หลายกิกะไบต์ สำหรับข้อมูลขนาดเล็กหรือตารางที่มีคอลัมน์ไม่มาก Gaussian copula มักให้ผลดีกว่ามาก</p>
+<p>ข้อควรรู้อีกข้อคือ API ของ SDV เปลี่ยนบ่อย ตัวอย่างนี้ทดสอบกับ SDV 2.0 ซึ่งรับข้อมูลเป็น dict ของตาราง ส่วนรุ่น 1.x รับ DataFrame โดยตรงและใช้ <code>Metadata.detect_from_dataframe</code> ก่อนใช้ ให้ตรวจ <code>sdv.__version__</code> และเอกสารของรุ่นนั้นเสมอ ไม่ว่าจะใช้วิธีใด ข้อมูลสังเคราะห์ไม่ได้มีความเป็นส่วนตัวโดยอัตโนมัติ หัวข้อถัดไปแสดงวิธีตรวจ</p>
+</section>
+</section>
+<section id="sec-ch16-evaluation" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="sec-ch16-evaluation"><span class="header-section-number">16.7</span> การประเมินข้อมูลสังเคราะห์: utility กับ privacy</h2>
+<section id="สองดานทขดกน" class="level3">
+<h3 class="anchored" data-anchor-id="สองดานทขดกน">สองด้านที่ขัดกัน</h3>
+<p>ข้อมูลสังเคราะห์ที่ดีต้องผ่านการประเมินสองด้าน ด้าน <strong>utility</strong> (ประโยชน์) ถามว่าข้อมูลสังเคราะห์ให้ผลการวิเคราะห์ใกล้เคียงข้อมูลจริงหรือไม่ ด้าน <strong>privacy</strong> (ความเป็นส่วนตัว) ถามว่าข้อมูลสังเคราะห์เปิดเผยข้อมูลของบุคคลในข้อมูลจริงหรือไม่ สองด้านนี้ขัดกันโดยธรรมชาติ ข้อมูลสังเคราะห์ที่เหมือนข้อมูลจริงทุกประการมี utility สูงสุดและ privacy ต่ำสุด เพราะเป็นการคัดลอก <span class="citation" data-cites="stadler2022synthetic">(<a href="../references.html#ref-stadler2022synthetic" role="doc-biblioref">Stadler และคณะ 2022</a>)</span></p>
+</section>
+<section id="utility" class="level3">
+<h3 class="anchored" data-anchor-id="utility">utility</h3>
+<div id="tbl-ch16-utility" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.6: ระดับของการประเมิน utility
+</figcaption>
+<div aria-describedby="tbl-ch16-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระดับ</th>
+<th>ตรวจอะไร</th>
+<th>วิธี</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>การแจกแจงของแต่ละคอลัมน์</td>
+<td>marginal เหมือนกันหรือไม่</td>
+<td>เปรียบเทียบสถิติสรุป histogram สถิติ Kolmogorov–Smirnov</td>
+</tr>
+<tr class="even">
+<td>ความสัมพันธ์ระหว่างคอลัมน์</td>
+<td>โครงสร้างร่วมเหมือนกันหรือไม่</td>
+<td>เปรียบเทียบเมทริกซ์สหสัมพันธ์ ตารางไขว้</td>
+</tr>
+<tr class="odd">
+<td>ผลการวิเคราะห์</td>
+<td>ข้อสรุปเหมือนกันหรือไม่</td>
+<td>ทำการวิเคราะห์เดียวกันทั้งสองชุดแล้วเทียบ</td>
+</tr>
+<tr class="even">
+<td>ข้อจำกัดเชิงตรรกะ</td>
+<td>แถวที่เป็นไปไม่ได้มีหรือไม่</td>
+<td>ตรวจด้วย schema ของบทที่ 9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(real.describe().<span class="bu">round</span>(<span class="dv">1</span>).T[[<span class="st">"mean"</span>, <span class="st">"50%"</span>, <span class="st">"max"</span>]])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(synthetic.describe().<span class="bu">round</span>(<span class="dv">1</span>).T[[<span class="st">"mean"</span>, <span class="st">"50%"</span>, <span class="st">"max"</span>]])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"corr"</span>, <span class="bu">round</span>(real.corr().iloc[<span class="dv">0</span>, <span class="dv">1</span>], <span class="dv">3</span>), <span class="bu">round</span>(synthetic.corr().iloc[<span class="dv">0</span>, <span class="dv">1</span>], <span class="dv">3</span>))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KS"</span>, [<span class="bu">round</span>(stats.ks_2samp(real[c], synthetic[c]).statistic, <span class="dv">3</span>) <span class="cf">for</span> c <span class="kw">in</span> real])</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ค่าสูงสุด &lt; ค่าเฉลี่ย:"</span>, <span class="bu">int</span>((synthetic[<span class="st">"pm25_max"</span>] <span class="op">&lt;</span> synthetic[<span class="st">"pm25_mean"</span>]).<span class="bu">sum</span>()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+           mean   50%    max
+pm25_mean  25.0  21.2  114.0
+pm25_max   41.2  35.0  197.6
+           mean   50%    max
+pm25_mean  25.4  21.8  109.1
+pm25_max   41.9  35.8  178.5
+corr 0.969 0.934
+KS [0.042, 0.045]
+ค่าสูงสุด &lt; ค่าเฉลี่ย: 1</code></pre>
+<p>(ผลลัพธ์จัดรูปแบบตัวเลขให้อ่านง่าย ตัวอย่างนี้ใช้สถานีหนึ่งจากฐานข้อมูลสังเคราะห์ 50 สถานีของหนังสือ) ข้อมูลสังเคราะห์รักษาค่าเฉลี่ย มัธยฐาน และรูปร่างของการแจกแจงได้ดี (สถิติ KS ต่ำ) สหสัมพันธ์ลดลงเล็กน้อยจาก 0.969 เป็น 0.934 แต่มีปัญหาสองข้อที่สำคัญ ข้อแรก <strong>ค่าสุดโต่งต่ำกว่าข้อมูลจริง</strong> และจะไม่มีวันเกินค่าสูงสุดของข้อมูลจริง เพราะขั้นที่ 4 แปลงกลับด้วยควอนไทล์ของข้อมูลจริง (<a href="#fig-ch16-synthetic" class="quarto-xref">ภาพที่&nbsp;<span>16.1</span></a>) ข้อมูลสังเคราะห์แบบนี้จึงไม่เหมาะกับการศึกษาเหตุการณ์ฝุ่นรุนแรง ซึ่งเป็นสิ่งที่สำคัญที่สุดในโดเมนนี้ ข้อสอง <strong>มีแถวที่เป็นไปไม่ได้</strong> คือค่าสูงสุดรายชั่วโมงต่ำกว่าค่าเฉลี่ยรายวัน เพราะ copula ไม่รู้ข้อจำกัดเชิงตรรกะนี้ ข้อมูลสังเคราะห์จึงต้องผ่านการตรวจด้วย schema เดียวกับข้อมูลจริงเสมอ</p>
+</section>
+<section id="privacy" class="level3">
+<h3 class="anchored" data-anchor-id="privacy">privacy</h3>
+<p>ตัววัดความเป็นส่วนตัวที่ใช้บ่อยคือ <strong><span class="idx">DCR</span></strong> (distance to closest record) ระยะทางจากแต่ละแถวสังเคราะห์ถึงแถวจริงที่ใกล้ที่สุด ถ้ามีแถวสังเคราะห์จำนวนมากที่ใกล้แถวจริงมากผิดปกติ หรือเหมือนกันทุกประการ แสดงว่าแบบจำลองจำข้อมูลจริงแล้วคัดลอกออกมา</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>dcr <span class="op">=</span> NearestNeighbors(n_neighbors<span class="op">=</span><span class="dv">1</span>).fit(real).kneighbors(synthetic)[<span class="dv">0</span>][:, <span class="dv">0</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>within <span class="op">=</span> NearestNeighbors(n_neighbors<span class="op">=</span><span class="dv">2</span>).fit(real).kneighbors(real)[<span class="dv">0</span>][:, <span class="dv">1</span>]   <span class="co"># ระยะระหว่างแถวจริงด้วยกัน</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(np.median(dcr), <span class="dv">2</span>), <span class="bu">round</span>(np.median(within), <span class="dv">2</span>), <span class="bu">int</span>((dcr <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+0.3 0.28 38</code></pre>
+<p>DCR มัธยฐาน (0.30) ใกล้เคียงกับระยะระหว่างแถวจริงด้วยกัน (0.28) ซึ่งดูดี แต่มี 38 แถวสังเคราะห์ที่ <strong>เหมือนแถวจริงทุกประการ</strong> สาเหตุคือข้อมูลจริงปัดเศษเป็นทศนิยมหนึ่งตำแหน่ง และขั้นที่ 4 ใช้ควอนไทล์ของข้อมูลจริง ค่าที่ได้จึงมักตรงกับค่าจริงพอดี และเมื่อทั้งสองคอลัมน์ตรงกับแถวเดียวกันโดยบังเอิญ ก็เกิดการคัดลอก สำหรับข้อมูลฝุ่นซึ่งไม่ใช่ข้อมูลส่วนบุคคล เรื่องนี้ไม่เป็นปัญหา แต่ถ้าเป็นข้อมูลผู้ป่วย แถวที่คัดลอกมาคือการรั่วของข้อมูลจริง ข้อสรุปสำคัญคือ <strong>ข้อมูลสังเคราะห์ไม่ได้เป็นนิรนามโดยอัตโนมัติ</strong> ต้องประเมินความเสี่ยงเสมอ และถ้าต้องการการรับประกันที่พิสูจน์ได้ ต้องใช้วิธีสร้างที่มี differential privacy</p>
+</section>
+<section id="การตดสนใจเผยแพร" class="level3">
+<h3 class="anchored" data-anchor-id="การตดสนใจเผยแพร">การตัดสินใจเผยแพร่</h3>
+<div id="tbl-ch16-release" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.7: คำถามก่อนเผยแพร่ข้อมูลสังเคราะห์
+</figcaption>
+<div aria-describedby="tbl-ch16-release-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>คำถาม</th>
+<th>ถ้าคำตอบคือใช่</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>มีแถวสังเคราะห์ที่เหมือนหรือใกล้แถวจริงมากผิดปกติหรือไม่</td>
+<td>ตัดแถวนั้นออก หรือเปลี่ยนวิธีสร้าง</td>
+</tr>
+<tr class="even">
+<td>ข้อมูลจริงมีกลุ่มเล็กที่อาจถูกจำได้หรือไม่</td>
+<td>ทำให้หยาบก่อนสร้าง หรือใช้วิธีที่มี DP</td>
+</tr>
+<tr class="odd">
+<td>ผู้ใช้ข้อมูลสังเคราะห์จะใช้ทำอะไร</td>
+<td>ประเมิน utility ตามการใช้งานนั้น ไม่ใช่ตามตัวชี้วัดทั่วไป</td>
+</tr>
+<tr class="even">
+<td>ผู้รับจะรู้หรือไม่ว่าเป็นข้อมูลสังเคราะห์</td>
+<td>ติดป้ายชัดเจนในไฟล์ ชื่อไฟล์ และเอกสาร</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch16-smote" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="sec-ch16-smote"><span class="header-section-number">16.8</span> class imbalance และ SMOTE ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ปญหาของกลมทมนอย" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของกลมทมนอย">ปัญหาของกลุ่มที่มีน้อย</h3>
+<p>ถ้าต้องการสร้างแบบจำลองจำแนกว่าวันใดจะเป็น “วันฝุ่นรุนแรง” (ค่าเฉลี่ยรายวันเกิน 75 µg/m³) ข้อมูลจะไม่สมดุลมาก ในข้อมูลสังเคราะห์ของหนังสือมีวันรุนแรงเพียง 589 จาก 67,631 สถานี-วัน (ประมาณ 0.9%) แบบจำลองที่ทายว่า “ไม่รุนแรง” ทุกวันได้ความแม่นยำ (accuracy) 99.1% แต่ไร้ประโยชน์โดยสิ้นเชิง ปัญหานี้เรียกว่า <strong><span class="idx">class imbalance</span></strong></p>
+</section>
+<section id="smote" class="level3">
+<h3 class="anchored" data-anchor-id="smote">SMOTE</h3>
+<p><strong><span class="idx">SMOTE</span></strong> (synthetic minority over-sampling technique) สร้างตัวอย่างสังเคราะห์ของกลุ่มที่มีน้อย โดยสุ่มจุดบนเส้นตรงระหว่างตัวอย่างหนึ่งกับเพื่อนบ้านใกล้สุดในกลุ่มเดียวกัน <span class="citation" data-cites="chawla2002smote">(<a href="../references.html#ref-chawla2002smote" role="doc-biblioref">Chawla และคณะ 2002</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> imblearn.over_sampling <span class="im">import</span> SMOTE</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT pm25_mean, pm25_max, (pm25_mean &gt; 75)::INT AS severe</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean WHERE is_complete AND date &lt; DATE '2024-01-01'</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>X_res, y_res <span class="op">=</span> SMOTE(random_state<span class="op">=</span><span class="dv">42</span>).fit_resample(d[[<span class="st">"pm25_mean"</span>, <span class="st">"pm25_max"</span>]], d[<span class="st">"severe"</span>])</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(d[<span class="st">"severe"</span>].value_counts().to_dict(), pd.Series(y_res).value_counts().to_dict())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+{0: 67042, 1: 589} {0: 67042, 1: 67042}</code></pre>
+</section>
+<section id="ขอควรระวง" class="level3">
+<h3 class="anchored" data-anchor-id="ขอควรระวง">ข้อควรระวัง</h3>
+<p>ตัวอย่างข้างต้นแสดงเพียงกลไก ไม่ใช่วิธีใช้ที่ถูกต้อง ข้อควรระวังสำคัญได้แก่</p>
+<ul>
+<li><strong>ใช้ SMOTE กับชุดฝึกเท่านั้น หลังแบ่งข้อมูลแล้ว</strong> ถ้าใช้ก่อนแบ่ง ตัวอย่างสังเคราะห์ที่สร้างจากข้อมูลทดสอบจะรั่วเข้าชุดฝึก ทำให้ประเมินผลดีเกินจริง (data leakage) สำหรับข้อมูลอนุกรมเวลา ต้องแบ่งตามเวลา ไม่ใช่สุ่ม (บทที่ 4)</li>
+<li><strong>ประเมินด้วยตัวชี้วัดที่เหมาะสม</strong> เช่น precision, recall และพื้นที่ใต้เส้นโค้ง precision-recall ไม่ใช่ accuracy</li>
+<li><strong>พิจารณาทางเลือกอื่นก่อน</strong> เช่น การให้น้ำหนักกลุ่ม (<code>class_weight="balanced"</code> ใน scikit-learn) หรือการปรับเกณฑ์การตัดสิน ซึ่งไม่ต้องสร้างข้อมูลปลอม และงานวิจัยภายหลังพบว่าในหลายกรณีให้ผลไม่ต่างหรือดีกว่า SMOTE <span class="citation" data-cites="vandengoorbergh2022harm">(<a href="../references.html#ref-vandengoorbergh2022harm" role="doc-biblioref">Goorbergh และคณะ 2022</a>)</span></li>
+<li><strong>ตัวอย่างสังเคราะห์ไม่ใช่ข้อมูลจริง</strong> จุดที่สุ่มบนเส้นตรงระหว่างสองวันรุนแรงอาจไม่สมจริงทางกายภาพ และห้ามนำไปใช้ในการวิเคราะห์เชิงพรรณนาหรือรายงานเด็ดขาด</li>
+</ul>
+</section>
+</section>
+<section id="sec-ch16-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch16-case">กรณีศึกษา: เตรียมโครงการให้พร้อมเชื่อมกับข้อมูลสุขภาพอย่างรับผิดชอบ</h2>
+<p><strong>สถานการณ์</strong> ทีมโครงการต้องการศึกษาว่าวันที่ค่า PM2.5 สูง สัมพันธ์กับจำนวนผู้ป่วยโรคทางเดินหายใจที่มารับบริการในโรงพยาบาลของจังหวัดหรือไม่ โรงพยาบาลแห่งหนึ่งยินดีให้ความร่วมมือ แต่ยังต้องผ่านกระบวนการขออนุญาตใช้ข้อมูลและคณะกรรมการจริยธรรม ซึ่งใช้เวลาหลายเดือน</p>
+<p><strong>การตัดสินใจ</strong></p>
+<ol type="1">
+<li><em>ประเมินว่าต้องใช้ข้อมูลระดับใด</em> คำถามของทีมเป็นระดับประชากร (จำนวนผู้ป่วยต่อวันต่อจังหวัด) ไม่ต้องใช้ข้อมูลรายบุคคล ทีมจึงขอเฉพาะ <em>จำนวนผู้ป่วยต่อวันแยกตามรหัสโรคและกลุ่มอายุ</em> แทนข้อมูลการเข้ารับบริการรายครั้ง ตามหลักการเก็บเท่าที่จำเป็น</li>
+<li><em>กำหนดเงื่อนไขการเผยแพร่</em> ตกลงกับโรงพยาบาลว่าตารางใดที่มีช่องน้อยกว่า 5 ราย จะไม่เผยแพร่ในรายงาน (small cell suppression) และรายงานเฉพาะระดับสัปดาห์เมื่อจำนวนต่อวันน้อยเกินไป</li>
+<li><em>พัฒนา pipeline ด้วยข้อมูลปลอม</em> ระหว่างรอการอนุมัติ ทีมสร้าง <code>src/make_fake_visits.py</code> ด้วย Faker ที่มีโครงสร้างตรงกับตารางที่จะได้รับ เขียนโค้ดรวมเป็นรายวัน เชื่อมกับ <code>daily_pm25_clean</code> และสร้างกราฟทั้งหมด ทดสอบว่าการเชื่อมไม่ทำให้แถวซ้ำหรือหาย</li>
+<li><em>เตรียมการจัดเก็บ</em> กำหนดว่าข้อมูลจริงจะเก็บบนเครื่องของมหาวิทยาลัยที่เข้ารหัส ไม่อยู่ใน repository และจะลบเมื่อโครงการจบ บันทึกทั้งหมดไว้ในหัวข้อ PDPA ของ README</li>
+</ol>
+<p><strong>ผล</strong> เมื่อได้รับอนุมัติ ทีมเปลี่ยนเพียงพาธของไฟล์ข้อมูลนำเข้า pipeline ก็ทำงานกับข้อมูลจริงได้ทันที และไม่มีสมาชิกคนใดต้องเห็นข้อมูลรายบุคคลเลย</p>
+<p><strong>ข้อจำกัดของการออกแบบ</strong> ข้อมูลรวมระดับจังหวัดตอบคำถามระดับบุคคลไม่ได้ (ecological fallacy ในบทที่ 13) และความสัมพันธ์ที่พบระหว่างฝุ่นกับจำนวนผู้ป่วยอาจถูกรบกวนด้วยปัจจัยอื่นที่เปลี่ยนตามฤดูกาลพร้อมกัน เช่น อุณหภูมิและโรคติดเชื้อตามฤดูกาล การวิเคราะห์เชิงเหตุผลต้องใช้วิธีทางระบาดวิทยาที่อยู่นอกขอบเขตของรายวิชา</p>
+</section>
+<section id="sec-ch16-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch16-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch16-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch16-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;16.8: ข้อผิดพลาดที่พบบ่อยในบทที่ 16
+</figcaption>
+<div aria-describedby="tbl-ch16-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>คิดว่าลบชื่อแล้วข้อมูลเป็นนิรนาม</td>
+<td>quasi-identifier ระบุตัวได้เมื่อรวมกัน</td>
+<td>ตรวจ k-anonymity ทำให้หยาบ หรือใช้ข้อมูลรวม</td>
+</tr>
+<tr class="even">
+<td>คิดว่าข้อมูลที่แฝงแล้วพ้นจากกฎหมาย</td>
+<td>pseudonymized data ยังเป็นข้อมูลส่วนบุคคล</td>
+<td>ปฏิบัติตาม PDPA เหมือนข้อมูลส่วนบุคคล</td>
+</tr>
+<tr class="odd">
+<td>สร้างรหัสแฝงด้วย hash ของเลขประจำตัวประชาชนโดยตรง</td>
+<td>คำนวณ hash ของเลขที่เป็นไปได้ทั้งหมดแล้วจับคู่กลับได้</td>
+<td>ใช้ HMAC ที่มีกุญแจลับ หรือรหัสสุ่มพร้อมตารางจับคู่</td>
+</tr>
+<tr class="even">
+<td>เผยแพร่ตารางที่มีช่องจำนวนน้อย</td>
+<td>ระบุตัวบุคคลในกลุ่มเล็กได้</td>
+<td>small cell suppression</td>
+</tr>
+<tr class="odd">
+<td>ขอข้อมูลทุกคอลัมน์ไว้ก่อน</td>
+<td>ขัดหลักการเก็บเท่าที่จำเป็น และเพิ่มความเสี่ยง</td>
+<td>ขอเฉพาะข้อมูลที่ต้องใช้ตอบคำถาม</td>
+</tr>
+<tr class="even">
+<td>วิเคราะห์ความสัมพันธ์จากข้อมูล Faker</td>
+<td>ทุกคอลัมน์สุ่มอิสระ ความสัมพันธ์ที่พบเป็นความบังเอิญ</td>
+<td>ใช้ Faker ทดสอบโครงสร้างและ pipeline เท่านั้น</td>
+</tr>
+<tr class="odd">
+<td>คิดว่าข้อมูลสังเคราะห์เป็นส่วนตัวโดยอัตโนมัติ</td>
+<td>แบบจำลองอาจคัดลอกแถวจริงออกมา</td>
+<td>ตรวจ DCR และแถวที่ซ้ำกับข้อมูลจริง</td>
+</tr>
+<tr class="even">
+<td>ใช้ข้อมูลสังเคราะห์ศึกษาเหตุการณ์สุดโต่ง</td>
+<td>วิธีที่ใช้ควอนไทล์ของข้อมูลจริงไม่สร้างค่าที่เกินข้อมูลจริง</td>
+<td>ใช้ข้อมูลจริงหรือวิธีที่ออกแบบสำหรับค่าสุดโต่ง</td>
+</tr>
+<tr class="odd">
+<td>ไม่ตรวจข้อมูลสังเคราะห์ด้วย schema</td>
+<td>อาจมีแถวที่เป็นไปไม่ได้ เช่น ค่าสูงสุดต่ำกว่าค่าเฉลี่ย</td>
+<td>ตรวจด้วย schema ของบทที่ 9 ทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>ใช้ SMOTE ก่อนแบ่งชุดฝึกและชุดทดสอบ</td>
+<td>ข้อมูลรั่ว ผลการประเมินดีเกินจริง</td>
+<td>ใช้กับชุดฝึกเท่านั้น หรือใช้ class weight</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 บังคับใช้เต็มรูปแบบตั้งแต่ 1 มิถุนายน 2565 กำหนดบทบาท ฐานทางกฎหมาย และหลักการ เช่น การใช้ตามวัตถุประสงค์และการเก็บเท่าที่จำเป็น งานวิจัยใช้ข้อมูลได้ภายใต้มาตรการปกป้องที่เหมาะสม</li>
+<li>ข้อมูลส่วนบุคคลรวมถึงข้อมูลที่ระบุตัวได้ทางอ้อม ข้อมูลสุขภาพเป็นข้อมูลอ่อนไหวตามมาตรา 26 และ quasi-identifier เป็นความเสี่ยงที่มักถูกประเมินต่ำ</li>
+<li>pseudonymization ลดความเสี่ยงแต่ข้อมูลยังเป็นข้อมูลส่วนบุคคล anonymization ที่แท้จริงทำให้พ้นจากกฎหมายแต่ทำได้ยาก และข้อมูลรวมก็รั่วได้ถ้ามีช่องจำนวนน้อย</li>
+<li>k-anonymity และ l-diversity วัดความเสี่ยงจาก quasi-identifier ส่วน differential privacy ให้การรับประกันที่ไม่ขึ้นกับข้อมูลภายนอก โดยแลกกับความแม่นยำผ่านงบ <span class="math inline">\(\varepsilon\)</span></li>
+<li>ข้อมูลสังเคราะห์แบบกฎ (Faker) เหมาะกับการทดสอบ pipeline แบบสถิติ (Gaussian copula) และแบบ deep learning (CTGAN) รักษาความสัมพันธ์ได้ แต่ต้องประเมินทั้ง utility และ privacy</li>
+<li>ข้อมูลสังเคราะห์ไม่ได้เป็นนิรนามโดยอัตโนมัติ อาจคัดลอกแถวจริง ไม่สร้างค่าสุดโต่ง และมีแถวที่เป็นไปไม่ได้ จึงต้องตรวจด้วย DCR และ schema</li>
+<li>SMOTE ช่วยกับ class imbalance แต่ต้องใช้กับชุดฝึกเท่านั้น และควรพิจารณา class weight ก่อน</li>
+<li>โครงการในรายวิชาควรใช้ข้อมูลที่ไม่ใช่ข้อมูลส่วนบุคคลหรือข้อมูลรวม พัฒนา pipeline ด้วยข้อมูลปลอม และบันทึกมาตรการใน README</li>
+</ul>
+</section>
+<section id="sec-ch16-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch16-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>จำแนกคอลัมน์ต่อไปนี้ว่าเป็นตัวระบุโดยตรง quasi-identifier ข้อมูลอ่อนไหว หรือไม่ใช่ข้อมูลส่วนบุคคล: (ก) เลขประจำตัวผู้ป่วย (ข) อายุ (ค) รหัสโรค ICD-10 (ง) ค่า PM2.5 เฉลี่ยรายวันของจังหวัด (จ) ตำบลที่อยู่ (ฉ) พิกัดบ้านของผู้ติดตั้งเซนเซอร์ส่วนบุคคล</li>
+<li>อธิบายความแตกต่างระหว่าง pseudonymization กับ anonymization และผลทางกฎหมายของแต่ละแบบตาม PDPA</li>
+<li>ทำไมการสร้างรหัสแฝงด้วย <code>sha256(citizen_id)</code> จึงไม่ปลอดภัย</li>
+<li>ข้อมูล Faker ในหัวข้อ <a href="#sec-ch16-synthetic" class="quarto-xref"><span>16.6</span></a> ใช้ทดสอบอะไรได้ และห้ามใช้ทำอะไร</li>
+<li>ระบุปัญหาสองข้อของข้อมูลสังเคราะห์จาก Gaussian copula ที่พบในหัวข้อ <a href="#sec-ch16-evaluation" class="quarto-xref"><span>16.7</span></a> และผลต่อการใช้งานในโดเมนคุณภาพอากาศ</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>เขียนหัวข้อ “ข้อมูลส่วนบุคคลและ PDPA” ใน README ของโครงการทีม ระบุว่าข้อมูลที่ใช้เป็นข้อมูลส่วนบุคคลหรือไม่ เพราะอะไร quasi-identifier ที่ต้องระวังถ้าต่อยอด และมาตรการที่ใช้</li>
+<li>สร้าง <code>src/make_fake_visits.py</code> ตามหัวข้อ <a href="#sec-ch16-synthetic" class="quarto-xref"><span>16.6</span></a> แล้วเขียน query ที่รวมเป็นจำนวนต่อจังหวัดต่อวัน เชื่อมกับค่าเฉลี่ยรายวันของจังหวัด ตรวจว่าจำนวนแถวหลังเชื่อมเป็นไปตามที่คาด</li>
+<li>ใช้ข้อมูลในข้อ 7 ตรวจ k-anonymity ของ quasi-identifier (อายุ เพศ จังหวัด วันที่) แล้วออกแบบการทำให้หยาบที่ทำให้ <span class="math inline">\(k \ge 10\)</span> โดยเสียความละเอียดน้อยที่สุดที่ทำได้ อธิบายการแลกเปลี่ยน</li>
+<li>สร้างข้อมูลสังเคราะห์ของ <code>pm25_mean</code>, <code>pm25_max</code> และ <code>n_hours_observed</code> ของสถานีหนึ่งด้วย Gaussian copula ประเมิน utility ตาม <a href="#tbl-ch16-utility" class="quarto-xref">ตารางที่&nbsp;<span>16.6</span></a> และนับแถวที่ละเมิดข้อจำกัดเชิงตรรกะ (เช่น ค่าสูงสุดต่ำกว่าค่าเฉลี่ย หรือจำนวนชั่วโมงเกิน 24)</li>
+<li>ใช้ Laplace mechanism กับตารางจำนวนวันที่เกินมาตรฐานต่อจังหวัดต่อปี ด้วย <span class="math inline">\(\varepsilon\)</span> = 0.1, 1 และ 10 แล้วตรวจว่าลำดับของจังหวัดเปลี่ยนไปเท่าใด (ข้อมูลนี้ไม่ใช่ข้อมูลส่วนบุคคล ใช้เพื่อเรียนรู้กลไกเท่านั้น)</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ปรับฟังก์ชัน Gaussian copula ให้สร้างค่าที่สุดโต่งเกินข้อมูลจริงได้ โดยแทนการแปลงกลับด้วยควอนไทล์ของข้อมูลจริงด้วยการแจกแจงที่ fit กับหางของข้อมูล (เช่น log-normal หรือ generalized Pareto สำหรับหางขวา) ประเมินว่าผลดีขึ้นหรือแย่ลงในด้าน utility และ privacy</li>
+<li>ศึกษาข้อถกเถียงเรื่องการใช้ differential privacy กับสำมะโนประชากรสหรัฐอเมริกาปี ค.ศ. 2020 แล้วอภิปรายว่าถ้าสำนักงานสถิติแห่งชาติของไทยจะใช้แนวทางเดียวกันกับข้อมูลระดับตำบล ควรพิจารณาอะไรบ้าง</li>
+<li>ออกแบบการโจมตีเพื่อระบุตัวตนซ้ำต่อข้อมูลสังเคราะห์ที่สร้างจากข้อมูล Faker ในข้อ 7 ด้วย Gaussian copula (สมมติว่าข้อมูล Faker คือข้อมูลจริง) วัดสัดส่วนของแถวจริงที่ถูกคัดลอกหรือเกือบคัดลอก แล้วเสนอวิธีลดความเสี่ยง</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch16">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="pdpa2019personal">ราชกิจจานุเบกษา (<a href="../references.html#ref-pdpa2019personal" role="doc-biblioref">2019</a>)</span> — ตัวบท พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 อ่านมาตรา 6, 19, 24, 26 และ 37 เป็นอย่างน้อย</li>
+<li><span class="citation" data-cites="sweeney2002kanonymity">Sweeney (<a href="../references.html#ref-sweeney2002kanonymity" role="doc-biblioref">2002</a>)</span> — บทความต้นฉบับของ k-anonymity พร้อมตัวอย่างการระบุตัวตนซ้ำที่เป็นจุดเริ่มต้นของสาขานี้</li>
+<li><span class="citation" data-cites="dwork2014algorithmic">Dwork และ Roth (<a href="../references.html#ref-dwork2014algorithmic" role="doc-biblioref">2014</a>)</span> — ตำรา differential privacy โดยผู้คิดค้น อ่านฟรีออนไลน์ บทที่ 1–3 อธิบายแนวคิดและ Laplace mechanism</li>
+<li><span class="citation" data-cites="jordon2022synthetic">Jordon และคณะ (<a href="../references.html#ref-jordon2022synthetic" role="doc-biblioref">2022</a>)</span> — ภาพรวมของข้อมูลสังเคราะห์ที่สมดุล ครอบคลุมทั้งวิธีสร้าง การประเมิน และข้อจำกัด</li>
+<li><span class="citation" data-cites="stadler2022synthetic">Stadler และคณะ (<a href="../references.html#ref-stadler2022synthetic" role="doc-biblioref">2022</a>)</span> — งานวิจัยที่แสดงว่าข้อมูลสังเคราะห์ไม่ได้ให้ความเป็นส่วนตัวมากอย่างที่มักเข้าใจ อ่านก่อนตัดสินใจเผยแพร่ข้อมูลสังเคราะห์</li>
+<li><span class="citation" data-cites="narayanan2008robust">Narayanan และ Shmatikov (<a href="../references.html#ref-narayanan2008robust" role="doc-biblioref">2008</a>)</span> — กรณี Netflix ที่แสดงพลังของการเชื่อมข้อมูลภายนอกในการระบุตัวตนซ้ำ</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-abowd2018census" class="csl-entry" role="listitem">
+Abowd, John M. 2018. <span>“The <span>U.S.</span> Census Bureau Adopts Differential Privacy”</span>. <em>Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining</em>, 2867. <a href="https://doi.org/10.1145/3219819.3226070">https://doi.org/10.1145/3219819.3226070</a>.
+</div>
+<div id="ref-chawla2002smote" class="csl-entry" role="listitem">
+Chawla, Nitesh V., Kevin W. Bowyer, Lawrence O. Hall, และ W. Philip Kegelmeyer. 2002. <span>“<span>SMOTE</span>: Synthetic Minority Over-sampling Technique”</span>. <em>Journal of Artificial Intelligence Research</em> 16: 321–57. <a href="https://doi.org/10.1613/jair.953">https://doi.org/10.1613/jair.953</a>.
+</div>
+<div id="ref-dwork2006calibrating" class="csl-entry" role="listitem">
+Dwork, Cynthia, Frank McSherry, Kobbi Nissim, และ Adam Smith. 2006. <span>“Calibrating Noise to Sensitivity in Private Data Analysis”</span>. <em>Theory of Cryptography (TCC 2006)</em>, Lecture Notes in Computer Science, ปี 3876: 265–84. <a href="https://doi.org/10.1007/11681878_14">https://doi.org/10.1007/11681878_14</a>.
+</div>
+<div id="ref-dwork2014algorithmic" class="csl-entry" role="listitem">
+Dwork, Cynthia, และ Aaron Roth. 2014. <span>“The Algorithmic Foundations of Differential Privacy”</span>. <em>Foundations and Trends in Theoretical Computer Science</em> 9 (3–4): 211–407. <a href="https://doi.org/10.1561/0400000042">https://doi.org/10.1561/0400000042</a>.
+</div>
+<div id="ref-eu2016gdpr" class="csl-entry" role="listitem">
+European Parliament and Council of the European Union. 2016. <em>Regulation (<span>EU</span>) 2016/679 on the Protection of Natural Persons with Regard to the Processing of Personal Data and on the Free Movement of Such Data (General Data Protection Regulation)</em>. Official Journal of the European Union, L 119, 4 May 2016. <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a>.
+</div>
+<div id="ref-faker2026docs" class="csl-entry" role="listitem">
+Faker Contributors. 2026. <em>Faker Documentation</em>. <a href="https://faker.readthedocs.io/">https://faker.readthedocs.io/</a>.
+</div>
+<div id="ref-vandengoorbergh2022harm" class="csl-entry" role="listitem">
+Goorbergh, Ruben van den, Maarten van Smeden, Dirk Timmerman, และ Ben Van Calster. 2022. <span>“The Harm of Class Imbalance Corrections for Risk Prediction Models: Illustration and Simulation Using Logistic Regression”</span>. <em>Journal of the American Medical Informatics Association</em> 29 (9): 1525–34. <a href="https://doi.org/10.1093/jamia/ocac093">https://doi.org/10.1093/jamia/ocac093</a>.
+</div>
+<div id="ref-jordon2022synthetic" class="csl-entry" role="listitem">
+Jordon, James, Lukasz Szpruch, Florimond Houssiau, และคณะ. 2022. <em>Synthetic Data — What, Why and How?</em> arXiv preprint arXiv:2205.03257. <a href="https://doi.org/10.48550/arXiv.2205.03257">https://doi.org/10.48550/arXiv.2205.03257</a>.
+</div>
+<div id="ref-machanavajjhala2007ldiversity" class="csl-entry" role="listitem">
+Machanavajjhala, Ashwin, Daniel Kifer, Johannes Gehrke, และ Muthuramakrishnan Venkitasubramaniam. 2007. <span>“l-Diversity: Privacy Beyond k-Anonymity”</span>. <em>ACM Transactions on Knowledge Discovery from Data</em> 1 (1): 3. <a href="https://doi.org/10.1145/1217299.1217302">https://doi.org/10.1145/1217299.1217302</a>.
+</div>
+<div id="ref-narayanan2008robust" class="csl-entry" role="listitem">
+Narayanan, Arvind, และ Vitaly Shmatikov. 2008. <span>“Robust De-anonymization of Large Sparse Datasets”</span>. <em>2008 IEEE Symposium on Security and Privacy</em>, 111–25. <a href="https://doi.org/10.1109/SP.2008.33">https://doi.org/10.1109/SP.2008.33</a>.
+</div>
+<div id="ref-patki2016synthetic" class="csl-entry" role="listitem">
+Patki, Neha, Roy Wedge, และ Kalyan Veeramachaneni. 2016. <span>“The Synthetic Data Vault”</span>. <em>2016 IEEE International Conference on Data Science and Advanced Analytics (DSAA)</em>, 399–410. <a href="https://doi.org/10.1109/DSAA.2016.49">https://doi.org/10.1109/DSAA.2016.49</a>.
+</div>
+<div id="ref-rocher2019estimating" class="csl-entry" role="listitem">
+Rocher, Luc, Julien M. Hendrickx, และ Yves-Alexandre de Montjoye. 2019. <span>“Estimating the Success of Re-identifications in Incomplete Datasets Using Generative Models”</span>. <em>Nature Communications</em> 10: 3069. <a href="https://doi.org/10.1038/s41467-019-10933-3">https://doi.org/10.1038/s41467-019-10933-3</a>.
+</div>
+<div id="ref-sklar1959fonctions" class="csl-entry" role="listitem">
+Sklar, Abe. 1959. <span>“Fonctions de r<span>é</span>partition <span>à</span> n dimensions et leurs marges”</span>. <em>Publications de l’Institut de Statistique de l’Universit<span class="nocase">é</span> de Paris</em> 8: 229–31.
+</div>
+<div id="ref-stadler2022synthetic" class="csl-entry" role="listitem">
+Stadler, Theresa, Bristena Oprisanu, และ Carmela Troncoso. 2022. <span>“Synthetic Data — Anonymisation Groundhog Day”</span>. <em>31st USENIX Security Symposium (USENIX Security 22)</em>, 1451–68.
+</div>
+<div id="ref-sweeney2000simple" class="csl-entry" role="listitem">
+Sweeney, Latanya. 2000. <em>Simple Demographics Often Identify People Uniquely</em>. Data Privacy Working Paper No. 3. Carnegie Mellon University.
+</div>
+<div id="ref-sweeney2002kanonymity" class="csl-entry" role="listitem">
+Sweeney, Latanya. 2002. <span>“k-Anonymity: A Model for Protecting Privacy”</span>. <em>International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems</em> 10 (5): 557–70. <a href="https://doi.org/10.1142/S0218488502001648">https://doi.org/10.1142/S0218488502001648</a>.
+</div>
+<div id="ref-xu2019modeling" class="csl-entry" role="listitem">
+Xu, Lei, Maria Skoularidou, Alfredo Cuesta-Infante, และ Kalyan Veeramachaneni. 2019. <span>“Modeling Tabular Data Using Conditional <span>GAN</span>”</span>. <em>Advances in Neural Information Processing Systems 32 (NeurIPS 2019)</em>, 7335–45.
+</div>
+<div id="ref-pdpa2019personal" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019. <em>พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/15-multivariate.html" class="pagination-link" aria-label="การสำรวจข้อมูลหลายมิติ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/17-spatial-data.html" class="pagination-link" aria-label="ข้อมูลเชิงพื้นที่">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

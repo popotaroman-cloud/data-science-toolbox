@@ -717,6 +717,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/10-missing-data.html">บทที่ 10</a> ก่อนเข้าเรียน</li>
 <li>อ่าน MCAR / MAR / MNAR — van Buuren, <em>FIMD</em> บทที่ 1.2</li>
 <li>คำนวณสัดส่วนค่าว่างของ <code>pm25</code> แยกตามสถานีและเดือน</li>
 <li>คิดล่วงหน้า: ถ้าเซนเซอร์เสียช่วงฝุ่นหนาที่สุด ค่าเฉลี่ยรายเดือนจะสูงหรือต่ำกว่าความจริง</li>
@@ -1009,7 +1010,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

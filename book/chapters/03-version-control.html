@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Version control และการทำงานร่วมกัน – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/04-questions-hypotheses.html" rel="next">
+<link href="../chapters/02-reproducible-environment.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/03-version-control.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch03-why" id="toc-sec-ch03-why" class="nav-link" data-scroll-target="#sec-ch03-why"><span class="header-section-number">3.1</span> ทำไมต้องมี version control</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาททกคนเคยเจอ" id="toc-ปญหาททกคนเคยเจอ" class="nav-link" data-scroll-target="#ปญหาททกคนเคยเจอ">ปัญหาที่ทุกคนเคยเจอ</a></li>
+  <li><a href="#version-control-กบงานขอมล" id="toc-version-control-กบงานขอมล" class="nav-link" data-scroll-target="#version-control-กบงานขอมล">version control กับงานข้อมูล</a></li>
+  <li><a href="#สงทควรและไมควรอยใน-git" id="toc-สงทควรและไมควรอยใน-git" class="nav-link" data-scroll-target="#สงทควรและไมควรอยใน-git">สิ่งที่ควรและไม่ควรอยู่ใน Git</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-model" id="toc-sec-ch03-model" class="nav-link" data-scroll-target="#sec-ch03-model"><span class="header-section-number">3.2</span> แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองเขาใจภายในของ-git" id="toc-ทำไมตองเขาใจภายในของ-git" class="nav-link" data-scroll-target="#ทำไมตองเขาใจภายในของ-git">ทำไมต้องเข้าใจภายในของ Git</a></li>
+  <li><a href="#git-คอฐานขอมลทระบวตถดวยเนอหา" id="toc-git-คอฐานขอมลทระบวตถดวยเนอหา" class="nav-link" data-scroll-target="#git-คอฐานขอมลทระบวตถดวยเนอหา">Git คือฐานข้อมูลที่ระบุวัตถุด้วยเนื้อหา</a></li>
+  <li><a href="#ลองดวตถจรง" id="toc-ลองดวตถจรง" class="nav-link" data-scroll-target="#ลองดวตถจรง">ลองดูวัตถุจริง</a></li>
+  <li><a href="#commit-ตอกนเปนสายดวย-parent" id="toc-commit-ตอกนเปนสายดวย-parent" class="nav-link" data-scroll-target="#commit-ตอกนเปนสายดวย-parent">commit ต่อกันเป็นสายด้วย parent</a></li>
+  <li><a href="#branch-และ-head-เปนเพยงปายชอ" id="toc-branch-และ-head-เปนเพยงปายชอ" class="nav-link" data-scroll-target="#branch-และ-head-เปนเพยงปายชอ">branch และ HEAD เป็นเพียงป้ายชื่อ</a></li>
+  <li><a href="#ผลทตามมาจากแบบจำลองน" id="toc-ผลทตามมาจากแบบจำลองน" class="nav-link" data-scroll-target="#ผลทตามมาจากแบบจำลองน">ผลที่ตามมาจากแบบจำลองนี้</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-commit" id="toc-sec-ch03-commit" class="nav-link" data-scroll-target="#sec-ch03-commit"><span class="header-section-number">3.3</span> staging area, commit ที่ดี และประวัติที่อ่านได้</a>
+  <ul class="collapse">
+  <li><a href="#สามพนทของ-git" id="toc-สามพนทของ-git" class="nav-link" data-scroll-target="#สามพนทของ-git">สามพื้นที่ของ Git</a></li>
+  <li><a href="#commit-ทดมลกษณะอยางไร" id="toc-commit-ทดมลกษณะอยางไร" class="nav-link" data-scroll-target="#commit-ทดมลกษณะอยางไร">commit ที่ดีมีลักษณะอย่างไร</a></li>
+  <li><a href="#commit-message-ทด" id="toc-commit-message-ทด" class="nav-link" data-scroll-target="#commit-message-ทด">commit message ที่ดี</a></li>
+  <li><a href="#อานประวต" id="toc-อานประวต" class="nav-link" data-scroll-target="#อานประวต">อ่านประวัติ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-branch" id="toc-sec-ch03-branch" class="nav-link" data-scroll-target="#sec-ch03-branch"><span class="header-section-number">3.4</span> branch, merge และ ★ rebase</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองม-branch" id="toc-ทำไมตองม-branch" class="nav-link" data-scroll-target="#ทำไมตองม-branch">ทำไมต้องมี branch</a></li>
+  <li><a href="#merge-รวมสองสายประวต" id="toc-merge-รวมสองสายประวต" class="nav-link" data-scroll-target="#merge-รวมสองสายประวต">merge: รวมสองสายประวัติ</a></li>
+  <li><a href="#rebase" id="toc-rebase" class="nav-link" data-scroll-target="#rebase">rebase ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-conflict" id="toc-sec-ch03-conflict" class="nav-link" data-scroll-target="#sec-ch03-conflict"><span class="header-section-number">3.5</span> การแก้ conflict</a>
+  <ul class="collapse">
+  <li><a href="#conflict-เกดขนเมอใด" id="toc-conflict-เกดขนเมอใด" class="nav-link" data-scroll-target="#conflict-เกดขนเมอใด">conflict เกิดขึ้นเมื่อใด</a></li>
+  <li><a href="#ตวอยาง" id="toc-ตวอยาง" class="nav-link" data-scroll-target="#ตวอยาง">ตัวอย่าง</a></li>
+  <li><a href="#ขนตอนการแก" id="toc-ขนตอนการแก" class="nav-link" data-scroll-target="#ขนตอนการแก">ขั้นตอนการแก้</a></li>
+  <li><a href="#conflict-ท-git-ตรวจไมพบ" id="toc-conflict-ท-git-ตรวจไมพบ" class="nav-link" data-scroll-target="#conflict-ท-git-ตรวจไมพบ">conflict ที่ Git ตรวจไม่พบ</a></li>
+  <li><a href="#ลด-conflict-ตงแตตน" id="toc-ลด-conflict-ตงแตตน" class="nav-link" data-scroll-target="#ลด-conflict-ตงแตตน">ลด conflict ตั้งแต่ต้น</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-github" id="toc-sec-ch03-github" class="nav-link" data-scroll-target="#sec-ch03-github"><span class="header-section-number">3.6</span> GitHub: remote, pull request, issue และ code review</a>
+  <ul class="collapse">
+  <li><a href="#git-กบ-github-ตางกนอยางไร" id="toc-git-กบ-github-ตางกนอยางไร" class="nav-link" data-scroll-target="#git-กบ-github-ตางกนอยางไร">Git กับ GitHub ต่างกันอย่างไร</a></li>
+  <li><a href="#remote" id="toc-remote" class="nav-link" data-scroll-target="#remote">remote</a></li>
+  <li><a href="#pull-request" id="toc-pull-request" class="nav-link" data-scroll-target="#pull-request">pull request</a></li>
+  <li><a href="#issue" id="toc-issue" class="nav-link" data-scroll-target="#issue">issue</a></li>
+  <li><a href="#code-review-บน-github" id="toc-code-review-บน-github" class="nav-link" data-scroll-target="#code-review-บน-github">code review บน GitHub</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-review" id="toc-sec-ch03-review" class="nav-link" data-scroll-target="#sec-ch03-review"><span class="header-section-number">3.7</span> ศิลปะของการ review โค้ด</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตอง-review" id="toc-ทำไมตอง-review" class="nav-link" data-scroll-target="#ทำไมตอง-review">ทำไมต้อง review</a></li>
+  <li><a href="#ดอะไรบาง" id="toc-ดอะไรบาง" class="nav-link" data-scroll-target="#ดอะไรบาง">ดูอะไรบ้าง</a></li>
+  <li><a href="#เขยนความคดเหนอยางไร" id="toc-เขยนความคดเหนอยางไร" class="nav-link" data-scroll-target="#เขยนความคดเหนอยางไร">เขียนความคิดเห็นอย่างไร</a></li>
+  <li><a href="#เปนผถก-review-ทด" id="toc-เปนผถก-review-ทด" class="nav-link" data-scroll-target="#เปนผถก-review-ทด">เป็นผู้ถูก review ที่ดี</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-notebook" id="toc-sec-ch03-notebook" class="nav-link" data-scroll-target="#sec-ch03-notebook"><span class="header-section-number">3.8</span> notebook กับ Git: nbstripout และ Jupytext ★</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของ-.ipynb-ใน-git" id="toc-ปญหาของ-.ipynb-ใน-git" class="nav-link" data-scroll-target="#ปญหาของ-.ipynb-ใน-git">ปัญหาของ <code>.ipynb</code> ใน Git</a></li>
+  <li><a href="#nbstripout-ลางผลลพธกอน-commit" id="toc-nbstripout-ลางผลลพธกอน-commit" class="nav-link" data-scroll-target="#nbstripout-ลางผลลพธกอน-commit">nbstripout: ล้างผลลัพธ์ก่อน commit</a></li>
+  <li><a href="#jupytext-notebook-เปนไฟลขอความ" id="toc-jupytext-notebook-เปนไฟลขอความ" class="nav-link" data-scroll-target="#jupytext-notebook-เปนไฟลขอความ">Jupytext: notebook เป็นไฟล์ข้อความ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-data-versioning" id="toc-sec-ch03-data-versioning" class="nav-link" data-scroll-target="#sec-ch03-data-versioning"><span class="header-section-number">3.9</span> การจัดเวอร์ชันข้อมูล: Git LFS, DVC ★</a>
+  <ul class="collapse">
+  <li><a href="#เมอใดตองจดเวอรชนขอมล" id="toc-เมอใดตองจดเวอรชนขอมล" class="nav-link" data-scroll-target="#เมอใดตองจดเวอรชนขอมล">เมื่อใดต้องจัดเวอร์ชันข้อมูล</a></li>
+  <li><a href="#git-lfs" id="toc-git-lfs" class="nav-link" data-scroll-target="#git-lfs">Git LFS</a></li>
+  <li><a href="#dvc" id="toc-dvc" class="nav-link" data-scroll-target="#dvc">DVC</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-ci" id="toc-sec-ch03-ci" class="nav-link" data-scroll-target="#sec-ch03-ci"><span class="header-section-number">3.10</span> GitHub Actions และ continuous integration เบื้องต้น ★</a>
+  <ul class="collapse">
+  <li><a href="#continuous-integration-คออะไร" id="toc-continuous-integration-คออะไร" class="nav-link" data-scroll-target="#continuous-integration-คออะไร">continuous integration คืออะไร</a></li>
+  <li><a href="#github-actions" id="toc-github-actions" class="nav-link" data-scroll-target="#github-actions">GitHub Actions</a></li>
+  <li><a href="#ci-สำหรบงานขอมล" id="toc-ci-สำหรบงานขอมล" class="nav-link" data-scroll-target="#ci-สำหรบงานขอมล">CI สำหรับงานข้อมูล</a></li>
+  </ul></li>
+  <li><a href="#sec-ch03-case" id="toc-sec-ch03-case" class="nav-link" data-scroll-target="#sec-ch03-case">กรณีศึกษา: ทีมสองคนพัฒนา pipeline PM2.5 พร้อมกัน</a></li>
+  <li><a href="#sec-ch03-pitfalls" id="toc-sec-ch03-pitfalls" class="nav-link" data-scroll-target="#sec-ch03-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch03-exercises" id="toc-sec-ch03-exercises" class="nav-link" data-scroll-target="#sec-ch03-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/03-version-control.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 2 ทำให้ <em>สภาพแวดล้อม</em> ของโครงการทำซ้ำได้ บทนี้ทำให้ <em>ประวัติ</em> ของโครงการตรวจสอบได้ เมื่อผลการวิเคราะห์เปลี่ยนไปจากสัปดาห์ที่แล้ว เราต้องตอบได้ว่าอะไรเปลี่ยน ใครเปลี่ยน เมื่อไร และเพราะอะไร เมื่อทำงานเป็นทีม เราต้องรวมงานของหลายคนเข้าด้วยกันโดยไม่ทับงานของกันและกัน และต้องมีกลไกให้เพื่อนตรวจงานก่อนรวม เครื่องมือที่ตอบความต้องการทั้งหมดนี้คือ version control</p>
+<p>บทนี้ไม่ได้มุ่งสอนคำสั่ง Git ทุกคำสั่ง ภาคผนวก ข มีตารางคำสั่งตามสถานการณ์ไว้แล้ว บทนี้มุ่งอธิบาย <em>แบบจำลองความคิด</em> ของ Git ว่าเก็บข้อมูลอย่างไร เมื่อเข้าใจแบบจำลองนี้แล้ว คำสั่งที่ดูซับซ้อนอย่าง merge หรือ rebase จะกลายเป็นเรื่องที่คาดเดาผลได้ และการแก้ปัญหาเมื่อ Git แสดงข้อความแปลก ๆ จะไม่ใช่การเดาสุ่มอีกต่อไป</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายเหตุผลที่โครงการข้อมูลต้องใช้ version control โดยเชื่อมโยงกับการทำซ้ำได้</li>
+<li>อธิบายแบบจำลองข้อมูลของ Git ได้แก่ blob, tree, commit และ DAG และใช้คำสั่งตรวจดูวัตถุใน repository ได้</li>
+<li>ใช้ staging area สร้าง commit ที่มีความหมายและเขียน commit message ที่ดี</li>
+<li>เปรียบเทียบ merge กับ rebase และเลือกใช้ได้ตามสถานการณ์</li>
+<li>แก้ conflict ได้อย่างถูกต้อง โดยเข้าใจว่า conflict เกิดขึ้นเพราะอะไร</li>
+<li>ใช้ GitHub ทำงานร่วมกันผ่าน remote, pull request และ issue</li>
+<li>review โค้ดของเพื่อนอย่างสร้างสรรค์ และประเมินงานข้อมูลได้มากกว่าความถูกต้องของไวยากรณ์</li>
+</ol>
+</section>
+<section id="sec-ch03-why" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-ch03-why"><span class="header-section-number">3.1</span> ทำไมต้องมี version control</h2>
+<section id="ปญหาททกคนเคยเจอ" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาททกคนเคยเจอ">ปัญหาที่ทุกคนเคยเจอ</h3>
+<p>ผู้อ่านหลายคนคงเคยเห็นโฟลเดอร์ที่มีไฟล์ชื่อ <code>analysis.ipynb</code>, <code>analysis_v2.ipynb</code>, <code>analysis_v2_fixed.ipynb</code> และ <code>analysis_final_จริง.ipynb</code> วิธีนี้เป็น version control แบบทำด้วยมือที่มีปัญหาหลายข้อ ไม่รู้ว่าแต่ละเวอร์ชันต่างกันตรงไหน ไม่รู้ว่าเวอร์ชันใดสร้างกราฟในรายงาน เมื่อเพื่อนส่งไฟล์ที่แก้มาทางอีเมลก็ไม่รู้ว่าจะรวมกับของตัวเองอย่างไร และเมื่อพบว่าการแก้ไขเมื่อสามวันก่อนทำให้ผลผิด ก็ย้อนกลับไปได้ยาก</p>
+<p><strong><span class="idx">version control</span></strong> คือระบบที่บันทึกการเปลี่ยนแปลงของไฟล์เป็นลำดับ พร้อมข้อมูลว่าใครเปลี่ยน เมื่อไร และเพราะอะไร ทำให้ย้อนดูหรือย้อนกลับไปยังสถานะใดก็ได้ในอดีต และรวมงานของหลายคนได้อย่างเป็นระบบ <span class="idx-tool">Git</span> เป็นระบบ version control ที่ใช้กันแพร่หลายที่สุดในปัจจุบัน Linus Torvalds สร้าง Git ขึ้นในปี ค.ศ. 2005 เพื่อใช้พัฒนา Linux kernel ซึ่งมีนักพัฒนาจำนวนมากทำงานพร้อมกันทั่วโลก <span class="citation" data-cites="chacon2014pro">(<a href="../references.html#ref-chacon2014pro" role="doc-biblioref">Chacon และ Straub 2014</a>)</span></p>
+</section>
+<section id="version-control-กบงานขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="version-control-กบงานขอมล">version control กับงานข้อมูล</h3>
+<p>Jenny Bryan เขียนบทความชวนนักสถิติให้ใช้ version control โดยชี้ว่า Git ไม่ได้มีไว้สำหรับนักพัฒนาซอฟต์แวร์เท่านั้น แต่ช่วยงานวิเคราะห์ข้อมูลได้โดยตรง <span class="citation" data-cites="bryan2018excuse">(<a href="../references.html#ref-bryan2018excuse" role="doc-biblioref">Bryan 2018</a>)</span> Ram ชี้ว่า Git ช่วยให้งานวิจัยทำซ้ำได้มากขึ้น เพราะเชื่อมผลลัพธ์แต่ละชิ้นกับสถานะของโค้ดที่สร้างมันได้อย่างแน่นอน <span class="citation" data-cites="ram2013git">(<a href="../references.html#ref-ram2013git" role="doc-biblioref">Ram 2013</a>)</span> ประโยชน์สำหรับโครงการ PM2.5 มีดังนี้</p>
+<div id="tbl-ch03-benefits" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-benefits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.1: ประโยชน์ของ version control ในโครงการข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch03-benefits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ประโยชน์</th>
+<th>ตัวอย่างในโครงการ PM2.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ย้อนดูว่าผลเปลี่ยนเพราะอะไร</td>
+<td>ค่าเฉลี่ยรายวันเปลี่ยนไป ดูประวัติของ <code>src/clean.py</code> แล้วพบว่ามีคนเปลี่ยนเกณฑ์ความครบถ้วนจาก 18 เป็น 20 ชั่วโมง</td>
+</tr>
+<tr class="even">
+<td>ย้อนกลับเมื่อแก้ผิด</td>
+<td>การแก้การแปลงเขตเวลาทำให้ข้อมูลเลื่อนไปเจ็ดชั่วโมง ย้อน commit นั้นกลับได้ทันที</td>
+</tr>
+<tr class="odd">
+<td>ทดลองโดยไม่กระทบงานหลัก</td>
+<td>สร้าง branch ลองวิธีเติมค่าแบบใหม่ ถ้าไม่ดีก็ทิ้ง branch โดย <code>main</code> ไม่เปลี่ยน</td>
+</tr>
+<tr class="even">
+<td>ทำงานพร้อมกันหลายคน</td>
+<td>คนหนึ่งแก้ script ดึงข้อมูล อีกคนเขียน notebook สำรวจ แล้วรวมกันผ่าน pull request</td>
+</tr>
+<tr class="odd">
+<td>ให้เพื่อนตรวจก่อนรวม</td>
+<td>เพื่อนเห็นว่าโค้ดคำนวณค่าเฉลี่ยโดยรวมค่า <code>-1</code> เข้าไปด้วย ก่อนจะรวมเข้า <code>main</code></td>
+</tr>
+<tr class="even">
+<td>ผูกผลลัพธ์กับโค้ด</td>
+<td>รายงานระบุ commit hash ที่ใช้สร้าง ใครก็ checkout commit นั้นแล้วสร้างผลเดิมได้</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สงทควรและไมควรอยใน-git" class="level3">
+<h3 class="anchored" data-anchor-id="สงทควรและไมควรอยใน-git">สิ่งที่ควรและไม่ควรอยู่ใน Git</h3>
+<p>Git ออกแบบมาเพื่อจัดการไฟล์ข้อความที่เปลี่ยนทีละน้อย เช่น ซอร์สโค้ด เอกสาร Markdown และไฟล์ตั้งค่า Git ไม่เหมาะกับไฟล์ขนาดใหญ่หรือไฟล์ไบนารีที่เปลี่ยนทั้งไฟล์ทุกครั้ง เพราะ Git เก็บทุกเวอร์ชันไว้ตลอดไป repository จะใหญ่ขึ้นเรื่อย ๆ จนช้าและ clone ได้ยาก</p>
+<div id="tbl-ch03-what-to-commit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-what-to-commit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.2: สิ่งที่ควรและไม่ควรเก็บใน Git
+</figcaption>
+<div aria-describedby="tbl-ch03-what-to-commit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ควรอยู่ใน Git</th>
+<th>ไม่ควรอยู่ใน Git</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>src/*.py</code>, <code>notebooks/*.ipynb</code> (ล้างผลลัพธ์แล้ว)</td>
+<td><code>data/</code>, <code>*.duckdb</code></td>
+<td>ข้อมูลสร้างใหม่ได้จากโค้ด อาจใหญ่มาก และอาจมีข้อจำกัดด้านลิขสิทธิ์</td>
+</tr>
+<tr class="even">
+<td><code>environment.yml</code>, <code>pyproject.toml</code>, <code>uv.lock</code></td>
+<td><code>.venv/</code>, <code>__pycache__/</code></td>
+<td>สร้างใหม่ได้จากไฟล์ระบุความต้องการ</td>
+</tr>
+<tr class="odd">
+<td><code>README.md</code>, <code>questions.md</code>, <code>data_dictionary.md</code></td>
+<td><code>.env</code></td>
+<td>ความลับต้องไม่อยู่ในประวัติ</td>
+</tr>
+<tr class="even">
+<td><code>report/*.qmd</code></td>
+<td><code>report/_site/</code></td>
+<td>ผลการ render สร้างใหม่ได้</td>
+</tr>
+<tr class="odd">
+<td><code>.env.example</code></td>
+<td>ข้อมูลส่วนบุคคล</td>
+<td>ผิด PDPA และลบออกจากประวัติได้ยาก (บทที่ 16)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>หลักจำง่ายคือ <strong>commit สิ่งที่คนเขียน ไม่ commit สิ่งที่เครื่องสร้าง</strong> ยกเว้นไฟล์ lock ซึ่งเครื่องสร้างแต่ต้อง commit เพราะเป็นบันทึกของสภาพแวดล้อม ถ้าจำเป็นต้องติดตามเวอร์ชันของข้อมูลจริง ๆ มีเครื่องมือเฉพาะที่หัวข้อ <a href="#sec-ch03-data-versioning" class="quarto-xref"><span>3.9</span></a> อธิบาย</p>
+</section>
+</section>
+<section id="sec-ch03-model" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-ch03-model"><span class="header-section-number">3.2</span> แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG</h2>
+<section id="ทำไมตองเขาใจภายในของ-git" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองเขาใจภายในของ-git">ทำไมต้องเข้าใจภายในของ Git</h3>
+<p>ผู้ใช้ Git ส่วนใหญ่จำคำสั่งเป็นสูตร เช่น <code>add</code> แล้ว <code>commit</code> แล้ว <code>push</code> ซึ่งใช้ได้ดีจนกระทั่งมีบางอย่างผิดพลาด เช่น “detached HEAD” หรือ “your branch has diverged” เมื่อถึงจุดนั้น คนที่จำแต่สูตรจะติดอยู่ ส่วนคนที่เข้าใจว่า Git เก็บข้อมูลอย่างไรจะรู้ว่าสถานการณ์คืออะไรและต้องทำอะไร แบบจำลองของ Git มีวัตถุเพียงไม่กี่ชนิด และเรียบง่ายกว่าที่คิด</p>
+</section>
+<section id="git-คอฐานขอมลทระบวตถดวยเนอหา" class="level3">
+<h3 class="anchored" data-anchor-id="git-คอฐานขอมลทระบวตถดวยเนอหา">Git คือฐานข้อมูลที่ระบุวัตถุด้วยเนื้อหา</h3>
+<p>ภายในโฟลเดอร์ <code>.git/</code> ของทุก repository มีฐานข้อมูลวัตถุ (object database) แต่ละวัตถุถูกระบุด้วย <strong><span class="idx">hash</span></strong> ซึ่งคำนวณจากเนื้อหาของวัตถุนั้นเอง โดยค่าเริ่มต้นใช้ฟังก์ชัน SHA-1 ได้เลขฐานสิบหก 40 หลัก <span class="citation" data-cites="chacon2014pro">(<a href="../references.html#ref-chacon2014pro" role="doc-biblioref">Chacon และ Straub 2014</a>)</span> ผลที่ตามมาคือ เนื้อหาเดียวกันได้ hash เดียวกันเสมอ ไม่ว่าจะอยู่บนเครื่องใด และถ้าเนื้อหาเปลี่ยนแม้แต่ตัวอักษรเดียว hash ก็เปลี่ยน คุณสมบัตินี้เรียกว่า content-addressable storage</p>
+<p>วัตถุหลักมีสามชนิด</p>
+<div id="tbl-ch03-objects" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.3: วัตถุหลักสามชนิดในฐานข้อมูลของ Git
+</figcaption>
+<div aria-describedby="tbl-ch03-objects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชนิด</th>
+<th>เก็บอะไร</th>
+<th>เทียบได้กับ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="idx">blob</span></td>
+<td>เนื้อหาของไฟล์หนึ่งไฟล์ ไม่มีชื่อไฟล์</td>
+<td>เนื้อหาในไฟล์</td>
+</tr>
+<tr class="even">
+<td><span class="idx">tree</span></td>
+<td>รายการชื่อไฟล์และโฟลเดอร์ พร้อม hash ของ blob หรือ tree ที่แต่ละชื่อชี้ไป</td>
+<td>โฟลเดอร์</td>
+</tr>
+<tr class="odd">
+<td><span class="idx">commit</span></td>
+<td>hash ของ tree ระดับบนสุด hash ของ commit แม่ ผู้เขียน เวลา และข้อความ</td>
+<td>ภาพถ่ายของทั้งโครงการ ณ เวลาหนึ่ง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ลองดวตถจรง" class="level3">
+<h3 class="anchored" data-anchor-id="ลองดวตถจรง">ลองดูวัตถุจริง</h3>
+<p>เราดูวัตถุในฐานข้อมูลได้ด้วยคำสั่ง <code>git cat-file</code> ตัวอย่างต่อไปนี้มาจาก repository ทดลองที่มีไฟล์ <code>README.md</code> และ <code>src/config.py</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> cat-file <span class="at">-p</span> HEAD            <span class="co"># ดู commit ที่ HEAD ชี้อยู่</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+tree 4710346e89910c76ac5d93a596ca478ecae977b6
+author นักศึกษา &lt;student@example.com&gt; 1793588400 +0700
+committer นักศึกษา &lt;student@example.com&gt; 1793588400 +0700
+
+เริ่มโครงการ</code></pre>
+<p>commit นี้ชี้ไปที่ tree หนึ่งตัว ซึ่งเราดูต่อได้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> cat-file <span class="at">-p</span> <span class="st">'HEAD^{tree}'</span>   <span class="co"># ดู tree ระดับบนสุดของ commit</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+100644 blob 6a35477c99aca84a59822560b8960796d772a808    README.md
+040000 tree 0114a1429848e1690aead3c09906aa5be5434846    src</code></pre>
+<p>tree บอกว่า <code>README.md</code> คือ blob ที่มี hash <code>6a35477...</code> และ <code>src</code> คือ tree อีกตัวหนึ่ง ถ้าผู้อ่านสร้างไฟล์ <code>README.md</code> ที่มีเนื้อหา <code># PM2.5 Explorer</code> ตามด้วยขึ้นบรรทัดใหม่ แล้วรัน <code>git hash-object README.md</code> บนเครื่องของตัวเอง จะได้ hash เดียวกันนี้ทุกตัวอักษร เพราะ hash ขึ้นกับเนื้อหาเท่านั้น</p>
+</section>
+<section id="commit-ตอกนเปนสายดวย-parent" class="level3">
+<h3 class="anchored" data-anchor-id="commit-ตอกนเปนสายดวย-parent">commit ต่อกันเป็นสายด้วย parent</h3>
+<p>commit ทุกตัวยกเว้นตัวแรกมีบรรทัด <code>parent</code> ที่ชี้ไปยัง commit ก่อนหน้า</p>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง) ของ git cat-file -p กับ commit ที่สอง
+tree 804d44f15e6072f74d8a93031a3b4e96ec931fe1
+parent 174e960957cebe557f2de898da31ef9b96800b64
+author นักศึกษา &lt;student@example.com&gt; 1792944865 +0000
+...
+ปรับเกณฑ์เป็น 37.5 ตามมาตรฐานใหม่</code></pre>
+<p>เมื่อ commit ชี้ไปยัง parent และ parent ชี้ไปยัง parent ของมันต่อไป ประวัติทั้งหมดจึงเป็นกราฟที่ลูกศรชี้ย้อนไปในอดีตเสมอ และไม่มีวงวน กราฟลักษณะนี้เรียกว่า <strong><span class="idx">DAG</span></strong> (directed acyclic graph) commit ที่เกิดจากการ merge จะมี parent สองตัว จึงเป็นจุดที่สองสายมาบรรจบกัน</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart RL
+  C4["a950f8d&lt;br/&gt;merge"] --&gt; C2["02eeffe&lt;br/&gt;ใช้เกณฑ์ WHO"]
+  C4 --&gt; C3["cd3bca2&lt;br/&gt;ปรับเกณฑ์เป็น 37.5"]
+  C2 --&gt; C1["174e960&lt;br/&gt;เริ่มโครงการ"]
+  C3 --&gt; C1
+  M([main]) -.-&gt; C4
+  H([HEAD]) -.-&gt; M
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="branch-และ-head-เปนเพยงปายชอ" class="level3">
+<h3 class="anchored" data-anchor-id="branch-และ-head-เปนเพยงปายชอ">branch และ HEAD เป็นเพียงป้ายชื่อ</h3>
+<p>ข้อเท็จจริงที่ทำให้ Git เข้าใจง่ายขึ้นมากคือ <strong><span class="idx">branch</span> เป็นเพียงไฟล์เล็ก ๆ ที่เก็บ hash ของ commit หนึ่งตัว</strong> ไม่ได้เก็บสำเนาของไฟล์ใด ๆ ไฟล์ <code>.git/refs/heads/main</code> มีข้อความเพียง 40 ตัวอักษร การสร้าง branch ใหม่จึงเร็วมากและแทบไม่ใช้พื้นที่ เมื่อ commit ใหม่บน branch ใด ป้ายชื่อของ branch นั้นจะเลื่อนไปชี้ commit ใหม่โดยอัตโนมัติ</p>
+<p><strong><span class="idx">HEAD</span></strong> คือป้ายที่บอกว่าเรากำลังทำงานอยู่ที่ใด ปกติ HEAD ชี้ไปที่ branch (เช่น <code>main</code>) และ branch ชี้ไปที่ commit ถ้าเรา checkout commit โดยตรงแทนที่จะ checkout branch HEAD จะชี้ไปที่ commit นั้นตรง ๆ สถานะนี้คือ “detached HEAD” ที่ผู้เริ่มต้นมักกลัว แต่ความจริงไม่มีอะไรเสียหาย เพียงแต่ถ้า commit ในสถานะนี้ commit ใหม่จะไม่มี branch ใดชี้ถึง และอาจหาไม่เจอในภายหลัง วิธีแก้คือสร้าง branch ใหม่ ณ ตำแหน่งนั้นด้วย <code>git switch -c ชื่อ-branch</code></p>
+</section>
+<section id="ผลทตามมาจากแบบจำลองน" class="level3">
+<h3 class="anchored" data-anchor-id="ผลทตามมาจากแบบจำลองน">ผลที่ตามมาจากแบบจำลองนี้</h3>
+<div id="tbl-ch03-model-consequences" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-model-consequences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.4: ปรากฏการณ์ของ Git ที่อธิบายได้ด้วยแบบจำลองข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch03-model-consequences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ปรากฏการณ์</th>
+<th>คำอธิบายจากแบบจำลอง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไฟล์ที่ไม่เปลี่ยนไม่ใช้พื้นที่เพิ่มเมื่อ commit ใหม่</td>
+<td>tree ของ commit ใหม่ชี้ไปที่ blob เดิม เพราะเนื้อหาเดิมได้ hash เดิม</td>
+</tr>
+<tr class="even">
+<td>แก้ข้อความของ commit เก่าแล้ว hash ของทุก commit หลังจากนั้นเปลี่ยน</td>
+<td>commit ลูกเก็บ hash ของแม่ ถ้าแม่เปลี่ยน hash ของลูกก็เปลี่ยนต่อเป็นทอด ๆ</td>
+</tr>
+<tr class="odd">
+<td>ไฟล์ข้อมูลขนาดใหญ่ที่เคย commit ยังอยู่แม้ลบแล้ว</td>
+<td>blob ยังถูก commit เก่าอ้างถึง จึงไม่ถูกลบออกจากฐานข้อมูล</td>
+</tr>
+<tr class="even">
+<td>สร้างและลบ branch ได้อย่างรวดเร็ว</td>
+<td>branch เป็นเพียงไฟล์ที่เก็บ hash ตัวเดียว</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวที่สองของ <a href="#tbl-ch03-model-consequences" class="quarto-xref">ตารางที่&nbsp;<span>3.4</span></a> อธิบายว่าทำไมจึงมีกฎว่า <em>ห้ามแก้ประวัติที่ push ไปแล้วและผู้อื่นใช้อยู่</em> เพราะการแก้ทำให้ hash ของ commit เปลี่ยน ประวัติบนเครื่องของเรากับของผู้อื่นจะไม่ตรงกันอีกต่อไป แถวที่สามอธิบายว่าทำไมการเผลอ commit ไฟล์ข้อมูลใหญ่หรือไฟล์ <code>.env</code> จึงแก้ยาก</p>
+</section>
+</section>
+<section id="sec-ch03-commit" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-ch03-commit"><span class="header-section-number">3.3</span> staging area, commit ที่ดี และประวัติที่อ่านได้</h2>
+<section id="สามพนทของ-git" class="level3">
+<h3 class="anchored" data-anchor-id="สามพนทของ-git">สามพื้นที่ของ Git</h3>
+<p>Git แบ่งพื้นที่ทำงานเป็นสามส่วน การเข้าใจสามส่วนนี้ทำให้รู้ว่าคำสั่งแต่ละคำสั่งย้ายการเปลี่ยนแปลงจากที่ใดไปที่ใด</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  W[working directory&lt;br/&gt;ไฟล์ที่เห็นและแก้] --&gt;|git add| S[staging area&lt;br/&gt;สิ่งที่จะอยู่ใน commit ถัดไป]
+  S --&gt;|git commit| R[(repository&lt;br/&gt;ประวัติ .git/)]
+  R --&gt;|git switch / git restore| W
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong><span class="idx">working directory</span></strong> คือไฟล์ในโฟลเดอร์ที่เราแก้ไขอยู่</li>
+<li><strong><span class="idx">staging area</span></strong> (หรือ index) คือพื้นที่เตรียมว่าการเปลี่ยนแปลงใดจะอยู่ใน commit ถัดไป</li>
+<li><strong><span class="idx">repository</span></strong> คือประวัติที่บันทึกแล้วในโฟลเดอร์ <code>.git/</code></li>
+</ul>
+<p>staging area อาจดูเป็นขั้นตอนที่เกินจำเป็น แต่มันทำให้เราเลือกได้ว่าจะ commit อะไร สมมุติว่าระหว่างแก้ script ดึงข้อมูล เราแก้ typo ใน README ด้วย และลองเพิ่มบรรทัด <code>print</code> เพื่อดีบัก staging area ทำให้เราแยก commit ได้เป็นสองชิ้นที่มีความหมาย และไม่นำบรรทัดดีบักเข้าไปในประวัติ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status                          <span class="co"># ดูว่าไฟล์ใดเปลี่ยนและอยู่ในพื้นที่ใด</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff                            <span class="co"># ดูการเปลี่ยนแปลงที่ยังไม่ได้ stage</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add src/fetch_air4thai.py       <span class="co"># stage ทั้งไฟล์</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-p</span> README.md                <span class="co"># เลือก stage ทีละส่วน (hunk)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--staged</span>                   <span class="co"># ดูสิ่งที่จะอยู่ใน commit ถัดไป</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่ม timeout 30 วินาทีให้ request ไป Air4Thai"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>นิสัยที่ป้องกันปัญหาได้มากที่สุดคือ <strong>รัน <code>git diff --staged</code> ก่อน commit ทุกครั้ง</strong> เพื่อตรวจว่าไม่มีไฟล์ที่ไม่ตั้งใจหลุดเข้าไป เช่น ไฟล์ข้อมูลหรือไฟล์ <code>.env</code> และควรหลีกเลี่ยง <code>git add .</code> หรือ <code>git add -A</code> ที่ stage ทุกอย่างโดยไม่เลือก</p>
+</section>
+<section id="commit-ทดมลกษณะอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="commit-ทดมลกษณะอยางไร">commit ที่ดีมีลักษณะอย่างไร</h3>
+<p>commit ที่ดีคือ <strong>หน่วยการเปลี่ยนแปลงที่มีความหมายหนึ่งเรื่อง</strong> (atomic commit) หมายความว่า</p>
+<ul>
+<li><strong>เรื่องเดียว</strong> commit หนึ่งทำสิ่งเดียว เช่น “แก้การแปลงเขตเวลา” ไม่ใช่ “แก้เขตเวลา เพิ่มกราฟ และแก้ typo”</li>
+<li><strong>สมบูรณ์</strong> หลัง commit โค้ดยังรันได้ ไม่ทิ้งโครงการไว้ในสภาพครึ่ง ๆ กลาง ๆ</li>
+<li><strong>ย้อนกลับได้โดยไม่กระทบเรื่องอื่น</strong> ถ้าต้อง revert commit นี้ จะไม่ทำให้งานเรื่องอื่นหายไปด้วย</li>
+</ul>
+<p>ขนาดที่เหมาะสมขึ้นกับงาน แต่ถ้าเขียน commit message แล้วต้องใช้คำว่า “และ” หลายครั้ง แปลว่า commit นั้นน่าจะใหญ่เกินไป</p>
+</section>
+<section id="commit-message-ทด" class="level3">
+<h3 class="anchored" data-anchor-id="commit-message-ทด">commit message ที่ดี</h3>
+<p>commit message เป็นจดหมายถึงผู้อ่านในอนาคต ซึ่งมักเป็นตัวเราเองที่จำไม่ได้แล้วว่าทำไมจึงแก้โค้ดแบบนั้น รูปแบบที่ใช้กันแพร่หลายมีดังนี้ <span class="citation" data-cites="beams2014how">(<a href="../references.html#ref-beams2014how" role="doc-biblioref">Beams 2014</a>)</span></p>
+<pre class="text"><code>บรรทัดแรก: สรุปสิ่งที่ทำ สั้น ไม่เกินประมาณ 50 ตัวอักษร
+
+(เว้นหนึ่งบรรทัด) ส่วนเนื้อหา: อธิบายว่า *ทำไม* จึงเปลี่ยน และผลกระทบ
+ถ้าจำเป็น ส่วน *อะไร* ดูได้จาก diff อยู่แล้ว</code></pre>
+<p>ตัวอย่างเปรียบเทียบ</p>
+<div id="tbl-ch03-commit-messages" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-commit-messages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.5: ตัวอย่าง commit message ที่ไม่ดีและที่ดี
+</figcaption>
+<div aria-describedby="tbl-ch03-commit-messages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ไม่ดี</th>
+<th>ดี</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>update</code></td>
+<td><code>เพิ่ม script ดึงข้อมูล PM2.5 รายชั่วโมงจาก Air4Thai</code></td>
+</tr>
+<tr class="even">
+<td><code>แก้บั๊ก</code></td>
+<td><code>แปลงค่า "-1" เป็น NULL ก่อนโหลดเข้า measurements</code></td>
+</tr>
+<tr class="odd">
+<td><code>final</code></td>
+<td><code>ใช้เกณฑ์ความครบถ้วน 18 ชั่วโมงตามข้อตกลงของโครงการ</code></td>
+</tr>
+<tr class="even">
+<td><code>แก้ไขไฟล์ clean.py</code></td>
+<td><code>แก้ขอบวันให้ใช้เวลา Asia/Bangkok แทน UTC</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>commit message ในคอลัมน์ขวาของ <a href="#tbl-ch03-commit-messages" class="quarto-xref">ตารางที่&nbsp;<span>3.5</span></a> บอกทั้งสิ่งที่เปลี่ยนและบริบท ทำให้ค้นหาในประวัติได้ เช่น <code>git log --grep "Asia/Bangkok"</code> จะพบ commit ที่แก้เรื่องเขตเวลาทันที บางทีมใช้รูปแบบ Conventional Commits ซึ่งขึ้นต้นด้วยประเภท เช่น <code>fix:</code> หรือ <code>feat:</code> <span class="citation" data-cites="conventionalcommits2026">(<a href="../references.html#ref-conventionalcommits2026" role="doc-biblioref">Conventional Commits 2026</a>)</span> ส่วนหนังสือเล่มนี้ใช้รหัสบทขึ้นต้น เช่น <code>ch07:</code> ซึ่งเป็นหลักการเดียวกัน คือทำให้ประวัติค้นหาและจัดกลุ่มได้</p>
+</section>
+<section id="อานประวต" class="level3">
+<h3 class="anchored" data-anchor-id="อานประวต">อ่านประวัติ</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span>     <span class="co"># ประวัติแบบย่อพร้อมกราฟของทุก branch</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-p</span> src/clean.py             <span class="co"># ประวัติของไฟล์เดียว พร้อม diff</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-S</span> <span class="st">"MIN_HOURS"</span>              <span class="co"># หา commit ที่เพิ่มหรือลบข้อความนี้</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> blame src/clean.py              <span class="co"># แต่ละบรรทัดมาจาก commit ใด</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show a950f8d                    <span class="co"># ดูรายละเอียดของ commit หนึ่ง</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง) ของ git log --oneline --graph
+*   a950f8d รวมเกณฑ์: ใช้มาตรฐานไทยเป็นหลัก เก็บค่า WHO ไว้เปรียบเทียบ
+|\
+| * cd3bca2 ปรับเกณฑ์เป็น 37.5 ตามมาตรฐานใหม่
+* | 02eeffe ใช้เกณฑ์ WHO
+|/
+* 174e960 เริ่มโครงการ</code></pre>
+<p>คำสั่ง <code>git log -S</code> มีประโยชน์มากในงานข้อมูล เมื่อพบว่าผลเปลี่ยนไปและสงสัยว่าเกี่ยวกับค่าคงที่ตัวใด คำสั่งนี้หา commit ที่เปลี่ยนค่านั้นได้ทันที ส่วน <code>git bisect</code> เป็นเครื่องมือขั้นสูงที่ค้นหาแบบแบ่งครึ่งว่า commit ใดเป็นต้นเหตุของปัญหา เหมาะเมื่อประวัติยาวและไม่รู้ว่าปัญหาเริ่มเมื่อใด</p>
+</section>
+</section>
+<section id="sec-ch03-branch" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-ch03-branch"><span class="header-section-number">3.4</span> branch, merge และ ★ rebase</h2>
+<section id="ทำไมตองม-branch" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองม-branch">ทำไมต้องมี branch</h3>
+<p>branch ทำให้เราทำงานหลายเรื่องคู่ขนานกันได้โดยไม่รบกวนกัน หลักปฏิบัติที่รายวิชาใช้คือ <strong><code>main</code> ต้องอยู่ในสถานะที่ใช้งานได้เสมอ</strong> งานใหม่ทุกชิ้นทำใน branch แยก เมื่อเสร็จและผ่านการ review จึงรวมเข้า <code>main</code> ผ่าน pull request แนวทางนี้เรียกว่า feature branch workflow</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> week05-daily-agg      <span class="co"># สร้าง branch ใหม่จากตำแหน่งปัจจุบัน แล้วสลับไป</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ... แก้ไขและ commit ...</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main                     <span class="co"># กลับไปที่ main</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch                          <span class="co"># แสดง branch ทั้งหมดบนเครื่อง</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> week05-daily-agg      <span class="co"># ลบ branch ที่รวมแล้ว</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตั้งชื่อ branch ให้บอกเรื่องที่ทำ เช่น <code>fix-timezone</code> หรือ <code>week05-daily-agg</code> ไม่ใช่ <code>test</code> หรือชื่อคน</p>
+</section>
+<section id="merge-รวมสองสายประวต" class="level3">
+<h3 class="anchored" data-anchor-id="merge-รวมสองสายประวต">merge: รวมสองสายประวัติ</h3>
+<p>เมื่องานใน branch เสร็จ เรารวมกลับเข้า <code>main</code> ด้วย <strong><span class="idx">merge</span></strong> ผลของ merge มีสองแบบ ขึ้นกับว่า <code>main</code> เปลี่ยนไปหรือไม่ระหว่างที่เราทำงานใน branch</p>
+<p><strong><span class="idx">fast-forward</span></strong> ถ้า <code>main</code> ไม่มี commit ใหม่เลยตั้งแต่แตก branch Git เพียงเลื่อนป้าย <code>main</code> ไปชี้ commit ล่าสุดของ branch ไม่ต้องสร้าง commit ใหม่ ประวัติยังเป็นเส้นตรง</p>
+<p><strong><span class="idx">three-way merge</span></strong> ถ้าทั้ง <code>main</code> และ branch มี commit ใหม่ Git หา <em>จุดแยก</em> (merge base) ซึ่งเป็น commit ล่าสุดที่ทั้งสองสายมีร่วมกัน แล้วเปรียบเทียบสามจุด คือ จุดแยก ปลาย <code>main</code> และปลาย branch ถ้าการเปลี่ยนแปลงของสองฝั่งไม่ทับกัน Git รวมให้อัตโนมัติและสร้าง merge commit ที่มี parent สองตัว ถ้าทับกัน จะเกิด conflict ซึ่งหัวข้อ <a href="#sec-ch03-conflict" class="quarto-xref"><span>3.5</span></a> อธิบาย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge week05-daily-agg          <span class="co"># รวม branch เข้า main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rebase" class="level3">
+<h3 class="anchored" data-anchor-id="rebase">rebase ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p><strong><span class="idx">rebase</span></strong> เป็นอีกวิธีหนึ่งในการรวมงาน แทนที่จะสร้าง merge commit rebase จะ <em>นำ commit ของ branch ไปเล่นซ้ำ</em> บนปลายของ <code>main</code> ทีละตัว ผลคือประวัติเป็นเส้นตรงเหมือนกับว่าเราเริ่มทำงานหลังจาก <code>main</code> ล่าสุด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch week05-daily-agg</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> rebase main                     <span class="co"># นำ commit ของ branch ไปต่อบนปลาย main</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>จากแบบจำลองในหัวข้อ <a href="#sec-ch03-model" class="quarto-xref"><span>3.2</span></a> เราเข้าใจได้ทันทีว่า commit ที่ถูกเล่นซ้ำเป็น <em>commit ใหม่</em> ที่มี hash ใหม่ เพราะ parent เปลี่ยนไป แม้ว่าเนื้อหาการเปลี่ยนแปลงจะเหมือนเดิม นี่คือเหตุผลของกฎทองของ rebase</p>
+<blockquote class="blockquote">
+<p><strong>อย่า rebase commit ที่ push ขึ้น remote แล้ว และมีผู้อื่นนำไปใช้ต่อ</strong></p>
+</blockquote>
+<p>ถ้าฝ่าฝืน ผู้อื่นจะมี commit ชุดเดิม ส่วนเรามี commit ชุดใหม่ที่เนื้อหาเหมือนกันแต่ hash ต่างกัน เมื่อรวมกันจะเกิดประวัติซ้ำซ้อนและ conflict ที่สับสน</p>
+<div id="tbl-ch03-merge-rebase" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-merge-rebase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.6: เปรียบเทียบ merge กับ rebase
+</figcaption>
+<div aria-describedby="tbl-ch03-merge-rebase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>merge</th>
+<th>rebase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ประวัติ</td>
+<td>เก็บประวัติจริงทั้งหมด รวมถึงจุดที่แยกและรวม</td>
+<td>เป็นเส้นตรง อ่านง่าย แต่ไม่ตรงกับลำดับเวลาจริง</td>
+</tr>
+<tr class="even">
+<td>hash ของ commit เดิม</td>
+<td>ไม่เปลี่ยน</td>
+<td>เปลี่ยน (สร้าง commit ใหม่)</td>
+</tr>
+<tr class="odd">
+<td>ความปลอดภัยกับ branch ที่แชร์</td>
+<td>ปลอดภัย</td>
+<td>อันตราย ถ้าผู้อื่นใช้ branch นั้นอยู่</td>
+</tr>
+<tr class="even">
+<td>conflict</td>
+<td>แก้ครั้งเดียวตอน merge</td>
+<td>อาจต้องแก้ทีละ commit</td>
+</tr>
+<tr class="odd">
+<td>เหมาะกับ</td>
+<td>รวม branch เข้า <code>main</code> ผ่าน pull request</td>
+<td>จัดระเบียบ branch ส่วนตัวก่อนเปิด pull request</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>สำหรับผู้เริ่มต้น คำแนะนำคือใช้ merge เป็นหลัก เพราะปลอดภัยและไม่เปลี่ยนประวัติ เมื่อคุ้นเคยกับ Git แล้ว จึงใช้ rebase จัดระเบียบ branch ของตัวเองที่ยังไม่มีใครใช้</p>
+</section>
+</section>
+<section id="sec-ch03-conflict" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-ch03-conflict"><span class="header-section-number">3.5</span> การแก้ conflict</h2>
+<section id="conflict-เกดขนเมอใด" class="level3">
+<h3 class="anchored" data-anchor-id="conflict-เกดขนเมอใด">conflict เกิดขึ้นเมื่อใด</h3>
+<p><strong><span class="idx">conflict</span></strong> เกิดขึ้นเมื่อสองสายประวัติแก้ <em>ส่วนเดียวกันของไฟล์เดียวกัน</em> ไปคนละทาง Git ไม่รู้ว่าควรเลือกฝั่งใด จึงหยุดและให้คนตัดสินใจ สิ่งสำคัญที่ต้องเข้าใจคือ conflict ไม่ใช่ความผิดพลาดหรือข้อบกพร่องของ Git แต่เป็นการที่ Git <em>ปฏิเสธที่จะเดา</em> ในเรื่องที่ต้องใช้ความเข้าใจของคน</p>
+</section>
+<section id="ตวอยาง" class="level3">
+<h3 class="anchored" data-anchor-id="ตวอยาง">ตัวอย่าง</h3>
+<p>สมมุติว่าสมาชิกสองคนในทีมแก้ค่าเกณฑ์ในไฟล์ <code>src/config.py</code> พร้อมกัน คนหนึ่งใน branch <code>fix-threshold</code> เปลี่ยนเป็นมาตรฐานไทย อีกคนใน <code>main</code> เปลี่ยนเป็นแนวทางของ WHO เมื่อ merge จะได้</p>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+Auto-merging src/config.py
+CONFLICT (content): Merge conflict in src/config.py
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+<p>และไฟล์ <code>src/config.py</code> จะมีเครื่องหมาย conflict</p>
+<pre class="text"><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+THRESHOLD = 15.0   # แนวทาง WHO 2021
+=======
+THRESHOLD = 37.5   # มาตรฐานไทย พ.ศ. 2566
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; fix-threshold</code></pre>
+<p>ส่วนระหว่าง <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> กับ <code>=======</code> เป็นของฝั่งที่เราอยู่ (ในที่นี้คือ <code>main</code>) ส่วนระหว่าง <code>=======</code> กับ <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; fix-threshold</code> เป็นของ branch ที่กำลังรวมเข้ามา</p>
+</section>
+<section id="ขนตอนการแก" class="level3">
+<h3 class="anchored" data-anchor-id="ขนตอนการแก">ขั้นตอนการแก้</h3>
+<ol type="1">
+<li><p><strong>อ่านและเข้าใจทั้งสองฝั่ง</strong> ถามว่าแต่ละฝั่งต้องการทำอะไร ไม่ใช่ถามว่าจะเลือกฝั่งใด ในตัวอย่างนี้ ทั้งสองฝั่งมีเหตุผล โครงการใช้มาตรฐานไทยเป็นเกณฑ์หลัก แต่การเปรียบเทียบกับ WHO ก็มีประโยชน์</p></li>
+<li><p><strong>แก้ไฟล์ให้เป็นสิ่งที่ถูกต้อง</strong> ซึ่งอาจเป็นฝั่งใดฝั่งหนึ่ง ทั้งสองฝั่งรวมกัน หรือสิ่งใหม่ และลบเครื่องหมาย conflict ออกให้หมด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>THRESHOLD <span class="op">=</span> <span class="fl">37.5</span>       <span class="co"># มาตรฐานไทย พ.ศ. 2566</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>WHO_GUIDELINE <span class="op">=</span> <span class="fl">15.0</span>   <span class="co"># แนวทาง WHO 2021</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>ตรวจว่าโค้ดยังทำงาน</strong> รันโค้ดหรือการทดสอบที่เกี่ยวข้อง conflict ที่แก้แล้วแต่ทำให้โค้ดพังเป็นเรื่องที่เกิดบ่อย</p></li>
+<li><p><strong>stage และ commit</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add src/config.py</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"รวมเกณฑ์: ใช้มาตรฐานไทยเป็นหลัก เก็บค่า WHO ไว้เปรียบเทียบ"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<p>ถ้าระหว่างแก้แล้วรู้สึกว่าสับสนเกินไป คำสั่ง <code>git merge --abort</code> จะยกเลิกการ merge และพาทุกอย่างกลับไปสถานะก่อน merge ได้อย่างปลอดภัย</p>
+</section>
+<section id="conflict-ท-git-ตรวจไมพบ" class="level3">
+<h3 class="anchored" data-anchor-id="conflict-ท-git-ตรวจไมพบ">conflict ที่ Git ตรวจไม่พบ</h3>
+<p>Git ตรวจพบเฉพาะ conflict ระดับข้อความ คือการแก้บรรทัดเดียวกัน แต่มี conflict ระดับความหมายที่ Git มองไม่เห็น เช่น คนหนึ่งเปลี่ยนชื่อคอลัมน์ <code>pm25_avg</code> เป็น <code>pm25_mean</code> ใน <code>src/clean.py</code> อีกคนเพิ่ม notebook ใหม่ที่ใช้ชื่อ <code>pm25_avg</code> สองการเปลี่ยนแปลงนี้อยู่คนละไฟล์ Git จึง merge ให้ได้โดยไม่มี conflict แต่ notebook ใหม่จะพังทันที นี่คือเหตุผลที่ต้องรันโค้ดหลัง merge เสมอ และเป็นเหตุผลของ continuous integration ในหัวข้อ <a href="#sec-ch03-ci" class="quarto-xref"><span>3.10</span></a></p>
+</section>
+<section id="ลด-conflict-ตงแตตน" class="level3">
+<h3 class="anchored" data-anchor-id="ลด-conflict-ตงแตตน">ลด conflict ตั้งแต่ต้น</h3>
+<div id="tbl-ch03-reduce-conflict" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-reduce-conflict-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.7: แนวปฏิบัติที่ช่วยลด conflict
+</figcaption>
+<div aria-describedby="tbl-ch03-reduce-conflict-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แนวปฏิบัติ</th>
+<th>ทำไมช่วย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ดึงงานล่าสุดจาก <code>main</code> เข้า branch บ่อย ๆ</td>
+<td>การเปลี่ยนแปลงที่ต่างกันมีน้อย conflict เล็กและแก้ง่าย</td>
+</tr>
+<tr class="even">
+<td>ทำ branch ให้อายุสั้นและงานเล็ก</td>
+<td>ยิ่ง branch อยู่นาน ยิ่งห่างจาก <code>main</code> มาก</td>
+</tr>
+<tr class="odd">
+<td>แบ่งงานตามไฟล์หรือโมดูล</td>
+<td>สองคนแก้คนละไฟล์ แทบไม่เกิด conflict</td>
+</tr>
+<tr class="even">
+<td>ตกลงรูปแบบโค้ดร่วมกันและใช้เครื่องมือจัดรูปแบบ</td>
+<td>ไม่เกิด conflict จากการจัดย่อหน้าหรือการเว้นวรรคต่างกัน</td>
+</tr>
+<tr class="odd">
+<td>ล้างผลลัพธ์ใน notebook ก่อน commit</td>
+<td>ผลลัพธ์ใน <code>.ipynb</code> เป็นต้นเหตุของ conflict ที่แก้ยากที่สุด (หัวข้อ <a href="#sec-ch03-notebook" class="quarto-xref"><span>3.8</span></a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch03-github" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-ch03-github"><span class="header-section-number">3.6</span> GitHub: remote, pull request, issue และ code review</h2>
+<section id="git-กบ-github-ตางกนอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="git-กบ-github-ตางกนอยางไร">Git กับ GitHub ต่างกันอย่างไร</h3>
+<p>Git เป็นโปรแกรมที่ทำงานบนเครื่องของเรา ไม่ต้องใช้อินเทอร์เน็ต ส่วน <span class="idx-tool">GitHub</span> เป็นบริการบนเว็บที่เก็บ repository ของ Git และเพิ่มเครื่องมือสำหรับทำงานร่วมกัน เช่น pull request, issue และ GitHub Actions ทางเลือกอื่นที่ทำงานคล้ายกันได้แก่ GitLab และ Bitbucket หลักการในหัวข้อนี้ใช้ได้กับทุกบริการ</p>
+</section>
+<section id="remote" class="level3">
+<h3 class="anchored" data-anchor-id="remote">remote</h3>
+<p><strong><span class="idx">remote</span></strong> คือ repository อีกชุดหนึ่งที่อยู่ที่อื่น เช่น บน GitHub เมื่อ clone repository ระบบจะตั้ง remote ชื่อ <code>origin</code> ให้อัตโนมัติ คำสั่งที่เกี่ยวกับ remote มีสามคำสั่งหลัก</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin                    <span class="co"># ดาวน์โหลด commit ใหม่จาก remote แต่ยังไม่รวม</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull                            <span class="co"># fetch แล้ว merge เข้า branch ปัจจุบัน</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin week05-daily-agg <span class="co"># ส่ง branch ขึ้น remote และตั้งให้ติดตามกัน</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ในแบบจำลองของ Git ทั้งสามคำสั่งเป็นเพียงการ <em>คัดลอกวัตถุ</em> ระหว่างฐานข้อมูลสองชุด และเลื่อนป้ายชื่อ branch ให้ตรงกัน <code>git fetch</code> ปลอดภัยเสมอเพราะไม่แตะ working directory ส่วน <code>git pull</code> อาจเกิด conflict ได้เพราะมีการ merge</p>
+</section>
+<section id="pull-request" class="level3">
+<h3 class="anchored" data-anchor-id="pull-request">pull request</h3>
+<p><strong><span class="idx">pull request</span></strong> (PR) คือคำขอให้รวม branch หนึ่งเข้ากับอีก branch หนึ่ง พร้อมพื้นที่สำหรับอภิปรายและ review ก่อนรวม PR ไม่ใช่ความสามารถของ Git แต่เป็นความสามารถของ GitHub ที่สร้างขึ้นบน branch และ merge ของ Git วงจรการทำงานด้วย PR มีดังนี้</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[สร้าง branch] --&gt; B[commit งาน]
+  B --&gt; C[push ขึ้น GitHub]
+  C --&gt; D[เปิด pull request]
+  D --&gt; E{review}
+  E --&gt;|ขอให้แก้| B
+  E --&gt;|approve| F[merge เข้า main]
+  F --&gt; G[ลบ branch]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>PR ที่ดีมีลักษณะดังนี้</p>
+<ul>
+<li><strong>เล็กและมีเรื่องเดียว</strong> PR ที่แก้ 50 บรรทัดได้รับการ review อย่างละเอียด ส่วน PR ที่แก้ 2,000 บรรทัดมักได้รับเพียงการกด approve ผ่าน ๆ</li>
+<li><strong>คำอธิบายบอกว่าทำอะไรและทำไม</strong> รวมถึงวิธีทดสอบ และสิ่งที่อยากให้ผู้ review ดูเป็นพิเศษ</li>
+<li><strong>สำหรับงานข้อมูล แสดงผลลัพธ์</strong> เช่น จำนวนแถวก่อนและหลังการเปลี่ยนแปลง หรือกราฟเปรียบเทียบ เพราะผู้ review อาจไม่ได้รันโค้ดเอง</li>
+</ul>
+</section>
+<section id="issue" class="level3">
+<h3 class="anchored" data-anchor-id="issue">issue</h3>
+<p><strong><span class="idx">issue</span></strong> เป็นที่บันทึกงานที่ต้องทำ ปัญหาที่พบ หรือคำถาม ใน GitHub ในโครงการข้อมูล issue มีประโยชน์สำหรับบันทึกปัญหาคุณภาพข้อมูลที่พบระหว่างสำรวจ เช่น “สถานี 36t มีค่าคงที่ 30 ชั่วโมงในเดือนมีนาคม ต้องตรวจสอบ” เมื่อแก้แล้ว PR ที่แก้สามารถอ้างถึง issue ได้ด้วยข้อความ เช่น <code>Closes #12</code> ซึ่งจะปิด issue โดยอัตโนมัติเมื่อ PR ถูก merge ทำให้ประวัติเชื่อมโยงจากปัญหาไปถึงการแก้ไขได้</p>
+</section>
+<section id="code-review-บน-github" class="level3">
+<h3 class="anchored" data-anchor-id="code-review-บน-github">code review บน GitHub</h3>
+<p>GitHub ให้ผู้ review แสดงความคิดเห็นได้ทีละบรรทัด และสรุปผลได้สามแบบ</p>
+<div id="tbl-ch03-review-states" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-review-states-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.8: ผลการ review บน GitHub
+</figcaption>
+<div aria-describedby="tbl-ch03-review-states-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ผลการ review</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Comment</td>
+<td>แสดงความคิดเห็นโดยไม่ตัดสิน</td>
+</tr>
+<tr class="even">
+<td>Approve</td>
+<td>เห็นด้วยให้รวม</td>
+</tr>
+<tr class="odd">
+<td>Request changes</td>
+<td>ต้องแก้ไขก่อนรวม</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>repository สามารถตั้งกฎป้องกัน branch (branch protection) เช่น ห้าม push ตรงเข้า <code>main</code> และต้องได้ approve อย่างน้อยหนึ่งคนก่อน merge กฎนี้ทำให้ทุกการเปลี่ยนแปลงของ <code>main</code> ผ่านสายตาอย่างน้อยสองคู่</p>
+</section>
+</section>
+<section id="sec-ch03-review" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-ch03-review"><span class="header-section-number">3.7</span> ศิลปะของการ review โค้ด</h2>
+<section id="ทำไมตอง-review" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตอง-review">ทำไมต้อง review</h3>
+<p>การ review โค้ดไม่ได้มีไว้หาบั๊กอย่างเดียว งานวิจัยที่ศึกษาการ review โค้ดในบริษัทซอฟต์แวร์ขนาดใหญ่พบว่า แม้ผู้พัฒนาคาดหวังว่าการ review จะช่วยหาข้อบกพร่องเป็นหลัก แต่ผลที่ได้จริงจำนวนมากคือการถ่ายทอดความรู้ การทำให้ทีมรับรู้การเปลี่ยนแปลง และการหาทางแก้ปัญหาที่ดีกว่า <span class="citation" data-cites="bacchelli2013expectations">(<a href="../references.html#ref-bacchelli2013expectations" role="doc-biblioref">Bacchelli และ Bird 2013</a>)</span> ในรายวิชานี้ การ review โค้ดของเพื่อนเป็นส่วนหนึ่งของการประเมินผล เพราะเป็นทักษะที่ใช้ในการทำงานจริง และช่วยให้ผู้ review เรียนรู้จากงานของผู้อื่นด้วย</p>
+</section>
+<section id="ดอะไรบาง" class="level3">
+<h3 class="anchored" data-anchor-id="ดอะไรบาง">ดูอะไรบ้าง</h3>
+<p>การ review งานข้อมูลต่างจากการ review ซอฟต์แวร์ทั่วไป เพราะโค้ดที่รันได้และดูสะอาดอาจให้ผลที่ผิดได้โดยไม่มี error ผู้ review ควรตรวจตามลำดับความสำคัญดังนี้</p>
+<ol type="1">
+<li><strong>ความถูกต้องของผลลัพธ์</strong> โค้ดทำสิ่งที่คำอธิบาย PR บอกหรือไม่ ผลลัพธ์สมเหตุสมผลหรือไม่ จำนวนแถวก่อนและหลังเป็นไปตามคาดหรือไม่</li>
+<li><strong>การจัดการข้อมูลที่เป็นจุดเสี่ยง</strong> ค่าหายถูกจัดการอย่างไร ค่าแทนอย่าง <code>-1</code> ถูกแปลงหรือยัง เขตเวลาถูกต้องหรือไม่ join ทำให้แถวเพิ่มขึ้นโดยไม่ตั้งใจหรือไม่ (บทที่ 8)</li>
+<li><strong>การทำซ้ำได้</strong> ใช้ path จาก root หรือไม่ มีค่าคงที่ที่ฝังอยู่ในโค้ดโดยไม่มีคำอธิบายหรือไม่ notebook รันจากต้นจนจบได้หรือไม่</li>
+<li><strong>ความปลอดภัยและจริยธรรม</strong> มีความลับ ข้อมูลส่วนบุคคล หรือไฟล์ข้อมูลหลุดเข้ามาหรือไม่</li>
+<li><strong>ความอ่านง่าย</strong> ชื่อตัวแปรสื่อความหมายหรือไม่ มีคำอธิบายในจุดที่ไม่ชัดเจนหรือไม่</li>
+</ol>
+<p>ลำดับนี้สำคัญ ผู้ review ที่เริ่มจากเรื่องการตั้งชื่อตัวแปรแล้วหมดเวลาก่อนจะดูว่าค่าเฉลี่ยคำนวณถูกหรือไม่ ได้ทำงานผิดลำดับความสำคัญ</p>
+</section>
+<section id="เขยนความคดเหนอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="เขยนความคดเหนอยางไร">เขียนความคิดเห็นอย่างไร</h3>
+<p>ความคิดเห็นที่ดีมุ่งที่โค้ด ไม่ใช่ที่คน เจาะจง และบอกเหตุผล เปรียบเทียบตัวอย่างต่อไปนี้</p>
+<div id="tbl-ch03-review-comments" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-review-comments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.9: ตัวอย่างความคิดเห็นในการ review โค้ด
+</figcaption>
+<div aria-describedby="tbl-ch03-review-comments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ความคิดเห็นที่ไม่ช่วย</th>
+<th>ความคิดเห็นที่ช่วย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“ผิด”</td>
+<td>“บรรทัดนี้ใช้ <code>AVG(pm25)</code> โดยยังไม่ได้แปลงค่า <code>-1</code> เป็น <code>NULL</code> ค่าเฉลี่ยจะต่ำกว่าความจริง ลองดู <code>src/load_duckdb.py</code> บรรทัดที่แปลงค่า”</td>
+</tr>
+<tr class="even">
+<td>“ทำไมเขียนแบบนี้”</td>
+<td>“อยากทราบเหตุผลที่เลือกเกณฑ์ 20 ชั่วโมงแทน 18 ตามข้อตกลง ถ้ามีเหตุผลช่วยเขียนไว้ใน comment ด้วย”</td>
+</tr>
+<tr class="odd">
+<td>“LGTM” อย่างเดียว</td>
+<td>“ตรวจแล้ว จำนวนแถวของ <code>daily_pm25</code> หลังแก้ตรงกับที่คำนวณด้วยมือสำหรับสถานี 02t เดือนมกราคม ส่วนชื่อฟังก์ชันอาจเปลี่ยนเป็น <code>aggregate_daily</code> จะสื่อความหมายกว่า (ไม่บังคับ)”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ข้อสังเกตจาก <a href="#tbl-ch03-review-comments" class="quarto-xref">ตารางที่&nbsp;<span>3.9</span></a> มีสามข้อ ข้อแรก ความคิดเห็นที่ดีบอกว่า <em>ปัญหาคืออะไร</em> และ <em>ทำไมเป็นปัญหา</em> ข้อสอง การตั้งคำถามแทนการสั่งช่วยให้บทสนทนาเป็นมิตรและเปิดโอกาสให้ผู้เขียนอธิบาย เพราะบางครั้งผู้เขียนมีเหตุผลที่ผู้ review ไม่รู้ ข้อสาม การแยกให้ชัดว่าข้อใดต้องแก้และข้อใดเป็นเพียงข้อเสนอ (เช่น ระบุว่า “ไม่บังคับ”) ช่วยให้ผู้เขียนจัดลำดับความสำคัญได้ แนวปฏิบัติด้านการ review ของ Google ให้คำแนะนำที่ละเอียดในเรื่องนี้ <span class="citation" data-cites="google2026engpractices">(<a href="../references.html#ref-google2026engpractices" role="doc-biblioref">Google 2026</a>)</span></p>
+</section>
+<section id="เปนผถก-review-ทด" class="level3">
+<h3 class="anchored" data-anchor-id="เปนผถก-review-ทด">เป็นผู้ถูก review ที่ดี</h3>
+<p>ผู้เขียนโค้ดมีส่วนทำให้การ review ได้ผลเช่นกัน ได้แก่ เปิด PR ที่เล็กและมีคำอธิบายชัด ตรวจ diff ของตัวเองก่อนขอ review ตอบทุกความคิดเห็น แม้เพียงว่า “แก้แล้ว” หรืออธิบายว่าทำไมไม่แก้ และมองความคิดเห็นว่าเป็นการช่วยให้งานดีขึ้น ไม่ใช่การวิจารณ์ตัวบุคคล</p>
+</section>
+</section>
+<section id="sec-ch03-notebook" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-ch03-notebook"><span class="header-section-number">3.8</span> notebook กับ Git: nbstripout และ Jupytext ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ปญหาของ-.ipynb-ใน-git" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของ-.ipynb-ใน-git">ปัญหาของ <code>.ipynb</code> ใน Git</h3>
+<p>บทที่ 2 อธิบายว่าไฟล์ <code>.ipynb</code> เป็น JSON ที่เก็บทั้งโค้ด ผลลัพธ์ และเลขลำดับการรัน คุณสมบัตินี้สร้างปัญหาสามข้อเมื่อใช้กับ Git</p>
+<ol type="1">
+<li><strong>diff อ่านไม่ออก</strong> การแก้โค้ดหนึ่งบรรทัดแล้วรันใหม่ เปลี่ยนเลขลำดับการรันของทุก cell และเปลี่ยนผลลัพธ์ diff จึงยาวหลายร้อยบรรทัด</li>
+<li><strong>repository บวม</strong> กราฟถูกเก็บเป็นข้อความ base64 ขนาดใหญ่ ทุกครั้งที่รันใหม่ Git เก็บกราฟชุดใหม่ไว้ทั้งหมด</li>
+<li><strong>conflict แก้ยาก</strong> conflict ใน JSON ที่มีกราฟ base64 แทบเป็นไปไม่ได้ที่จะแก้ด้วยมือ</li>
+</ol>
+</section>
+<section id="nbstripout-ลางผลลพธกอน-commit" class="level3">
+<h3 class="anchored" data-anchor-id="nbstripout-ลางผลลพธกอน-commit">nbstripout: ล้างผลลัพธ์ก่อน commit</h3>
+<p><span class="idx-tool"><code>nbstripout</code></span> เป็นเครื่องมือที่ลบผลลัพธ์และเลขลำดับการรันออกจาก notebook <span class="citation" data-cites="nbstripout2026">(<a href="../references.html#ref-nbstripout2026" role="doc-biblioref"><span class="nocase">Rathgeber และคณะ</span> 2026</a>)</span> เมื่อติดตั้งเป็น Git filter มันจะล้างผลลัพธ์โดยอัตโนมัติทุกครั้งที่ stage โดยไม่แตะไฟล์ใน working directory เรายังเห็นผลลัพธ์บนเครื่องของตัวเอง แต่สิ่งที่เข้าไปใน Git มีเฉพาะโค้ด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install nbstripout              <span class="co"># หรือ uv add --dev nbstripout</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nbstripout</span> <span class="at">--install</span>                <span class="co"># ติดตั้ง filter ให้ repository นี้</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อแลกเปลี่ยนคือ ผู้ที่เปิด notebook บน GitHub จะไม่เห็นผลลัพธ์ ซึ่งสอดคล้องกับหลักการของเล่มนี้ ที่ว่าผลลัพธ์สุดท้ายควรอยู่ในรายงานที่สร้างจากโค้ด ไม่ใช่ใน notebook</p>
+</section>
+<section id="jupytext-notebook-เปนไฟลขอความ" class="level3">
+<h3 class="anchored" data-anchor-id="jupytext-notebook-เปนไฟลขอความ">Jupytext: notebook เป็นไฟล์ข้อความ</h3>
+<p><span class="idx-tool">Jupytext</span> แก้ปัญหาอีกแบบ โดยจับคู่ notebook กับไฟล์ข้อความ เช่น <code>.py</code> ในรูปแบบ percent (<code># %%</code>) หรือไฟล์ Markdown <span class="citation" data-cites="jupytext2026">(<a href="../references.html#ref-jupytext2026" role="doc-biblioref"><span class="nocase">Wouts และคณะ</span> 2026</a>)</span> เมื่อแก้ไขฝั่งใดฝั่งหนึ่ง อีกฝั่งจะถูกปรับให้ตรงกัน เราจึง commit เฉพาะไฟล์ <code>.py</code> ซึ่ง diff อ่านง่ายและแก้ conflict ได้เหมือนโค้ดธรรมดา</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jupytext</span> <span class="at">--set-formats</span> ipynb,py:percent notebooks/explore.ipynb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ไฟล์ <code>notebooks/explore.py</code> ที่ได้มีลักษณะดังนี้ ซึ่งเป็นรูปแบบเดียวกับที่ VS Code ใช้ในบทที่ 2</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %% [markdown]</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # สำรวจค่าเฉลี่ยรายวัน</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># %%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"../data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-ch03-notebook-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-notebook-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.10: เปรียบเทียบวิธีจัดการ notebook ใน Git
+</figcaption>
+<div aria-describedby="tbl-ch03-notebook-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>เครื่องมือ</th>
+<th>วิธีการ</th>
+<th>ข้อดี</th>
+<th>ข้อจำกัด</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>nbstripout</td>
+<td>ล้างผลลัพธ์ตอน stage</td>
+<td>ใช้ง่าย ยังเป็นไฟล์ <code>.ipynb</code></td>
+<td>diff ยังเป็น JSON</td>
+</tr>
+<tr class="even">
+<td>Jupytext</td>
+<td>จับคู่กับไฟล์ <code>.py</code> หรือ <code>.md</code></td>
+<td>diff อ่านง่าย แก้ conflict ได้</td>
+<td>ทุกคนในทีมต้องติดตั้งและตั้งค่าเหมือนกัน</td>
+</tr>
+<tr class="odd">
+<td>ไฟล์ <code>.py</code> แบบ <code># %%</code> อย่างเดียว</td>
+<td>ไม่ใช้ <code>.ipynb</code> เลย</td>
+<td>เรียบง่ายที่สุด</td>
+<td>ไม่มีผลลัพธ์บันทึกไว้ ผู้อ่านต้องรันเอง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch03-data-versioning" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-ch03-data-versioning"><span class="header-section-number">3.9</span> การจัดเวอร์ชันข้อมูล: Git LFS, DVC ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="เมอใดตองจดเวอรชนขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="เมอใดตองจดเวอรชนขอมล">เมื่อใดต้องจัดเวอร์ชันข้อมูล</h3>
+<p>โครงการในเล่มนี้ไม่ commit ข้อมูล เพราะข้อมูลสร้างใหม่ได้จาก script ดึงข้อมูล แต่มีสถานการณ์ที่การสร้างใหม่ไม่พอ เช่น API ไม่ให้ข้อมูลย้อนหลังแล้ว ข้อมูลถูกแก้ไขโดยผู้ให้บริการ หรือต้องการผูกผลการวิเคราะห์กับ <em>ข้อมูลชุดที่แน่นอน</em> เพื่อให้ผู้อื่นตรวจสอบได้ ในกรณีเหล่านี้ต้องมีวิธีจัดเวอร์ชันข้อมูลที่ไม่ทำให้ repository บวม</p>
+</section>
+<section id="git-lfs" class="level3">
+<h3 class="anchored" data-anchor-id="git-lfs">Git LFS</h3>
+<p><strong><span class="idx">Git LFS</span></strong> (Large File Storage) เก็บไฟล์ขนาดใหญ่ไว้นอก repository บนเซิร์ฟเวอร์แยก ส่วนใน repository เก็บเพียงไฟล์ตัวชี้ขนาดเล็กที่มี hash ของไฟล์จริง <span class="citation" data-cites="gitlfs2026">(<a href="../references.html#ref-gitlfs2026" role="doc-biblioref">Git LFS 2026</a>)</span> เมื่อ clone หรือ checkout Git LFS ดาวน์โหลดไฟล์จริงที่ตรงกับเวอร์ชันนั้นมาให้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> lfs install</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> lfs track <span class="st">"data/sample/*.parquet"</span>   <span class="co"># บันทึกกฎลงใน .gitattributes</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .gitattributes data/sample/pm25_2023.parquet</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่มข้อมูลตัวอย่างปี 2023 ผ่าน Git LFS"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Git LFS ใช้ง่ายเพราะทำงานร่วมกับคำสั่ง Git ปกติ แต่บริการโฮสต์ส่วนใหญ่จำกัดพื้นที่และปริมาณการดาวน์โหลดของ LFS และ Git LFS ไม่ได้บันทึกว่าข้อมูลถูกสร้างขึ้นมาอย่างไร</p>
+</section>
+<section id="dvc" class="level3">
+<h3 class="anchored" data-anchor-id="dvc">DVC</h3>
+<p><strong><span class="idx">DVC</span></strong> (Data Version Control) เป็นเครื่องมือที่ออกแบบมาสำหรับงานข้อมูลโดยเฉพาะ <span class="citation" data-cites="dvc2026">(<a href="../references.html#ref-dvc2026" role="doc-biblioref">Iterative 2026</a>)</span> หลักการคล้าย Git LFS คือเก็บไฟล์ตัวชี้ใน Git และเก็บข้อมูลจริงไว้ที่อื่น แต่ DVC ให้เลือกที่เก็บได้หลากหลาย เช่น โฟลเดอร์บนเครื่อง Google Drive หรือ cloud storage และที่สำคัญคือ DVC บันทึก <em>pipeline</em> ได้ด้วย ว่าไฟล์ข้อมูลแต่ละไฟล์สร้างจากคำสั่งใดและไฟล์ใด เมื่อไฟล์ต้นทางเปลี่ยน DVC รู้ว่าต้องรันขั้นใดใหม่</p>
+<div id="tbl-ch03-lfs-dvc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-lfs-dvc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.11: เปรียบเทียบ Git LFS กับ DVC
+</figcaption>
+<div aria-describedby="tbl-ch03-lfs-dvc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>Git LFS</th>
+<th>DVC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ที่เก็บข้อมูล</td>
+<td>เซิร์ฟเวอร์ LFS ของบริการโฮสต์</td>
+<td>เลือกได้หลายแบบ (local, cloud)</td>
+</tr>
+<tr class="even">
+<td>บันทึก pipeline</td>
+<td>ไม่ได้</td>
+<td>ได้ (<code>dvc.yaml</code>)</td>
+</tr>
+<tr class="odd">
+<td>ความยากในการเริ่มต้น</td>
+<td>ต่ำ</td>
+<td>ปานกลาง</td>
+</tr>
+<tr class="even">
+<td>เหมาะกับ</td>
+<td>ไฟล์ใหญ่จำนวนไม่มากที่เปลี่ยนไม่บ่อย</td>
+<td>โครงการที่ข้อมูลและแบบจำลองเปลี่ยนบ่อย ต้องติดตามที่มา</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>สำหรับโครงการในรายวิชานี้ แนวทางที่แนะนำคือ ไม่ commit ข้อมูล และเก็บไฟล์ JSON ดิบไว้ใน <code>data/raw/</code> บนเครื่อง ถ้าต้องการแชร์ข้อมูลชุดที่แน่นอนกับทีม ให้ export เป็นไฟล์ Parquet ไว้ในที่เก็บร่วม แล้วบันทึก hash ของไฟล์ไว้ใน README เพื่อให้ตรวจได้ว่าได้ไฟล์ชุดเดียวกัน</p>
+</section>
+</section>
+<section id="sec-ch03-ci" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="sec-ch03-ci"><span class="header-section-number">3.10</span> GitHub Actions และ continuous integration เบื้องต้น ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="continuous-integration-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="continuous-integration-คออะไร">continuous integration คืออะไร</h3>
+<p><strong><span class="idx">continuous integration</span></strong> (CI) คือแนวปฏิบัติที่รันการตรวจสอบอัตโนมัติทุกครั้งที่มีการ push หรือเปิด pull request เพื่อให้รู้ทันทีว่าการเปลี่ยนแปลงทำให้อะไรพังหรือไม่ หัวข้อ <a href="#sec-ch03-conflict" class="quarto-xref"><span>3.5</span></a> แสดงว่า conflict ระดับความหมายเป็นสิ่งที่ Git ตรวจไม่พบ CI เป็นกลไกที่ช่วยจับปัญหาประเภทนี้ ก่อนที่งานจะถูกรวมเข้า <code>main</code></p>
+</section>
+<section id="github-actions" class="level3">
+<h3 class="anchored" data-anchor-id="github-actions">GitHub Actions</h3>
+<p>GitHub Actions เป็นบริการ CI ที่อยู่ใน GitHub <span class="citation" data-cites="githubactions2026">(<a href="../references.html#ref-githubactions2026" role="doc-biblioref">GitHub 2026</a>)</span> เรากำหนดงานที่ต้องรันในไฟล์ YAML ในโฟลเดอร์ <code>.github/workflows/</code> ตัวอย่างต่อไปนี้ตรวจโค้ดด้วย Ruff และรันชุดทดสอบด้วย pytest ทุกครั้งที่มี pull request</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/check.yml</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> check</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">pull_request</span><span class="kw">]</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test</span><span class="kw">:</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> astral-sh/setup-uv@v6</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> uv sync --frozen</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> uv run ruff check src/</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> uv run pytest tests/</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ผลของการรันแสดงเป็นเครื่องหมายถูกหรือกากบาทบนหน้า pull request ถ้าตั้งกฎป้องกัน branch ให้ต้องผ่าน CI ก่อน merge จะไม่มีโค้ดที่ทำให้การทดสอบพังเข้าไปใน <code>main</code> ได้</p>
+</section>
+<section id="ci-สำหรบงานขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="ci-สำหรบงานขอมล">CI สำหรับงานข้อมูล</h3>
+<p>CI ในงานข้อมูลตรวจได้มากกว่าโค้ด ตัวอย่างการตรวจที่มีประโยชน์สำหรับโครงการ PM2.5 ได้แก่</p>
+<ul>
+<li><strong>รัน pipeline กับข้อมูลตัวอย่างขนาดเล็ก</strong> เพื่อยืนยันว่าทุกขั้นยังทำงานต่อกันได้ โดยใช้ไฟล์ตัวอย่างที่อยู่ใน repository ไม่ต้องเรียก API จริง</li>
+<li><strong>ตรวจกฎคุณภาพข้อมูล</strong> ด้วย pandera กับข้อมูลตัวอย่าง (บทที่ 9)</li>
+<li><strong>ตรวจว่า notebook ไม่มีผลลัพธ์ค้าง</strong> หรือรันได้จากต้นจนจบ</li>
+<li><strong>ตรวจว่าไม่มีความลับหลุด</strong> ด้วยเครื่องมือสแกนหา key</li>
+</ul>
+<p>ข้อควรระวังคือ CI ไม่ควรเรียก API ภายนอกจริงในทุก pull request เพราะอาจโดน rate limit ทำให้ CI ล้มเหลวด้วยเหตุผลที่ไม่เกี่ยวกับโค้ด และเป็นภาระต่อผู้ให้บริการข้อมูล (บทที่ 5)</p>
+</section>
+</section>
+<section id="sec-ch03-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch03-case">กรณีศึกษา: ทีมสองคนพัฒนา pipeline PM2.5 พร้อมกัน</h2>
+<p><strong>สถานการณ์</strong> นักศึกษาสองคน ก และ ข ทำโครงการ PM2.5 ร่วมกันใน repository เดียว ในสัปดาห์ที่ 5 ก รับผิดชอบการรวมค่ารายชั่วโมงเป็นรายวัน (<code>daily_pm25</code>) ส่วน ข รับผิดชอบการเพิ่มข้อมูลภาคให้ตาราง <code>stations</code></p>
+<p><strong>คำถาม</strong> ทีมจะจัดการงานอย่างไรให้ทำงานพร้อมกันได้ รวมงานได้โดยไม่ทับกัน และมั่นใจว่าผลลัพธ์ถูกต้องก่อนรวมเข้า <code>main</code></p>
+<p><strong>วิธีการ</strong> ทีมใช้ feature branch workflow ร่วมกับ pull request ลำดับเหตุการณ์เป็นดังนี้</p>
+<ol type="1">
+<li>ทั้งสองคนเปิด issue สำหรับงานของตัวเอง แล้วแตก branch จาก <code>main</code> ชื่อ <code>week05-daily-agg</code> และ <code>week05-region</code> ตามลำดับ</li>
+<li>ข ทำงานเสร็จก่อน เปิด PR พร้อมคำอธิบายว่าเพิ่มตาราง mapping จังหวัดกับภาค และแสดงผลว่าทุกสถานีมีค่า <code>region</code> ครบ ก review แล้วพบว่าชื่อจังหวัด “กรุงเทพฯ” กับ “กรุงเทพมหานคร” ไม่ตรงกัน ทำให้บางสถานีไม่ได้ค่าภาค ข แก้แล้ว ก approve และ merge</li>
+<li>ก ดึง <code>main</code> ล่าสุดเข้า branch ของตัวเองด้วย <code>git merge main</code> เกิด conflict ใน <code>src/load_duckdb.py</code> เพราะทั้งสองคนเพิ่มบรรทัดต่อท้ายฟังก์ชันเดียวกัน ก อ่านทั้งสองฝั่ง เห็นว่าต้องเก็บทั้งสองส่วน จึงแก้ให้ทำงานตามลำดับ แล้วรัน pipeline ใหม่ทั้งหมดเพื่อยืนยันว่าทำงานได้</li>
+<li>ก เปิด PR พร้อมแสดงจำนวนแถวของ <code>daily_pm25</code> และตัวอย่างค่าเฉลี่ยรายวันของสถานีหนึ่งที่คำนวณด้วยมือเทียบกับผลจากโค้ด ข review แล้วถามว่าทำไมใช้ <code>CAST(ts AS DATE)</code> และ <code>ts</code> อยู่ในเขตเวลาใด ก อธิบายว่า <code>ts</code> เก็บเป็นเวลาท้องถิ่น Asia/Bangkok อยู่แล้ว (บทที่ 7–8) และเพิ่ม comment ในโค้ด จากนั้น merge</li>
+</ol>
+<p><strong>ผล</strong> ประวัติของ repository แสดงลำดับเหตุการณ์ทั้งหมด คือ issue สองรายการ PR สองรายการพร้อมการอภิปราย และ merge commit ที่แก้ conflict ใครที่ดูประวัติในภายหลังจะรู้ว่าทำไมตาราง mapping จึงมีชื่อกรุงเทพฯ สองแบบ และทำไม <code>daily_pm25</code> จึงใช้ <code>CAST(ts AS DATE)</code></p>
+<p><strong>การตีความ</strong> การ review ในขั้นที่ 2 จับปัญหาคุณภาพข้อมูลได้ก่อนที่ปัญหาจะไปถึงการวิเคราะห์ ถ้าไม่มีการ review สถานีในกรุงเทพฯ บางแห่งจะไม่มีภาค และจะหายไปจากทุกการวิเคราะห์ที่ join กับ <code>stations</code> โดยไม่มี error ใดแจ้งเตือน ส่วนการถามในขั้นที่ 4 ไม่ได้พบข้อผิดพลาด แต่ทำให้เหตุผลถูกบันทึกไว้ในโค้ด</p>
+<p><strong>ข้อจำกัด</strong> workflow นี้พึ่งพาวินัยของสมาชิก ถ้าคนใดคนหนึ่ง push ตรงเข้า <code>main</code> หรือ approve โดยไม่ได้ดูจริง กลไกทั้งหมดก็ไม่มีความหมาย การตั้งกฎป้องกัน branch และ CI ในหัวข้อ <a href="#sec-ch03-ci" class="quarto-xref"><span>3.10</span></a> ช่วยลดการพึ่งพาวินัยลงได้</p>
+</section>
+<section id="sec-ch03-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch03-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch03-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch03-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;3.12: ข้อผิดพลาดที่พบบ่อยในบทที่ 3
+</figcaption>
+<div aria-describedby="tbl-ch03-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ใช้ <code>git add .</code> โดยไม่ตรวจ</td>
+<td>ไฟล์ข้อมูล <code>.env</code> หรือไฟล์ชั่วคราวหลุดเข้า Git</td>
+<td>stage ทีละไฟล์ และตรวจ <code>git diff --staged</code> ก่อน commit</td>
+</tr>
+<tr class="even">
+<td>commit ไฟล์ข้อมูลใหญ่แล้วลบใน commit ถัดไป</td>
+<td>blob ยังอยู่ในประวัติ repository ยังใหญ่เท่าเดิม</td>
+<td>ใส่ <code>data/</code> ใน <code>.gitignore</code> ตั้งแต่วันแรก</td>
+</tr>
+<tr class="odd">
+<td>commit ครั้งเดียวตอนท้ายพร้อมข้อความ “final”</td>
+<td>ไม่มีประวัติให้ย้อนกลับ และผู้อ่านไม่รู้ว่าทำอะไร</td>
+<td>commit บ่อยเป็นเรื่องเดียว ข้อความบอกว่าทำอะไรและทำไม</td>
+</tr>
+<tr class="even">
+<td>ทำงานตรงบน <code>main</code></td>
+<td>งานครึ่ง ๆ กลาง ๆ ทำให้ <code>main</code> ใช้งานไม่ได้ และไม่มีโอกาส review</td>
+<td>ทำงานใน branch แล้วรวมผ่าน pull request</td>
+</tr>
+<tr class="odd">
+<td>rebase branch ที่แชร์กับผู้อื่นแล้ว</td>
+<td>hash เปลี่ยน ประวัติของผู้อื่นไม่ตรงกัน</td>
+<td>ใช้ merge กับ branch ที่แชร์ rebase เฉพาะ branch ส่วนตัว</td>
+</tr>
+<tr class="even">
+<td>แก้ conflict โดยเลือกฝั่งของตัวเองทั้งหมดโดยไม่อ่าน</td>
+<td>งานของเพื่อนหายไปโดยไม่รู้ตัว</td>
+<td>อ่านทั้งสองฝั่ง เข้าใจเจตนา แล้วรันโค้ดหลังแก้</td>
+</tr>
+<tr class="odd">
+<td>approve PR โดยไม่ได้ดูผลลัพธ์</td>
+<td>ข้อผิดพลาดในข้อมูลที่ไม่ทำให้เกิด error หลุดเข้า <code>main</code></td>
+<td>ตรวจผลลัพธ์และจุดเสี่ยงของข้อมูลก่อนความอ่านง่ายของโค้ด</td>
+</tr>
+<tr class="even">
+<td>commit notebook พร้อมผลลัพธ์และกราฟ</td>
+<td>repository บวม diff อ่านไม่ออก conflict แก้ยาก</td>
+<td>ใช้ nbstripout หรือ Jupytext หรือล้างผลลัพธ์ก่อน commit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>version control บันทึกว่าอะไรเปลี่ยน ใครเปลี่ยน เมื่อไร และทำไม ทำให้ผลการวิเคราะห์ตรวจสอบย้อนกลับได้ และทำงานเป็นทีมได้โดยไม่ทับงานกัน</li>
+<li>Git เก็บข้อมูลเป็นวัตถุสามชนิดที่ระบุด้วย hash ของเนื้อหา คือ blob, tree และ commit commit ชี้ไปยัง parent จนประวัติเป็น DAG ส่วน branch และ HEAD เป็นเพียงป้ายชื่อที่ชี้ไปยัง commit</li>
+<li>staging area ช่วยให้เลือกได้ว่าจะ commit อะไร commit ที่ดีมีเรื่องเดียว สมบูรณ์ และมีข้อความที่บอกทั้งสิ่งที่ทำและเหตุผล</li>
+<li>merge รักษาประวัติจริงและปลอดภัยกับ branch ที่แชร์ ส่วน rebase สร้าง commit ใหม่และทำให้ประวัติเป็นเส้นตรง แต่ห้ามใช้กับ commit ที่ผู้อื่นใช้อยู่</li>
+<li>conflict คือการที่ Git ปฏิเสธที่จะเดาเมื่อสองฝั่งแก้ส่วนเดียวกัน การแก้ต้องเข้าใจเจตนาของทั้งสองฝั่ง และรันโค้ดหลังแก้เสมอ เพราะ conflict ระดับความหมาย Git ตรวจไม่พบ</li>
+<li>GitHub เพิ่ม remote, pull request และ issue บน Git การ review งานข้อมูลควรตรวจความถูกต้องของผลลัพธ์และจุดเสี่ยงของข้อมูลก่อนความอ่านง่าย</li>
+<li>notebook ต้องล้างผลลัพธ์ก่อน commit ข้อมูลขนาดใหญ่ใช้ Git LFS หรือ DVC และ CI ช่วยตรวจทุกการเปลี่ยนแปลงโดยอัตโนมัติ</li>
+</ul>
+</section>
+<section id="sec-ch03-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch03-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>อธิบายความต่างระหว่าง blob, tree และ commit และบอกว่าวัตถุใดเก็บชื่อไฟล์</li>
+<li>ทำไมการแก้ข้อความของ commit ที่อยู่กลางประวัติจึงทำให้ hash ของทุก commit หลังจากนั้นเปลี่ยน</li>
+<li>branch ใน Git คืออะไรในทางเทคนิค และทำไมการสร้าง branch ใหม่จึงเร็วมาก</li>
+<li>เขียน commit message ที่ดีสำหรับการเปลี่ยนแปลงต่อไปนี้: เพิ่มการตรวจว่าค่า PM2.5 ต้องไม่ติดลบใน <code>src/validate.py</code></li>
+<li>เมื่อใดที่ merge จะเป็นแบบ fast-forward และเมื่อใดจะสร้าง merge commit</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>สร้าง repository ทดลอง commit ไฟล์ <code>README.md</code> แล้วใช้ <code>git cat-file -p</code> ดู commit, tree และ blob ตามลำดับ จากนั้นแก้ README แล้ว commit อีกครั้ง เปรียบเทียบ hash ของ tree และ blob ในสอง commit และอธิบายว่าส่วนใดเปลี่ยนและส่วนใดไม่เปลี่ยน</li>
+<li>จำลอง conflict ตามตัวอย่างในหัวข้อ <a href="#sec-ch03-conflict" class="quarto-xref"><span>3.5</span></a> โดยสร้างสอง branch ที่แก้บรรทัดเดียวกันของ <code>src/config.py</code> แล้ว merge แก้ conflict ให้เก็บทั้งสองค่า และแสดงผลของ <code>git log --oneline --graph</code></li>
+<li>review pull request ของเพื่อนในรายวิชาตามลำดับห้าข้อในหัวข้อ <a href="#sec-ch03-review" class="quarto-xref"><span>3.7</span></a> เขียนความคิดเห็นอย่างน้อยสามข้อ โดยมีข้อหนึ่งเกี่ยวกับการจัดการข้อมูล และระบุให้ชัดว่าข้อใดต้องแก้และข้อใดเป็นข้อเสนอ</li>
+<li>ใช้ <code>git log -S</code> หา commit ที่เพิ่มค่า <code>37.5</code> เข้าไปใน repository โครงการของตน แล้วใช้ <code>git show</code> ดูรายละเอียดของ commit นั้น commit message บอกเหตุผลของการเปลี่ยนแปลงหรือไม่</li>
+<li>ตรวจไฟล์ <code>.gitignore</code> ของโครงการตนเองเทียบกับ <a href="#tbl-ch03-what-to-commit" class="quarto-xref">ตารางที่&nbsp;<span>3.2</span></a> แล้วรัน <code>git status --ignored</code> อธิบายว่ามีไฟล์ใดถูกละเว้นบ้าง และมีไฟล์ใดที่ควรละเว้นแต่ยังไม่ได้ละเว้น</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ตั้ง GitHub Actions ให้ repository โครงการของตน ที่รัน pipeline กับไฟล์ข้อมูลตัวอย่างขนาดเล็กและตรวจว่าตาราง <code>daily_pm25</code> มีจำนวนแถวตามที่คาด ทุกครั้งที่เปิด pull request บันทึกปัญหาที่พบระหว่างตั้งค่า</li>
+<li>ใช้ <code>git bisect</code> หา commit ที่ทำให้ผลลัพธ์เปลี่ยน โดยสร้างประวัติทดลองอย่างน้อย 10 commit ที่มี commit หนึ่งแอบเปลี่ยนเกณฑ์ความครบถ้วน แล้วเขียน script ที่ <code>git bisect run</code> ใช้ตัดสินว่า commit ใดดีหรือเสีย</li>
+<li>เปรียบเทียบ Git LFS กับ DVC ในทางปฏิบัติ โดยจัดเวอร์ชันไฟล์ Parquet ข้อมูลตัวอย่างด้วยทั้งสองวิธี แล้ววิเคราะห์ข้อดีข้อเสียสำหรับโครงการ PM2.5 ที่ข้อมูลเพิ่มขึ้นทุกชั่วโมง</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch03">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="chacon2014pro">Chacon และ Straub (<a href="../references.html#ref-chacon2014pro" role="doc-biblioref">2014</a>)</span> — หนังสือ Git ที่ครบถ้วนที่สุดและอ่านฟรีออนไลน์ บทที่ 10 เรื่อง Git internals อธิบายแบบจำลองข้อมูลในบทนี้อย่างละเอียด</li>
+<li><span class="citation" data-cites="bryan2018excuse">Bryan (<a href="../references.html#ref-bryan2018excuse" role="doc-biblioref">2018</a>)</span> — บทความที่เขียนสำหรับนักสถิติและนักวิเคราะห์ข้อมูลโดยเฉพาะ อธิบายว่าทำไมและอย่างไรที่ควรใช้ Git กับ GitHub</li>
+<li><span class="citation" data-cites="blischak2016quick">Blischak และคณะ (<a href="../references.html#ref-blischak2016quick" role="doc-biblioref">2016</a>)</span> — บทนำ Git และ GitHub สั้น ๆ สำหรับนักวิจัย พร้อมตัวอย่างวงจรการทำงาน</li>
+<li><span class="citation" data-cites="ram2013git">Ram (<a href="../references.html#ref-ram2013git" role="doc-biblioref">2013</a>)</span> — บทความที่อธิบายว่า Git ช่วยให้งานวิจัยทำซ้ำได้อย่างไร</li>
+<li><span class="citation" data-cites="bacchelli2013expectations">Bacchelli และ Bird (<a href="../references.html#ref-bacchelli2013expectations" role="doc-biblioref">2013</a>)</span> — งานวิจัยเรื่องความคาดหวังและผลที่ได้จริงของการ review โค้ด ช่วยให้เข้าใจว่า review มีไว้ทำอะไร</li>
+<li><span class="citation" data-cites="google2026engpractices">Google (<a href="../references.html#ref-google2026engpractices" role="doc-biblioref">2026</a>)</span> — แนวปฏิบัติการ review โค้ดของ Google ทั้งสำหรับผู้ review และผู้ถูก review</li>
+<li><span class="citation" data-cites="beams2014how">Beams (<a href="../references.html#ref-beams2014how" role="doc-biblioref">2014</a>)</span> — บทความสั้นเรื่องการเขียน commit message ที่ดี</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bacchelli2013expectations" class="csl-entry" role="listitem">
+Bacchelli, Alberto, และ Christian Bird. 2013. <span>“Expectations, Outcomes, and Challenges of Modern Code Review”</span>. <em>Proceedings of the 35th International Conference on Software Engineering (ICSE)</em>, 712–21. <a href="https://doi.org/10.1109/ICSE.2013.6606617">https://doi.org/10.1109/ICSE.2013.6606617</a>.
+</div>
+<div id="ref-beams2014how" class="csl-entry" role="listitem">
+Beams, Chris. 2014. <em>How to Write a <span>Git</span> Commit Message</em>. <a href="https://cbea.ms/git-commit/">https://cbea.ms/git-commit/</a>.
+</div>
+<div id="ref-blischak2016quick" class="csl-entry" role="listitem">
+Blischak, John D., Emily R. Davenport, และ Greg Wilson. 2016. <span>“A Quick Introduction to Version Control with <span>Git</span> and <span>GitHub</span>”</span>. <em>PLoS Computational Biology</em> 12 (1): e1004668. <a href="https://doi.org/10.1371/journal.pcbi.1004668">https://doi.org/10.1371/journal.pcbi.1004668</a>.
+</div>
+<div id="ref-bryan2018excuse" class="csl-entry" role="listitem">
+Bryan, Jennifer. 2018. <span>“Excuse Me, Do You Have a Moment to Talk About Version Control?”</span> <em>The American Statistician</em> 72 (1): 20–27. <a href="https://doi.org/10.1080/00031305.2017.1399928">https://doi.org/10.1080/00031305.2017.1399928</a>.
+</div>
+<div id="ref-chacon2014pro" class="csl-entry" role="listitem">
+Chacon, Scott, และ Ben Straub. 2014. <em>Pro Git</em>. 2 พิมพ์ครั้งที่. Apress. <a href="https://git-scm.com/book">https://git-scm.com/book</a>.
+</div>
+<div id="ref-conventionalcommits2026" class="csl-entry" role="listitem">
+Conventional Commits. 2026. <em>Conventional Commits Specification 1.0.0</em>. <a href="https://www.conventionalcommits.org/">https://www.conventionalcommits.org/</a>.
+</div>
+<div id="ref-gitlfs2026" class="csl-entry" role="listitem">
+Git LFS. 2026. <em>Git Large File Storage</em>. <a href="https://git-lfs.com/">https://git-lfs.com/</a>.
+</div>
+<div id="ref-githubactions2026" class="csl-entry" role="listitem">
+GitHub. 2026. <em><span>GitHub Actions</span> Documentation</em>. <a href="https://docs.github.com/actions">https://docs.github.com/actions</a>.
+</div>
+<div id="ref-google2026engpractices" class="csl-entry" role="listitem">
+Google. 2026. <em>Google Engineering Practices Documentation: Code Review</em>. <a href="https://google.github.io/eng-practices/review/">https://google.github.io/eng-practices/review/</a>.
+</div>
+<div id="ref-dvc2026" class="csl-entry" role="listitem">
+Iterative. 2026. <em><span>DVC</span> Documentation</em>. <a href="https://dvc.org/doc">https://dvc.org/doc</a>.
+</div>
+<div id="ref-ram2013git" class="csl-entry" role="listitem">
+Ram, Karthik. 2013. <span>“Git Can Facilitate Greater Reproducibility and Increased Transparency in Science”</span>. <em>Source Code for Biology and Medicine</em> 8: 7. <a href="https://doi.org/10.1186/1751-0473-8-7">https://doi.org/10.1186/1751-0473-8-7</a>.
+</div>
+<div id="ref-nbstripout2026" class="csl-entry" role="listitem">
+<span class="nocase">Rathgeber, Florian และคณะ</span>. 2026. <em>nbstripout: Strip Output from <span>Jupyter</span> Notebooks</em>. <a href="https://github.com/kynan/nbstripout">https://github.com/kynan/nbstripout</a>.
+</div>
+<div id="ref-jupytext2026" class="csl-entry" role="listitem">
+<span class="nocase">Wouts, Marc และคณะ</span>. 2026. <em>Jupytext Documentation</em>. <a href="https://jupytext.readthedocs.io/">https://jupytext.readthedocs.io/</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/02-reproducible-environment.html" class="pagination-link" aria-label="สภาพแวดล้อมการทำงานที่ทำซ้ำได้">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/04-questions-hypotheses.html" class="pagination-link" aria-label="การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

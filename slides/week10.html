@@ -642,6 +642,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/13-exploratory-statistics.html">บทที่ 13</a> และ <a href="../book/chapters/14-time-series.html">บทที่ 14</a> ก่อนเข้าเรียน</li>
 <li>ทบทวน median, IQR, p-value และ effect size</li>
 <li>อ่าน <code>scipy.stats.mannwhitneyu</code> และ <code>statsmodels.tsa.seasonal.STL</code> คร่าว ๆ</li>
 <li>เลือกข้อสังเกต 2 ข้อจากกราฟสัปดาห์ 9–10 ที่อยาก <em>ทดสอบ</em></li>
@@ -935,7 +936,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

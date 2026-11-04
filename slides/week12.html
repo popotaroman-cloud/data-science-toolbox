@@ -580,13 +580,15 @@
 <section id="robust-z-score-รายสถาน-เดอน" class="slide level2">
 <h2>Robust z-score รายสถานี × เดือน</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>d[<span class="st">"month"</span>] <span class="op">=</span> pd.to_datetime(d[<span class="st">"date"</span>]).dt.month</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> d.groupby([<span class="st">"station_id"</span>, <span class="st">"month"</span>])[<span class="st">"pm25_mean"</span>]</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>med <span class="op">=</span> g.transform(<span class="st">"median"</span>)</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>mad <span class="op">=</span> g.transform(<span class="kw">lambda</span> s: (s <span class="op">-</span> s.median()).<span class="bu">abs</span>().median())</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>d[<span class="st">"robust_z"</span>] <span class="op">=</span> <span class="fl">0.6745</span> <span class="op">*</span> (d[<span class="st">"pm25_mean"</span>] <span class="op">-</span> med) <span class="op">/</span> mad</span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>d[<span class="st">"is_outlier"</span>] <span class="op">=</span> d[<span class="st">"robust_z"</span>].<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="fl">3.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>d[<span class="st">"log_pm25"</span>] <span class="op">=</span> np.log(d[<span class="st">"pm25_mean"</span>])       <span class="co"># สเกล log: ข้อมูลเบ้ขวา</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> d.groupby([<span class="st">"station_id"</span>, <span class="st">"month"</span>])[<span class="st">"log_pm25"</span>]</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>med <span class="op">=</span> g.transform(<span class="st">"median"</span>)</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a>mad <span class="op">=</span> g.transform(<span class="kw">lambda</span> s: (s <span class="op">-</span> s.median()).<span class="bu">abs</span>().median())</span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>d[<span class="st">"robust_z"</span>] <span class="op">=</span> <span class="fl">0.6745</span> <span class="op">*</span> (d[<span class="st">"log_pm25"</span>] <span class="op">-</span> med) <span class="op">/</span> mad</span>
+<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a>d[<span class="st">"is_outlier"</span>] <span class="op">=</span> d[<span class="st">"robust_z"</span>].<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="fl">3.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><code>d</code> มาจาก <strong>ข้อมูลรายวันที่ทำความสะอาดแล้ว</strong></li>
+<li><code>d</code> มาจาก <code>daily_pm25_clean</code> <strong>เฉพาะวันที่ <code>is_complete</code></strong></li>
+<li>ตัดสินเหตุผลด้วย <em>สถานีอื่น</em> ในจังหวัดเดียวกัน (ไม่นับสถานีที่ถูกติดธงเอง)</li>
 <li><strong>ติดธง</strong> เป็นคอลัมน์ใหม่ ไม่ลบแถว</li>
 </ul>
 </section></section>
@@ -798,6 +800,7 @@
 <section id="กอนสปดาหหนา" class="slide level2">
 <h2>ก่อนสัปดาห์หน้า</h2>
 <ul>
+<li>อ่านหนังสือ <a href="../book/chapters/17-spatial-data.html">บทที่ 17</a> และ <a href="../book/chapters/18-hierarchical-data.html">บทที่ 18</a> ก่อนเข้าเรียน</li>
 <li>สรุปลักษณะแต่ละ cluster 2–3 บรรทัด + คำถามใหม่ใน <code>questions.md</code></li>
 <li>ขอไฟล์ GeoJSON ขอบเขตจังหวัดจากผู้สอน (หรือ geoBoundaries / HDX) และอ่านสัญญาอนุญาต</li>
 <li>อ่าน GeoPandas <em>Managing Projections</em> · ตรวจว่า <code>stations</code> มี <code>lat</code>, <code>lon</code> ครบ</li>
@@ -1090,7 +1093,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/popotaroman-cloud\.github\.io\/data-science-toolbox\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

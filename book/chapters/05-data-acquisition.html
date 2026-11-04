@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; การได้มาซึ่งข้อมูลจาก API และเว็บไซต์ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/06-analytical-databases.html" rel="next">
+<link href="../chapters/04-questions-hypotheses.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch05-open-data" id="toc-sec-ch05-open-data" class="nav-link" data-scroll-target="#sec-ch05-open-data"><span class="header-section-number">5.1</span> ภูมิทัศน์ข้อมูลเปิดของประเทศไทย</a>
+  <ul class="collapse">
+  <li><a href="#ขอมลเปดคออะไร" id="toc-ขอมลเปดคออะไร" class="nav-link" data-scroll-target="#ขอมลเปดคออะไร">ข้อมูลเปิดคืออะไร</a></li>
+  <li><a href="#แหลงขอมลของประเทศไทย" id="toc-แหลงขอมลของประเทศไทย" class="nav-link" data-scroll-target="#แหลงขอมลของประเทศไทย">แหล่งข้อมูลของประเทศไทย</a></li>
+  <li><a href="#ประเมนแหลงขอมลกอนลงมอ" id="toc-ประเมนแหลงขอมลกอนลงมอ" class="nav-link" data-scroll-target="#ประเมนแหลงขอมลกอนลงมอ">ประเมินแหล่งข้อมูลก่อนลงมือ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-http" id="toc-sec-ch05-http" class="nav-link" data-scroll-target="#sec-ch05-http"><span class="header-section-number">5.2</span> HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</a>
+  <ul class="collapse">
+  <li><a href="#request-และ-response" id="toc-request-และ-response" class="nav-link" data-scroll-target="#request-และ-response">request และ response</a></li>
+  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">method</a></li>
+  <li><a href="#status-code" id="toc-status-code" class="nav-link" data-scroll-target="#status-code">status code</a></li>
+  <li><a href="#header" id="toc-header" class="nav-link" data-scroll-target="#header">header</a></li>
+  <li><a href="#tls-และ-certificate-chain" id="toc-tls-และ-certificate-chain" class="nav-link" data-scroll-target="#tls-และ-certificate-chain">TLS และ certificate chain</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-rest" id="toc-sec-ch05-rest" class="nav-link" data-scroll-target="#sec-ch05-rest"><span class="header-section-number">5.3</span> REST API: authentication, pagination, rate limit</a>
+  <ul class="collapse">
+  <li><a href="#rest-คออะไร" id="toc-rest-คออะไร" class="nav-link" data-scroll-target="#rest-คออะไร">REST คืออะไร</a></li>
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">authentication</a></li>
+  <li><a href="#pagination" id="toc-pagination" class="nav-link" data-scroll-target="#pagination">pagination</a></li>
+  <li><a href="#rate-limit" id="toc-rate-limit" class="nav-link" data-scroll-target="#rate-limit">rate limit</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-formats" id="toc-sec-ch05-formats" class="nav-link" data-scroll-target="#sec-ch05-formats"><span class="header-section-number">5.4</span> รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</a>
+  <ul class="collapse">
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json">JSON</a></li>
+  <li><a href="#csv" id="toc-csv" class="nav-link" data-scroll-target="#csv">CSV</a></li>
+  <li><a href="#xml" id="toc-xml" class="nav-link" data-scroll-target="#xml">XML</a></li>
+  <li><a href="#encoding-ทำไมภาษาไทยกลายเปนอกขระแปลก" id="toc-encoding-ทำไมภาษาไทยกลายเปนอกขระแปลก" class="nav-link" data-scroll-target="#encoding-ทำไมภาษาไทยกลายเปนอกขระแปลก">encoding: ทำไมภาษาไทยกลายเป็นอักขระแปลก</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-robust" id="toc-sec-ch05-robust" class="nav-link" data-scroll-target="#sec-ch05-robust"><span class="header-section-number">5.5</span> การดึงข้อมูลอย่างทนทาน: timeout, retry, backoff, idempotency</a>
+  <ul class="collapse">
+  <li><a href="#ความผดพลาดเปนเรองปกต" id="toc-ความผดพลาดเปนเรองปกต" class="nav-link" data-scroll-target="#ความผดพลาดเปนเรองปกต">ความผิดพลาดเป็นเรื่องปกติ</a></li>
+  <li><a href="#timeout" id="toc-timeout" class="nav-link" data-scroll-target="#timeout">timeout</a></li>
+  <li><a href="#retry-และ-exponential-backoff" id="toc-retry-และ-exponential-backoff" class="nav-link" data-scroll-target="#retry-และ-exponential-backoff">retry และ exponential backoff</a></li>
+  <li><a href="#idempotency-ของ-script" id="toc-idempotency-ของ-script" class="nav-link" data-scroll-target="#idempotency-ของ-script">idempotency ของ script</a></li>
+  <li><a href="#โครงสรางของ-srcfetch_air4thai.py" id="toc-โครงสรางของ-srcfetch_air4thai.py" class="nav-link" data-scroll-target="#โครงสรางของ-srcfetch_air4thai.py">โครงสร้างของ <code>src/fetch_air4thai.py</code></a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-scraping" id="toc-sec-ch05-scraping" class="nav-link" data-scroll-target="#sec-ch05-scraping"><span class="header-section-number">5.6</span> web scraping: DOM, CSS selector และ BeautifulSoup</a>
+  <ul class="collapse">
+  <li><a href="#เมอใดตอง-scrape" id="toc-เมอใดตอง-scrape" class="nav-link" data-scroll-target="#เมอใดตอง-scrape">เมื่อใดต้อง scrape</a></li>
+  <li><a href="#dom" id="toc-dom" class="nav-link" data-scroll-target="#dom">DOM</a></li>
+  <li><a href="#css-selector" id="toc-css-selector" class="nav-link" data-scroll-target="#css-selector">CSS selector</a></li>
+  <li><a href="#beautifulsoup" id="toc-beautifulsoup" class="nav-link" data-scroll-target="#beautifulsoup">BeautifulSoup</a></li>
+  <li><a href="#ขอจำกดของ-scraping" id="toc-ขอจำกดของ-scraping" class="nav-link" data-scroll-target="#ขอจำกดของ-scraping">ข้อจำกัดของ scraping</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-legal" id="toc-sec-ch05-legal" class="nav-link" data-scroll-target="#sec-ch05-legal"><span class="header-section-number">5.7</span> กฎหมายและจริยธรรม: robots.txt, ข้อกำหนดการใช้งาน, ลิขสิทธิ์, PDPA</a>
+  <ul class="collapse">
+  <li><a href="#ทำไดไมไดแปลวาควรทำ" id="toc-ทำไดไมไดแปลวาควรทำ" class="nav-link" data-scroll-target="#ทำไดไมไดแปลวาควรทำ">ทำได้ไม่ได้แปลว่าควรทำ</a></li>
+  <li><a href="#robots.txt" id="toc-robots.txt" class="nav-link" data-scroll-target="#robots.txt">robots.txt</a></li>
+  <li><a href="#ขอกำหนดการใชงาน" id="toc-ขอกำหนดการใชงาน" class="nav-link" data-scroll-target="#ขอกำหนดการใชงาน">ข้อกำหนดการใช้งาน</a></li>
+  <li><a href="#ลขสทธ" id="toc-ลขสทธ" class="nav-link" data-scroll-target="#ลขสทธ">ลิขสิทธิ์</a></li>
+  <li><a href="#pdpa" id="toc-pdpa" class="nav-link" data-scroll-target="#pdpa">PDPA</a></li>
+  <li><a href="#แนวปฏบตทด" id="toc-แนวปฏบตทด" class="nav-link" data-scroll-target="#แนวปฏบตทด">แนวปฏิบัติที่ดี</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-incremental" id="toc-sec-ch05-incremental" class="nav-link" data-scroll-target="#sec-ch05-incremental"><span class="header-section-number">5.8</span> การดึงข้อมูลแบบตั้งเวลาและแบบเพิ่มเติม (incremental) ★</a>
+  <ul class="collapse">
+  <li><a href="#ตงเวลาให-script-รนเอง" id="toc-ตงเวลาให-script-รนเอง" class="nav-link" data-scroll-target="#ตงเวลาให-script-รนเอง">ตั้งเวลาให้ script รันเอง</a></li>
+  <li><a href="#incremental-loading" id="toc-incremental-loading" class="nav-link" data-scroll-target="#incremental-loading">incremental loading</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-observability" id="toc-sec-ch05-observability" class="nav-link" data-scroll-target="#sec-ch05-observability"><span class="header-section-number">5.9</span> logging และการสังเกตการณ์ (observability) ของ pipeline ★</a>
+  <ul class="collapse">
+  <li><a href="#ทำไม-print-ไมพอ" id="toc-ทำไม-print-ไมพอ" class="nav-link" data-scroll-target="#ทำไม-print-ไมพอ">ทำไม <code>print</code> ไม่พอ</a></li>
+  <li><a href="#จาก-logging-ส-observability" id="toc-จาก-logging-ส-observability" class="nav-link" data-scroll-target="#จาก-logging-ส-observability">จาก logging สู่ observability</a></li>
+  </ul></li>
+  <li><a href="#sec-ch05-case" id="toc-sec-ch05-case" class="nav-link" data-scroll-target="#sec-ch05-case">กรณีศึกษา: สร้าง script ดึงข้อมูล Air4Thai ที่ทนทาน</a></li>
+  <li><a href="#sec-ch05-pitfalls" id="toc-sec-ch05-pitfalls" class="nav-link" data-scroll-target="#sec-ch05-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch05-exercises" id="toc-sec-ch05-exercises" class="nav-link" data-scroll-target="#sec-ch05-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 4 จบลงด้วยไฟล์ <code>questions.md</code> ที่บอกว่าโครงการต้องการตอบคำถามใด และต้องใช้ข้อมูลอะไร บทนี้เริ่มชั้นแรกของ pipeline คือการนำข้อมูลจากแหล่งภายนอกเข้ามาในระบบของเรา ฟังดูเป็นงานง่าย เพียงเรียก URL แล้วบันทึกผล แต่ในทางปฏิบัติ งานนี้เต็มไปด้วยรายละเอียดที่ส่งผลต่อคุณภาพของทุกขั้นหลังจากนั้น เครือข่ายอาจหลุด เซิร์ฟเวอร์อาจตอบช้า ใบรับรองความปลอดภัยอาจไม่ครบ ตัวอักษรไทยอาจกลายเป็นอักขระแปลก ๆ และข้อมูลบางช่วงอาจดึงซ้ำไม่ได้อีกแล้ว</p>
+<p>บทนี้อธิบายกลไกที่อยู่เบื้องหลังการดึงข้อมูลตั้งแต่ระดับโปรโตคอล HTTP ไปจนถึงการออกแบบ script ที่ทนทานต่อความผิดพลาด และจบด้วยกรอบกฎหมายและจริยธรรมที่นักวิทยาการข้อมูลต้องคำนึงถึงก่อนนำข้อมูลของผู้อื่นมาใช้ ผลงานของบทคือ <code>src/fetch_air4thai.py</code> ซึ่งทำหน้าที่เดียว คือบันทึก response ดิบจาก Air4Thai ให้ครบถ้วนและถูกต้อง ส่วนการแปลงเป็นตารางเป็นงานของบทที่ 6–7</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายภูมิทัศน์ข้อมูลเปิดของประเทศไทยและประเมินความเหมาะสมของแหล่งข้อมูลกับคำถาม</li>
+<li>อธิบายองค์ประกอบของ HTTP request และ response รวมถึงกลไกของ TLS certificate chain</li>
+<li>ใช้ REST API ที่มี authentication, pagination และ rate limit อย่างถูกต้อง</li>
+<li>แยกรูปแบบข้อมูล JSON, CSV และ XML และแก้ปัญหา encoding ของภาษาไทยได้</li>
+<li>ออกแบบ script ดึงข้อมูลที่มี timeout, retry แบบ backoff และเป็น idempotent</li>
+<li>ดึงข้อมูลจากหน้าเว็บด้วย CSS selector และ BeautifulSoup เมื่อไม่มี API</li>
+<li>ประเมินประเด็นกฎหมายและจริยธรรมของการได้มาซึ่งข้อมูล ทั้ง robots.txt ข้อกำหนดการใช้งาน ลิขสิทธิ์ และ PDPA</li>
+</ol>
+</section>
+<section id="sec-ch05-open-data" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-ch05-open-data"><span class="header-section-number">5.1</span> ภูมิทัศน์ข้อมูลเปิดของประเทศไทย</h2>
+<section id="ขอมลเปดคออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลเปดคออะไร">ข้อมูลเปิดคืออะไร</h3>
+<p><span class="idx">ข้อมูลเปิด</span> (open data) คือข้อมูลที่ทุกคนเข้าถึง ใช้ และเผยแพร่ต่อได้อย่างเสรี โดยอาจมีเงื่อนไขเพียงให้อ้างอิงแหล่งที่มา Open Definition ของ Open Knowledge Foundation กำหนดว่าข้อมูลเปิดต้องมีสัญญาอนุญาตที่เปิด และอยู่ในรูปแบบที่เครื่องอ่านได้โดยไม่ต้องใช้ซอฟต์แวร์เฉพาะ <span class="citation" data-cites="okfn2026opendefinition">(<a href="../references.html#ref-okfn2026opendefinition" role="doc-biblioref">Open Knowledge Foundation 2026</a>)</span> สองเงื่อนไขนี้สำคัญต่องานของเรา ข้อมูลที่เผยแพร่เป็นไฟล์ PDF ของตาราง หรือรูปภาพของกราฟ แม้จะเข้าถึงได้ฟรี ก็ยังนำมาวิเคราะห์ได้ยาก และข้อมูลที่ไม่มีสัญญาอนุญาตชัดเจน ก็ยังไม่แน่ว่านำไปเผยแพร่ต่อได้หรือไม่</p>
+</section>
+<section id="แหลงขอมลของประเทศไทย" class="level3">
+<h3 class="anchored" data-anchor-id="แหลงขอมลของประเทศไทย">แหล่งข้อมูลของประเทศไทย</h3>
+<p>ประเทศไทยมีกรอบกฎหมายที่สนับสนุนการเปิดเผยข้อมูลภาครัฐ ได้แก่ พ.ร.บ.ข้อมูลข่าวสารของราชการ พ.ศ. 2540 ซึ่งรับรองสิทธิของประชาชนในการเข้าถึงข้อมูลข่าวสารของราชการ <span class="citation" data-cites="oic1997official">(<a href="../references.html#ref-oic1997official" role="doc-biblioref">ราชกิจจานุเบกษา 1997</a>)</span> และ พ.ร.บ.การบริหารงานและการให้บริการภาครัฐผ่านระบบดิจิทัล พ.ศ. 2562 ซึ่งกำหนดให้หน่วยงานรัฐจัดทำข้อมูลในรูปแบบดิจิทัลและเปิดเผยต่อสาธารณะ <span class="citation" data-cites="dga2019digital">(<a href="../references.html#ref-dga2019digital" role="doc-biblioref">ราชกิจจานุเบกษา 2019a</a>)</span> แหล่งข้อมูลที่ใช้ทำโครงการได้มีหลายประเภท</p>
+<div id="tbl-ch05-sources" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-sources-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.1: แหล่งข้อมูลเปิดของประเทศไทยที่ใช้ทำโครงการได้ (รายละเอียดเพิ่มเติมในภาคผนวก ง)
+</figcaption>
+<div aria-describedby="tbl-ch05-sources-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แหล่ง</th>
+<th>ลักษณะข้อมูล</th>
+<th>วิธีเข้าถึง</th>
+<th>เหมาะกับ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Air4Thai (กรมควบคุมมลพิษ)</td>
+<td>คุณภาพอากาศรายชั่วโมงจากสถานีตรวจวัด</td>
+<td>JSON ผ่าน URL บริการ</td>
+<td>กรณีศึกษาหลักของเล่ม</td>
+</tr>
+<tr class="even">
+<td>data.go.th</td>
+<td>ศูนย์กลางชุดข้อมูลเปิดภาครัฐหลายหน่วยงาน</td>
+<td>ดาวน์โหลดไฟล์และ API ของพอร์ทัล</td>
+<td>ค้นหาแหล่งข้อมูลในโดเมนอื่น</td>
+</tr>
+<tr class="odd">
+<td>กรมอุตุนิยมวิทยา</td>
+<td>สภาพอากาศ ปริมาณฝน อุณหภูมิ</td>
+<td>บริการข้อมูลของหน่วยงาน</td>
+<td>ตัวแปรประกอบการวิเคราะห์ฝุ่น</td>
+</tr>
+<tr class="even">
+<td>สำนักงานสถิติแห่งชาติ</td>
+<td>ประชากร เศรษฐกิจ สังคม</td>
+<td>ตารางสถิติและไฟล์ดาวน์โหลด</td>
+<td>ข้อมูลระดับจังหวัดเพื่อเทียบ</td>
+</tr>
+<tr class="odd">
+<td>GISTDA</td>
+<td>ข้อมูลจากดาวเทียม เช่น จุดความร้อน</td>
+<td>บริการข้อมูลของหน่วยงาน</td>
+<td>ข้อมูลเชิงพื้นที่ประกอบ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>รายละเอียดของบริการแต่ละแหล่ง เช่น endpoint และพารามิเตอร์ เปลี่ยนไปตามเวลา ภาคผนวก ง รวบรวมข้อมูลล่าสุดไว้ และผู้อ่านควรตรวจสอบกับเว็บไซต์ของหน่วยงานก่อนใช้ทุกครั้ง</p>
+</section>
+<section id="ประเมนแหลงขอมลกอนลงมอ" class="level3">
+<h3 class="anchored" data-anchor-id="ประเมนแหลงขอมลกอนลงมอ">ประเมินแหล่งข้อมูลก่อนลงมือ</h3>
+<p>ก่อนเขียนโค้ดดึงข้อมูลแม้แต่บรรทัดเดียว ควรประเมินแหล่งข้อมูลด้วยคำถามต่อไปนี้ ซึ่งเชื่อมโยงกับ <code>questions.md</code> โดยตรง</p>
+<ol type="1">
+<li><strong>ข้อมูลตอบคำถามได้หรือไม่</strong> มีตัวแปร พื้นที่ และช่วงเวลาที่คำถามต้องการหรือไม่ ความละเอียดของเวลาพอหรือไม่ เช่น คำถามเรื่องช่วงเวลาของวันต้องการข้อมูลรายชั่วโมง ข้อมูลรายวันตอบไม่ได้</li>
+<li><strong>ใครสร้างข้อมูล และสร้างอย่างไร</strong> เป็นค่าที่วัดได้โดยตรง ค่าที่ประมาณจากแบบจำลอง หรือค่าที่รายงานโดยบุคคล วิธีวัดเปลี่ยนไปในช่วงเวลาที่สนใจหรือไม่</li>
+<li><strong>เข้าถึงอย่างไร</strong> มี API หรือต้องดาวน์โหลดไฟล์ ต้องลงทะเบียนหรือใช้ key หรือไม่ มีข้อมูลย้อนหลังหรือมีเฉพาะค่าล่าสุด</li>
+<li><strong>ใช้ได้ภายใต้เงื่อนไขใด</strong> มีสัญญาอนุญาตหรือข้อกำหนดการใช้งานหรือไม่ ต้องอ้างอิงอย่างไร นำไปเผยแพร่ต่อได้หรือไม่ (หัวข้อ <a href="#sec-ch05-legal" class="quarto-xref"><span>5.7</span></a>)</li>
+<li><strong>เสถียรเพียงใด</strong> โครงสร้างข้อมูลเปลี่ยนบ่อยหรือไม่ มีเอกสารกำกับหรือไม่</li>
+</ol>
+<p>คำถามข้อ 3 สำคัญเป็นพิเศษสำหรับ Air4Thai บริการที่ให้ค่าล่าสุดของทุกสถานีให้เฉพาะค่าปัจจุบัน ค่าของชั่วโมงที่ผ่านไปแล้วดึงซ้ำจากบริการนี้ไม่ได้ ถ้าต้องการข้อมูลต่อเนื่อง จึงต้องดึงสะสมไปเรื่อย ๆ หรือใช้บริการข้อมูลย้อนหลังซึ่งมี endpoint ต่างหาก ข้อเท็จจริงนี้กำหนดการออกแบบของ script ทั้งหมดในบทนี้</p>
+</section>
+</section>
+<section id="sec-ch05-http" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-ch05-http"><span class="header-section-number">5.2</span> HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain</h2>
+<section id="request-และ-response" class="level3">
+<h3 class="anchored" data-anchor-id="request-และ-response">request และ response</h3>
+<p>ทุกครั้งที่ Python ขอข้อมูลจากเว็บ จะเกิดการสื่อสารหนึ่งคู่ตามโปรโตคอล <span class="idx">HTTP</span> คือ <strong><span class="idx">request</span></strong> จากฝั่งเรา (client) และ <strong><span class="idx">response</span></strong> จากฝั่งเซิร์ฟเวอร์ ความหมายของแต่ละองค์ประกอบกำหนดไว้ในมาตรฐาน RFC 9110 <span class="citation" data-cites="rfc9110http">(<a href="../references.html#ref-rfc9110http" role="doc-biblioref">Fielding และคณะ 2022</a>)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+  participant C as Python (requests)
+  participant S as เซิร์ฟเวอร์ Air4Thai
+  C-&gt;&gt;S: GET /services/getNewAQI_JSON.php&lt;br/&gt;Header: User-Agent, Accept
+  S--&gt;&gt;C: 200 OK&lt;br/&gt;Header: Content-Type: application/json&lt;br/&gt;Body: {"stations": [...]}
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="tbl-ch05-http-parts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-http-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.2: องค์ประกอบของ HTTP request และ response
+</figcaption>
+<div aria-describedby="tbl-ch05-http-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>องค์ประกอบ</th>
+<th>อยู่ใน</th>
+<th>ความหมาย</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>method</td>
+<td>request</td>
+<td>การกระทำที่ขอ</td>
+<td><code>GET</code> ขอข้อมูล · <code>POST</code> ส่งข้อมูล</td>
+</tr>
+<tr class="even">
+<td>URL</td>
+<td>request</td>
+<td>ที่อยู่ของทรัพยากรพร้อมพารามิเตอร์</td>
+<td><code>https://example.org/api?station=02t</code></td>
+</tr>
+<tr class="odd">
+<td>header</td>
+<td>ทั้งสองฝั่ง</td>
+<td>ข้อมูลกำกับ</td>
+<td><code>User-Agent</code>, <code>Content-Type</code>, <code>Authorization</code></td>
+</tr>
+<tr class="even">
+<td>status code</td>
+<td>response</td>
+<td>ผลของการร้องขอ</td>
+<td><code>200</code>, <code>404</code>, <code>429</code>, <code>503</code></td>
+</tr>
+<tr class="odd">
+<td>body</td>
+<td>ทั้งสองฝั่ง</td>
+<td>เนื้อหา</td>
+<td>JSON, HTML, CSV</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="method" class="level3">
+<h3 class="anchored" data-anchor-id="method">method</h3>
+<p>method ที่ใช้บ่อยในงานดึงข้อมูลคือ <code>GET</code> ซึ่งขอข้อมูลโดยไม่เปลี่ยนแปลงอะไรบนเซิร์ฟเวอร์ มาตรฐาน HTTP กำหนดให้ <code>GET</code> เป็น method ที่ <em>ปลอดภัย</em> (safe) และ <em>idempotent</em> หมายความว่าการเรียกซ้ำกี่ครั้งก็ไม่ควรทำให้สถานะของเซิร์ฟเวอร์ต่างไปจากการเรียกครั้งเดียว <span class="citation" data-cites="rfc9110http">(<a href="../references.html#ref-rfc9110http" role="doc-biblioref">Fielding และคณะ 2022</a>)</span> คุณสมบัตินี้ทำให้เราลองเรียก <code>GET</code> ใหม่ได้อย่างปลอดภัยเมื่อเกิดข้อผิดพลาด ส่วน <code>POST</code> ซึ่งใช้ส่งข้อมูลไปสร้างหรือแก้ไขสิ่งใดสิ่งหนึ่ง ไม่ได้รับประกันคุณสมบัตินี้ การลองใหม่จึงต้องระวังมากกว่า</p>
+</section>
+<section id="status-code" class="level3">
+<h3 class="anchored" data-anchor-id="status-code">status code</h3>
+<p>status code เป็นตัวเลขสามหลัก หลักแรกบอกกลุ่มของผลลัพธ์ script ที่ดีต้องตอบสนองต่างกันตามกลุ่ม</p>
+<div id="tbl-ch05-status" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.3: กลุ่มของ status code และการตอบสนองที่เหมาะสม
+</figcaption>
+<div aria-describedby="tbl-ch05-status-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>กลุ่ม</th>
+<th>ความหมาย</th>
+<th>ตัวอย่างที่พบบ่อย</th>
+<th>script ควรทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2xx</td>
+<td>สำเร็จ</td>
+<td><code>200 OK</code></td>
+<td>ตรวจ body แล้วประมวลผลต่อ</td>
+</tr>
+<tr class="even">
+<td>3xx</td>
+<td>ย้ายที่</td>
+<td><code>301</code>, <code>302</code></td>
+<td>ปกติ requests ตามไปให้อัตโนมัติ</td>
+</tr>
+<tr class="odd">
+<td>4xx</td>
+<td>ฝั่ง client ผิด</td>
+<td><code>400</code>, <code>401</code>, <code>403</code>, <code>404</code></td>
+<td>หยุดและแก้โค้ด ลองใหม่ไม่ช่วย</td>
+</tr>
+<tr class="even">
+<td>4xx พิเศษ</td>
+<td>ขอถี่เกินไป</td>
+<td><code>429 Too Many Requests</code></td>
+<td>รอตาม <code>Retry-After</code> แล้วลองใหม่</td>
+</tr>
+<tr class="odd">
+<td>5xx</td>
+<td>ฝั่งเซิร์ฟเวอร์ผิดพลาด</td>
+<td><code>500</code>, <code>502</code>, <code>503</code>, <code>504</code></td>
+<td>รอแล้วลองใหม่ เพราะมักเป็นปัญหาชั่วคราว</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>status code <code>429</code> กำหนดไว้ใน RFC 6585 และเซิร์ฟเวอร์อาจส่ง header <code>Retry-After</code> มาบอกว่าควรรอนานเท่าไรก่อนลองใหม่ <span class="citation" data-cites="rfc6585additional">(<a href="../references.html#ref-rfc6585additional" role="doc-biblioref">Nottingham และ Fielding 2012</a>)</span> script ที่เคารพ header นี้เป็นทั้งการปฏิบัติที่ถูกต้องทางเทคนิคและเป็นมารยาทต่อผู้ให้บริการ</p>
+<p>ข้อควรระวังคือ <code>200 OK</code> ไม่ได้แปลว่าได้ข้อมูลที่ต้องการเสมอ บางบริการตอบ <code>200</code> พร้อม body ที่เป็นข้อความแจ้งข้อผิดพลาด หรือเป็นรายการว่าง script จึงต้องตรวจ <em>เนื้อหา</em> ของ body ด้วย ไม่ใช่ตรวจเพียง status code</p>
+</section>
+<section id="header" class="level3">
+<h3 class="anchored" data-anchor-id="header">header</h3>
+<p>header ที่ควรรู้จักมีดังนี้</p>
+<ul>
+<li><strong><code>User-Agent</code></strong> (request) บอกว่า client คือโปรแกรมอะไร การตั้งค่านี้ให้บอกชื่อโครงการและช่องทางติดต่อ เป็นมารยาทที่ช่วยให้ผู้ให้บริการติดต่อเราได้ถ้า script สร้างปัญหา</li>
+<li><strong><code>Content-Type</code></strong> (response) บอกชนิดของ body เช่น <code>application/json</code> หรือ <code>text/html; charset=utf-8</code> ส่วน <code>charset</code> บอก encoding ซึ่งสำคัญมากกับภาษาไทย (หัวข้อ <a href="#sec-ch05-formats" class="quarto-xref"><span>5.4</span></a>)</li>
+<li><strong><code>Authorization</code></strong> (request) ส่งข้อมูลยืนยันตัวตน เช่น API key หรือ token (หัวข้อ <a href="#sec-ch05-rest" class="quarto-xref"><span>5.3</span></a>)</li>
+<li><strong><code>Retry-After</code></strong> (response) บอกระยะเวลาที่ควรรอก่อนลองใหม่</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>URL <span class="op">=</span> <span class="st">"http://air4thai.pcd.go.th/services/getNewAQI_JSON.php"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>HEADERS <span class="op">=</span> {<span class="st">"User-Agent"</span>: <span class="st">"pm25-explorer/0.1 (student project; contact: your-email@example.com)"</span>}</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> requests.get(URL, headers<span class="op">=</span>HEADERS, timeout<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">60</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.status_code, r.headers.get(<span class="st">"Content-Type"</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.url)          <span class="co"># URL สุดท้ายหลังจากตาม redirect</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(r.history)      <span class="co"># รายการ response ระหว่างทาง ถ้ามีการ redirect</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tls-และ-certificate-chain" class="level3">
+<h3 class="anchored" data-anchor-id="tls-และ-certificate-chain">TLS และ certificate chain</h3>
+<p>เมื่อ URL ขึ้นต้นด้วย <code>https://</code> การสื่อสารจะถูกเข้ารหัสด้วย <strong><span class="idx">TLS</span></strong> (Transport Layer Security ซึ่งพัฒนามาจาก SSL) TLS ทำสองหน้าที่ หน้าที่แรกคือเข้ารหัสข้อมูลไม่ให้ผู้อื่นดักอ่านได้ หน้าที่ที่สองซึ่งสำคัญไม่แพ้กันคือ <em>ยืนยันตัวตน</em> ของเซิร์ฟเวอร์ ว่าเรากำลังคุยกับเซิร์ฟเวอร์ที่ถูกต้องจริง ไม่ใช่ผู้แอบอ้าง <span class="citation" data-cites="rfc8446tls">(<a href="../references.html#ref-rfc8446tls" role="doc-biblioref">Rescorla 2018</a>)</span></p>
+<p>การยืนยันตัวตนอาศัย <strong><span class="idx">certificate chain</span></strong> เซิร์ฟเวอร์ส่งใบรับรอง (certificate) ของตนมาให้ ใบรับรองนี้ถูกลงนามโดยผู้ออกใบรับรองระดับกลาง (intermediate CA) ซึ่งถูกลงนามโดยผู้ออกใบรับรองระดับราก (root CA) อีกทอดหนึ่ง เครื่องของเรามีรายการ root CA ที่เชื่อถือไว้ล่วงหน้า (trust store) client จะไล่ตรวจลายเซ็นจากใบรับรองของเซิร์ฟเวอร์ขึ้นไปจนถึง root CA ที่อยู่ใน trust store ถ้าไล่ไม่ถึง การเชื่อมต่อจะล้มเหลว</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+  L[ใบรับรองของเซิร์ฟเวอร์&lt;br/&gt;air4thai.pcd.go.th] --&gt;|ลงนามโดย| I[intermediate CA]
+  I --&gt;|ลงนามโดย| R[root CA]
+  R -.อยู่ใน.-&gt; T[(trust store&lt;br/&gt;ของเครื่องเรา)]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ตามมาตรฐาน เซิร์ฟเวอร์ควรส่งทั้งใบรับรองของตนและใบรับรองระดับกลางมาพร้อมกัน ถ้าเซิร์ฟเวอร์ส่งมาไม่ครบ client บางตัวหาใบรับรองระดับกลางเองได้ เช่น เบราว์เซอร์และระบบปฏิบัติการบางระบบที่ดาวน์โหลดใบรับรองที่ขาดได้ แต่ requests ใช้ trust store ของแพ็กเกจ <code>certifi</code> และไม่ได้ดาวน์โหลดใบรับรองที่ขาดให้ ผลคือ เบราว์เซอร์เปิดเว็บได้ปกติ แต่ requests แจ้ง <code>SSLError</code> พร้อมข้อความ <code>certificate verify failed: unable to get local issuer certificate</code></p>
+<p>ณ เดือนตุลาคม พ.ศ. 2569 URL แบบ <code>http://</code> ของ Air4Thai ถูก redirect ไปยัง <code>https://</code> และพบปัญหาลักษณะนี้ วิธีแก้ที่ปลอดภัยคือให้ Python ใช้ trust store ของระบบปฏิบัติการด้วยแพ็กเกจ <span class="idx-tool"><code>truststore</code></span> <span class="citation" data-cites="truststore2026">(<a href="../references.html#ref-truststore2026" role="doc-biblioref"><span class="nocase">Larson และคณะ</span> 2026</a>)</span> ซึ่งได้ประโยชน์จากความสามารถของระบบปฏิบัติการในการตรวจ certificate chain</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> truststore</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>truststore.inject_into_ssl()   <span class="co"># เรียกครั้งเดียวก่อนสร้างการเชื่อมต่อ</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ห้ามแก้ <code>SSLError</code> ด้วย <code>requests.get(url, verify=False)</code> คำสั่งนี้ปิดการยืนยันตัวตนของเซิร์ฟเวอร์ทั้งหมด script จะยอมรับข้อมูลจากใครก็ได้ที่แอบอ้างเป็นเซิร์ฟเวอร์ปลายทาง ข้อมูลที่ได้จึงเชื่อถือไม่ได้ ถ้า <code>truststore</code> ใช้ไม่ได้บนระบบของผู้อ่าน ให้ใช้ไฟล์ตัวอย่างจากผู้สอนแทน</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ch05-rest" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-ch05-rest"><span class="header-section-number">5.3</span> REST API: authentication, pagination, rate limit</h2>
+<section id="rest-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="rest-คออะไร">REST คืออะไร</h3>
+<p><span class="idx">API</span> (Application Programming Interface) คือช่องทางที่ระบบหนึ่งเปิดให้โปรแกรมอื่นเรียกใช้ API บนเว็บส่วนใหญ่ออกแบบตามแนวคิด <strong><span class="idx">REST</span></strong> (Representational State Transfer) ซึ่ง Roy Fielding อธิบายไว้ในวิทยานิพนธ์ของเขา <span class="citation" data-cites="fielding2000architectural">(<a href="../references.html#ref-fielding2000architectural" role="doc-biblioref">Fielding 2000</a>)</span> ในทางปฏิบัติ REST API มีลักษณะร่วมกันคือ ทรัพยากรแต่ละอย่างมี URL ของตัวเอง (เรียกว่า endpoint) ใช้ method ของ HTTP แทนการกระทำ และส่งข้อมูลกลับเป็น JSON ตัวอย่างเช่น</p>
+<pre class="text"><code>GET /api/stations              → รายการสถานีทั้งหมด
+GET /api/stations/02t          → ข้อมูลของสถานี 02t
+GET /api/measurements?station=02t&amp;start=2026-01-01&amp;end=2026-01-31
+                               → ค่าวัดของสถานี 02t ในเดือนมกราคม</code></pre>
+<p>endpoint ในตัวอย่างนี้เป็น API สมมุติเพื่ออธิบายแนวคิด API จริงแต่ละแห่งมีรูปแบบของตัวเอง และต้องอ่านเอกสารของผู้ให้บริการทุกครั้ง บริการของ Air4Thai ที่ใช้ในเล่มนี้เป็น URL ที่ส่ง JSON กลับมา ไม่ได้มีโครงสร้างครบตามแนวคิด REST แต่หลักการเรียกใช้เหมือนกัน</p>
+<p>พารามิเตอร์ของ endpoint ควรส่งผ่านอาร์กิวเมนต์ <code>params</code> ของ requests แทนการต่อข้อความเอง เพราะ requests จะ encode อักขระพิเศษและภาษาไทยให้ถูกต้อง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> requests.get(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://example.org/api/measurements"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span>{<span class="st">"station"</span>: <span class="st">"02t"</span>, <span class="st">"start"</span>: <span class="st">"2026-01-01"</span>, <span class="st">"end"</span>: <span class="st">"2026-01-31"</span>},</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>HEADERS, timeout<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">60</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="authentication" class="level3">
+<h3 class="anchored" data-anchor-id="authentication">authentication</h3>
+<p>API จำนวนมากต้องการให้ผู้ใช้ยืนยันตัวตน เพื่อควบคุมการเข้าถึงและนับปริมาณการใช้ รูปแบบที่พบบ่อยมีดังนี้</p>
+<div id="tbl-ch05-auth" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-auth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.4: รูปแบบการยืนยันตัวตนของ API
+</figcaption>
+<div aria-describedby="tbl-ch05-auth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>รูปแบบ</th>
+<th>วิธีส่ง</th>
+<th>ข้อควรระวัง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>API key ใน header</td>
+<td><code>headers={"X-API-Key": key}</code> หรือชื่อ header ตามเอกสาร</td>
+<td>ปลอดภัยกว่าการใส่ใน URL</td>
+</tr>
+<tr class="even">
+<td>API key ใน query string</td>
+<td><code>params={"api_key": key}</code></td>
+<td>key อาจถูกบันทึกใน log ของเซิร์ฟเวอร์และของเรา</td>
+</tr>
+<tr class="odd">
+<td>Bearer token</td>
+<td><code>headers={"Authorization": f"Bearer {token}"}</code></td>
+<td>token มักมีอายุ ต้องขอใหม่เมื่อหมดอายุ</td>
+</tr>
+<tr class="even">
+<td>OAuth 2.0</td>
+<td>ขอ token ผ่านขั้นตอนอนุญาตก่อน</td>
+<td>ซับซ้อนกว่า ใช้เมื่อเข้าถึงข้อมูลของผู้ใช้คนอื่น</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ไม่ว่าจะใช้รูปแบบใด key และ token ต้องเก็บไว้ในไฟล์ <code>.env</code> ตามที่บทที่ 2 อธิบาย ห้ามเขียนลงในโค้ดหรือ notebook และห้ามพิมพ์ค่าออกทาง log Air4Thai ไม่ต้องใช้ key แต่แหล่งข้อมูลอื่นที่ผู้อ่านอาจใช้ในโครงการต้องใช้</p>
+</section>
+<section id="pagination" class="level3">
+<h3 class="anchored" data-anchor-id="pagination">pagination</h3>
+<p>เมื่อข้อมูลมีจำนวนมาก API มักไม่ส่งทั้งหมดในครั้งเดียว แต่แบ่งเป็นหน้า (page) ผู้ใช้ต้องเรียกซ้ำจนครบ รูปแบบหลักมีสองแบบ</p>
+<p><strong><span class="idx">offset pagination</span></strong> ระบุตำแหน่งเริ่มต้นและจำนวน เช่น <code>?offset=200&amp;limit=100</code> เข้าใจง่าย แต่มีปัญหาเมื่อข้อมูลเปลี่ยนระหว่างการดึง ถ้ามีแถวใหม่ถูกเพิ่มเข้ามาที่หน้าแรกระหว่างที่เรากำลังดึงหน้าที่สาม แถวจะเลื่อนไป ทำให้บางแถวถูกดึงซ้ำหรือหลุดหายไป</p>
+<p><strong><span class="idx">cursor pagination</span></strong> เซิร์ฟเวอร์ส่งตัวชี้ (cursor) ของหน้าถัดไปมาพร้อมข้อมูล ผู้ใช้ส่ง cursor นั้นกลับไปในการเรียกครั้งถัดไป รูปแบบนี้ทนต่อการเปลี่ยนแปลงของข้อมูลมากกว่า และมักใช้ในบริการขนาดใหญ่</p>
+<p>โค้ดต่อไปนี้แสดงโครงของการดึงแบบ cursor ชื่อฟิลด์ <code>items</code> และ <code>next_cursor</code> เป็นชื่อสมมุติ ต้องเปลี่ยนตามเอกสารของ API จริง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fetch_all(url: <span class="bu">str</span>, params: <span class="bu">dict</span>, max_pages: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1000</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">dict</span>]:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""ดึงทุกหน้าของ API แบบ cursor (ชื่อฟิลด์เป็นตัวอย่าง ให้ตรวจกับเอกสารจริง)"""</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    items, cursor <span class="op">=</span> [], <span class="va">None</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_pages):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        page_params <span class="op">=</span> {<span class="op">**</span>params, <span class="op">**</span>({<span class="st">"cursor"</span>: cursor} <span class="cf">if</span> cursor <span class="cf">else</span> {})}</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> requests.get(url, params<span class="op">=</span>page_params, headers<span class="op">=</span>HEADERS, timeout<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">60</span>))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        r.raise_for_status()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        body <span class="op">=</span> r.json()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        items.extend(body[<span class="st">"items"</span>])</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        cursor <span class="op">=</span> body.get(<span class="st">"next_cursor"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> cursor:</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> items</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="dv">1</span>)                 <span class="co"># เว้นระยะระหว่างหน้า</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f"เกิน </span><span class="sc">{</span>max_pages<span class="sc">}</span><span class="ss"> หน้า ตรวจว่า cursor เปลี่ยนจริงหรือไม่"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>สังเกตว่าโค้ดมีขีดจำกัด <code>max_pages</code> เพื่อป้องกันการวนไม่รู้จบในกรณีที่ API มีข้อผิดพลาดและส่ง cursor เดิมกลับมาซ้ำ</p>
+</section>
+<section id="rate-limit" class="level3">
+<h3 class="anchored" data-anchor-id="rate-limit">rate limit</h3>
+<p><span class="idx">rate limit</span> คือขีดจำกัดจำนวน request ต่อช่วงเวลาที่ผู้ให้บริการกำหนด เช่น 60 ครั้งต่อนาที เพื่อป้องกันไม่ให้ผู้ใช้คนหนึ่งใช้ทรัพยากรจนผู้อื่นใช้ไม่ได้ เมื่อเกินขีดจำกัด เซิร์ฟเวอร์มักตอบ <code>429</code> บาง API ส่ง header บอกปริมาณที่เหลือมาด้วย ชื่อ header ต่างกันไปตามผู้ให้บริการ</p>
+<p>การเคารพ rate limit ทำได้สามระดับ ระดับแรกคือ ดึงเท่าที่จำเป็น เช่น Air4Thai อัปเดตค่ารายชั่วโมง การดึงชั่วโมงละครั้งจึงเพียงพอ การดึงทุกนาทีไม่ได้ข้อมูลเพิ่ม แต่เพิ่มภาระให้เซิร์ฟเวอร์หกสิบเท่า ระดับที่สองคือ เว้นระยะระหว่าง request เมื่อต้องดึงหลายหน้าหรือหลายสถานี และระดับที่สามคือ ตอบสนองต่อ <code>429</code> อย่างถูกต้อง ด้วยการรอตาม <code>Retry-After</code> ซึ่งหัวข้อ <a href="#sec-ch05-robust" class="quarto-xref"><span>5.5</span></a> แสดงวิธีทำ</p>
+</section>
+</section>
+<section id="sec-ch05-formats" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-ch05-formats"><span class="header-section-number">5.4</span> รูปแบบข้อมูล: JSON, CSV, XML และ encoding (UTF-8, TIS-620)</h2>
+<section id="json" class="level3">
+<h3 class="anchored" data-anchor-id="json">JSON</h3>
+<p><span class="idx">JSON</span> (JavaScript Object Notation) เป็นรูปแบบที่ API สมัยใหม่ใช้มากที่สุด กำหนดไว้ใน RFC 8259 <span class="citation" data-cites="rfc8259json">(<a href="../references.html#ref-rfc8259json" role="doc-biblioref">Bray 2017</a>)</span> ประกอบด้วยโครงสร้างสองแบบที่ซ้อนกันได้ไม่จำกัด คือ object (<code>{}</code>) ซึ่ง Python แปลงเป็น <code>dict</code> และ array (<code>[]</code>) ซึ่งแปลงเป็น <code>list</code> ค่าปลายทางเป็น string, number, <code>true</code>/<code>false</code> หรือ <code>null</code> (แปลงเป็น <code>None</code>)</p>
+<p>response ของ Air4Thai มีโครงสร้างโดยย่อดังนี้ (ค่าในตัวอย่างเป็นข้อมูลสมมุติ แสดงเฉพาะโครงสร้าง ตรวจสอบโครงสร้างเมื่อ ต.ค. 2569)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"stations"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"stationID"</span><span class="fu">:</span> <span class="st">"02t"</span><span class="fu">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"nameTH"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> <span class="dt">"nameEN"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"areaTH"</span><span class="fu">:</span> <span class="st">"แขวง... เขต..., กรุงเทพฯ"</span><span class="fu">,</span> <span class="dt">"areaEN"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"stationType"</span><span class="fu">:</span> <span class="st">"GROUND"</span><span class="fu">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"lat"</span><span class="fu">:</span> <span class="st">"13.73"</span><span class="fu">,</span> <span class="dt">"long"</span><span class="fu">:</span> <span class="st">"100.49"</span><span class="fu">,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"AQILast"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"date"</span><span class="fu">:</span> <span class="st">"2026-10-23"</span><span class="fu">,</span> <span class="dt">"time"</span><span class="fu">:</span> <span class="st">"03:00"</span><span class="fu">,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"PM25"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"value"</span><span class="fu">:</span> <span class="st">"24.5"</span><span class="fu">,</span> <span class="dt">"aqi"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">,</span> <span class="dt">"color_id"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">},</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"PM10"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"value"</span><span class="fu">:</span> <span class="st">"-1"</span><span class="fu">,</span> <span class="dt">"aqi"</span><span class="fu">:</span> <span class="st">"-1"</span><span class="fu">,</span> <span class="dt">"color_id"</span><span class="fu">:</span> <span class="st">"..."</span><span class="fu">}</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ลักษณะสามประการของข้อมูลนี้ต้องจัดการในขั้นโหลด (บทที่ 6–7) และเป็นเหตุผลว่าทำไมต้องตรวจโครงสร้างจริงทุกครั้ง</p>
+<ul>
+<li><strong>ตัวเลขทั้งหมดเป็น string</strong> เช่น <code>"24.5"</code> ต้องแปลงเป็นตัวเลขก่อนคำนวณ</li>
+<li><strong>ค่าหายแทนด้วย <code>"-1"</code></strong> ไม่ใช่ <code>null</code> ถ้าไม่แปลงเป็นค่าว่างก่อน การหาค่าเฉลี่ยจะนำ -1 ไปคำนวณด้วย และได้ค่าต่ำกว่าความจริง</li>
+<li><strong>มีทั้ง <code>value</code> และ <code>aqi</code></strong> <code>value</code> คือความเข้มข้นในหน่วย µg/m³ ส่วน <code>aqi</code> คือดัชนีคุณภาพอากาศ คำถามของเล่มนี้ใช้ <code>value</code></li>
+</ul>
+<p>ฟังก์ชันต่อไปนี้ช่วยพิมพ์โครงสร้างของ JSON ที่ซ้อนหลายชั้น เพื่อตรวจชื่อ key จาก response จริง แทนการเชื่อเอกสารหรือคำตอบจาก AI</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_keys(obj, prefix: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span>, depth: <span class="bu">int</span> <span class="op">=</span> <span class="dv">3</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""พิมพ์ path ของ key และชนิดของค่า ลึกไม่เกิน depth ชั้น"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> depth <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(obj, <span class="bu">dict</span>):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k, v <span class="kw">in</span> obj.items():</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">type</span>(v)<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            show_keys(v, prefix <span class="op">+</span> <span class="st">"  "</span>, depth <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(obj, <span class="bu">list</span>) <span class="kw">and</span> obj:</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        show_keys(obj[<span class="dv">0</span>], prefix <span class="op">+</span> <span class="st">"[0] "</span>, depth <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>show_keys(r.json()[<span class="st">"stations"</span>][<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="csv" class="level3">
+<h3 class="anchored" data-anchor-id="csv">CSV</h3>
+<p><strong><span class="idx">CSV</span></strong> (Comma-Separated Values) เป็นรูปแบบตารางที่เรียบง่ายที่สุด แต่มีมาตรฐานที่หลวมมาก RFC 4180 อธิบายรูปแบบที่ใช้กันทั่วไป <span class="citation" data-cites="rfc4180csv">(<a href="../references.html#ref-rfc4180csv" role="doc-biblioref">Shafranovich 2005</a>)</span> แต่ไฟล์ CSV ในโลกจริงมีความหลากหลายสูง ปัญหาที่พบบ่อยได้แก่ ตัวคั่นไม่ใช่จุลภาค (บางไฟล์ใช้อัฒภาคหรือแท็บ) ข้อความที่มีจุลภาคอยู่ภายในต้องครอบด้วยเครื่องหมายคำพูด รูปแบบวันที่ไม่ระบุ และ CSV ไม่มีข้อมูลชนิดข้อมูล ทุกอย่างเป็นข้อความ ผู้อ่านต้องบอกเองว่าคอลัมน์ใดเป็นตัวเลขหรือวันที่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>stations <span class="op">=</span> pd.read_csv(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/sample/stations_sample.csv"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    dtype<span class="op">=</span>{<span class="st">"station_id"</span>: <span class="st">"string"</span>},   <span class="co"># กันรหัสที่ขึ้นต้นด้วยเลขศูนย์ถูกแปลงเป็นตัวเลข</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    encoding<span class="op">=</span><span class="st">"utf-8"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="xml" class="level3">
+<h3 class="anchored" data-anchor-id="xml">XML</h3>
+<p><strong><span class="idx">XML</span></strong> เป็นรูปแบบแบบมีโครงสร้างที่เก่ากว่า JSON ยังพบในบริการของหน่วยงานรัฐบางแห่งและในฟีด RSS ข้อมูลอยู่ในแท็กที่ซ้อนกันคล้าย HTML pandas อ่าน XML ที่มีโครงสร้างเป็นรายการซ้ำได้ด้วย <code>pd.read_xml</code> ส่วน XML ที่ซับซ้อนกว่านั้นใช้โมดูล <code>xml.etree.ElementTree</code> ของ Python</p>
+<div id="tbl-ch05-formats" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.5: เปรียบเทียบรูปแบบข้อมูล JSON, CSV และ XML
+</figcaption>
+<div aria-describedby="tbl-ch05-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>JSON</th>
+<th>CSV</th>
+<th>XML</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>โครงสร้าง</td>
+<td>ซ้อนได้ไม่จำกัด</td>
+<td>ตารางสองมิติ</td>
+<td>ซ้อนได้ไม่จำกัด</td>
+</tr>
+<tr class="even">
+<td>ชนิดข้อมูล</td>
+<td>string, number, boolean, null</td>
+<td>ไม่มี ทุกอย่างเป็นข้อความ</td>
+<td>ไม่มีในตัว (ต้องมี schema แยก)</td>
+</tr>
+<tr class="odd">
+<td>ขนาด</td>
+<td>ปานกลาง</td>
+<td>เล็ก</td>
+<td>ใหญ่ (แท็กซ้ำ)</td>
+</tr>
+<tr class="even">
+<td>พบใน</td>
+<td>API สมัยใหม่</td>
+<td>ไฟล์ดาวน์โหลด สเปรดชีต</td>
+<td>บริการรุ่นเก่า ฟีด RSS</td>
+</tr>
+<tr class="odd">
+<td>อ่านใน Python</td>
+<td><code>r.json()</code>, <code>json.load</code></td>
+<td><code>pd.read_csv</code></td>
+<td><code>pd.read_xml</code>, <code>ElementTree</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="encoding-ทำไมภาษาไทยกลายเปนอกขระแปลก" class="level3">
+<h3 class="anchored" data-anchor-id="encoding-ทำไมภาษาไทยกลายเปนอกขระแปลก">encoding: ทำไมภาษาไทยกลายเป็นอักขระแปลก</h3>
+<p>คอมพิวเตอร์เก็บข้อความเป็นลำดับของไบต์ <strong><span class="idx">encoding</span></strong> คือกฎที่บอกว่าไบต์แต่ละชุดแทนอักขระใด ถ้าเขียนด้วย encoding หนึ่งแต่อ่านด้วยอีก encoding หนึ่ง ข้อความจะผิดเพี้ยน ภาษาไทยมี encoding ที่ใช้กันมากสองแบบ</p>
+<ul>
+<li><strong><span class="idx">UTF-8</span></strong> เป็น encoding ของ Unicode ที่รองรับทุกภาษา อักษรไทยแต่ละตัวใช้ 3 ไบต์ เป็นมาตรฐานของเว็บและของ Python 3</li>
+<li><strong><span class="idx">TIS-620</span></strong> เป็นมาตรฐานอุตสาหกรรมไทย มอก. 620-2533 อักษรไทยแต่ละตัวใช้ 1 ไบต์ ยังพบในไฟล์จากระบบรุ่นเก่าและไฟล์ที่ส่งออกจากโปรแกรมบน Windows ภาษาไทย ซึ่งมักใช้ code page 874 (cp874) ที่ขยายจาก TIS-620</li>
+</ul>
+<p>ทดลองดูความต่างได้ด้วยโค้ดสั้น ๆ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"สถานีตรวจวัดคุณภาพอากาศ"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b_utf8 <span class="op">=</span> text.encode(<span class="st">"utf-8"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>b_tis <span class="op">=</span> text.encode(<span class="st">"tis-620"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(text), <span class="bu">len</span>(b_utf8), <span class="bu">len</span>(b_tis))   <span class="co"># จำนวนอักขระ, ไบต์แบบ UTF-8, ไบต์แบบ TIS-620</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>b_tis.decode(<span class="st">"utf-8"</span>)                       <span class="co"># อ่านไบต์ TIS-620 ด้วย UTF-8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+23 69 23
+UnicodeDecodeError: 'utf-8' codec can't decode byte ... : invalid continuation byte</code></pre>
+<p>ข้อความ 23 อักขระใช้ 69 ไบต์ใน UTF-8 แต่ใช้ 23 ไบต์ใน TIS-620 และการอ่านไบต์ TIS-620 ด้วย UTF-8 ทำให้เกิด error ทันที ถ้าใช้ <code>errors="replace"</code> จะไม่เกิด error แต่จะได้อักขระแทนที่ (�) ปนกับอักขระแปลก ๆ ซึ่งอันตรายกว่า เพราะข้อมูลเสียหายโดยไม่มีใครรู้</p>
+<p>แนวทางจัดการ encoding ในงานข้อมูลมีดังนี้</p>
+<ol type="1">
+<li><strong>ดู <code>charset</code> ใน header <code>Content-Type</code></strong> ก่อน ถ้าเซิร์ฟเวอร์ระบุมา requests จะใช้ค่านั้นเมื่อเรียก <code>r.text</code></li>
+<li><strong>ระบุ <code>encoding</code> ทุกครั้งที่อ่านไฟล์</strong> เช่น <code>pd.read_csv(path, encoding="utf-8")</code> หรือ <code>encoding="cp874"</code> สำหรับไฟล์ไทยรุ่นเก่า อย่าปล่อยให้ใช้ค่าเริ่มต้นของระบบปฏิบัติการ ซึ่งต่างกันระหว่าง Windows กับ macOS</li>
+<li><strong>เก็บ response ดิบเป็นไบต์</strong> ด้วย <code>r.content</code> แทน <code>r.text</code> ในขั้นบันทึก raw เพื่อไม่ให้การตีความ encoding ผิดทำให้ข้อมูลดิบเสียหาย</li>
+<li><strong>แปลงทุกอย่างเป็น UTF-8</strong> ในขั้นโหลด แล้วใช้ UTF-8 ตลอด pipeline หลังจากนั้น</li>
+</ol>
+</section>
+</section>
+<section id="sec-ch05-robust" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-ch05-robust"><span class="header-section-number">5.5</span> การดึงข้อมูลอย่างทนทาน: timeout, retry, backoff, idempotency</h2>
+<section id="ความผดพลาดเปนเรองปกต" class="level3">
+<h3 class="anchored" data-anchor-id="ความผดพลาดเปนเรองปกต">ความผิดพลาดเป็นเรื่องปกติ</h3>
+<p>script ที่รันได้บนเครื่องของเราในครั้งแรก ไม่ได้รับประกันว่าจะรันได้ทุกชั่วโมงตลอดภาคการศึกษา เครือข่ายอาจหลุดชั่วคราว เซิร์ฟเวอร์อาจปิดปรับปรุง หรือตอบช้าในช่วงที่มีผู้ใช้มาก script ที่ทนทานต้อง <em>คาดว่าจะเกิดความผิดพลาด</em> และจัดการแต่ละแบบอย่างเหมาะสม ไม่ใช่หยุดทำงานหรือค้างไปเฉย ๆ</p>
+</section>
+<section id="timeout" class="level3">
+<h3 class="anchored" data-anchor-id="timeout">timeout</h3>
+<p>ถ้าไม่ระบุ <code>timeout</code> requests จะรอได้ไม่สิ้นสุด script ที่ตั้งเวลารันทุกชั่วโมงอาจค้างซ้อนกันหลายตัวจนเครื่องทำงานไม่ได้ requests รับ timeout เป็นคู่ค่า คือเวลาสูงสุดที่รอการเชื่อมต่อ และเวลาสูงสุดที่รอระหว่างได้รับข้อมูลแต่ละช่วง <span class="citation" data-cites="requests2026docs">(<a href="../references.html#ref-requests2026docs" role="doc-biblioref"><span class="nocase">Reitz และคณะ</span> 2026</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> requests.get(URL, headers<span class="op">=</span>HEADERS, timeout<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">60</span>))   <span class="co"># (เชื่อมต่อ, อ่านข้อมูล) วินาที</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="retry-และ-exponential-backoff" class="level3">
+<h3 class="anchored" data-anchor-id="retry-และ-exponential-backoff">retry และ exponential backoff</h3>
+<p>ความผิดพลาดแบ่งได้เป็นสองแบบ แบบ <em>ชั่วคราว</em> เช่น เครือข่ายหลุด <code>503</code> หรือ <code>429</code> มักหายไปเองถ้ารอสักครู่ ส่วนแบบ <em>ถาวร</em> เช่น <code>404</code> หรือ URL ผิด ลองซ้ำกี่ครั้งก็ไม่หาย script ควร retry เฉพาะแบบแรก</p>
+<p>การรอเท่ากันทุกครั้งก่อนลองใหม่มีปัญหา ถ้าเซิร์ฟเวอร์ล่มเพราะรับภาระไม่ไหว และ client จำนวนมากลองใหม่พร้อมกันทุก 5 วินาที เซิร์ฟเวอร์จะไม่มีโอกาสฟื้นตัว <strong><span class="idx">exponential backoff</span></strong> แก้ปัญหานี้ด้วยการเพิ่มระยะรอเป็นเท่าตัวในแต่ละครั้ง และเพิ่มความสุ่ม (jitter) เพื่อไม่ให้ client ทุกตัวลองใหม่พร้อมกัน ระยะรอของครั้งที่ <span class="math inline">\(k\)</span> คือ</p>
+<p><span id="eq-ch05-backoff"><span class="math display">\[
+d_k \sim \text{Uniform}\left(0,\ \min(c,\ b \cdot 2^{k-1})\right)
+\tag{5.1}\]</span></span></p>
+<p>โดยที่ <span class="math inline">\(b\)</span> คือระยะรอพื้นฐาน (เช่น 2 วินาที) <span class="math inline">\(c\)</span> คือระยะรอสูงสุด (เช่น 60 วินาที) และ <span class="math inline">\(k\)</span> คือลำดับของความพยายามที่ล้มเหลว ตัวอย่างเช่น ถ้า <span class="math inline">\(b = 2\)</span> ครั้งที่ 1 รอสุ่มระหว่าง 0–2 วินาที ครั้งที่ 2 รอ 0–4 วินาที ครั้งที่ 3 รอ 0–8 วินาที วิธีสุ่มทั้งช่วงแบบนี้เรียกว่า full jitter ซึ่งการวิเคราะห์ของ Amazon Web Services พบว่าลดภาระของเซิร์ฟเวอร์ได้ดีเมื่อมี client จำนวนมาก <span class="citation" data-cites="brooker2015exponential">(<a href="../references.html#ref-brooker2015exponential" role="doc-biblioref">Brooker 2015</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>log <span class="op">=</span> logging.getLogger(<span class="st">"fetch"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>RETRY_STATUS <span class="op">=</span> {<span class="dv">429</span>, <span class="dv">500</span>, <span class="dv">502</span>, <span class="dv">503</span>, <span class="dv">504</span>}</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_with_backoff(url: <span class="bu">str</span>, max_tries: <span class="bu">int</span> <span class="op">=</span> <span class="dv">5</span>, base: <span class="bu">float</span> <span class="op">=</span> <span class="fl">2.0</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                     cap: <span class="bu">float</span> <span class="op">=</span> <span class="fl">60.0</span>) <span class="op">-&gt;</span> requests.Response:</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""GET พร้อม retry แบบ exponential backoff + jitter เฉพาะข้อผิดพลาดชั่วคราว"""</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> attempt <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, max_tries <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        retry_after <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>            r <span class="op">=</span> requests.get(url, headers<span class="op">=</span>HEADERS, timeout<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">60</span>))</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> (requests.<span class="pp">ConnectionError</span>, requests.Timeout) <span class="im">as</span> exc:</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            reason <span class="op">=</span> <span class="bu">type</span>(exc).<span class="va">__name__</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> r.status_code <span class="kw">not</span> <span class="kw">in</span> RETRY_STATUS:</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>                r.raise_for_status()          <span class="co"># 4xx อื่น ๆ เป็นความผิดพลาดถาวร ไม่ลองซ้ำ</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> r</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            reason <span class="op">=</span> <span class="ss">f"HTTP </span><span class="sc">{</span>r<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>            retry_after <span class="op">=</span> r.headers.get(<span class="st">"Retry-After"</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> attempt <span class="op">==</span> max_tries:</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        delay <span class="op">=</span> random.uniform(<span class="dv">0</span>, <span class="bu">min</span>(cap, base <span class="op">*</span> <span class="dv">2</span> <span class="op">**</span> (attempt <span class="op">-</span> <span class="dv">1</span>)))   <span class="co"># full jitter</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> retry_after <span class="kw">and</span> retry_after.isdigit():</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>            delay <span class="op">=</span> <span class="bu">max</span>(delay, <span class="bu">float</span>(retry_after))                        <span class="co"># เคารพ Retry-After</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>        log.warning(<span class="st">"ครั้งที่ </span><span class="sc">%d</span><span class="st"> ล้มเหลว (</span><span class="sc">%s</span><span class="st">) รอ </span><span class="sc">%.1f</span><span class="st"> วินาที"</span>, attempt, reason, delay)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>        time.sleep(delay)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="ss">f"ล้มเหลวครบ </span><span class="sc">{</span>max_tries<span class="sc">}</span><span class="ss"> ครั้ง: </span><span class="sc">{</span>reason<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เมื่อทดสอบกับเซิร์ฟเวอร์จำลองที่ตอบ <code>503</code> พร้อม <code>Retry-After: 1</code> สองครั้งแรก แล้วตอบ <code>200</code> ในครั้งที่สาม ได้ log ดังนี้</p>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+WARNING fetch ครั้งที่ 1 ล้มเหลว (HTTP 503) รอ 1.0 วินาที
+WARNING fetch ครั้งที่ 2 ล้มเหลว (HTTP 503) รอ 1.0 วินาที
+200 {'stations': []} จำนวนครั้งที่เรียก: 3</code></pre>
+<p>requests ยังรองรับ retry ในตัวผ่าน <code>HTTPAdapter</code> ร่วมกับคลาส <code>Retry</code> ของ urllib3 ซึ่งมีพารามิเตอร์ <code>backoff_factor</code> และ <code>status_forcelist</code> <span class="citation" data-cites="urllib32026retry">(<a href="../references.html#ref-urllib32026retry" role="doc-biblioref"><span class="nocase">urllib3 contributors</span> 2026</a>)</span> ผู้อ่านที่เข้าใจหลักการในหัวข้อนี้แล้วเลือกใช้ได้ตามความสะดวก</p>
+</section>
+<section id="idempotency-ของ-script" class="level3">
+<h3 class="anchored" data-anchor-id="idempotency-ของ-script">idempotency ของ script</h3>
+<p>หัวข้อ <a href="#sec-ch05-http" class="quarto-xref"><span>5.2</span></a> กล่าวว่า <code>GET</code> เป็น idempotent หลักการเดียวกันใช้กับ script ทั้ง script ด้วย script ที่ <strong><span class="idx">idempotent</span></strong> คือ script ที่รันซ้ำได้ผลเท่าเดิม ไม่ว่าจะรันกี่ครั้ง หรือรันซ้ำหลังจากล้มเหลวกลางทาง คุณสมบัตินี้สำคัญเพราะเมื่อ script ล้มเหลว เราอยากแก้ปัญหาแล้วรันใหม่ได้ทันที โดยไม่ต้องกังวลว่าจะเกิดข้อมูลซ้ำหรือข้อมูลเสียหาย</p>
+<p>สำหรับ script ดึงข้อมูล การทำให้ idempotent มีหลักการดังนี้</p>
+<div id="tbl-ch05-idempotent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-idempotent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.6: หลักการทำให้ script ดึงข้อมูลเป็น idempotent
+</figcaption>
+<div aria-describedby="tbl-ch05-idempotent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลักการ</th>
+<th>วิธีทำใน <code>src/fetch_air4thai.py</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไม่ทับข้อมูลเดิม</td>
+<td>ชื่อไฟล์มีเวลาที่ดึง เช่น <code>air4thai_20261023T140500.json</code></td>
+</tr>
+<tr class="even">
+<td>ไม่ทิ้งไฟล์ครึ่งไฟล์เมื่อล้มเหลว</td>
+<td>เขียนลงไฟล์ชั่วคราวก่อน แล้วเปลี่ยนชื่อเมื่อเขียนเสร็จ</td>
+</tr>
+<tr class="odd">
+<td>แยกการดึงออกจากการโหลด</td>
+<td>script ดึงข้อมูลเพียงบันทึกไฟล์ การโหลดเข้าฐานข้อมูลแบบ upsert เป็นหน้าที่ของ <code>src/load_duckdb.py</code> (บทที่ 7)</td>
+</tr>
+<tr class="even">
+<td>บอกผลด้วย exit code</td>
+<td>สำเร็จคืนค่า 0 ล้มเหลวคืนค่า 1 เพื่อให้ระบบตั้งเวลารู้ผล</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การรันซ้ำจะได้ไฟล์ดิบเพิ่มขึ้นหนึ่งไฟล์ ซึ่งอาจมีข้อมูลชั่วโมงเดียวกับไฟล์ก่อนหน้า แต่ไม่เป็นปัญหา เพราะขั้นโหลดในบทที่ 7 ใช้ primary key <code>(station_id, ts)</code> และขจัดแถวซ้ำ ผลลัพธ์สุดท้ายในฐานข้อมูลจึงเท่าเดิมไม่ว่าจะรันขั้นดึงกี่ครั้ง ความเป็น idempotent จึงเกิดจาก <em>การออกแบบทั้ง pipeline</em> ร่วมกัน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> zoneinfo <span class="im">import</span> ZoneInfo</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>BKK <span class="op">=</span> ZoneInfo(<span class="st">"Asia/Bangkok"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>RAW_DIR <span class="op">=</span> Path(<span class="st">"data/raw"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_raw(body: <span class="bu">bytes</span>, raw_dir: Path <span class="op">=</span> RAW_DIR) <span class="op">-&gt;</span> Path:</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""บันทึก response ดิบ ชื่อไฟล์มีเวลาที่ดึง (เวลาไทย) และไม่ทับไฟล์เดิม"""</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    fetched_at <span class="op">=</span> datetime.now(BKK)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> raw_dir <span class="op">/</span> <span class="ss">f"air4thai_</span><span class="sc">{</span>fetched_at<span class="sc">:</span><span class="op">%</span>Y<span class="op">%</span>m<span class="op">%</span>dT<span class="op">%</span>H<span class="op">%</span>M<span class="op">%</span>S<span class="sc">}</span><span class="ss">.json"</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    tmp <span class="op">=</span> path.with_suffix(<span class="st">".json.part"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    tmp.write_bytes(body)          <span class="co"># เขียนลงไฟล์ชั่วคราวก่อน</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    tmp.rename(path)               <span class="co"># แล้วเปลี่ยนชื่อ: ผู้อ่านไม่มีวันเห็นไฟล์ครึ่งไฟล์</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> path</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="โครงสรางของ-srcfetch_air4thai.py" class="level3">
+<h3 class="anchored" data-anchor-id="โครงสรางของ-srcfetch_air4thai.py">โครงสร้างของ <code>src/fetch_air4thai.py</code></h3>
+<p>เมื่อรวมทุกส่วนเข้าด้วยกัน script มีโครงสร้างดังนี้ โค้ดฉบับเต็มอยู่ในคู่มือปฏิบัติการสัปดาห์ที่ 3</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> validate(r: requests.Response) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""ตรวจว่า response เป็น JSON ที่มีรายการสถานีไม่ว่าง คืนจำนวนสถานี"""</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> r.json()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    stations <span class="op">=</span> data.get(<span class="st">"stations"</span>) <span class="cf">if</span> <span class="bu">isinstance</span>(data, <span class="bu">dict</span>) <span class="cf">else</span> <span class="va">None</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> stations:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"response ไม่มีรายการสถานี หรือรายการว่าง"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(stations)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main() <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    RAW_DIR.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> get_with_backoff(URL)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> validate(r)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        path <span class="op">=</span> save_raw(r.content)    <span class="co"># เก็บเป็นไบต์ ไม่ตีความ encoding</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        log.exception(<span class="st">"ดึงข้อมูลไม่สำเร็จ"</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    log.info(<span class="st">"บันทึก </span><span class="sc">%s</span><span class="st"> (</span><span class="sc">%d</span><span class="st"> สถานี)"</span>, path.name, n)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">SystemExit</span>(main())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ลำดับใน <code>main()</code> มีเหตุผล การตรวจ (<code>validate</code>) อยู่ก่อนการบันทึก เพื่อไม่ให้ response ที่ผิดรูปแบบ เช่น หน้า HTML แจ้งปิดปรับปรุงที่มากับ status <code>200</code> ถูกบันทึกเป็นไฟล์ดิบที่ดูเหมือนข้อมูลจริง และข้อผิดพลาดทุกแบบถูกจับไว้ที่จุดเดียว บันทึกลง log พร้อม traceback แล้วคืน exit code 1</p>
+</section>
+</section>
+<section id="sec-ch05-scraping" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-ch05-scraping"><span class="header-section-number">5.6</span> web scraping: DOM, CSS selector และ BeautifulSoup</h2>
+<section id="เมอใดตอง-scrape" class="level3">
+<h3 class="anchored" data-anchor-id="เมอใดตอง-scrape">เมื่อใดต้อง scrape</h3>
+<p><span class="idx">web scraping</span> คือการดึงข้อมูลจากหน้าเว็บที่ออกแบบมาให้คนอ่าน ไม่ได้ออกแบบมาให้โปรแกรมใช้ ควรใช้เป็นทางเลือกสุดท้าย เมื่อไม่มี API และไม่มีไฟล์ให้ดาวน์โหลด เพราะหน้าเว็บเปลี่ยนรูปแบบได้ทุกเมื่อโดยไม่แจ้งล่วงหน้า และ script ที่แกะ HTML จะพังทันทีที่รูปแบบเปลี่ยน ตัวอย่างการใช้งานที่เหมาะสมคือ ตารางรายชื่อสถานีพร้อมรายละเอียดที่มีบนหน้าเว็บแต่ไม่มีใน API ซึ่งเปลี่ยนไม่บ่อยและดึงเพียงครั้งเดียว</p>
+</section>
+<section id="dom" class="level3">
+<h3 class="anchored" data-anchor-id="dom">DOM</h3>
+<p>เมื่อเบราว์เซอร์อ่าน HTML จะสร้างโครงสร้างต้นไม้ที่เรียกว่า <strong><span class="idx">DOM</span></strong> (Document Object Model) แต่ละแท็กเป็นโหนดหนึ่งในต้นไม้ มีโหนดลูกซ้อนอยู่ภายใน และมีคุณสมบัติ (attribute) เช่น <code>id</code> และ <code>class</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">table</span><span class="ot"> id</span><span class="op">=</span><span class="st">"stations"</span><span class="dt">&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">thead</span><span class="dt">&gt;&lt;</span><span class="kw">tr</span><span class="dt">&gt;&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>รหัส<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>ชื่อสถานี<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;&lt;</span><span class="kw">th</span><span class="dt">&gt;</span>จังหวัด<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;&lt;/</span><span class="kw">tr</span><span class="dt">&gt;&lt;/</span><span class="kw">thead</span><span class="dt">&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tbody</span><span class="dt">&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>02t<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">td</span><span class="ot"> class</span><span class="op">=</span><span class="st">"name"</span><span class="dt">&gt;</span>สถานี ก<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>กรุงเทพฯ<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>36t<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">td</span><span class="ot"> class</span><span class="op">=</span><span class="st">"name"</span><span class="dt">&gt;</span>สถานี ข<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>เชียงใหม่<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tbody</span><span class="dt">&gt;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">table</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="css-selector" class="level3">
+<h3 class="anchored" data-anchor-id="css-selector">CSS selector</h3>
+<p><strong><span class="idx">CSS selector</span></strong> เป็นภาษาสำหรับระบุโหนดใน DOM เดิมใช้กำหนดรูปแบบการแสดงผลของหน้าเว็บ แต่ใช้เลือกข้อมูลได้ดีเช่นกัน</p>
+<div id="tbl-ch05-css" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-css-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.7: CSS selector ที่ใช้บ่อยในการ scrape
+</figcaption>
+<div aria-describedby="tbl-ch05-css-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>selector</th>
+<th>เลือกอะไร</th>
+<th>ตัวอย่างกับ HTML ข้างบน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>tag</code></td>
+<td>ทุกโหนดที่เป็นแท็กนั้น</td>
+<td><code>td</code> เลือกทุกเซลล์</td>
+</tr>
+<tr class="even">
+<td><code>#id</code></td>
+<td>โหนดที่มี <code>id</code> ตรงกัน</td>
+<td><code>#stations</code> เลือกตาราง</td>
+</tr>
+<tr class="odd">
+<td><code>.class</code></td>
+<td>โหนดที่มี <code>class</code> ตรงกัน</td>
+<td><code>.name</code> เลือกเซลล์ชื่อสถานี</td>
+</tr>
+<tr class="even">
+<td><code>A B</code></td>
+<td>โหนด B ที่อยู่ภายใน A (ลึกเท่าใดก็ได้)</td>
+<td><code>#stations tbody tr</code> เลือกแถวข้อมูล</td>
+</tr>
+<tr class="odd">
+<td><code>A &gt; B</code></td>
+<td>โหนด B ที่เป็นลูกโดยตรงของ A</td>
+<td><code>tr &gt; td</code></td>
+</tr>
+<tr class="even">
+<td><code>[attr=value]</code></td>
+<td>โหนดที่มี attribute ตรงกัน</td>
+<td><code>a[href$=".csv"]</code> ลิงก์ที่ลงท้ายด้วย <code>.csv</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="beautifulsoup" class="level3">
+<h3 class="anchored" data-anchor-id="beautifulsoup">BeautifulSoup</h3>
+<p><span class="idx-tool">BeautifulSoup</span> เป็นไลบรารีที่แปลง HTML เป็นต้นไม้ที่ Python ค้นหาได้ และรองรับ CSS selector ผ่านเมธอด <code>select</code> <span class="citation" data-cites="richardson2026beautifulsoup">(<a href="../references.html#ref-richardson2026beautifulsoup" role="doc-biblioref">Richardson 2026</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>soup <span class="op">=</span> BeautifulSoup(html, <span class="st">"html.parser"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>header <span class="op">=</span> [th.get_text(strip<span class="op">=</span><span class="va">True</span>) <span class="cf">for</span> th <span class="kw">in</span> soup.select(<span class="st">"#stations thead th"</span>)]</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [[td.get_text(strip<span class="op">=</span><span class="va">True</span>) <span class="cf">for</span> td <span class="kw">in</span> tr.select(<span class="st">"td"</span>)]</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> tr <span class="kw">in</span> soup.select(<span class="st">"#stations tbody tr"</span>)]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.DataFrame(rows, columns<span class="op">=</span>header))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+  รหัส ชื่อสถานี    จังหวัด
+0  02t   สถานี ก   กรุงเทพฯ
+1  36t   สถานี ข  เชียงใหม่</code></pre>
+<p>ในการใช้งานจริง ตัวแปร <code>html</code> มาจาก <code>requests.get(page_url, headers=HEADERS, timeout=30).text</code> และควรบันทึก HTML ดิบไว้ใน <code>data/raw/</code> ตามหลักเดียวกับ JSON สำหรับตาราง HTML ที่เรียบง่าย <code>pd.read_html</code> อ่านได้ในคำสั่งเดียว แต่ BeautifulSoup ยืดหยุ่นกว่าเมื่อข้อมูลไม่ได้อยู่ในรูปตาราง</p>
+</section>
+<section id="ขอจำกดของ-scraping" class="level3">
+<h3 class="anchored" data-anchor-id="ขอจำกดของ-scraping">ข้อจำกัดของ scraping</h3>
+<div id="tbl-ch05-scraping-limits" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-scraping-limits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.8: ข้อจำกัดของ web scraping และแนวทางแก้ไข
+</figcaption>
+<div aria-describedby="tbl-ch05-scraping-limits-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ปัญหา</th>
+<th>สาเหตุ</th>
+<th>แนวทาง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>script พังเมื่อหน้าเว็บเปลี่ยน</td>
+<td>selector อ้างถึงโครงสร้างที่ไม่มีแล้ว</td>
+<td>ใช้ selector ที่ผูกกับ <code>id</code> หรือความหมาย ไม่ใช่ลำดับตำแหน่ง และตรวจผลทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>ไม่พบข้อมูลใน HTML</td>
+<td>หน้าเว็บสร้างเนื้อหาด้วย JavaScript หลังโหลด</td>
+<td>หาว่าหน้าเว็บเรียก API ใดเบื้องหลัง (ดูในเครื่องมือนักพัฒนาของเบราว์เซอร์) แล้วเรียก API นั้นแทน</td>
+</tr>
+<tr class="odd">
+<td>ข้อความไทยเพี้ยน</td>
+<td>encoding ของหน้าเว็บไม่ตรงกับที่ requests เดา</td>
+<td>ตรวจ <code>r.encoding</code> และ <code>charset</code> ในหน้า HTML</td>
+</tr>
+<tr class="even">
+<td>ถูกบล็อก</td>
+<td>ดึงถี่เกินไปหรือไม่ระบุตัวตน</td>
+<td>เว้นระยะ ระบุ <code>User-Agent</code> และเคารพ <code>robots.txt</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch05-legal" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sec-ch05-legal"><span class="header-section-number">5.7</span> กฎหมายและจริยธรรม: robots.txt, ข้อกำหนดการใช้งาน, ลิขสิทธิ์, PDPA</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>เนื้อหาในหัวข้อนี้เป็นความรู้ทั่วไปเพื่อการศึกษา ไม่ใช่คำปรึกษาทางกฎหมาย กฎหมายและข้อกำหนดของแต่ละแหล่งข้อมูลเปลี่ยนแปลงได้ เมื่อทำโครงการที่มีความเสี่ยงทางกฎหมาย ควรตรวจสอบกับตัวบทกฎหมายฉบับทางการและปรึกษาผู้เชี่ยวชาญ</p>
+</div>
+</div>
+<section id="ทำไดไมไดแปลวาควรทำ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไดไมไดแปลวาควรทำ">ทำได้ไม่ได้แปลว่าควรทำ</h3>
+<p>ความสามารถทางเทคนิคที่จะดึงข้อมูลได้ไม่ได้แปลว่าได้รับอนุญาตให้ดึงหรือนำไปใช้ หัวข้อนี้อธิบายกรอบสี่ระดับที่ต้องพิจารณา ตั้งแต่ข้อตกลงทางเทคนิคไปจนถึงกฎหมาย</p>
+</section>
+<section id="robots.txt" class="level3">
+<h3 class="anchored" data-anchor-id="robots.txt">robots.txt</h3>
+<p><code>robots.txt</code> เป็นไฟล์ที่ root ของเว็บไซต์ ซึ่งบอกโปรแกรมอัตโนมัติว่าได้รับอนุญาตให้เข้าถึง path ใด ข้อตกลงนี้มีมานานและได้รับการกำหนดเป็นมาตรฐาน RFC 9309 ในปี ค.ศ. 2022 <span class="citation" data-cites="rfc9309robots">(<a href="../references.html#ref-rfc9309robots" role="doc-biblioref">Koster และคณะ 2022</a>)</span> Python ตรวจไฟล์นี้ได้ด้วยโมดูลมาตรฐาน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.robotparser <span class="im">import</span> RobotFileParser</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rp <span class="op">=</span> RobotFileParser()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>rp.set_url(<span class="st">"http://air4thai.pcd.go.th/robots.txt"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>rp.read()</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rp.can_fetch(<span class="st">"pm25-explorer"</span>, URL))   <span class="co"># True = อนุญาต</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>สิ่งที่ต้องเข้าใจคือ <code>robots.txt</code> เป็น <em>ข้อตกลง</em> ไม่ใช่กลไกป้องกัน โปรแกรมที่ไม่เคารพก็ยังเข้าถึงได้ทางเทคนิค แต่การฝ่าฝืนแสดงว่าเราจงใจเพิกเฉยต่อความประสงค์ของเจ้าของเว็บไซต์ และอาจถูกนำไปพิจารณาประกอบหากเกิดข้อพิพาท ในทางกลับกัน การที่ <code>robots.txt</code> อนุญาตก็ไม่ได้แปลว่าข้อมูลนั้นนำไปใช้ได้ทุกวัตถุประสงค์</p>
+</section>
+<section id="ขอกำหนดการใชงาน" class="level3">
+<h3 class="anchored" data-anchor-id="ขอกำหนดการใชงาน">ข้อกำหนดการใช้งาน</h3>
+<p>เว็บไซต์และ API จำนวนมากมีข้อกำหนดการใช้งาน (terms of use) หรือสัญญาอนุญาต (license) ที่ระบุว่าข้อมูลใช้ได้อย่างไร เช่น ต้องอ้างอิงแหล่งที่มา ห้ามใช้เชิงพาณิชย์ หรือห้ามเผยแพร่ข้อมูลดิบต่อ ผู้อ่านต้องอ่านข้อกำหนดเหล่านี้ก่อนใช้ข้อมูล และบันทึกไว้ใน README ของโครงการ ชุดข้อมูลเปิดหลายชุดใช้สัญญาอนุญาตมาตรฐาน เช่น Creative Commons ซึ่งบทที่ 22 อธิบายรายละเอียด</p>
+</section>
+<section id="ลขสทธ" class="level3">
+<h3 class="anchored" data-anchor-id="ลขสทธ">ลิขสิทธิ์</h3>
+<p>ตาม พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537 มาตรา 7 ข่าวประจำวันและข้อเท็จจริงที่มีลักษณะเป็นเพียงข่าวสาร รวมถึงกฎหมาย ระเบียบ และประกาศของหน่วยงานรัฐ ไม่ถือเป็นงานอันมีลิขสิทธิ์ <span class="citation" data-cites="copyright1994thai">(<a href="../references.html#ref-copyright1994thai" role="doc-biblioref">ราชกิจจานุเบกษา 1994</a>)</span> ตัวเลขค่าฝุ่นที่วัดได้จึงเป็นข้อเท็จจริง แต่ <em>การเลือกและจัดเรียง</em> ข้อมูลอย่างสร้างสรรค์ หรือข้อความ รูปภาพ และการออกแบบบนหน้าเว็บ อาจได้รับความคุ้มครอง นอกจากนี้ ข้อกำหนดการใช้งานเป็นสัญญาที่ผูกพันผู้ใช้แยกจากกฎหมายลิขสิทธิ์ แม้ข้อมูลจะไม่มีลิขสิทธิ์ ก็อาจมีเงื่อนไขการใช้ตามสัญญา</p>
+</section>
+<section id="pdpa" class="level3">
+<h3 class="anchored" data-anchor-id="pdpa">PDPA</h3>
+<p>ข้อมูลคุณภาพอากาศไม่มีข้อมูลส่วนบุคคล แต่โครงการในโดเมนอื่นอาจมี เช่น การ scrape ความคิดเห็นจากเว็บบอร์ด รายชื่อผู้ประกอบการ หรือข้อมูลผู้ป่วย พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) มาตรา 6 นิยามข้อมูลส่วนบุคคลว่าเป็นข้อมูลเกี่ยวกับบุคคลซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้ไม่ว่าทางตรงหรือทางอ้อม <span class="citation" data-cites="pdpa2019personal">(<a href="../references.html#ref-pdpa2019personal" role="doc-biblioref">ราชกิจจานุเบกษา 2019b</a>)</span> ประเด็นที่ผู้เริ่มต้นมักเข้าใจผิดคือ <em>ข้อมูลที่เผยแพร่สาธารณะแล้วก็ยังเป็นข้อมูลส่วนบุคคล</em> การเก็บรวบรวมต้องมีฐานทางกฎหมายตามที่กำหนดในมาตรา 24 และข้อมูลส่วนบุคคลที่มีความอ่อนไหวตามมาตรา 26 เช่น ข้อมูลสุขภาพ มีเงื่อนไขเข้มงวดกว่า บทที่ 16 อธิบาย PDPA สำหรับนักวิทยาการข้อมูลอย่างละเอียด</p>
+</section>
+<section id="แนวปฏบตทด" class="level3">
+<h3 class="anchored" data-anchor-id="แนวปฏบตทด">แนวปฏิบัติที่ดี</h3>
+<div id="tbl-ch05-legal-checklist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-legal-checklist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.9: คำถามด้านกฎหมายและจริยธรรมก่อนดึงข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch05-legal-checklist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระดับ</th>
+<th>คำถามที่ต้องตอบก่อนดึงข้อมูล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>เทคนิค</td>
+<td><code>robots.txt</code> อนุญาตหรือไม่ ความถี่ที่ดึงเป็นภาระต่อเซิร์ฟเวอร์หรือไม่</td>
+</tr>
+<tr class="even">
+<td>สัญญา</td>
+<td>ข้อกำหนดการใช้งานอนุญาตวัตถุประสงค์ของเราหรือไม่ ต้องอ้างอิงอย่างไร</td>
+</tr>
+<tr class="odd">
+<td>ลิขสิทธิ์</td>
+<td>สิ่งที่ดึงเป็นข้อเท็จจริง หรือเป็นงานสร้างสรรค์ของผู้อื่น</td>
+</tr>
+<tr class="even">
+<td>ความเป็นส่วนตัว</td>
+<td>มีข้อมูลที่ระบุตัวบุคคลได้หรือไม่ ถ้ามี มีฐานทางกฎหมายหรือไม่ และจำเป็นต้องเก็บหรือไม่</td>
+</tr>
+<tr class="odd">
+<td>จริยธรรม</td>
+<td>ถ้าเจ้าของข้อมูลหรือบุคคลในข้อมูลรู้ว่าเรานำไปใช้แบบนี้ เขาจะยอมรับได้หรือไม่</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch05-incremental" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="sec-ch05-incremental"><span class="header-section-number">5.8</span> การดึงข้อมูลแบบตั้งเวลาและแบบเพิ่มเติม (incremental) ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ตงเวลาให-script-รนเอง" class="level3">
+<h3 class="anchored" data-anchor-id="ตงเวลาให-script-รนเอง">ตั้งเวลาให้ script รันเอง</h3>
+<p>บริการค่าล่าสุดของ Air4Thai ให้เฉพาะค่าปัจจุบัน ถ้าต้องการข้อมูลต่อเนื่อง script ต้องรันทุกชั่วโมง ซึ่งไม่ควรพึ่งการกดรันด้วยมือ ระบบปฏิบัติการมีเครื่องมือตั้งเวลาในตัว บน macOS และ Linux คือ <strong><span class="idx">cron</span></strong> ส่วนบน Windows คือ Task Scheduler</p>
+<pre class="text"><code># crontab -e แล้วเพิ่มบรรทัดนี้: รันนาทีที่ 5 ของทุกชั่วโมง
+5 * * * * cd /home/user/pm25-explorer &amp;&amp; /home/user/miniforge3/envs/dstoolbox/bin/python src/fetch_air4thai.py</code></pre>
+<p>ข้อสังเกตสามข้อเกี่ยวกับบรรทัดนี้ ข้อแรก รันที่นาทีที่ 5 แทนนาทีที่ 0 เพื่อให้เซิร์ฟเวอร์อัปเดตข้อมูลของชั่วโมงนั้นเสร็จก่อน และไม่ไปพร้อมกับ script ของคนอื่นจำนวนมากที่ตั้งไว้ที่นาทีที่ 0 ข้อสอง ใช้ path เต็มของ <code>python</code> ในสภาพแวดล้อม เพราะ cron ไม่ได้ activate สภาพแวดล้อมให้ (บทที่ 2) ข้อสาม <code>cd</code> ไปที่ root ของโครงการก่อน เพื่อให้ relative path ใน script ทำงานถูกต้อง</p>
+</section>
+<section id="incremental-loading" class="level3">
+<h3 class="anchored" data-anchor-id="incremental-loading">incremental loading</h3>
+<p>เมื่อใช้บริการข้อมูลย้อนหลังซึ่งรับช่วงวันที่เป็นพารามิเตอร์ การดึงข้อมูลทั้งหมดใหม่ทุกครั้งสิ้นเปลืองทั้งเวลาและภาระของเซิร์ฟเวอร์ <strong><span class="idx">incremental loading</span></strong> คือการดึงเฉพาะส่วนที่ยังไม่มี โดยจำจุดล่าสุดที่ดึงแล้วไว้ จุดนี้เรียกว่า <strong><span class="idx">watermark</span></strong> ซึ่งในข้อมูลของเราคือเวลาล่าสุดที่มีค่าของแต่ละสถานีในฐานข้อมูล</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>watermark <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT station_id, MAX(ts) AS last_ts</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM measurements</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE pm25 IS NOT NULL</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY station_id</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>last_ts <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(watermark[<span class="st">"station_id"</span>], watermark[<span class="st">"last_ts"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>จากนั้นดึงข้อมูลของแต่ละสถานีตั้งแต่ <code>last_ts</code> เป็นต้นไป ข้อควรระวังมีสองข้อ ข้อแรก ควรดึง <em>ทับซ้อน</em> ย้อนหลังไปเล็กน้อย เช่น 6–24 ชั่วโมงก่อน watermark เพราะผู้ให้บริการอาจปรับปรุงค่าล่าสุดหลังจากเผยแพร่ครั้งแรก การทับซ้อนนี้ไม่ทำให้เกิดข้อมูลซ้ำ เพราะขั้นโหลดเป็น upsert ข้อสอง สถานีใหม่ที่ยังไม่มีใน watermark ต้องกำหนดวันเริ่มต้นแยก</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  W[(อ่าน watermark&lt;br/&gt;MAX ts ต่อสถานี)] --&gt; R[กำหนดช่วง&lt;br/&gt;watermark − 24 ชม. ถึงปัจจุบัน]
+  R --&gt; F[ดึงข้อมูลย้อนหลัง&lt;br/&gt;เฉพาะช่วงนั้น]
+  F --&gt; S[บันทึก raw]
+  S --&gt; L[upsert เข้า measurements&lt;br/&gt;บทที่ 7]
+  L --&gt; W
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ch05-observability" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="sec-ch05-observability"><span class="header-section-number">5.9</span> logging และการสังเกตการณ์ (observability) ของ pipeline ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="ทำไม-print-ไมพอ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไม-print-ไมพอ">ทำไม <code>print</code> ไม่พอ</h3>
+<p>script ที่รันอัตโนมัติทุกชั่วโมงไม่มีใครนั่งดูหน้าจอ เมื่อพบว่าข้อมูลของวันหนึ่งหายไป เราต้องย้อนดูได้ว่า script รันหรือไม่ รันแล้วสำเร็จหรือล้มเหลว และล้มเหลวเพราะอะไร <code>print</code> แสดงผลบนหน้าจอแล้วหายไป ส่วนโมดูล <span class="idx-tool"><code>logging</code></span> ของ Python บันทึกข้อความพร้อมเวลาและระดับความรุนแรงลงไฟล์ได้ <span class="citation" data-cites="python2026logging">(<a href="../references.html#ref-python2026logging" role="doc-biblioref">Python Software Foundation 2026</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>RAW_DIR <span class="op">=</span> Path(<span class="st">"data/raw"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>RAW_DIR.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)        <span class="co"># ต้องสร้างโฟลเดอร์ก่อนตั้งค่า FileHandler</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.INFO,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">"</span><span class="sc">%(asctime)s</span><span class="st"> </span><span class="sc">%(levelname)s</span><span class="st"> </span><span class="sc">%(name)s</span><span class="st"> </span><span class="sc">%(message)s</span><span class="st">"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    handlers<span class="op">=</span>[logging.StreamHandler(),</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>              logging.FileHandler(RAW_DIR <span class="op">/</span> <span class="st">"fetch.log"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)],</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>log <span class="op">=</span> logging.getLogger(<span class="st">"fetch"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-ch05-log-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-log-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.10: ระดับของ logging และการใช้งาน
+</figcaption>
+<div aria-describedby="tbl-ch05-log-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ระดับ</th>
+<th>ใช้เมื่อ</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DEBUG</code></td>
+<td>รายละเอียดสำหรับการแก้ปัญหา</td>
+<td>ค่าของพารามิเตอร์แต่ละครั้ง</td>
+</tr>
+<tr class="even">
+<td><code>INFO</code></td>
+<td>เหตุการณ์ปกติที่ควรบันทึก</td>
+<td>บันทึกไฟล์แล้ว 182 สถานี</td>
+</tr>
+<tr class="odd">
+<td><code>WARNING</code></td>
+<td>ผิดปกติแต่ยังทำงานต่อได้</td>
+<td>retry ครั้งที่ 2</td>
+</tr>
+<tr class="even">
+<td><code>ERROR</code></td>
+<td>ทำงานไม่สำเร็จ</td>
+<td>ล้มเหลวครบทุกครั้ง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="จาก-logging-ส-observability" class="level3">
+<h3 class="anchored" data-anchor-id="จาก-logging-ส-observability">จาก logging สู่ observability</h3>
+<p><strong><span class="idx">observability</span></strong> คือความสามารถในการเข้าใจสภาพภายในของระบบจากข้อมูลที่ระบบส่งออกมา <span class="citation" data-cites="majors2022observability">(<a href="../references.html#ref-majors2022observability" role="doc-biblioref">Majors และคณะ 2022</a>)</span> สำหรับ pipeline ข้อมูล คำถามที่ต้องตอบได้ไม่ใช่เพียง “script รันสำเร็จหรือไม่” แต่รวมถึง “ข้อมูลที่ได้ปกติหรือไม่” script ที่รันสำเร็จทุกชั่วโมงแต่ได้รายการสถานีที่น้อยลงครึ่งหนึ่ง หรือได้ค่า PM2.5 เป็น <code>-1</code> ทั้งหมด ก็ยังเป็นปัญหาที่ต้องรู้</p>
+<p>ตัวชี้วัดที่ควรบันทึกในทุกรอบของการดึงข้อมูล</p>
+<div id="tbl-ch05-observability" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-observability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.11: ตัวชี้วัดการสังเกตการณ์ของ script ดึงข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch05-observability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ตัวชี้วัด</th>
+<th>ตัวอย่างค่าปกติ</th>
+<th>สัญญาณผิดปกติ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สถานะของรอบ (สำเร็จ/ล้มเหลว)</td>
+<td>สำเร็จ</td>
+<td>ล้มเหลวติดต่อกันหลายรอบ</td>
+</tr>
+<tr class="even">
+<td>จำนวนสถานีใน response</td>
+<td>ใกล้เคียงรอบก่อน</td>
+<td>ลดลงมากกะทันหัน</td>
+</tr>
+<tr class="odd">
+<td>สัดส่วนสถานีที่ค่า PM2.5 เป็น <code>"-1"</code></td>
+<td>ต่ำ</td>
+<td>สูงผิดปกติ</td>
+</tr>
+<tr class="even">
+<td>เวลาของข้อมูลล่าสุด (<code>AQILast.date</code> + <code>time</code>)</td>
+<td>ชั่วโมงล่าสุด</td>
+<td>ไม่เปลี่ยนหลายรอบ (ข้อมูลค้าง)</td>
+</tr>
+<tr class="odd">
+<td>เวลาที่ใช้ในการดึง</td>
+<td>ไม่กี่วินาที</td>
+<td>นานขึ้นมาก</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การบันทึกตัวชี้วัดเหล่านี้ลงในไฟล์ CSV หรือตารางในฐานข้อมูลทุกรอบ ทำให้วาดกราฟดูแนวโน้มได้ และตั้งการแจ้งเตือนเมื่อค่าผิดปกติได้ แนวคิดนี้ต่อยอดไปเป็นการตรวจคุณภาพข้อมูลอย่างเป็นระบบในบทที่ 9</p>
+</section>
+</section>
+<section id="sec-ch05-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch05-case">กรณีศึกษา: สร้าง script ดึงข้อมูล Air4Thai ที่ทนทาน</h2>
+<p><strong>คำถาม</strong> script ดึงข้อมูลของโครงการต้องเก็บค่ารายชั่วโมงของทุกสถานีอย่างต่อเนื่องตลอดภาคการศึกษา เพื่อตอบคำถาม Q1 ใน <code>questions.md</code> ต้องออกแบบอย่างไรให้ข้อมูลไม่หาย ไม่ซ้ำ และตรวจสอบได้</p>
+<p><strong>ข้อมูล</strong> บริการค่าล่าสุดของ Air4Thai ซึ่งให้ JSON ของทุกสถานี ณ ชั่วโมงล่าสุด</p>
+<p><strong>วิธีการ</strong> ออกแบบตามหลักการของบทนี้ทีละชั้น</p>
+<ol type="1">
+<li><strong>ประเมินแหล่งข้อมูล</strong> (หัวข้อ <a href="#sec-ch05-open-data" class="quarto-xref"><span>5.1</span></a>) บริการให้เฉพาะค่าปัจจุบัน จึงต้องดึงสะสมทุกชั่วโมง และต้องเก็บไฟล์ดิบไว้ เพราะค่าของชั่วโมงที่ผ่านไปแล้วดึงซ้ำจากบริการนี้ไม่ได้</li>
+<li><strong>ตรวจโครงสร้างจริง</strong> (หัวข้อ <a href="#sec-ch05-formats" class="quarto-xref"><span>5.4</span></a>) ใช้ <code>show_keys</code> ดู response แล้วบันทึกชื่อ key ลงในพจนานุกรมข้อมูล พบว่าตัวเลขเป็น string และค่าหายเป็น <code>"-1"</code></li>
+<li><strong>เชื่อมต่ออย่างปลอดภัย</strong> (หัวข้อ <a href="#sec-ch05-http" class="quarto-xref"><span>5.2</span></a>) ใช้ <code>truststore</code> แก้ปัญหา certificate chain ไม่ใช้ <code>verify=False</code></li>
+<li><strong>ทนต่อความผิดพลาด</strong> (หัวข้อ <a href="#sec-ch05-robust" class="quarto-xref"><span>5.5</span></a>) ใช้ timeout และ <code>get_with_backoff</code> ตรวจรูปแบบของ response ก่อนบันทึก บันทึกเป็นไบต์ด้วยชื่อไฟล์ที่มีเวลา และเขียนผ่านไฟล์ชั่วคราว</li>
+<li><strong>ตรวจสิทธิ์และมารยาท</strong> (หัวข้อ <a href="#sec-ch05-legal" class="quarto-xref"><span>5.7</span></a>) ตรวจ <code>robots.txt</code> ตั้ง <code>User-Agent</code> ดึงชั่วโมงละครั้ง และบันทึกเงื่อนไขการใช้ข้อมูลและวิธีอ้างอิงใน README</li>
+<li><strong>ตั้งเวลาและสังเกตการณ์</strong> (หัวข้อ ★) ตั้ง cron ที่นาทีที่ 5 ของทุกชั่วโมง และบันทึกจำนวนสถานีกับสัดส่วนค่า <code>"-1"</code> ลง log ทุกรอบ</li>
+</ol>
+<p><strong>ผล</strong> หลังรันครบหนึ่งสัปดาห์ โฟลเดอร์ <code>data/raw/</code> ควรมีไฟล์ JSON ประมาณชั่วโมงละหนึ่งไฟล์ และ <code>fetch.log</code> บันทึกทุกรอบ ผู้อ่านตรวจความต่อเนื่องได้ด้วยการนับไฟล์ต่อวัน ถ้าบางวันมีไฟล์น้อยกว่า 24 ไฟล์ ให้เปิด log ของวันนั้นเพื่อดูว่ารอบใดล้มเหลวและเพราะอะไร</p>
+<p><strong>การตีความ</strong> ไฟล์ที่ขาดไม่ได้แปลว่าข้อมูลของชั่วโมงนั้นหายไปเสมอ ถ้ารอบถัดไปสำเร็จ และเซิร์ฟเวอร์ยังแสดงค่าของชั่วโมงก่อนหน้าอยู่ (เพราะยังไม่อัปเดต) ข้อมูลอาจยังครบ การตรวจที่แท้จริงต้องทำหลังโหลดเข้าฐานข้อมูล โดยนับจำนวนชั่วโมงที่มีค่าต่อสถานีต่อวัน ซึ่งเป็นงานของบทที่ 7 และ 9</p>
+<p><strong>ข้อจำกัด</strong> ถ้าเครื่องที่รัน cron ปิดอยู่ ข้อมูลของช่วงนั้นจะหายและเรียกคืนจากบริการค่าล่าสุดไม่ได้ ทางแก้คือรันบนเครื่องที่เปิดตลอดเวลา หรือเติมช่วงที่ขาดด้วยบริการข้อมูลย้อนหลังตามหัวข้อ incremental loading และต้องบันทึกช่วงที่เติมไว้ เพราะข้อมูลย้อนหลังอาจผ่านการปรับปรุงจากผู้ให้บริการแล้ว จึงอาจต่างจากค่าที่เผยแพร่แบบเวลาจริงเล็กน้อย</p>
+</section>
+<section id="sec-ch05-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch05-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch05-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch05-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;5.12: ข้อผิดพลาดที่พบบ่อยในบทที่ 5
+</figcaption>
+<div aria-describedby="tbl-ch05-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไม่ใส่ <code>timeout</code></td>
+<td>request อาจค้างไม่สิ้นสุด script ตั้งเวลาค้างซ้อนกัน</td>
+<td>ใส่ <code>timeout=(10, 60)</code> ทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>แก้ <code>SSLError</code> ด้วย <code>verify=False</code></td>
+<td>ปิดการยืนยันตัวตนของเซิร์ฟเวอร์ ข้อมูลเชื่อถือไม่ได้</td>
+<td>ใช้ <code>truststore</code> หรือไฟล์ตัวอย่าง</td>
+</tr>
+<tr class="odd">
+<td>retry ทุกข้อผิดพลาดรวมถึง <code>404</code></td>
+<td>ลองซ้ำไม่ช่วย และเพิ่มภาระให้เซิร์ฟเวอร์</td>
+<td>retry เฉพาะข้อผิดพลาดชั่วคราว (5xx, 429, เครือข่าย)</td>
+</tr>
+<tr class="even">
+<td>retry ทันทีหรือรอเท่ากันทุกครั้ง</td>
+<td>เซิร์ฟเวอร์ที่รับภาระไม่ไหวไม่มีโอกาสฟื้นตัว</td>
+<td>exponential backoff พร้อม jitter และเคารพ <code>Retry-After</code></td>
+</tr>
+<tr class="odd">
+<td>เชื่อชื่อ key จากเอกสารหรือ AI โดยไม่ตรวจ</td>
+<td>key อาจผิดหรือเปลี่ยนไปแล้ว</td>
+<td>ตรวจด้วย <code>show_keys</code> กับ response จริง</td>
+</tr>
+<tr class="even">
+<td>แปลง JSON เป็นตารางทันทีแล้วทิ้ง response</td>
+<td>ถ้าแปลงผิดเอาข้อมูลคืนไม่ได้</td>
+<td>บันทึก response ดิบเป็นไบต์ก่อนแปลง</td>
+</tr>
+<tr class="odd">
+<td>ถือว่า <code>200 OK</code> คือได้ข้อมูลถูกต้อง</td>
+<td>บางบริการตอบ 200 พร้อมข้อความ error หรือรายการว่าง</td>
+<td>ตรวจเนื้อหาของ body ก่อนบันทึก</td>
+</tr>
+<tr class="even">
+<td>อ่านไฟล์โดยไม่ระบุ <code>encoding</code></td>
+<td>ภาษาไทยเพี้ยนต่างกันในแต่ละระบบปฏิบัติการ</td>
+<td>ระบุ <code>encoding</code> ทุกครั้ง และแปลงเป็น UTF-8 ในขั้นโหลด</td>
+</tr>
+<tr class="odd">
+<td>ดึงข้อมูลทุกนาทีจาก endpoint ที่อัปเดตรายชั่วโมง</td>
+<td>ไม่ได้ข้อมูลเพิ่ม แต่เพิ่มภาระให้ผู้ให้บริการ</td>
+<td>ดึงตามความถี่การอัปเดต</td>
+</tr>
+<tr class="even">
+<td>คิดว่าข้อมูลสาธารณะไม่ใช่ข้อมูลส่วนบุคคล</td>
+<td>ข้อมูลที่ระบุตัวบุคคลได้ยังอยู่ภายใต้ PDPA</td>
+<td>ประเมินตาม <a href="#tbl-ch05-legal-checklist" class="quarto-xref">ตารางที่&nbsp;<span>5.9</span></a> ก่อนเก็บ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>ก่อนเขียนโค้ดดึงข้อมูล ต้องประเมินแหล่งข้อมูลว่าตอบคำถามได้หรือไม่ สร้างอย่างไร เข้าถึงอย่างไร ใช้ได้ภายใต้เงื่อนไขใด และเสถียรเพียงใด บริการค่าล่าสุดของ Air4Thai ให้เฉพาะค่าปัจจุบัน จึงต้องดึงสะสมและเก็บไฟล์ดิบ</li>
+<li>HTTP ประกอบด้วย method, URL, header, status code และ body script ต้องตอบสนองต่างกันตามกลุ่มของ status code และตรวจเนื้อหาของ body ด้วย</li>
+<li>TLS ยืนยันตัวตนของเซิร์ฟเวอร์ผ่าน certificate chain ปัญหา chain ไม่ครบแก้ด้วย <code>truststore</code> ห้ามใช้ <code>verify=False</code></li>
+<li>REST API อาจต้องการ authentication แบ่งข้อมูลเป็นหน้า และมี rate limit key ต้องอยู่ใน <code>.env</code> และต้องดึงตามความถี่ที่จำเป็น</li>
+<li>JSON ของ Air4Thai ส่งตัวเลขเป็น string และใช้ <code>"-1"</code> แทนค่าหาย encoding ของภาษาไทยต้องระบุชัดเจน และเก็บ response ดิบเป็นไบต์</li>
+<li>script ที่ทนทานใช้ timeout, retry เฉพาะข้อผิดพลาดชั่วคราวด้วย exponential backoff และเป็น idempotent ด้วยชื่อไฟล์ที่มีเวลาและการแยกขั้นดึงออกจากขั้นโหลด</li>
+<li>web scraping เป็นทางเลือกสุดท้ายเมื่อไม่มี API และต้องเคารพ <code>robots.txt</code> ข้อกำหนดการใช้งาน ลิขสิทธิ์ และ PDPA</li>
+</ul>
+</section>
+<section id="sec-ch05-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch05-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>status code <code>404</code>, <code>429</code> และ <code>503</code> ต่างกันอย่างไร และ script ดึงข้อมูลควรตอบสนองต่อแต่ละแบบอย่างไร</li>
+<li>อธิบายว่าทำไมเบราว์เซอร์จึงเปิดเว็บไซต์หนึ่งได้ปกติ แต่ requests แจ้ง <code>SSLError</code> พร้อมข้อความ <code>certificate verify failed: unable to get local issuer certificate</code> และทำไม <code>verify=False</code> จึงไม่ใช่วิธีแก้ที่ยอมรับได้</li>
+<li>ใช้ <a href="#eq-ch05-backoff" class="quarto-xref">สมการ&nbsp;<span>5.1</span></a> คำนวณช่วงของระยะรอในครั้งที่ 1 ถึง 5 เมื่อ <span class="math inline">\(b = 2\)</span> วินาทีและ <span class="math inline">\(c = 30\)</span> วินาที</li>
+<li>ระบุลักษณะสามประการของ JSON จาก Air4Thai ที่ต้องจัดการในขั้นโหลด และผลที่ตามมาถ้าไม่จัดการแต่ละข้อ</li>
+<li>ข้อมูลที่เผยแพร่บนเว็บไซต์สาธารณะแล้วยังเป็นข้อมูลส่วนบุคคลตาม PDPA หรือไม่ อธิบายโดยอ้างนิยามในกฎหมาย</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>เรียกบริการค่าล่าสุดของ Air4Thai (หรือเปิดไฟล์ <code>air4thai_sample.json</code> จากผู้สอน) แล้วใช้ <code>show_keys</code> ตรวจโครงสร้าง บันทึกชื่อ key ทั้งหมดของสถานีหนึ่งสถานี และเปรียบเทียบกับโครงสร้างในหัวข้อ <a href="#sec-ch05-formats" class="quarto-xref"><span>5.4</span></a> ว่าตรงกันหรือไม่</li>
+<li>นับจำนวนสถานีที่ค่า <code>PM25.value</code> เป็น <code>"-1"</code> ใน response หรือไฟล์ตัวอย่าง และคำนวณค่าเฉลี่ยของ <code>PM25.value</code> สองแบบ คือแบบที่รวม <code>-1</code> และแบบที่ตัดออก ความต่างของสองค่านี้บอกอะไร</li>
+<li>เขียนเซิร์ฟเวอร์จำลองด้วย <code>http.server</code> ที่ตอบ <code>429</code> พร้อม <code>Retry-After: 2</code> หนึ่งครั้งแล้วตอบ <code>200</code> จากนั้นทดสอบ <code>get_with_backoff</code> และแสดง log ว่ารอตาม <code>Retry-After</code> จริง</li>
+<li>สร้างไฟล์ CSV ภาษาไทยด้วย encoding <code>cp874</code> แล้วอ่านด้วย <code>pd.read_csv</code> โดยไม่ระบุ encoding และโดยระบุ encoding ที่ถูกต้อง บันทึกผลที่ได้</li>
+<li>ตรวจ <code>robots.txt</code> และข้อกำหนดการใช้งานของแหล่งข้อมูลที่โครงการของตนใช้ แล้วเขียนส่วน “แหล่งข้อมูลและเงื่อนไขการใช้งาน” ใน README ตามคำถามใน <a href="#tbl-ch05-legal-checklist" class="quarto-xref">ตารางที่&nbsp;<span>5.9</span></a></li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ค้นหาบริการข้อมูลย้อนหลังของ Air4Thai จากเว็บไซต์ของหน่วยงาน ตรวจ endpoint และพารามิเตอร์ที่ใช้งานได้จริง แล้วเขียน script ที่เติมข้อมูลช่วงที่ขาดของสถานีหนึ่งแบบ incremental โดยใช้ watermark จากฐานข้อมูล บันทึกวันที่ที่ตรวจสอบ endpoint ไว้ใน comment</li>
+<li>เพิ่มการบันทึกตัวชี้วัดใน <a href="#tbl-ch05-observability" class="quarto-xref">ตารางที่&nbsp;<span>5.11</span></a> ลงตาราง <code>fetch_log</code> ใน DuckDB ทุกรอบที่ script ทำงาน จากนั้นเขียน query ที่ตรวจหารอบที่ผิดปกติ เช่น จำนวนสถานีลดลงเกินร้อยละ 20 จากค่ามัธยฐานของ 24 รอบก่อนหน้า</li>
+<li>เลือกเว็บไซต์ที่มีข้อมูลซึ่งเป็นประโยชน์กับโครงการแต่ไม่มี API ประเมินตาม <a href="#tbl-ch05-legal-checklist" class="quarto-xref">ตารางที่&nbsp;<span>5.9</span></a> ว่าควร scrape หรือไม่ ถ้าควร ให้เขียน scraper ที่ทนต่อการเปลี่ยนแปลงของหน้าเว็บ และมีการตรวจผลที่แจ้งเตือนเมื่อโครงสร้างหน้าเว็บเปลี่ยน</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch05">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="requests2026docs"><span class="nocase">Reitz และคณะ</span> (<a href="../references.html#ref-requests2026docs" role="doc-biblioref">2026</a>)</span> — เอกสารทางการของ requests ส่วน Quickstart และ Advanced Usage ครอบคลุม timeout, session และการจัดการข้อผิดพลาด</li>
+<li><span class="citation" data-cites="rfc9110http">Fielding และคณะ (<a href="../references.html#ref-rfc9110http" role="doc-biblioref">2022</a>)</span> — มาตรฐาน HTTP ฉบับปัจจุบัน อ่านส่วนที่ว่าด้วย method และ status code เมื่อต้องการความหมายที่แน่นอน</li>
+<li><span class="citation" data-cites="brooker2015exponential">Brooker (<a href="../references.html#ref-brooker2015exponential" role="doc-biblioref">2015</a>)</span> — บทความที่อธิบายและเปรียบเทียบรูปแบบของ backoff และ jitter ด้วยการจำลอง</li>
+<li><span class="citation" data-cites="fielding2000architectural">Fielding (<a href="../references.html#ref-fielding2000architectural" role="doc-biblioref">2000</a>)</span> — วิทยานิพนธ์ต้นฉบับที่นิยาม REST บทที่ 5 อธิบายข้อจำกัดของสถาปัตยกรรมแบบ REST</li>
+<li><span class="citation" data-cites="richardson2026beautifulsoup">Richardson (<a href="../references.html#ref-richardson2026beautifulsoup" role="doc-biblioref">2026</a>)</span> — เอกสารทางการของ BeautifulSoup พร้อมตัวอย่างการค้นหาด้วย CSS selector</li>
+<li><span class="citation" data-cites="rfc9309robots">Koster และคณะ (<a href="../references.html#ref-rfc9309robots" role="doc-biblioref">2022</a>)</span> — มาตรฐาน robots.txt ที่อธิบายไวยากรณ์และขอบเขตของข้อตกลงอย่างชัดเจน</li>
+<li><span class="citation" data-cites="majors2022observability">Majors และคณะ (<a href="../references.html#ref-majors2022observability" role="doc-biblioref">2022</a>)</span> — หนังสือเรื่อง observability ที่ช่วยให้เข้าใจว่าทำไมการรู้ว่าระบบ “ทำงาน” จึงไม่เพียงพอ</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-rfc8259json" class="csl-entry" role="listitem">
+Bray, Tim. 2017. <em>The <span>JavaScript</span> Object Notation (<span>JSON</span>) Data Interchange Format</em>. RFC No. 8259. Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC8259">https://doi.org/10.17487/RFC8259</a>.
+</div>
+<div id="ref-brooker2015exponential" class="csl-entry" role="listitem">
+Brooker, Marc. 2015. <em>Exponential Backoff and Jitter</em>. AWS Architecture Blog. <a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/">https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/</a>.
+</div>
+<div id="ref-fielding2000architectural" class="csl-entry" role="listitem">
+Fielding, Roy Thomas. 2000. <span>“Architectural Styles and the Design of Network-Based Software Architectures”</span>. Phdthesis, University of California, Irvine.
+</div>
+<div id="ref-rfc9110http" class="csl-entry" role="listitem">
+Fielding, Roy T., Mark Nottingham, และ Julian Reschke. 2022. <em><span>HTTP</span> Semantics</em>. RFC No. 9110. Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC9110">https://doi.org/10.17487/RFC9110</a>.
+</div>
+<div id="ref-rfc9309robots" class="csl-entry" role="listitem">
+Koster, Martijn, Gary Illyes, Henner Zeller, และ Lizzi Sassman. 2022. <em>Robots Exclusion Protocol</em>. RFC No. 9309. Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC9309">https://doi.org/10.17487/RFC9309</a>.
+</div>
+<div id="ref-truststore2026" class="csl-entry" role="listitem">
+<span class="nocase">Larson, Seth และคณะ</span>. 2026. <em>truststore: Verify Certificates Using <span>OS</span> Trust Stores</em>. <a href="https://truststore.readthedocs.io/">https://truststore.readthedocs.io/</a>.
+</div>
+<div id="ref-majors2022observability" class="csl-entry" role="listitem">
+Majors, Charity, Liz Fong-Jones, และ George Miranda. 2022. <em>Observability Engineering: Achieving Production Excellence</em>. O’Reilly Media.
+</div>
+<div id="ref-rfc6585additional" class="csl-entry" role="listitem">
+Nottingham, Mark, และ Roy T. Fielding. 2012. <em>Additional <span>HTTP</span> Status Codes</em>. RFC No. 6585. Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC6585">https://doi.org/10.17487/RFC6585</a>.
+</div>
+<div id="ref-okfn2026opendefinition" class="csl-entry" role="listitem">
+Open Knowledge Foundation. 2026. <em>The Open Definition</em>. <a href="https://opendefinition.org/">https://opendefinition.org/</a>.
+</div>
+<div id="ref-python2026logging" class="csl-entry" role="listitem">
+Python Software Foundation. 2026. <em>logging – Logging Facility for <span>Python</span></em>. <a href="https://docs.python.org/3/library/logging.html">https://docs.python.org/3/library/logging.html</a>.
+</div>
+<div id="ref-requests2026docs" class="csl-entry" role="listitem">
+<span class="nocase">Reitz, Kenneth และคณะ</span>. 2026. <em>Requests: <span>HTTP</span> for Humans – Documentation</em>. <a href="https://requests.readthedocs.io/">https://requests.readthedocs.io/</a>.
+</div>
+<div id="ref-rfc8446tls" class="csl-entry" role="listitem">
+Rescorla, Eric. 2018. <em>The Transport Layer Security (<span>TLS</span>) Protocol Version 1.3</em>. RFC No. 8446. Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC8446">https://doi.org/10.17487/RFC8446</a>.
+</div>
+<div id="ref-richardson2026beautifulsoup" class="csl-entry" role="listitem">
+Richardson, Leonard. 2026. <em>Beautiful Soup Documentation</em>. <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">https://www.crummy.com/software/BeautifulSoup/bs4/doc/</a>.
+</div>
+<div id="ref-rfc4180csv" class="csl-entry" role="listitem">
+Shafranovich, Yakov. 2005. <em>Common Format and <span>MIME</span> Type for Comma-Separated Values (<span>CSV</span>) Files</em>. RFC No. 4180. Internet Engineering Task Force. <a href="https://doi.org/10.17487/RFC4180">https://doi.org/10.17487/RFC4180</a>.
+</div>
+<div id="ref-urllib32026retry" class="csl-entry" role="listitem">
+<span class="nocase">urllib3 contributors</span>. 2026. <em>urllib3 Documentation: <span>Retry</span></em>. <a href="https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html">https://urllib3.readthedocs.io/en/stable/reference/urllib3.util.html</a>.
+</div>
+<div id="ref-copyright1994thai" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 1994. <em>พระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537</em>.
+</div>
+<div id="ref-oic1997official" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 1997. <em>พระราชบัญญัติข้อมูลข่าวสารของราชการ พ.ศ. 2540</em>.
+</div>
+<div id="ref-dga2019digital" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019a. <em>พระราชบัญญัติการบริหารงานและการให้บริการภาครัฐผ่านระบบดิจิทัล พ.ศ. 2562</em>.
+</div>
+<div id="ref-pdpa2019personal" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 2019b. <em>พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/04-questions-hypotheses.html" class="pagination-link" aria-label="การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/06-analytical-databases.html" class="pagination-link" aria-label="แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; สภาพแวดล้อมการทำงานที่ทำซ้ำได้ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/03-version-control.html" rel="next">
+<link href="../chapters/01-data-science-eda.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/02-reproducible-environment.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch02-crisis" id="toc-sec-ch02-crisis" class="nav-link" data-scroll-target="#sec-ch02-crisis"><span class="header-section-number">2.1</span> วิกฤตการทำซ้ำได้ (reproducibility crisis) และระดับของการทำซ้ำได้</a>
+  <ul class="collapse">
+  <li><a href="#วกฤตในงานวจย" id="toc-วกฤตในงานวจย" class="nav-link" data-scroll-target="#วกฤตในงานวจย">วิกฤตในงานวิจัย</a></li>
+  <li><a href="#นยามทตองแยกใหชด" id="toc-นยามทตองแยกใหชด" class="nav-link" data-scroll-target="#นยามทตองแยกใหชด">นิยามที่ต้องแยกให้ชัด</a></li>
+  <li><a href="#ระดบของการทำซำได" id="toc-ระดบของการทำซำได" class="nav-link" data-scroll-target="#ระดบของการทำซำได">ระดับของการทำซ้ำได้</a></li>
+  <li><a href="#หลกปฏบตทไดผล" id="toc-หลกปฏบตทไดผล" class="nav-link" data-scroll-target="#หลกปฏบตทไดผล">หลักปฏิบัติที่ได้ผล</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-shell" id="toc-sec-ch02-shell" class="nav-link" data-scroll-target="#sec-ch02-shell"><span class="header-section-number">2.2</span> shell และ terminal: แนวคิด path, process, environment variable</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมตองรจก-shell" id="toc-ทำไมตองรจก-shell" class="nav-link" data-scroll-target="#ทำไมตองรจก-shell">ทำไมต้องรู้จัก shell</a></li>
+  <li><a href="#path-ไฟลอยทไหน" id="toc-path-ไฟลอยทไหน" class="nav-link" data-scroll-target="#path-ไฟลอยทไหน">Path: ไฟล์อยู่ที่ไหน</a></li>
+  <li><a href="#process-โปรแกรมทกำลงทำงาน" id="toc-process-โปรแกรมทกำลงทำงาน" class="nav-link" data-scroll-target="#process-โปรแกรมทกำลงทำงาน">Process: โปรแกรมที่กำลังทำงาน</a></li>
+  <li><a href="#environment-variable-การตงคาทสงตอให-process" id="toc-environment-variable-การตงคาทสงตอให-process" class="nav-link" data-scroll-target="#environment-variable-การตงคาทสงตอให-process">Environment variable: การตั้งค่าที่ส่งต่อให้ process</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-packages" id="toc-sec-ch02-packages" class="nav-link" data-scroll-target="#sec-ch02-packages"><span class="header-section-number">2.3</span> Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</a>
+  <ul class="collapse">
+  <li><a href="#python-หาแพกเกจจากทไหน" id="toc-python-หาแพกเกจจากทไหน" class="nav-link" data-scroll-target="#python-หาแพกเกจจากทไหน">Python หาแพ็กเกจจากที่ไหน</a></li>
+  <li><a href="#pip-และ-pypi" id="toc-pip-และ-pypi" class="nav-link" data-scroll-target="#pip-และ-pypi">pip และ PyPI</a></li>
+  <li><a href="#conda-และ-channel" id="toc-conda-และ-channel" class="nav-link" data-scroll-target="#conda-และ-channel">conda และ channel</a></li>
+  <li><a href="#เลอกใชอะไรเมอใด" id="toc-เลอกใชอะไรเมอใด" class="nav-link" data-scroll-target="#เลอกใชอะไรเมอใด">เลือกใช้อะไรเมื่อใด</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-venv" id="toc-sec-ch02-venv" class="nav-link" data-scroll-target="#sec-ch02-venv"><span class="header-section-number">2.4</span> virtual environment ทำงานอย่างไร</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาท-virtual-environment-แก" id="toc-ปญหาท-virtual-environment-แก" class="nav-link" data-scroll-target="#ปญหาท-virtual-environment-แก">ปัญหาที่ virtual environment แก้</a></li>
+  <li><a href="#กลไกเบองหลง" id="toc-กลไกเบองหลง" class="nav-link" data-scroll-target="#กลไกเบองหลง">กลไกเบื้องหลัง</a></li>
+  <li><a href="#conda-environment-ตางจาก-venv-อยางไร" id="toc-conda-environment-ตางจาก-venv-อยางไร" class="nav-link" data-scroll-target="#conda-environment-ตางจาก-venv-อยางไร">conda environment ต่างจาก venv อย่างไร</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-lock" id="toc-sec-ch02-lock" class="nav-link" data-scroll-target="#sec-ch02-lock"><span class="header-section-number">2.5</span> การ lock เวอร์ชัน: <code>environment.yml</code>, <code>pyproject.toml</code>, <code>uv.lock</code></a>
+  <ul class="collapse">
+  <li><a href="#ทำไมรายชอแพกเกจอยางเดยวไมพอ" id="toc-ทำไมรายชอแพกเกจอยางเดยวไมพอ" class="nav-link" data-scroll-target="#ทำไมรายชอแพกเกจอยางเดยวไมพอ">ทำไมรายชื่อแพ็กเกจอย่างเดียวไม่พอ</a></li>
+  <li><a href="#environment.yml-ของ-conda" id="toc-environment.yml-ของ-conda" class="nav-link" data-scroll-target="#environment.yml-ของ-conda"><code>environment.yml</code> ของ conda</a></li>
+  <li><a href="#pyproject.toml-และ-uv.lock" id="toc-pyproject.toml-และ-uv.lock" class="nav-link" data-scroll-target="#pyproject.toml-และ-uv.lock"><code>pyproject.toml</code> และ <code>uv.lock</code></a></li>
+  <li><a href="#วงจรการทำงานกบไฟล-lock" id="toc-วงจรการทำงานกบไฟล-lock" class="nav-link" data-scroll-target="#วงจรการทำงานกบไฟล-lock">วงจรการทำงานกับไฟล์ lock</a></li>
+  <li><a href="#บนทกเวอรชนในผลลพธ" id="toc-บนทกเวอรชนในผลลพธ" class="nav-link" data-scroll-target="#บนทกเวอรชนในผลลพธ">บันทึกเวอร์ชันในผลลัพธ์</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-jupyter" id="toc-sec-ch02-jupyter" class="nav-link" data-scroll-target="#sec-ch02-jupyter"><span class="header-section-number">2.6</span> Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ <code>.ipynb</code> และปัญหา hidden state</a>
+  <ul class="collapse">
+  <li><a href="#สถาปตยกรรม-หนาจอกบ-kernel-แยกกน" id="toc-สถาปตยกรรม-หนาจอกบ-kernel-แยกกน" class="nav-link" data-scroll-target="#สถาปตยกรรม-หนาจอกบ-kernel-แยกกน">สถาปัตยกรรม: หน้าจอกับ kernel แยกกัน</a></li>
+  <li><a href="#รปแบบไฟล-.ipynb" id="toc-รปแบบไฟล-.ipynb" class="nav-link" data-scroll-target="#รปแบบไฟล-.ipynb">รูปแบบไฟล์ <code>.ipynb</code></a></li>
+  <li><a href="#ปญหา-hidden-state" id="toc-ปญหา-hidden-state" class="nav-link" data-scroll-target="#ปญหา-hidden-state">ปัญหา hidden state</a></li>
+  <li><a href="#วธปองกน" id="toc-วธปองกน" class="nav-link" data-scroll-target="#วธปองกน">วิธีป้องกัน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-vscode" id="toc-sec-ch02-vscode" class="nav-link" data-scroll-target="#sec-ch02-vscode"><span class="header-section-number">2.7</span> VS Code สำหรับงานข้อมูล</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมใช-vs-code" id="toc-ทำไมใช-vs-code" class="nav-link" data-scroll-target="#ทำไมใช-vs-code">ทำไมใช้ VS Code</a></li>
+  <li><a href="#การเลอก-interpreter" id="toc-การเลอก-interpreter" class="nav-link" data-scroll-target="#การเลอก-interpreter">การเลือก interpreter</a></li>
+  <li><a href="#คณสมบตทใชบอยในงานขอมล" id="toc-คณสมบตทใชบอยในงานขอมล" class="nav-link" data-scroll-target="#คณสมบตทใชบอยในงานขอมล">คุณสมบัติที่ใช้บ่อยในงานข้อมูล</a></li>
+  <li><a href="#ตงคาเฉพาะโครงการ" id="toc-ตงคาเฉพาะโครงการ" class="nav-link" data-scroll-target="#ตงคาเฉพาะโครงการ">ตั้งค่าเฉพาะโครงการ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-project" id="toc-sec-ch02-project" class="nav-link" data-scroll-target="#sec-ch02-project"><span class="header-section-number">2.8</span> โครงสร้างโครงการ การตั้งค่า และการจัดการความลับ (<code>.env</code>)</a>
+  <ul class="collapse">
+  <li><a href="#โครงสรางโครงการทดชวยอะไร" id="toc-โครงสรางโครงการทดชวยอะไร" class="nav-link" data-scroll-target="#โครงสรางโครงการทดชวยอะไร">โครงสร้างโครงการที่ดีช่วยอะไร</a></li>
+  <li><a href="#อางองไฟลจาก-root-ของโครงการ" id="toc-อางองไฟลจาก-root-ของโครงการ" class="nav-link" data-scroll-target="#อางองไฟลจาก-root-ของโครงการ">อ้างอิงไฟล์จาก root ของโครงการ</a></li>
+  <li><a href="#การตงคาแยกจากโคด" id="toc-การตงคาแยกจากโคด" class="nav-link" data-scroll-target="#การตงคาแยกจากโคด">การตั้งค่าแยกจากโค้ด</a></li>
+  <li><a href="#ความลบและไฟล-.env" id="toc-ความลบและไฟล-.env" class="nav-link" data-scroll-target="#ความลบและไฟล-.env">ความลับและไฟล์ <code>.env</code></a></li>
+  <li><a href="#ไฟล-.gitignore-ของโครงการ" id="toc-ไฟล-.gitignore-ของโครงการ" class="nav-link" data-scroll-target="#ไฟล-.gitignore-ของโครงการ">ไฟล์ <code>.gitignore</code> ของโครงการ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-container" id="toc-sec-ch02-container" class="nav-link" data-scroll-target="#sec-ch02-container"><span class="header-section-number">2.9</span> container (Docker) และ dev container เบื้องต้น ★</a>
+  <ul class="collapse">
+  <li><a href="#สงทไฟล-lock-ยงไมครอบคลม" id="toc-สงทไฟล-lock-ยงไมครอบคลม" class="nav-link" data-scroll-target="#สงทไฟล-lock-ยงไมครอบคลม">สิ่งที่ไฟล์ lock ยังไม่ครอบคลุม</a></li>
+  <li><a href="#container-คออะไร" id="toc-container-คออะไร" class="nav-link" data-scroll-target="#container-คออะไร">container คืออะไร</a></li>
+  <li><a href="#dockerfile-สำหรบโครงการ" id="toc-dockerfile-สำหรบโครงการ" class="nav-link" data-scroll-target="#dockerfile-สำหรบโครงการ">Dockerfile สำหรับโครงการ</a></li>
+  <li><a href="#dev-container" id="toc-dev-container" class="nav-link" data-scroll-target="#dev-container">dev container</a></li>
+  <li><a href="#เมอใดควรใช-container" id="toc-เมอใดควรใช-container" class="nav-link" data-scroll-target="#เมอใดควรใช-container">เมื่อใดควรใช้ container</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-ai" id="toc-sec-ch02-ai" class="nav-link" data-scroll-target="#sec-ch02-ai"><span class="header-section-number">2.10</span> การใช้ AI ช่วยเขียนโค้ด: ขอบเขต วิธีตรวจสอบ และการบันทึก</a>
+  <ul class="collapse">
+  <li><a href="#นโยบายของรายวชา" id="toc-นโยบายของรายวชา" class="nav-link" data-scroll-target="#นโยบายของรายวชา">นโยบายของรายวิชา</a></li>
+  <li><a href="#ทำไมตองตรวจสอบ" id="toc-ทำไมตองตรวจสอบ" class="nav-link" data-scroll-target="#ทำไมตองตรวจสอบ">ทำไมต้องตรวจสอบ</a></li>
+  <li><a href="#วธตรวจสอบอยางเปนระบบ" id="toc-วธตรวจสอบอยางเปนระบบ" class="nav-link" data-scroll-target="#วธตรวจสอบอยางเปนระบบ">วิธีตรวจสอบอย่างเป็นระบบ</a></li>
+  <li><a href="#การบนทก" id="toc-การบนทก" class="nav-link" data-scroll-target="#การบนทก">การบันทึก</a></li>
+  <li><a href="#ขอบเขตทเหมาะสม" id="toc-ขอบเขตทเหมาะสม" class="nav-link" data-scroll-target="#ขอบเขตทเหมาะสม">ขอบเขตที่เหมาะสม</a></li>
+  </ul></li>
+  <li><a href="#sec-ch02-case" id="toc-sec-ch02-case" class="nav-link" data-scroll-target="#sec-ch02-case">กรณีศึกษา: ทำให้ notebook สำรวจ PM2.5 ทำซ้ำได้</a></li>
+  <li><a href="#sec-ch02-pitfalls" id="toc-sec-ch02-pitfalls" class="nav-link" data-scroll-target="#sec-ch02-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch02-exercises" id="toc-sec-ch02-exercises" class="nav-link" data-scroll-target="#sec-ch02-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-data-science-eda.html">ส่วนที่ 1 รากฐาน</a></li><li class="breadcrumb-item"><a href="../chapters/02-reproducible-environment.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 1 สรุปว่าการสำรวจข้อมูลที่ดีต้อง <em>ตรวจสอบได้</em> และ <em>ทำซ้ำได้</em> บทนี้เปลี่ยนหลักการนั้นให้เป็นการปฏิบัติในระดับเครื่องมือ คำถามหลักของบทคือ ถ้าเพื่อนร่วมทีมหรือตัวเราเองในอีกหกเดือน clone repository โครงการไปรันบนเครื่องอื่น จะได้ผลลัพธ์เดียวกันหรือไม่ และถ้าไม่ได้ อะไรคือสาเหตุ</p>
+<p>คำตอบส่วนใหญ่ไม่ได้อยู่ในโค้ดวิเคราะห์ แต่อยู่ใน <em>สิ่งที่อยู่รอบโค้ด</em> ได้แก่ เวอร์ชันของ Python และไลบรารี ตัวแปรสภาพแวดล้อม ตำแหน่งของไฟล์ ลำดับการรัน cell ใน notebook และความลับอย่าง API key ที่ไม่ควรอยู่ในโค้ดเลย บทนี้อธิบายกลไกของสิ่งเหล่านี้ตั้งแต่ระดับ shell ไปจนถึง container เพื่อให้ผู้อ่านไม่เพียงทำตามขั้นตอนการติดตั้งได้ แต่เข้าใจว่าเมื่อมีปัญหาควรตรวจที่ไหน</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายความหมายของการทำซ้ำได้ แยกระดับของการทำซ้ำได้ และเชื่อมโยงกับวิกฤตการทำซ้ำได้ในงานวิจัย</li>
+<li>อธิบายแนวคิด path, process และ environment variable และใช้คำสั่ง shell ตรวจสอบสภาพแวดล้อมได้</li>
+<li>อธิบายว่า Python หาแพ็กเกจจากที่ใด และเปรียบเทียบ pip, wheel และ conda channel</li>
+<li>สร้างและใช้ virtual environment ด้วย conda หรือ uv พร้อม lock เวอร์ชันให้ผู้อื่นสร้างตามได้</li>
+<li>อธิบายสถาปัตยกรรมของ Jupyter และระบุสาเหตุของปัญหา hidden state</li>
+<li>ออกแบบโครงสร้างโครงการและจัดการความลับด้วยไฟล์ <code>.env</code> อย่างปลอดภัย</li>
+<li>ประเมินโค้ดที่ได้จาก AI ด้วยวิธีตรวจสอบที่เป็นระบบ และบันทึกการใช้ AI ได้</li>
+</ol>
+</section>
+<section id="sec-ch02-crisis" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-ch02-crisis"><span class="header-section-number">2.1</span> วิกฤตการทำซ้ำได้ (reproducibility crisis) และระดับของการทำซ้ำได้</h2>
+<section id="วกฤตในงานวจย" class="level3">
+<h3 class="anchored" data-anchor-id="วกฤตในงานวจย">วิกฤตในงานวิจัย</h3>
+<p>ในช่วงทศวรรษ 2010 วงการวิทยาศาสตร์หลายสาขาเริ่มตระหนักว่างานวิจัยที่ตีพิมพ์แล้วจำนวนมากไม่สามารถทำซ้ำได้ โครงการ Open Science Collaboration พยายามทำซ้ำการศึกษาทางจิตวิทยา 100 เรื่องที่ตีพิมพ์ในวารสารชั้นนำ พบว่าการศึกษาต้นฉบับร้อยละ 97 รายงานผลที่มีนัยสำคัญทางสถิติ แต่การทำซ้ำได้ผลที่มีนัยสำคัญเพียงร้อยละ 36 <span class="citation" data-cites="osc2015estimating">(<a href="../references.html#ref-osc2015estimating" role="doc-biblioref">Open Science Collaboration 2015</a>)</span> การสำรวจนักวิจัยมากกว่า 1,500 คนของวารสาร <em>Nature</em> พบว่า นักวิจัยมากกว่าร้อยละ 70 เคยพยายามทำซ้ำการทดลองของผู้อื่นแล้วไม่สำเร็จ และมากกว่าครึ่งเคยทำซ้ำการทดลองของตัวเองไม่สำเร็จ <span class="citation" data-cites="baker2016reproducibility">(<a href="../references.html#ref-baker2016reproducibility" role="doc-biblioref">Baker 2016</a>)</span> ปรากฏการณ์นี้ถูกเรียกว่า <span class="idx">วิกฤตการทำซ้ำได้</span> (reproducibility crisis)</p>
+<p>สาเหตุของวิกฤตมีหลายด้าน ทั้งการออกแบบการศึกษาที่มีขนาดตัวอย่างเล็ก แรงจูงใจให้ตีพิมพ์เฉพาะผลที่มีนัยสำคัญ และทางเลือกในการวิเคราะห์ที่ไม่ได้รายงาน (บทที่ 4 อธิบายเรื่องนี้) แต่มีอีกสาเหตุหนึ่งที่อยู่ในขอบเขตของบทนี้โดยตรง คือ <em>การคำนวณที่ทำซ้ำไม่ได้</em> แม้ได้ข้อมูลชุดเดียวกัน ผู้อื่นก็ไม่สามารถรันการวิเคราะห์ซ้ำได้ เพราะไม่มีโค้ด ไม่รู้ว่าใช้ซอฟต์แวร์รุ่นใด หรือโค้ดพึ่งพาไฟล์และการตั้งค่าที่อยู่เฉพาะบนเครื่องของผู้วิจัย</p>
+</section>
+<section id="นยามทตองแยกใหชด" class="level3">
+<h3 class="anchored" data-anchor-id="นยามทตองแยกใหชด">นิยามที่ต้องแยกให้ชัด</h3>
+<p>คำว่า reproducibility และ replicability ถูกใช้สลับกันในหลายสาขา หนังสือเล่มนี้ใช้นิยามของ National Academies of Sciences ของสหรัฐอเมริกา <span class="citation" data-cites="nasem2019reproducibility">(<a href="../references.html#ref-nasem2019reproducibility" role="doc-biblioref">National Academies of Sciences, Engineering, and Medicine 2019</a>)</span></p>
+<div id="tbl-ch02-repro-definitions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-repro-definitions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.1: นิยามการทำซ้ำได้สองแบบ ตาม National Academies
+</figcaption>
+<div aria-describedby="tbl-ch02-repro-definitions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>คำ</th>
+<th>นิยาม</th>
+<th>ตัวอย่างกับข้อมูล PM2.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>การทำซ้ำได้ (reproducibility)</td>
+<td>ได้ผลที่สอดคล้องกันเมื่อใช้ <strong>ข้อมูลเดียวกัน</strong> โค้ดเดียวกัน และเงื่อนไขการวิเคราะห์เดียวกัน</td>
+<td>เพื่อนรัน <code>src/run_pipeline.py</code> กับไฟล์ JSON ชุดเดียวกัน ได้ตาราง <code>daily_pm25</code> ตรงกันทุกแถว</td>
+</tr>
+<tr class="even">
+<td>การทำซ้ำด้วยข้อมูลใหม่ (replicability)</td>
+<td>ได้ผลที่สอดคล้องกันเมื่อศึกษาคำถามเดียวกันด้วย <strong>ข้อมูลชุดใหม่</strong></td>
+<td>ข้อสันนิษฐานจากข้อมูลช่วงสำรวจ ยังเห็นได้เมื่อตรวจด้วยข้อมูลปีล่าสุด</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>บทนี้เน้นการทำซ้ำได้ในความหมายแรก ซึ่งเป็นเงื่อนไขขั้นต่ำ ถ้าแม้แต่ข้อมูลเดียวกันยังรันได้ผลไม่ตรงกัน ก็ไม่มีความหมายที่จะพูดถึงการทำซ้ำด้วยข้อมูลใหม่ ส่วนความหมายที่สองเป็นเรื่องของการออกแบบการวิเคราะห์ ซึ่งบทที่ 4 อธิบายผ่านการแยกข้อมูลสำรวจกับข้อมูลยืนยัน</p>
+</section>
+<section id="ระดบของการทำซำได" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบของการทำซำได">ระดับของการทำซ้ำได้</h3>
+<p>Roger Peng เสนอให้มองการทำซ้ำได้เป็น <em>สเปกตรัม</em> ไม่ใช่สิ่งที่มีหรือไม่มี <span class="citation" data-cites="peng2011reproducible">(<a href="../references.html#ref-peng2011reproducible" role="doc-biblioref">Peng 2011</a>)</span> ปลายด้านหนึ่งคืองานที่มีเพียงบทความ ปลายอีกด้านคืองานที่มีโค้ด ข้อมูล และสภาพแวดล้อมครบจนรันซ้ำได้ทันที หนังสือเล่มนี้แบ่งเป็นห้าระดับตามสิ่งที่ผู้อื่นต้องมีเพื่อทำซ้ำ</p>
+<div id="tbl-ch02-repro-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-repro-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.2: ระดับของการทำซ้ำได้ของงานวิเคราะห์ข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch02-repro-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ระดับ</th>
+<th>สิ่งที่มี</th>
+<th>ผู้อื่นทำซ้ำได้หรือไม่</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>รายงานผลอย่างเดียว</td>
+<td>ไม่ได้ ต้องเชื่อตามที่เขียน</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>รายงาน + โค้ด</td>
+<td>ได้บางส่วน ถ้าเดาเวอร์ชันซอฟต์แวร์และหาข้อมูลเองได้</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>รายงาน + โค้ด + ข้อมูล (หรือ script ดึงข้อมูล)</td>
+<td>ได้ ถ้าสภาพแวดล้อมบังเอิญตรงกัน</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>ระดับ 2 + สภาพแวดล้อมที่ lock เวอร์ชัน</td>
+<td>ได้ บนระบบปฏิบัติการที่รองรับ</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>ระดับ 3 + container หรือระบบที่รันทั้งหมดด้วยคำสั่งเดียว</td>
+<td>ได้ แทบทุกเครื่อง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>โครงการในรายวิชานี้ตั้งเป้าที่ <strong>ระดับ 3</strong> คือ repository มีโค้ดทั้งหมด script ดึงข้อมูล และไฟล์ lock สภาพแวดล้อม ส่วนระดับ 4 เป็นหัวข้อ ★ ในหัวข้อ <a href="#sec-ch02-container" class="quarto-xref"><span>2.9</span></a> สังเกตว่าระดับ 2 ใช้ “script ดึงข้อมูล” แทนตัวข้อมูลได้ เพราะเราไม่ commit ไฟล์ข้อมูลเข้า Git (บทที่ 3 อธิบายเหตุผล) ข้อจำกัดคือ ข้อมูลจาก API อาจเปลี่ยนไปตามเวลา การเก็บไฟล์ JSON ดิบพร้อมเวลาที่ดึงไว้ใน <code>data/raw/</code> จึงสำคัญ</p>
+</section>
+<section id="หลกปฏบตทไดผล" class="level3">
+<h3 class="anchored" data-anchor-id="หลกปฏบตทไดผล">หลักปฏิบัติที่ได้ผล</h3>
+<p>งานทบทวนหลายชิ้นสรุปหลักปฏิบัติสำหรับงานคำนวณที่ทำซ้ำได้ไว้คล้ายกัน เช่น Sandve และคณะเสนอกฎสิบข้อ <span class="citation" data-cites="sandve2013ten">(<a href="../references.html#ref-sandve2013ten" role="doc-biblioref">Sandve และคณะ 2013</a>)</span> และ Wilson และคณะเสนอแนวปฏิบัติที่ “ดีพอ” สำหรับนักวิจัยที่ไม่ได้เป็นนักพัฒนาซอฟต์แวร์ <span class="citation" data-cites="wilson2017good">(<a href="../references.html#ref-wilson2017good" role="doc-biblioref">Wilson และคณะ 2017</a>)</span> หลักที่ตรงกับงานสำรวจข้อมูลมากที่สุดมีดังนี้</p>
+<ol type="1">
+<li><strong>ทุกผลลัพธ์ต้องสืบย้อนไปถึงโค้ดที่สร้างได้</strong> ไม่มีตัวเลขหรือกราฟในรายงานที่ได้จากการคลิกด้วยมือ</li>
+<li><strong>ไม่แก้ข้อมูลดิบด้วยมือ</strong> ถ้าต้องแก้ ให้เขียนโค้ดที่แก้ เพื่อให้รู้ว่าแก้อะไรและทำซ้ำได้</li>
+<li><strong>บันทึกเวอร์ชันของซอฟต์แวร์ทั้งหมด</strong> ไม่ใช่เฉพาะไลบรารีหลัก</li>
+<li><strong>ใช้ version control กับทุกอย่างที่เป็นข้อความ</strong> โค้ด เอกสาร และไฟล์ตั้งค่า</li>
+<li><strong>ตั้งค่า random seed</strong> เมื่อใช้การสุ่ม เช่น การ bootstrap ในบทที่ 13 หรือ k-means ในบทที่ 15</li>
+<li><strong>เก็บข้อมูลดิบแยกจากข้อมูลที่ผ่านการประมวลผล</strong> และไม่เขียนทับข้อมูลดิบ</li>
+</ol>
+</section>
+</section>
+<section id="sec-ch02-shell" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-ch02-shell"><span class="header-section-number">2.2</span> shell และ terminal: แนวคิด path, process, environment variable</h2>
+<section id="ทำไมตองรจก-shell" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองรจก-shell">ทำไมต้องรู้จัก shell</h3>
+<p>ผู้เริ่มต้นจำนวนมากใช้งานคอมพิวเตอร์ผ่านหน้าจอกราฟิกเป็นหลัก แต่เครื่องมือข้อมูลเกือบทั้งหมดในเล่มนี้ ทั้ง conda, uv, Git, Quarto และ Streamlit ถูกออกแบบให้สั่งงานผ่าน terminal เหตุผลไม่ใช่ความเคยชินของนักพัฒนา แต่เป็นเพราะคำสั่งที่พิมพ์เป็นข้อความ <em>บันทึกได้ ทำซ้ำได้ และนำไปใส่ใน script ได้</em> ขณะที่การคลิกบนหน้าจอทำซ้ำได้ยาก</p>
+<p><strong><span class="idx">terminal</span></strong> คือโปรแกรมที่แสดงหน้าต่างสำหรับพิมพ์คำสั่ง ส่วน <strong><span class="idx">shell</span></strong> คือโปรแกรมที่ทำงานอยู่ภายใน ทำหน้าที่อ่านคำสั่ง แปลความหมาย และสั่งให้ระบบปฏิบัติการทำงาน shell ที่พบบ่อยคือ bash และ zsh บน macOS และ Linux และ PowerShell บน Windows คำสั่งพื้นฐานของแต่ละ shell ต่างกันเล็กน้อย ภาคผนวก ข มีตารางเทียบคำสั่ง</p>
+</section>
+<section id="path-ไฟลอยทไหน" class="level3">
+<h3 class="anchored" data-anchor-id="path-ไฟลอยทไหน">Path: ไฟล์อยู่ที่ไหน</h3>
+<p><strong><span class="idx">path</span></strong> คือที่อยู่ของไฟล์หรือโฟลเดอร์ในระบบไฟล์ มีสองแบบ</p>
+<ul>
+<li><strong><span class="idx">absolute path</span></strong> เริ่มจากรากของระบบไฟล์ เช่น <code>/home/user/pm25-explorer/data/pm25.duckdb</code> บน Linux หรือ <code>C:\Users\user\pm25-explorer\data\pm25.duckdb</code> บน Windows</li>
+<li><strong><span class="idx">relative path</span></strong> เริ่มจากโฟลเดอร์ปัจจุบัน (working directory) เช่น <code>data/pm25.duckdb</code> หมายถึงไฟล์ <code>pm25.duckdb</code> ในโฟลเดอร์ <code>data</code> ที่อยู่ในโฟลเดอร์ปัจจุบัน</li>
+</ul>
+<p>ข้อผิดพลาดที่พบบ่อยที่สุดในโครงการข้อมูลคือ โค้ดเปิดไฟล์ด้วย relative path แต่ถูกรันจากโฟลเดอร์อื่น เช่น notebook ใน <code>notebooks/</code> เรียก <code>duckdb.connect("data/pm25.duckdb")</code> ซึ่งจะหาไฟล์ที่ <code>notebooks/data/pm25.duckdb</code> และ DuckDB จะ <em>สร้างไฟล์ฐานข้อมูลเปล่าใหม่</em> ขึ้นมาที่นั่นแทนที่จะแจ้ง error ผลคือ query ทุกอันแจ้งว่าไม่พบตาราง และผู้เริ่มต้นมักงงว่าข้อมูลหายไปไหน หัวข้อ <a href="#sec-ch02-project" class="quarto-xref"><span>2.8</span></a> แสดงวิธีป้องกันด้วยการหา root ของโครงการ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>                 <span class="co"># แสดง working directory ปัจจุบัน</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/            <span class="co"># แสดงไฟล์ในโฟลเดอร์ data ที่อยู่ใต้โฟลเดอร์ปัจจุบัน</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..               <span class="co"># ขึ้นไปหนึ่งระดับ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="process-โปรแกรมทกำลงทำงาน" class="level3">
+<h3 class="anchored" data-anchor-id="process-โปรแกรมทกำลงทำงาน">Process: โปรแกรมที่กำลังทำงาน</h3>
+<p>เมื่อเราพิมพ์ <code>python src/load_duckdb.py</code> shell จะสร้าง <strong><span class="idx">process</span></strong> ใหม่ขึ้นมารันโปรแกรม Python process แต่ละตัวมีหน่วยความจำของตัวเอง มี working directory ของตัวเอง และมีชุดตัวแปรสภาพแวดล้อมที่ <em>คัดลอก</em> มาจาก process แม่ (shell) ตอนที่ถูกสร้าง</p>
+<p>แนวคิดนี้อธิบายปรากฏการณ์หลายอย่างที่ผู้เริ่มต้นสับสน</p>
+<ul>
+<li><strong>kernel ของ Jupyter เป็น process แยก</strong> ตัวแปรที่สร้างใน notebook อยู่ในหน่วยความจำของ kernel process เมื่อ restart kernel ตัวแปรทั้งหมดหายไป (หัวข้อ <a href="#sec-ch02-jupyter" class="quarto-xref"><span>2.6</span></a>)</li>
+<li><strong>DuckDB ล็อกไฟล์ต่อ process</strong> ถ้า notebook เปิด <code>data/pm25.duckdb</code> แบบเขียนได้ค้างไว้ script อื่นที่พยายามเขียนไฟล์เดียวกันจะเปิดไม่ได้ ภาคผนวก ฉ อธิบายการแก้ปัญหานี้</li>
+<li><strong>การเปลี่ยนตัวแปรสภาพแวดล้อมใน process หนึ่งไม่กระทบ process อื่น</strong> ถ้าตั้งค่าใน terminal หนึ่ง อีก terminal หนึ่งจะไม่เห็น</li>
+</ul>
+</section>
+<section id="environment-variable-การตงคาทสงตอให-process" class="level3">
+<h3 class="anchored" data-anchor-id="environment-variable-การตงคาทสงตอให-process">Environment variable: การตั้งค่าที่ส่งต่อให้ process</h3>
+<p><strong><span class="idx">environment variable</span></strong> คือคู่ชื่อกับค่าที่ process ได้รับจาก process แม่ ใช้ส่งการตั้งค่าให้โปรแกรมโดยไม่ต้องแก้โค้ด ตัวแปรที่สำคัญที่สุดสำหรับบทนี้คือ <code>PATH</code> ซึ่งเป็นรายการโฟลเดอร์ที่ shell จะค้นหาเมื่อเราพิมพ์ชื่อคำสั่ง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span>            <span class="co"># macOS / Linux: แสดงรายการโฟลเดอร์ คั่นด้วย :</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python          <span class="co"># แสดงว่าคำสั่ง python ที่จะถูกเรียกคือไฟล์ใด</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$env</span><span class="op">:</span><span class="va">PATH</span>             <span class="co"># PowerShell: แสดงรายการโฟลเดอร์ คั่นด้วย ;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Command</span> python    <span class="co"># แสดงว่าคำสั่ง python ที่จะถูกเรียกคือไฟล์ใด</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เมื่อพิมพ์ <code>python</code> shell จะค้นหาไฟล์ชื่อ <code>python</code> ในโฟลเดอร์แรกของ <code>PATH</code> ถ้าไม่พบจึงค้นในโฟลเดอร์ถัดไป และใช้ไฟล์แรกที่พบ การ “activate” สภาพแวดล้อม ซึ่งหัวข้อ <a href="#sec-ch02-venv" class="quarto-xref"><span>2.4</span></a> จะอธิบาย ก็คือการนำโฟลเดอร์ของสภาพแวดล้อมไปใส่ไว้หน้าสุดของ <code>PATH</code> นั่นเอง</p>
+<p>ปัญหา “ติดตั้งแพ็กเกจแล้วแต่ import ไม่ได้” ส่วนใหญ่มีสาเหตุเดียว คือ <code>python</code> ที่รันโค้ดกับ <code>pip</code> ที่ติดตั้งแพ็กเกจเป็นคนละตัวกัน คำสั่ง <code>which python</code> และ <code>which pip</code> (หรือ <code>Get-Command</code> บน Windows) ช่วยวินิจฉัยได้ทันที วิธีป้องกันคือใช้ <code>python -m pip install ...</code> แทน <code>pip install ...</code> เพื่อให้แน่ใจว่าติดตั้งลงใน Python ตัวเดียวกับที่ใช้รัน</p>
+</section>
+</section>
+<section id="sec-ch02-packages" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-ch02-packages"><span class="header-section-number">2.3</span> Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel</h2>
+<section id="python-หาแพกเกจจากทไหน" class="level3">
+<h3 class="anchored" data-anchor-id="python-หาแพกเกจจากทไหน">Python หาแพ็กเกจจากที่ไหน</h3>
+<p>เมื่อโค้ดเรียก <code>import duckdb</code> interpreter จะค้นหาโมดูลชื่อ <code>duckdb</code> ในรายการโฟลเดอร์ที่เก็บไว้ในตัวแปร <code>sys.path</code> ตามลำดับ และใช้ตัวแรกที่พบ เราตรวจดูได้ว่ากำลังใช้ Python ตัวไหนและค้นหาแพ็กเกจจากที่ใด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.executable)   <span class="co"># ไฟล์ interpreter ที่กำลังรันอยู่</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.version)      <span class="co"># เวอร์ชันของ Python</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> sys.path:      <span class="co"># โฟลเดอร์ที่ใช้ค้นหาโมดูล ตามลำดับ</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+/home/user/miniforge3/envs/dstoolbox/bin/python
+3.12.7 | packaged by conda-forge | ...
+/home/user/miniforge3/envs/dstoolbox/lib/python312.zip
+/home/user/miniforge3/envs/dstoolbox/lib/python3.12
+/home/user/miniforge3/envs/dstoolbox/lib/python3.12/lib-dynload
+/home/user/miniforge3/envs/dstoolbox/lib/python3.12/site-packages</code></pre>
+<p>โฟลเดอร์ <code>site-packages</code> เป็นที่เก็บแพ็กเกจที่ติดตั้งเพิ่มเติม ถ้า <code>sys.executable</code> ชี้ไปที่สภาพแวดล้อมที่ถูกต้อง เช่น <code>dstoolbox</code> แพ็กเกจที่ติดตั้งในสภาพแวดล้อมนั้นจะถูกพบ ผู้อ่านควรรันสามบรรทัดนี้เป็นสิ่งแรกเมื่อเจอ <code>ModuleNotFoundError</code></p>
+<p>ข้อควรระวังหนึ่งคือ โฟลเดอร์แรกใน <code>sys.path</code> มักเป็นโฟลเดอร์ของ script ที่กำลังรัน (หรือโฟลเดอร์ปัจจุบันเมื่อรันแบบโต้ตอบ) ถ้าเราตั้งชื่อไฟล์ของเราเองว่า <code>pandas.py</code> หรือ <code>duckdb.py</code> คำสั่ง <code>import pandas</code> จะ import ไฟล์ของเราแทนไลบรารีจริง และเกิด error แปลก ๆ ที่หาสาเหตุยาก จึงไม่ควรตั้งชื่อไฟล์ซ้ำกับชื่อไลบรารี</p>
+</section>
+<section id="pip-และ-pypi" class="level3">
+<h3 class="anchored" data-anchor-id="pip-และ-pypi">pip และ PyPI</h3>
+<p><strong><span class="idx">pip</span></strong> เป็นตัวติดตั้งแพ็กเกจมาตรฐานของ Python ดาวน์โหลดแพ็กเกจจาก <strong><span class="idx">PyPI</span></strong> (Python Package Index) ซึ่งเป็นคลังแพ็กเกจกลางของชุมชน Python แพ็กเกจบน PyPI มาได้สองรูปแบบ</p>
+<ul>
+<li><strong>source distribution (sdist)</strong> เป็นซอร์สโค้ด ต้องสร้าง (build) บนเครื่องผู้ติดตั้ง ถ้าแพ็กเกจมีส่วนที่เขียนด้วย C หรือ C++ เครื่องผู้ติดตั้งต้องมี compiler และไลบรารีที่จำเป็น ซึ่งเป็นสาเหตุของ error การติดตั้งที่พบบ่อยบน Windows</li>
+<li><strong><span class="idx">wheel</span></strong> (ไฟล์ <code>.whl</code>) เป็นแพ็กเกจที่สร้างเสร็จแล้วสำหรับระบบปฏิบัติการและเวอร์ชัน Python ที่ระบุ ติดตั้งได้ด้วยการแตกไฟล์ ไม่ต้อง compile <span class="citation" data-cites="pep427wheel">(<a href="../references.html#ref-pep427wheel" role="doc-biblioref">Holth 2012</a>)</span> ชื่อไฟล์ wheel บอกว่าสร้างมาสำหรับระบบใด เช่น <code>cp312</code> หมายถึง CPython 3.12 และ <code>win_amd64</code> หมายถึง Windows 64 บิต</li>
+</ul>
+<p>pip จะเลือก wheel ที่ตรงกับเครื่องก่อนเสมอ ถ้าไม่มี wheel ที่ตรง จึงย้อนไปใช้ sdist ปัญหาจึงมักเกิดเมื่อใช้ Python เวอร์ชันใหม่มากจนแพ็กเกจยังไม่ได้ออก wheel สำหรับเวอร์ชันนั้น นี่เป็นเหตุผลหนึ่งที่รายวิชากำหนด Python 3.12 แทนที่จะใช้เวอร์ชันล่าสุด</p>
+</section>
+<section id="conda-และ-channel" class="level3">
+<h3 class="anchored" data-anchor-id="conda-และ-channel">conda และ channel</h3>
+<p><strong><span class="idx">conda</span></strong> เป็นทั้งตัวจัดการแพ็กเกจและตัวจัดการสภาพแวดล้อม ต่างจาก pip ในสองด้านสำคัญ ด้านแรกคือ conda จัดการแพ็กเกจได้ทุกภาษา ไม่ใช่เฉพาะ Python ไลบรารีภาษา C ที่ GeoPandas ต้องใช้ เช่น GDAL และ PROJ ถูกติดตั้งเป็นแพ็กเกจ conda ได้โดยตรง ด้านที่สองคือ conda ติดตั้ง <em>ตัว Python เอง</em> ได้ ทำให้แต่ละสภาพแวดล้อมมี Python คนละเวอร์ชันได้</p>
+<p>แพ็กเกจ conda อยู่ในคลังที่เรียกว่า <strong><span class="idx">channel</span></strong> channel ที่รายวิชาใช้คือ <strong><span class="idx">conda-forge</span></strong> ซึ่งเป็นคลังที่ชุมชนดูแล มีแพ็กเกจครบและอัปเดตเร็ว ไฟล์ <code>environment.yml</code> ของรายวิชาระบุ channel นี้ไว้ และตัวติดตั้ง Miniforge ตั้งค่าให้ใช้ conda-forge เป็นค่าเริ่มต้น ข้อควรระวังคือ ไม่ควรผสมแพ็กเกจจากหลาย channel ในสภาพแวดล้อมเดียวโดยไม่จำเป็น เพราะไลบรารีภาษา C ที่สร้างจากคนละ channel อาจเข้ากันไม่ได้</p>
+</section>
+<section id="เลอกใชอะไรเมอใด" class="level3">
+<h3 class="anchored" data-anchor-id="เลอกใชอะไรเมอใด">เลือกใช้อะไรเมื่อใด</h3>
+<div id="tbl-ch02-package-tools" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-package-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.3: แนวทางเลือกเครื่องมือจัดการแพ็กเกจ
+</figcaption>
+<div aria-describedby="tbl-ch02-package-tools-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สถานการณ์</th>
+<th>เครื่องมือที่แนะนำ</th>
+<th>เหตุผล</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>โครงการที่ใช้ GeoPandas หรือไลบรารีที่มีส่วนประกอบภาษา C มาก</td>
+<td>conda (Miniforge)</td>
+<td>ติดตั้งไลบรารีภาษา C ได้โดยไม่ต้อง compile</td>
+</tr>
+<tr class="even">
+<td>โครงการ Python ล้วน ต้องการความเร็วและ lock เวอร์ชันแม่นยำ</td>
+<td>uv</td>
+<td>แก้การพึ่งพาเร็วมาก สร้างไฟล์ lock ข้ามระบบปฏิบัติการ</td>
+</tr>
+<tr class="odd">
+<td>ต้องติดตั้งแพ็กเกจที่มีเฉพาะบน PyPI ในสภาพแวดล้อม conda</td>
+<td>conda + pip (ระบุใน <code>environment.yml</code> ส่วน <code>pip:</code>)</td>
+<td>ติดตั้งด้วย conda ให้มากที่สุดก่อน แล้วจึงใช้ pip สำหรับส่วนที่เหลือ</td>
+</tr>
+<tr class="even">
+<td>เครื่องไม่พร้อม ติดตั้งโปรแกรมไม่ได้</td>
+<td>Google Colab</td>
+<td>ใช้ชั่วคราวได้ แต่สภาพแวดล้อมไม่ถาวรและควบคุมเวอร์ชันได้ยาก</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch02-venv" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-ch02-venv"><span class="header-section-number">2.4</span> virtual environment ทำงานอย่างไร</h2>
+<section id="ปญหาท-virtual-environment-แก" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาท-virtual-environment-แก">ปัญหาที่ virtual environment แก้</h3>
+<p>สมมุติว่าผู้อ่านมีสองโครงการบนเครื่องเดียวกัน โครงการเก่าเขียนด้วย pandas 1.5 และใช้ฟังก์ชันที่ถูกยกเลิกไปแล้วใน pandas 2 ส่วนโครงการใหม่ต้องใช้ pandas 2 ถ้าติดตั้งทุกอย่างลงใน Python ตัวเดียวของระบบ โครงการใดโครงการหนึ่งจะพังเสมอ <strong><span class="idx">virtual environment</span></strong> แก้ปัญหานี้โดยให้แต่ละโครงการมีโฟลเดอร์ <code>site-packages</code> ของตัวเอง</p>
+</section>
+<section id="กลไกเบองหลง" class="level3">
+<h3 class="anchored" data-anchor-id="กลไกเบองหลง">กลไกเบื้องหลัง</h3>
+<p>virtual environment ไม่ได้เป็นเวทมนตร์ มันคือโฟลเดอร์ธรรมดาที่มีโครงสร้างดังนี้ (ตัวอย่างจาก <code>venv</code> บน Linux)</p>
+<pre class="text"><code>.venv/
+├── pyvenv.cfg           ← บอกว่า Python ตัวหลักอยู่ที่ไหน
+├── bin/                 ← (Windows: Scripts\)
+│   ├── python           ← ลิงก์หรือสำเนาของ interpreter
+│   ├── pip
+│   └── activate         ← script ที่แก้ PATH
+└── lib/python3.12/site-packages/   ← แพ็กเกจของโครงการนี้เท่านั้น</code></pre>
+<p>เมื่อ Python เริ่มทำงาน มันจะหาไฟล์ <code>pyvenv.cfg</code> ในโฟลเดอร์ระดับบนของไฟล์ interpreter ถ้าพบ ก็จะตั้ง <code>sys.prefix</code> ให้ชี้ไปที่โฟลเดอร์ของสภาพแวดล้อม และใช้ <code>site-packages</code> ของสภาพแวดล้อมนั้นแทนของระบบ กลไกนี้กำหนดไว้ใน PEP 405 <span class="citation" data-cites="pep405venv">(<a href="../references.html#ref-pep405venv" role="doc-biblioref">Meyer 2011</a>)</span> เราตรวจได้ว่ากำลังอยู่ใน virtual environment หรือไม่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>in_venv <span class="op">=</span> sys.prefix <span class="op">!=</span> sys.base_prefix</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"อยู่ใน virtual environment:"</span>, in_venv)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"prefix:"</span>, sys.prefix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>script <code>activate</code> ทำเพียงสองอย่าง คือ นำโฟลเดอร์ <code>bin/</code> ของสภาพแวดล้อมไปไว้หน้าสุดของ <code>PATH</code> และเปลี่ยนข้อความ prompt ให้แสดงชื่อสภาพแวดล้อม การ activate จึงไม่จำเป็นอย่างแท้จริง ถ้าเราเรียก <code>.venv/bin/python script.py</code> ตรง ๆ ก็ได้ผลเหมือนกัน ความเข้าใจนี้ช่วยเมื่อต้องตั้งค่าเครื่องมือภายนอก เช่น ระบบตั้งเวลารัน script ซึ่งไม่ได้ activate สภาพแวดล้อมให้</p>
+</section>
+<section id="conda-environment-ตางจาก-venv-อยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="conda-environment-ตางจาก-venv-อยางไร">conda environment ต่างจาก venv อย่างไร</h3>
+<p>สภาพแวดล้อมของ conda ใช้หลักการเดียวกัน คือมีโฟลเดอร์แยกของแต่ละสภาพแวดล้อม แต่มีความต่างสำคัญคือ โฟลเดอร์นั้นมี <em>ตัว Python และไลบรารีระบบ</em> อยู่ภายในทั้งหมด ไม่ได้อ้างอิง Python ตัวหลักของระบบ สภาพแวดล้อม conda จึงแยกจากระบบได้สมบูรณ์กว่า แต่ใช้พื้นที่มากกว่า</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda: สร้างจากไฟล์ แล้วเปิดใช้</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment.yml</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate dstoolbox</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env list                  <span class="co"># แสดงสภาพแวดล้อมทั้งหมดและตำแหน่งโฟลเดอร์</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># uv: สร้าง .venv/ ในโฟลเดอร์โครงการตาม pyproject.toml และ uv.lock</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python src/run_pipeline.py   <span class="co"># รันโดยไม่ต้อง activate</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ใช้หนึ่งสภาพแวดล้อมต่อหนึ่งโครงการ และอย่าติดตั้งแพ็กเกจลงในสภาพแวดล้อม <code>base</code> ของ conda หรือ Python ของระบบ ถ้าสภาพแวดล้อมของโครงการเสียหาย เราลบโฟลเดอร์แล้วสร้างใหม่จากไฟล์ได้ทันที แต่ถ้า Python ของระบบเสียหาย อาจต้องติดตั้งระบบใหม่</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ch02-lock" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sec-ch02-lock"><span class="header-section-number">2.5</span> การ lock เวอร์ชัน: <code>environment.yml</code>, <code>pyproject.toml</code>, <code>uv.lock</code></h2>
+<section id="ทำไมรายชอแพกเกจอยางเดยวไมพอ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมรายชอแพกเกจอยางเดยวไมพอ">ทำไมรายชื่อแพ็กเกจอย่างเดียวไม่พอ</h3>
+<p>ไฟล์ที่ระบุว่า “ต้องการ pandas” ยังไม่พอให้ทำซ้ำได้ เพราะวันนี้ pandas อาจเป็นเวอร์ชันหนึ่ง และอีกหกเดือนอาจเป็นอีกเวอร์ชันที่พฤติกรรมเปลี่ยนไป ยิ่งไปกว่านั้น pandas เองก็พึ่งพาแพ็กเกจอื่น เช่น NumPy ซึ่งมีเวอร์ชันของตัวเอง สภาพแวดล้อมจริงของโครงการขนาดกลางอาจมีแพ็กเกจหลายร้อยตัว ทั้งที่เราระบุไว้เพียงสามสิบตัว</p>
+<p>จึงต้องแยกไฟล์สองประเภทออกจากกัน</p>
+<div id="tbl-ch02-spec-vs-lock" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-spec-vs-lock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.4: ไฟล์ระบุความต้องการกับไฟล์ lock
+</figcaption>
+<div aria-describedby="tbl-ch02-spec-vs-lock-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ประเภท</th>
+<th>หน้าที่</th>
+<th>ตัวอย่าง</th>
+<th>คนแก้หรือเครื่องสร้าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไฟล์ระบุความต้องการ (specification)</td>
+<td>บอกว่าโครงการต้องการแพ็กเกจอะไร ในช่วงเวอร์ชันใด</td>
+<td><code>environment.yml</code>, <code>pyproject.toml</code></td>
+<td>คนแก้</td>
+</tr>
+<tr class="even">
+<td>ไฟล์ lock</td>
+<td>บันทึกเวอร์ชันที่แน่นอนของทุกแพ็กเกจ รวมถึงแพ็กเกจที่ถูกพึ่งพาทางอ้อม</td>
+<td><code>uv.lock</code>, <code>conda-lock.yml</code></td>
+<td>เครื่องสร้าง ห้ามแก้ด้วยมือ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="environment.yml-ของ-conda" class="level3">
+<h3 class="anchored" data-anchor-id="environment.yml-ของ-conda"><code>environment.yml</code> ของ conda</h3>
+<p>ไฟล์ <code>environment.yml</code> ของรายวิชาเป็นไฟล์ระบุความต้องการ ส่วนต้นของไฟล์มีลักษณะดังนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> dstoolbox</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python=3.12</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> requests</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> truststore</span><span class="co">            # แก้ปัญหา SSL certificate ของ Air4Thai</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> python-duckdb&gt;=1.4,&lt;2</span><span class="co">   # ทั้งชั้นใช้เวอร์ชันหลักเดียวกัน</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pandas</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> polars</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">  # ...</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> pip</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">pip</span><span class="kw">:</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> skimpy</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>สังเกตว่าบางแพ็กเกจระบุช่วงเวอร์ชัน เช่น <code>python-duckdb&gt;=1.4,&lt;2</code> เพราะไฟล์ฐานข้อมูลของ DuckDB 2.x เปิดด้วย 1.x ไม่ได้ ถ้าคนในทีมใช้คนละเวอร์ชันหลักจะแลกไฟล์ฐานข้อมูลกันไม่ได้ ส่วนแพ็กเกจที่ไม่ระบุเวอร์ชันจะได้เวอร์ชันล่าสุดที่เข้ากันได้ ณ วันที่สร้างสภาพแวดล้อม ไฟล์นี้จึงทำซ้ำได้ในระดับ “ใกล้เคียง” แต่ไม่ใช่ “ตรงกันทุกตัว”</p>
+<p>ถ้าต้องการบันทึกสภาพแวดล้อมปัจจุบันให้ตรงทุกตัว conda มีคำสั่ง <code>conda env export</code> แต่ผลที่ได้ผูกกับระบบปฏิบัติการที่สร้าง ไฟล์ที่ export จาก Linux มักใช้บน Windows ไม่ได้ ทางเลือกที่ดีกว่าคือเครื่องมือ conda-lock ซึ่งสร้างไฟล์ lock แยกตามระบบปฏิบัติการจากไฟล์ <code>environment.yml</code> ไฟล์เดียว</p>
+</section>
+<section id="pyproject.toml-และ-uv.lock" class="level3">
+<h3 class="anchored" data-anchor-id="pyproject.toml-และ-uv.lock"><code>pyproject.toml</code> และ <code>uv.lock</code></h3>
+<p><code>pyproject.toml</code> เป็นไฟล์มาตรฐานของโครงการ Python ส่วน <code>[project]</code> ระบุชื่อ เวอร์ชัน และรายการแพ็กเกจที่ต้องการ ตามรูปแบบใน PEP 621 <span class="citation" data-cites="pep621metadata">(<a href="../references.html#ref-pep621metadata" role="doc-biblioref"><span class="nocase">Cannon และคณะ</span> 2020</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project]</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"dstoolbox"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">requires-python</span> <span class="op">=</span> <span class="st">"&gt;=3.12,&lt;3.13"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">dependencies</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"requests"</span><span class="op">,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"truststore"</span><span class="op">,</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"duckdb&gt;=1.4,&lt;2"</span><span class="op">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pandas"</span><span class="op">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เมื่อรัน <code>uv lock</code> หรือ <code>uv sync</code> ครั้งแรก uv จะแก้ปัญหาการพึ่งพา (dependency resolution) แล้วบันทึกเวอร์ชันที่แน่นอนของทุกแพ็กเกจลงใน <code>uv.lock</code> พร้อมค่า hash ของไฟล์ที่ดาวน์โหลด <span class="citation" data-cites="astral2026uv">(<a href="../references.html#ref-astral2026uv" role="doc-biblioref">Astral 2026</a>)</span> ไฟล์ lock ของ uv ครอบคลุมทุกระบบปฏิบัติการในไฟล์เดียว ผู้ที่ clone repository ไปแล้วรัน <code>uv sync</code> จะได้แพ็กเกจเวอร์ชันเดียวกันทุกตัว และค่า hash ช่วยยืนยันว่าไฟล์ที่ดาวน์โหลดไม่ถูกแก้ไขระหว่างทาง</p>
+</section>
+<section id="วงจรการทำงานกบไฟล-lock" class="level3">
+<h3 class="anchored" data-anchor-id="วงจรการทำงานกบไฟล-lock">วงจรการทำงานกับไฟล์ lock</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add plotly           <span class="co"># เพิ่มแพ็กเกจ: แก้ pyproject.toml และ uv.lock พร้อมกัน</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> lock <span class="at">--upgrade-package</span> pandas   <span class="co"># อัปเกรดเฉพาะ pandas อย่างตั้งใจ</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync                 <span class="co"># ทำให้ .venv ตรงกับ uv.lock</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add pyproject.toml uv.lock</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"เพิ่ม plotly สำหรับกราฟเชิงโต้ตอบ"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>หลักการสำคัญคือ <strong>commit ไฟล์ lock เข้า Git เสมอ</strong> และ <strong>อัปเกรดแพ็กเกจอย่างตั้งใจ</strong> ไม่ใช่ปล่อยให้เปลี่ยนเองเมื่อสร้างสภาพแวดล้อมใหม่ ถ้าผลการวิเคราะห์เปลี่ยนหลังอัปเกรด ประวัติใน Git จะบอกได้ว่าเปลี่ยนเพราะแพ็กเกจใด</p>
+</section>
+<section id="บนทกเวอรชนในผลลพธ" class="level3">
+<h3 class="anchored" data-anchor-id="บนทกเวอรชนในผลลพธ">บันทึกเวอร์ชันในผลลัพธ์</h3>
+<p>นอกจากไฟล์ lock แล้ว การพิมพ์เวอร์ชันของไลบรารีหลักไว้ที่ต้น notebook หรือในรายงานช่วยให้ผู้อ่านรู้ทันทีว่าผลนั้นได้จากซอฟต์แวร์รุ่นใด</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python </span><span class="sc">{</span>sys<span class="sc">.</span>version<span class="sc">.</span>split()[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> | pandas </span><span class="sc">{</span>pd<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss"> | duckdb </span><span class="sc">{</span>duckdb<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+Python 3.12.7 | pandas 2.3.3 | duckdb 1.5.6</code></pre>
+</section>
+</section>
+<section id="sec-ch02-jupyter" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="sec-ch02-jupyter"><span class="header-section-number">2.6</span> Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ <code>.ipynb</code> และปัญหา hidden state</h2>
+<section id="สถาปตยกรรม-หนาจอกบ-kernel-แยกกน" class="level3">
+<h3 class="anchored" data-anchor-id="สถาปตยกรรม-หนาจอกบ-kernel-แยกกน">สถาปัตยกรรม: หน้าจอกับ kernel แยกกัน</h3>
+<p>Jupyter ไม่ใช่โปรแกรมเดียว แต่เป็นระบบที่มีสองส่วนหลักสื่อสารกันผ่านโปรโตคอลข้อความ <span class="citation" data-cites="kluyver2016jupyter">(<a href="../references.html#ref-kluyver2016jupyter" role="doc-biblioref"><span class="nocase">Kluyver และคณะ</span> 2016</a>)</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  UI[หน้าจอ&lt;br/&gt;JupyterLab / VS Code] &lt;--&gt;|ข้อความ JSON&lt;br/&gt;ผ่าน ZeroMQ| K[kernel&lt;br/&gt;process Python]
+  UI &lt;--&gt; F[(ไฟล์ .ipynb)]
+  K &lt;--&gt; M[หน่วยความจำ&lt;br/&gt;ตัวแปร DataFrame การเชื่อมต่อ DuckDB]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>หน้าจอ (frontend)</strong> เช่น JupyterLab ในเบราว์เซอร์ หรือ VS Code ทำหน้าที่แสดง cell รับการแก้ไข และบันทึกไฟล์</li>
+<li><strong><span class="idx">kernel</span></strong> เป็น process ที่รันโค้ดจริง ตัวแปรทั้งหมดอยู่ในหน่วยความจำของ kernel ไม่ได้อยู่ในไฟล์ notebook</li>
+</ul>
+<p>เมื่อกดรัน cell หน้าจอส่งโค้ดในรูปข้อความไปให้ kernel kernel รันแล้วส่งผลลัพธ์กลับมาให้แสดง การแยกส่วนแบบนี้ทำให้ kernel เป็นภาษาอื่นได้ หรืออยู่บนเครื่องอื่นได้ แต่ก็เป็นต้นเหตุของปัญหาที่จะกล่าวถึงต่อไป</p>
+</section>
+<section id="รปแบบไฟล-.ipynb" class="level3">
+<h3 class="anchored" data-anchor-id="รปแบบไฟล-.ipynb">รูปแบบไฟล์ <code>.ipynb</code></h3>
+<p>ไฟล์ <code>.ipynb</code> เป็นไฟล์ JSON ที่เก็บรายการ cell แต่ละ cell มีชนิด (code หรือ markdown) ซอร์ส และสำหรับ code cell ยังเก็บ <em>ผลลัพธ์</em> และ <em>เลขลำดับการรัน</em> (execution count) ไว้ด้วย</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"cell_type"</span><span class="fu">:</span> <span class="st">"code"</span><span class="fu">,</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"execution_count"</span><span class="fu">:</span> <span class="dv">7</span><span class="fu">,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"source"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"df = con.execute(</span><span class="ch">\"</span><span class="st">SELECT * FROM stations</span><span class="ch">\"</span><span class="st">).df()</span><span class="ch">\n</span><span class="st">"</span><span class="ot">,</span> <span class="st">"df.shape"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"outputs"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span><span class="dt">"output_type"</span><span class="fu">:</span> <span class="st">"execute_result"</span><span class="fu">,</span> <span class="dt">"data"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"text/plain"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"(182, 8)"</span><span class="ot">]</span><span class="fu">}}</span><span class="ot">]</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>การเก็บผลลัพธ์ไว้ในไฟล์มีข้อดีคือ ผู้อ่านเห็นผลโดยไม่ต้องรัน แต่มีข้อเสียสามข้อ ข้อแรก ไฟล์ใหญ่ขึ้นมากเมื่อมีกราฟหรือตารางยาว ข้อสอง การเปลี่ยนแปลงเล็กน้อยใน Git กลายเป็น diff ยาวที่อ่านไม่ออก (บทที่ 3 หัวข้อ ★ อธิบายวิธีแก้) และข้อสาม ผลลัพธ์ที่บันทึกไว้อาจ <em>ไม่ตรงกับโค้ด</em> ที่เห็นในไฟล์ ซึ่งนำไปสู่ปัญหาถัดไป</p>
+</section>
+<section id="ปญหา-hidden-state" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหา-hidden-state">ปัญหา hidden state</h3>
+<p><strong><span class="idx">hidden state</span></strong> คือสถานะในหน่วยความจำของ kernel ที่ไม่สามารถสร้างขึ้นใหม่ได้จากการรัน notebook ตั้งแต่ต้นจนจบตามลำดับ เกิดได้หลายทาง</p>
+<ol type="1">
+<li><strong>รัน cell ข้ามลำดับ</strong> เช่น รัน cell 5 ก่อน cell 3 ผลของ cell 5 ขึ้นกับตัวแปรที่ cell 3 ยังไม่ได้สร้าง หรือสร้างค่าที่ต่างไป</li>
+<li><strong>แก้ cell แล้วไม่ได้รันใหม่</strong> ผลลัพธ์ที่เห็นเป็นของโค้ดเวอร์ชันเก่า</li>
+<li><strong>ลบ cell ที่สร้างตัวแปร</strong> ตัวแปรยังอยู่ในหน่วยความจำ cell อื่นที่ใช้ตัวแปรนั้นยังรันได้ จนกว่าจะ restart kernel</li>
+<li><strong>แก้ค่าตัวแปรเดิมซ้ำ</strong> เช่น cell ที่มีคำสั่ง <code>df = df[df["pm25"] &gt; 0]</code> รันสองครั้งก็ยังให้ผลเหมือนเดิม แต่ cell ที่มีคำสั่ง <code>df["pm25"] = df["pm25"] * 1.1</code> รันสองครั้งจะคูณซ้ำ</li>
+</ol>
+<p>ตัวอย่างของข้อ 3 กับข้อมูล PM2.5</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cell 1 (ถูกลบไปแล้ว แต่เคยรัน)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cell 2</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>n_exceed <span class="op">=</span> (daily[<span class="st">"pm25_mean"</span>] <span class="op">&gt;</span> threshold).<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>cell 2 ยังรันได้และให้ผลจำนวนวันที่เกิน 50 µg/m³ ทั้งที่เกณฑ์ปัจจุบันคือ 37.5 µg/m³ และไม่มีโค้ดใดในไฟล์ที่กำหนดค่า <code>threshold</code> อีกแล้ว เมื่อเพื่อนเปิด notebook นี้แล้วรันตั้งแต่ต้น จะได้ <code>NameError</code> ทันที</p>
+<p>ปัญหานี้ไม่ใช่เรื่องสมมุติ งานวิจัยที่ศึกษา notebook บน GitHub จำนวนมากกว่าหนึ่งล้านไฟล์พบว่า มีเพียงประมาณหนึ่งในสี่ที่รันจนจบได้โดยไม่มี error และเพียงประมาณร้อยละ 4 ที่รันแล้วได้ผลลัพธ์ตรงกับที่บันทึกไว้ในไฟล์ <span class="citation" data-cites="pimentel2019large">(<a href="../references.html#ref-pimentel2019large" role="doc-biblioref">Pimentel และคณะ 2019</a>)</span></p>
+</section>
+<section id="วธปองกน" class="level3">
+<h3 class="anchored" data-anchor-id="วธปองกน">วิธีป้องกัน</h3>
+<div id="tbl-ch02-hidden-state" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-hidden-state-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.5: วิธีป้องกันปัญหา hidden state ใน notebook
+</figcaption>
+<div aria-describedby="tbl-ch02-hidden-state-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>วิธี</th>
+<th>ทำอย่างไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Restart and Run All ก่อน commit</td>
+<td>ใช้คำสั่ง <em>Restart Kernel and Run All Cells</em> ทุกครั้งก่อนบันทึกหรือส่งงาน ถ้ารันผ่านจนจบ แปลว่าไม่มี hidden state</td>
+</tr>
+<tr class="even">
+<td>ให้ cell เป็น idempotent</td>
+<td>เขียน cell ให้รันซ้ำกี่ครั้งก็ได้ผลเท่าเดิม เช่น สร้างตัวแปรใหม่แทนการแก้ตัวแปรเดิม</td>
+</tr>
+<tr class="odd">
+<td>กำหนดค่าคงที่ไว้ที่ cell แรก</td>
+<td>เช่น <code>THRESHOLD = 37.5</code> และ path ของฐานข้อมูล ให้ทุก cell อ้างจากที่เดียว</td>
+</tr>
+<tr class="even">
+<td>ย้ายโค้ดที่ใช้ซ้ำไปเป็นฟังก์ชันใน <code>src/</code></td>
+<td>notebook เรียกใช้ฟังก์ชันแทนการคัดลอกโค้ด</td>
+</tr>
+<tr class="odd">
+<td>ใช้ notebook เพื่อสำรวจ ไม่ใช่เพื่อผลิตผลลัพธ์สุดท้าย</td>
+<td>ผลลัพธ์ที่ไปอยู่ในรายงานสร้างจาก script หรือ Quarto ที่รันตั้งแต่ต้นทุกครั้ง (บทที่ 19)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>เลขลำดับการรัน <code>[n]</code> หน้า cell ที่ไม่เรียงจากบนลงล่าง เช่น <code>[12]</code> อยู่เหนือ <code>[5]</code> เป็นสัญญาณว่า notebook อาจมี hidden state ผลลัพธ์ที่เห็นอาจสร้างซ้ำไม่ได้</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ch02-vscode" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="sec-ch02-vscode"><span class="header-section-number">2.7</span> VS Code สำหรับงานข้อมูล</h2>
+<section id="ทำไมใช-vs-code" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมใช-vs-code">ทำไมใช้ VS Code</h3>
+<p>VS Code เป็นโปรแกรมแก้ไขโค้ดที่รวมเครื่องมือที่โครงการข้อมูลต้องใช้ไว้ในที่เดียว ได้แก่ การแก้ไขไฟล์ <code>.py</code>, <code>.md</code>, <code>.sql</code> และ <code>.ipynb</code> terminal ในตัว การเชื่อมกับ Git และการเลือก interpreter ของ Python รายวิชาเลือก VS Code เพราะช่วยให้ผู้เรียนเห็นภาพรวมของโครงการทั้ง repository ไม่ใช่เพียง notebook ทีละไฟล์</p>
+</section>
+<section id="การเลอก-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="การเลอก-interpreter">การเลือก interpreter</h3>
+<p>สิ่งสำคัญที่สุดในการตั้งค่า VS Code สำหรับงาน Python คือการเลือก interpreter ให้ตรงกับสภาพแวดล้อมของโครงการ เปิด Command Palette (<code>Ctrl+Shift+P</code> หรือ <code>Cmd+Shift+P</code>) แล้วเลือก <em>Python: Select Interpreter</em> จากนั้นเลือก <code>dstoolbox</code> (conda) หรือ <code>.venv</code> (uv) สำหรับ notebook ให้เลือก kernel ที่มุมขวาบนของ notebook ให้ตรงกันด้วย</p>
+<p>ถ้าเลือกผิด อาการที่พบคือ <code>ModuleNotFoundError</code> ทั้งที่ติดตั้งแพ็กเกจแล้ว หรือ notebook กับ terminal ใช้ไลบรารีคนละเวอร์ชัน วิธีตรวจคือรันโค้ด <code>sys.executable</code> ในหัวข้อ <a href="#sec-ch02-packages" class="quarto-xref"><span>2.3</span></a> ทั้งใน notebook และใน terminal แล้วเทียบว่าตรงกันหรือไม่</p>
+</section>
+<section id="คณสมบตทใชบอยในงานขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="คณสมบตทใชบอยในงานขอมล">คุณสมบัติที่ใช้บ่อยในงานข้อมูล</h3>
+<div id="tbl-ch02-vscode" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-vscode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.6: คุณสมบัติของ VS Code ที่ใช้บ่อยในงานข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch02-vscode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>คุณสมบัติ</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Integrated terminal (<code>Ctrl+`</code>)</td>
+<td>รันคำสั่ง conda, uv, Git โดยไม่ต้องสลับหน้าต่าง terminal เปิดที่โฟลเดอร์โครงการโดยอัตโนมัติ</td>
+</tr>
+<tr class="even">
+<td>Source Control</td>
+<td>ดูไฟล์ที่เปลี่ยน diff ทีละบรรทัด stage และ commit</td>
+</tr>
+<tr class="odd">
+<td>Variables / Data Viewer ใน notebook</td>
+<td>ดูค่าตัวแปรและ DataFrame ที่อยู่ใน kernel</td>
+</tr>
+<tr class="even">
+<td>Python Interactive (<code># %%</code>)</td>
+<td>แบ่งไฟล์ <code>.py</code> เป็น cell ด้วยบรรทัด <code># %%</code> รันทีละส่วนได้เหมือน notebook แต่ไฟล์ยังเป็นข้อความธรรมดา</td>
+</tr>
+<tr class="odd">
+<td>Extension ที่แนะนำ</td>
+<td>Python, Jupyter, Ruff (ตรวจและจัดรูปแบบโค้ด), Quarto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>คุณสมบัติ <code># %%</code> มีประโยชน์เป็นพิเศษ เพราะเป็นทางสายกลางระหว่าง notebook กับ script เราสำรวจทีละส่วนได้เหมือน notebook แต่ไฟล์เป็น <code>.py</code> ธรรมดา diff ใน Git อ่านง่าย และรันจากต้นจนจบด้วย <code>python file.py</code> ได้ทันที ไม่มีผลลัพธ์ค้างอยู่ในไฟล์</p>
+</section>
+<section id="ตงคาเฉพาะโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="ตงคาเฉพาะโครงการ">ตั้งค่าเฉพาะโครงการ</h3>
+<p>VS Code เก็บการตั้งค่าเฉพาะโครงการไว้ในโฟลเดอร์ <code>.vscode/</code> repository ของรายวิชาใส่โฟลเดอร์นี้ไว้ใน <code>.gitignore</code> เพราะการตั้งค่าส่วนใหญ่ เช่น ตำแหน่งของ interpreter ผูกกับเครื่องของแต่ละคน ถ้าทีมต้องการแบ่งปันการตั้งค่าบางอย่าง เช่น กฎการจัดรูปแบบโค้ด ควรใส่ไว้ใน <code>pyproject.toml</code> ส่วน <code>[tool.ruff]</code> แทน เพราะเครื่องมืออื่นนอกจาก VS Code ก็อ่านได้</p>
+</section>
+</section>
+<section id="sec-ch02-project" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="sec-ch02-project"><span class="header-section-number">2.8</span> โครงสร้างโครงการ การตั้งค่า และการจัดการความลับ (<code>.env</code>)</h2>
+<section id="โครงสรางโครงการทดชวยอะไร" class="level3">
+<h3 class="anchored" data-anchor-id="โครงสรางโครงการทดชวยอะไร">โครงสร้างโครงการที่ดีช่วยอะไร</h3>
+<p>โครงสร้างโฟลเดอร์ที่ตกลงกันไว้ล่วงหน้าทำให้ทุกคนในทีม รวมถึงผู้ตรวจงาน รู้ว่าจะหาอะไรได้ที่ไหนโดยไม่ต้องถาม และทำให้โค้ดอ้างอิงไฟล์ด้วย path ที่คาดเดาได้ โครงสร้างของโครงการในเล่มนี้แสดงไว้ในบทที่ 0 หัวข้อ 0.6 หลักการเบื้องหลังมีดังนี้</p>
+<div id="tbl-ch02-project-principles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-project-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.7: หลักการของโครงสร้างโครงการ
+</figcaption>
+<div aria-describedby="tbl-ch02-project-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลักการ</th>
+<th>ในโครงสร้างของเล่ม</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>แยกข้อมูลดิบ ข้อมูลที่ประมวลผลแล้ว และผลลัพธ์</td>
+<td><code>data/raw/</code> · <code>data/pm25.duckdb</code> · <code>reports/figures/</code></td>
+</tr>
+<tr class="even">
+<td>แยกโค้ดที่รันซ้ำได้ออกจากโค้ดสำรวจ</td>
+<td><code>src/</code> · <code>notebooks/</code></td>
+</tr>
+<tr class="odd">
+<td>แยกส่วนสื่อสารผลออกจากส่วนวิเคราะห์</td>
+<td><code>report/</code> · <code>app/</code></td>
+</tr>
+<tr class="even">
+<td>เอกสารประกอบอยู่ที่ root ของ repository</td>
+<td><code>README.md</code> · <code>questions.md</code> · <code>data_dictionary.md</code> · <code>AI_USAGE.md</code></td>
+</tr>
+<tr class="odd">
+<td>ไม่ commit สิ่งที่สร้างใหม่ได้หรือเป็นความลับ</td>
+<td><code>data/</code>, <code>.env</code>, <code>.venv/</code> อยู่ใน <code>.gitignore</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="อางองไฟลจาก-root-ของโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="อางองไฟลจาก-root-ของโครงการ">อ้างอิงไฟล์จาก root ของโครงการ</h3>
+<p>เพื่อแก้ปัญหา relative path ในหัวข้อ <a href="#sec-ch02-shell" class="quarto-xref"><span>2.2</span></a> ให้ทุกไฟล์ในโครงการหา root ของโครงการก่อน แล้วสร้าง path จาก root เสมอ วิธีที่เรียบง่ายคือใช้ <code>pathlib</code> หาโฟลเดอร์ที่มีไฟล์ซึ่งมีอยู่ที่ root เท่านั้น เช่น <code>pyproject.toml</code> หรือ <code>environment.yml</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> project_root(marker: <span class="bu">str</span> <span class="op">=</span> <span class="st">"environment.yml"</span>) <span class="op">-&gt;</span> Path:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""หาโฟลเดอร์ root ของโครงการ โดยไล่ขึ้นไปจนพบไฟล์ marker"""</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    here <span class="op">=</span> Path.cwd().resolve()</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> folder <span class="kw">in</span> [here, <span class="op">*</span>here.parents]:</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (folder <span class="op">/</span> marker).exists():</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> folder</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">FileNotFoundError</span>(<span class="ss">f"ไม่พบ </span><span class="sc">{</span>marker<span class="sc">}</span><span class="ss"> ในโฟลเดอร์นี้หรือโฟลเดอร์ระดับบน"</span>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> project_root()</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>โค้ดนี้ทำงานได้ทั้งเมื่อรันจาก root ของโครงการ และเมื่อรันจาก notebook ใน <code>notebooks/</code> เพราะไล่หาขึ้นไปจนพบ ส่วน script ใน <code>src/</code> อาจใช้ <code>Path(__file__).resolve().parent.parent</code> แทน เพราะตำแหน่งของไฟล์ script คงที่ ไม่ขึ้นกับว่ารันจากโฟลเดอร์ใด</p>
+</section>
+<section id="การตงคาแยกจากโคด" class="level3">
+<h3 class="anchored" data-anchor-id="การตงคาแยกจากโคด">การตั้งค่าแยกจากโค้ด</h3>
+<p>ค่าที่อาจเปลี่ยนตามสภาพแวดล้อม เช่น path ของฐานข้อมูล URL ของ API หรือช่วงวันที่ที่ใช้สำรวจ ควรแยกออกจากโค้ดตรรกะ หลักการนี้มาจากแนวปฏิบัติ Twelve-Factor App ซึ่งเสนอให้เก็บการตั้งค่าที่ต่างกันระหว่างสภาพแวดล้อมไว้ในตัวแปรสภาพแวดล้อม <span class="citation" data-cites="wiggins2011twelve">(<a href="../references.html#ref-wiggins2011twelve" role="doc-biblioref">Wiggins 2011</a>)</span> ในโครงการขนาดเล็ก ค่าที่ไม่ใช่ความลับเก็บเป็นค่าคงที่ในโมดูลเดียวได้ เช่น <code>src/config.py</code> ส่วนค่าที่เป็นความลับต้องใช้วิธีในหัวข้อย่อยถัดไป</p>
+</section>
+<section id="ความลบและไฟล-.env" class="level3">
+<h3 class="anchored" data-anchor-id="ความลบและไฟล-.env">ความลับและไฟล์ <code>.env</code></h3>
+<p><strong>ความลับ</strong> (secret) คือข้อมูลที่ให้สิทธิ์เข้าถึงบางอย่าง เช่น API key รหัสผ่านฐานข้อมูล หรือ token ของบริการคลาวด์ Air4Thai ไม่ต้องใช้ API key แต่แหล่งข้อมูลอื่นหลายแห่งต้องใช้ หลักการคือ <strong>ความลับต้องไม่อยู่ในโค้ดและไม่อยู่ใน Git</strong> เพราะเมื่อ push ขึ้น GitHub แล้ว ความลับจะอยู่ในประวัติของ repository ตลอดไป แม้จะลบใน commit ถัดไปก็ตาม</p>
+<p>วิธีมาตรฐานคือเก็บความลับไว้ในไฟล์ <code>.env</code> ที่ root ของโครงการ และใส่ <code>.env</code> ไว้ใน <code>.gitignore</code></p>
+<pre class="text"><code># .env (ห้าม commit)
+WEATHER_API_KEY=abc123-ตัวอย่างเท่านั้น</code></pre>
+<p>แล้วอ่านค่าในโค้ดด้วยแพ็กเกจ <code>python-dotenv</code> ซึ่งโหลดค่าจากไฟล์ <code>.env</code> เข้าไปเป็นตัวแปรสภาพแวดล้อมของ process <span class="citation" data-cites="pythondotenv2026">(<a href="../references.html#ref-pythondotenv2026" role="doc-biblioref"><span class="nocase">Kumar และคณะ</span> 2026</a>)</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>load_dotenv()                                  <span class="co"># อ่าน .env ในโฟลเดอร์ปัจจุบันหรือระดับบน</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> os.environ.get(<span class="st">"WEATHER_API_KEY"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> api_key <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">RuntimeError</span>(<span class="st">"ไม่พบ WEATHER_API_KEY ให้สร้างไฟล์ .env ตาม .env.example"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ส่วนที่ commit ได้คือไฟล์ <code>.env.example</code> ที่มีชื่อตัวแปรครบแต่ไม่มีค่าจริง เพื่อให้ผู้อื่นรู้ว่าต้องตั้งค่าอะไรบ้าง</p>
+<pre class="text"><code># .env.example (commit ได้)
+WEATHER_API_KEY=</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ถ้าเผลอ commit และ push ความลับขึ้น GitHub แล้ว สิ่งแรกที่ต้องทำคือ <strong>ยกเลิกหรือเปลี่ยน key นั้นทันที</strong> ที่ผู้ให้บริการ การลบไฟล์ออกใน commit ถัดไปไม่ได้ลบออกจากประวัติ และ repository สาธารณะอาจถูกโปรแกรมอัตโนมัติสแกนหา key ภายในเวลาสั้น ๆ หลัง push</p>
+</div>
+</div>
+</section>
+<section id="ไฟล-.gitignore-ของโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="ไฟล-.gitignore-ของโครงการ">ไฟล์ <code>.gitignore</code> ของโครงการ</h3>
+<pre class="text"><code># สภาพแวดล้อมและไฟล์ชั่วคราวของ Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# ข้อมูลและความลับ
+data/
+*.duckdb
+*.duckdb.wal
+.env
+
+# ผลลัพธ์ที่สร้างใหม่ได้
+report/_site/</code></pre>
+</section>
+</section>
+<section id="sec-ch02-container" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="sec-ch02-container"><span class="header-section-number">2.9</span> container (Docker) และ dev container เบื้องต้น ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<section id="สงทไฟล-lock-ยงไมครอบคลม" class="level3">
+<h3 class="anchored" data-anchor-id="สงทไฟล-lock-ยงไมครอบคลม">สิ่งที่ไฟล์ lock ยังไม่ครอบคลุม</h3>
+<p>ไฟล์ lock บันทึกเวอร์ชันของแพ็กเกจ Python แต่ไม่ได้บันทึกทุกสิ่งที่โครงการพึ่งพา เช่น ระบบปฏิบัติการ ไลบรารีระบบ ฟอนต์ภาษาไทยที่ใช้ในกราฟ (บทที่ 11) หรือเครื่องมือนอก Python อย่าง Quarto ระดับที่ 4 ของการทำซ้ำได้ใน <a href="#tbl-ch02-repro-levels" class="quarto-xref">ตารางที่&nbsp;<span>2.2</span></a> ต้องบันทึกสิ่งเหล่านี้ด้วย <strong><span class="idx">container</span></strong> เป็นเครื่องมือที่ทำได้</p>
+</section>
+<section id="container-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="container-คออะไร">container คืออะไร</h3>
+<p>container คือการรันโปรแกรมในสภาพแวดล้อมที่แยกออกจากระบบหลัก โดยมีระบบไฟล์ของตัวเองซึ่งบรรจุทุกอย่างที่โปรแกรมต้องใช้ ตั้งแต่ไลบรารีระบบจนถึงแพ็กเกจ Python ต่างจาก virtual machine ตรงที่ container ใช้ kernel ของระบบปฏิบัติการร่วมกับเครื่องหลัก จึงเริ่มทำงานเร็วและใช้ทรัพยากรน้อยกว่า Docker เป็นเครื่องมือที่ทำให้ container ใช้งานได้แพร่หลาย <span class="citation" data-cites="merkel2014docker">(<a href="../references.html#ref-merkel2014docker" role="doc-biblioref">Merkel 2014</a>)</span> และ Boettiger อธิบายการนำ Docker มาใช้เพื่องานวิจัยที่ทำซ้ำได้ไว้โดยเฉพาะ <span class="citation" data-cites="boettiger2015introduction">(<a href="../references.html#ref-boettiger2015introduction" role="doc-biblioref">Boettiger 2015</a>)</span></p>
+<p>คำที่ต้องรู้มีสามคำ</p>
+<ul>
+<li><strong><span class="idx">Dockerfile</span></strong> ไฟล์ข้อความที่บอกขั้นตอนการสร้างสภาพแวดล้อม</li>
+<li><strong>image</strong> ผลจากการสร้างตาม Dockerfile เป็นแม่แบบที่ไม่เปลี่ยนแปลง</li>
+<li><strong>container</strong> สิ่งที่ได้เมื่อรัน image หนึ่ง image สร้าง container ได้หลายตัว</li>
+</ul>
+</section>
+<section id="dockerfile-สำหรบโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="dockerfile-สำหรบโครงการ">Dockerfile สำหรับโครงการ</h3>
+<p>ตัวอย่างต่อไปนี้สร้าง image จาก Python 3.12 แล้วติดตั้งแพ็กเกจตาม <code>uv.lock</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> python:3.12-slim</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ติดตั้งฟอนต์ภาษาไทยสำหรับกราฟ</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> <span class="at">--no-install-recommends</span> fonts-thai-tlwg <span class="dt">\</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&amp;&amp;</span> <span class="fu">rm</span> <span class="at">-rf</span> /var/lib/apt/lists/<span class="pp">*</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ติดตั้ง uv แล้วติดตั้งแพ็กเกจตามไฟล์ lock</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> <span class="op">--from=ghcr.io/astral-sh/uv:latest</span> /uv /usr/local/bin/uv</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> pyproject.toml uv.lock ./</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">uv</span> sync <span class="at">--frozen</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> src/ src/</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"uv"</span>, <span class="st">"run"</span>, <span class="st">"python"</span>, <span class="st">"src/run_pipeline.py"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> pm25-explorer .</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-v</span> <span class="st">"</span><span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span><span class="st">/data:/app/data"</span> pm25-explorer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตัวเลือก <code>-v</code> เชื่อมโฟลเดอร์ <code>data/</code> บนเครื่องเข้ากับโฟลเดอร์ใน container ทำให้ข้อมูลที่ pipeline สร้างยังอยู่หลัง container หยุดทำงาน ตัวเลือก <code>--frozen</code> ของ <code>uv sync</code> บังคับให้ติดตั้งตามไฟล์ lock เท่านั้น ถ้าไฟล์ lock ไม่ตรงกับ <code>pyproject.toml</code> จะหยุดพร้อม error แทนที่จะแก้ไฟล์ lock เอง ข้อสังเกตคือ ตัวอย่างนี้ใช้ tag <code>latest</code> ของ image uv เพื่อความกระชับ งานที่ต้องการทำซ้ำได้จริงควรระบุเวอร์ชันของ image ให้แน่นอน</p>
+</section>
+<section id="dev-container" class="level3">
+<h3 class="anchored" data-anchor-id="dev-container">dev container</h3>
+<p><strong><span class="idx">dev container</span></strong> คือการใช้ container เป็นสภาพแวดล้อมสำหรับ <em>พัฒนา</em> ไม่ใช่เพียงรันผลลัพธ์ VS Code และ GitHub Codespaces อ่านไฟล์ <code>.devcontainer/devcontainer.json</code> แล้วเปิดโครงการภายใน container ให้โดยอัตโนมัติ <span class="citation" data-cites="devcontainers2026spec">(<a href="../references.html#ref-devcontainers2026spec" role="doc-biblioref">Development Containers 2026</a>)</span> ผู้ร่วมงานที่เปิด repository จะได้สภาพแวดล้อมเหมือนกันทุกคนโดยไม่ต้องติดตั้ง conda หรือ uv เอง</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"pm25-explorer"</span><span class="fu">,</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"build"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"dockerfile"</span><span class="fu">:</span> <span class="st">"../Dockerfile"</span> <span class="fu">},</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"customizations"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"vscode"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"extensions"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"ms-python.python"</span><span class="ot">,</span> <span class="st">"ms-toolsai.jupyter"</span><span class="ot">]</span> <span class="fu">}</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="เมอใดควรใช-container" class="level3">
+<h3 class="anchored" data-anchor-id="เมอใดควรใช-container">เมื่อใดควรใช้ container</h3>
+<p>container เพิ่มความซับซ้อนให้โครงการ ผู้ร่วมงานต้องติดตั้ง Docker และต้องเข้าใจแนวคิดเพิ่มเติม สำหรับโครงการในรายวิชานี้ ระดับที่ 3 (ไฟล์ lock) เพียงพอแล้ว container คุ้มค่าเมื่อโครงการพึ่งพาสิ่งนอก Python มาก เมื่อต้อง deploy ไปยังเซิร์ฟเวอร์ (บทที่ 20) หรือเมื่อต้องการให้ผู้อื่นทำซ้ำผลได้หลังเวลาผ่านไปหลายปี</p>
+</section>
+</section>
+<section id="sec-ch02-ai" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="sec-ch02-ai"><span class="header-section-number">2.10</span> การใช้ AI ช่วยเขียนโค้ด: ขอบเขต วิธีตรวจสอบ และการบันทึก</h2>
+<section id="นโยบายของรายวชา" class="level3">
+<h3 class="anchored" data-anchor-id="นโยบายของรายวชา">นโยบายของรายวิชา</h3>
+<p>รายวิชานี้อนุญาตให้ใช้ AI ประเภท large language model (LLM) ช่วยเขียนโค้ดได้ทุกงาน โดยมีเงื่อนไขสามข้อตามประมวลรายวิชา ข้อแรก ผู้เรียนต้องอธิบายโค้ดทุกบรรทัดที่ส่งได้ ข้อสอง ต้องระบุการใช้ AI ใน commit message หรือไฟล์ <code>AI_USAGE.md</code> และข้อสาม ต้องตรวจผลลัพธ์จาก AI กับข้อมูลจริงทุกครั้ง หัวข้อนี้อธิบายเหตุผลของแต่ละเงื่อนไขและวิธีปฏิบัติ ส่วนมิติด้านจริยธรรมอยู่ในบทที่ 22</p>
+</section>
+<section id="ทำไมตองตรวจสอบ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมตองตรวจสอบ">ทำไมต้องตรวจสอบ</h3>
+<p>LLM สร้างข้อความโดยทำนายคำถัดไปที่น่าจะเป็นจากข้อมูลที่ฝึกมา ไม่ได้ตรวจสอบว่าสิ่งที่สร้างมีอยู่จริงหรือถูกต้อง ผลคือ LLM อาจสร้างโค้ดที่ดูถูกต้องแต่อ้างถึงสิ่งที่ไม่มีอยู่จริง ปรากฏการณ์นี้เรียกว่า <strong><span class="idx">hallucination</span></strong> ในงานข้อมูล hallucination ที่พบบ่อยมีดังนี้</p>
+<div id="tbl-ch02-hallucination" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-hallucination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.8: ประเภทของ hallucination ที่พบบ่อยในโค้ดงานข้อมูล
+</figcaption>
+<div aria-describedby="tbl-ch02-hallucination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ประเภท</th>
+<th>ตัวอย่าง</th>
+<th>ผลที่ตามมา</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ชื่อคอลัมน์ที่ไม่มีจริง</td>
+<td>สมมุติว่าข้อมูล Air4Thai มีคอลัมน์ <code>pm25_avg</code> ทั้งที่ไม่มี</td>
+<td><code>KeyError</code> ทันที หรือแย่กว่านั้นคือใช้คอลัมน์อื่นที่ชื่อคล้ายกัน</td>
+</tr>
+<tr class="even">
+<td>ฟังก์ชันหรือพารามิเตอร์ที่ไม่มีจริง</td>
+<td>เรียกพารามิเตอร์ที่ไม่มีในไลบรารีเวอร์ชันที่ใช้</td>
+<td>error หรือพารามิเตอร์ถูกเพิกเฉยโดยไม่แจ้ง</td>
+</tr>
+<tr class="odd">
+<td>endpoint ของ API ที่ไม่มีจริง</td>
+<td>สร้าง URL ที่ดูสมเหตุสมผลแต่ไม่มีบนเซิร์ฟเวอร์</td>
+<td>404 หรือได้ข้อมูลจากแหล่งที่ไม่ได้ตั้งใจ</td>
+</tr>
+<tr class="even">
+<td>ชื่อแพ็กเกจที่ไม่มีจริง</td>
+<td>แนะนำให้ติดตั้งแพ็กเกจชื่อที่ไม่มีบน PyPI</td>
+<td>ถ้ามีผู้ไม่หวังดีจดชื่อนั้นไว้ อาจได้ติดตั้งโค้ดอันตราย</td>
+</tr>
+<tr class="odd">
+<td>ตรรกะที่ผิดอย่างแนบเนียน</td>
+<td>รวมค่ารายชั่วโมงเป็นรายวันโดยไม่สนใจเขตเวลา</td>
+<td>โค้ดรันผ่าน แต่ค่าเฉลี่ยรายวันผิดทั้งหมด</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวที่สี่ใน <a href="#tbl-ch02-hallucination" class="quarto-xref">ตารางที่&nbsp;<span>2.8</span></a> ไม่ใช่ความเสี่ยงในทางทฤษฎี งานวิจัยที่วิเคราะห์โค้ดที่ LLM หลายตัวสร้างขึ้นพบว่า LLM อ้างถึงแพ็กเกจที่ไม่มีอยู่จริงในสัดส่วนที่ไม่น้อย และชื่อที่สร้างขึ้นบางชื่อปรากฏซ้ำเมื่อถามคำถามเดิม ทำให้ผู้ไม่หวังดีคาดเดาและจดชื่อนั้นไว้ล่วงหน้าได้ <span class="citation" data-cites="spracklen2025we">(<a href="../references.html#ref-spracklen2025we" role="doc-biblioref">Spracklen และคณะ 2025</a>)</span> แถวสุดท้ายอันตรายที่สุด เพราะโค้ดไม่ error และผลลัพธ์ดูสมเหตุสมผล</p>
+</section>
+<section id="วธตรวจสอบอยางเปนระบบ" class="level3">
+<h3 class="anchored" data-anchor-id="วธตรวจสอบอยางเปนระบบ">วิธีตรวจสอบอย่างเป็นระบบ</h3>
+<ol type="1">
+<li><strong>อ่านก่อนรัน</strong> ทำความเข้าใจทุกบรรทัด ถ้ามีบรรทัดที่อธิบายไม่ได้ ให้ถาม AI ให้อธิบาย แล้วตรวจคำอธิบายกับเอกสารทางการ</li>
+<li><strong>ตรวจชื่อกับแหล่งจริง</strong> ชื่อคอลัมน์ตรวจกับข้อมูลจริง (<code>df.columns</code> หรือ <code>DESCRIBE table</code>) ชื่อฟังก์ชันและพารามิเตอร์ตรวจกับเอกสารของไลบรารีเวอร์ชันที่ใช้ endpoint ตรวจกับเอกสารของผู้ให้บริการ ชื่อแพ็กเกจตรวจบน PyPI หรือ conda-forge ก่อนติดตั้ง</li>
+<li><strong>ทดสอบกับกรณีที่รู้คำตอบ</strong> เช่น สร้าง DataFrame เล็ก ๆ ที่คำนวณค่าเฉลี่ยรายวันได้ด้วยมือ แล้วเทียบกับผลของโค้ด</li>
+<li><strong>ทดสอบกับกรณีขอบ</strong> เช่น วันที่ข้อมูลหายทั้งวัน ค่า <code>"-1"</code> หรือช่วงข้ามเที่ยงคืน</li>
+<li><strong>ตรวจผลกับความคาดหวัง</strong> ใช้วงจรเล็กของการสำรวจจากบทที่ 1 ถ้าผลไม่ตรงกับความคาดหวัง ให้สงสัยโค้ดก่อนสงสัยข้อมูล</li>
+</ol>
+</section>
+<section id="การบนทก" class="level3">
+<h3 class="anchored" data-anchor-id="การบนทก">การบันทึก</h3>
+<p>การบันทึกการใช้ AI มีประโยชน์มากกว่าการทำตามกฎ บันทึกช่วยให้ผู้ตรวจงานรู้ว่าส่วนใดควรตรวจละเอียดเป็นพิเศษ และช่วยให้ตัวเราเองย้อนกลับมาดูได้ว่าตรวจสอบอะไรไปแล้วบ้าง รูปแบบของ <code>AI_USAGE.md</code> ในรายวิชามีดังนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> วันที่ <span class="pp">|</span> ใช้ AI ช่วยเรื่องอะไร <span class="pp">|</span> เครื่องมือ <span class="pp">|</span> ตรวจสอบผลอย่างไร <span class="pp">|</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2026-11-02 <span class="pp">|</span> ร่างฟังก์ชัน retry ใน src/fetch_air4thai.py <span class="pp">|</span> (ชื่อเครื่องมือ) <span class="pp">|</span> อ่านทุกบรรทัด ทดสอบด้วย URL ที่ตอบ 503 ตรวจพารามิเตอร์ timeout กับเอกสาร requests <span class="pp">|</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ใน commit message ให้ระบุสั้น ๆ เช่น <code>เพิ่มฟังก์ชัน retry (ร่างด้วย AI ตรวจแล้วตาม AI_USAGE.md)</code></p>
+</section>
+<section id="ขอบเขตทเหมาะสม" class="level3">
+<h3 class="anchored" data-anchor-id="ขอบเขตทเหมาะสม">ขอบเขตที่เหมาะสม</h3>
+<p>AI มีประโยชน์มากกับงานที่ <em>ตรวจสอบผลได้ง่าย</em> เช่น ร่างโค้ดที่เราเข้าใจแนวคิดอยู่แล้ว อธิบาย error message แปลงโค้ดระหว่าง pandas กับ SQL หรือเขียนกรณีทดสอบ ส่วนงานที่ต้องระวังคืองานที่ <em>ตรวจสอบผลได้ยาก</em> เช่น การเลือกวิธีทางสถิติ การตีความผลการวิเคราะห์ หรือข้อเท็จจริงเกี่ยวกับกฎหมายและโดเมน งานกลุ่มหลังนี้ ถ้าใช้ AI ช่วย ต้องตรวจกับแหล่งอ้างอิงที่เชื่อถือได้เสมอ</p>
+</section>
+</section>
+<section id="sec-ch02-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch02-case">กรณีศึกษา: ทำให้ notebook สำรวจ PM2.5 ทำซ้ำได้</h2>
+<p><strong>สถานการณ์</strong> นักศึกษาคนหนึ่งส่ง notebook <code>explore.ipynb</code> ที่คำนวณสัดส่วนวันที่ค่าเฉลี่ย PM2.5 เกินมาตรฐานของแต่ละภาค ผลในไฟล์แสดงตารางครบถ้วน แต่เมื่อเพื่อนในทีม clone repository ไปรันกลับพบปัญหาหลายข้อ</p>
+<p><strong>คำถาม</strong> อะไรทำให้ notebook นี้ทำซ้ำไม่ได้ และต้องแก้อย่างไรให้ถึงระดับที่ 3 ของการทำซ้ำได้</p>
+<p><strong>อาการที่พบ</strong> เพื่อนพบปัญหาตามลำดับดังนี้</p>
+<ol type="1">
+<li><code>ModuleNotFoundError: No module named 'duckdb'</code> เพราะ repository ไม่มีไฟล์สภาพแวดล้อม</li>
+<li>หลังติดตั้งแพ็กเกจเอง <code>duckdb.connect("pm25.duckdb")</code> สร้างไฟล์เปล่าขึ้นมาใน <code>notebooks/</code> แล้ว query แจ้งว่าไม่พบตาราง <code>measurements</code> เพราะผู้เขียนเก็บฐานข้อมูลไว้ในโฟลเดอร์ <code>notebooks/</code> บนเครื่องตัวเอง และไฟล์นั้นไม่ได้อยู่ใน Git</li>
+<li>หลังแก้ path ได้ <code>NameError: name 'threshold' is not defined</code> เพราะ cell ที่กำหนดค่าเกณฑ์ถูกลบไปแล้ว</li>
+<li>หลังเพิ่มค่าเกณฑ์เอง ได้ผลไม่ตรงกับในไฟล์ เพราะไม่รู้ว่าผู้เขียนใช้เกณฑ์เท่าไร และใช้ข้อมูลถึงวันที่ใด</li>
+</ol>
+<p><strong>วิธีแก้</strong> ตารางต่อไปนี้จับคู่ปัญหากับหลักการในบทนี้</p>
+<div id="tbl-ch02-case-fixes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-case-fixes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.9: การแก้ปัญหาการทำซ้ำได้ของ notebook ในกรณีศึกษา
+</figcaption>
+<div aria-describedby="tbl-ch02-case-fixes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ปัญหา</th>
+<th>หลักการ</th>
+<th>การแก้ไข</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไม่มีไฟล์สภาพแวดล้อม</td>
+<td>lock เวอร์ชัน (หัวข้อ <a href="#sec-ch02-lock" class="quarto-xref"><span>2.5</span></a>)</td>
+<td>เพิ่ม <code>environment.yml</code> หรือ <code>pyproject.toml</code> + <code>uv.lock</code></td>
+</tr>
+<tr class="even">
+<td>path ผูกกับโฟลเดอร์ที่รัน</td>
+<td>อ้างอิงจาก root (หัวข้อ <a href="#sec-ch02-project" class="quarto-xref"><span>2.8</span></a>)</td>
+<td>ใช้ <code>project_root()</code> และเก็บฐานข้อมูลที่ <code>data/pm25.duckdb</code></td>
+</tr>
+<tr class="odd">
+<td>ไม่มีข้อมูลให้เพื่อน</td>
+<td>ระดับ 2: script ดึงข้อมูล</td>
+<td>ให้ <code>src/run_pipeline.py</code> สร้างฐานข้อมูลจาก API หรือจากไฟล์ตัวอย่าง</td>
+</tr>
+<tr class="even">
+<td>ตัวแปรจาก cell ที่ลบไปแล้ว</td>
+<td>hidden state (หัวข้อ <a href="#sec-ch02-jupyter" class="quarto-xref"><span>2.6</span></a>)</td>
+<td>ประกาศค่าคงที่ไว้ cell แรก แล้ว Restart and Run All ก่อน commit</td>
+</tr>
+<tr class="odd">
+<td>ไม่รู้เกณฑ์และช่วงข้อมูล</td>
+<td>บันทึกเงื่อนไขการวิเคราะห์</td>
+<td>ใส่ค่าคงที่และเวอร์ชันซอฟต์แวร์ไว้ต้น notebook</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>cell แรกของ notebook หลังแก้ไขมีลักษณะดังนี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># %% ตั้งค่า: ทุก cell อ้างค่าจากที่นี่</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>ROOT <span class="op">=</span> <span class="bu">next</span>(p <span class="cf">for</span> p <span class="kw">in</span> [Path.cwd(), <span class="op">*</span>Path.cwd().parents] <span class="cf">if</span> (p <span class="op">/</span> <span class="st">"environment.yml"</span>).exists())</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>THRESHOLD <span class="op">=</span> <span class="fl">37.5</span>                       <span class="co"># มาตรฐาน PM2.5 เฉลี่ย 24 ชม. ของไทย (µg/m³)</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>EXPLORE_END <span class="op">=</span> <span class="st">"2024-01-01"</span>             <span class="co"># ข้อมูลก่อนวันนี้ = ช่วงสำรวจ (บทที่ 4)</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>MIN_HOURS <span class="op">=</span> <span class="dv">18</span>                         <span class="co"># เกณฑ์ความครบถ้วนรายวันของโครงการ</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(DB_PATH), read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Python </span><span class="sc">{</span>sys<span class="sc">.</span>version<span class="sc">.</span>split()[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> | pandas </span><span class="sc">{</span>pd<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss"> | duckdb </span><span class="sc">{</span>duckdb<span class="sc">.</span>__version__<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>ผล</strong> หลังแก้ไข เพื่อนในทีมทำซ้ำได้ด้วยคำสั่งสามขั้น คือ สร้างสภาพแวดล้อมจากไฟล์ รัน <code>src/run_pipeline.py</code> เพื่อสร้างฐานข้อมูล และเปิด notebook แล้ว Restart and Run All</p>
+<p><strong>ข้อจำกัด</strong> ผลยังอาจต่างกันเล็กน้อยถ้าทั้งสองคนดึงข้อมูลจาก API ในวันต่างกัน เพราะข้อมูลล่าสุดเปลี่ยนไปทุกชั่วโมง และข้อมูลย้อนหลังบางส่วนอาจถูกปรับปรุงโดยผู้ให้บริการ วิธีแก้คือกำหนดช่วงวันที่ของการวิเคราะห์ให้ชัดเจน (เช่น <code>EXPLORE_END</code>) และเก็บไฟล์ JSON ดิบไว้ หรือใช้ไฟล์ตัวอย่างชุดเดียวกันจากผู้สอน</p>
+</section>
+<section id="sec-ch02-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch02-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch02-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch02-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;2.10: ข้อผิดพลาดที่พบบ่อยในบทที่ 2
+</figcaption>
+<div aria-describedby="tbl-ch02-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ติดตั้งแพ็กเกจลงใน Python ของระบบหรือสภาพแวดล้อม <code>base</code></td>
+<td>โครงการต่าง ๆ ชนกัน และซ่อมยากเมื่อเสียหาย</td>
+<td>หนึ่งสภาพแวดล้อมต่อหนึ่งโครงการ</td>
+</tr>
+<tr class="even">
+<td>ใช้ <code>pip install</code> แล้ว import ไม่ได้</td>
+<td><code>pip</code> กับ <code>python</code> เป็นคนละตัว</td>
+<td>ใช้ <code>python -m pip install</code> และตรวจ <code>sys.executable</code></td>
+</tr>
+<tr class="odd">
+<td>ตั้งชื่อไฟล์ของตัวเองว่า <code>pandas.py</code> หรือ <code>duckdb.py</code></td>
+<td>Python import ไฟล์ของเราแทนไลบรารีจริง</td>
+<td>ตั้งชื่อไฟล์ที่ไม่ซ้ำกับไลบรารี</td>
+</tr>
+<tr class="even">
+<td>เปิดฐานข้อมูลด้วย relative path จาก notebook</td>
+<td>DuckDB สร้างไฟล์เปล่าใหม่ในโฟลเดอร์ผิด</td>
+<td>สร้าง path จาก root ของโครงการ</td>
+</tr>
+<tr class="odd">
+<td>ไม่ commit ไฟล์ lock</td>
+<td>ผู้อื่นได้แพ็กเกจคนละเวอร์ชัน ผลอาจต่างกัน</td>
+<td>commit <code>uv.lock</code> หรือไฟล์ lock ของ conda ทุกครั้งที่เปลี่ยน</td>
+</tr>
+<tr class="even">
+<td>ส่ง notebook ที่ไม่ได้ Restart and Run All</td>
+<td>มี hidden state ผลลัพธ์สร้างซ้ำไม่ได้</td>
+<td>Restart and Run All ก่อน commit ทุกครั้ง</td>
+</tr>
+<tr class="odd">
+<td>เขียน API key ลงในโค้ดหรือ notebook</td>
+<td>key อยู่ในประวัติ Git ตลอดไปเมื่อ push</td>
+<td>เก็บใน <code>.env</code> ที่อยู่ใน <code>.gitignore</code> และ commit <code>.env.example</code></td>
+</tr>
+<tr class="even">
+<td>เชื่อโค้ดจาก AI โดยไม่ตรวจชื่อคอลัมน์ ฟังก์ชัน และ endpoint</td>
+<td>AI สร้างชื่อที่ไม่มีอยู่จริงได้</td>
+<td>ตรวจกับข้อมูลจริงและเอกสารทางการทุกครั้ง และบันทึกใน <code>AI_USAGE.md</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>การทำซ้ำได้คือการได้ผลที่สอดคล้องกันจากข้อมูลและโค้ดเดียวกัน เป็นเงื่อนไขขั้นต่ำของงานที่เชื่อถือได้ โครงการในรายวิชาตั้งเป้าที่ระดับ 3 คือมีโค้ด script ดึงข้อมูล และไฟล์ lock สภาพแวดล้อม</li>
+<li>shell สั่งงานด้วยข้อความที่บันทึกและทำซ้ำได้ ตัวแปร <code>PATH</code> กำหนดว่าคำสั่งใดถูกเรียก และการ activate สภาพแวดล้อมคือการแก้ <code>PATH</code></li>
+<li>Python หาแพ็กเกจจาก <code>sys.path</code> ปัญหา import ส่วนใหญ่มาจากการใช้ interpreter คนละตัว ตรวจได้ด้วย <code>sys.executable</code></li>
+<li>virtual environment คือโฟลเดอร์ที่มี <code>site-packages</code> แยกของแต่ละโครงการ conda ยังแยกตัว Python และไลบรารีภาษา C ได้ด้วย</li>
+<li>ไฟล์ระบุความต้องการ (<code>environment.yml</code>, <code>pyproject.toml</code>) ต่างจากไฟล์ lock (<code>uv.lock</code>) ซึ่งบันทึกเวอร์ชันที่แน่นอนของทุกแพ็กเกจ และต้อง commit เสมอ</li>
+<li>kernel ของ Jupyter เป็น process แยกที่เก็บตัวแปรไว้ในหน่วยความจำ ทำให้เกิด hidden state ได้ Restart and Run All ก่อน commit ทุกครั้ง</li>
+<li>ความลับต้องไม่อยู่ในโค้ดหรือ Git ใช้ไฟล์ <code>.env</code> ร่วมกับ <code>.gitignore</code> และ <code>.env.example</code></li>
+<li>โค้ดจาก AI ต้องอ่าน ตรวจชื่อกับแหล่งจริง ทดสอบกับกรณีที่รู้คำตอบ และบันทึกใน <code>AI_USAGE.md</code></li>
+</ul>
+</section>
+<section id="sec-ch02-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch02-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>อธิบายความต่างระหว่าง reproducibility กับ replicability พร้อมยกตัวอย่างกับโครงการ PM2.5 ที่ไม่ซ้ำกับใน <a href="#tbl-ch02-repro-definitions" class="quarto-xref">ตารางที่&nbsp;<span>2.1</span></a></li>
+<li>อธิบายว่าเมื่อพิมพ์คำสั่ง <code>python</code> ใน terminal shell ตัดสินใจอย่างไรว่าจะรันไฟล์ใด และการ activate สภาพแวดล้อมเปลี่ยนการตัดสินใจนั้นอย่างไร</li>
+<li>wheel ต่างจาก source distribution อย่างไร และทำไมการใช้ Python เวอร์ชันใหม่ล่าสุดจึงอาจทำให้ติดตั้งแพ็กเกจไม่ได้</li>
+<li>ยกตัวอย่างสถานการณ์ hidden state ใน notebook สามแบบ และวิธีป้องกันแต่ละแบบ</li>
+<li>ถ้าเผลอ push ไฟล์ <code>.env</code> ที่มี API key ขึ้น GitHub ต้องทำอะไรเป็นอันดับแรก และทำไมการลบไฟล์ใน commit ถัดไปจึงไม่พอ</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>รันโค้ดที่แสดง <code>sys.executable</code>, <code>sys.prefix</code> และ <code>sys.base_prefix</code> ทั้งใน terminal และใน notebook ของโครงการ บันทึกผล แล้วอธิบายว่าทั้งสองที่ใช้สภาพแวดล้อมเดียวกันหรือไม่</li>
+<li>สร้างโครงการ uv ใหม่ เพิ่มแพ็กเกจ <code>duckdb</code> และ <code>pandas</code> แล้วเปิดไฟล์ <code>uv.lock</code> นับว่ามีแพ็กเกจทั้งหมดกี่ตัว และอธิบายว่าทำไมจำนวนจึงมากกว่าสองตัว</li>
+<li>เขียนฟังก์ชัน <code>project_root()</code> ในหัวข้อ <a href="#sec-ch02-project" class="quarto-xref"><span>2.8</span></a> ลงใน <code>src/paths.py</code> แล้วเรียกใช้จากทั้ง notebook ใน <code>notebooks/</code> และ script ใน <code>src/</code> ตรวจว่าได้ path ของฐานข้อมูลเดียวกัน</li>
+<li>สร้าง notebook ที่จงใจมี hidden state อย่างน้อยหนึ่งแบบ แล้วแสดงว่า Restart and Run All ตรวจพบปัญหานั้นได้อย่างไร</li>
+<li>ขอให้ AI เขียนฟังก์ชันอ่านไฟล์ JSON ของ Air4Thai แล้วแปลงเป็น DataFrame ตรวจสอบโค้ดที่ได้ตามห้าขั้นในหัวข้อ <a href="#sec-ch02-ai" class="quarto-xref"><span>2.10</span></a> บันทึกสิ่งที่พบลงใน <code>AI_USAGE.md</code> และระบุว่าพบ hallucination หรือไม่</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>เขียน Dockerfile สำหรับโครงการของตน ที่รัน <code>src/run_pipeline.py</code> ได้ และสร้างกราฟที่มีตัวอักษรไทยแสดงผลถูกต้อง ทดสอบบนเครื่องอื่นอย่างน้อยหนึ่งเครื่อง แล้วบันทึกปัญหาที่พบ</li>
+<li>เลือกบทความวิจัยที่เผยแพร่โค้ดและข้อมูลไว้หนึ่งบทความในสาขาที่สนใจ พยายามทำซ้ำผลหนึ่งตารางหรือกราฟ แล้วประเมินว่างานนั้นอยู่ที่ระดับใดใน <a href="#tbl-ch02-repro-levels" class="quarto-xref">ตารางที่&nbsp;<span>2.2</span></a> พร้อมบันทึกอุปสรรคทั้งหมดที่พบ</li>
+<li>ออกแบบ checklist การทำซ้ำได้สำหรับโครงการของตนเอง 10 ข้อ ที่ตรวจได้ด้วยคำสั่งหรือ script โดยอัตโนมัติให้ได้มากที่สุด และอธิบายว่าข้อใดยังต้องตรวจด้วยคน</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch02">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="nasem2019reproducibility">National Academies of Sciences, Engineering, and Medicine (<a href="../references.html#ref-nasem2019reproducibility" role="doc-biblioref">2019</a>)</span> — รายงานที่ให้นิยามการทำซ้ำได้และการทำซ้ำด้วยข้อมูลใหม่อย่างชัดเจน และวิเคราะห์สาเหตุของวิกฤตอย่างเป็นระบบ</li>
+<li><span class="citation" data-cites="peng2011reproducible">Peng (<a href="../references.html#ref-peng2011reproducible" role="doc-biblioref">2011</a>)</span> — บทความสั้นที่เสนอแนวคิดสเปกตรัมของการทำซ้ำได้ ซึ่งเป็นที่มาของการแบ่งระดับในบทนี้</li>
+<li><span class="citation" data-cites="wilson2017good">Wilson และคณะ (<a href="../references.html#ref-wilson2017good" role="doc-biblioref">2017</a>)</span> — แนวปฏิบัติที่ “ดีพอ” สำหรับผู้ที่ไม่ได้เป็นนักพัฒนาซอฟต์แวร์ ครอบคลุมการจัดการข้อมูล โค้ด และโครงสร้างโครงการ</li>
+<li><span class="citation" data-cites="sandve2013ten">Sandve และคณะ (<a href="../references.html#ref-sandve2013ten" role="doc-biblioref">2013</a>)</span> — กฎสิบข้อสำหรับงานคำนวณที่ทำซ้ำได้ อ่านจบได้ในครั้งเดียวและใช้เป็น checklist ได้</li>
+<li><span class="citation" data-cites="pimentel2019large">Pimentel และคณะ (<a href="../references.html#ref-pimentel2019large" role="doc-biblioref">2019</a>)</span> — งานวิจัยที่วัดว่า notebook บน GitHub ทำซ้ำได้มากน้อยเพียงใด และวิเคราะห์สาเหตุที่พบบ่อย</li>
+<li><span class="citation" data-cites="astral2026uv">Astral (<a href="../references.html#ref-astral2026uv" role="doc-biblioref">2026</a>)</span> — เอกสารทางการของ uv อธิบายการจัดการโครงการ ไฟล์ lock และคำสั่งทั้งหมด</li>
+<li><span class="citation" data-cites="boettiger2015introduction">Boettiger (<a href="../references.html#ref-boettiger2015introduction" role="doc-biblioref">2015</a>)</span> — บทนำการใช้ Docker เพื่องานวิจัยที่ทำซ้ำได้ พร้อมอภิปรายข้อดีข้อเสียเทียบกับทางเลือกอื่น</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-astral2026uv" class="csl-entry" role="listitem">
+Astral. 2026. <em>uv Documentation</em>. <a href="https://docs.astral.sh/uv/">https://docs.astral.sh/uv/</a>.
+</div>
+<div id="ref-baker2016reproducibility" class="csl-entry" role="listitem">
+Baker, Monya. 2016. <span>“1,500 Scientists Lift the Lid on Reproducibility”</span>. <em>Nature</em> 533 (7604): 452–54. <a href="https://doi.org/10.1038/533452a">https://doi.org/10.1038/533452a</a>.
+</div>
+<div id="ref-boettiger2015introduction" class="csl-entry" role="listitem">
+Boettiger, Carl. 2015. <span>“An Introduction to <span>Docker</span> for Reproducible Research”</span>. <em>ACM SIGOPS Operating Systems Review</em> 49 (1): 71–79. <a href="https://doi.org/10.1145/2723872.2723882">https://doi.org/10.1145/2723872.2723882</a>.
+</div>
+<div id="ref-pep621metadata" class="csl-entry" role="listitem">
+<span class="nocase">Cannon, Brett และคณะ</span>. 2020. <em><span>PEP</span> 621 – Storing Project Metadata in pyproject.toml</em>. <a href="https://peps.python.org/pep-0621/">https://peps.python.org/pep-0621/</a>.
+</div>
+<div id="ref-devcontainers2026spec" class="csl-entry" role="listitem">
+Development Containers. 2026. <em>Development Container Specification</em>. <a href="https://containers.dev/">https://containers.dev/</a>.
+</div>
+<div id="ref-pep427wheel" class="csl-entry" role="listitem">
+Holth, Daniel. 2012. <em><span>PEP</span> 427 – The Wheel Binary Package Format 1.0</em>. <a href="https://peps.python.org/pep-0427/">https://peps.python.org/pep-0427/</a>.
+</div>
+<div id="ref-kluyver2016jupyter" class="csl-entry" role="listitem">
+<span class="nocase">Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando Pérez, และคณะ</span>. 2016. <span>“Jupyter Notebooks – a Publishing Format for Reproducible Computational Workflows”</span>. ใน <em>Positioning and Power in Academic Publishing: Players, Agents and Agendas</em>, เรียบเรียงโดย Fernando Loizides และ Birgit Schmidt. IOS Press. <a href="https://doi.org/10.3233/978-1-61499-649-1-87">https://doi.org/10.3233/978-1-61499-649-1-87</a>.
+</div>
+<div id="ref-pythondotenv2026" class="csl-entry" role="listitem">
+<span class="nocase">Kumar, Saurabh และคณะ</span>. 2026. <em>python-dotenv</em>. <a href="https://pypi.org/project/python-dotenv/">https://pypi.org/project/python-dotenv/</a>.
+</div>
+<div id="ref-merkel2014docker" class="csl-entry" role="listitem">
+Merkel, Dirk. 2014. <span>“Docker: Lightweight <span>Linux</span> Containers for Consistent Development and Deployment”</span>. <em>Linux Journal</em> 2014 (239): 2.
+</div>
+<div id="ref-pep405venv" class="csl-entry" role="listitem">
+Meyer, Carl. 2011. <em><span>PEP</span> 405 – Python Virtual Environments</em>. <a href="https://peps.python.org/pep-0405/">https://peps.python.org/pep-0405/</a>.
+</div>
+<div id="ref-nasem2019reproducibility" class="csl-entry" role="listitem">
+National Academies of Sciences, Engineering, and Medicine. 2019. <em>Reproducibility and Replicability in Science</em>. The National Academies Press. <a href="https://doi.org/10.17226/25303">https://doi.org/10.17226/25303</a>.
+</div>
+<div id="ref-osc2015estimating" class="csl-entry" role="listitem">
+Open Science Collaboration. 2015. <span>“Estimating the Reproducibility of Psychological Science”</span>. <em>Science</em> 349 (6251): aac4716. <a href="https://doi.org/10.1126/science.aac4716">https://doi.org/10.1126/science.aac4716</a>.
+</div>
+<div id="ref-peng2011reproducible" class="csl-entry" role="listitem">
+Peng, Roger D. 2011. <span>“Reproducible Research in Computational Science”</span>. <em>Science</em> 334 (6060): 1226–27. <a href="https://doi.org/10.1126/science.1213847">https://doi.org/10.1126/science.1213847</a>.
+</div>
+<div id="ref-pimentel2019large" class="csl-entry" role="listitem">
+Pimentel, João Felipe, Leonardo Murta, Vanessa Braganholo, และ Juliana Freire. 2019. <span>“A Large-Scale Study About Quality and Reproducibility of <span>Jupyter</span> Notebooks”</span>. <em>Proceedings of the 16th International Conference on Mining Software Repositories (MSR)</em>, 507–17. <a href="https://doi.org/10.1109/MSR.2019.00077">https://doi.org/10.1109/MSR.2019.00077</a>.
+</div>
+<div id="ref-sandve2013ten" class="csl-entry" role="listitem">
+Sandve, Geir Kjetil, Anton Nekrutenko, James Taylor, และ Eivind Hovig. 2013. <span>“Ten Simple Rules for Reproducible Computational Research”</span>. <em>PLoS Computational Biology</em> 9 (10): e1003285. <a href="https://doi.org/10.1371/journal.pcbi.1003285">https://doi.org/10.1371/journal.pcbi.1003285</a>.
+</div>
+<div id="ref-spracklen2025we" class="csl-entry" role="listitem">
+Spracklen, Joseph, Raveen Wijewickrama, A. H. M. Nazmus Sakib, Anindya Maiti, Bimal Viswanath, และ Murtuza Jadliwala. 2025. <span>“We Have a Package for You! <span>A</span> Comprehensive Analysis of Package Hallucinations by Code Generating <span>LLMs</span>”</span>. <em>Proceedings of the 34th USENIX Security Symposium</em>.
+</div>
+<div id="ref-wiggins2011twelve" class="csl-entry" role="listitem">
+Wiggins, Adam. 2011. <em>The Twelve-Factor App</em>. <a href="https://12factor.net/">https://12factor.net/</a>.
+</div>
+<div id="ref-wilson2017good" class="csl-entry" role="listitem">
+Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, และ Tracy K. Teal. 2017. <span>“Good Enough Practices in Scientific Computing”</span>. <em>PLoS Computational Biology</em> 13 (6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/01-data-science-eda.html" class="pagination-link" aria-label="วิทยาการข้อมูลและการสำรวจข้อมูล">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/03-version-control.html" class="pagination-link" aria-label="Version control และการทำงานร่วมกัน">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

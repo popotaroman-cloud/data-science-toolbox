@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>22&nbsp; จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../appendices/a-python.html" rel="next">
+<link href="../chapters/21-case-study-pm25.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/21-case-study-pm25.html">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</a></li><li class="breadcrumb-item"><a href="../chapters/22-ethics-ai.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch22-principles" id="toc-sec-ch22-principles" class="nav-link" data-scroll-target="#sec-ch22-principles"><span class="header-section-number">22.1</span> หลักจริยธรรมข้อมูล</a>
+  <ul class="collapse">
+  <li><a href="#จรยธรรมขอมลคออะไร" id="toc-จรยธรรมขอมลคออะไร" class="nav-link" data-scroll-target="#จรยธรรมขอมลคออะไร">จริยธรรมข้อมูลคืออะไร</a></li>
+  <li><a href="#หลกทใชในงานวเคราะหขอมล" id="toc-หลกทใชในงานวเคราะหขอมล" class="nav-link" data-scroll-target="#หลกทใชในงานวเคราะหขอมล">หลักที่ใช้ในงานวิเคราะห์ข้อมูล</a></li>
+  <li><a href="#ความยตธรรมเชงสงแวดลอม" id="toc-ความยตธรรมเชงสงแวดลอม" class="nav-link" data-scroll-target="#ความยตธรรมเชงสงแวดลอม">ความยุติธรรมเชิงสิ่งแวดล้อม</a></li>
+  </ul></li>
+  <li><a href="#sec-ch22-bias" id="toc-sec-ch22-bias" class="nav-link" data-scroll-target="#sec-ch22-bias"><span class="header-section-number">22.2</span> อคติในข้อมูลและในการตีความ</a>
+  <ul class="collapse">
+  <li><a href="#อคตเกดไดทกขน" id="toc-อคตเกดไดทกขน" class="nav-link" data-scroll-target="#อคตเกดไดทกขน">อคติเกิดได้ทุกขั้น</a></li>
+  <li><a href="#อคตของผวเคราะห" id="toc-อคตของผวเคราะห" class="nav-link" data-scroll-target="#อคตของผวเคราะห">อคติของผู้วิเคราะห์</a></li>
+  <li><a href="#การสอสารทกอความเสยหาย" id="toc-การสอสารทกอความเสยหาย" class="nav-link" data-scroll-target="#การสอสารทกอความเสยหาย">การสื่อสารที่ก่อความเสียหาย</a></li>
+  </ul></li>
+  <li><a href="#sec-ch22-ai" id="toc-sec-ch22-ai" class="nav-link" data-scroll-target="#sec-ch22-ai"><span class="header-section-number">22.3</span> ความรับผิดชอบเมื่อใช้ AI ช่วยเขียนโค้ด: hallucination และการตรวจสอบ</a>
+  <ul class="collapse">
+  <li><a href="#ai-ในรายวชา" id="toc-ai-ในรายวชา" class="nav-link" data-scroll-target="#ai-ในรายวชา">AI ในรายวิชา</a></li>
+  <li><a href="#hallucination" id="toc-hallucination" class="nav-link" data-scroll-target="#hallucination">hallucination</a></li>
+  <li><a href="#แนวปฏบตในการตรวจสอบ" id="toc-แนวปฏบตในการตรวจสอบ" class="nav-link" data-scroll-target="#แนวปฏบตในการตรวจสอบ">แนวปฏิบัติในการตรวจสอบ</a></li>
+  <li><a href="#การบนทกการใช-ai" id="toc-การบนทกการใช-ai" class="nav-link" data-scroll-target="#การบนทกการใช-ai">การบันทึกการใช้ AI</a></li>
+  </ul></li>
+  <li><a href="#sec-ch22-licenses" id="toc-sec-ch22-licenses" class="nav-link" data-scroll-target="#sec-ch22-licenses"><span class="header-section-number">22.4</span> สัญญาอนุญาตของข้อมูลและซอฟต์แวร์</a>
+  <ul class="collapse">
+  <li><a href="#ทำไมสญญาอนญาตจงสำคญ" id="toc-ทำไมสญญาอนญาตจงสำคญ" class="nav-link" data-scroll-target="#ทำไมสญญาอนญาตจงสำคญ">ทำไมสัญญาอนุญาตจึงสำคัญ</a></li>
+  <li><a href="#สญญาอนญาตของขอมล" id="toc-สญญาอนญาตของขอมล" class="nav-link" data-scroll-target="#สญญาอนญาตของขอมล">สัญญาอนุญาตของข้อมูล</a></li>
+  <li><a href="#สญญาอนญาตของซอฟตแวร" id="toc-สญญาอนญาตของซอฟตแวร" class="nav-link" data-scroll-target="#สญญาอนญาตของซอฟตแวร">สัญญาอนุญาตของซอฟต์แวร์</a></li>
+  <li><a href="#สญญาอนญาตของโครงการ" id="toc-สญญาอนญาตของโครงการ" class="nav-link" data-scroll-target="#สญญาอนญาตของโครงการ">สัญญาอนุญาตของโครงการ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch22-integrity" id="toc-sec-ch22-integrity" class="nav-link" data-scroll-target="#sec-ch22-integrity"><span class="header-section-number">22.5</span> ความซื่อตรงทางวิชาการ</a>
+  <ul class="collapse">
+  <li><a href="#ความซอตรงในงานขอมล" id="toc-ความซอตรงในงานขอมล" class="nav-link" data-scroll-target="#ความซอตรงในงานขอมล">ความซื่อตรงในงานข้อมูล</a></li>
+  <li><a href="#งานกลมและการใช-ai" id="toc-งานกลมและการใช-ai" class="nav-link" data-scroll-target="#งานกลมและการใช-ai">งานกลุ่มและการใช้ AI</a></li>
+  <li><a href="#เมอพบขอผดพลาดหลงสงงาน" id="toc-เมอพบขอผดพลาดหลงสงงาน" class="nav-link" data-scroll-target="#เมอพบขอผดพลาดหลงสงงาน">เมื่อพบข้อผิดพลาดหลังส่งงาน</a></li>
+  </ul></li>
+  <li><a href="#sec-ch22-case" id="toc-sec-ch22-case" class="nav-link" data-scroll-target="#sec-ch22-case">กรณีศึกษา: ทบทวนโครงการ PM2.5 ด้วยมุมมองจริยธรรม</a></li>
+  <li><a href="#sec-ch22-pitfalls" id="toc-sec-ch22-pitfalls" class="nav-link" data-scroll-target="#sec-ch22-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch22-exercises" id="toc-sec-ch22-exercises" class="nav-link" data-scroll-target="#sec-ch22-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/21-case-study-pm25.html">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</a></li><li class="breadcrumb-item"><a href="../chapters/22-ethics-ai.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ตลอดเล่มนี้ ประเด็นจริยธรรมปรากฏอยู่แทบทุกบท การเลือกข้อมูลที่จะแสดงในกราฟ (บทที่ 11) การรายงานผลที่ไม่ได้รับการยืนยัน (บทที่ 4 และ 21) การไม่ลบค่าผิดปกติที่อาจเป็นเหตุการณ์จริง (บทที่ 15) และการปกป้องข้อมูลส่วนบุคคล (บทที่ 16) บทสุดท้ายนี้รวบรวมประเด็นเหล่านั้นเข้าเป็นกรอบเดียว และเพิ่มสองเรื่องที่ทุกคนในรายวิชาต้องเผชิญ คือ การใช้ AI ช่วยเขียนโค้ดอย่างรับผิดชอบ และสัญญาอนุญาตของข้อมูลและซอฟต์แวร์ที่ใช้</p>
+<p>จริยธรรมข้อมูลไม่ใช่รายการข้อห้ามที่ท่องจำ แต่เป็นการถามคำถามที่ถูกต้องในแต่ละขั้นของงาน ใครได้ประโยชน์และใครอาจเสียประโยชน์จากการวิเคราะห์นี้ ข้อมูลนี้เป็นตัวแทนของใคร และไม่ได้เป็นตัวแทนของใคร ผลลัพธ์นี้ตรวจสอบได้หรือไม่ บทนี้สั้นกว่าบทอื่นตามที่กำหนดไว้ แต่หลักการในบทนี้ใช้กับทุกงานข้อมูลที่ผู้อ่านจะทำต่อไป</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายหลักจริยธรรมข้อมูล และนำไปใช้ประเมินโครงการวิเคราะห์ข้อมูล</li>
+<li>ระบุแหล่งของอคติในข้อมูลและในการตีความ ในข้อมูลของโครงการ</li>
+<li>ใช้ AI ช่วยเขียนโค้ดโดยตรวจสอบผลลัพธ์อย่างเป็นระบบ และบันทึกการใช้อย่างโปร่งใส</li>
+<li>เลือกและปฏิบัติตามสัญญาอนุญาตของข้อมูลและซอฟต์แวร์</li>
+<li>อธิบายความซื่อตรงทางวิชาการในบริบทของงานข้อมูลและการใช้ AI</li>
+</ol>
+</section>
+<section id="sec-ch22-principles" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="sec-ch22-principles"><span class="header-section-number">22.1</span> หลักจริยธรรมข้อมูล</h2>
+<section id="จรยธรรมขอมลคออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="จรยธรรมขอมลคออะไร">จริยธรรมข้อมูลคืออะไร</h3>
+<p><strong><span class="idx">จริยธรรมข้อมูล</span></strong> (data ethics) เป็นสาขาที่ศึกษาปัญหาทางศีลธรรมที่เกี่ยวกับข้อมูล อัลกอริทึม และแนวปฏิบัติในการใช้ข้อมูล <span class="citation" data-cites="floridi2016what">(<a href="../references.html#ref-floridi2016what" role="doc-biblioref">Floridi และ Taddeo 2016</a>)</span> สาขานี้ต่อยอดจากจริยธรรมการวิจัยในมนุษย์ ซึ่ง Belmont Report ของสหรัฐอเมริกาวางหลักไว้สามข้อ คือ ความเคารพในบุคคล (respect for persons) การให้ประโยชน์และไม่ก่อความเสียหาย (beneficence) และความยุติธรรม (justice) <span class="citation" data-cites="belmont1979">(<a href="../references.html#ref-belmont1979" role="doc-biblioref">National Commission for the Protection of Human Subjects of Biomedical and Behavioral Research 1979</a>)</span> องค์กรวิชาชีพที่เกี่ยวข้องกับงานข้อมูล เช่น ACM และ American Statistical Association มีจรรยาบรรณที่ขยายหลักเหล่านี้สู่งานคำนวณและงานสถิติ <span class="citation" data-cites="acm2018code asa2022ethical">(<a href="../references.html#ref-acm2018code" role="doc-biblioref">Association for Computing Machinery 2018</a>; <a href="../references.html#ref-asa2022ethical" role="doc-biblioref">American Statistical Association 2022</a>)</span></p>
+</section>
+<section id="หลกทใชในงานวเคราะหขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="หลกทใชในงานวเคราะหขอมล">หลักที่ใช้ในงานวิเคราะห์ข้อมูล</h3>
+<div id="tbl-ch22-principles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.1: หลักจริยธรรมข้อมูลและคำถามในโครงการ
+</figcaption>
+<div aria-describedby="tbl-ch22-principles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลัก</th>
+<th>ความหมาย</th>
+<th>คำถามที่ต้องถามในโครงการ PM2.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ประโยชน์และการไม่ก่อความเสียหาย</td>
+<td>งานควรสร้างประโยชน์และหลีกเลี่ยงความเสียหายที่คาดการณ์ได้</td>
+<td>ข้อสรุปที่ผิดจะทำให้ใครเสียหาย เช่น การบอกว่าอากาศดีขึ้นทั้งที่ข้อมูลวันฝุ่นหนาหายไป</td>
+</tr>
+<tr class="even">
+<td>ความเคารพในบุคคลและความเป็นส่วนตัว</td>
+<td>ปกป้องข้อมูลและสิทธิของบุคคล</td>
+<td>ถ้าเชื่อมกับข้อมูลสุขภาพ มีมาตรการปกป้องตามบทที่ 16 หรือไม่</td>
+</tr>
+<tr class="odd">
+<td>ความยุติธรรม</td>
+<td>ประโยชน์และภาระกระจายอย่างเป็นธรรม</td>
+<td>พื้นที่ที่ไม่มีสถานีตรวจวัดถูกมองข้ามในการตัดสินใจหรือไม่</td>
+</tr>
+<tr class="even">
+<td>ความโปร่งใส</td>
+<td>วิธีการและข้อจำกัดเปิดเผยให้ตรวจสอบได้</td>
+<td>ผู้อื่นทำซ้ำการวิเคราะห์ได้หรือไม่ ข้อจำกัดถูกรายงานหรือไม่</td>
+</tr>
+<tr class="odd">
+<td>ความรับผิดชอบ</td>
+<td>มีผู้รับผิดชอบต่อผลของงาน</td>
+<td>ใครรับผิดชอบเมื่อพบข้อผิดพลาดหลังเผยแพร่ และจะแก้ไขอย่างไร</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ความยตธรรมเชงสงแวดลอม" class="level3">
+<h3 class="anchored" data-anchor-id="ความยตธรรมเชงสงแวดลอม">ความยุติธรรมเชิงสิ่งแวดล้อม</h3>
+<p>ข้อมูลคุณภาพอากาศเกี่ยวข้องโดยตรงกับประเด็น <strong><span class="idx">ความยุติธรรมเชิงสิ่งแวดล้อม</span></strong> (environmental justice) คือคำถามว่ากลุ่มคนใดได้รับมลพิษมากกว่ากลุ่มอื่น และมีเสียงในการตัดสินใจน้อยกว่าหรือไม่ งานวิจัยในหลายประเทศพบว่าการสัมผัส PM2.5 กระจายอย่างไม่เท่าเทียมตามรายได้และกลุ่มประชากร <span class="citation" data-cites="tessum2021pm25">(<a href="../references.html#ref-tessum2021pm25" role="doc-biblioref">Tessum และคณะ 2021</a>)</span> ในบริบทของไทย ประเด็นที่ควรถาม เช่น เกษตรกรที่ทำงานกลางแจ้งในฤดูเผา หรือชุมชนในพื้นที่ที่ไม่มีสถานีตรวจวัด ได้รับข้อมูลเพียงพอต่อการป้องกันตนเองหรือไม่ นักวิเคราะห์ข้อมูลไม่ได้ตอบคำถามเหล่านี้ได้คนเดียว แต่การตั้งคำถามและการรายงานว่าข้อมูลไม่ครอบคลุมกลุ่มใด เป็นความรับผิดชอบโดยตรง</p>
+</section>
+</section>
+<section id="sec-ch22-bias" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="sec-ch22-bias"><span class="header-section-number">22.2</span> อคติในข้อมูลและในการตีความ</h2>
+<section id="อคตเกดไดทกขน" class="level3">
+<h3 class="anchored" data-anchor-id="อคตเกดไดทกขน">อคติเกิดได้ทุกขั้น</h3>
+<p><strong><span class="idx">อคติ</span></strong> (bias) ในบริบทนี้หมายถึงความคลาดเคลื่อนเชิงระบบที่ทำให้ผลการวิเคราะห์เอนไปทางใดทางหนึ่ง ไม่ใช่ความคลาดเคลื่อนแบบสุ่มที่หักล้างกันได้ Suresh และ Guttag จำแนกแหล่งของความเสียหายตลอดวงจรของข้อมูลไว้อย่างเป็นระบบ <span class="citation" data-cites="suresh2021framework">(<a href="../references.html#ref-suresh2021framework" role="doc-biblioref">Suresh และ Guttag 2021</a>)</span> ตารางต่อไปนี้ปรับกรอบนั้นให้เข้ากับโครงการ</p>
+<div id="tbl-ch22-bias" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-bias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.2: แหล่งของอคติในข้อมูลและในการตีความ
+</figcaption>
+<div aria-describedby="tbl-ch22-bias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แหล่งอคติ</th>
+<th>ความหมาย</th>
+<th>ตัวอย่างในข้อมูล PM2.5</th>
+<th>บทที่เกี่ยวข้อง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>การเลือกตัวอย่าง (selection bias)</td>
+<td>หน่วยที่อยู่ในข้อมูลไม่เป็นตัวแทนของประชากรที่ต้องการสรุป</td>
+<td>สถานีกระจุกในเมือง ข้อสรุปจึงไม่แทนชนบท</td>
+<td>13, 17</td>
+</tr>
+<tr class="even">
+<td>การวัด (measurement bias)</td>
+<td>เครื่องมือหรือวิธีวัดให้ค่าคลาดเชิงระบบ</td>
+<td>เซนเซอร์ราคาประหยัดอ่านค่าสูงเกินจริงเมื่อความชื้นสูง</td>
+<td>9, 14</td>
+</tr>
+<tr class="odd">
+<td>ข้อมูลสูญหายที่ไม่สุ่ม</td>
+<td>ข้อมูลหายมากในบางสถานการณ์</td>
+<td>เครื่องหยุดทำงานบ่อยในวันที่ฝุ่นหนา (MNAR)</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>การรวมข้อมูล (aggregation bias)</td>
+<td>การรวมซ่อนความต่างหรือกลับทิศของความสัมพันธ์</td>
+<td>Simpson’s paradox เมื่อเครือข่ายสถานีขยาย</td>
+<td>13, 18</td>
+</tr>
+<tr class="odd">
+<td>การตีความ (confirmation bias)</td>
+<td>มองหาและให้น้ำหนักหลักฐานที่ตรงกับความเชื่อเดิม</td>
+<td>ทดลองกราฟจนได้ภาพที่ตรงกับสิ่งที่คาดไว้</td>
+<td>4, 12</td>
+</tr>
+<tr class="even">
+<td>การรายงาน (reporting bias)</td>
+<td>รายงานเฉพาะผลที่น่าสนใจหรือมีนัยสำคัญ</td>
+<td>ไม่รายงานข้อค้นพบที่ไม่ได้รับการยืนยัน</td>
+<td>4, 21</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="อคตของผวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="อคตของผวเคราะห">อคติของผู้วิเคราะห์</h3>
+<p>อคติที่ตรวจพบยากที่สุดอยู่ในตัวผู้วิเคราะห์เอง นักวิเคราะห์ที่เชื่ออยู่แล้วว่าการเผาในภาคเหนือเป็นสาเหตุหลักของฝุ่น จะเห็นหลักฐานสนับสนุนในทุกกราฟ และอาจมองข้ามคำอธิบายอื่น เช่น สภาพอากาศ หรือหมอกควันข้ามแดน การป้องกันอคติของตนเองไม่ได้อาศัยความตั้งใจดี แต่อาศัยกระบวนการ ได้แก่ การเขียนคำถามและวิธีไว้ล่วงหน้า (บทที่ 4) การแยกข้อมูลช่วงสำรวจและช่วงยืนยัน การให้ผู้อื่นตรวจโค้ดและข้อสรุป (บทที่ 2) และการถามตัวเองอย่างจริงจังว่า “ถ้าสมมติฐานของฉันผิด ข้อมูลจะดูเป็นอย่างไร”</p>
+</section>
+<section id="การสอสารทกอความเสยหาย" class="level3">
+<h3 class="anchored" data-anchor-id="การสอสารทกอความเสยหาย">การสื่อสารที่ก่อความเสียหาย</h3>
+<p>อคติไม่ได้อยู่เพียงในการวิเคราะห์ แต่อยู่ในการสื่อสารด้วย แผนที่ที่ระบายจังหวัดหนึ่งเป็นสีแดงเข้มที่สุดจากข้อมูลสถานีเดียว (บทที่ 17) อาจกระทบการท่องเที่ยวและเศรษฐกิจของจังหวัดนั้นโดยไม่เป็นธรรม ข้อความที่สรุปว่า “เกษตรกรเผาทำให้ฝุ่นสูง” จากข้อมูลที่ไม่ได้วัดการเผาเลย อาจส่งผลต่อกลุ่มคนที่ถูกกล่าวถึง การเลือกถ้อยคำตามระดับหลักฐาน (บทที่ 19) จึงไม่ใช่เพียงเรื่องความถูกต้องทางวิชาการ แต่เป็นเรื่องความรับผิดชอบต่อผู้ที่ได้รับผลจากข้อสรุป <span class="citation" data-cites="dignazio2020data">(<a href="../references.html#ref-dignazio2020data" role="doc-biblioref">D’Ignazio และ Klein 2020</a>)</span></p>
+</section>
+</section>
+<section id="sec-ch22-ai" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="sec-ch22-ai"><span class="header-section-number">22.3</span> ความรับผิดชอบเมื่อใช้ AI ช่วยเขียนโค้ด: hallucination และการตรวจสอบ</h2>
+<section id="ai-ในรายวชา" class="level3">
+<h3 class="anchored" data-anchor-id="ai-ในรายวชา">AI ในรายวิชา</h3>
+<p>รายวิชานี้อนุญาตให้ใช้ large language model (LLM) ช่วยเขียนโค้ดได้ทุกงาน ภายใต้เงื่อนไขสามข้อ คือ ผู้เรียนต้องอธิบายโค้ดทุกบรรทัดที่ส่งได้ ต้องบันทึกการใช้ AI ใน <code>AI_USAGE.md</code> หรือ commit message และต้องตรวจผลลัพธ์จาก AI กับข้อมูลจริงทุกครั้ง นโยบายนี้สะท้อนความจริงของการทำงาน AI เป็นเครื่องมือที่ทรงพลังและใช้กันแพร่หลาย การห้ามใช้ไม่สมจริง แต่การใช้โดยไม่ตรวจสอบเป็นอันตราย</p>
+</section>
+<section id="hallucination" class="level3">
+<h3 class="anchored" data-anchor-id="hallucination">hallucination</h3>
+<p><strong><span class="idx">hallucination</span></strong> คือการที่ LLM สร้างเนื้อหาที่ดูน่าเชื่อถือแต่ไม่ถูกต้องหรือไม่มีอยู่จริง <span class="citation" data-cites="ji2023survey">(<a href="../references.html#ref-ji2023survey" role="doc-biblioref">Ji และคณะ 2023</a>)</span> ในงานเขียนโค้ด hallucination มีรูปแบบเฉพาะที่พบบ่อย</p>
+<div id="tbl-ch22-hallucination" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-hallucination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.3: รูปแบบของ hallucination ในงานเขียนโค้ดและวิธีตรวจพบ
+</figcaption>
+<div aria-describedby="tbl-ch22-hallucination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>รูปแบบ</th>
+<th>ตัวอย่างในโครงการ</th>
+<th>วิธีตรวจพบ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>endpoint หรือพารามิเตอร์ของ API ที่ไม่มีจริง</td>
+<td>URL ของ Air4Thai ที่ไม่มีอยู่ หรือพารามิเตอร์ที่ API ไม่รองรับ</td>
+<td>ทดสอบเรียกจริง เทียบกับเอกสารของผู้ให้บริการ (บทที่ 5)</td>
+</tr>
+<tr class="even">
+<td>ชื่อคอลัมน์หรือตารางที่ไม่มีในข้อมูล</td>
+<td><code>pm25_avg</code> แทน <code>pm25_mean</code> หรือตาราง <code>daily</code> ที่ไม่มี</td>
+<td>รันโค้ดกับข้อมูลจริง ตรวจด้วย <code>DESCRIBE</code></td>
+</tr>
+<tr class="odd">
+<td>ฟังก์ชันหรือพารามิเตอร์ของไลบรารีที่ไม่มี หรือเปลี่ยนไปแล้ว</td>
+<td>API ของ SDV รุ่นเก่า (บทที่ 16) ฟังก์ชันของ pandas ที่ถูกยกเลิก</td>
+<td>อ่านเอกสารของรุ่นที่ติดตั้ง ตรวจ <code>__version__</code></td>
+</tr>
+<tr class="even">
+<td>แพ็กเกจที่ไม่มีอยู่จริง</td>
+<td>ชื่อแพ็กเกจที่ฟังดูสมเหตุสมผลแต่ไม่มีใน PyPI</td>
+<td>ตรวจใน PyPI ก่อนติดตั้งเสมอ</td>
+</tr>
+<tr class="odd">
+<td>ข้อเท็จจริงหรือแหล่งอ้างอิงที่ไม่มีจริง</td>
+<td>มาตรฐานคุณภาพอากาศที่ผิด บทความที่ไม่มีอยู่</td>
+<td>ตรวจกับแหล่งต้นทาง (ภาคผนวก ง)</td>
+</tr>
+<tr class="even">
+<td>โค้ดที่รันได้แต่ผิดตรรกะ</td>
+<td>ค่าเฉลี่ยของค่าเฉลี่ย การรวมรายวันด้วยเวลา UTC</td>
+<td>ทดสอบกับกรณีที่รู้คำตอบ ตรวจด้วยหลักในบทที่ 7 และ 18</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวที่สี่มีผลด้านความปลอดภัยโดยตรง งานวิจัยพบว่า LLM แนะนำชื่อแพ็กเกจที่ไม่มีอยู่จริงในสัดส่วนที่ไม่น้อย และผู้ไม่หวังดีอาจลงทะเบียนชื่อเหล่านั้นใน PyPI พร้อมโค้ดอันตราย รอให้ผู้ใช้ติดตั้งตามคำแนะนำของ AI <span class="citation" data-cites="spracklen2025we">(<a href="../references.html#ref-spracklen2025we" role="doc-biblioref">Spracklen และคณะ 2025</a>)</span> แถวสุดท้ายอันตรายที่สุดในงานวิเคราะห์ เพราะโค้ดรันได้ไม่มีข้อผิดพลาด และผลลัพธ์ดูสมเหตุสมผล แต่ตัวเลขผิด งานวิจัยยังพบว่าผู้ใช้ที่ใช้ AI ช่วยเขียนโค้ดมีแนวโน้มเขียนโค้ดที่ไม่ปลอดภัยมากกว่า แต่กลับมั่นใจในความปลอดภัยของโค้ดมากกว่า <span class="citation" data-cites="perry2023users">(<a href="../references.html#ref-perry2023users" role="doc-biblioref">Perry และคณะ 2023</a>)</span></p>
+</section>
+<section id="แนวปฏบตในการตรวจสอบ" class="level3">
+<h3 class="anchored" data-anchor-id="แนวปฏบตในการตรวจสอบ">แนวปฏิบัติในการตรวจสอบ</h3>
+<ol type="1">
+<li><strong>ขอทีละชิ้นเล็ก</strong> ขอให้ AI เขียนฟังก์ชันเดียวที่ทดสอบได้ ไม่ใช่ทั้ง pipeline ในคำขอเดียว</li>
+<li><strong>ให้บริบทที่ถูกต้อง</strong> ส่ง schema จริง (ผลของ <code>DESCRIBE</code>) และรุ่นของไลบรารีไปพร้อมคำขอ แทนการให้ AI เดา</li>
+<li><strong>รันกับข้อมูลจริงทุกครั้ง</strong> โค้ดที่ยังไม่ได้รันคือโค้ดที่ยังไม่รู้ว่าถูกหรือผิด</li>
+<li><strong>ทดสอบกับกรณีที่รู้คำตอบ</strong> เช่น ข้อมูลเล็ก ๆ ที่คำนวณด้วยมือได้ หรือเทียบผลของสองวิธี (SQL กับ pandas)</li>
+<li><strong>อ่านทุกบรรทัดก่อน commit</strong> ถ้าอธิบายบรรทัดใดไม่ได้ ให้ศึกษาจนเข้าใจหรือเขียนใหม่</li>
+<li><strong>ระวังข้อมูลที่ส่งให้ AI</strong> ห้ามส่งข้อมูลส่วนบุคคล ความลับ (API key) หรือข้อมูลที่มีเงื่อนไขห้ามเปิดเผยไปยังบริการ AI ภายนอก เพราะข้อมูลอาจถูกเก็บหรือใช้ฝึกแบบจำลอง (บทที่ 5 และ 16)</li>
+</ol>
+</section>
+<section id="การบนทกการใช-ai" class="level3">
+<h3 class="anchored" data-anchor-id="การบนทกการใช-ai">การบันทึกการใช้ AI</h3>
+<p><code>AI_USAGE.md</code> บันทึกว่าใช้ AI ส่วนใด อย่างไร และตรวจสอบอย่างไร ตัวอย่างหนึ่งรายการ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2026-09-14 · src/clean.py (สัปดาห์ที่ 7)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>เครื่องมือ: ผู้ช่วย AI ในตัวแก้ไขโค้ด</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ขอให้ช่วย: เขียน query สร้างตารางชั่วโมงที่ครบทุกชั่วโมงด้วย generate_series แล้ว LEFT JOIN กับ measurements</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>สิ่งที่ AI ทำผิด: ใช้ชื่อคอลัมน์ <span class="in">`timestamp`</span> แทน <span class="in">`ts`</span> และสร้างช่วงเวลาเป็น UTC</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ตรวจพบอย่างไร: query ล้มเหลวเพราะไม่มีคอลัมน์ <span class="in">`timestamp`</span> หลังแก้ชื่อ พบว่าจำนวนชั่วโมงต่อวันถูกต้อง</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  แต่ค่าเฉลี่ยรายวันเลื่อนเจ็ดชั่วโมงเมื่อเทียบกับการคำนวณด้วยมือของหนึ่งวัน</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>สิ่งที่แก้: ใช้ <span class="in">`ts`</span> และสร้างช่วงเวลาเป็นเวลาไทยตามข้อกำหนดของโครงการ เพิ่มการทดสอบหนึ่งวันที่รู้คำตอบ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>บันทึกที่ดีมีประโยชน์มากกว่าการปฏิบัติตามกฎ ทำให้ผู้ตรวจเห็นกระบวนการคิด ทำให้ผู้เรียนเห็นรูปแบบของข้อผิดพลาดที่ AI มักทำ และเป็นหลักฐานของความซื่อตรงทางวิชาการ (หัวข้อ <a href="#sec-ch22-integrity" class="quarto-xref"><span>22.5</span></a>)</p>
+</section>
+</section>
+<section id="sec-ch22-licenses" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="sec-ch22-licenses"><span class="header-section-number">22.4</span> สัญญาอนุญาตของข้อมูลและซอฟต์แวร์</h2>
+<section id="ทำไมสญญาอนญาตจงสำคญ" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไมสญญาอนญาตจงสำคญ">ทำไมสัญญาอนุญาตจึงสำคัญ</h3>
+<p>ข้อมูลและซอฟต์แวร์ที่ดาวน์โหลดได้ฟรีไม่ได้แปลว่าใช้ได้อย่างไรก็ได้ งานส่วนใหญ่ได้รับความคุ้มครองตามกฎหมายลิขสิทธิ์ (ในประเทศไทยคือ พ.ร.บ.ลิขสิทธิ์ พ.ศ. 2537) <span class="citation" data-cites="copyright1994thai">(<a href="../references.html#ref-copyright1994thai" role="doc-biblioref">ราชกิจจานุเบกษา 1994</a>)</span> สิทธิในการใช้ ดัดแปลง และเผยแพร่ต่อมาจาก <strong><span class="idx">สัญญาอนุญาต</span></strong> (license) ที่เจ้าของกำหนด ผู้ที่ใช้โดยไม่ปฏิบัติตามเงื่อนไขอาจละเมิดลิขสิทธิ์ แม้จะไม่ได้ตั้งใจ</p>
+</section>
+<section id="สญญาอนญาตของขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="สญญาอนญาตของขอมล">สัญญาอนุญาตของข้อมูล</h3>
+<p>ข้อมูลเปิดตามนิยามของ Open Knowledge Foundation คือข้อมูลที่ทุกคนใช้ ดัดแปลง และเผยแพร่ต่อได้อย่างเสรี โดยอาจมีเงื่อนไขเพียงการระบุที่มาและการเผยแพร่ต่อด้วยเงื่อนไขเดิม <span class="citation" data-cites="okfn2026opendefinition">(<a href="../references.html#ref-okfn2026opendefinition" role="doc-biblioref">Open Knowledge Foundation 2026</a>)</span> สัญญาอนุญาตของข้อมูลที่พบบ่อยได้แก่</p>
+<div id="tbl-ch22-data-licenses" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-data-licenses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.4: สัญญาอนุญาตของข้อมูลที่พบบ่อย
+</figcaption>
+<div aria-describedby="tbl-ch22-data-licenses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>สัญญาอนุญาต</th>
+<th>ใช้เชิงพาณิชย์</th>
+<th>ดัดแปลง</th>
+<th>เงื่อนไข</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CC0 (สาธารณสมบัติ)</td>
+<td>ได้</td>
+<td>ได้</td>
+<td>ไม่มี</td>
+</tr>
+<tr class="even">
+<td>CC BY</td>
+<td>ได้</td>
+<td>ได้</td>
+<td>ระบุที่มา</td>
+</tr>
+<tr class="odd">
+<td>CC BY-SA</td>
+<td>ได้</td>
+<td>ได้</td>
+<td>ระบุที่มา และเผยแพร่งานดัดแปลงด้วยสัญญาเดียวกัน</td>
+</tr>
+<tr class="even">
+<td>CC BY-NC</td>
+<td>ไม่ได้</td>
+<td>ได้</td>
+<td>ระบุที่มา ห้ามใช้เชิงพาณิชย์</td>
+</tr>
+<tr class="odd">
+<td>ODbL</td>
+<td>ได้</td>
+<td>ได้</td>
+<td>ระบุที่มา และฐานข้อมูลที่ดัดแปลงต้องเปิดด้วยสัญญาเดียวกัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>รายละเอียดของสัญญาอนุญาต Creative Commons อ่านได้จากเว็บไซต์ของ Creative Commons <span class="citation" data-cites="cc2026licenses">(<a href="../references.html#ref-cc2026licenses" role="doc-biblioref">Creative Commons 2026</a>)</span> สำหรับโครงการ ข้อมูลแต่ละชุดต้องตรวจเงื่อนไขของแหล่งนั้นโดยตรง ได้แก่ ข้อมูลจาก Air4Thai ซึ่งเป็นข้อมูลของหน่วยงานรัฐ ให้ตรวจเงื่อนไขการใช้ที่ระบุบนเว็บไซต์ของกรมควบคุมมลพิษ ชุดข้อมูลบน data.go.th ให้ตรวจสัญญาอนุญาตที่ระบุในหน้าของชุดข้อมูลนั้น และไฟล์ขอบเขตการปกครองจาก geoBoundaries, HDX หรือ GADM มีเงื่อนไขต่างกัน บางแหล่งห้ามใช้เชิงพาณิชย์ (บทที่ 17) ทุกแหล่งต้องบันทึกชื่อแหล่ง วันที่ดาวน์โหลด สัญญาอนุญาต และรูปแบบการระบุที่มาที่กำหนด ไว้ใน README</p>
+</section>
+<section id="สญญาอนญาตของซอฟตแวร" class="level3">
+<h3 class="anchored" data-anchor-id="สญญาอนญาตของซอฟตแวร">สัญญาอนุญาตของซอฟต์แวร์</h3>
+<p>ไลบรารีที่ใช้ในรายวิชาเป็นซอฟต์แวร์โอเพนซอร์ส ซึ่งมีสัญญาอนุญาตสองกลุ่มหลัก <span class="citation" data-cites="osi2026licenses">(<a href="../references.html#ref-osi2026licenses" role="doc-biblioref">Open Source Initiative 2026</a>)</span></p>
+<div id="tbl-ch22-software-licenses" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-software-licenses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.5: กลุ่มของสัญญาอนุญาตซอฟต์แวร์
+</figcaption>
+<div aria-describedby="tbl-ch22-software-licenses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>กลุ่ม</th>
+<th>ตัวอย่าง</th>
+<th>เงื่อนไขหลัก</th>
+<th>ไลบรารีในรายวิชา</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>permissive</td>
+<td>MIT, BSD, Apache-2.0</td>
+<td>เก็บข้อความลิขสิทธิ์และสัญญาอนุญาต ใช้ในงานปิดได้</td>
+<td>DuckDB (MIT), pandas (BSD), scikit-learn (BSD), Plotly (MIT), Streamlit (Apache-2.0)</td>
+</tr>
+<tr class="even">
+<td>copyleft</td>
+<td>GPL, AGPL</td>
+<td>งานที่ดัดแปลงหรือรวมต้องเผยแพร่ด้วยสัญญาเดียวกัน</td>
+<td>ไลบรารีบางตัวในระบบนิเวศ ต้องตรวจก่อนรวมเข้ากับงานที่จะแจกจ่าย</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ตรวจสัญญาอนุญาตของแพ็กเกจที่ติดตั้งได้จาก metadata</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> importlib.metadata <span class="im">import</span> distributions</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dist <span class="kw">in</span> distributions():</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> dist.metadata[<span class="st">"Name"</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> name.lower() <span class="kw">in</span> {<span class="st">"duckdb"</span>, <span class="st">"pandas"</span>, <span class="st">"plotly"</span>, <span class="st">"streamlit"</span>, <span class="st">"polars"</span>}:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        license_text <span class="op">=</span> dist.metadata.get(<span class="st">"License-Expression"</span>) <span class="kw">or</span> dist.metadata.get(<span class="st">"License"</span>) <span class="kw">or</span> <span class="st">""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:&lt;10}</span><span class="ss"> </span><span class="sc">{</span>license_text<span class="sc">.</span>splitlines()[<span class="dv">0</span>][:<span class="dv">40</span>] <span class="cf">if</span> license_text <span class="cf">else</span> <span class="st">'ไม่ระบุ'</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ลำดับของแพ็กเกจอาจต่างกันตามเครื่อง
+duckdb     ไม่ระบุ
+streamlit  Apache-2.0
+polars     Copyright (c) 2025 Ritchie Vink
+pandas     BSD 3-Clause License
+plotly     MIT</code></pre>
+<p>ผลลัพธ์แสดงว่า metadata ไม่สม่ำเสมอ บางแพ็กเกจใส่ชื่อสัญญาอนุญาต บางแพ็กเกจใส่ข้อความลิขสิทธิ์บรรทัดแรก (Polars ใช้สัญญาอนุญาต MIT ตามที่ระบุใน repository) และบางแพ็กเกจระบุไว้เฉพาะใน classifier ของ metadata (DuckDB ระบุ MIT ใน classifier) การตรวจที่เชื่อถือได้ต้องดูไฟล์ LICENSE ใน repository ของแต่ละโครงการ หรือใช้เครื่องมือเฉพาะ เช่น <code>pip-licenses</code></p>
+</section>
+<section id="สญญาอนญาตของโครงการ" class="level3">
+<h3 class="anchored" data-anchor-id="สญญาอนญาตของโครงการ">สัญญาอนุญาตของโครงการ</h3>
+<p>repository ของโครงการที่เปิดเป็นสาธารณะควรมีไฟล์ <code>LICENSE</code> ถ้าไม่มี ตามกฎหมายลิขสิทธิ์ ผู้อื่นไม่มีสิทธิใช้โค้ดนั้น แม้จะเห็นได้บน GitHub สำหรับโค้ดของโครงการ สัญญาอนุญาตแบบ permissive อย่าง MIT ใช้ได้ง่ายและเปิดกว้าง ส่วนเนื้อหาอย่างรายงานและกราฟ อาจใช้ CC BY ข้อควรระวังคือ สัญญาอนุญาตของโครงการไม่ได้เปลี่ยนเงื่อนไขของข้อมูลที่ใช้ ถ้าข้อมูลห้ามเผยแพร่ต่อ ก็ห้าม commit ข้อมูลนั้นลง repository ไม่ว่าโค้ดจะใช้สัญญาอนุญาตใด</p>
+</section>
+</section>
+<section id="sec-ch22-integrity" class="level2" data-number="22.5">
+<h2 data-number="22.5" class="anchored" data-anchor-id="sec-ch22-integrity"><span class="header-section-number">22.5</span> ความซื่อตรงทางวิชาการ</h2>
+<section id="ความซอตรงในงานขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="ความซอตรงในงานขอมล">ความซื่อตรงในงานข้อมูล</h3>
+<p>ความซื่อตรงทางวิชาการ (academic integrity) ในงานข้อมูลครอบคลุมมากกว่าการไม่คัดลอกงานผู้อื่น ความประพฤติมิชอบทางการวิจัยที่ร้ายแรงที่สุดสามประเภท ได้แก่ การสร้างข้อมูลเท็จ (fabrication) การบิดเบือนข้อมูล (falsification) และการลอกเลียนผลงาน (plagiarism) <span class="citation" data-cites="fanelli2009how">(<a href="../references.html#ref-fanelli2009how" role="doc-biblioref">Fanelli 2009</a>)</span> ในงานวิเคราะห์ข้อมูล แต่ละประเภทมีรูปแบบเฉพาะ</p>
+<div id="tbl-ch22-misconduct" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-misconduct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.6: ความประพฤติมิชอบในงานข้อมูลและแนวปฏิบัติที่ป้องกัน
+</figcaption>
+<div aria-describedby="tbl-ch22-misconduct-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ความประพฤติมิชอบ</th>
+<th>รูปแบบในงานข้อมูล</th>
+<th>แนวปฏิบัติที่ป้องกัน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>สร้างข้อมูลเท็จ</td>
+<td>ใช้ข้อมูลสังเคราะห์หรือข้อมูลตัวอย่างโดยไม่ระบุ แล้วนำเสนอว่าเป็นข้อมูลจริง</td>
+<td>ติดป้ายข้อมูลสังเคราะห์ทุกที่ ทั้งชื่อไฟล์ กราฟ และรายงาน (บทที่ 16)</td>
+</tr>
+<tr class="even">
+<td>บิดเบือนข้อมูล</td>
+<td>ลบค่าที่ไม่เข้ากับข้อสรุป ปรับวิธีจนได้ผลที่ต้องการ แก้ข้อมูลด้วยมือ</td>
+<td>ทุกการแปลงอยู่ในโค้ด เก็บธงแทนการลบ แยกช่วงสำรวจและยืนยัน</td>
+</tr>
+<tr class="odd">
+<td>ลอกเลียนผลงาน</td>
+<td>ใช้โค้ด กราฟ หรือข้อความของผู้อื่นหรือของ AI โดยไม่ระบุ</td>
+<td>อ้างอิงแหล่งที่มา บันทึกการใช้ AI</td>
+</tr>
+<tr class="even">
+<td>รายงานแบบเลือกผล</td>
+<td>รายงานเฉพาะผลที่มีนัยสำคัญหรือที่ยืนยันได้</td>
+<td>รายงานทุกการทดสอบที่ทำ รวมถึงผลที่ไม่ได้รับการยืนยัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวแรกเกี่ยวข้องกับหนังสือเล่มนี้โดยตรง ผลลัพธ์ตัวอย่างในหนังสือใช้ข้อมูลสังเคราะห์ เพราะต้องการทดสอบว่าโค้ดทำงานถูกต้องโดยไม่ต้องพึ่ง API ที่อาจเปลี่ยนแปลง ทุกบล็อกผลลัพธ์จึงระบุว่า “ข้อมูลสังเคราะห์” การไม่ระบุจะทำให้ผู้อ่านเข้าใจผิดว่าตัวเลขเหล่านั้นบอกอะไรเกี่ยวกับคุณภาพอากาศจริงของประเทศไทย ซึ่งเป็นการสร้างข้อมูลเท็จ แม้จะไม่ได้ตั้งใจ</p>
+</section>
+<section id="งานกลมและการใช-ai" class="level3">
+<h3 class="anchored" data-anchor-id="งานกลมและการใช-ai">งานกลุ่มและการใช้ AI</h3>
+<p>ในรายวิชาที่ทำงานเป็นทีมและอนุญาตให้ใช้ AI ขอบเขตของ “ผลงานของตนเอง” ต้องชัดเจน หลักการของรายวิชามีสามข้อ ข้อแรก ทุกคนในทีมต้องอธิบายได้ทุกส่วนของระบบที่ตนรับผิดชอบ และเข้าใจภาพรวมของส่วนอื่น ข้อสอง การมีส่วนร่วมของแต่ละคนดูได้จากประวัติใน Git และการ review ใน pull request (บทที่ 2) ซึ่งเป็นหลักฐานที่โปร่งใสกว่าการรายงานด้วยคำพูด ข้อสาม การใช้ AI ไม่ใช่การโกง ตราบที่บันทึกไว้ เข้าใจ และตรวจสอบแล้ว แต่การส่งโค้ดที่ AI เขียนโดยอธิบายไม่ได้ ถือว่าไม่ใช่ผลงานของตนเอง</p>
+</section>
+<section id="เมอพบขอผดพลาดหลงสงงาน" class="level3">
+<h3 class="anchored" data-anchor-id="เมอพบขอผดพลาดหลงสงงาน">เมื่อพบข้อผิดพลาดหลังส่งงาน</h3>
+<p>ข้อผิดพลาดเกิดขึ้นได้กับทุกคน ความซื่อตรงวัดจากสิ่งที่ทำเมื่อพบข้อผิดพลาด ไม่ใช่จากการไม่เคยผิดเลย ถ้าพบข้อผิดพลาดที่กระทบข้อสรุปหลังส่งรายงานหรือเผยแพร่แดชบอร์ด ให้แจ้งผู้รับ แก้ไขพร้อมบันทึกว่าแก้อะไรและเพราะอะไร (Git ช่วยได้มาก) และประเมินว่าข้อสรุปเปลี่ยนไปอย่างไร การทำซ้ำได้ที่สร้างตลอดเล่มนี้ทำให้การแก้ไขทำได้รวดเร็วและตรวจสอบได้ ซึ่งเป็นอีกเหตุผลหนึ่งที่การลงทุนกับกระบวนการที่ดีคุ้มค่า</p>
+</section>
+</section>
+<section id="sec-ch22-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch22-case">กรณีศึกษา: ทบทวนโครงการ PM2.5 ด้วยมุมมองจริยธรรม</h2>
+<p><strong>สถานการณ์</strong> ก่อนการนำเสนอสุดท้าย ทีมใช้คำถามจากบทนี้ทบทวนโครงการของตนทีละขั้น</p>
+<div id="tbl-ch22-review" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-review-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.7: การทบทวนโครงการด้วยมุมมองจริยธรรม
+</figcaption>
+<div aria-describedby="tbl-ch22-review-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ขั้นของงาน</th>
+<th>คำถามที่ทีมถาม</th>
+<th>สิ่งที่พบ</th>
+<th>การแก้ไข</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>คำถาม</td>
+<td>ใครได้ประโยชน์ ใครอาจเสียประโยชน์</td>
+<td>การจัดอันดับจังหวัดอาจกระทบจังหวัดที่มีสถานีเดียวอย่างไม่เป็นธรรม</td>
+<td>แสดงจำนวนสถานีคู่กับทุกอันดับ และเขียนข้อจำกัด</td>
+</tr>
+<tr class="even">
+<td>ข้อมูล</td>
+<td>ข้อมูลไม่เป็นตัวแทนของใคร</td>
+<td>ชนบทและจังหวัดที่ไม่มีสถานีไม่อยู่ในข้อมูล</td>
+<td>เพิ่มแผนที่จังหวัดที่ไม่มีสถานีในรายงาน (Q4)</td>
+</tr>
+<tr class="odd">
+<td>คุณภาพข้อมูล</td>
+<td>การตัดสินใจใดอาจทำให้ผลเอียง</td>
+<td>ข้อมูลหายกระจุกในวันฝุ่นหนา</td>
+<td>รายงานผลการวิเคราะห์ความไว</td>
+</tr>
+<tr class="even">
+<td>การวิเคราะห์</td>
+<td>ทดลองไปกี่แบบก่อนได้ผลที่รายงาน</td>
+<td>ลองการจัดกลุ่มหลายแบบก่อนเลือก k = 4</td>
+<td>บันทึกทุกแบบที่ลอง และเรียกผลว่าเป็นสมมติฐาน</td>
+</tr>
+<tr class="odd">
+<td>การสื่อสาร</td>
+<td>ถ้อยคำใดเกินหลักฐาน</td>
+<td>ร่างแรกเขียนว่า “การเผาทำให้ฝุ่นสูง”</td>
+<td>แก้เป็น “ฝุ่นสูงในช่วงเดียวกับที่มีการเผามาก”</td>
+</tr>
+<tr class="even">
+<td>AI</td>
+<td>มีส่วนใดที่อธิบายไม่ได้</td>
+<td>ฟังก์ชัน bootstrap ที่ AI เขียนให้ สมาชิกคนหนึ่งอธิบายไม่ได้</td>
+<td>ศึกษาจนเข้าใจ เขียนการทดสอบ และบันทึกใน <code>AI_USAGE.md</code></td>
+</tr>
+<tr class="odd">
+<td>สัญญาอนุญาต</td>
+<td>ใช้ข้อมูลและโค้ดตามเงื่อนไขหรือไม่</td>
+<td>ไฟล์ขอบเขตจังหวัดห้ามใช้เชิงพาณิชย์ และยังไม่ได้ระบุที่มา</td>
+<td>ระบุที่มาใน README และในคำบรรยายแผนที่</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>บทเรียน</strong> การทบทวนนี้ไม่ได้เปลี่ยนข้อค้นพบหลักของทีม แต่เปลี่ยนวิธีนำเสนอ ทำให้ข้อสรุปซื่อตรงขึ้น และทำให้ทีมตอบคำถามเรื่องข้อจำกัดในการนำเสนอได้อย่างมั่นใจ ประเด็นจริยธรรมส่วนใหญ่ในงานข้อมูลไม่ได้เป็นการเลือกระหว่างถูกกับผิดที่ชัดเจน แต่เป็นการสะสมของการตัดสินใจเล็ก ๆ ที่ต้องทำอย่างรู้ตัว</p>
+</section>
+<section id="sec-ch22-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch22-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch22-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch22-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;22.8: ข้อผิดพลาดที่พบบ่อยในบทที่ 22
+</figcaption>
+<div aria-describedby="tbl-ch22-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>คิดว่าจริยธรรมเป็นเรื่องของข้อมูลส่วนบุคคลเท่านั้น</td>
+<td>อคติ การสื่อสาร และความโปร่งใสก็เป็นเรื่องจริยธรรม</td>
+<td>ใช้คำถามใน <a href="#tbl-ch22-principles" class="quarto-xref">ตารางที่&nbsp;<span>22.1</span></a> ทุกขั้นของงาน</td>
+</tr>
+<tr class="even">
+<td>สรุปไปยังประชากรที่ข้อมูลไม่ครอบคลุม</td>
+<td>selection bias ข้อสรุปไม่เป็นธรรมต่อกลุ่มที่ไม่อยู่ในข้อมูล</td>
+<td>ระบุว่าข้อมูลเป็นตัวแทนของใคร และไม่เป็นของใคร</td>
+</tr>
+<tr class="odd">
+<td>ใช้โค้ดจาก AI โดยไม่รันกับข้อมูลจริง</td>
+<td>hallucination ของชื่อคอลัมน์ ฟังก์ชัน และ API</td>
+<td>รันและทดสอบทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>ติดตั้งแพ็กเกจตามที่ AI แนะนำโดยไม่ตรวจ</td>
+<td>แพ็กเกจอาจไม่มีจริงหรือเป็นอันตราย</td>
+<td>ตรวจใน PyPI และเอกสารของแพ็กเกจก่อนติดตั้ง</td>
+</tr>
+<tr class="odd">
+<td>ส่งข้อมูลส่วนบุคคลหรือ API key ให้บริการ AI</td>
+<td>ข้อมูลอาจถูกเก็บหรือใช้ฝึกแบบจำลอง</td>
+<td>ส่งเฉพาะ schema หรือข้อมูลตัวอย่างที่ไม่อ่อนไหว</td>
+</tr>
+<tr class="even">
+<td>ไม่บันทึกการใช้ AI</td>
+<td>ขัดนโยบายของรายวิชา และผู้ตรวจไม่เห็นกระบวนการ</td>
+<td>บันทึกใน <code>AI_USAGE.md</code> พร้อมสิ่งที่ AI ทำผิด</td>
+</tr>
+<tr class="odd">
+<td>คิดว่าข้อมูลที่ดาวน์โหลดได้ฟรีใช้ได้อย่างไรก็ได้</td>
+<td>อาจละเมิดสัญญาอนุญาต</td>
+<td>ตรวจและบันทึกสัญญาอนุญาตของทุกแหล่ง</td>
+</tr>
+<tr class="even">
+<td>repository สาธารณะไม่มีไฟล์ LICENSE</td>
+<td>ผู้อื่นไม่มีสิทธิใช้โค้ดตามกฎหมาย</td>
+<td>เพิ่ม LICENSE ที่เหมาะสม</td>
+</tr>
+<tr class="odd">
+<td>นำเสนอข้อมูลสังเคราะห์โดยไม่ติดป้าย</td>
+<td>เป็นการสร้างข้อมูลเท็จ แม้ไม่ตั้งใจ</td>
+<td>ติดป้ายในชื่อไฟล์ กราฟ และรายงาน</td>
+</tr>
+<tr class="even">
+<td>ซ่อนข้อผิดพลาดที่พบหลังส่งงาน</td>
+<td>ผู้ใช้ตัดสินใจจากข้อมูลที่ผิด</td>
+<td>แจ้ง แก้ไข และบันทึกการแก้ไข</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>จริยธรรมข้อมูลต่อยอดจากหลักของ Belmont Report ได้แก่ ความเคารพในบุคคล การให้ประโยชน์ และความยุติธรรม และเพิ่มความโปร่งใสกับความรับผิดชอบ ข้อมูลคุณภาพอากาศเกี่ยวข้องโดยตรงกับความยุติธรรมเชิงสิ่งแวดล้อม</li>
+<li>อคติเกิดได้ทุกขั้น ตั้งแต่การเลือกตัวอย่าง การวัด ข้อมูลสูญหาย การรวมข้อมูล ไปจนถึงการตีความและการรายงาน การป้องกันอาศัยกระบวนการ ไม่ใช่ความตั้งใจดี</li>
+<li>AI ช่วยเขียนโค้ดได้มาก แต่สร้าง hallucination ได้ทั้งชื่อคอลัมน์ ฟังก์ชัน API แพ็กเกจ และตรรกะที่ผิดแต่รันได้ ต้องขอทีละชิ้น ให้บริบทที่ถูกต้อง รันและทดสอบทุกครั้ง และอ่านทุกบรรทัด</li>
+<li>บันทึกการใช้ AI ใน <code>AI_USAGE.md</code> พร้อมสิ่งที่ AI ทำผิดและวิธีตรวจพบ และห้ามส่งข้อมูลส่วนบุคคลหรือความลับให้บริการ AI</li>
+<li>ข้อมูลและซอฟต์แวร์มีสัญญาอนุญาตที่ต้องตรวจและปฏิบัติตาม บันทึกแหล่งที่มาและสัญญาอนุญาตใน README และใส่ LICENSE ให้ repository สาธารณะ</li>
+<li>ความซื่อตรงทางวิชาการในงานข้อมูลรวมถึงการติดป้ายข้อมูลสังเคราะห์ การไม่บิดเบือนข้อมูล การอ้างอิง และการรายงานทุกผลที่ทำ ความซื่อตรงวัดจากสิ่งที่ทำเมื่อพบข้อผิดพลาด</li>
+</ul>
+</section>
+<section id="sec-ch22-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch22-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>ใช้หลักใน <a href="#tbl-ch22-principles" class="quarto-xref">ตารางที่&nbsp;<span>22.1</span></a> ประเมินสถานการณ์นี้: ทีมหนึ่งเผยแพร่แดชบอร์ดที่จัดอันดับจังหวัดตามค่าฝุ่นเฉลี่ย โดยจังหวัดอันดับแย่ที่สุดมีสถานีเพียงแห่งเดียวที่ตั้งอยู่ริมถนนใหญ่</li>
+<li>ระบุแหล่งอคติตาม <a href="#tbl-ch22-bias" class="quarto-xref">ตารางที่&nbsp;<span>22.2</span></a> ของกรณีต่อไปนี้: (ก) ใช้เฉพาะสถานีที่มีข้อมูลครบทุกปีในการวิเคราะห์แนวโน้ม (ข) ใช้เซนเซอร์ราคาประหยัดในฤดูฝนโดยไม่สอบเทียบ (ค) รายงานเฉพาะสถานีที่ผลการทดสอบมีนัยสำคัญ</li>
+<li>ยกตัวอย่าง hallucination ของ AI ในงานเขียนโค้ดสามรูปแบบ และวิธีตรวจพบแต่ละรูปแบบ</li>
+<li>อธิบายความแตกต่างระหว่างสัญญาอนุญาต CC BY กับ CC BY-NC และผลต่อการนำข้อมูลไปใช้ในแอปพลิเคชันเชิงพาณิชย์</li>
+<li>ทำไมการนำเสนอผลจากข้อมูลสังเคราะห์โดยไม่ติดป้ายจึงถือเป็นความประพฤติมิชอบ แม้ผู้นำเสนอจะไม่ได้ตั้งใจหลอกลวง</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>ทบทวนโครงการของทีมตามรูปแบบใน <a href="#tbl-ch22-review" class="quarto-xref">ตารางที่&nbsp;<span>22.7</span></a> อย่างน้อยห้าขั้น บันทึกสิ่งที่พบและการแก้ไข</li>
+<li>ตรวจ <code>AI_USAGE.md</code> ของทีม แล้วเขียนรายการเพิ่มสำหรับการใช้ AI ครั้งที่สำคัญที่สุดที่ยังไม่ได้บันทึก ตามรูปแบบในหัวข้อ <a href="#sec-ch22-ai" class="quarto-xref"><span>22.3</span></a> รวมถึงสิ่งที่ AI ทำผิด</li>
+<li>เลือกฟังก์ชันหนึ่งในโครงการที่ AI ช่วยเขียน เขียนการทดสอบด้วยกรณีที่รู้คำตอบอย่างน้อยสามกรณี (ข้อมูลเล็กที่คำนวณด้วยมือได้) และรายงานว่าพบข้อผิดพลาดหรือไม่</li>
+<li>ทำรายการแหล่งข้อมูลและไลบรารีทั้งหมดที่โครงการใช้ พร้อมสัญญาอนุญาตที่ตรวจจากแหล่งต้นทาง (ไม่ใช่จาก metadata อย่างเดียว) และรูปแบบการระบุที่มาที่กำหนด แล้วเพิ่มลงใน README</li>
+<li>เลือกสัญญาอนุญาตสำหรับโค้ดและเนื้อหาของโครงการ อธิบายเหตุผล และตรวจว่าไม่ขัดกับเงื่อนไขของข้อมูลที่ใช้</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ศึกษาประเด็นความยุติธรรมเชิงสิ่งแวดล้อมของฝุ่น PM2.5 ในประเทศไทย ออกแบบการวิเคราะห์ที่ตรวจว่าการสัมผัสฝุ่นกระจายไม่เท่าเทียมตามกลุ่มประชากรหรือไม่ ระบุข้อมูลที่ต้องการ ข้อจำกัด และประเด็นจริยธรรมของการวิเคราะห์นั้นเอง</li>
+<li>ทดลองให้ AI สองเครื่องมือเขียนโค้ดเดียวกัน (เช่น query ที่คำนวณสัดส่วนวันเกินมาตรฐานรายจังหวัดแบบ pooled) โดยให้บริบทต่างกันสามระดับ (ไม่ให้ schema, ให้ schema, ให้ schema และตัวอย่างข้อมูล) เปรียบเทียบความถูกต้องของผล และสรุปแนวปฏิบัติในการใช้ AI</li>
+<li>เขียนนโยบายการใช้ AI สำหรับทีมวิเคราะห์ข้อมูลในหน่วยงานรัฐที่ทำงานกับข้อมูลคุณภาพอากาศและข้อมูลสุขภาพ ครอบคลุมสิ่งที่อนุญาต สิ่งที่ห้าม การตรวจสอบ การบันทึก และความรับผิดชอบเมื่อเกิดข้อผิดพลาด</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch22">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="floridi2016what">Floridi และ Taddeo (<a href="../references.html#ref-floridi2016what" role="doc-biblioref">2016</a>)</span> — บทความที่นิยามจริยธรรมข้อมูลเป็นสาขาและวางกรอบของปัญหาหลัก</li>
+<li><span class="citation" data-cites="suresh2021framework">Suresh และ Guttag (<a href="../references.html#ref-suresh2021framework" role="doc-biblioref">2021</a>)</span> — กรอบการจำแนกแหล่งของความเสียหายตลอดวงจรของข้อมูลและแบบจำลอง ใช้ได้กับงานวิเคราะห์ทั่วไป</li>
+<li><span class="citation" data-cites="dignazio2020data">D’Ignazio และ Klein (<a href="../references.html#ref-dignazio2020data" role="doc-biblioref">2020</a>)</span> — หนังสือที่ตั้งคำถามว่าข้อมูลสะท้อนอำนาจและความไม่เท่าเทียมอย่างไร อ่านฟรีออนไลน์</li>
+<li><span class="citation" data-cites="asa2022ethical">American Statistical Association (<a href="../references.html#ref-asa2022ethical" role="doc-biblioref">2022</a>)</span> — แนวปฏิบัติทางจริยธรรมของสมาคมสถิติอเมริกัน ครอบคลุมความรับผิดชอบต่อข้อมูล ผู้ใช้ และวิชาชีพ</li>
+<li><span class="citation" data-cites="spracklen2025we">Spracklen และคณะ (<a href="../references.html#ref-spracklen2025we" role="doc-biblioref">2025</a>)</span> — งานวิจัยเรื่อง package hallucination ของ LLM และความเสี่ยงต่อห่วงโซ่อุปทานซอฟต์แวร์</li>
+<li><span class="citation" data-cites="perry2023users">Perry และคณะ (<a href="../references.html#ref-perry2023users" role="doc-biblioref">2023</a>)</span> — งานวิจัยที่พบว่าผู้ใช้ AI ช่วยเขียนโค้ดเขียนโค้ดที่ปลอดภัยน้อยลงแต่มั่นใจมากขึ้น</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-asa2022ethical" class="csl-entry" role="listitem">
+American Statistical Association. 2022. <em>Ethical Guidelines for Statistical Practice</em>. <a href="https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice">https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice</a>.
+</div>
+<div id="ref-acm2018code" class="csl-entry" role="listitem">
+Association for Computing Machinery. 2018. <em><span>ACM</span> Code of Ethics and Professional Conduct</em>. <a href="https://www.acm.org/code-of-ethics">https://www.acm.org/code-of-ethics</a>.
+</div>
+<div id="ref-cc2026licenses" class="csl-entry" role="listitem">
+Creative Commons. 2026. <em>About <span>CC</span> Licenses</em>. <a href="https://creativecommons.org/share-your-work/cclicenses/">https://creativecommons.org/share-your-work/cclicenses/</a>.
+</div>
+<div id="ref-dignazio2020data" class="csl-entry" role="listitem">
+D’Ignazio, Catherine, และ Lauren F. Klein. 2020. <em>Data Feminism</em>. MIT Press.
+</div>
+<div id="ref-fanelli2009how" class="csl-entry" role="listitem">
+Fanelli, Daniele. 2009. <span>“How Many Scientists Fabricate and Falsify Research? <span>A</span> Systematic Review and Meta-Analysis of Survey Data”</span>. <em>PLoS ONE</em> 4 (5): e5738. <a href="https://doi.org/10.1371/journal.pone.0005738">https://doi.org/10.1371/journal.pone.0005738</a>.
+</div>
+<div id="ref-floridi2016what" class="csl-entry" role="listitem">
+Floridi, Luciano, และ Mariarosaria Taddeo. 2016. <span>“What Is Data Ethics?”</span> <em>Philosophical Transactions of the Royal Society A</em> 374 (2083): 20160360. <a href="https://doi.org/10.1098/rsta.2016.0360">https://doi.org/10.1098/rsta.2016.0360</a>.
+</div>
+<div id="ref-ji2023survey" class="csl-entry" role="listitem">
+Ji, Ziwei, Nayeon Lee, Rita Frieske, และคณะ. 2023. <span>“Survey of Hallucination in Natural Language Generation”</span>. <em>ACM Computing Surveys</em> 55 (12): 248:1–38. <a href="https://doi.org/10.1145/3571730">https://doi.org/10.1145/3571730</a>.
+</div>
+<div id="ref-belmont1979" class="csl-entry" role="listitem">
+National Commission for the Protection of Human Subjects of Biomedical and Behavioral Research. 1979. <em>The Belmont Report: Ethical Principles and Guidelines for the Protection of Human Subjects of Research</em>. U.S. Department of Health, Education,; Welfare.
+</div>
+<div id="ref-okfn2026opendefinition" class="csl-entry" role="listitem">
+Open Knowledge Foundation. 2026. <em>The Open Definition</em>. <a href="https://opendefinition.org/">https://opendefinition.org/</a>.
+</div>
+<div id="ref-osi2026licenses" class="csl-entry" role="listitem">
+Open Source Initiative. 2026. <em><span>OSI</span> Approved Licenses</em>. <a href="https://opensource.org/licenses">https://opensource.org/licenses</a>.
+</div>
+<div id="ref-perry2023users" class="csl-entry" role="listitem">
+Perry, Neil, Megha Srivastava, Deepak Kumar, และ Dan Boneh. 2023. <span>“Do Users Write More Insecure Code with <span>AI</span> Assistants?”</span> <em>Proceedings of the 2023 ACM SIGSAC Conference on Computer and Communications Security (CCS ’23)</em>, 2785–99. <a href="https://doi.org/10.1145/3576915.3623157">https://doi.org/10.1145/3576915.3623157</a>.
+</div>
+<div id="ref-spracklen2025we" class="csl-entry" role="listitem">
+Spracklen, Joseph, Raveen Wijewickrama, A. H. M. Nazmus Sakib, Anindya Maiti, Bimal Viswanath, และ Murtuza Jadliwala. 2025. <span>“We Have a Package for You! <span>A</span> Comprehensive Analysis of Package Hallucinations by Code Generating <span>LLMs</span>”</span>. <em>Proceedings of the 34th USENIX Security Symposium</em>.
+</div>
+<div id="ref-suresh2021framework" class="csl-entry" role="listitem">
+Suresh, Harini, และ John Guttag. 2021. <span>“A Framework for Understanding Sources of Harm throughout the Machine Learning Life Cycle”</span>. <em>Equity and Access in Algorithms, Mechanisms, and Optimization (EAAMO ’21)</em>, 17:1–9. <a href="https://doi.org/10.1145/3465416.3483305">https://doi.org/10.1145/3465416.3483305</a>.
+</div>
+<div id="ref-tessum2021pm25" class="csl-entry" role="listitem">
+Tessum, Christopher W., David A. Paolella, Sarah E. Chambliss, Joshua S. Apte, Jason D. Hill, และ Julian D. Marshall. 2021. <span>“<span>PM2.5</span> Polluters Disproportionately and Systemically Affect People of Color in the <span>United States</span>”</span>. <em>Science Advances</em> 7 (18): eabf4491. <a href="https://doi.org/10.1126/sciadv.abf4491">https://doi.org/10.1126/sciadv.abf4491</a>.
+</div>
+<div id="ref-copyright1994thai" class="csl-entry" role="listitem">
+ราชกิจจานุเบกษา. 1994. <em>พระราชบัญญัติลิขสิทธิ์ พ.ศ. 2537</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/21-case-study-pm25.html" class="pagination-link" aria-label="กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../appendices/a-python.html" class="pagination-link" aria-label="ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล">
+        <span class="nav-page-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

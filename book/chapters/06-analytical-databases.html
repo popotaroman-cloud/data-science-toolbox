@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์ – ชุดเครื่องมือสำหรับวิทยาการข้อมูล</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/07-sql-analysis.html" rel="next">
+<link href="../chapters/05-data-acquisition.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "ไม่พบผลลัพธ์",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/06-analytical-databases.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../index.html" title="เว็บไซต์รายวิชา" class="quarto-navigation-tool px-1" aria-label="เว็บไซต์รายวิชา"><i class="bi bi-house"></i></a>
+    <a href="https://github.com/popotaroman-cloud/data-science-toolbox" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">คำนำ</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/00-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บทที่ 0 ภาพรวมของหนังสือ: เรื่องนี้เกี่ยวกับอะไร และนำไปใช้อย่างไร</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">วิทยาการข้อมูลและการสำรวจข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-reproducible-environment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">สภาพแวดล้อมการทำงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Version control และการทำงานร่วมกัน</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-questions-hypotheses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-analytical-databases.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-sql-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-data-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">การจัดการและแปลงรูปข้อมูล</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">คุณภาพข้อมูลและการตรวจสอบ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-missing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ข้อมูลสูญหาย</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">หลักการรับรู้และการออกแบบภาพข้อมูล</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-interactive-viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Grammar of graphics และ visualization เชิงโต้ตอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">สถิติเชิงพรรณนาและการอนุมานเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-time-series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">การวิเคราะห์อนุกรมเวลาเชิงสำรวจ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">การสำรวจข้อมูลหลายมิติ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/16-synthetic-privacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ข้อมูลสังเคราะห์และความเป็นส่วนตัว</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/18-hierarchical-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/19-storytelling-reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/20-dashboards.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">กรณีศึกษาครบวงจร: ระบบสำรวจ PM2.5 ของประเทศไทย</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/22-ethics-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">จริยธรรมข้อมูลและการใช้ AI อย่างรับผิดชอบ</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">ภาคผนวก</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ก Python ที่จำเป็นสำหรับวิทยาการข้อมูล</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/b-shell-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/c-sql-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/d-air4thai-open-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ง ข้อมูล Air4Thai และแหล่งข้อมูลเปิดของประเทศไทย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/e-math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก จ คณิตศาสตร์พื้นฐานที่ใช้ในเล่ม</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/f-troubleshooting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/g-answers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ช แนวคำตอบแบบฝึกหัดที่เลือก</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/h-toolbox-reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">อภิธานศัพท์</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../book-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ดัชนี</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">บรรณานุกรม</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">สารบัญ</h2>
+   
+  <ul>
+  <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
+  <li><a href="#sec-ch06-relational" id="toc-sec-ch06-relational" class="nav-link" data-scroll-target="#sec-ch06-relational"><span class="header-section-number">6.1</span> relational model: relation, key และ integrity</a>
+  <ul class="collapse">
+  <li><a href="#ทมาของแบบจำลองเชงสมพนธ" id="toc-ทมาของแบบจำลองเชงสมพนธ" class="nav-link" data-scroll-target="#ทมาของแบบจำลองเชงสมพนธ">ที่มาของแบบจำลองเชิงสัมพันธ์</a></li>
+  <li><a href="#relation-tuple-และ-attribute" id="toc-relation-tuple-และ-attribute" class="nav-link" data-scroll-target="#relation-tuple-และ-attribute">relation, tuple และ attribute</a></li>
+  <li><a href="#key" id="toc-key" class="nav-link" data-scroll-target="#key">key</a></li>
+  <li><a href="#integrity-constraint" id="toc-integrity-constraint" class="nav-link" data-scroll-target="#integrity-constraint">integrity constraint</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-normalization" id="toc-sec-ch06-normalization" class="nav-link" data-scroll-target="#sec-ch06-normalization"><span class="header-section-number">6.2</span> normalization กับ denormalization</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของตารางเดยวทมทกอยาง" id="toc-ปญหาของตารางเดยวทมทกอยาง" class="nav-link" data-scroll-target="#ปญหาของตารางเดยวทมทกอยาง">ปัญหาของตารางเดียวที่มีทุกอย่าง</a></li>
+  <li><a href="#normalization" id="toc-normalization" class="nav-link" data-scroll-target="#normalization">normalization</a></li>
+  <li><a href="#denormalization" id="toc-denormalization" class="nav-link" data-scroll-target="#denormalization">denormalization</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-oltp-olap" id="toc-sec-ch06-oltp-olap" class="nav-link" data-scroll-target="#sec-ch06-oltp-olap"><span class="header-section-number">6.3</span> OLTP กับ OLAP และ ★ star schema</a>
+  <ul class="collapse">
+  <li><a href="#สองลกษณะงานของฐานขอมล" id="toc-สองลกษณะงานของฐานขอมล" class="nav-link" data-scroll-target="#สองลกษณะงานของฐานขอมล">สองลักษณะงานของฐานข้อมูล</a></li>
+  <li><a href="#star-schema" id="toc-star-schema" class="nav-link" data-scroll-target="#star-schema">star schema ★</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-row-column" id="toc-sec-ch06-row-column" class="nav-link" data-scroll-target="#sec-ch06-row-column"><span class="header-section-number">6.4</span> row store กับ column store</a>
+  <ul class="collapse">
+  <li><a href="#ขอมลอยบนดสกอยางไร" id="toc-ขอมลอยบนดสกอยางไร" class="nav-link" data-scroll-target="#ขอมลอยบนดสกอยางไร">ข้อมูลอยู่บนดิสก์อย่างไร</a></li>
+  <li><a href="#ทำไม-column-store-เรวสำหรบงานวเคราะห" id="toc-ทำไม-column-store-เรวสำหรบงานวเคราะห" class="nav-link" data-scroll-target="#ทำไม-column-store-เรวสำหรบงานวเคราะห">ทำไม column store เร็วสำหรับงานวิเคราะห์</a></li>
+  <li><a href="#เมอใดท-row-store-ดกวา" id="toc-เมอใดท-row-store-ดกวา" class="nav-link" data-scroll-target="#เมอใดท-row-store-ดกวา">เมื่อใดที่ row store ดีกว่า</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-duckdb" id="toc-sec-ch06-duckdb" class="nav-link" data-scroll-target="#sec-ch06-duckdb"><span class="header-section-number">6.5</span> DuckDB: สถาปัตยกรรม in-process และ vectorized execution</a>
+  <ul class="collapse">
+  <li><a href="#ฐานขอมลเชงวเคราะหทฝงในโปรแกรม" id="toc-ฐานขอมลเชงวเคราะหทฝงในโปรแกรม" class="nav-link" data-scroll-target="#ฐานขอมลเชงวเคราะหทฝงในโปรแกรม">ฐานข้อมูลเชิงวิเคราะห์ที่ฝังในโปรแกรม</a></li>
+  <li><a href="#vectorized-execution" id="toc-vectorized-execution" class="nav-link" data-scroll-target="#vectorized-execution">vectorized execution</a></li>
+  <li><a href="#duckdb-ในระบบนเวศของ-python" id="toc-duckdb-ในระบบนเวศของ-python" class="nav-link" data-scroll-target="#duckdb-ในระบบนเวศของ-python">DuckDB ในระบบนิเวศของ Python</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-parquet" id="toc-sec-ch06-parquet" class="nav-link" data-scroll-target="#sec-ch06-parquet"><span class="header-section-number">6.6</span> Parquet เชิงลึก: row group, encoding, compression, statistics</a>
+  <ul class="collapse">
+  <li><a href="#parquet-คออะไร" id="toc-parquet-คออะไร" class="nav-link" data-scroll-target="#parquet-คออะไร">Parquet คืออะไร</a></li>
+  <li><a href="#โครงสรางภายในของไฟล" id="toc-โครงสรางภายในของไฟล" class="nav-link" data-scroll-target="#โครงสรางภายในของไฟล">โครงสร้างภายในของไฟล์</a></li>
+  <li><a href="#encoding-และ-compression" id="toc-encoding-และ-compression" class="nav-link" data-scroll-target="#encoding-และ-compression">encoding และ compression</a></li>
+  <li><a href="#ลองดภายในไฟลจรง" id="toc-ลองดภายในไฟลจรง" class="nav-link" data-scroll-target="#ลองดภายในไฟลจรง">ลองดูภายในไฟล์จริง</a></li>
+  <li><a href="#statistics-และ-predicate-pushdown" id="toc-statistics-และ-predicate-pushdown" class="nav-link" data-scroll-target="#statistics-และ-predicate-pushdown">statistics และ predicate pushdown</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-arrow" id="toc-sec-ch06-arrow" class="nav-link" data-scroll-target="#sec-ch06-arrow"><span class="header-section-number">6.7</span> Apache Arrow: รูปแบบหน่วยความจำแบบ columnar และ zero-copy</a>
+  <ul class="collapse">
+  <li><a href="#ปญหาของการสงขอมลระหวางเครองมอ" id="toc-ปญหาของการสงขอมลระหวางเครองมอ" class="nav-link" data-scroll-target="#ปญหาของการสงขอมลระหวางเครองมอ">ปัญหาของการส่งข้อมูลระหว่างเครื่องมือ</a></li>
+  <li><a href="#arrow-คออะไร" id="toc-arrow-คออะไร" class="nav-link" data-scroll-target="#arrow-คออะไร">Arrow คืออะไร</a></li>
+  <li><a href="#arrow-ในทางปฏบต" id="toc-arrow-ในทางปฏบต" class="nav-link" data-scroll-target="#arrow-ในทางปฏบต">Arrow ในทางปฏิบัติ</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-partitioning" id="toc-sec-ch06-partitioning" class="nav-link" data-scroll-target="#sec-ch06-partitioning"><span class="header-section-number">6.8</span> partitioning และการออกแบบที่เก็บข้อมูลสำหรับข้อมูลอนุกรมเวลา</a>
+  <ul class="collapse">
+  <li><a href="#partitioning-คออะไร" id="toc-partitioning-คออะไร" class="nav-link" data-scroll-target="#partitioning-คออะไร">partitioning คืออะไร</a></li>
+  <li><a href="#ออกแบบ-partition-อยางไร" id="toc-ออกแบบ-partition-อยางไร" class="nav-link" data-scroll-target="#ออกแบบ-partition-อยางไร">ออกแบบ partition อย่างไร</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-alternatives" id="toc-sec-ch06-alternatives" class="nav-link" data-scroll-target="#sec-ch06-alternatives"><span class="header-section-number">6.9</span> ทางเลือกอื่น: SQLite, PostgreSQL, data lake และ lakehouse ★</a>
+  <ul class="collapse">
+  <li><a href="#sqlite" id="toc-sqlite" class="nav-link" data-scroll-target="#sqlite">SQLite</a></li>
+  <li><a href="#postgresql" id="toc-postgresql" class="nav-link" data-scroll-target="#postgresql">PostgreSQL</a></li>
+  <li><a href="#data-lake-และ-lakehouse" id="toc-data-lake-และ-lakehouse" class="nav-link" data-scroll-target="#data-lake-และ-lakehouse">data lake และ lakehouse</a></li>
+  </ul></li>
+  <li><a href="#sec-ch06-case" id="toc-sec-ch06-case" class="nav-link" data-scroll-target="#sec-ch06-case">กรณีศึกษา: ออกแบบที่เก็บข้อมูล PM2.5 ของโครงการ</a></li>
+  <li><a href="#sec-ch06-pitfalls" id="toc-sec-ch06-pitfalls" class="nav-link" data-scroll-target="#sec-ch06-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
+  <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
+  <li><a href="#sec-ch06-exercises" id="toc-sec-ch06-exercises" class="nav-link" data-scroll-target="#sec-ch06-exercises">แบบฝึกหัด</a>
+  <ul class="collapse">
+  <li><a href="#ระดบพนฐาน" id="toc-ระดบพนฐาน" class="nav-link" data-scroll-target="#ระดบพนฐาน">ระดับพื้นฐาน</a></li>
+  <li><a href="#ระดบประยกต" id="toc-ระดบประยกต" class="nav-link" data-scroll-target="#ระดบประยกต">ระดับประยุกต์</a></li>
+  <li><a href="#ระดบทาทาย" id="toc-ระดบทาทาย" class="nav-link" data-scroll-target="#ระดบทาทาย">ระดับท้าทาย</a></li>
+  </ul></li>
+  <li><a href="#อานเพมเตม" id="toc-อานเพมเตม" class="nav-link" data-scroll-target="#อานเพมเตม">อ่านเพิ่มเติม</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/05-data-acquisition.html">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</a></li><li class="breadcrumb-item"><a href="../chapters/06-analytical-databases.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">แบบจำลองข้อมูลและฐานข้อมูลเชิงวิเคราะห์</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>agent:claude </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>บทที่ 5 ทิ้งเราไว้กับโฟลเดอร์ <code>data/raw/</code> ที่มีไฟล์ JSON หลายร้อยไฟล์ ไฟล์ละหนึ่งชั่วโมง ถ้าจะตอบคำถามว่า “ภาคใดมีสัดส่วนวันเกินมาตรฐานสูงที่สุด” จากไฟล์เหล่านี้โดยตรง เราต้องเปิดทุกไฟล์ แกะโครงสร้างที่ซ้อนหลายชั้น แปลงข้อความเป็นตัวเลข และรวมผลเองทุกครั้งที่ถาม งานนี้ทั้งช้าและเสี่ยงต่อความผิดพลาด บทนี้อธิบายวิธีจัดข้อมูลให้เป็น <em>ตาราง</em> ที่มีโครงสร้างชัดเจน ถามด้วย SQL ได้ และตอบได้เร็วแม้มีข้อมูลหลายล้านแถว</p>
+<p>บทนี้ตอบคำถามสองระดับ ระดับแรกคือ <em>การออกแบบ</em> ว่าควรแบ่งข้อมูลเป็นตารางอย่างไร ใช้ key อะไร และบังคับความถูกต้องอย่างไร ระดับที่สองคือ <em>การจัดเก็บ</em> ว่าทำไมฐานข้อมูลเชิงวิเคราะห์อย่าง DuckDB และรูปแบบไฟล์อย่าง Parquet จึงเร็วกว่าทางเลือกอื่นมากสำหรับงานสำรวจข้อมูล ความเข้าใจทั้งสองระดับทำให้เราตัดสินใจได้อย่างมีเหตุผลว่าควรเก็บข้อมูลอย่างไร แทนที่จะทำตามสูตร บทที่ 7 จะนำตารางที่ออกแบบในบทนี้ไปวิเคราะห์ด้วย SQL</p>
+<section id="วตถประสงคการเรยนร" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
+<p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
+<ol type="1">
+<li>อธิบายแบบจำลองเชิงสัมพันธ์ ได้แก่ relation, key และ integrity constraint และใช้บังคับความถูกต้องของข้อมูลได้</li>
+<li>เปรียบเทียบ normalization กับ denormalization และเลือกได้ตามลักษณะงาน</li>
+<li>เปรียบเทียบงาน OLTP กับ OLAP และอธิบายว่าทำไมงานสำรวจข้อมูลเป็นงาน OLAP</li>
+<li>อธิบายความต่างระหว่าง row store กับ column store และผลต่อประสิทธิภาพของ query เชิงวิเคราะห์</li>
+<li>อธิบายสถาปัตยกรรมแบบ in-process และ vectorized execution ของ DuckDB</li>
+<li>อธิบายโครงสร้างภายในของไฟล์ Parquet และใช้ metadata ของไฟล์ตรวจสอบการจัดเก็บได้</li>
+<li>ออกแบบการ partition ข้อมูลอนุกรมเวลาให้เหมาะกับรูปแบบของ query</li>
+</ol>
+</section>
+<section id="sec-ch06-relational" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-ch06-relational"><span class="header-section-number">6.1</span> relational model: relation, key และ integrity</h2>
+<section id="ทมาของแบบจำลองเชงสมพนธ" class="level3">
+<h3 class="anchored" data-anchor-id="ทมาของแบบจำลองเชงสมพนธ">ที่มาของแบบจำลองเชิงสัมพันธ์</h3>
+<p>ในปี ค.ศ. 1970 Edgar F. Codd นักวิจัยของ IBM เสนอแบบจำลองเชิงสัมพันธ์ (relational model) ซึ่งเปลี่ยนวิธีคิดเรื่องฐานข้อมูลไปอย่างสิ้นเชิง <span class="citation" data-cites="codd1970relational">(<a href="../references.html#ref-codd1970relational" role="doc-biblioref">Codd 1970</a>)</span> ก่อนหน้านั้น โปรแกรมต้องรู้ว่าข้อมูลถูกจัดเก็บบนดิสก์อย่างไร และต้องเดินตามตัวชี้จากระเบียนหนึ่งไปอีกระเบียนหนึ่ง แนวคิดสำคัญของ Codd คือ <em>แยกความหมายของข้อมูลออกจากวิธีจัดเก็บ</em> ผู้ใช้บอกเพียงว่าต้องการข้อมูลอะไร ระบบเป็นผู้ตัดสินใจว่าจะหาข้อมูลอย่างไร แนวคิดนี้เป็นรากฐานของ SQL และฐานข้อมูลเกือบทุกระบบที่ใช้กันในปัจจุบัน รวมถึง DuckDB</p>
+</section>
+<section id="relation-tuple-และ-attribute" class="level3">
+<h3 class="anchored" data-anchor-id="relation-tuple-และ-attribute">relation, tuple และ attribute</h3>
+<p>ในภาษาของแบบจำลองเชิงสัมพันธ์ ข้อมูลถูกจัดเป็น <strong><span class="idx">relation</span></strong> ซึ่งในทางปฏิบัติคือตาราง แต่ละแถวเรียกว่า <strong><span class="idx">tuple</span></strong> และแต่ละคอลัมน์เรียกว่า <strong><span class="idx">attribute</span></strong> ซึ่งมีชนิดข้อมูล (domain) กำหนดไว้</p>
+<div id="tbl-ch06-relational-terms" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-relational-terms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.1: ศัพท์ของแบบจำลองเชิงสัมพันธ์และความหมายในทางปฏิบัติ
+</figcaption>
+<div aria-describedby="tbl-ch06-relational-terms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ศัพท์ในแบบจำลอง</th>
+<th>ศัพท์ในทางปฏิบัติ</th>
+<th>ตัวอย่างในโครงการ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>relation</td>
+<td>ตาราง</td>
+<td><code>measurements</code></td>
+</tr>
+<tr class="even">
+<td>tuple</td>
+<td>แถว</td>
+<td>ค่าวัดของสถานี 02t เวลา 2026-01-15 08:00</td>
+</tr>
+<tr class="odd">
+<td>attribute</td>
+<td>คอลัมน์</td>
+<td><code>pm25</code></td>
+</tr>
+<tr class="even">
+<td>domain</td>
+<td>ชนิดข้อมูล</td>
+<td><code>DOUBLE</code></td>
+</tr>
+<tr class="odd">
+<td>schema</td>
+<td>โครงสร้างของตาราง</td>
+<td>ชื่อคอลัมน์และชนิดข้อมูลทั้งหมด</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>relation ในทางทฤษฎีเป็น <em>เซต</em> ของ tuple ซึ่งมีผลสองข้อ ข้อแรก ไม่มี tuple ที่ซ้ำกันทุกประการ ข้อสอง ลำดับของแถวไม่มีความหมาย ข้อหลังนี้สำคัญในทางปฏิบัติ ถ้าต้องการผลลัพธ์เรียงตามลำดับใด ต้องสั่ง <code>ORDER BY</code> เสมอ ห้ามพึ่งลำดับที่เห็นในครั้งก่อน</p>
+</section>
+<section id="key" class="level3">
+<h3 class="anchored" data-anchor-id="key">key</h3>
+<p><strong>key</strong> คือ attribute หรือกลุ่มของ attribute ที่ระบุแถวได้ไม่ซ้ำ ใน schema ของโครงการ</p>
+<ul>
+<li>ตาราง <code>stations</code> มี <span class="idx">primary key</span> คือ <code>station_id</code> เพราะแต่ละสถานีมีรหัสไม่ซ้ำกัน</li>
+<li>ตาราง <code>measurements</code> มี primary key ประกอบ (composite key) คือ <code>(station_id, ts)</code> เพราะสถานีหนึ่งมีค่าวัดได้เพียงหนึ่งแถวต่อหนึ่งชั่วโมง ลำพัง <code>station_id</code> หรือ <code>ts</code> อย่างเดียวไม่ระบุแถวได้</li>
+</ul>
+<p><strong><span class="idx">foreign key</span></strong> คือ attribute ในตารางหนึ่งที่อ้างอิง primary key ของอีกตารางหนึ่ง <code>measurements.station_id</code> เป็น foreign key ที่อ้างอิง <code>stations.station_id</code> หมายความว่าทุกค่าวัดต้องเป็นของสถานีที่มีอยู่จริงในตาราง <code>stations</code></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  stations ||--o{ measurements : "มีค่าวัด"
+  stations {
+    VARCHAR station_id PK
+    VARCHAR name_th
+    VARCHAR name_en
+    VARCHAR province
+    VARCHAR region
+    DOUBLE lat
+    DOUBLE lon
+    VARCHAR station_type
+  }
+  measurements {
+    VARCHAR station_id PK,FK
+    TIMESTAMP ts PK
+    DOUBLE pm25
+    DOUBLE pm10
+    DOUBLE o3
+    DOUBLE co
+    DOUBLE no2
+    DOUBLE so2
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="integrity-constraint" class="level3">
+<h3 class="anchored" data-anchor-id="integrity-constraint">integrity constraint</h3>
+<p><strong><span class="idx">integrity constraint</span></strong> คือกฎที่ฐานข้อมูลบังคับเพื่อให้ข้อมูลถูกต้องเสมอ ข้อดีของการให้ฐานข้อมูลบังคับกฎ แทนการตรวจด้วยโค้ดของเราเอง คือ กฎถูกบังคับทุกครั้งไม่ว่าข้อมูลจะเข้ามาจากโปรแกรมใด และข้อมูลที่ผิดกฎจะไม่มีทางเข้าไปอยู่ในตารางได้เลย</p>
+<div id="tbl-ch06-constraints" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-constraints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.2: ชนิดของ integrity constraint
+</figcaption>
+<div aria-describedby="tbl-ch06-constraints-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ชนิด</th>
+<th>กฎ</th>
+<th>ตัวอย่างใน schema</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>entity integrity</td>
+<td>primary key ต้องไม่ซ้ำและไม่เป็น <code>NULL</code></td>
+<td><code>PRIMARY KEY (station_id, ts)</code></td>
+</tr>
+<tr class="even">
+<td>referential integrity</td>
+<td>foreign key ต้องอ้างถึงแถวที่มีอยู่จริง</td>
+<td><code>REFERENCES stations (station_id)</code></td>
+</tr>
+<tr class="odd">
+<td>domain integrity</td>
+<td>ค่าต้องอยู่ในชนิดและช่วงที่กำหนด</td>
+<td><code>pm25 DOUBLE CHECK (pm25 &gt;= 0)</code></td>
+</tr>
+<tr class="even">
+<td>not null</td>
+<td>ค่าต้องไม่เป็น <code>NULL</code></td>
+<td><code>name_th VARCHAR NOT NULL</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ลองดูว่า DuckDB บังคับกฎเหล่านี้อย่างไร ด้วยตารางทดลองในหน่วยความจำ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>()   <span class="co"># ฐานข้อมูลในหน่วยความจำ สำหรับทดลอง</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""CREATE TABLE stations (</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">    station_id VARCHAR PRIMARY KEY, name_th VARCHAR, province VARCHAR, region VARCHAR)"""</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""CREATE TABLE measurements (</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">    station_id VARCHAR REFERENCES stations (station_id),</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    ts TIMESTAMP, pm25 DOUBLE CHECK (pm25 &gt;= 0),</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    PRIMARY KEY (station_id, ts))"""</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"INSERT INTO stations VALUES ('02t', 'สถานี ก', 'กรุงเทพฯ', 'กลาง')"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"INSERT INTO measurements VALUES ('02t', TIMESTAMP '2026-01-15 08:00', 41.2)"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>bad_rows <span class="op">=</span> [</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"('02t', TIMESTAMP '2026-01-15 08:00', 39.0)"</span>,   <span class="co"># ซ้ำกับแถวเดิม</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"('99x', TIMESTAMP '2026-01-15 08:00', 20.0)"</span>,   <span class="co"># ไม่มีสถานีนี้</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"('02t', TIMESTAMP '2026-01-15 09:00', -1)"</span>,     <span class="co"># ค่าแทนที่หลุดมา</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> bad_rows:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        con.execute(<span class="ss">f"INSERT INTO measurements VALUES </span><span class="sc">{</span>row<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> duckdb.ConstraintException <span class="im">as</span> e:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="bu">str</span>(e).splitlines()[<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+Constraint Error: Duplicate key "station_id: 02t, ts: 2026-01-15 08:00:00" violates primary key constraint.
+Constraint Error: Violates foreign key constraint because key "station_id: 99x" does not exist in the referenced table
+Constraint Error: CHECK constraint failed on table measurements with expression CHECK((pm25 &gt;= 0))</code></pre>
+<p>แถวที่สามน่าสนใจเป็นพิเศษ ถ้าโค้ดโหลดข้อมูลลืมแปลงค่า <code>"-1"</code> ของ Air4Thai เป็น <code>NULL</code> กฎ <code>CHECK (pm25 &gt;= 0)</code> จะหยุดข้อมูลนั้นไว้ทันที แทนที่จะปล่อยให้ค่า -1 เข้าไปทำให้ค่าเฉลี่ยผิดในทุกการวิเคราะห์ต่อจากนั้น</p>
+<p>schema ในเอกสารรายสัปดาห์ที่ 4 กำหนดเพียง primary key ไม่ได้กำหนด foreign key และ <code>CHECK</code> ผู้อ่านเพิ่มกฎเหล่านี้ได้ แต่ต้องเข้าใจข้อแลกเปลี่ยน กฎยิ่งเข้มงวด ข้อมูลยิ่งน่าเชื่อถือ แต่ขั้นโหลดก็จะล้มเหลวบ่อยขึ้นเมื่อพบข้อมูลที่ไม่ตรงกฎ เช่น ค่าวัดของสถานีใหม่ที่ยังไม่ได้เพิ่มเข้าตาราง <code>stations</code> ทางเลือกหนึ่งที่บทที่ 9 อธิบายคือ ตรวจด้วยโค้ดก่อนโหลด และให้นโยบายว่าข้อผิดพลาดแบบใดหยุด pipeline แบบใดเพียงเตือน</p>
+</section>
+</section>
+<section id="sec-ch06-normalization" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-ch06-normalization"><span class="header-section-number">6.2</span> normalization กับ denormalization</h2>
+<section id="ปญหาของตารางเดยวทมทกอยาง" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของตารางเดยวทมทกอยาง">ปัญหาของตารางเดียวที่มีทุกอย่าง</h3>
+<p>สมมุติว่าเราเก็บข้อมูลทั้งหมดในตารางเดียว ทุกแถวมีทั้งค่าวัดและรายละเอียดของสถานี</p>
+<div id="tbl-ch06-denormalized" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-denormalized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.3: ตัวอย่างตารางที่ไม่ normalize (ข้อมูลสมมุติ)
+</figcaption>
+<div aria-describedby="tbl-ch06-denormalized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>station_id</th>
+<th>name_th</th>
+<th>province</th>
+<th>region</th>
+<th>ts</th>
+<th>pm25</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>02t</td>
+<td>สถานี ก</td>
+<td>กรุงเทพฯ</td>
+<td>กลาง</td>
+<td>2026-01-15 08:00</td>
+<td>41.2</td>
+</tr>
+<tr class="even">
+<td>02t</td>
+<td>สถานี ก</td>
+<td>กรุงเทพฯ</td>
+<td>กลาง</td>
+<td>2026-01-15 09:00</td>
+<td>38.7</td>
+</tr>
+<tr class="odd">
+<td>02t</td>
+<td>สถานี ก</td>
+<td>กรุงเทพฯ</td>
+<td>กลาง</td>
+<td>2026-01-15 10:00</td>
+<td>35.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ตารางนี้มีปัญหาที่เรียกว่า <strong><span class="idx">update anomaly</span></strong> ชื่อ จังหวัด และภาคของสถานีถูกเก็บซ้ำทุกชั่วโมง สถานีหนึ่งมีประมาณ 8,760 แถวต่อปี ถ้าพบว่าภาคของสถานีหนึ่งบันทึกผิด ต้องแก้ทุกแถว ถ้าแก้ไม่ครบ ข้อมูลจะขัดแย้งกันเอง สถานีเดียวกันอยู่สองภาค นอกจากนี้ยังมี insertion anomaly คือเพิ่มสถานีใหม่ที่ยังไม่มีค่าวัดไม่ได้ และ deletion anomaly คือถ้าลบค่าวัดทั้งหมดของสถานีหนึ่ง ข้อมูลของสถานีก็หายไปด้วย</p>
+</section>
+<section id="normalization" class="level3">
+<h3 class="anchored" data-anchor-id="normalization">normalization</h3>
+<p><strong><span class="idx">normalization</span></strong> คือกระบวนการแยกตารางเพื่อขจัดความซ้ำซ้อนและ anomaly เหล่านี้ หลักการคือ <em>ข้อเท็จจริงแต่ละข้อควรถูกเก็บไว้ที่เดียว</em> ข้อเท็จจริงว่า “สถานี 02t อยู่ในภาคกลาง” เป็นคุณสมบัติของสถานี ไม่ใช่ของค่าวัดรายชั่วโมง จึงควรอยู่ในตาราง <code>stations</code> เพียงครั้งเดียว ระดับของ normalization ถูกนิยามเป็นรูปแบบปกติ (normal form) หลายระดับ <span class="citation" data-cites="elmasri2016fundamentals">(<a href="../references.html#ref-elmasri2016fundamentals" role="doc-biblioref">Elmasri และ Navathe 2016</a>)</span> สามระดับแรกเพียงพอสำหรับงานส่วนใหญ่</p>
+<div id="tbl-ch06-normal-forms" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-normal-forms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.4: รูปแบบปกติสามระดับแรก
+</figcaption>
+<div aria-describedby="tbl-ch06-normal-forms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>รูปแบบปกติ</th>
+<th>เงื่อนไขโดยย่อ</th>
+<th>ตัวอย่างที่ละเมิด</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1NF</td>
+<td>ทุกช่องมีค่าเดียว ไม่มีรายการซ้อนในช่อง</td>
+<td>คอลัมน์ <code>pollutants</code> เก็บ <code>"pm25=41.2;pm10=60.1"</code></td>
+</tr>
+<tr class="even">
+<td>2NF</td>
+<td>1NF และ attribute ที่ไม่ใช่ key ขึ้นกับ key ทั้งชุด ไม่ใช่บางส่วน</td>
+<td><code>name_th</code> ใน <code>measurements</code> ขึ้นกับ <code>station_id</code> เพียงส่วนเดียวของ key <code>(station_id, ts)</code></td>
+</tr>
+<tr class="odd">
+<td>3NF</td>
+<td>2NF และ attribute ที่ไม่ใช่ key ไม่ขึ้นกับ attribute อื่นที่ไม่ใช่ key</td>
+<td><code>region</code> ขึ้นกับ <code>province</code> ซึ่งไม่ใช่ key</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>schema ของโครงการแยก <code>stations</code> ออกจาก <code>measurements</code> จึงผ่าน 2NF ส่วนแถวสุดท้ายของ <a href="#tbl-ch06-normal-forms" class="quarto-xref">ตารางที่&nbsp;<span>6.4</span></a> ชี้ว่า ถ้าเคร่งครัดตาม 3NF คอลัมน์ <code>region</code> ควรอยู่ในตาราง <code>provinces</code> แยกต่างหาก เพราะภาคเป็นคุณสมบัติของจังหวัด ไม่ใช่ของสถานี schema ของโครงการเลือกเก็บ <code>region</code> ไว้ใน <code>stations</code> โดยตรง ซึ่งเป็นการ denormalize อย่างตั้งใจ เพราะจังหวัดแทบไม่เคยย้ายภาค และการเก็บไว้ในตารางเดียวทำให้ query ง่ายขึ้นมาก ตัวอย่างนี้แสดงว่า normalization เป็นหลักการที่ต้องชั่งน้ำหนัก ไม่ใช่กฎตายตัว</p>
+</section>
+<section id="denormalization" class="level3">
+<h3 class="anchored" data-anchor-id="denormalization">denormalization</h3>
+<p><strong><span class="idx">denormalization</span></strong> คือการรวมตารางหรือเก็บข้อมูลซ้ำอย่างตั้งใจ เพื่อให้อ่านเร็วขึ้นหรือ query ง่ายขึ้น แลกกับความเสี่ยงที่ข้อมูลจะขัดแย้งกัน ในงานวิเคราะห์ denormalization พบบ่อยในรูปของตารางสรุป เช่น <code>daily_pm25</code> ในบทที่ 8 ซึ่งเป็นค่าที่คำนวณจาก <code>measurements</code> ได้ทุกเมื่อ แต่เก็บไว้เพราะคำนวณทุกครั้งที่ถามจะช้า</p>
+<div id="tbl-ch06-norm-tradeoff" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-norm-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.5: เปรียบเทียบ normalization กับ denormalization
+</figcaption>
+<div aria-describedby="tbl-ch06-norm-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>normalization</th>
+<th>denormalization</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ความซ้ำซ้อน</td>
+<td>ต่ำ ข้อเท็จจริงอยู่ที่เดียว</td>
+<td>สูง ข้อมูลถูกเก็บซ้ำ</td>
+</tr>
+<tr class="even">
+<td>การแก้ไขข้อมูล</td>
+<td>ง่ายและปลอดภัย</td>
+<td>ต้องแก้หลายที่ เสี่ยงขัดแย้ง</td>
+</tr>
+<tr class="odd">
+<td>การอ่านเพื่อวิเคราะห์</td>
+<td>ต้อง join หลายตาราง</td>
+<td>อ่านจากตารางเดียว เร็วกว่า</td>
+</tr>
+<tr class="even">
+<td>เหมาะกับ</td>
+<td>ข้อมูลต้นทางที่ถูกแก้ไขบ่อย</td>
+<td>ตารางสรุปและข้อมูลที่ไม่ค่อยเปลี่ยน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>หลักปฏิบัติที่ดีคือ เก็บข้อมูลต้นทางแบบ normalize แล้วสร้างตารางหรือ view ที่ denormalize จากข้อมูลต้นทางด้วยโค้ดที่รันซ้ำได้ เมื่อข้อมูลต้นทางเปลี่ยน ก็สร้างตารางสรุปใหม่ ความขัดแย้งจึงไม่เกิด เพราะไม่มีใครแก้ตารางสรุปด้วยมือ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- view ที่ join ไว้ให้ใช้สะดวก: ไม่เก็บข้อมูลซ้ำ เพราะ view คำนวณใหม่ทุกครั้งที่ถาม</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> measurements_with_station <span class="kw">AS</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> m.<span class="op">*</span>, s.name_th, s.province, s.region</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> measurements <span class="kw">AS</span> m</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-ch06-oltp-olap" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-ch06-oltp-olap"><span class="header-section-number">6.3</span> OLTP กับ OLAP และ ★ star schema</h2>
+<section id="สองลกษณะงานของฐานขอมล" class="level3">
+<h3 class="anchored" data-anchor-id="สองลกษณะงานของฐานขอมล">สองลักษณะงานของฐานข้อมูล</h3>
+<p>ฐานข้อมูลถูกใช้กับงานสองลักษณะที่ต่างกันมาก จนระบบที่ออกแบบมาเพื่องานหนึ่งมักทำอีกงานได้ไม่ดี</p>
+<p><strong><span class="idx">OLTP</span></strong> (Online Transaction Processing) คืองานธุรกรรม เช่น ระบบขายสินค้าที่บันทึกคำสั่งซื้อทีละรายการ ระบบธนาคารที่โอนเงินทีละครั้ง แต่ละ query แตะข้อมูลเพียงไม่กี่แถว แต่มี query จำนวนมากพร้อมกัน และต้องการความถูกต้องของการเขียนสูงมาก</p>
+<p><strong><span class="idx">OLAP</span></strong> (Online Analytical Processing) คืองานวิเคราะห์ เช่น “ค่าเฉลี่ย PM2.5 รายเดือนของทุกสถานีในห้าปี” แต่ละ query อ่านข้อมูลจำนวนมาก แต่มักอ่านเพียงไม่กี่คอลัมน์ และมี query พร้อมกันไม่มาก ข้อมูลส่วนใหญ่ถูกเพิ่มเป็นชุด ไม่ค่อยถูกแก้ไข</p>
+<div id="tbl-ch06-oltp-olap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-oltp-olap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.6: เปรียบเทียบงาน OLTP กับ OLAP
+</figcaption>
+<div aria-describedby="tbl-ch06-oltp-olap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>OLTP</th>
+<th>OLAP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ตัวอย่าง</td>
+<td>บันทึกคำสั่งซื้อ โอนเงิน</td>
+<td>ค่าเฉลี่ยรายเดือนของทุกสถานี</td>
+</tr>
+<tr class="even">
+<td>แถวต่อ query</td>
+<td>ไม่กี่แถว</td>
+<td>หลายล้านแถว</td>
+</tr>
+<tr class="odd">
+<td>คอลัมน์ต่อ query</td>
+<td>ทุกคอลัมน์ของแถวนั้น</td>
+<td>ไม่กี่คอลัมน์</td>
+</tr>
+<tr class="even">
+<td>การเขียน</td>
+<td>บ่อย ทีละแถว</td>
+<td>เป็นชุด ไม่บ่อย</td>
+</tr>
+<tr class="odd">
+<td>ผู้ใช้พร้อมกัน</td>
+<td>มาก</td>
+<td>น้อย</td>
+</tr>
+<tr class="even">
+<td>ระบบตัวอย่าง</td>
+<td>PostgreSQL, MySQL, SQLite</td>
+<td>DuckDB, ClickHouse, BigQuery</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>งานสำรวจข้อมูลทั้งหมดในเล่มนี้เป็นงาน OLAP เราเพิ่มข้อมูลชั่วโมงละครั้งเป็นชุด และถามคำถามที่อ่านข้อมูลจำนวนมาก เช่น ค่าเฉลี่ย สัดส่วน และการเปรียบเทียบข้ามสถานี นี่คือเหตุผลหลักที่หนังสือเลือก DuckDB ซึ่งออกแบบมาเพื่องาน OLAP โดยเฉพาะ หัวข้อ <a href="#sec-ch06-row-column" class="quarto-xref"><span>6.4</span></a> และ <a href="#sec-ch06-duckdb" class="quarto-xref"><span>6.5</span></a> อธิบายว่าการออกแบบนั้นทำให้เร็วได้อย่างไร</p>
+</section>
+<section id="star-schema" class="level3">
+<h3 class="anchored" data-anchor-id="star-schema">star schema ★</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>คลังข้อมูล (data warehouse) สำหรับงาน OLAP ในองค์กรมักออกแบบตาม <strong><span class="idx">star schema</span></strong> ซึ่ง Ralph Kimball ทำให้แพร่หลาย <span class="citation" data-cites="kimball2013data">(<a href="../references.html#ref-kimball2013data" role="doc-biblioref">Kimball และ Ross 2013</a>)</span> star schema มีตารางสองประเภท</p>
+<ul>
+<li><strong><span class="idx">fact table</span></strong> เก็บเหตุการณ์หรือการวัดที่เป็นตัวเลข แต่ละแถวคือหนึ่งเหตุการณ์ในระดับความละเอียดที่กำหนด (grain) เช่น หนึ่งค่าวัดต่อสถานีต่อชั่วโมง</li>
+<li><strong><span class="idx">dimension table</span></strong> เก็บบริบทที่ใช้กรองและจัดกลุ่ม เช่น สถานี เวลา และสารมลพิษ</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">erDiagram
+  dim_station ||--o{ fact_measurement : ""
+  dim_time ||--o{ fact_measurement : ""
+  dim_pollutant ||--o{ fact_measurement : ""
+  fact_measurement {
+    VARCHAR station_id FK
+    TIMESTAMP ts FK
+    VARCHAR pollutant FK
+    DOUBLE value
+  }
+  dim_station {
+    VARCHAR station_id PK
+    VARCHAR province
+    VARCHAR region
+  }
+  dim_time {
+    TIMESTAMP ts PK
+    DATE date
+    INTEGER hour
+    VARCHAR season
+    BOOLEAN is_holiday
+  }
+  dim_pollutant {
+    VARCHAR pollutant PK
+    VARCHAR unit
+    DOUBLE standard_24h
+  }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ข้อดีของ star schema คือ คำถามเชิงวิเคราะห์เกือบทุกข้อเขียนได้ในรูปเดียวกัน คือ join fact table กับ dimension ที่ต้องการ แล้วกรองและจัดกลุ่มตามคอลัมน์ของ dimension ตาราง <code>dim_time</code> ที่มีคอลัมน์ <code>season</code> และ <code>is_holiday</code> คำนวณไว้ล่วงหน้า ทำให้ถามเรื่องฤดูกาลหรือวันหยุดได้โดยไม่ต้องเขียนตรรกะของวันที่ซ้ำในทุก query และ <code>dim_pollutant</code> ที่เก็บค่ามาตรฐานไว้ ทำให้เปลี่ยนเกณฑ์ได้ที่เดียว</p>
+<p>schema ของโครงการในเล่มนี้ไม่ใช่ star schema เต็มรูปแบบ ตาราง <code>measurements</code> เก็บสารมลพิษเป็นคอลัมน์ (รูปแบบกว้าง) ไม่ใช่เป็นแถว และไม่มี <code>dim_time</code> แยก ทางเลือกนี้เรียบง่ายกว่าสำหรับโครงการขนาดนี้ ส่วน <code>stations</code> ทำหน้าที่เหมือน dimension table อยู่แล้ว บทที่ 8 อธิบายการแปลงระหว่างรูปแบบกว้างกับรูปแบบยาว และบทที่ 18 อธิบายการดำเนินการแบบ OLAP เช่น roll-up และ drill-down บนลำดับชั้นของ dimension</p>
+</section>
+</section>
+<section id="sec-ch06-row-column" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-ch06-row-column"><span class="header-section-number">6.4</span> row store กับ column store</h2>
+<section id="ขอมลอยบนดสกอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="ขอมลอยบนดสกอยางไร">ข้อมูลอยู่บนดิสก์อย่างไร</h3>
+<p>ตารางเป็นสองมิติ แต่ดิสก์และหน่วยความจำเก็บข้อมูลเป็นลำดับไบต์มิติเดียว ฐานข้อมูลจึงต้องเลือกว่าจะเรียงค่าในตารางลงเป็นลำดับอย่างไร มีสองทางเลือกหลัก</p>
+<p><strong><span class="idx">row store</span></strong> เรียงค่าทีละแถว ค่าทุกคอลัมน์ของแถวหนึ่งอยู่ติดกัน แล้วตามด้วยแถวถัดไป</p>
+<pre class="text"><code>[02t|2026-01-15 08:00|41.2|60.1|...][02t|2026-01-15 09:00|38.7|57.3|...][...]</code></pre>
+<p><strong><span class="idx">column store</span></strong> เรียงค่าทีละคอลัมน์ ค่าของคอลัมน์เดียวกันจากทุกแถวอยู่ติดกัน</p>
+<pre class="text"><code>station_id: [02t|02t|02t|...]
+ts:         [2026-01-15 08:00|2026-01-15 09:00|...]
+pm25:       [41.2|38.7|35.1|...]
+pm10:       [60.1|57.3|52.8|...]</code></pre>
+</section>
+<section id="ทำไม-column-store-เรวสำหรบงานวเคราะห" class="level3">
+<h3 class="anchored" data-anchor-id="ทำไม-column-store-เรวสำหรบงานวเคราะห">ทำไม column store เร็วสำหรับงานวิเคราะห์</h3>
+<p>พิจารณา query “ค่าเฉลี่ย PM2.5 ของทุกแถว” ซึ่งต้องการเพียงคอลัมน์เดียวจากแปดคอลัมน์ของ <code>measurements</code></p>
+<ul>
+<li>ใน row store ต้องอ่านทุกแถวทั้งแถวจากดิสก์ แม้จะใช้เพียงหนึ่งในแปดของข้อมูลที่อ่าน</li>
+<li>ใน column store อ่านเฉพาะคอลัมน์ <code>pm25</code> ข้อมูลที่ต้องอ่านลดลงเหลือประมาณหนึ่งในแปด</li>
+</ul>
+<p>นอกจากการอ่านน้อยลงแล้ว <span class="idx">การจัดเก็บแบบ columnar</span> ยังมีข้อได้เปรียบอีกสองข้อ ข้อแรกคือ <strong>บีบอัดได้ดีกว่า</strong> ค่าในคอลัมน์เดียวกันมีชนิดเดียวกันและมักคล้ายกัน เช่น คอลัมน์ <code>station_id</code> มีค่าซ้ำกันหลายพันครั้งติดกัน จึงบีบอัดได้มาก ข้อที่สองคือ <strong>ใช้ CPU ได้มีประสิทธิภาพกว่า</strong> ค่าชนิดเดียวกันที่อยู่ติดกันในหน่วยความจำเหมาะกับการประมวลผลแบบเวกเตอร์ ซึ่งหัวข้อ <a href="#sec-ch06-duckdb" class="quarto-xref"><span>6.5</span></a> อธิบาย</p>
+<p>Abadi และคณะศึกษาว่าข้อได้เปรียบของ column store มาจากไหน และพบว่าไม่ได้มาจากการจัดเก็บเพียงอย่างเดียว แต่มาจากการออกแบบตัวประมวลผล query ทั้งระบบให้ทำงานกับข้อมูลแบบคอลัมน์ เช่น การประมวลผลบนข้อมูลที่ยังบีบอัดอยู่ <span class="citation" data-cites="abadi2008column">(<a href="../references.html#ref-abadi2008column" role="doc-biblioref">Abadi และคณะ 2008</a>)</span></p>
+</section>
+<section id="เมอใดท-row-store-ดกวา" class="level3">
+<h3 class="anchored" data-anchor-id="เมอใดท-row-store-ดกวา">เมื่อใดที่ row store ดีกว่า</h3>
+<p>column store ไม่ได้ดีกว่าในทุกกรณี ถ้า query ต้องการทุกคอลัมน์ของแถวเดียว เช่น “ดูข้อมูลทั้งหมดของค่าวัดหนึ่งค่า” column store ต้องไปหยิบค่าจากแปดตำแหน่งแล้วประกอบเป็นแถว ส่วน row store อ่านจากตำแหน่งเดียว การเขียนทีละแถวก็เช่นกัน row store เขียนแถวใหม่ต่อท้ายได้ทันที ส่วน column store ต้องเขียนลงทุกคอลัมน์ ลักษณะเหล่านี้ทำให้ row store เหมาะกับงาน OLTP และ column store เหมาะกับงาน OLAP ตรงตาม <a href="#tbl-ch06-oltp-olap" class="quarto-xref">ตารางที่&nbsp;<span>6.6</span></a></p>
+<div id="tbl-ch06-row-vs-column" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-row-vs-column-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.7: ลักษณะของ query ที่เหมาะกับ row store และ column store
+</figcaption>
+<div aria-describedby="tbl-ch06-row-vs-column-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ลักษณะของ query</th>
+<th>row store</th>
+<th>column store</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>อ่านไม่กี่คอลัมน์จากหลายล้านแถว</td>
+<td>ช้า (อ่านทุกคอลัมน์)</td>
+<td>เร็ว</td>
+</tr>
+<tr class="even">
+<td>อ่านทุกคอลัมน์ของแถวเดียว</td>
+<td>เร็ว</td>
+<td>ช้ากว่า</td>
+</tr>
+<tr class="odd">
+<td>เพิ่มแถวทีละแถวบ่อย ๆ</td>
+<td>เร็ว</td>
+<td>ช้ากว่า</td>
+</tr>
+<tr class="even">
+<td>เพิ่มข้อมูลเป็นชุดใหญ่</td>
+<td>ปานกลาง</td>
+<td>เร็ว</td>
+</tr>
+<tr class="odd">
+<td>อัตราการบีบอัด</td>
+<td>ต่ำ</td>
+<td>สูง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-ch06-duckdb" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-ch06-duckdb"><span class="header-section-number">6.5</span> DuckDB: สถาปัตยกรรม in-process และ vectorized execution</h2>
+<section id="ฐานขอมลเชงวเคราะหทฝงในโปรแกรม" class="level3">
+<h3 class="anchored" data-anchor-id="ฐานขอมลเชงวเคราะหทฝงในโปรแกรม">ฐานข้อมูลเชิงวิเคราะห์ที่ฝังในโปรแกรม</h3>
+<p>ฐานข้อมูลส่วนใหญ่ เช่น PostgreSQL ทำงานแบบ <strong>client–server</strong> มีโปรแกรมเซิร์ฟเวอร์ที่ต้องติดตั้งและเปิดทิ้งไว้ โปรแกรมของเราเชื่อมต่อผ่านเครือข่าย ส่ง query ไป และรับผลกลับมา <span class="idx-tool">DuckDB</span> ใช้แนวทางที่ต่างออกไป คือทำงานแบบ <strong><span class="idx">in-process</span></strong> ตัวฐานข้อมูลเป็นไลบรารีที่ทำงานอยู่ภายใน process ของโปรแกรม Python ของเราเอง ไม่มีเซิร์ฟเวอร์แยก และฐานข้อมูลทั้งหมดเป็นไฟล์เดียว <span class="citation" data-cites="raasveldt2019duckdb">(<a href="../references.html#ref-raasveldt2019duckdb" role="doc-biblioref">Raasveldt และ Mühleisen 2019</a>)</span></p>
+<p>แนวคิดนี้คล้าย SQLite ซึ่งเป็นฐานข้อมูลแบบฝังที่แพร่หลายที่สุด แต่ SQLite เป็น row store ที่ออกแบบสำหรับงาน OLTP ส่วน DuckDB เป็น column store ที่ออกแบบสำหรับงาน OLAP ผู้พัฒนาจึงมักอธิบาย DuckDB ว่าเป็น “SQLite สำหรับงานวิเคราะห์”</p>
+<div id="tbl-ch06-inprocess" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-inprocess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.8: เปรียบเทียบสถาปัตยกรรม client–server กับ in-process
+</figcaption>
+<div aria-describedby="tbl-ch06-inprocess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>client–server (เช่น PostgreSQL)</th>
+<th>in-process (DuckDB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>การติดตั้ง</td>
+<td>ติดตั้งและดูแลเซิร์ฟเวอร์</td>
+<td><code>pip install duckdb</code></td>
+</tr>
+<tr class="even">
+<td>ที่เก็บข้อมูล</td>
+<td>ไดเรกทอรีของเซิร์ฟเวอร์</td>
+<td>ไฟล์เดียว เช่น <code>data/pm25.duckdb</code></td>
+</tr>
+<tr class="odd">
+<td>การส่งผลลัพธ์</td>
+<td>ผ่านเครือข่าย แปลงรูปแบบ</td>
+<td>อยู่ในหน่วยความจำเดียวกัน ส่งต่อให้ pandas ได้เร็ว</td>
+</tr>
+<tr class="even">
+<td>ผู้ใช้พร้อมกัน</td>
+<td>หลายคน หลายโปรแกรม</td>
+<td>process เดียวที่เขียนได้ ณ เวลาหนึ่ง</td>
+</tr>
+<tr class="odd">
+<td>เหมาะกับ</td>
+<td>ระบบที่หลายคนใช้พร้อมกัน</td>
+<td>งานวิเคราะห์บนเครื่องของผู้วิเคราะห์</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>แถวที่สี่ของ <a href="#tbl-ch06-inprocess" class="quarto-xref">ตารางที่&nbsp;<span>6.8</span></a> เป็นข้อจำกัดที่ต้องเข้าใจ ไฟล์ DuckDB หนึ่งไฟล์เปิดแบบเขียนได้โดย process เดียว ณ เวลาหนึ่ง แต่หลาย process เปิดแบบอ่านอย่างเดียวพร้อมกันได้ นี่คือเหตุผลที่หนังสือกำหนดให้เปิดฐานข้อมูลสำหรับการวิเคราะห์ด้วย <code>read_only=True</code> เสมอ notebook แดชบอร์ด และ script วิเคราะห์จึงเปิดไฟล์เดียวกันได้พร้อมกัน ส่วน script โหลดข้อมูลเป็นโปรแกรมเดียวที่เปิดแบบเขียนได้ ภาคผนวก ฉ อธิบายวิธีแก้เมื่อพบข้อความว่าไฟล์ถูกล็อก</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)   <span class="co"># สำหรับการวิเคราะห์ทุกครั้ง</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> con.execute(<span class="st">"SELECT COUNT(*) FROM measurements"</span>).fetchone()[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="vectorized-execution" class="level3">
+<h3 class="anchored" data-anchor-id="vectorized-execution">vectorized execution</h3>
+<p>ตัวประมวลผล query แบบดั้งเดิมทำงานทีละแถว ตามแบบจำลองที่เรียกว่า Volcano หรือ iterator model ตัวดำเนินการแต่ละตัว เช่น ตัวกรองหรือตัวรวมกลุ่ม ขอแถวถัดไปจากตัวก่อนหน้าทีละหนึ่งแถว ข้อเสียคือ ทุกแถวต้องผ่านการเรียกฟังก์ชันหลายชั้น ต้นทุนของการเรียกฟังก์ชันจึงสูงกว่างานคำนวณจริง เช่น การบวกเลขหนึ่งครั้ง</p>
+<p><strong><span class="idx">vectorized execution</span></strong> แก้ปัญหานี้ด้วยการประมวลผลทีละ <em>ชุด</em> ของค่า (vector) ซึ่งใน DuckDB มีขนาดประมาณสองพันค่า แนวคิดนี้มาจากงานวิจัยของระบบ MonetDB/X100 <span class="citation" data-cites="boncz2005monetdb">(<a href="../references.html#ref-boncz2005monetdb" role="doc-biblioref">Boncz และคณะ 2005</a>)</span> ต้นทุนของการเรียกฟังก์ชันถูกแบ่งเฉลี่ยไปบนค่าจำนวนมาก และลูปที่วนบนอาร์เรย์ของค่าชนิดเดียวกันทำให้ CPU ใช้ความสามารถอย่างคำสั่ง SIMD (คำนวณหลายค่าในคำสั่งเดียว) และหน่วยความจำแคชได้อย่างมีประสิทธิภาพ</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  subgraph T[ทีละแถว]
+    direction TB
+    a1[แถว 1] --&gt; f1[กรอง] --&gt; g1[รวม]
+    a2[แถว 2] --&gt; f2[กรอง] --&gt; g2[รวม]
+    a3[...]
+  end
+  subgraph V[ทีละ vector]
+    direction TB
+    b1["vector 2,048 ค่า"] --&gt; h1[กรองทั้ง vector] --&gt; k1[รวมทั้ง vector]
+  end
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>ผลในทางปฏิบัติคือ query เชิงวิเคราะห์บนข้อมูลหลายล้านแถว เช่น ค่าเฉลี่ยรายสถานีรายเดือน ใช้เวลาเพียงเสี้ยววินาทีถึงไม่กี่วินาทีบนเครื่องคอมพิวเตอร์ส่วนตัว นอกจากนี้ DuckDB ยังกระจายงานไปยังหลายแกนของ CPU ได้โดยอัตโนมัติ</p>
+</section>
+<section id="duckdb-ในระบบนเวศของ-python" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb-ในระบบนเวศของ-python">DuckDB ในระบบนิเวศของ Python</h3>
+<p>DuckDB อ่านข้อมูลจากหลายแหล่งได้โดยตรง โดยไม่ต้องโหลดเข้าตารางก่อน <span class="citation" data-cites="duckdb2026docs">(<a href="../references.html#ref-duckdb2026docs" role="doc-biblioref">DuckDB Foundation 2026</a>)</span></p>
+<ul>
+<li>query ไฟล์ CSV, JSON และ Parquet ได้ด้วยฟังก์ชัน เช่น <code>read_csv</code>, <code>read_json</code> และ <code>read_parquet</code></li>
+<li>query DataFrame ของ pandas หรือ Polars ที่อยู่ในตัวแปรของ Python ได้ด้วยชื่อตัวแปรนั้น</li>
+<li>ส่งผลลัพธ์เป็น DataFrame ของ pandas ด้วย <code>.df()</code> หรือของ Polars ด้วย <code>.pl()</code></li>
+</ul>
+<p>ความสามารถเหล่านี้ทำให้ DuckDB เป็นตัวเชื่อมระหว่างไฟล์ ฐานข้อมูล และ DataFrame ได้อย่างราบรื่น ซึ่งบทที่ 8 ใช้ประโยชน์อย่างมาก</p>
+</section>
+</section>
+<section id="sec-ch06-parquet" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-ch06-parquet"><span class="header-section-number">6.6</span> Parquet เชิงลึก: row group, encoding, compression, statistics</h2>
+<section id="parquet-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="parquet-คออะไร">Parquet คืออะไร</h3>
+<p><span class="idx">Parquet</span> เป็นรูปแบบไฟล์แบบ columnar แบบเปิดของ Apache Software Foundation ออกแบบมาเพื่อเก็บข้อมูลเชิงวิเคราะห์ให้ประหยัดพื้นที่และอ่านเร็ว โครงสร้างของมันได้แรงบันดาลใจจากระบบ Dremel ของ Google <span class="citation" data-cites="melnik2010dremel apache2026parquet">(<a href="../references.html#ref-melnik2010dremel" role="doc-biblioref">Melnik และคณะ 2010</a>; <a href="../references.html#ref-apache2026parquet" role="doc-biblioref">Apache Software Foundation 2026b</a>)</span> ไฟล์ Parquet เก็บชนิดข้อมูลไว้ในตัว ต่างจาก CSV ที่ทุกอย่างเป็นข้อความ และเครื่องมือเกือบทุกตัวในระบบนิเวศข้อมูลอ่านได้ ทั้ง pandas, Polars, DuckDB, Spark และโปรแกรม BI จึงเหมาะสำหรับแลกเปลี่ยนและสำรองข้อมูล</p>
+</section>
+<section id="โครงสรางภายในของไฟล" class="level3">
+<h3 class="anchored" data-anchor-id="โครงสรางภายในของไฟล">โครงสร้างภายในของไฟล์</h3>
+<p>ไฟล์ Parquet ไม่ได้เป็น column store ล้วน ๆ แต่เป็นแบบผสม (hybrid) แบ่งแถวเป็นกลุ่ม แล้วเก็บแต่ละกลุ่มแบบคอลัมน์</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  F[ไฟล์ Parquet] --&gt; RG1[row group 0&lt;br/&gt;แถว 1–122,880]
+  F --&gt; RG2[row group 1&lt;br/&gt;แถว 122,881–245,760]
+  F --&gt; RGn[...]
+  F --&gt; FT[footer&lt;br/&gt;schema + metadata + statistics]
+  RG1 --&gt; C1[column chunk: station_id]
+  RG1 --&gt; C2[column chunk: ts]
+  RG1 --&gt; C3[column chunk: pm25]
+  C3 --&gt; P1[page] &amp; P2[page]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="tbl-ch06-parquet-parts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-parquet-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.9: ส่วนประกอบของไฟล์ Parquet
+</figcaption>
+<div aria-describedby="tbl-ch06-parquet-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ส่วน</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>row group</td>
+<td>กลุ่มของแถว เป็นหน่วยที่อ่านแยกกันได้และประมวลผลขนานกันได้</td>
+</tr>
+<tr class="even">
+<td>column chunk</td>
+<td>ค่าของคอลัมน์หนึ่งภายใน row group หนึ่ง ถูกบีบอัดแยกกัน</td>
+</tr>
+<tr class="odd">
+<td>page</td>
+<td>หน่วยย่อยที่สุดของการเข้ารหัสและบีบอัดภายใน column chunk</td>
+</tr>
+<tr class="even">
+<td>footer</td>
+<td>อยู่ท้ายไฟล์ เก็บ schema ตำแหน่งของทุก column chunk และสถิติของแต่ละ chunk</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>การที่ footer อยู่ท้ายไฟล์ทำให้โปรแกรมอ่าน footer ก่อนเพียงส่วนเล็ก ๆ แล้วรู้ทันทีว่าต้องอ่านส่วนใดของไฟล์บ้าง โดยไม่ต้องอ่านทั้งไฟล์</p>
+</section>
+<section id="encoding-และ-compression" class="level3">
+<h3 class="anchored" data-anchor-id="encoding-และ-compression">encoding และ compression</h3>
+<p>ค่าในแต่ละ column chunk ผ่านสองขั้นก่อนบันทึก ขั้นแรกคือ <strong>encoding</strong> ซึ่งแปลงค่าให้อยู่ในรูปที่กะทัดรัดโดยใช้ความรู้เรื่องโครงสร้างของข้อมูล ขั้นที่สองคือ <strong>compression</strong> ซึ่งบีบอัดผลด้วยอัลกอริทึมทั่วไป</p>
+<ul>
+<li><strong><span class="idx">dictionary encoding</span></strong> สร้างพจนานุกรมของค่าที่ไม่ซ้ำ แล้วเก็บเพียงหมายเลขอ้างอิง เหมาะกับคอลัมน์ที่มีค่าซ้ำมาก เช่น <code>station_id</code> ซึ่งมีไม่กี่สิบค่าแต่ซ้ำหลายล้านครั้ง</li>
+<li><strong><span class="idx">run-length encoding</span></strong> (RLE) เก็บค่ากับจำนวนครั้งที่ซ้ำติดกัน เช่น <code>02t</code> ซ้ำ 52,608 ครั้ง เก็บเป็นคู่เดียว เหมาะเมื่อข้อมูลเรียงตามคอลัมน์นั้น</li>
+<li><strong>compression</strong> ใช้อัลกอริทึม เช่น Snappy หรือ Zstandard (ZSTD) บีบอัดผลลัพธ์อีกชั้น</li>
+</ul>
+</section>
+<section id="ลองดภายในไฟลจรง" class="level3">
+<h3 class="anchored" data-anchor-id="ลองดภายในไฟลจรง">ลองดูภายในไฟล์จริง</h3>
+<p>DuckDB อ่าน metadata ของไฟล์ Parquet ได้ด้วยฟังก์ชัน <code>parquet_metadata</code> ตัวอย่างต่อไปนี้ส่งออกตาราง <code>measurements</code> เป็นทั้ง CSV และ Parquet แล้วเปรียบเทียบ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"COPY measurements TO 'data/measurements.csv' (HEADER)"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""COPY measurements TO 'data/parquet/measurements.parquet'</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">               (FORMAT parquet, COMPRESSION zstd)"""</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> [<span class="st">"data/measurements.csv"</span>, <span class="st">"data/parquet/measurements.parquet"</span>]:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(f, <span class="bu">round</span>(os.path.getsize(f) <span class="op">/</span> <span class="fl">1e6</span>, <span class="dv">1</span>), <span class="st">"MB"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติประมาณ 420,000 แถว ขนาดจริงขึ้นกับข้อมูลที่ผู้อ่านดึงมา
+data/measurements.csv 22.0 MB
+data/parquet/measurements.parquet 3.7 MB</code></pre>
+<p>ไฟล์ Parquet เล็กกว่า CSV ประมาณหกเท่า และยังเก็บชนิดข้อมูลไว้ครบ จากนั้นดู metadata ของ row group สองกลุ่มแรก</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(con.execute(<span class="st">"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT row_group_id, path_in_schema AS col, row_group_num_rows AS n_rows,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">           compression, encodings, stats_min, stats_max</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM parquet_metadata('data/parquet/measurements.parquet')</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE path_in_schema IN ('ts', 'pm25') AND row_group_id &lt; 2</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY row_group_id, col</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+   row_group_id   col  n_rows compression         encodings            stats_min            stats_max
+0             0  pm25  122880        ZSTD  PLAIN_DICTIONARY                  3.7                209.7
+1             0    ts  122880        ZSTD             PLAIN  2020-01-01 00:00:00  2025-12-31 23:00:00
+2             1  pm25  122880        ZSTD  PLAIN_DICTIONARY                  4.3                156.9
+3             1    ts  122880        ZSTD             PLAIN  2020-01-01 00:00:00  2025-12-31 23:00:00</code></pre>
+</section>
+<section id="statistics-และ-predicate-pushdown" class="level3">
+<h3 class="anchored" data-anchor-id="statistics-และ-predicate-pushdown">statistics และ predicate pushdown</h3>
+<p>คอลัมน์ <code>stats_min</code> และ <code>stats_max</code> คือ <strong>statistics</strong> ที่ footer เก็บไว้สำหรับทุก column chunk ประโยชน์ของมันคือ <strong><span class="idx">predicate pushdown</span></strong> เมื่อ query มีเงื่อนไข เช่น <code>WHERE ts &gt;= '2025-01-01'</code> ตัวอ่านดูค่า <code>stats_max</code> ของคอลัมน์ <code>ts</code> ในแต่ละ row group ก่อน ถ้าค่าสูงสุดของ row group ใดน้อยกว่า 2025-01-01 ก็ข้าม row group นั้นไปได้ทั้งกลุ่มโดยไม่ต้องอ่าน</p>
+<p>แต่ผลลัพธ์ข้างบนแสดงปัญหาที่น่าสนใจ ทุก row group มีค่า <code>ts</code> ตั้งแต่ปี ค.ศ. 2020 ถึง 2025 เพราะตาราง <code>measurements</code> เรียงตามสถานี แต่ละ row group จึงมีข้อมูลของสถานีไม่กี่แห่งครบทุกปี statistics ของ <code>ts</code> จึงไม่ช่วยข้าม row group ใดได้เลย แก้ได้โดยเรียงข้อมูลตามเวลาก่อนเขียน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""COPY (SELECT * FROM measurements ORDER BY ts, station_id)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">               TO 'data/parquet/measurements_by_ts.parquet' (FORMAT parquet, COMPRESSION zstd)"""</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(con.execute(<span class="st">"""</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT row_group_id, stats_min AS ts_min, stats_max AS ts_max</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM parquet_metadata('data/parquet/measurements_by_ts.parquet')</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE path_in_schema = 'ts' ORDER BY row_group_id</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสมมุติเพื่อแสดงรูปแบบของผลลัพธ์
+   row_group_id               ts_min               ts_max
+0             0  2020-01-01 00:00:00  2021-10-01 23:00:00
+1             1  2021-10-02 00:00:00  2023-07-03 23:00:00
+2             2  2023-07-04 00:00:00  2025-04-03 23:00:00
+3             3  2025-04-04 00:00:00  2025-12-31 23:00:00</code></pre>
+<p>ตอนนี้แต่ละ row group ครอบคลุมช่วงเวลาที่ไม่ทับกัน query ที่ถามเฉพาะปี ค.ศ. 2025 อ่านเพียงสอง row group จากสี่ บทเรียนคือ <strong>ลำดับของข้อมูลในไฟล์ควรสอดคล้องกับเงื่อนไขที่ใช้กรองบ่อยที่สุด</strong> สำหรับข้อมูลอนุกรมเวลา เงื่อนไขนั้นมักเป็นเวลา</p>
+</section>
+</section>
+<section id="sec-ch06-arrow" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="sec-ch06-arrow"><span class="header-section-number">6.7</span> Apache Arrow: รูปแบบหน่วยความจำแบบ columnar และ zero-copy</h2>
+<section id="ปญหาของการสงขอมลระหวางเครองมอ" class="level3">
+<h3 class="anchored" data-anchor-id="ปญหาของการสงขอมลระหวางเครองมอ">ปัญหาของการส่งข้อมูลระหว่างเครื่องมือ</h3>
+<p>งานวิเคราะห์ข้อมูลหนึ่งงานมักใช้หลายเครื่องมือ เช่น query ด้วย DuckDB แปลงต่อด้วย pandas แล้ววาดกราฟด้วย Plotly ถ้าแต่ละเครื่องมือมีรูปแบบการเก็บข้อมูลในหน่วยความจำของตัวเอง ทุกครั้งที่ส่งข้อมูลข้ามเครื่องมือ ต้อง <em>แปลง</em> ค่าทีละค่า (serialize แล้ว deserialize) ซึ่งใช้ทั้งเวลาและหน่วยความจำเป็นสองเท่าระหว่างการแปลง สำหรับข้อมูลหลายล้านแถว การแปลงอาจใช้เวลานานกว่าการคำนวณจริง</p>
+</section>
+<section id="arrow-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-คออะไร">Arrow คืออะไร</h3>
+<p><span class="idx-tool">Apache Arrow</span> เป็นข้อกำหนดของรูปแบบตารางแบบ columnar <em>ในหน่วยความจำ</em> ที่เครื่องมือหลายตัวตกลงใช้ร่วมกัน <span class="citation" data-cites="apache2026arrow">(<a href="../references.html#ref-apache2026arrow" role="doc-biblioref">Apache Software Foundation 2026a</a>)</span> ถ้าทุกเครื่องมือเข้าใจรูปแบบเดียวกัน การส่งข้อมูลก็ไม่ต้องแปลง เพียงส่งตำแหน่งของหน่วยความจำ แนวคิดนี้เรียกว่า <strong><span class="idx">zero-copy</span></strong> คือส่งข้อมูลต่อได้โดยไม่ต้องคัดลอก</p>
+<p>ความสัมพันธ์ระหว่าง Parquet กับ Arrow จำได้ง่าย Parquet คือรูปแบบบน <em>ดิสก์</em> ที่เน้นการบีบอัดให้เล็ก ส่วน Arrow คือรูปแบบใน <em>หน่วยความจำ</em> ที่เน้นการคำนวณให้เร็ว เมื่ออ่านไฟล์ Parquet เครื่องมือมักคลายการบีบอัดออกมาเป็น Arrow</p>
+<div id="tbl-ch06-parquet-arrow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-parquet-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.10: เปรียบเทียบ Parquet กับ Arrow
+</figcaption>
+<div aria-describedby="tbl-ch06-parquet-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ด้าน</th>
+<th>Parquet</th>
+<th>Arrow</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>อยู่ที่</td>
+<td>ดิสก์</td>
+<td>หน่วยความจำ</td>
+</tr>
+<tr class="even">
+<td>เป้าหมาย</td>
+<td>เล็ก อ่านเฉพาะส่วนที่ต้องการได้</td>
+<td>คำนวณเร็ว ส่งต่อระหว่างเครื่องมือได้ทันที</td>
+</tr>
+<tr class="odd">
+<td>การบีบอัด</td>
+<td>มี (dictionary, RLE, ZSTD)</td>
+<td>โดยทั่วไปไม่บีบอัด</td>
+</tr>
+<tr class="even">
+<td>ใช้เมื่อ</td>
+<td>เก็บ สำรอง แลกเปลี่ยนไฟล์</td>
+<td>ส่งข้อมูลระหว่าง DuckDB, pandas, Polars</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="arrow-ในทางปฏบต" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-ในทางปฏบต">Arrow ในทางปฏิบัติ</h3>
+<p>ผู้อ่านแทบไม่ต้องเขียนโค้ด Arrow โดยตรง แต่ได้ประโยชน์จาก Arrow ทุกครั้งที่ DuckDB ส่งผลให้ pandas หรือ Polars ตัวอย่างต่อไปนี้แสดงการรับผลลัพธ์เป็น Arrow แล้วแปลงเป็น DataFrame สองแบบ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"SELECT station_id, ts, pm25 FROM measurements WHERE station_id = '02t'"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tbl <span class="op">=</span> con.execute(query).to_arrow_table()     <span class="co"># pyarrow.Table</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tbl.schema)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>df_numpy <span class="op">=</span> tbl.to_pandas()                            <span class="co"># dtype แบบ NumPy (ค่าเริ่มต้น)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>df_arrow <span class="op">=</span> tbl.to_pandas(types_mapper<span class="op">=</span>pd.ArrowDtype)  <span class="co"># dtype ที่มี Arrow อยู่เบื้องหลัง</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>df_polars <span class="op">=</span> con.execute(query).pl()                   <span class="co"># Polars ใช้ Arrow เป็นรูปแบบภายในอยู่แล้ว</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
+station_id: string
+ts: timestamp[us]
+pm25: double</code></pre>
+<p>ใน DuckDB 1.5 เมธอดชื่อเดิม <code>fetch_arrow_table()</code> ยังใช้ได้แต่แจ้งเตือนว่าเลิกใช้แล้ว (deprecated) และแนะนำให้ใช้ <code>to_arrow_table()</code> แทน ถ้าผู้อ่านใช้ DuckDB รุ่นก่อนหน้าที่ยังไม่มีเมธอดใหม่ ให้ใช้ชื่อเดิม ส่วน Polars ใช้ Arrow เป็นรูปแบบภายใน การส่งข้อมูลจาก DuckDB ไป Polars จึงแทบไม่มีต้นทุน บทที่ 8 อธิบาย dtype ที่มี Arrow อยู่เบื้องหลังใน pandas และข้อดีข้อเสียเมื่อเทียบกับ dtype แบบ NumPy</p>
+<p>ในทิศทางกลับกัน DuckDB query DataFrame ที่อยู่ในตัวแปรของ Python ได้โดยตรง ซึ่งเป็นประโยชน์ของ Arrow เช่นกัน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(con.execute(<span class="st">"SELECT COUNT(*), ROUND(AVG(pm25), 1) FROM df_polars"</span>).fetchone())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-ch06-partitioning" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="sec-ch06-partitioning"><span class="header-section-number">6.8</span> partitioning และการออกแบบที่เก็บข้อมูลสำหรับข้อมูลอนุกรมเวลา</h2>
+<section id="partitioning-คออะไร" class="level3">
+<h3 class="anchored" data-anchor-id="partitioning-คออะไร">partitioning คืออะไร</h3>
+<p>เมื่อข้อมูลใหญ่ขึ้น การเก็บทุกอย่างในไฟล์เดียวเริ่มมีข้อเสีย การเพิ่มข้อมูลใหม่ต้องเขียนไฟล์ใหญ่ใหม่ทั้งไฟล์ และ query ที่ต้องการข้อมูลเพียงบางส่วนยังต้องเปิดไฟล์ใหญ่ <strong><span class="idx">partitioning</span></strong> คือการแบ่งข้อมูลเป็นหลายไฟล์ตามค่าของคอลัมน์หนึ่ง เช่น แบ่งตามปี เพื่อให้ query อ่านเฉพาะไฟล์ที่เกี่ยวข้อง และเพิ่มข้อมูลใหม่ได้โดยเขียนเฉพาะไฟล์ของช่วงนั้น</p>
+<p>รูปแบบที่แพร่หลายคือ <strong><span class="idx">hive partitioning</span></strong> ซึ่งใช้ชื่อโฟลเดอร์ในรูป <code>คอลัมน์=ค่า</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">    COPY (SELECT *, year(ts) AS year FROM measurements)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">    TO 'data/parquet/measurements' (FORMAT parquet, PARTITION_BY (year), OVERWRITE_OR_IGNORE)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง) โครงสร้างโฟลเดอร์ที่ได้
+data/parquet/measurements/year=2020/data_0.parquet
+data/parquet/measurements/year=2021/data_0.parquet
+...
+data/parquet/measurements/year=2025/data_0.parquet</code></pre>
+<p>เมื่อ query ด้วยเงื่อนไขของคอลัมน์ที่ใช้ partition ตัวอ่านข้ามโฟลเดอร์ที่ไม่ตรงเงื่อนไขได้ทั้งโฟลเดอร์ การข้ามนี้เรียกว่า <strong><span class="idx">partition pruning</span></strong> ดูได้จากแผนการทำงานของ query</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plan <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">    EXPLAIN SELECT COUNT(*)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM read_parquet('data/parquet/measurements/*/*.parquet', hive_partitioning = true)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE year = 2024</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).fetchall()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(plan[<span class="dv">0</span>][<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง) บางส่วนของแผนการทำงาน
+│        READ_PARQUET       │
+│       File Filters:       │
+│       (year = 2024)       │
+│    Scanning Files: 1/6    │</code></pre>
+<p>บรรทัด <code>Scanning Files: 1/6</code> ยืนยันว่า DuckDB อ่านเพียงไฟล์เดียวจากหกไฟล์ บทที่ 7 หัวข้อ ★ อธิบายการอ่านแผนการทำงานของ query อย่างละเอียด</p>
+</section>
+<section id="ออกแบบ-partition-อยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="ออกแบบ-partition-อยางไร">ออกแบบ partition อย่างไร</h3>
+<p>การเลือกคอลัมน์และความละเอียดของ partition เป็นการชั่งน้ำหนักระหว่างสองปัญหา partition ที่หยาบเกินไป เช่น ไม่แบ่งเลย ทำให้ query ต้องอ่านข้อมูลที่ไม่ต้องการมาก ส่วน partition ที่ละเอียดเกินไป เช่น แบ่งรายชั่วโมงต่อสถานี ทำให้เกิดไฟล์เล็กจำนวนมหาศาล ซึ่งเรียกว่า <em>small files problem</em> การเปิดไฟล์แต่ละไฟล์มีต้นทุนคงที่ และไฟล์เล็กบีบอัดได้ไม่ดี</p>
+<div id="tbl-ch06-partition-design" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-partition-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.11: หลักการออกแบบ partition สำหรับข้อมูลอนุกรมเวลา
+</figcaption>
+<div aria-describedby="tbl-ch06-partition-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>หลักการ</th>
+<th>เหตุผล</th>
+<th>ตัวอย่างในโครงการ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>partition ตามคอลัมน์ที่ใช้กรองบ่อยที่สุด</td>
+<td>ให้ partition pruning ได้ผล</td>
+<td>เวลา เพราะเกือบทุก query กรองช่วงเวลา</td>
+</tr>
+<tr class="even">
+<td>เลือกความละเอียดให้แต่ละไฟล์มีขนาดเหมาะสม</td>
+<td>หลีกเลี่ยงไฟล์เล็กจำนวนมาก</td>
+<td>รายปี (ไฟล์ละประมาณ 1 MB สำหรับข้อมูลสมมุติ) หรือรายเดือนเมื่อข้อมูลใหญ่ขึ้นมาก</td>
+</tr>
+<tr class="odd">
+<td>ภายในไฟล์ เรียงตามคอลัมน์ที่ใช้กรองรอง</td>
+<td>ให้ statistics ของ row group ช่วยข้ามได้</td>
+<td>เรียงตาม <code>ts</code></td>
+</tr>
+<tr class="even">
+<td>ไม่ partition ตามคอลัมน์ที่มีค่าไม่ซ้ำจำนวนมาก</td>
+<td>ได้ไฟล์จำนวนมหาศาล</td>
+<td>ไม่ partition ตาม <code>ts</code> ระดับชั่วโมง</td>
+</tr>
+<tr class="odd">
+<td>แยกข้อมูลที่ยังเปลี่ยนออกจากข้อมูลที่นิ่งแล้ว</td>
+<td>เขียนใหม่เฉพาะส่วนที่เปลี่ยน</td>
+<td>ปีปัจจุบันเขียนใหม่ได้ ปีก่อนหน้าไม่ต้องแตะ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>สำหรับโครงการในเล่มนี้ ข้อมูลรายชั่วโมงหลายปีของสถานีจำนวนหลักร้อยมีขนาดหลักล้านแถว ตาราง <code>measurements</code> ในไฟล์ DuckDB ไฟล์เดียวก็เพียงพอ และ DuckDB จัดการการจัดเก็บภายในให้เอง การส่งออกเป็น Parquet แบบ partition เหมาะเมื่อต้องการแลกเปลี่ยนข้อมูลกับเครื่องมืออื่น สำรองข้อมูลรายปี หรือเมื่อข้อมูลใหญ่ขึ้นจนการเก็บในไฟล์เดียวไม่สะดวก</p>
+</section>
+</section>
+<section id="sec-ch06-alternatives" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="sec-ch06-alternatives"><span class="header-section-number">6.9</span> ทางเลือกอื่น: SQLite, PostgreSQL, data lake และ lakehouse ★</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>★ เนื้อหาเชิงลึก
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+</div>
+</div>
+<p>DuckDB เหมาะกับงานสำรวจข้อมูลของผู้วิเคราะห์คนเดียวหรือทีมเล็ก แต่ไม่ได้เหมาะกับทุกสถานการณ์ หัวข้อนี้เปรียบเทียบทางเลือกอื่นที่ผู้อ่านจะพบในการทำงานจริง</p>
+<section id="sqlite" class="level3">
+<h3 class="anchored" data-anchor-id="sqlite">SQLite</h3>
+<p>SQLite เป็นฐานข้อมูลแบบฝังที่ติดตั้งอยู่ในอุปกรณ์จำนวนมหาศาล ตั้งแต่โทรศัพท์มือถือจนถึงเบราว์เซอร์ <span class="citation" data-cites="sqlite2026about">(<a href="../references.html#ref-sqlite2026about" role="doc-biblioref">SQLite 2026</a>)</span> Python มีโมดูล <code>sqlite3</code> ในตัวโดยไม่ต้องติดตั้งเพิ่ม SQLite เป็น row store ที่เหมาะกับงาน OLTP ขนาดเล็ก เช่น เก็บการตั้งค่าของแอปพลิเคชัน หรือเก็บบันทึกการทำงานของ script แต่ช้ากว่า DuckDB มากสำหรับ query เชิงวิเคราะห์บนข้อมูลจำนวนมาก</p>
+</section>
+<section id="postgresql" class="level3">
+<h3 class="anchored" data-anchor-id="postgresql">PostgreSQL</h3>
+<p>PostgreSQL เป็นฐานข้อมูลแบบ client–server แบบเปิดที่มีความสามารถครบถ้วน <span class="citation" data-cites="postgresql2026docs">(<a href="../references.html#ref-postgresql2026docs" role="doc-biblioref">The PostgreSQL Global Development Group 2026</a>)</span> เหมาะเมื่อหลายคนหรือหลายโปรแกรมต้องเขียนข้อมูลพร้อมกัน ต้องการระบบสิทธิ์การเข้าถึงที่ละเอียด หรือเป็นฐานข้อมูลหลักของแอปพลิเคชัน ถ้าโครงการ PM2.5 ขยายเป็นระบบที่มีผู้ใช้จำนวนมาก PostgreSQL อาจเป็นที่เก็บข้อมูลต้นทาง และใช้ DuckDB อ่านข้อมูลจาก PostgreSQL มาวิเคราะห์ได้ผ่าน extension</p>
+</section>
+<section id="data-lake-และ-lakehouse" class="level3">
+<h3 class="anchored" data-anchor-id="data-lake-และ-lakehouse">data lake และ lakehouse</h3>
+<p>ในองค์กรที่มีข้อมูลขนาดใหญ่มาก ข้อมูลมักถูกเก็บเป็นไฟล์จำนวนมาก (เช่น Parquet) บน cloud storage ราคาถูก เรียกว่า <strong><span class="idx">data lake</span></strong> ข้อดีคือยืดหยุ่นและราคาต่ำ แต่ไฟล์ล้วน ๆ ขาดความสามารถของฐานข้อมูล เช่น การเขียนพร้อมกันอย่างปลอดภัย การแก้ไขข้อมูล และการย้อนเวอร์ชัน</p>
+<p><strong><span class="idx">lakehouse</span></strong> เป็นแนวคิดที่เพิ่มชั้นจัดการ (table format) อย่าง Delta Lake หรือ Apache Iceberg ไว้บนไฟล์ใน data lake เพื่อให้มีคุณสมบัติของฐานข้อมูล เช่น transaction และ schema ที่บังคับได้ ขณะที่ข้อมูลยังอยู่ในรูปไฟล์เปิดที่หลายเครื่องมืออ่านได้ <span class="citation" data-cites="armbrust2021lakehouse">(<a href="../references.html#ref-armbrust2021lakehouse" role="doc-biblioref">Armbrust และคณะ 2021</a>)</span></p>
+<div id="tbl-ch06-alternatives" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-alternatives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.12: ทางเลือกในการจัดเก็บข้อมูลและสถานการณ์ที่เหมาะสม
+</figcaption>
+<div aria-describedby="tbl-ch06-alternatives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ทางเลือก</th>
+<th>สถาปัตยกรรม</th>
+<th>จุดแข็ง</th>
+<th>ใช้เมื่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DuckDB</td>
+<td>in-process, column store</td>
+<td>เร็วมากสำหรับงานวิเคราะห์ ไม่ต้องดูแล</td>
+<td>งานสำรวจบนเครื่องผู้วิเคราะห์</td>
+</tr>
+<tr class="even">
+<td>SQLite</td>
+<td>in-process, row store</td>
+<td>มีอยู่ทุกที่ เสถียรมาก</td>
+<td>งาน OLTP ขนาดเล็ก เก็บสถานะของโปรแกรม</td>
+</tr>
+<tr class="odd">
+<td>PostgreSQL</td>
+<td>client–server, row store</td>
+<td>หลายผู้ใช้ ครบเครื่อง</td>
+<td>ฐานข้อมูลของแอปพลิเคชัน ข้อมูลต้นทางที่หลายคนเขียน</td>
+</tr>
+<tr class="even">
+<td>data lake</td>
+<td>ไฟล์บน cloud storage</td>
+<td>ราคาถูก ขยายได้ไม่จำกัด</td>
+<td>ข้อมูลขนาดใหญ่มาก หลายรูปแบบ</td>
+</tr>
+<tr class="odd">
+<td>lakehouse</td>
+<td>table format บน data lake</td>
+<td>ยืดหยุ่นแบบ lake พร้อมคุณสมบัติแบบฐานข้อมูล</td>
+<td>องค์กรขนาดใหญ่ที่หลายทีมใช้ข้อมูลร่วมกัน</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>หลักการเลือกเหมือนกับที่บทที่ 0 กล่าวไว้ คือ เลือกเครื่องมือที่น้อยที่สุดที่แก้ปัญหาได้ สำหรับโครงการในรายวิชา DuckDB ไฟล์เดียวเพียงพอ และหลักการในบทนี้ ได้แก่ key, integrity, columnar storage และ partitioning ใช้ได้กับทุกทางเลือกในตาราง</p>
+</section>
+</section>
+<section id="sec-ch06-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch06-case">กรณีศึกษา: ออกแบบที่เก็บข้อมูล PM2.5 ของโครงการ</h2>
+<p><strong>คำถาม</strong> ข้อมูลจาก <code>data/raw/*.json</code> ควรถูกจัดเก็บอย่างไรให้ตอบคำถาม Q1 (ภาคใดมีสัดส่วนวันเกินมาตรฐานสูงสุด) ได้อย่างถูกต้องและรวดเร็ว และรองรับการเพิ่มข้อมูลทุกชั่วโมงตลอดภาคการศึกษา</p>
+<p><strong>ข้อมูล</strong> ไฟล์ JSON ที่ script ในบทที่ 5 บันทึกไว้ ไฟล์ละหนึ่งชั่วโมง แต่ละไฟล์มีทั้งข้อมูลสถานีและค่าวัดของทุกสถานี</p>
+<p><strong>วิธีการ</strong> ตัดสินใจทีละเรื่องตามหลักการของบทนี้</p>
+<ol type="1">
+<li><strong>แยกตารางตามอัตราการเปลี่ยนแปลง</strong> (หัวข้อ <a href="#sec-ch06-normalization" class="quarto-xref"><span>6.2</span></a>) ข้อมูลสถานีแทบไม่เปลี่ยน แต่ค่าวัดเพิ่มขึ้นทุกชั่วโมง จึงแยกเป็น <code>stations</code> และ <code>measurements</code> ข้อมูลสถานีที่ซ้ำอยู่ในทุกไฟล์ JSON จะถูกเก็บเพียงครั้งเดียว</li>
+<li><strong>เลือก key</strong> (หัวข้อ <a href="#sec-ch06-relational" class="quarto-xref"><span>6.1</span></a>) <code>stations</code> ใช้ <code>station_id</code> เป็น primary key และ <code>measurements</code> ใช้ <code>(station_id, ts)</code> ซึ่งทำให้ฐานข้อมูลปฏิเสธแถวซ้ำเมื่อโหลดไฟล์ที่ทับซ้อนกัน ตรงกับหลัก idempotency ในบทที่ 5</li>
+<li><strong>เลือกชนิดข้อมูล</strong> <code>ts</code> เป็น <code>TIMESTAMP</code> เวลาท้องถิ่น Asia/Bangkok ค่าสารมลพิษเป็น <code>DOUBLE</code> และค่าหายเป็น <code>NULL</code> ไม่ใช่ -1 ส่วน <code>region</code> เติมจากตาราง mapping จังหวัดกับภาคที่เขียนเอง เพราะ Air4Thai ไม่ได้ส่งภาคมา</li>
+<li><strong>ตัดสินใจเรื่อง denormalization</strong> เก็บ <code>region</code> ไว้ใน <code>stations</code> โดยตรง แม้จะไม่เป็นไปตาม 3NF เพราะจังหวัดแทบไม่ย้ายภาค และทำให้ query ของ Q1 เขียนง่ายขึ้น บันทึกการตัดสินใจนี้ไว้ในพจนานุกรมข้อมูล</li>
+<li><strong>เลือกที่เก็บ</strong> (หัวข้อ <a href="#sec-ch06-duckdb" class="quarto-xref"><span>6.5</span></a>) ใช้ DuckDB ไฟล์เดียว <code>data/pm25.duckdb</code> เพราะงานเป็น OLAP ผู้วิเคราะห์มีคนเดียวหรือทีมเล็ก และไม่ต้องดูแลเซิร์ฟเวอร์</li>
+<li><strong>วางแผนการสำรองและแลกเปลี่ยน</strong> (หัวข้อ <a href="#sec-ch06-partitioning" class="quarto-xref"><span>6.8</span></a>) ส่งออก <code>measurements</code> เป็น Parquet แบบ partition รายปี เรียงตาม <code>ts</code> ภายในไฟล์ เพื่อแบ่งปันข้อมูลกับเพื่อนในทีมหรือนำไปใช้กับเครื่องมืออื่น</li>
+</ol>
+<p><strong>ผล</strong> schema ที่ได้ตรงกับที่เอกสารรายสัปดาห์ที่ 4 กำหนด ใน <a href="00-overview.html#tbl-ch00-tables" class="quarto-xref">ตารางที่&nbsp;<span>5</span></a> ของบทที่ 0 query ของ Q1 ต้อง join เพียงสองตาราง และการโหลดซ้ำไม่สร้างแถวซ้ำ เมื่อทดลองกับข้อมูลสมมุติประมาณ 420,000 แถว ไฟล์ Parquet มีขนาดประมาณหนึ่งในหกของ CSV และ query ที่กรองตามปีอ่านเพียงไฟล์เดียวจากหกไฟล์</p>
+<p><strong>การตีความ</strong> การออกแบบนี้ไม่ได้ทำให้ query เร็วขึ้นเท่านั้น แต่ทำให้ข้อมูล <em>ถูกต้อง</em> ขึ้นด้วย primary key ป้องกันแถวซ้ำ การเก็บค่าหายเป็น <code>NULL</code> ป้องกันค่าเฉลี่ยที่ผิด และการเก็บข้อมูลสถานีที่เดียวป้องกันไม่ให้สถานีเดียวกันอยู่สองภาค</p>
+<p><strong>ข้อจำกัด</strong> schema นี้เก็บสารมลพิษเป็นคอลัมน์ ถ้าในอนาคตต้องเพิ่มสารมลพิษชนิดใหม่ ต้องเพิ่มคอลัมน์ใหม่ทั้งตาราง และตารางนี้ไม่ได้บันทึกว่าค่าวัดแต่ละค่ามาจากไฟล์ดิบใดและดึงเมื่อไร ถ้าต้องการสืบย้อนที่มาของแต่ละแถว (data lineage) อาจเพิ่มคอลัมน์ <code>fetched_at</code> หรือ <code>source_file</code> ซึ่งเป็นการตัดสินใจที่ควรบันทึกไว้ใน <code>questions.md</code> หรือพจนานุกรมข้อมูลถ้าเลือกทำ</p>
+</section>
+<section id="sec-ch06-pitfalls" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch06-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
+<div id="tbl-ch06-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch06-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;6.13: ข้อผิดพลาดที่พบบ่อยในบทที่ 6
+</figcaption>
+<div aria-describedby="tbl-ch06-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ข้อผิดพลาด</th>
+<th>ทำไมผิด</th>
+<th>ทำอย่างไรแทน</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ไม่กำหนด primary key ให้ <code>measurements</code></td>
+<td>โหลดซ้ำแล้วเกิดแถวซ้ำ ค่าเฉลี่ยและการนับผิดโดยไม่รู้ตัว</td>
+<td>กำหนด <code>PRIMARY KEY (station_id, ts)</code></td>
+</tr>
+<tr class="even">
+<td>เก็บค่าหายเป็น <code>-1</code> หรือ <code>-999</code></td>
+<td><code>AVG()</code> นำค่าแทนไปคำนวณ ได้ค่าเฉลี่ยต่ำกว่าความจริง</td>
+<td>แปลงเป็น <code>NULL</code> ในขั้นโหลด และพิจารณาเพิ่ม <code>CHECK (pm25 &gt;= 0)</code></td>
+</tr>
+<tr class="odd">
+<td>เก็บชื่อ จังหวัด และภาคของสถานีซ้ำในทุกแถวของค่าวัด</td>
+<td>แก้ข้อมูลไม่ครบแล้วขัดแย้งกันเอง</td>
+<td>แยกตาราง <code>stations</code> และ join เมื่อต้องการ</td>
+</tr>
+<tr class="even">
+<td>พึ่งลำดับของแถวที่เห็นในครั้งก่อน</td>
+<td>relation ไม่มีลำดับ ผลอาจเรียงต่างไปในครั้งถัดไป</td>
+<td>สั่ง <code>ORDER BY</code> ทุกครั้งที่ลำดับมีความหมาย</td>
+</tr>
+<tr class="odd">
+<td>เปิดไฟล์ DuckDB แบบเขียนได้จากหลายโปรแกรมพร้อมกัน</td>
+<td>ไฟล์ถูกล็อก โปรแกรมที่สองเปิดไม่ได้</td>
+<td>เปิดด้วย <code>read_only=True</code> สำหรับการวิเคราะห์ทุกครั้ง</td>
+</tr>
+<tr class="even">
+<td>ส่งออก CSV เพื่อแลกเปลี่ยนข้อมูลขนาดใหญ่</td>
+<td>ไฟล์ใหญ่ ชนิดข้อมูลหาย วันที่และรหัสถูกตีความผิด</td>
+<td>ใช้ Parquet ซึ่งเก็บชนิดข้อมูลและบีบอัดได้</td>
+</tr>
+<tr class="odd">
+<td>เขียน Parquet โดยไม่เรียงตามเวลา</td>
+<td>statistics ของ row group ข้ามข้อมูลไม่ได้ ทุก query ต้องอ่านทั้งไฟล์</td>
+<td>เรียงตาม <code>ts</code> ก่อนเขียน</td>
+</tr>
+<tr class="even">
+<td>partition ละเอียดเกินไป เช่น รายชั่วโมงต่อสถานี</td>
+<td>ไฟล์เล็กจำนวนมหาศาล ช้ากว่าไม่ partition</td>
+<td>partition รายปีหรือรายเดือนตามขนาดข้อมูล</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="สรป" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
+<ul>
+<li>แบบจำลองเชิงสัมพันธ์จัดข้อมูลเป็นตารางที่มี key ระบุแถว primary key และ foreign key ร่วมกับ integrity constraint อย่าง <code>CHECK</code> ทำให้ฐานข้อมูลปฏิเสธข้อมูลที่ผิดได้ทันที</li>
+<li>normalization เก็บข้อเท็จจริงแต่ละข้อไว้ที่เดียวเพื่อป้องกันความขัดแย้ง ส่วน denormalization เก็บซ้ำอย่างตั้งใจเพื่อให้อ่านง่ายและเร็ว schema ของโครงการแยก <code>stations</code> กับ <code>measurements</code> และเก็บ <code>region</code> ไว้ใน <code>stations</code> อย่างตั้งใจ</li>
+<li>งานสำรวจข้อมูลเป็นงาน OLAP ที่อ่านไม่กี่คอลัมน์จากข้อมูลจำนวนมาก จึงเหมาะกับ column store ซึ่งอ่านเฉพาะคอลัมน์ที่ต้องการและบีบอัดได้ดีกว่า row store</li>
+<li>DuckDB เป็นฐานข้อมูล in-process แบบ column store ที่ประมวลผลทีละ vector ไม่ต้องดูแลเซิร์ฟเวอร์ และส่งข้อมูลให้ pandas และ Polars ได้เร็ว ต้องเปิดแบบ <code>read_only=True</code> สำหรับการวิเคราะห์</li>
+<li>Parquet แบ่งข้อมูลเป็น row group ที่เก็บแบบคอลัมน์ พร้อม encoding, compression และ statistics ลำดับของข้อมูลในไฟล์กำหนดว่า statistics ช่วยข้ามข้อมูลได้หรือไม่</li>
+<li>Arrow เป็นรูปแบบ columnar ในหน่วยความจำที่ทำให้ส่งข้อมูลระหว่างเครื่องมือได้โดยไม่ต้องแปลง ส่วน Parquet เป็นรูปแบบบนดิสก์</li>
+<li>partition ข้อมูลอนุกรมเวลาตามเวลาในความละเอียดที่เหมาะสม และเรียงตามเวลาภายในไฟล์ ทำให้ query อ่านเฉพาะส่วนที่ต้องการ</li>
+</ul>
+</section>
+<section id="sec-ch06-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch06-exercises">แบบฝึกหัด</h2>
+<section id="ระดบพนฐาน" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
+<ol type="1">
+<li>ทำไมตาราง <code>measurements</code> จึงต้องใช้ primary key ประกอบ <code>(station_id, ts)</code> และจะเกิดอะไรขึ้นถ้าใช้ <code>ts</code> อย่างเดียวเป็น primary key</li>
+<li>อธิบาย update anomaly ด้วยตัวอย่างจากข้อมูล PM2.5 และบอกว่าการแยกตาราง <code>stations</code> ป้องกันปัญหานี้อย่างไร</li>
+<li>ระบุว่า query ต่อไปนี้เป็นงาน OLTP หรือ OLAP: (ก) บันทึกค่าวัดใหม่หนึ่งค่า (ข) หาสัดส่วนวันเกินมาตรฐานของทุกสถานีในห้าปี (ค) แก้ชื่อสถานีหนึ่งแห่ง (ง) หาค่าสูงสุดรายเดือนของแต่ละภาค</li>
+<li>อธิบายว่าทำไม column store จึงบีบอัดคอลัมน์ <code>station_id</code> ได้ดีกว่า row store</li>
+<li>Parquet กับ Arrow ต่างกันอย่างไร และแต่ละรูปแบบเหมาะกับงานใด</li>
+</ol>
+</section>
+<section id="ระดบประยกต" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
+<ol start="6" type="1">
+<li>สร้างตาราง <code>measurements</code> ในฐานข้อมูลทดลองที่มี <code>CHECK (pm25 &gt;= 0 AND pm25 &lt; 1000)</code> แล้วพยายามเพิ่มแถวที่มีค่า -1, 0 และ 1,500 บันทึกว่าแถวใดถูกปฏิเสธ และอภิปรายว่าขอบบน 1,000 µg/m³ เหมาะสมหรือไม่</li>
+<li>ส่งออกตาราง <code>measurements</code> ของโครงการเป็น CSV และ Parquet แบบ ZSTD และแบบ Snappy เปรียบเทียบขนาดไฟล์ทั้งสามแบบ และเวลาที่ใช้อ่านคอลัมน์ <code>pm25</code> ของแต่ละไฟล์ด้วย DuckDB</li>
+<li>ใช้ <code>parquet_metadata</code> ตรวจไฟล์ Parquet ที่ส่งออก นับจำนวน row group และดู encoding ของคอลัมน์ <code>station_id</code> อธิบายว่าทำไมจึงได้ encoding แบบนั้น</li>
+<li>ส่งออก <code>measurements</code> แบบ partition รายปี แล้วใช้ <code>EXPLAIN</code> ตรวจว่า query ที่กรอง <code>year = 2023</code> อ่านกี่ไฟล์ จากนั้นลอง query ที่กรองด้วย <code>ts &gt;= '2023-01-01' AND ts &lt; '2024-01-01'</code> แทน อ่านกี่ไฟล์ และทำไม</li>
+<li>เขียน <code>CREATE VIEW measurements_with_station</code> ตามตัวอย่างในหัวข้อ <a href="#sec-ch06-normalization" class="quarto-xref"><span>6.2</span></a> ในฐานข้อมูลของโครงการ แล้วใช้ view นี้หาจำนวนแถวต่อภาค เปรียบเทียบผลกับการ join ตรง ๆ</li>
+</ol>
+</section>
+<section id="ระดบทาทาย" class="level3">
+<h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
+<ol start="11" type="1">
+<li>ออกแบบ star schema สำหรับข้อมูล PM2.5 ที่มี <code>fact_measurement</code> ในรูปแบบยาว (หนึ่งแถวต่อสารมลพิษ) และ dimension <code>dim_station</code>, <code>dim_time</code> และ <code>dim_pollutant</code> เขียน SQL สร้างตารางจาก <code>measurements</code> และ <code>stations</code> แล้วเปรียบเทียบความยากของ query Q1 ระหว่าง schema เดิมกับ star schema</li>
+<li>เปรียบเทียบประสิทธิภาพของ SQLite กับ DuckDB บน query เชิงวิเคราะห์สามแบบ (ค่าเฉลี่ยรายสถานี ค่าเฉลี่ยรายเดือนต่อภาค และการหาแถวเดียวด้วย primary key) โดยใช้ข้อมูลชุดเดียวกัน อธิบายผลด้วยแนวคิด row store และ column store</li>
+<li>ศึกษา table format อย่าง Apache Iceberg หรือ Delta Lake แล้วเขียนรายงานสั้นว่า ถ้าโครงการ PM2.5 ขยายเป็นระบบระดับประเทศที่หลายหน่วยงานเพิ่มข้อมูลพร้อมกัน ควรออกแบบที่เก็บข้อมูลอย่างไร และต้องเพิ่มความสามารถใดที่ DuckDB ไฟล์เดียวไม่มี</li>
+</ol>
+<p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch06">ภาคผนวก ช</a></p>
+</section>
+</section>
+<section id="อานเพมเตม" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
+<ul>
+<li><span class="citation" data-cites="codd1970relational">Codd (<a href="../references.html#ref-codd1970relational" role="doc-biblioref">1970</a>)</span> — บทความต้นฉบับของแบบจำลองเชิงสัมพันธ์ แม้จะเขียนด้วยภาษาคณิตศาสตร์ แต่ส่วนบทนำอธิบายแรงจูงใจที่ยังเป็นจริงในปัจจุบัน</li>
+<li><span class="citation" data-cites="elmasri2016fundamentals">Elmasri และ Navathe (<a href="../references.html#ref-elmasri2016fundamentals" role="doc-biblioref">2016</a>)</span> — ตำราฐานข้อมูลที่อธิบาย normalization และรูปแบบปกติทุกระดับอย่างละเอียด พร้อมตัวอย่าง</li>
+<li><span class="citation" data-cites="abadi2008column">Abadi และคณะ (<a href="../references.html#ref-abadi2008column" role="doc-biblioref">2008</a>)</span> — งานวิจัยที่วิเคราะห์ว่าข้อได้เปรียบของ column store มาจากไหน ช่วยให้เข้าใจว่าการออกแบบทั้งระบบสำคัญกว่าการจัดเก็บเพียงอย่างเดียว</li>
+<li><span class="citation" data-cites="raasveldt2019duckdb">Raasveldt และ Mühleisen (<a href="../references.html#ref-raasveldt2019duckdb" role="doc-biblioref">2019</a>)</span> — บทความแนะนำ DuckDB จากผู้พัฒนา อธิบายเหตุผลของการออกแบบแบบ in-process</li>
+<li><span class="citation" data-cites="kimball2013data">Kimball และ Ross (<a href="../references.html#ref-kimball2013data" role="doc-biblioref">2013</a>)</span> — ตำราการออกแบบคลังข้อมูลแบบ dimensional modeling และ star schema ที่ใช้กันแพร่หลายในอุตสาหกรรม</li>
+<li><span class="citation" data-cites="apache2026parquet">Apache Software Foundation (<a href="../references.html#ref-apache2026parquet" role="doc-biblioref">2026b</a>)</span> — เอกสารทางการของ Parquet อธิบายรูปแบบไฟล์ encoding และ metadata</li>
+<li><span class="citation" data-cites="armbrust2021lakehouse">Armbrust และคณะ (<a href="../references.html#ref-armbrust2021lakehouse" role="doc-biblioref">2021</a>)</span> — บทความที่เสนอแนวคิด lakehouse และวิเคราะห์ข้อจำกัดของ data warehouse และ data lake แบบดั้งเดิม</li>
+</ul>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-abadi2008column" class="csl-entry" role="listitem">
+Abadi, Daniel J., Samuel R. Madden, และ Nabil Hachem. 2008. <span>“Column-Stores vs. Row-Stores: How Different Are They Really?”</span> <em>Proceedings of the 2008 ACM SIGMOD International Conference on Management of Data</em>, 967–80. <a href="https://doi.org/10.1145/1376616.1376712">https://doi.org/10.1145/1376616.1376712</a>.
+</div>
+<div id="ref-apache2026arrow" class="csl-entry" role="listitem">
+Apache Software Foundation. 2026a. <em>Apache Arrow Columnar Format</em>. <a href="https://arrow.apache.org/docs/format/Columnar.html">https://arrow.apache.org/docs/format/Columnar.html</a>.
+</div>
+<div id="ref-apache2026parquet" class="csl-entry" role="listitem">
+Apache Software Foundation. 2026b. <em>Apache Parquet Documentation</em>. <a href="https://parquet.apache.org/docs/">https://parquet.apache.org/docs/</a>.
+</div>
+<div id="ref-armbrust2021lakehouse" class="csl-entry" role="listitem">
+Armbrust, Michael, Ali Ghodsi, Reynold Xin, และ Matei Zaharia. 2021. <span>“Lakehouse: A New Generation of Open Platforms That Unify Data Warehousing and Advanced Analytics”</span>. <em>Proceedings of the 11th Conference on Innovative Data Systems Research (CIDR)</em>.
+</div>
+<div id="ref-boncz2005monetdb" class="csl-entry" role="listitem">
+Boncz, Peter, Marcin Zukowski, และ Niels Nes. 2005. <span>“<span>MonetDB/X100</span>: Hyper-Pipelining Query Execution”</span>. <em>Proceedings of the Second Biennial Conference on Innovative Data Systems Research (CIDR)</em>.
+</div>
+<div id="ref-codd1970relational" class="csl-entry" role="listitem">
+Codd, Edgar F. 1970. <span>“A Relational Model of Data for Large Shared Data Banks”</span>. <em>Communications of the ACM</em> 13 (6): 377–87. <a href="https://doi.org/10.1145/362384.362685">https://doi.org/10.1145/362384.362685</a>.
+</div>
+<div id="ref-duckdb2026docs" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026. <em><span>DuckDB</span> Documentation</em>. <a href="https://duckdb.org/docs/">https://duckdb.org/docs/</a>.
+</div>
+<div id="ref-elmasri2016fundamentals" class="csl-entry" role="listitem">
+Elmasri, Ramez, และ Shamkant B. Navathe. 2016. <em>Fundamentals of Database Systems</em>. 7 พิมพ์ครั้งที่. Pearson.
+</div>
+<div id="ref-kimball2013data" class="csl-entry" role="listitem">
+Kimball, Ralph, และ Margy Ross. 2013. <em>The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling</em>. 3 พิมพ์ครั้งที่. Wiley.
+</div>
+<div id="ref-melnik2010dremel" class="csl-entry" role="listitem">
+Melnik, Sergey, Andrey Gubarev, Jing Jing Long, และคณะ. 2010. <span>“Dremel: Interactive Analysis of Web-Scale Datasets”</span>. <em>Proceedings of the VLDB Endowment</em> 3 (1–2): 330–39.
+</div>
+<div id="ref-raasveldt2019duckdb" class="csl-entry" role="listitem">
+Raasveldt, Mark, และ Hannes Mühleisen. 2019. <span>“<span>DuckDB</span>: An Embeddable Analytical Database”</span>. <em>Proceedings of the 2019 International Conference on Management of Data (SIGMOD)</em>, 1981–84. <a href="https://doi.org/10.1145/3299869.3320212">https://doi.org/10.1145/3299869.3320212</a>.
+</div>
+<div id="ref-sqlite2026about" class="csl-entry" role="listitem">
+SQLite. 2026. <em>About <span>SQLite</span></em>. <a href="https://www.sqlite.org/about.html">https://www.sqlite.org/about.html</a>.
+</div>
+<div id="ref-postgresql2026docs" class="csl-entry" role="listitem">
+The PostgreSQL Global Development Group. 2026. <em><span>PostgreSQL</span> Documentation</em>. <a href="https://www.postgresql.org/docs/">https://www.postgresql.org/docs/</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/05-data-acquisition.html" class="pagination-link" aria-label="การได้มาซึ่งข้อมูลจาก API และเว็บไซต์">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">การได้มาซึ่งข้อมูลจาก API และเว็บไซต์</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/07-sql-analysis.html" class="pagination-link" aria-label="SQL เพื่อการวิเคราะห์">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">SQL เพื่อการวิเคราะห์</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
