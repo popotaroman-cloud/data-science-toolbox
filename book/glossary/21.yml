@@ -1,23 +1,16 @@
-- term: Architecture decision record (ADR)
+- term: Architecture decision record
   th: บันทึกการตัดสินใจออกแบบ
   definition: >
-    เอกสารสั้นที่บันทึกบริบท สิ่งที่ตัดสินใจ ทางเลือกที่พิจารณา และผลที่ตามมาของการตัดสินใจออกแบบแต่ละข้อ
-    ช่วยให้ผู้อื่นเข้าใจว่าทำไมระบบจึงเป็นแบบนี้
+    เอกสารสั้นที่บันทึกการตัดสินใจออกแบบหนึ่งข้อ พร้อมบริบท ทางเลือกที่พิจารณา เหตุผล และข้อแลกเปลี่ยน
   section: sec-ch21-architecture
-  see_also: [Reproducibility]
-
+- term: Data lineage
+  th: ลำดับวงศ์ของข้อมูล
+  definition: >
+    ความสัมพันธ์ที่บอกว่าแต่ละตารางสร้างจากตารางใด ด้วยโค้ดใด ใช้หาสาเหตุของตัวเลขที่ผิดและรู้ว่าต้องรันขั้นใดใหม่
+  section: sec-ch21-architecture
+  see_also: [Pipeline]
 - term: Sensitivity analysis
   th: การวิเคราะห์ความไว
   definition: >
-    การคำนวณผลซ้ำด้วยทางเลือกที่สมเหตุสมผลต่างกัน เช่น เกณฑ์ความครบถ้วนหรือวิธีจัดการข้อมูลสูญหาย
-    เพื่อดูว่าข้อสรุปเปลี่ยนหรือไม่
-  section: sec-ch21-quality
-  see_also: [Missing data, Garden of forking paths]
-
-- term: Cluster bootstrap
-  th: cluster bootstrap
-  definition: >
-    bootstrap ที่สุ่มทั้งกลุ่ม เช่น ทั้งสถานี แทนการสุ่มทีละแถว ใช้เมื่อข้อมูลภายในกลุ่มสัมพันธ์กัน
-    ให้ช่วงความเชื่อมั่นที่ซื่อตรงกว่าการถือว่าทุกแถวเป็นอิสระ
-  section: sec-ch21-findings
-  see_also: [Bootstrap, Autocorrelation]
+    การคำนวณคำตอบซ้ำภายใต้การตัดสินใจหลายแบบ เช่น เกณฑ์ความครบถ้วนต่างกัน เพื่อดูว่าข้อสรุปมั่นคงหรือขึ้นกับการตัดสินใจนั้น
+  section: sec-ch21-case

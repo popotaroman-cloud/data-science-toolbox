@@ -1,31 +1,41 @@
 - term: Data storytelling
   th: การเล่าเรื่องด้วยข้อมูล
   definition: >
-    การสื่อสารผลการวิเคราะห์ที่จัดโครงสร้างตามความต้องการของผู้อ่าน ข้อค้นพบก่อน หลักฐานตาม
-    พร้อมบริบทของตัวเลข ข้อจำกัด และความไม่แน่นอน
+    การเรียบเรียงข้อค้นพบจากข้อมูลให้ผู้อ่านเฉพาะกลุ่มเข้าใจและนำไปใช้ได้ โดยบอกข้อค้นพบก่อน
+    ให้หลักฐานตาม และบอกความไม่แน่นอนอย่างซื่อตรง
   section: sec-ch19-structure
-  see_also: [Literate programming]
-
+- term: Pyramid principle
+  th: หลักการพีระมิด
+  definition: >
+    โครงสร้างการเขียนที่ข้อสรุปหลักอยู่บนยอด ข้อสนับสนุนอยู่ชั้นถัดลงมา และหลักฐานอยู่ชั้นล่างสุด
+    ผู้อ่านหยุดที่ชั้นใดก็ได้สาระสำคัญแล้ว
+  section: sec-ch19-structure
+- term: Martini glass structure
+  th: โครงสร้างแก้วมาร์ตินี
+  definition: >
+    โครงสร้างการเล่าเรื่องด้วยภาพที่เริ่มด้วยส่วนที่ผู้เขียนนำลำดับ แล้วเปิดให้ผู้อ่านสำรวจเองในตอนท้าย
+  section: sec-ch19-structure
 - term: Literate programming
   th: literate programming
   definition: >
-    แนวคิดของ Knuth ที่เขียนโปรแกรมเป็นงานเขียนอธิบายความคิดโดยมีโค้ดแทรก ในงานข้อมูลคือเอกสาร
-    ที่รวมข้อความ โค้ด และผลลัพธ์ ทำให้ตัวเลขในรายงานตรงกับการคำนวณเสมอ
+    แนวคิดของ Knuth ที่ให้เขียนโปรแกรมเพื่อให้คนอ่าน โดยมีคำอธิบายและโค้ดสานกันในเอกสารเดียว
+    เป็นพื้นฐานของ Quarto และ notebook
   section: sec-ch19-quarto
-  see_also: [Reproducibility, Notebook]
-
-- term: Inline code
-  th: inline code
+  see_also: [Quarto]
+- term: Quarto
+  th: Quarto
   definition: >
-    expression ที่แทรกในข้อความของเอกสาร Quarto ด้วยรูปแบบ `{python} expr` ผลลัพธ์ถูกแทรกลงในประโยค
-    เมื่อ render จึงไม่ต้องคัดลอกตัวเลขด้วยมือ
+    ระบบเผยแพร่เอกสารเชิงคำนวณที่รันโค้ดทุกครั้งที่ render แล้วสร้าง HTML, PDF, Word หรือสไลด์
+    ตัวเลขและกราฟจึงตรงกับข้อมูลเสมอ
   section: sec-ch19-quarto
-  see_also: [Literate programming]
-
 - term: Parameterized report
   th: รายงานแบบมีพารามิเตอร์
   definition: >
-    แม่แบบรายงานที่รับค่าพารามิเตอร์จากภายนอก แล้ว render ซ้ำด้วยค่าต่างกันเพื่อสร้างหลายฉบับ
-    เช่น หนึ่งฉบับต่อภาค เอกสาร Python ใน Quarto ใช้กลไกของ papermill
-  section: sec-ch19-parameterized
-  see_also: [Inline code]
+    รายงานต้นฉบับเดียวที่มีตัวแปรสำหรับส่วนที่ต่างกัน เช่น ภาคหรือปี แล้ว render หลายครั้งด้วยค่าต่างกัน
+  section: sec-ch19-params
+- term: Fresh-clone test
+  th: fresh-clone test
+  definition: >
+    การทดสอบการทำซ้ำได้ด้วยการให้ผู้อื่น clone repository ลงโฟลเดอร์ใหม่แล้วทำตาม README เท่านั้น
+  section: sec-ch19-checklist
+  see_also: [Reproducibility]

@@ -220,7 +220,7 @@ print(matplotlib.get_cachedir())    # ลบไฟล์ fontlist-*.json ใน�
 |---|---|---|
 | `missing ScriptRunContext! This warning can be ignored when running in bare mode.` และไม่มีหน้าเว็บ | รันด้วย `python app.py` | รันด้วย `streamlit run app/app.py` |
 | แอปช้า ทุกการคลิกใช้เวลาหลายวินาที | Streamlit รัน script ใหม่ทั้งไฟล์ทุกครั้งที่ผู้ใช้โต้ตอบ และ query ถูกรันซ้ำทุกครั้ง | ใช้ `st.cache_data` กับฟังก์ชันที่ query และ `st.cache_resource` กับการเชื่อมต่อ (@sec-ch20-cache) |
-| ค่าที่ผู้ใช้เลือกหายไปหลังคลิก | เก็บค่าในตัวแปรธรรมดา ซึ่งถูกสร้างใหม่ทุก rerun | เก็บใน `st.session_state` (@sec-ch20-streamlit) |
+| ค่าที่ผู้ใช้เลือกหายไปหลังคลิก | เก็บค่าในตัวแปรธรรมดา ซึ่งถูกสร้างใหม่ทุก rerun | เก็บใน `st.session_state` (@sec-ch20-streamlit-model) |
 | แก้ข้อมูลในฐานข้อมูลแล้วแอปยังแสดงค่าเดิม | ผลของ `cache_data` ยังไม่หมดอายุ | ตั้ง `ttl` ของ cache หรือกด Clear cache ในเมนู |
 | `There are multiple button elements with the same auto-generated ID` | widget ชนิดเดียวกันสองตัวมี label และพารามิเตอร์เหมือนกัน | ใส่ `key=` ที่ไม่ซ้ำให้แต่ละตัว |
 | `Could not set lock on file` | notebook หรือ script อื่นเปิดฐานข้อมูลแบบเขียนค้างไว้ | ดู [ฉ.4](#sec-appf-duckdb) และเปิดการเชื่อมต่อในแอปด้วย `read_only=True` |
@@ -235,7 +235,7 @@ print(matplotlib.get_cachedir())    # ลบไฟล์ fontlist-*.json ใน�
 | อาการ | สาเหตุ | วิธีแก้ |
 |---|---|---|
 | `ModuleNotFoundError` ระหว่าง render แต่ใน notebook import ได้ | Quarto ใช้ Python คนละตัวกับสภาพแวดล้อมโครงการ | เปิดสภาพแวดล้อมก่อนรัน `quarto render` หรือตั้งตัวแปร `QUARTO_PYTHON` ให้ชี้ไปยัง Python ของโครงการ |
-| `No module named 'papermill'` หรือพารามิเตอร์ไม่ถูกส่งเข้า | รายงานแบบมีพารามิเตอร์ของเอกสาร Python ต้องใช้ papermill และ cell ที่มี tag `parameters` | ติดตั้ง papermill และตรวจ tag ของ cell (@sec-ch19-parameterized) |
+| `No module named 'papermill'` หรือพารามิเตอร์ไม่ถูกส่งเข้า | รายงานแบบมีพารามิเตอร์ของเอกสาร Python ต้องใช้ papermill และ cell ที่มี tag `parameters` | ติดตั้ง papermill และตรวจ tag ของ cell (@sec-ch19-params) |
 | render สำเร็จแต่ไม่เจอไฟล์ผลลัพธ์ | ในโครงการ Quarto ผลลัพธ์ไปอยู่ใน `output-dir` เช่น `_site/` หรือ `_book/` | ดู `output-dir` ใน `_quarto.yml` |
 | PDF ไม่ออก และมีข้อความเกี่ยวกับ LaTeX | ยังไม่ได้ติดตั้ง TeX | `quarto install tinytex` หรือเปลี่ยนเป็น `format: typst` |
 | PDF ภาษาไทยเป็นสี่เหลี่ยมหรือหาย | ฟอนต์เริ่มต้นไม่มีอักษรไทย | ตั้ง `mainfont: "Sarabun"` (หรือฟอนต์ไทยอื่นที่ติดตั้ง) ในส่วนหัว |

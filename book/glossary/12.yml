@@ -1,55 +1,47 @@
 - term: Grammar of graphics
   th: grammar of graphics
   definition: >
-    แนวคิดของ Wilkinson ที่มองกราฟทุกภาพว่าประกอบจากข้อมูล การจับคู่ เครื่องหมาย
-    การแปลงทางสถิติ สเกล ระบบพิกัด และ facet เป็นฐานของ ggplot2, seaborn objects และ Altair
+    แนวคิดที่มองกราฟทุกชนิดว่าประกอบจากองค์ประกอบชุดเดียวกัน ได้แก่ data,
+    aesthetic mapping, stat, geom, scale, coordinate และ facet
+    เปลี่ยนองค์ประกอบเดียวได้กราฟใหม่
   section: sec-ch12-grammar
-  see_also: [Aesthetic mapping, Facet / small multiples]
-
+  see_also: [Aesthetic mapping]
 - term: Aesthetic mapping
   th: การจับคู่ตัวแปรกับคุณลักษณะภาพ
   definition: >
-    การกำหนดว่าตัวแปรใดในข้อมูลแสดงด้วยคุณลักษณะทางภาพใด เช่น ตำแหน่ง x สี หรือขนาด
-    ต้องใช้ข้อมูลในรูป tidy
+    ความสัมพันธ์จากค่าในคอลัมน์ของข้อมูลไปยังค่าทางภาพ เช่น ภาค → สี หรือวันที่ → ตำแหน่งบนแกน x
+    ต่างจากการกำหนดค่าคงที่ที่ใช้ค่าเดียวกับทุกแถว
   section: sec-ch12-grammar
-  see_also: [Grammar of graphics, Encoding (visual), Tidy data]
-
-- term: Trace (Plotly)
+  see_also: [Grammar of graphics]
+- term: Trace
   th: trace
   definition: >
-    ชุดข้อมูลหนึ่งชุดที่วาดด้วยเครื่องหมายหนึ่งแบบใน figure ของ Plotly
-    figure ประกอบด้วยรายการ trace (data) และ layout
-  section: sec-ch12-plotly
-  see_also: [Interactive]
-
-- term: Interactive
-  th: เชิงโต้ตอบ
+    ชุดรูปทรงชนิดเดียวกันหนึ่งชุดใน Figure ของ Plotly เช่น เส้นของภาคหนึ่ง
+    Figure ประกอบด้วย list ของ trace กับ layout
+  section: sec-ch12-plotly-model
+- term: Linked views
+  th: linked views
   definition: >
-    กราฟที่ผู้อ่านเปลี่ยนมุมมองได้ เช่น ชี้ดูรายละเอียด ซูม กรอง หรือเลือก
-    ควรออกแบบตามลำดับ overview first, zoom and filter, details on demand
-  section: sec-ch12-shneiderman
-  see_also: [Linked views / brushing, Visualization]
-
-- term: Linked views / brushing
-  th: linked views / brushing
+    กราฟหลายภาพที่แสดงข้อมูลชุดเดียวกันจากคนละมุม และเชื่อมกันด้วยการเลือก
+    เลือกรายการในภาพหนึ่งแล้วรายการเดียวกันถูกเน้นหรือกรองในภาพอื่น
+  section: sec-ch12-linked-views
+  see_also: [Brushing]
+- term: Brushing
+  th: brushing
   definition: >
-    การแสดงข้อมูลชุดเดียวกันในหลายกราฟที่เชื่อมกัน การเลือกในกราฟหนึ่ง
-    เช่น การลากกรอบเลือก (brushing) จะกรองหรือเน้นข้อมูลในกราฟอื่น
-  section: sec-ch12-linked
-  see_also: [Interactive]
-
-- term: Datashader
-  th: Datashader
+    การลากกรอบเลือกบริเวณในกราฟหนึ่ง เพื่อเน้นหรือกรองรายการเดียวกันในกราฟอื่นที่เชื่อมกัน
+  section: sec-ch12-linked-views
+  see_also: [Linked views]
+- term: Binning
+  th: binning
   definition: >
-    ไลบรารีที่แสดงข้อมูลจุดจำนวนมหาศาลด้วยการนับจำนวนจุดต่อพิกเซลแล้วแปลงเป็นสี
-    แก้ทั้งปัญหา overplotting และขนาดข้อมูลที่ส่งไปยังเบราว์เซอร์
+    การแบ่งค่าต่อเนื่องเป็นช่วงแล้วนับหรือสรุปค่าในแต่ละช่วง ใช้ใน histogram
+    และ histogram สองมิติเพื่อลดข้อมูลก่อนวาด
   section: sec-ch12-big-data
   see_also: [Overplotting]
-
-- term: Accessibility
-  th: การเข้าถึงได้
+- term: Alt text
+  th: ข้อความทางเลือก (alt text)
   definition: >
-    การออกแบบให้ผู้อ่านทุกกลุ่ม รวมถึงผู้พิการทางการเห็นและผู้มีภาวะตาบอดสี เข้าถึงเนื้อหาได้
-    สำหรับกราฟได้แก่ alt text ที่บอกข้อค้นพบ ตารางข้อมูลประกอบ และการไม่พึ่งสีอย่างเดียว
+    ข้อความที่บรรยายเนื้อหาของภาพสำหรับผู้ที่มองไม่เห็นภาพ ควรบอกองค์ประกอบ สถิติสำคัญ
+    และรูปแบบที่เห็น ไม่ใช่เพียงชนิดของกราฟ
   section: sec-ch12-accessibility
-  see_also: [Visualization]

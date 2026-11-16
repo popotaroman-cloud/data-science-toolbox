@@ -1,55 +1,28 @@
 - term: Dashboard
   th: แดชบอร์ด
   definition: >
-    การแสดงข้อมูลที่สำคัญที่สุดสำหรับวัตถุประสงค์หนึ่งในหน้าจอเดียวเพื่อให้ตรวจดูได้ในพริบตา
-    แบ่งเป็นเชิงปฏิบัติการ เชิงวิเคราะห์ และเชิงกลยุทธ์
+    การแสดงผลด้วยภาพของข้อมูลที่สำคัญที่สุดต่อเป้าหมายหนึ่ง จัดให้ติดตามได้เร็ว แบ่งเป็นเชิงปฏิบัติการ
+    เชิงวิเคราะห์ และเชิงกลยุทธ์ตามผู้ใช้และการตัดสินใจ
   section: sec-ch20-types
-  see_also: [Key performance indicator (KPI), Drill-down]
-
 - term: Key performance indicator (KPI)
   th: ตัวชี้วัดหลัก
   definition: >
-    ตัวเลขสรุปที่แสดงเด่นในแดชบอร์ด ต้องตอบคำถามของผู้ใช้ มีหน่วยและจุดเทียบ
-    และคำนวณด้วยนิยามเดียวกันทุกระดับ
+    ตัวเลขเด่นบนแดชบอร์ดที่ต้องมีนิยาม หน่วย ช่วงเวลา การเปรียบเทียบ ทิศทางที่ดี และความสดของข้อมูล
   section: sec-ch20-layout
-  see_also: [Dashboard]
-
-- term: Rerun (Streamlit)
-  th: rerun
-  definition: >
-    แบบจำลองการทำงานของ Streamlit ที่รัน script ทั้งไฟล์ใหม่ตั้งแต่บรรทัดแรกทุกครั้งที่ผู้ใช้โต้ตอบกับ widget
-    จึงต้องใช้ session state เก็บค่าข้ามรอบ และ cache ป้องกันงานซ้ำ
-  section: sec-ch20-streamlit
-  see_also: [Session state, Caching]
-
 - term: Session state
   th: session state
   definition: >
-    dictionary ของ Streamlit ที่ค่าคงอยู่ข้าม rerun ภายใน session ของผู้ใช้แต่ละคน
-    ใช้เก็บสถานะ เช่น ระดับของ drill-down ที่เลือก
-  section: sec-ch20-streamlit
-  see_also: [Rerun (Streamlit), Callback]
-
+    ที่เก็บค่าของ Streamlit ที่อยู่รอดข้ามการ rerun ของ session เดียวกัน ใช้จำสถานะ เช่น ระดับ drill-down
+  section: sec-ch20-streamlit-model
+  see_also: [Callback]
 - term: Callback
   th: callback
   definition: >
-    ฟังก์ชันที่ Streamlit เรียกก่อน rerun เมื่อ widget เปลี่ยนค่า กำหนดด้วย on_change หรือ on_click
-    เป็นที่เดียวที่แก้ค่าของ widget ใน session state ได้หลังสร้าง widget
-  section: sec-ch20-streamlit
-  see_also: [Session state]
-
+    ฟังก์ชันที่ผูกกับ widget และรันก่อนการ rerun เมื่อผู้ใช้เปลี่ยนค่า เป็นที่ที่แก้ค่าของ widget ใน session state ได้
+  section: sec-ch20-streamlit-model
 - term: Caching
   th: caching
   definition: >
-    การเก็บผลของการคำนวณหรือทรัพยากรไว้ใช้ซ้ำ Streamlit มี cache_data สำหรับข้อมูล (คืนสำเนา)
-    และ cache_resource สำหรับทรัพยากรที่ใช้ร่วมกัน เช่น การเชื่อมต่อฐานข้อมูล
+    การเก็บผลของฟังก์ชันไว้ใช้ซ้ำเมื่อเรียกด้วย argument เดิม ใน Streamlit ใช้ cache_resource กับออบเจกต์ที่ใช้ร่วมกัน
+    และ cache_data กับผลลัพธ์ที่คืนเป็นสำเนา
   section: sec-ch20-cache
-  see_also: [Rerun (Streamlit)]
-
-- term: SQL injection
-  th: SQL injection
-  definition: >
-    การโจมตีโดยส่งข้อความที่เป็นคำสั่ง SQL เข้ามาแทนค่า เมื่อโปรแกรมต่อค่าของผู้ใช้ลงในสตริง SQL
-    ป้องกันด้วยตัวยึดตำแหน่ง (?) และการส่งค่าแยก
-  section: sec-ch20-drilldown
-  see_also: [Query]
