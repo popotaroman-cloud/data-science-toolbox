@@ -7,6 +7,11 @@ book:
   subtitle: "การสำรวจข้อมูลเชิงลึกด้วย Python และ SQL ตั้งแต่แหล่งข้อมูลถึงแดชบอร์ด"
   author: "วาโย ปุยะติ"
   repo-url: https://github.com/popotaroman-cloud/data-science-toolbox
+  sidebar:
+    tools:
+      - icon: house
+        href: ../index.html
+        text: "เว็บไซต์รายวิชา"
   chapters:
     - index.qmd
     - chapters/00-overview.qmd
@@ -84,6 +89,22 @@ bibliography:
   - refs/21.bib
   - refs/22.bib
   - refs/appendix.bib
+
+language:
+  crossref-fig-title: "ภาพที่"
+  crossref-fig-prefix: "ภาพที่"
+  crossref-tbl-title: "ตารางที่"
+  crossref-tbl-prefix: "ตารางที่"
+  crossref-eq-prefix: "สมการ"
+  crossref-sec-prefix: "หัวข้อ"
+  crossref-ch-prefix: "บทที่"
+  crossref-apx-prefix: "ภาคผนวก"
+  section-title-appendices: "ภาคผนวก"
+  section-title-references: "เอกสารอ้างอิง"
+  toc-title-document: "สารบัญ"
+  toc-title-website: "ในหน้านี้"
+  search-no-results-text: "ไม่พบผลลัพธ์"
+  code-tools-show-all-code: "แสดงโค้ดทั้งหมด"
 
 format:
   html:

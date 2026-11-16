@@ -1,0 +1,45 @@
+- term: Missing data
+  th: ข้อมูลสูญหาย
+  definition: >
+    ข้อมูลที่ควรมีแต่ไม่มี แบ่งเป็นแบบ explicit (มีแถวแต่ค่าว่าง) และ implicit (ไม่มีแถว)
+    ผลต่อการวิเคราะห์ขึ้นกับกลไกการสูญหายมากกว่าปริมาณ
+  section: sec-ch10-explicit-implicit
+  see_also: [MCAR / MAR / MNAR, Missing value]
+
+- term: Missing value
+  th: ค่าสูญหาย
+  definition: >
+    ค่าหนึ่งค่าที่ไม่ทราบ แทนด้วย NULL ใน SQL และ NaN หรือ NA ใน pandas
+    ฟังก์ชันรวมส่วนใหญ่ข้ามค่าสูญหาย
+  section: sec-ch10-explicit-implicit
+  see_also: [Missing data, Sentinel value]
+
+- term: MCAR / MAR / MNAR
+  th: MCAR / MAR / MNAR
+  definition: >
+    กลไกการสูญหายตามกรอบของ Rubin: MCAR หายโดยไม่ขึ้นกับอะไร, MAR หายขึ้นกับตัวแปรที่เห็น,
+    MNAR หายขึ้นกับค่าที่หายไปเอง ซึ่งพิสูจน์จากข้อมูลชุดเดียวไม่ได้
+  section: sec-ch10-rubin
+
+- term: Imputation
+  th: การเติมค่า
+  definition: >
+    การแทนค่าที่หายด้วยค่าประมาณ เช่น ค่ากลาง LOCF interpolation หรือแบบจำลอง
+    ค่าที่เติมต้องมี flag กำกับ และทำให้ความไม่แน่นอนดูน้อยกว่าความจริง
+  section: sec-ch10-single
+  see_also: [Multiple imputation, Interpolation]
+
+- term: Interpolation
+  th: การประมาณค่าในช่วง
+  definition: >
+    การเติมค่าที่หายด้วยเส้นตรงหรือเส้นโค้งระหว่างค่าสองฝั่งของช่องว่าง เหมาะกับช่องว่างสั้นในอนุกรมเวลา
+    interpolate(limit=n) ของ pandas ไม่ได้จำกัดความยาวช่องว่าง
+  section: sec-ch10-single
+
+- term: Multiple imputation
+  th: การเติมค่าแบบหลายชุด
+  definition: >
+    การเติมค่าหลายชุดโดยสุ่มจากการแจกแจงของค่าที่น่าจะเป็น วิเคราะห์แต่ละชุดแล้วรวมผลด้วย Rubin's rules
+    ทำให้ความไม่แน่นอนจากการเติมค่าถูกนับรวม
+  section: sec-ch10-multiple
+  see_also: [Imputation]

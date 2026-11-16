@@ -96,6 +96,7 @@ daily = con.sql("""
     SELECT d.station_id, d.date, d.pm25_mean, d.pm25_max, d.n_hours,
            s.name_th, s.province, s.region
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
 """).df()
 daily["date"] = pd.to_datetime(daily["date"])
 daily["month"] = daily["date"].dt.month

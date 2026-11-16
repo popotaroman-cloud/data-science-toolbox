@@ -2,4 +2,607 @@
 
 <!-- สร้างโดย scripts/assemble.py จาก glossary/*.yml ห้ามแก้ไฟล์นี้โดยตรง -->
 
-ยังไม่มีศัพท์ในอภิธานศัพท์
+**Academic integrity** (ความซื่อตรงทางวิชาการ)
+: การทำงานวิชาการอย่างซื่อตรง ไม่สร้างข้อมูลเท็จ ไม่บิดเบือนข้อมูล ไม่ลอกเลียนผลงาน ในงานข้อมูลรวมถึงการติดป้ายข้อมูลสังเคราะห์และการบันทึกการใช้ AI
+  อธิบายใน [ความซื่อตรงทางวิชาการ](chapters/22-ethics-ai.qmd#sec-ch22-integrity) · ดูเพิ่ม Data ethics, Synthetic data
+
+**Accessibility** (การเข้าถึงได้)
+: การออกแบบให้ผู้อ่านทุกกลุ่ม รวมถึงผู้พิการทางการเห็นและผู้มีภาวะตาบอดสี เข้าถึงเนื้อหาได้ สำหรับกราฟได้แก่ alt text ที่บอกข้อค้นพบ ตารางข้อมูลประกอบ และการไม่พึ่งสีอย่างเดียว
+  อธิบายใน [การเข้าถึงได้ (accessibility) ของกราฟ](chapters/12-interactive-viz.qmd#sec-ch12-accessibility) · ดูเพิ่ม Visualization
+
+**Aesthetic mapping** (การจับคู่ตัวแปรกับคุณลักษณะภาพ)
+: การกำหนดว่าตัวแปรใดในข้อมูลแสดงด้วยคุณลักษณะทางภาพใด เช่น ตำแหน่ง x สี หรือขนาด ต้องใช้ข้อมูลในรูป tidy
+  อธิบายใน [grammar of graphics ของ Wilkinson](chapters/12-interactive-viz.qmd#sec-ch12-grammar) · ดูเพิ่ม Grammar of graphics, Encoding (visual), Tidy data
+
+**Aggregation** (การรวมกลุ่ม)
+: การยุบหลายแถวให้เหลือหนึ่งแถวต่อกลุ่ม พร้อมค่าสรุป เช่น AVG, COUNT, MAX ด้วย GROUP BY ฟังก์ชันรวมส่วนใหญ่ข้ามค่า NULL ยกเว้น COUNT(*)
+  อธิบายใน [aggregation, `GROUP BY ALL` และ `GROUPING SETS`/`ROLLUP`/`CUBE`](chapters/07-sql-analysis.qmd#sec-ch07-aggregation) · ดูเพิ่ม Window function
+
+**Analytical question** (คำถามเชิงวิเคราะห์)
+: คำถามที่ตอบได้ด้วยข้อมูล มีคุณลักษณะสี่ข้อ คือ เฉพาะเจาะจง วัดได้ มีคำตอบได้มากกว่าหนึ่งแบบ และนำไปใช้ได้ พร้อมระบุเกณฑ์ที่ใช้อย่างชัดเจน
+  อธิบายใน [คุณลักษณะของคำถามเชิงวิเคราะห์ที่ดี](chapters/04-questions-hypotheses.qmd#sec-ch04-good-questions)
+
+**Annotation** (คำอธิบายประกอบ)
+: ข้อความ ลูกศร หรือเส้นอ้างอิงที่วางบนกราฟเพื่อชี้ประเด็นและให้บริบท เช่น เส้นมาตรฐาน 37.5 µg/m³ และป้ายบอกค่าสูงสุด
+  อธิบายใน [การใส่คำอธิบายประกอบและเส้นอ้างอิง (มาตรฐาน 37.5 µg/m³)](chapters/11-visual-perception.qmd#sec-ch11-annotation) · ดูเพิ่ม Visualization
+
+**Anonymization** (การทำให้เป็นข้อมูลนิรนาม)
+: การแปลงข้อมูลจนไม่สามารถระบุตัวบุคคลได้อีกด้วยวิธีที่มีเหตุผลตามสมควร ข้อมูลที่เป็นนิรนามแท้จริง ไม่ใช่ข้อมูลส่วนบุคคล แต่ทำได้ยากกว่าที่คิดเพราะ quasi-identifier
+  อธิบายใน [anonymization กับ pseudonymization](chapters/16-synthetic-privacy.qmd#sec-ch16-anonymization) · ดูเพิ่ม Pseudonymization, Re-identification
+
+**API** (API)
+: Application Programming Interface ช่องทางที่ระบบหนึ่งเปิดให้โปรแกรมอื่นเรียกใช้ API บนเว็บมักรับ request ผ่าน HTTP และส่งข้อมูลกลับเป็น JSON
+  อธิบายใน [REST API: authentication, pagination, rate limit](chapters/05-data-acquisition.qmd#sec-ch05-rest) · ดูเพิ่ม Endpoint, Rate limit
+
+**Architecture decision record (ADR)** (บันทึกการตัดสินใจออกแบบ)
+: เอกสารสั้นที่บันทึกบริบท สิ่งที่ตัดสินใจ ทางเลือกที่พิจารณา และผลที่ตามมาของการตัดสินใจออกแบบแต่ละข้อ ช่วยให้ผู้อื่นเข้าใจว่าทำไมระบบจึงเป็นแบบนี้
+  อธิบายใน [สถาปัตยกรรมและการตัดสินใจออกแบบ](chapters/21-case-study-pm25.qmd#sec-ch21-architecture) · ดูเพิ่ม Reproducibility
+
+**As-of join** (as-of join)
+: การจับคู่แต่ละแถวกับแถวของอีกตารางที่มีเวลาใกล้ที่สุดตามทิศที่กำหนด ควรกำหนดระยะห่างสูงสุดที่ยอมรับได้ (tolerance)
+  อธิบายใน [การจัดแนวข้อมูลเซนเซอร์ที่เวลาไม่สม่ำเสมอ](chapters/14-time-series.qmd#sec-ch14-alignment) · ดูเพิ่ม Join
+
+**Autocorrelation** (สหสัมพันธ์ในตัว)
+: สหสัมพันธ์ระหว่างอนุกรมกับตัวเองที่เลื่อนไป k ช่วงเวลา (lag) แสดงด้วย ACF ทำให้ขนาดตัวอย่างที่มีประสิทธิผลต่ำกว่าจำนวนค่าจริง
+  อธิบายใน [autocorrelation: ACF และ PACF](chapters/14-time-series.qmd#sec-ch14-acf) · ดูเพิ่ม Stationarity
+
+**Bias (data)** (อคติ)
+: ความคลาดเคลื่อนเชิงระบบที่ทำให้ผลการวิเคราะห์เอนไปทางใดทางหนึ่ง เกิดได้จากการเลือกตัวอย่าง การวัด ข้อมูลสูญหาย การรวมข้อมูล การตีความ และการรายงาน
+  อธิบายใน [อคติในข้อมูลและในการตีความ](chapters/22-ethics-ai.qmd#sec-ch22-bias) · ดูเพิ่ม Data ethics, MCAR / MAR / MNAR
+
+**Bootstrap** (bootstrap)
+: วิธี resampling ที่สุ่มข้อมูลจากตัวอย่างเดิมแบบใส่คืนซ้ำหลายพันครั้ง เพื่อประมาณการแจกแจงและช่วงความเชื่อมั่นของสถิติใดก็ได้
+  อธิบายใน [resampling: bootstrap และ permutation test](chapters/13-exploratory-statistics.qmd#sec-ch13-resampling) · ดูเพิ่ม Permutation test, Confidence interval
+
+**Branch** (branch)
+: ป้ายชื่อที่ชี้ไปยัง commit หนึ่งตัวและเลื่อนตามเมื่อมี commit ใหม่ ใช้แยกสายการพัฒนา เพื่อลองของใหม่โดยไม่กระทบ main
+  อธิบายใน [แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG](chapters/03-version-control.qmd#sec-ch03-model) · ดูเพิ่ม Merge / rebase
+
+**Caching** (caching)
+: การเก็บผลของการคำนวณหรือทรัพยากรไว้ใช้ซ้ำ Streamlit มี cache_data สำหรับข้อมูล (คืนสำเนา) และ cache_resource สำหรับทรัพยากรที่ใช้ร่วมกัน เช่น การเชื่อมต่อฐานข้อมูล
+  อธิบายใน [caching: `cache_data` กับ `cache_resource` และการเชื่อมต่อแบบ read-only](chapters/20-dashboards.qmd#sec-ch20-cache) · ดูเพิ่ม Rerun (Streamlit)
+
+**Callback** (callback)
+: ฟังก์ชันที่ Streamlit เรียกก่อน rerun เมื่อ widget เปลี่ยนค่า กำหนดด้วย on_change หรือ on_click เป็นที่เดียวที่แก้ค่าของ widget ใน session state ได้หลังสร้าง widget
+  อธิบายใน [แบบจำลองการทำงานของ Streamlit: rerun, session state, callback](chapters/20-dashboards.qmd#sec-ch20-streamlit) · ดูเพิ่ม Session state
+
+**Change point** (change point)
+: จุดในเวลาที่คุณสมบัติทางสถิติของอนุกรมเปลี่ยนอย่างฉับพลัน อาจเกิดจากปรากฏการณ์จริงหรือจากการเปลี่ยนระบบการวัด
+  อธิบายใน [change point detection](chapters/14-time-series.qmd#sec-ch14-change-point) · ดูเพิ่ม Time series
+
+**Choropleth map** (แผนที่ choropleth)
+: แผนที่ที่ระบายสีแต่ละพื้นที่ตามค่าของตัวแปร ต้องแยกพื้นที่ไม่มีข้อมูล แสดงจำนวนข้อมูลต่อพื้นที่ และระวังพื้นที่ใหญ่ครอบงำสายตาและ MAUP
+  อธิบายใน [แผนที่ choropleth และปัญหา MAUP](chapters/17-spatial-data.qmd#sec-ch17-choropleth) · ดูเพิ่ม MAUP
+
+**Cluster bootstrap** (cluster bootstrap)
+: bootstrap ที่สุ่มทั้งกลุ่ม เช่น ทั้งสถานี แทนการสุ่มทีละแถว ใช้เมื่อข้อมูลภายในกลุ่มสัมพันธ์กัน ให้ช่วงความเชื่อมั่นที่ซื่อตรงกว่าการถือว่าทุกแถวเป็นอิสระ
+  อธิบายใน [การสำรวจและข้อค้นพบ](chapters/21-case-study-pm25.qmd#sec-ch21-findings) · ดูเพิ่ม Bootstrap, Autocorrelation
+
+**Clustering** (การจัดกลุ่ม)
+: การแบ่งหน่วยข้อมูลเป็นกลุ่มที่คล้ายกันภายในและต่างกันระหว่างกลุ่ม โดยไม่มีป้ายคำตอบ เช่น k-means, hierarchical clustering และ DBSCAN ผลขึ้นกับการตัดสินใจของผู้วิเคราะห์
+  อธิบายใน [clustering: k-means, hierarchical, DBSCAN](chapters/15-multivariate.qmd#sec-ch15-clustering) · ดูเพิ่ม Silhouette
+
+**Code review** (การ review โค้ด)
+: การให้ผู้อื่นตรวจการเปลี่ยนแปลงของโค้ดก่อนรวม งานข้อมูลควรตรวจความถูกต้องของผลลัพธ์ และจุดเสี่ยงของข้อมูลก่อนความอ่านง่ายของโค้ด
+  อธิบายใน [ศิลปะของการ review โค้ด](chapters/03-version-control.qmd#sec-ch03-review) · ดูเพิ่ม Pull request (PR)
+
+**Colormap / palette** (ชุดสี)
+: การจับคู่ค่าหรือกลุ่มของข้อมูลกับสี แบ่งเป็น sequential, diverging และ categorical ชุดสีที่ดีสำหรับค่าต่อเนื่องควรมี perceptual uniformity
+  อธิบายใน [วิทยาศาสตร์ของสี: perceptual uniformity, sequential/diverging/categorical, ภาวะตาบอดสี](chapters/11-visual-perception.qmd#sec-ch11-color) · ดูเพิ่ม Encoding (visual)
+
+**Columnar storage** (การจัดเก็บแบบ columnar)
+: การเรียงค่าในตารางทีละคอลัมน์ ทำให้อ่านเฉพาะคอลัมน์ที่ต้องการได้และบีบอัดได้ดี เหมาะกับงาน OLAP ใช้ใน DuckDB, Parquet และ Arrow
+  อธิบายใน [row store กับ column store](chapters/06-analytical-databases.qmd#sec-ch06-row-column) · ดูเพิ่ม OLTP / OLAP, Parquet
+
+**Commit** (commit)
+: วัตถุใน Git ที่บันทึกสถานะของทั้งโครงการ ณ เวลาหนึ่ง เก็บ hash ของ tree ระดับบน hash ของ commit แม่ ผู้เขียน เวลา และข้อความ commit ต่อกันเป็น DAG
+  อธิบายใน [แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG](chapters/03-version-control.qmd#sec-ch03-model) · ดูเพิ่ม Branch
+
+**Completeness** (ความครบถ้วน)
+: สัดส่วนของข้อมูลที่มีจริงเทียบกับที่ควรมี เช่น จำนวนชั่วโมงที่มีค่า (n_hours) ต่อวัน โครงการนี้ใช้เกณฑ์ไม่น้อยกว่า 18 จาก 24 ชั่วโมง ซึ่งเป็นข้อกำหนดของโครงการ
+  อธิบายใน [resampling และความครบถ้วนของข้อมูลเมื่อรวมกลุ่ม](chapters/08-data-wrangling.qmd#sec-ch08-resample)
+
+**Confidence interval** (ช่วงความเชื่อมั่น)
+: ช่วงที่คำนวณจากตัวอย่าง ซึ่งถ้าทำซ้ำกระบวนการหลายครั้ง สัดส่วนที่กำหนด (เช่น 95%) ของช่วงจะครอบคลุมค่าจริง สะท้อนเฉพาะความไม่แน่นอนจากการสุ่มตัวอย่าง
+  อธิบายใน [ประชากร ตัวอย่าง และช่วงความเชื่อมั่น](chapters/13-exploratory-statistics.qmd#sec-ch13-ci) · ดูเพิ่ม Bootstrap, Effect size
+
+**Confirmatory analysis** (การวิเคราะห์เชิงยืนยัน)
+: การทดสอบข้อสันนิษฐานที่กำหนดไว้ล่วงหน้าด้วยวิธีที่วางแผนไว้ เพื่อสรุปผลพร้อมระดับความไม่แน่นอน ควรใช้ข้อมูลคนละชุดกับที่ใช้สำรวจเพื่อสร้างข้อสันนิษฐานนั้น
+  อธิบายใน [EDA กับ Confirmatory Data Analysis](chapters/01-data-science-eda.qmd#sec-ch01-eda-cda) · ดูเพิ่ม Exploratory Data Analysis (EDA)
+
+**Coordinate Reference System (CRS)** (ระบบพิกัดอ้างอิง)
+: ข้อกำหนดที่บอกว่าตัวเลขพิกัดหมายถึงตำแหน่งใด ประกอบด้วย datum ชนิดของพิกัด และหน่วย ระบุด้วยรหัส EPSG เช่น 4326 (WGS 84) และ 32647 (UTM 47N)
+  อธิบายใน [ระบบพิกัดและเส้นโครงแผนที่สำหรับประเทศไทย (WGS 84, UTM 47N/48N)](chapters/17-spatial-data.qmd#sec-ch17-crs) · ดูเพิ่ม Projection, Datum
+
+**Correlation** (สหสัมพันธ์)
+: ตัววัดความสัมพันธ์ระหว่างสองตัวแปร Pearson วัดความสัมพันธ์เชิงเส้น Spearman วัดความสัมพันธ์แบบทางเดียวจากลำดับ สหสัมพันธ์ไม่ใช่เหตุและผล
+  อธิบายใน [สหสัมพันธ์และกับดัก: Simpson's paradox, ecological fallacy](chapters/13-exploratory-statistics.qmd#sec-ch13-correlation) · ดูเพิ่ม Simpson's paradox
+
+**CTE** (CTE)
+: Common Table Expression ส่วนของ query ที่ตั้งชื่อไว้ด้วย WITH แล้วอ้างถึงในขั้นถัดไป ทำให้ query ที่ซับซ้อนอ่านเป็นขั้นตอนจากบนลงล่างและตรวจสอบได้ทีละขั้น
+  อธิบายใน [CTE และ recursive CTE](chapters/07-sql-analysis.qmd#sec-ch07-cte)
+
+**Dashboard** (แดชบอร์ด)
+: การแสดงข้อมูลที่สำคัญที่สุดสำหรับวัตถุประสงค์หนึ่งในหน้าจอเดียวเพื่อให้ตรวจดูได้ในพริบตา แบ่งเป็นเชิงปฏิบัติการ เชิงวิเคราะห์ และเชิงกลยุทธ์
+  อธิบายใน [ประเภทของแดชบอร์ด: เชิงปฏิบัติการ เชิงวิเคราะห์ เชิงกลยุทธ์](chapters/20-dashboards.qmd#sec-ch20-types) · ดูเพิ่ม Key performance indicator (KPI), Drill-down
+
+**Data acquisition** (การได้มาซึ่งข้อมูล)
+: ขั้นแรกของ pipeline ที่นำข้อมูลจากแหล่งภายนอกเข้ามาในระบบ เช่น ดึงจาก API หรือหน้าเว็บ แล้วบันทึกข้อมูลดิบพร้อมเวลาที่ดึง ก่อนแปลงรูปในขั้นถัดไป
+  อธิบายใน [ภูมิทัศน์ข้อมูลเปิดของประเทศไทย](chapters/05-data-acquisition.qmd#sec-ch05-open-data) · ดูเพิ่ม Raw data
+
+**Data dictionary** (พจนานุกรมข้อมูล)
+: เอกสารที่อธิบายทุกตารางและทุกคอลัมน์ รวมถึงหน่วย เขตเวลา ความหมาย และการตัดสินใจที่ส่งผลต่อการตีความ เช่น การแปลงค่าแทน
+  อธิบายใน [การจัดทำเอกสารข้อมูล: data dictionary และ Datasheets for Datasets](chapters/09-data-quality.qmd#sec-ch09-documentation)
+
+**Data ethics** (จริยธรรมข้อมูล)
+: สาขาที่ศึกษาปัญหาทางศีลธรรมเกี่ยวกับข้อมูล อัลกอริทึม และแนวปฏิบัติในการใช้ข้อมูล ต่อยอดจากหลักความเคารพในบุคคล การให้ประโยชน์ และความยุติธรรม
+  อธิบายใน [หลักจริยธรรมข้อมูล](chapters/22-ethics-ai.qmd#sec-ch22-principles) · ดูเพิ่ม Bias (data)
+
+**Data lifecycle** (วงจรชีวิตข้อมูล)
+: ลำดับขั้นที่ข้อมูลผ่านตั้งแต่ตั้งคำถาม ได้มา จัดเก็บ แปลงรูป ตรวจคุณภาพ สำรวจ จนถึงสื่อสารผล เป็นวงจรที่ย้อนกลับได้ เช่น CRISP-DM และ OSEMN
+  อธิบายใน [แบบจำลองวงจรชีวิตข้อมูล: CRISP-DM, OSEMN และวงจรของหนังสือเล่มนี้](chapters/01-data-science-eda.qmd#sec-ch01-lifecycle) · ดูเพิ่ม Pipeline
+
+**Data profiling** (data profiling)
+: การสรุปลักษณะของข้อมูลทุกคอลัมน์อย่างเป็นระบบ เช่น ชนิด ค่าว่าง การแจกแจง และค่าซ้ำ เพื่อหาปัญหาของข้อมูล ไม่ได้แทนการตีความของผู้วิเคราะห์
+  อธิบายใน [data profiling: ทฤษฎีและเครื่องมือ](chapters/09-data-quality.qmd#sec-ch09-profiling)
+
+**Data quality** (คุณภาพข้อมูล)
+: ความเหมาะของข้อมูลกับการใช้งาน ตรวจได้หลายมิติ เช่น ความครบถ้วน ความถูกต้องตามรูปแบบ ความสอดคล้อง ความไม่ซ้ำ ความทันเวลา และความแม่นยำ
+  อธิบายใน [มิติของคุณภาพข้อมูล (DAMA, ISO/IEC 25012)](chapters/09-data-quality.qmd#sec-ch09-dimensions) · ดูเพิ่ม Completeness, Validation
+
+**Data science** (วิทยาการข้อมูล)
+: การนำข้อมูลมาตอบคำถามอย่างเป็นระบบ โดยใช้สถิติศาสตร์จัดการความไม่แน่นอน ใช้การคำนวณจัดการปริมาณและความซับซ้อนของข้อมูล และใช้ความรู้เชิงโดเมนตั้งคำถามและตีความผล
+  อธิบายใน [วิทยาการข้อมูลคืออะไร: สถิติ วิทยาการคอมพิวเตอร์ และความรู้เชิงโดเมน](chapters/01-data-science-eda.qmd#sec-ch01-what-is-ds) · ดูเพิ่ม Domain knowledge
+
+**Data storytelling** (การเล่าเรื่องด้วยข้อมูล)
+: การสื่อสารผลการวิเคราะห์ที่จัดโครงสร้างตามความต้องการของผู้อ่าน ข้อค้นพบก่อน หลักฐานตาม พร้อมบริบทของตัวเลข ข้อจำกัด และความไม่แน่นอน
+  อธิบายใน [โครงสร้างการเล่าเรื่อง: ข้อค้นพบก่อน หลักฐานตาม](chapters/19-storytelling-reports.qmd#sec-ch19-structure) · ดูเพิ่ม Literate programming
+
+**Data-ink ratio** (อัตราส่วนหมึกข้อมูล)
+: สัดส่วนของหมึกที่ใช้แสดงข้อมูลจริงต่อหมึกทั้งหมดในกราฟ ตามแนวคิดของ Tufte ใช้เป็นแนวทางลดสิ่งรบกวนที่ไม่ช่วยให้เข้าใจข้อมูล
+  อธิบายใน [ความซื่อตรงของภาพ: lie factor, data-ink (Tufte), แกนที่ถูกตัด](chapters/11-visual-perception.qmd#sec-ch11-integrity) · ดูเพิ่ม Lie factor
+
+**Database** (ฐานข้อมูล)
+: ระบบที่จัดเก็บข้อมูลอย่างมีโครงสร้าง และให้ค้นหาและแก้ไขได้ด้วยภาษาอย่าง SQL พร้อมบังคับกฎความถูกต้อง เช่น primary key
+  อธิบายใน [relational model: relation, key และ integrity](chapters/06-analytical-databases.qmd#sec-ch06-relational) · ดูเพิ่ม Primary key, Table / view
+
+**DataFrame** (DataFrame)
+: โครงสร้างข้อมูลตารางในหน่วยความจำของ pandas หรือ Polars แต่ละคอลัมน์มีชนิดข้อมูล (dtype) pandas มี index ที่ใช้จัดแนวข้อมูลอัตโนมัติ ส่วน Polars ไม่มี index
+  อธิบายใน [pandas เชิงลึก: index, dtype, copy-on-write และ Arrow-backed dtype](chapters/08-data-wrangling.qmd#sec-ch08-pandas)
+
+**Datashader** (Datashader)
+: ไลบรารีที่แสดงข้อมูลจุดจำนวนมหาศาลด้วยการนับจำนวนจุดต่อพิกเซลแล้วแปลงเป็นสี แก้ทั้งปัญหา overplotting และขนาดข้อมูลที่ส่งไปยังเบราว์เซอร์
+  อธิบายใน [visualization ข้อมูลขนาดใหญ่: binning, aggregation และ Datashader](chapters/12-interactive-viz.qmd#sec-ch12-big-data) · ดูเพิ่ม Overplotting
+
+**Datum** (datum)
+: การผูก ellipsoid เข้ากับโลกจริง กำหนดตำแหน่งและการวางแนว พิกัดของจุดเดียวกันใน datum ต่างกันอาจต่างกันหลายร้อยเมตร เช่น WGS 84 กับ Indian 1975
+  อธิบายใน [ภูมิมาตรศาสตร์เบื้องต้น: ellipsoid, datum, พิกัดภูมิศาสตร์](chapters/17-spatial-data.qmd#sec-ch17-geodesy) · ดูเพิ่ม Coordinate Reference System (CRS)
+
+**Decomposition** (การแยกองค์ประกอบ)
+: การแยกอนุกรมเวลาเป็นแนวโน้ม ฤดูกาล และส่วนเหลือ แบบบวกหรือแบบคูณ STL ยอมให้ฤดูกาลเปลี่ยนได้และทนต่อค่าผิดปกติ
+  อธิบายใน [การแยกองค์ประกอบ: classical decomposition และ STL](chapters/14-time-series.qmd#sec-ch14-decomposition) · ดูเพิ่ม Trend / seasonality, Smoothing
+
+**Differential privacy** (differential privacy)
+: นิยามความเป็นส่วนตัวของกระบวนการ ซึ่งผลลัพธ์แทบไม่เปลี่ยนไม่ว่าข้อมูลของคนใดคนหนึ่งจะอยู่ในชุดข้อมูลหรือไม่ ควบคุมด้วยงบ epsilon แลกกับความแม่นยำ
+  อธิบายใน [differential privacy เบื้องต้น](chapters/16-synthetic-privacy.qmd#sec-ch16-dp) · ดูเพิ่ม Anonymization
+
+**Distribution** (การแจกแจง)
+: รูปแบบที่บอกว่าค่าแต่ละช่วงของตัวแปรเกิดขึ้นบ่อยเพียงใด สรุปด้วยตำแหน่ง การกระจาย และรูปร่าง ค่า PM2.5 มักมีการแจกแจงเบ้ขวาใกล้เคียง log-normal
+  อธิบายใน [การแจกแจงและรูปร่างของข้อมูล](chapters/13-exploratory-statistics.qmd#sec-ch13-distribution) · ดูเพิ่ม Skewness, Mean / median
+
+**Distributive / algebraic / holistic measure** (ตัวชี้วัดแบบบวกได้ / รวมได้ถ้าเก็บองค์ประกอบ / รวมไม่ได้)
+: การจำแนกตัวชี้วัดตามการรวมข้ามระดับ จำนวนนับบวกได้ ค่าเฉลี่ยรวมได้ถ้าเก็บผลรวมและจำนวน มัธยฐานและเปอร์เซ็นไทล์ต้องคำนวณจากข้อมูลระดับล่างสุด
+  อธิบายใน [ความสอดคล้องของการรวมข้อมูลข้ามระดับ](chapters/18-hierarchical-data.qmd#sec-ch18-consistency) · ดูเพิ่ม Aggregation
+
+**Domain knowledge** (ความรู้เชิงโดเมน)
+: ความรู้เกี่ยวกับเรื่องที่ข้อมูลวัด เช่น วิทยาศาสตร์คุณภาพอากาศ ช่วยตั้งคำถามที่มีความหมาย แยกเหตุการณ์จริงออกจากความผิดพลาดของการวัด และตีความผลให้ถูกต้อง
+  อธิบายใน [วิทยาการข้อมูลคืออะไร: สถิติ วิทยาการคอมพิวเตอร์ และความรู้เชิงโดเมน](chapters/01-data-science-eda.qmd#sec-ch01-what-is-ds)
+
+**Drill-down** (drill-down)
+: การเจาะลงจากระดับบนไปยังระดับล่างของลำดับชั้น เช่น จากภาคไปยังจังหวัดและสถานี ตรงข้ามกับ roll-up ซึ่งรวมขึ้นไประดับบน
+  อธิบายใน [การดำเนินการแบบ OLAP: roll-up, drill-down, slice, dice](chapters/18-hierarchical-data.qmd#sec-ch18-olap) · ดูเพิ่ม Hierarchy, OLTP / OLAP
+
+**Ecological fallacy** (ecological fallacy)
+: การอนุมานความสัมพันธ์ในระดับบุคคลจากข้อมูลระดับกลุ่ม เช่น ระดับจังหวัด ข้อสรุปควรจำกัดอยู่ที่ระดับของข้อมูล
+  อธิบายใน [สหสัมพันธ์และกับดัก: Simpson's paradox, ecological fallacy](chapters/13-exploratory-statistics.qmd#sec-ch13-correlation) · ดูเพิ่ม Simpson's paradox
+
+**Effect size** (ขนาดอิทธิพล)
+: ขนาดของผลที่วัดแยกจากขนาดตัวอย่าง เช่น ผลต่างในหน่วยเดิม Hedges' g หรือ Cliff's delta ควรรายงานคู่กับช่วงความเชื่อมั่นเสมอ
+  อธิบายใน [effect size: ทำไม p-value อย่างเดียวไม่พอ](chapters/13-exploratory-statistics.qmd#sec-ch13-effect-size) · ดูเพิ่ม p-value, Confidence interval
+
+**Encoding (visual)** (การเข้ารหัสภาพ)
+: การแปลงค่าของข้อมูลเป็นคุณสมบัติทางภาพ เช่น ตำแหน่ง ความยาว มุม พื้นที่ หรือสี แต่ละแบบให้ความแม่นยำในการถอดค่ากลับต่างกัน
+  อธิบายใน [ลำดับความแม่นยำของการเข้ารหัสภาพ (Cleveland & McGill)](chapters/11-visual-perception.qmd#sec-ch11-cleveland) · ดูเพิ่ม Preattentive attribute, Colormap / palette
+
+**Endpoint** (endpoint)
+: URL ของทรัพยากรหนึ่งใน API ที่โปรแกรมเรียกเพื่อขอหรือส่งข้อมูล เปลี่ยนได้ตามเวลา จึงต้องตรวจกับเอกสารของผู้ให้บริการและระบุวันที่ตรวจสอบ
+  อธิบายใน [REST API: authentication, pagination, rate limit](chapters/05-data-acquisition.qmd#sec-ch05-rest) · ดูเพิ่ม API
+
+**Environment (Python)** (สภาพแวดล้อม)
+: ชุดของ Python interpreter และแพ็กเกจที่โครงการหนึ่งใช้ บันทึกเป็นไฟล์ เช่น environment.yml หรือ pyproject.toml และ uv.lock เพื่อให้ผู้อื่นสร้างตามได้
+  อธิบายใน [Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel](chapters/02-reproducible-environment.qmd#sec-ch02-packages) · ดูเพิ่ม Virtual environment, Package
+
+**Exploratory Data Analysis (EDA)** (การสำรวจข้อมูล)
+: กระบวนการทำความรู้จักข้อมูลก่อนสรุปผล ด้วยกราฟ ตารางสรุป และการแปลงข้อมูล เพื่อหาเบาะแสและสร้างข้อสันนิษฐาน แนวคิดของ John Tukey ซึ่งเปรียบงานนี้กับงานนักสืบ
+  อธิบายใน [กำเนิด Exploratory Data Analysis: John Tukey กับ "งานนักสืบ"](chapters/01-data-science-eda.qmd#sec-ch01-tukey) · ดูเพิ่ม Confirmatory analysis
+
+**Facet / small multiples** (facet / small multiples)
+: ชุดกราฟขนาดเล็กที่ออกแบบเหมือนกันและใช้สเกลเดียวกัน ต่างกันเพียงกลุ่มของข้อมูลที่แสดง ช่วยให้เปรียบเทียบหลายกลุ่มได้ด้วยสายตา
+  อธิบายใน [small multiples และการเปรียบเทียบ](chapters/11-visual-perception.qmd#sec-ch11-small-multiples) · ดูเพิ่ม Visualization
+
+**Garden of forking paths** (garden of forking paths)
+: ปรากฏการณ์ที่ทางเลือกเล็ก ๆ จำนวนมากในการวิเคราะห์ ซึ่งตัดสินใจหลังเห็นข้อมูล ทำให้ผลดูมีนัยสำคัญเกินจริง แม้ทดสอบเพียงครั้งเดียวและไม่มีเจตนาโกง
+  อธิบายใน [Garden of forking paths, HARKing และ p-hacking](chapters/04-questions-hypotheses.qmd#sec-ch04-forking-paths) · ดูเพิ่ม HARKing, Multiple comparisons
+
+**Grammar of graphics** (grammar of graphics)
+: แนวคิดของ Wilkinson ที่มองกราฟทุกภาพว่าประกอบจากข้อมูล การจับคู่ เครื่องหมาย การแปลงทางสถิติ สเกล ระบบพิกัด และ facet เป็นฐานของ ggplot2, seaborn objects และ Altair
+  อธิบายใน [grammar of graphics ของ Wilkinson](chapters/12-interactive-viz.qmd#sec-ch12-grammar) · ดูเพิ่ม Aesthetic mapping, Facet / small multiples
+
+**Hallucination (AI)** (hallucination)
+: การที่แบบจำลองภาษาสร้างเนื้อหาที่ดูน่าเชื่อถือแต่ไม่ถูกต้องหรือไม่มีอยู่จริง เช่น ชื่อคอลัมน์ ฟังก์ชัน endpoint หรือแพ็กเกจที่ไม่มีจริง ต้องตรวจด้วยการรันกับข้อมูลจริงเสมอ
+  อธิบายใน [ความรับผิดชอบเมื่อใช้ AI ช่วยเขียนโค้ด: hallucination และการตรวจสอบ](chapters/22-ethics-ai.qmd#sec-ch22-ai) · ดูเพิ่ม Data ethics
+
+**HARKing** (HARKing)
+: Hypothesizing After the Results are Known คือการเห็นผลในข้อมูลก่อน แล้วรายงานราวกับว่าได้ตั้งสมมติฐานนั้นไว้ล่วงหน้า ทำให้ข้อสันนิษฐานดูเหมือนข้อสรุปที่ยืนยันแล้ว
+  อธิบายใน [Garden of forking paths, HARKing และ p-hacking](chapters/04-questions-hypotheses.qmd#sec-ch04-forking-paths) · ดูเพิ่ม Garden of forking paths
+
+**Hierarchy** (ลำดับชั้น)
+: โครงสร้างที่แต่ละหน่วยในระดับล่างเป็นสมาชิกของหน่วยเดียวในระดับบน เช่น สถานี → จังหวัด → ภาค ต้องตรวจว่าไม่มีหน่วยที่มีหน่วยแม่มากกว่าหนึ่ง
+  อธิบายใน [โครงสร้างลำดับชั้น: ภาค → จังหวัด → สถานี](chapters/18-hierarchical-data.qmd#sec-ch18-hierarchy) · ดูเพิ่ม Drill-down
+
+**Hypothesis** (สมมติฐาน)
+: คำตอบที่คาดไว้ล่วงหน้าพร้อมเหตุผล มาจากความรู้เชิงโดเมน งานวิจัย ผู้ใช้ผลลัพธ์ หรือ first look ต้องแยกสมมติฐานก่อนเห็นข้อมูลออกจากสมมติฐานที่เกิดจากข้อมูล
+  อธิบายใน [แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look](chapters/04-questions-hypotheses.qmd#sec-ch04-hypothesis-sources) · ดูเพิ่ม Analytical question
+
+**Idempotent** (idempotent)
+: คุณสมบัติของการทำงานที่รันซ้ำได้ผลเท่าเดิม เช่น การโหลดข้อมูลแบบ upsert ที่ขจัดข้อมูลซ้ำก่อน รันกี่ครั้งตารางก็มีข้อมูลเหมือนเดิม
+  อธิบายใน [การโหลดข้อมูลแบบ idempotent: upsert และการขจัดข้อมูลซ้ำ](chapters/07-sql-analysis.qmd#sec-ch07-upsert) · ดูเพิ่ม Upsert, Primary key
+
+**Imputation** (การเติมค่า)
+: การแทนค่าที่หายด้วยค่าประมาณ เช่น ค่ากลาง LOCF interpolation หรือแบบจำลอง ค่าที่เติมต้องมี flag กำกับ และทำให้ความไม่แน่นอนดูน้อยกว่าความจริง
+  อธิบายใน [การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation](chapters/10-missing-data.qmd#sec-ch10-single) · ดูเพิ่ม Multiple imputation, Interpolation
+
+**Inline code** (inline code)
+: expression ที่แทรกในข้อความของเอกสาร Quarto ด้วยรูปแบบ `{python} expr` ผลลัพธ์ถูกแทรกลงในประโยค เมื่อ render จึงไม่ต้องคัดลอกตัวเลขด้วยมือ
+  อธิบายใน [literate programming และ Quarto](chapters/19-storytelling-reports.qmd#sec-ch19-quarto) · ดูเพิ่ม Literate programming
+
+**Interactive** (เชิงโต้ตอบ)
+: กราฟที่ผู้อ่านเปลี่ยนมุมมองได้ เช่น ชี้ดูรายละเอียด ซูม กรอง หรือเลือก ควรออกแบบตามลำดับ overview first, zoom and filter, details on demand
+  อธิบายใน [หลักการโต้ตอบ: overview first, zoom and filter, details on demand (Shneiderman)](chapters/12-interactive-viz.qmd#sec-ch12-shneiderman) · ดูเพิ่ม Linked views / brushing, Visualization
+
+**Interpolation** (การประมาณค่าในช่วง)
+: การเติมค่าที่หายด้วยเส้นตรงหรือเส้นโค้งระหว่างค่าสองฝั่งของช่องว่าง เหมาะกับช่องว่างสั้นในอนุกรมเวลา interpolate(limit=n) ของ pandas ไม่ได้จำกัดความยาวช่องว่าง
+  อธิบายใน [การเติมค่าแบบเดี่ยว: ค่าเฉลี่ย, LOCF, interpolation](chapters/10-missing-data.qmd#sec-ch10-single)
+
+**Interquartile range (IQR)** (พิสัยระหว่างควอร์ไทล์)
+: ผลต่างระหว่างควอร์ไทล์ที่สามกับควอร์ไทล์ที่หนึ่ง ครอบคลุมข้อมูลครึ่งกลาง เป็นตัววัดการกระจายที่ทนต่อค่าผิดปกติ
+  อธิบายใน [robust statistics: median, IQR, MAD, trimmed mean](chapters/13-exploratory-statistics.qmd#sec-ch13-robust) · ดูเพิ่ม Robust statistics
+
+**Isolation Forest** (Isolation Forest)
+: วิธีตรวจหาค่าผิดปกติที่แยกข้อมูลด้วยต้นไม้แบ่งแบบสุ่ม ค่าที่ถูกแยกออกได้ด้วยการแบ่งน้อยครั้งถือว่าผิดปกติ จำนวนธงขึ้นกับพารามิเตอร์ contamination ที่กำหนดล่วงหน้า
+  อธิบายใน [การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest](chapters/15-multivariate.qmd#sec-ch15-outliers) · ดูเพิ่ม Outlier
+
+**Join** (join)
+: การรวมแถวจากสองตารางตามเงื่อนไข มีหลายชนิด เช่น inner, left, semi, anti และ ASOF inner join ตัดแถวที่จับคู่ไม่ได้ทิ้งโดยไม่แจ้งเตือน
+  อธิบายใน [join ทุกแบบ: inner, outer, semi, anti และ ASOF join](chapters/07-sql-analysis.qmd#sec-ch07-joins) · ดูเพิ่ม Primary key
+
+**Kernel** (kernel)
+: process ที่รันโค้ดของ notebook และเก็บตัวแปรไว้ในหน่วยความจำ แยกจากหน้าจอที่แสดง notebook เมื่อ restart kernel ตัวแปรทั้งหมดจะหายไป
+  อธิบายใน [Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ `.ipynb` และปัญหา hidden state](chapters/02-reproducible-environment.qmd#sec-ch02-jupyter) · ดูเพิ่ม Notebook
+
+**Key performance indicator (KPI)** (ตัวชี้วัดหลัก)
+: ตัวเลขสรุปที่แสดงเด่นในแดชบอร์ด ต้องตอบคำถามของผู้ใช้ มีหน่วยและจุดเทียบ และคำนวณด้วยนิยามเดียวกันทุกระดับ
+  อธิบายใน [หลักการจัดวางและการออกแบบตัวชี้วัด](chapters/20-dashboards.qmd#sec-ch20-layout) · ดูเพิ่ม Dashboard
+
+**License** (สัญญาอนุญาต)
+: เงื่อนไขที่เจ้าของงานกำหนดสำหรับการใช้ ดัดแปลง และเผยแพร่ต่อ เช่น CC BY สำหรับข้อมูล MIT และ GPL สำหรับซอฟต์แวร์ ต้องตรวจและบันทึกสำหรับทุกแหล่งที่ใช้
+  อธิบายใน [สัญญาอนุญาตของข้อมูลและซอฟต์แวร์](chapters/22-ethics-ai.qmd#sec-ch22-licenses) · ดูเพิ่ม Data ethics
+
+**Lie factor** (lie factor)
+: อัตราส่วนระหว่างขนาดของผลที่แสดงในภาพกับขนาดของผลในข้อมูล ตามนิยามของ Tufte กราฟที่ซื่อตรงมีค่าใกล้ 1
+  อธิบายใน [ความซื่อตรงของภาพ: lie factor, data-ink (Tufte), แกนที่ถูกตัด](chapters/11-visual-perception.qmd#sec-ch11-integrity) · ดูเพิ่ม Data-ink ratio
+
+**Linked views / brushing** (linked views / brushing)
+: การแสดงข้อมูลชุดเดียวกันในหลายกราฟที่เชื่อมกัน การเลือกในกราฟหนึ่ง เช่น การลากกรอบเลือก (brushing) จะกรองหรือเน้นข้อมูลในกราฟอื่น
+  อธิบายใน [linked views และ brushing](chapters/12-interactive-viz.qmd#sec-ch12-linked) · ดูเพิ่ม Interactive
+
+**Literate programming** (literate programming)
+: แนวคิดของ Knuth ที่เขียนโปรแกรมเป็นงานเขียนอธิบายความคิดโดยมีโค้ดแทรก ในงานข้อมูลคือเอกสาร ที่รวมข้อความ โค้ด และผลลัพธ์ ทำให้ตัวเลขในรายงานตรงกับการคำนวณเสมอ
+  อธิบายใน [literate programming และ Quarto](chapters/19-storytelling-reports.qmd#sec-ch19-quarto) · ดูเพิ่ม Reproducibility, Notebook
+
+**Loading** (loading)
+: สัมประสิทธิ์ของแต่ละมิติเดิมในองค์ประกอบหลัก ใช้ตีความว่าองค์ประกอบหมายถึงอะไร เครื่องหมายของ loading กลับได้โดยไม่เปลี่ยนผล
+  อธิบายใน [การตีความ loading และ explained variance](chapters/15-multivariate.qmd#sec-ch15-loadings) · ดูเพิ่ม Principal Component Analysis (PCA)
+
+**MAUP** (MAUP)
+: modifiable areal unit problem ผลการวิเคราะห์ข้อมูลที่รวมเป็นพื้นที่เปลี่ยนไปตามขนาดและการแบ่งเขต ของพื้นที่ที่ใช้รวม
+  อธิบายใน [แผนที่ choropleth และปัญหา MAUP](chapters/17-spatial-data.qmd#sec-ch17-choropleth) · ดูเพิ่ม Choropleth map, Ecological fallacy
+
+**MCAR / MAR / MNAR** (MCAR / MAR / MNAR)
+: กลไกการสูญหายตามกรอบของ Rubin: MCAR หายโดยไม่ขึ้นกับอะไร, MAR หายขึ้นกับตัวแปรที่เห็น, MNAR หายขึ้นกับค่าที่หายไปเอง ซึ่งพิสูจน์จากข้อมูลชุดเดียวไม่ได้
+  อธิบายใน [กรอบแนวคิดของ Rubin: MCAR, MAR, MNAR](chapters/10-missing-data.qmd#sec-ch10-rubin)
+
+**Mean / median** (ค่าเฉลี่ย / มัธยฐาน)
+: ตัววัดตำแหน่งของข้อมูล ค่าเฉลี่ยใช้ค่าทุกค่าและไวต่อค่าผิดปกติ มัธยฐานคือค่ากลางเมื่อเรียงข้อมูล มี breakdown point 50%
+  อธิบายใน [robust statistics: median, IQR, MAD, trimmed mean](chapters/13-exploratory-statistics.qmd#sec-ch13-robust) · ดูเพิ่ม Robust statistics
+
+**Merge / rebase** (merge / rebase)
+: สองวิธีรวมงานจาก branch merge สร้าง commit ที่มี parent สองตัวและรักษาประวัติจริง rebase นำ commit ไปเล่นซ้ำบนปลายของอีก branch ทำให้ได้ commit ใหม่และประวัติเป็นเส้นตรง
+  อธิบายใน [branch, merge และ rebase](chapters/03-version-control.qmd#sec-ch03-branch) · ดูเพิ่ม Branch
+
+**Missing data** (ข้อมูลสูญหาย)
+: ข้อมูลที่ควรมีแต่ไม่มี แบ่งเป็นแบบ explicit (มีแถวแต่ค่าว่าง) และ implicit (ไม่มีแถว) ผลต่อการวิเคราะห์ขึ้นกับกลไกการสูญหายมากกว่าปริมาณ
+  อธิบายใน [explicit กับ implicit missing](chapters/10-missing-data.qmd#sec-ch10-explicit-implicit) · ดูเพิ่ม MCAR / MAR / MNAR, Missing value
+
+**Missing value** (ค่าสูญหาย)
+: ค่าหนึ่งค่าที่ไม่ทราบ แทนด้วย NULL ใน SQL และ NaN หรือ NA ใน pandas ฟังก์ชันรวมส่วนใหญ่ข้ามค่าสูญหาย
+  อธิบายใน [explicit กับ implicit missing](chapters/10-missing-data.qmd#sec-ch10-explicit-implicit) · ดูเพิ่ม Missing data, Sentinel value
+
+**Multiple comparisons** (การเปรียบเทียบหลายครั้ง)
+: ปัญหาที่โอกาสได้ผลบวกเท็จเพิ่มขึ้นตามจำนวนการทดสอบ แก้ด้วยการปรับ p-value เช่น Holm (ควบคุม FWER) หรือ Benjamini–Hochberg (ควบคุม FDR)
+  อธิบายใน [การเปรียบเทียบหลายครั้ง: Bonferroni, Holm, Benjamini–Hochberg (FDR)](chapters/13-exploratory-statistics.qmd#sec-ch13-multiple) · ดูเพิ่ม p-value, Garden of forking paths
+
+**Multiple imputation** (การเติมค่าแบบหลายชุด)
+: การเติมค่าหลายชุดโดยสุ่มจากการแจกแจงของค่าที่น่าจะเป็น วิเคราะห์แต่ละชุดแล้วรวมผลด้วย Rubin's rules ทำให้ความไม่แน่นอนจากการเติมค่าถูกนับรวม
+  อธิบายใน [multiple imputation และ Rubin's rules](chapters/10-missing-data.qmd#sec-ch10-multiple) · ดูเพิ่ม Imputation
+
+**Normalization / denormalization** (normalization)
+: การแยกตารางเพื่อให้ข้อเท็จจริงแต่ละข้อถูกเก็บไว้ที่เดียว ป้องกันข้อมูลขัดแย้งเมื่อแก้ไข ตรงข้ามกับ denormalization ที่เก็บซ้ำอย่างตั้งใจเพื่อให้อ่านเร็วขึ้น
+  อธิบายใน [normalization กับ denormalization](chapters/06-analytical-databases.qmd#sec-ch06-normalization)
+
+**Notebook** (notebook)
+: เอกสารเชิงโต้ตอบรูปแบบ .ipynb ที่รวมโค้ด ผลลัพธ์ และข้อความ เหมาะกับการสำรวจข้อมูล แต่เสี่ยงต่อปัญหา hidden state เมื่อรัน cell ข้ามลำดับ
+  อธิบายใน [Jupyter: สถาปัตยกรรม kernel, รูปแบบไฟล์ `.ipynb` และปัญหา hidden state](chapters/02-reproducible-environment.qmd#sec-ch02-jupyter) · ดูเพิ่ม Kernel
+
+**OLTP / OLAP** (OLAP)
+: Online Analytical Processing งานวิเคราะห์ที่อ่านไม่กี่คอลัมน์จากแถวจำนวนมาก เช่น ค่าเฉลี่ยรายเดือนของทุกสถานี ตรงข้ามกับ OLTP ที่อ่านเขียนทีละแถว
+  อธิบายใน [OLTP กับ OLAP และ star schema](chapters/06-analytical-databases.qmd#sec-ch06-oltp-olap)
+
+**Outlier** (ค่าผิดปกติ)
+: ค่าที่ต่างจากค่าส่วนใหญ่มากจนน่าสงสัยว่ามาจากกลไกอื่น ต้องนิยามเทียบกับบริบท อาจเป็นความผิดพลาดหรือเหตุการณ์จริง จึงบันทึกเป็นธงพร้อมเหตุผลแทนการลบ
+  อธิบายใน [การตรวจหา outlier: z-score, IQR, Mahalanobis, LOF, Isolation Forest](chapters/15-multivariate.qmd#sec-ch15-outliers) · ดูเพิ่ม Robust statistics, Isolation Forest
+
+**Overplotting** (overplotting)
+: ภาวะที่จุดจำนวนมากทับกันใน scatter plot จนไม่เห็นความหนาแน่น แก้ด้วยการลดความทึบ สุ่มตัวอย่าง หรือใช้ 2D histogram
+  อธิบายใน [การเลือกกราฟตามคำถาม](chapters/11-visual-perception.qmd#sec-ch11-chart-choice) · ดูเพิ่ม Visualization
+
+**p-value** (p-value)
+: ความน่าจะเป็นที่จะได้ข้อมูลต่างจากสมมติฐานว่างอย่างน้อยเท่าที่เห็น ถ้าสมมติฐานว่างเป็นจริง ไม่ได้วัดความน่าจะเป็นที่สมมติฐานเป็นจริง และไม่ได้วัดขนาดของผล
+  อธิบายใน [การทดสอบสมมติฐาน: parametric และ non-parametric](chapters/13-exploratory-statistics.qmd#sec-ch13-testing) · ดูเพิ่ม Statistical significance, Effect size
+
+**Package** (แพ็กเกจ)
+: ชุดโมดูล Python ที่แจกจ่ายเพื่อติดตั้งและนำไปใช้ซ้ำ ติดตั้งจาก PyPI ด้วย pip หรือ uv หรือจาก conda channel ด้วย conda ในรูป wheel หรือ source distribution
+  อธิบายใน [Python interpreter และระบบแพ็กเกจ: pip, wheel, conda channel](chapters/02-reproducible-environment.qmd#sec-ch02-packages)
+
+**Parameterized report** (รายงานแบบมีพารามิเตอร์)
+: แม่แบบรายงานที่รับค่าพารามิเตอร์จากภายนอก แล้ว render ซ้ำด้วยค่าต่างกันเพื่อสร้างหลายฉบับ เช่น หนึ่งฉบับต่อภาค เอกสาร Python ใน Quarto ใช้กลไกของ papermill
+  อธิบายใน [รายงานแบบมีพารามิเตอร์](chapters/19-storytelling-reports.qmd#sec-ch19-parameterized) · ดูเพิ่ม Inline code
+
+**Parquet** (Parquet)
+: รูปแบบไฟล์แบบ columnar แบบเปิด แบ่งแถวเป็น row group เก็บชนิดข้อมูล บีบอัดรายคอลัมน์ และมี statistics ที่ช่วยข้ามข้อมูลที่ไม่ตรงเงื่อนไข
+  อธิบายใน [Parquet เชิงลึก: row group, encoding, compression, statistics](chapters/06-analytical-databases.qmd#sec-ch06-parquet) · ดูเพิ่ม Columnar storage
+
+**PDPA** (พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)
+: กฎหมายหลักของไทยที่กำกับการเก็บ ใช้ และเปิดเผยข้อมูลส่วนบุคคล บังคับใช้เต็มรูปแบบ ตั้งแต่ 1 มิถุนายน 2565 กำหนดบทบาทของผู้ควบคุมและผู้ประมวลผลข้อมูล และหลักการ เช่น การเก็บเท่าที่จำเป็น
+  อธิบายใน [พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 สำหรับนักวิทยาการข้อมูล](chapters/16-synthetic-privacy.qmd#sec-ch16-pdpa) · ดูเพิ่ม Personal data
+
+**Permutation test** (permutation test)
+: การทดสอบสมมติฐานโดยสลับป้ายกลุ่มแบบสุ่มซ้ำหลายพันครั้ง เพื่อสร้างการแจกแจงของสถิติ ภายใต้สมมติฐานว่าง ไม่ต้องสมมติรูปแบบของการแจกแจง
+  อธิบายใน [resampling: bootstrap และ permutation test](chapters/13-exploratory-statistics.qmd#sec-ch13-resampling) · ดูเพิ่ม Bootstrap, p-value
+
+**Personal data** (ข้อมูลส่วนบุคคล)
+: ข้อมูลเกี่ยวกับบุคคลซึ่งทำให้ระบุตัวบุคคลนั้นได้ ไม่ว่าทางตรงหรือทางอ้อม ไม่รวมข้อมูลของผู้ถึงแก่กรรม ตามมาตรา 6 ของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+  อธิบายใน [ข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว](chapters/16-synthetic-privacy.qmd#sec-ch16-personal-data) · ดูเพิ่ม Sensitive data, PDPA
+
+**Pipeline** (pipeline)
+: ลำดับขั้นตอนที่ข้อมูลไหลผ่านอย่างเป็นระบบ แต่ละขั้นมีหน้าที่เดียวและส่งผลลัพธ์ให้ขั้นถัดไป เช่น ดึงข้อมูล → บันทึกไฟล์ดิบ → โหลดเข้าฐานข้อมูล → ตรวจสอบ → ทำความสะอาด
+  อธิบายใน [0.6 กรณีศึกษาหลัก: ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย](chapters/00-overview.qmd#sec-ch00-case-main) · ดูเพิ่ม Idempotent, Reproducibility
+
+**Preattentive attribute** (คุณลักษณะที่รับรู้ก่อนการตั้งใจ)
+: คุณลักษณะทางภาพ เช่น สี ขนาด ตำแหน่ง และการวางแนว ที่ระบบการมองเห็นประมวลผลได้ทันที ก่อนการตั้งใจมองหา ใช้เน้นสิ่งที่ต้องการให้ผู้อ่านเห็นก่อน
+  อธิบายใน [การรับรู้ทางสายตา: preattentive attribute และหลัก Gestalt](chapters/11-visual-perception.qmd#sec-ch11-perception) · ดูเพิ่ม Encoding (visual)
+
+**Primary key** (primary key)
+: คอลัมน์หรือกลุ่มคอลัมน์ที่ระบุแถวได้ไม่ซ้ำและไม่เป็น NULL เช่น (station_id, ts) ในตาราง measurements ทำให้ฐานข้อมูลปฏิเสธแถวซ้ำ
+  อธิบายใน [relational model: relation, key และ integrity](chapters/06-analytical-databases.qmd#sec-ch06-relational) · ดูเพิ่ม Idempotent
+
+**Principal Component Analysis (PCA)** (การวิเคราะห์องค์ประกอบหลัก)
+: วิธีลดมิติแบบเชิงเส้นที่หาทิศทางที่ข้อมูลกระจายมากที่สุด ทิศทางคือ eigenvector ของเมทริกซ์ ความแปรปรวนร่วม และความแปรปรวนตามทิศคือ eigenvalue คำนวณผ่าน SVD
+  อธิบายใน [PCA เชิงคณิตศาสตร์: eigen decomposition และ SVD](chapters/15-multivariate.qmd#sec-ch15-pca) · ดูเพิ่ม Loading, Scaling / standardization
+
+**Projection** (เส้นโครงแผนที่)
+: การแปลงพิกัดบนผิวโค้งของโลกเป็นพิกัดบนระนาบ ต้องบิดเบือนบางคุณสมบัติเสมอ UTM แบ่งโลกเป็นโซน 6 องศา ประเทศไทยคร่อมโซน 47N และ 48N
+  อธิบายใน [ระบบพิกัดและเส้นโครงแผนที่สำหรับประเทศไทย (WGS 84, UTM 47N/48N)](chapters/17-spatial-data.qmd#sec-ch17-crs) · ดูเพิ่ม Coordinate Reference System (CRS)
+
+**Pseudonymization** (การแฝงข้อมูล)
+: การแทนตัวระบุโดยตรงด้วยรหัสแฝง โดยเก็บตารางจับคู่หรือกุญแจไว้แยก ลดความเสี่ยง แต่ข้อมูลที่แฝงแล้วยังเป็นข้อมูลส่วนบุคคล
+  อธิบายใน [anonymization กับ pseudonymization](chapters/16-synthetic-privacy.qmd#sec-ch16-anonymization) · ดูเพิ่ม Anonymization
+
+**Pull request (PR)** (pull request)
+: คำขอให้รวม branch หนึ่งเข้าอีก branch หนึ่งบนบริการอย่าง GitHub พร้อมพื้นที่อภิปรายและ review ก่อนรวม
+  อธิบายใน [GitHub: remote, pull request, issue และ code review](chapters/03-version-control.qmd#sec-ch03-github) · ดูเพิ่ม Code review
+
+**Query** (query)
+: คำสั่งที่ส่งให้ฐานข้อมูลเพื่อขอข้อมูล เช่น SELECT ใน SQL ผู้ใช้บอกว่าต้องการผลลัพธ์อะไร ฐานข้อมูลเป็นผู้เลือกวิธีทำงานที่เร็วที่สุด
+  อธิบายใน [ลำดับการประมวลผลเชิงตรรกะของคำสั่ง SELECT](chapters/07-sql-analysis.qmd#sec-ch07-logical-order)
+
+**Rate limit** (rate limit)
+: ขีดจำกัดจำนวน request ต่อช่วงเวลาที่ผู้ให้บริการกำหนด เมื่อเกินมักได้ status 429 พร้อม header Retry-After บอกระยะเวลาที่ควรรอ
+  อธิบายใน [REST API: authentication, pagination, rate limit](chapters/05-data-acquisition.qmd#sec-ch05-rest)
+
+**Raw data** (ข้อมูลดิบ)
+: ข้อมูลในรูปที่ได้รับจากแหล่งต้นทางโดยยังไม่ผ่านการแปลง เก็บแยกไว้และไม่เขียนทับ เพื่อให้ประมวลผลใหม่ได้เมื่อพบว่าขั้นแปลงผิดพลาด
+  อธิบายใน [การดึงข้อมูลอย่างทนทาน: timeout, retry, backoff, idempotency](chapters/05-data-acquisition.qmd#sec-ch05-robust)
+
+**Re-identification** (การระบุตัวตนซ้ำ)
+: การเชื่อมข้อมูลที่ลบตัวระบุแล้วเข้ากับข้อมูลภายนอกจนรู้ว่าแถวใดเป็นของใคร มักอาศัย quasi-identifier เช่น อายุ เพศ และที่อยู่
+  อธิบายใน [k-anonymity, l-diversity และการโจมตีเพื่อระบุตัวตนซ้ำ](chapters/16-synthetic-privacy.qmd#sec-ch16-k-anonymity) · ดูเพิ่ม Anonymization
+
+**Repository (repo)** (repository)
+: โฟลเดอร์โครงการที่ Git ติดตามการเปลี่ยนแปลง ประกอบด้วยไฟล์ที่ทำงานอยู่และฐานข้อมูลประวัติในโฟลเดอร์ .git/
+  อธิบายใน [แบบจำลองข้อมูลของ Git: blob, tree, commit และ DAG](chapters/03-version-control.qmd#sec-ch03-model)
+
+**Reproducibility** (การทำซ้ำได้)
+: การได้ผลที่สอดคล้องกันเมื่อใช้ข้อมูลเดียวกัน โค้ดเดียวกัน และเงื่อนไขการวิเคราะห์เดียวกัน ต่างจาก replicability ซึ่งศึกษาคำถามเดิมด้วยข้อมูลชุดใหม่
+  อธิบายใน [วิกฤตการทำซ้ำได้ (reproducibility crisis) และระดับของการทำซ้ำได้](chapters/02-reproducible-environment.qmd#sec-ch02-crisis)
+
+**Request / response** (request / response)
+: คู่การสื่อสารของ HTTP request จาก client ประกอบด้วย method URL header และ body response จากเซิร์ฟเวอร์ประกอบด้วย status code header และ body
+  อธิบายใน [HTTP เชิงลึก: method, status code, header, TLS/SSL certificate chain](chapters/05-data-acquisition.qmd#sec-ch05-http)
+
+**Rerun (Streamlit)** (rerun)
+: แบบจำลองการทำงานของ Streamlit ที่รัน script ทั้งไฟล์ใหม่ตั้งแต่บรรทัดแรกทุกครั้งที่ผู้ใช้โต้ตอบกับ widget จึงต้องใช้ session state เก็บค่าข้ามรอบ และ cache ป้องกันงานซ้ำ
+  อธิบายใน [แบบจำลองการทำงานของ Streamlit: rerun, session state, callback](chapters/20-dashboards.qmd#sec-ch20-streamlit) · ดูเพิ่ม Session state, Caching
+
+**Resample** (resample)
+: การรวมหรือแตกข้อมูลอนุกรมเวลาเป็นช่วงเวลาใหม่ เช่น รายชั่วโมงเป็นรายวัน resample ของ pandas สร้างแถวของทุกช่วงเวลาแม้ไม่มีข้อมูล ต่างจาก groupby
+  อธิบายใน [resampling และความครบถ้วนของข้อมูลเมื่อรวมกลุ่ม](chapters/08-data-wrangling.qmd#sec-ch08-resample) · ดูเพิ่ม Completeness
+
+**Reshape** (การปรับรูป)
+: การเปลี่ยนรูปของตารางโดยไม่เปลี่ยนข้อมูล เช่น melt จากกว้างเป็นยาว และ pivot จากยาวเป็นกว้าง pivot แจ้ง error เมื่อมีแถวซ้ำ ซึ่งเป็นสัญญาณให้ตรวจข้อมูล
+  อธิบายใน [reshaping: melt, pivot และ wide/long](chapters/08-data-wrangling.qmd#sec-ch08-reshape)
+
+**Robust statistics** (สถิติแบบทนทาน)
+: สถิติที่ไม่เปลี่ยนมากเมื่อข้อมูลบางส่วนผิดปกติ เช่น มัธยฐาน IQR MAD และ trimmed mean เปรียบเทียบความทนทานด้วย breakdown point
+  อธิบายใน [robust statistics: median, IQR, MAD, trimmed mean](chapters/13-exploratory-statistics.qmd#sec-ch13-robust) · ดูเพิ่ม Interquartile range (IQR), Mean / median
+
+**ROLLUP / CUBE** (ROLLUP / CUBE)
+: ส่วนขยายของ GROUP BY ที่คำนวณหลายระดับการรวมในคำสั่งเดียว ROLLUP คำนวณตามลำดับชั้น CUBE คำนวณทุกชุดค่าผสม ใช้ GROUPING() แยกแถวผลรวมจากค่าว่างจริง
+  อธิบายใน [การดำเนินการแบบ OLAP: roll-up, drill-down, slice, dice](chapters/18-hierarchical-data.qmd#sec-ch18-olap) · ดูเพิ่ม Aggregation, Drill-down
+
+**Scaling / standardization** (การปรับสเกล / การทำให้เป็นมาตรฐาน)
+: การแปลงมิติของข้อมูลให้อยู่ในสเกลที่เทียบกันได้ การทำให้เป็นมาตรฐานทำให้แต่ละมิติมีค่าเฉลี่ย 0 และส่วนเบี่ยงเบนมาตรฐาน 1 ซึ่งกำหนดน้ำหนักของแต่ละมิติในวิธีที่อาศัยระยะทาง
+  อธิบายใน [ระยะทาง ความคล้าย และการปรับสเกล](chapters/15-multivariate.qmd#sec-ch15-distance) · ดูเพิ่ม Principal Component Analysis (PCA), Clustering
+
+**Schema** (schema)
+: คำอธิบายโครงสร้างที่ข้อมูลต้องมี เช่น ชื่อคอลัมน์ ชนิดข้อมูล และกฎของค่า ทั้งในฐานข้อมูล (CREATE TABLE) และในการตรวจ DataFrame (pandera)
+  อธิบายใน [validation as code ด้วย pandera](chapters/09-data-quality.qmd#sec-ch09-pandera)
+
+**Sensitive data** (ข้อมูลส่วนบุคคลที่มีความอ่อนไหว)
+: ข้อมูลส่วนบุคคลตามมาตรา 26 เช่น ข้อมูลสุขภาพ เชื้อชาติ ความเชื่อทางศาสนา ประวัติอาชญากรรม ข้อมูลพันธุกรรมและชีวภาพ ซึ่งการเก็บรวบรวมมีเงื่อนไขเข้มงวดกว่าข้อมูลทั่วไป
+  อธิบายใน [ข้อมูลส่วนบุคคลและข้อมูลอ่อนไหว](chapters/16-synthetic-privacy.qmd#sec-ch16-personal-data) · ดูเพิ่ม Personal data
+
+**Sensitivity analysis** (การวิเคราะห์ความไว)
+: การคำนวณผลซ้ำด้วยทางเลือกที่สมเหตุสมผลต่างกัน เช่น เกณฑ์ความครบถ้วนหรือวิธีจัดการข้อมูลสูญหาย เพื่อดูว่าข้อสรุปเปลี่ยนหรือไม่
+  อธิบายใน [คุณภาพข้อมูลและข้อมูลสูญหาย](chapters/21-case-study-pm25.qmd#sec-ch21-quality) · ดูเพิ่ม Missing data, Garden of forking paths
+
+**Sentinel value** (ค่าแทน)
+: ตัวเลขพิเศษที่ระบบใช้แทนค่าว่าง เช่น "-1" ของ Air4Thai ต้องแปลงเป็น NULL ในขั้นโหลด มิฉะนั้นจะถูกนำไปคำนวณและทำให้ค่าสรุปผิดอย่างเป็นระบบ
+  อธิบายใน [ปัญหาเฉพาะของข้อมูลจากเซนเซอร์: ค่าแทน (sentinel), sensor ค้าง, drift, การสอบเทียบ](chapters/09-data-quality.qmd#sec-ch09-sensor) · ดูเพิ่ม Missing value
+
+**Session state** (session state)
+: dictionary ของ Streamlit ที่ค่าคงอยู่ข้าม rerun ภายใน session ของผู้ใช้แต่ละคน ใช้เก็บสถานะ เช่น ระดับของ drill-down ที่เลือก
+  อธิบายใน [แบบจำลองการทำงานของ Streamlit: rerun, session state, callback](chapters/20-dashboards.qmd#sec-ch20-streamlit) · ดูเพิ่ม Rerun (Streamlit), Callback
+
+**Silhouette** (silhouette)
+: ตัววัดว่าแต่ละจุดอยู่ใกล้กลุ่มของตนมากกว่ากลุ่มอื่นเพียงใด มีค่าระหว่าง −1 ถึง 1 ใช้ร่วมกับ elbow ความเสถียร และความหมายในการเลือกจำนวนกลุ่ม
+  อธิบายใน [การประเมิน cluster: silhouette และความเสถียร](chapters/15-multivariate.qmd#sec-ch15-evaluation) · ดูเพิ่ม Clustering
+
+**Simpson's paradox** (Simpson's paradox)
+: ปรากฏการณ์ที่ความสัมพันธ์ในข้อมูลรวมตรงข้ามกับในทุกกลุ่มย่อย มักเกิดเมื่อองค์ประกอบของกลุ่มต่างกัน เช่น เครือข่ายสถานีขยายตัว
+  อธิบายใน [สหสัมพันธ์และกับดัก: Simpson's paradox, ecological fallacy](chapters/13-exploratory-statistics.qmd#sec-ch13-correlation) · ดูเพิ่ม Correlation, Ecological fallacy
+
+**Skewness** (ความเบ้)
+: ตัววัดความไม่สมมาตรของการแจกแจง ค่าบวกหมายถึงหางยาวทางขวา ซึ่งทำให้ค่าเฉลี่ยสูงกว่ามัธยฐาน
+  อธิบายใน [การแจกแจงและรูปร่างของข้อมูล](chapters/13-exploratory-statistics.qmd#sec-ch13-distribution) · ดูเพิ่ม Distribution
+
+**Smoothing** (การทำให้เรียบ)
+: การลดความผันผวนระยะสั้นเพื่อให้เห็นรูปแบบที่ช้ากว่า เช่น moving average และ LOESS ขนาดหน้าต่างต้องเลือกให้ตรงกับคำถาม
+  อธิบายใน [smoothing: moving average และ LOESS](chapters/14-time-series.qmd#sec-ch14-smoothing) · ดูเพิ่ม Decomposition
+
+**Spatial autocorrelation** (สหสัมพันธ์เชิงพื้นที่)
+: ความสัมพันธ์ระหว่างค่าของตัวแปรเดียวกันในตำแหน่งที่ใกล้กัน วัดด้วย Moran's I ทำให้หน่วยเชิงพื้นที่ไม่เป็นอิสระต่อกัน
+  อธิบายใน [spatial autocorrelation: Moran's I](chapters/17-spatial-data.qmd#sec-ch17-moran) · ดูเพิ่ม Autocorrelation
+
+**Spatial interpolation** (การประมาณค่าเชิงพื้นที่)
+: การสร้างพื้นผิวต่อเนื่องจากค่าที่จุดตรวจวัด เช่น IDW และ kriging ไม่สามารถสร้างข้อมูลในบริเวณที่ไม่ได้วัด จึงต้องแสดงความไม่แน่นอนควบคู่
+  อธิบายใน [การประมาณค่าเชิงพื้นที่จากเครือข่ายสถานี: IDW และ kriging เบื้องต้น](chapters/17-spatial-data.qmd#sec-ch17-interpolation) · ดูเพิ่ม Spatial autocorrelation
+
+**Spatial join** (spatial join)
+: การเชื่อมสองตารางด้วยความสัมพันธ์เชิงพื้นที่แทนคีย์ เช่น สถานีที่อยู่ภายในจังหวัด ต้องให้ทั้งสองชุดอยู่ใน CRS เดียวกัน
+  อธิบายใน [spatial operation และ spatial join](chapters/17-spatial-data.qmd#sec-ch17-operations) · ดูเพิ่ม Join, Coordinate Reference System (CRS)
+
+**SQL injection** (SQL injection)
+: การโจมตีโดยส่งข้อความที่เป็นคำสั่ง SQL เข้ามาแทนค่า เมื่อโปรแกรมต่อค่าของผู้ใช้ลงในสตริง SQL ป้องกันด้วยตัวยึดตำแหน่ง (?) และการส่งค่าแยก
+  อธิบายใน [การออกแบบ drill-down หลายระดับ](chapters/20-dashboards.qmd#sec-ch20-drilldown) · ดูเพิ่ม Query
+
+**Stakeholder** (ผู้มีส่วนได้ส่วนเสีย)
+: บุคคลหรือหน่วยงานที่ใช้ผลการวิเคราะห์หรือได้รับผลกระทบจากผลนั้น การคุยกับผู้มีส่วนได้ส่วนเสียช่วยให้คำถามนำไปใช้ได้
+  อธิบายใน [แหล่งที่มาของสมมติฐาน: ความรู้โดเมน งานวิจัย ผู้ใช้ผลลัพธ์ และ first look](chapters/04-questions-hypotheses.qmd#sec-ch04-hypothesis-sources)
+
+**Stationarity** (stationarity)
+: คุณสมบัติของอนุกรมเวลาที่ค่าเฉลี่ย ความแปรปรวน และโครงสร้างความสัมพันธ์ไม่เปลี่ยนตามเวลา อนุกรมที่ไม่มีคุณสมบัตินี้อาจให้สหสัมพันธ์ปลอม
+  อธิบายใน [stationarity และ การทดสอบ (ADF, KPSS)](chapters/14-time-series.qmd#sec-ch14-stationarity) · ดูเพิ่ม Time series
+
+**Statistical significance** (นัยสำคัญทางสถิติ)
+: สถานะเมื่อ p-value ต่ำกว่าเกณฑ์ที่กำหนดไว้ล่วงหน้า เช่น 0.05 ไม่ได้หมายความว่าผลมีขนาดใหญ่หรือมีความสำคัญในทางปฏิบัติ
+  อธิบายใน [การทดสอบสมมติฐาน: parametric และ non-parametric](chapters/13-exploratory-statistics.qmd#sec-ch13-testing) · ดูเพิ่ม p-value
+
+**Synthetic data** (ข้อมูลสังเคราะห์)
+: ข้อมูลที่สร้างด้วยกระบวนการคำนวณแทนการเก็บจากโลกจริง แบบกฎใช้ทดสอบ pipeline แบบสถิติและ deep learning รักษาความสัมพันธ์ ต้องประเมินทั้ง utility และ privacy
+  อธิบายใน [ข้อมูลสังเคราะห์: แบบกฎ (Faker), แบบสถิติ (copula), แบบ deep learning (CTGAN)](chapters/16-synthetic-privacy.qmd#sec-ch16-synthetic) · ดูเพิ่ม Differential privacy
+
+**Table / view** (ตาราง / view)
+: ตารางเก็บข้อมูลจริงเป็นแถวและคอลัมน์ view คือ query ที่ตั้งชื่อไว้ เรียกใช้ได้เหมือนตารางแต่คำนวณใหม่ทุกครั้ง จึงไม่เก็บข้อมูลซ้ำ
+  อธิบายใน [normalization กับ denormalization](chapters/06-analytical-databases.qmd#sec-ch06-normalization)
+
+**Terminal / shell** (terminal / shell)
+: terminal คือโปรแกรมหน้าต่างสำหรับพิมพ์คำสั่ง shell คือโปรแกรมที่อ่านและแปลคำสั่งนั้น เช่น bash, zsh และ PowerShell คำสั่งที่พิมพ์บันทึกและทำซ้ำได้
+  อธิบายใน [shell และ terminal: แนวคิด path, process, environment variable](chapters/02-reproducible-environment.qmd#sec-ch02-shell)
+
+**Tidy data** (tidy data)
+: รูปแบบข้อมูลตามหลักของ Wickham คือ ตัวแปรหนึ่งตัวอยู่ในคอลัมน์หนึ่ง การสังเกตหนึ่งครั้งอยู่ในแถวหนึ่ง และหน่วยการสังเกตหนึ่งชนิดอยู่ในตารางหนึ่ง รูปที่ tidy ขึ้นกับคำถาม
+  อธิบายใน [tidy data: หลักการของ Wickham](chapters/08-data-wrangling.qmd#sec-ch08-tidy) · ดูเพิ่ม Wide / long format
+
+**Time series** (อนุกรมเวลา)
+: ลำดับของค่าที่วัดตามเวลา ค่าที่อยู่ติดกันมักสัมพันธ์กัน เครื่องมือส่วนใหญ่ต้องการข้อมูลที่มีความถี่แน่นอน
+  อธิบายใน [องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual](chapters/14-time-series.qmd#sec-ch14-components) · ดูเพิ่ม Trend / seasonality, Autocorrelation
+
+**Timezone** (เขตเวลา)
+: กฎที่กำหนดความต่างของเวลาท้องถิ่นจาก UTC เช่น Asia/Bangkok คือ UTC+07:00 ไม่มีเวลาออมแสง การตัดวันผิดเขตเวลาทำให้ค่าเฉลี่ยรายวันปนข้อมูลสองวัน
+  อธิบายใน [การจัดการวันเวลาและเขตเวลาใน SQL](chapters/07-sql-analysis.qmd#sec-ch07-datetime)
+
+**Trace (Plotly)** (trace)
+: ชุดข้อมูลหนึ่งชุดที่วาดด้วยเครื่องหมายหนึ่งแบบใน figure ของ Plotly figure ประกอบด้วยรายการ trace (data) และ layout
+  อธิบายใน [แบบจำลองของ Plotly: figure, trace, layout](chapters/12-interactive-viz.qmd#sec-ch12-plotly) · ดูเพิ่ม Interactive
+
+**Treemap / sunburst** (treemap / sunburst)
+: กราฟสำหรับข้อมูลลำดับชั้น treemap ใช้สี่เหลี่ยมซ้อนกัน sunburst ใช้วงแหวนซ้อนกัน ขนาดต้องเป็นค่าที่บวกกันได้ และสีใช้กับค่าที่ต้องการเปรียบเทียบ
+  อธิบายใน [treemap และ sunburst: อัลกอริทึมการจัดวาง](chapters/18-hierarchical-data.qmd#sec-ch18-treemap) · ดูเพิ่ม Hierarchy
+
+**Trend / seasonality** (แนวโน้ม / ฤดูกาล)
+: องค์ประกอบของอนุกรมเวลา แนวโน้มคือการเปลี่ยนระดับระยะยาว ฤดูกาลคือรูปแบบที่ซ้ำในคาบแน่นอน PM2.5 มีฤดูกาลรายวัน รายสัปดาห์ และรายปี
+  อธิบายใน [องค์ประกอบของอนุกรมเวลา: trend, seasonality, residual](chapters/14-time-series.qmd#sec-ch14-components) · ดูเพิ่ม Decomposition
+
+**Upsert** (upsert)
+: การเพิ่มแถวใหม่เมื่อ key ยังไม่มี และแก้ไขแถวเดิมเมื่อ key มีอยู่แล้ว ใน DuckDB ใช้ INSERT OR REPLACE หรือ INSERT ... ON CONFLICT
+  อธิบายใน [การโหลดข้อมูลแบบ idempotent: upsert และการขจัดข้อมูลซ้ำ](chapters/07-sql-analysis.qmd#sec-ch07-upsert) · ดูเพิ่ม Idempotent
+
+**Validation** (การตรวจสอบความถูกต้อง)
+: การตรวจข้อมูลกับกฎที่กำหนดไว้ เช่น ชนิด ช่วงค่า และ key ที่ไม่ซ้ำ เขียนเป็นโค้ดด้วย pandera เพื่อให้ตรวจซ้ำได้ทุกครั้งที่ข้อมูลใหม่เข้ามา
+  อธิบายใน [validation as code ด้วย pandera](chapters/09-data-quality.qmd#sec-ch09-pandera) · ดูเพิ่ม Schema
+
+**Version control** (version control)
+: ระบบที่บันทึกการเปลี่ยนแปลงของไฟล์เป็นลำดับ พร้อมข้อมูลว่าใครเปลี่ยน เมื่อไร และทำไม ย้อนดูหรือย้อนกลับได้ และรวมงานของหลายคนได้อย่างเป็นระบบ เช่น Git
+  อธิบายใน [ทำไมต้องมี version control](chapters/03-version-control.qmd#sec-ch03-why) · ดูเพิ่ม Commit, Repository (repo)
+
+**Virtual environment** (virtual environment)
+: โฟลเดอร์ที่มี site-packages แยกของโครงการหนึ่ง ทำให้แต่ละโครงการใช้แพ็กเกจคนละเวอร์ชันได้ การ activate คือการนำโฟลเดอร์ของสภาพแวดล้อมไปไว้หน้าสุดของ PATH
+  อธิบายใน [virtual environment ทำงานอย่างไร](chapters/02-reproducible-environment.qmd#sec-ch02-venv) · ดูเพิ่ม Environment (Python)
+
+**Visualization** (การนำเสนอข้อมูลด้วยภาพ)
+: การแปลงข้อมูลเป็นภาพเพื่อให้ผู้อ่านเห็นรูปแบบ ความผิดปกติ และความแตกต่าง โดยอาศัยระบบการมองเห็น ใช้ทั้งในการสำรวจและการสื่อสาร
+  อธิบายใน [การรับรู้ทางสายตา: preattentive attribute และหลัก Gestalt](chapters/11-visual-perception.qmd#sec-ch11-perception) · ดูเพิ่ม Encoding (visual)
+
+**Web scraping** (web scraping)
+: การดึงข้อมูลจากหน้าเว็บที่ออกแบบมาให้คนอ่าน ด้วยการแกะโครงสร้าง HTML เช่น ใช้ CSS selector กับ BeautifulSoup ใช้เมื่อไม่มี API และต้องเคารพ robots.txt ข้อกำหนดการใช้งาน และกฎหมาย
+  อธิบายใน [web scraping: DOM, CSS selector และ BeautifulSoup](chapters/05-data-acquisition.qmd#sec-ch05-scraping)
+
+**Wide / long format** (รูปแบบกว้าง / รูปแบบยาว)
+: รูปแบบกว้างกระจายค่าของตัวแปรเป็นหลายคอลัมน์ รูปแบบยาวรวมเป็นคอลัมน์ชื่อกับคอลัมน์ค่า แปลงไปมาด้วย melt และ pivot
+  อธิบายใน [reshaping: melt, pivot และ wide/long](chapters/08-data-wrangling.qmd#sec-ch08-reshape) · ดูเพิ่ม Reshape
+
+**Window function** (window function)
+: ฟังก์ชัน SQL ที่คำนวณค่าจากกลุ่มแถวที่สัมพันธ์กับแถวปัจจุบัน โดยไม่ยุบแถวเหมือน GROUP BY เช่น ค่าเฉลี่ยเคลื่อนที่ 7 วัน อันดับ หรือค่าของวันก่อนหน้า
+  อธิบายใน [window function: ranking, moving average, lag/lead](chapters/07-sql-analysis.qmd#sec-ch07-window) · ดูเพิ่ม Aggregation, CTE
+

@@ -6,19 +6,24 @@ dependencies:
   # environment & notebooks
   - jupyterlab
   - ipykernel
+  - nbstripout            # ลบผลลัพธ์ notebook ก่อน commit (บทที่ 3)
+  - jupytext
+  - pytest                # ทดสอบฟังก์ชันและแอป (บทที่ 20, ภาคผนวก ก)
+  - ruff
   # data acquisition
   - requests
   - truststore            # แก้ปัญหา SSL certificate ของ Air4Thai
   - python-dotenv
   - beautifulsoup4
   # storage & query
-  - python-duckdb>=1.4,<2   # ทั้งชั้นใช้เวอร์ชันหลักเดียวกัน (ไฟล์ .duckdb ของ 2.x เปิดด้วย 1.x ไม่ได้)
+  - python-duckdb>=1.5,<2   # ทั้งชั้นใช้เวอร์ชันหลักเดียวกัน (ไฟล์ .duckdb ของ 2.x เปิดด้วย 1.x ไม่ได้)
   - pyarrow
   # wrangling
   - pandas
   - polars
   # profiling & data quality
   - ydata-profiling
+  - setuptools<81         # ydata-profiling ยังใช้ pkg_resources
   - pandera
   - missingno
   # visualization
@@ -30,6 +35,7 @@ dependencies:
   # statistics
   - scipy
   - statsmodels
+  - ruptures              # change point detection (บทที่ 14)
   - pingouin
   # multivariate & outliers
   - scikit-learn
@@ -41,8 +47,12 @@ dependencies:
   # spatial
   - geopandas
   - folium
+  - libpysal              # spatial weights และ Moran's I (บทที่ 17)
+  - esda
+  - pykrige
   # communication
   - streamlit
+  - papermill             # รายงาน Quarto แบบมีพารามิเตอร์ (บทที่ 19)
   - pip
   - pip:
       - skimpy

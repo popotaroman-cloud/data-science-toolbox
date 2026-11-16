@@ -199,6 +199,7 @@ flowchart LR
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 5](../book/chapters/05-data-acquisition.html) ก่อนเข้าเรียน
 - เขียนรายการ "ข้อมูลที่ต้องเก็บ" ท้าย `questions.md`
 - เปิด `getNewAQI_JSON.php` ใน browser สังเกตโครงสร้าง JSON
 - อ่าน HTTP request/response + requests Quickstart

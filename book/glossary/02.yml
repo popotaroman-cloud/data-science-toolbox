@@ -1,0 +1,52 @@
+- term: Reproducibility
+  th: การทำซ้ำได้
+  definition: >
+    การได้ผลที่สอดคล้องกันเมื่อใช้ข้อมูลเดียวกัน โค้ดเดียวกัน และเงื่อนไขการวิเคราะห์เดียวกัน
+    ต่างจาก replicability ซึ่งศึกษาคำถามเดิมด้วยข้อมูลชุดใหม่
+  section: sec-ch02-crisis
+
+- term: Environment (Python)
+  th: สภาพแวดล้อม
+  definition: >
+    ชุดของ Python interpreter และแพ็กเกจที่โครงการหนึ่งใช้ บันทึกเป็นไฟล์
+    เช่น environment.yml หรือ pyproject.toml และ uv.lock เพื่อให้ผู้อื่นสร้างตามได้
+  section: sec-ch02-packages
+  see_also: [Virtual environment, Package]
+
+- term: Package
+  th: แพ็กเกจ
+  definition: >
+    ชุดโมดูล Python ที่แจกจ่ายเพื่อติดตั้งและนำไปใช้ซ้ำ ติดตั้งจาก PyPI ด้วย pip หรือ uv
+    หรือจาก conda channel ด้วย conda ในรูป wheel หรือ source distribution
+  section: sec-ch02-packages
+
+- term: Virtual environment
+  th: virtual environment
+  definition: >
+    โฟลเดอร์ที่มี site-packages แยกของโครงการหนึ่ง ทำให้แต่ละโครงการใช้แพ็กเกจคนละเวอร์ชันได้
+    การ activate คือการนำโฟลเดอร์ของสภาพแวดล้อมไปไว้หน้าสุดของ PATH
+  section: sec-ch02-venv
+  see_also: [Environment (Python)]
+
+- term: Kernel
+  th: kernel
+  definition: >
+    process ที่รันโค้ดของ notebook และเก็บตัวแปรไว้ในหน่วยความจำ แยกจากหน้าจอที่แสดง notebook
+    เมื่อ restart kernel ตัวแปรทั้งหมดจะหายไป
+  section: sec-ch02-jupyter
+  see_also: [Notebook]
+
+- term: Notebook
+  th: notebook
+  definition: >
+    เอกสารเชิงโต้ตอบรูปแบบ .ipynb ที่รวมโค้ด ผลลัพธ์ และข้อความ เหมาะกับการสำรวจข้อมูล
+    แต่เสี่ยงต่อปัญหา hidden state เมื่อรัน cell ข้ามลำดับ
+  section: sec-ch02-jupyter
+  see_also: [Kernel]
+
+- term: Terminal / shell
+  th: terminal / shell
+  definition: >
+    terminal คือโปรแกรมหน้าต่างสำหรับพิมพ์คำสั่ง shell คือโปรแกรมที่อ่านและแปลคำสั่งนั้น
+    เช่น bash, zsh และ PowerShell คำสั่งที่พิมพ์บันทึกและทำซ้ำได้
+  section: sec-ch02-shell

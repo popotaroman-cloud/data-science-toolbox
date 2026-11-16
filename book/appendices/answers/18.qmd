@@ -1,3 +1,59 @@
 ## บทที่ 18 {#sec-appg-ch18 .unnumbered}
 
-<!-- ผู้เขียนบทที่ 18 เขียนแนวคำตอบที่นี่ ใช้เลขข้อเดียวกับในบท เช่น **18.1** -->
+**18.1** (ก) distributive (ข) algebraic (ค) distributive (ง) holistic (จ) algebraic (คำนวณจากจำนวนวันเกินมาตรฐานและจำนวนวันทั้งหมด) (ฉ) algebraic (คำนวณได้จากจำนวน ผลรวม และผลรวมกำลังสอง)
+
+**18.2** แบบ pooled: $(1200 \times 25 + 300 \times 40 + 500 \times 30)/2000 = 57{,}000/2{,}000 = 28.5$ µg/m³ ตอบคำถามว่า "สถานี-วันทั่วไปในภาคมีค่าเท่าใด" ค่าเฉลี่ยของค่าเฉลี่ยจังหวัด: $(25 + 40 + 30)/3 \approx 31.7$ µg/m³ ตอบคำถามว่า "จังหวัดทั่วไปในภาคมีค่าเท่าใด" ซึ่งให้น้ำหนักจังหวัดที่สองที่มีข้อมูลน้อยเท่ากับจังหวัดแรกที่มีข้อมูลมากที่สุด
+
+**18.3** พื้นที่ของหน่วยแม่ใน treemap เท่ากับผลรวมของพื้นที่หน่วยลูก ถ้าใช้ค่าเฉลี่ยเป็นขนาด พื้นที่ของภาคจะเป็นผลรวมของค่าเฉลี่ยจังหวัด ซึ่งไม่มีความหมาย และภาคที่มีจังหวัดมากจะดูใหญ่เพียงเพราะมีจังหวัดมาก ควรใช้ค่าเฉลี่ยเป็นสี และใช้ค่าที่บวกกันได้ เช่น จำนวนสถานี-วัน เป็นขนาด
+
+**18.4** `ROLLUP (region, province)` คำนวณกลุ่ม (region, province), (region) และ () ส่วน `CUBE (region, province)` คำนวณเพิ่มกลุ่ม (province) ด้วย สำหรับลำดับชั้นที่จังหวัดอยู่ในภาคเดียว กลุ่ม (province) ให้ผลเหมือน (region, province) จึงซ้ำซ้อน `ROLLUP` จึงเหมาะกว่า ส่วน `CUBE` เหมาะกับมิติที่ไม่เป็นลำดับชั้นของกันและกัน เช่น ภาคกับปี
+
+**18.5** slice: ตรึงปี ค.ศ. 2023 ด้วย `WHERE YEAR(date) = 2023` dice: เลือกภาคเหนือและภาคกลางในฤดูแล้ง ด้วย `WHERE region IN ('เหนือ', 'กลาง') AND MONTH(date) BETWEEN 2 AND 4`
+
+**18.6** แนวทาง: นำ query ตรวจจังหวัดที่มีมากกว่าหนึ่งภาคและสถานีที่ไม่มีภาคหรือจังหวัดในหัวข้อ [-@sec-ch18-hierarchy] มาเขียนเป็นฟังก์ชันที่ `raise` เมื่อผลไม่ว่าง เช่น
+
+```python
+def check_hierarchy(con) -> None:
+    bad = con.execute("""
+        SELECT province FROM stations GROUP BY province HAVING COUNT(DISTINCT region) > 1
+    """).df()
+    if len(bad) > 0:
+        raise ValueError(f"จังหวัดที่มีมากกว่าหนึ่งภาค: {bad['province'].tolist()}")
+```
+
+**18.7** คำตอบขึ้นกับข้อมูล ถ้าข้อมูลไม่สมดุลมาก ลำดับอาจเปลี่ยน เช่น ภาคที่มีจังหวัดหนึ่งมีสถานีจำนวนมากที่ค่าต่ำ จะมีค่าแบบ pooled ต่ำกว่าค่าเฉลี่ยของจังหวัด วิธีที่ใช้ต้องตรงกับนิยามใน `questions.md`
+
+**18.8** สีของภาคใน treemap ควรตรงกับ `share_over` ของแถวระดับภาคจาก `ROLLUP` เพราะ Plotly คำนวณสีของหน่วยแม่เป็นค่าเฉลี่ยถ่วงน้ำหนักด้วย `values` ซึ่งเมื่อสีคือสัดส่วนและน้ำหนักคือจำนวนวัน จะได้สัดส่วนแบบ pooled ตรวจได้จาก `fig.data[0].ids` และ `fig.data[0].marker.colors`
+
+**18.9** แนวทาง:
+
+```sql
+SELECT s.region, YEAR(d.date) AS year,
+       ROUND(AVG((d.pm25_mean > 37.5)::INT), 3) AS share_over
+FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+WHERE d.is_complete AND d.date < DATE '2024-01-01'
+GROUP BY CUBE (s.region, YEAR(d.date))
+ORDER BY s.region NULLS LAST, year NULLS LAST;
+```
+
+แล้วใช้ pandas `pivot` โดยแทน `NULL` ด้วย "รวม" `PIVOT` ของ DuckDB ให้ตารางภาค × ปีได้โดยตรง แต่ไม่มีแถวและคอลัมน์ผลรวม ต้องคำนวณเพิ่ม ข้อดีของ `CUBE` คือผลรวมของทุกระดับคำนวณจากข้อมูลรายวันโดยตรง จึงสอดคล้องกันเสมอ
+
+**18.10** แนวทาง:
+
+```python
+def test_counts_are_consistent(con):
+    df = con.execute("""
+        SELECT s.region, s.province, COUNT(*) FILTER (WHERE d.pm25_mean > 37.5) AS n_over
+        FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+        WHERE d.is_complete
+        GROUP BY ROLLUP (s.region, s.province)
+    """).df()
+    national = df.query("region.isna()")["n_over"].iloc[0]
+    regions = df.query("region.notna() and province.isna()")
+    provinces = df.query("province.notna()")
+    assert national == regions["n_over"].sum()
+    for region, total in regions.set_index("region")["n_over"].items():
+        assert total == provinces.query("region == @region")["n_over"].sum()
+```
+
+ฟิกซ์เจอร์ `con` สร้างการเชื่อมต่อแบบอ่านอย่างเดียวกับฐานข้อมูลทดสอบ

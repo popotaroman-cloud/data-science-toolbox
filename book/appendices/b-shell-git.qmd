@@ -1,9 +1,192 @@
 ---
-status: todo
+status: drafting
+authors: ["agent:claude"]
+last-verified: "2026-10"
 ---
 
 # ภาคผนวก ข คำสั่ง shell และ Git ที่ใช้บ่อย {.unnumbered}
 
-::: {.callout-warning}
-ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
-:::
+ภาคผนวกนี้เป็นตารางอ้างอิงเร็วของคำสั่งที่ใช้ตลอดรายวิชา แนวคิดเบื้องหลังอยู่ในบทที่ 2 (สภาพแวดล้อม) และบทที่ 3 (Git และ GitHub) คำสั่งในตารางทดสอบกับ PowerShell 7 บน Windows, zsh บน macOS และ bash บน Linux รุ่นที่ใช้ในปี พ.ศ. 2569 ตัวเลือกบางตัวอาจต่างกันเล็กน้อยในรุ่นอื่น ให้ตรวจด้วย `คำสั่ง --help` เสมอ
+
+## ข.1 คำสั่ง shell บน Windows (PowerShell), macOS และ Linux เทียบกัน {#sec-appb-shell .unnumbered}
+
+### หลักการร่วม
+
+**shell** คือโปรแกรมที่รับคำสั่งเป็นข้อความแล้วสั่งระบบปฏิบัติการ macOS และ Linux ใช้ shell ตระกูล Unix (zsh, bash) ซึ่งมีคำสั่งเหมือนกันเกือบทั้งหมด ส่วน Windows ใช้ PowerShell ซึ่งมีชื่อคำสั่งของตัวเอง แต่ตั้งชื่อย่อ (alias) ให้คำสั่งพื้นฐานหลายตัวเหมือน Unix เช่น `ls`, `cd`, `pwd` ใช้ได้ทั้งสามระบบ
+
+| งาน | macOS / Linux | Windows PowerShell |
+|---|---|---|
+| ดูโฟลเดอร์ปัจจุบัน | `pwd` | `pwd` (`Get-Location`) |
+| แสดงไฟล์ | `ls -la` | `ls` (`Get-ChildItem -Force`) |
+| เปลี่ยนโฟลเดอร์ | `cd data/raw` | `cd data\raw` (ใช้ `/` ก็ได้) |
+| ขึ้นไปหนึ่งระดับ | `cd ..` | `cd ..` |
+| สร้างโฟลเดอร์ (รวมโฟลเดอร์แม่) | `mkdir -p data/raw` | `mkdir data\raw` (`New-Item -ItemType Directory -Force`) |
+| คัดลอกไฟล์ | `cp a.csv b.csv` | `cp a.csv b.csv` (`Copy-Item`) |
+| ย้ายหรือเปลี่ยนชื่อ | `mv a.csv b.csv` | `mv a.csv b.csv` (`Move-Item`) |
+| ลบไฟล์ | `rm a.csv` | `rm a.csv` (`Remove-Item`) |
+| ลบโฟลเดอร์ทั้งหมด | `rm -rf outputs` | `Remove-Item -Recurse -Force outputs` |
+| แสดงเนื้อหาไฟล์ | `cat file.txt` | `cat file.txt` (`Get-Content`) |
+| แสดงสิบบรรทัดแรก | `head -n 10 file.csv` | `Get-Content file.csv -TotalCount 10` |
+| ค้นหาข้อความในไฟล์ | `grep -rn "pm25" src/` | `Select-String -Path src\*.py -Pattern "pm25"` |
+| หาตำแหน่งของโปรแกรม | `which python` | `Get-Command python` |
+| ตั้งตัวแปรสภาพแวดล้อม (เฉพาะ session) | `export API_KEY=xxx` | `$env:API_KEY = "xxx"` |
+| อ่านตัวแปรสภาพแวดล้อม | `echo $API_KEY` | `echo $env:API_KEY` |
+| ล้างหน้าจอ | `clear` | `clear` (`Clear-Host`) |
+
+: คำสั่ง shell เทียบกันสามระบบ {#tbl-appb-shell}
+
+### ข้อต่างที่มักทำให้สะดุด
+
+- **ตัวคั่นพาธ** Windows ใช้ `\` แต่ PowerShell และ Python ส่วนใหญ่รับ `/` ได้ ในโค้ด Python ให้ใช้ `pathlib` เสมอ (ภาคผนวก ก)
+- **การขึ้นบรรทัดใหม่ของคำสั่งยาว** bash และ zsh ใช้ `\` ท้ายบรรทัด PowerShell ใช้ backtick (`` ` ``) คำสั่งยาวในเล่มนี้จึงเขียนเป็นบรรทัดเดียวเมื่อทำได้
+- **นโยบายการรัน script บน Windows** PowerShell อาจไม่ยอมรัน script สำหรับ activate สภาพแวดล้อม แก้ด้วย `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` (ภาคผนวก ฉ)
+- **ตัวพิมพ์เล็กและใหญ่** ชื่อไฟล์บน Linux แยกตัวพิมพ์เล็กใหญ่ (`Data.csv` กับ `data.csv` คนละไฟล์) แต่บน Windows และ macOS โดยค่าเริ่มต้นไม่แยก โค้ดที่ทำงานบนเครื่องของผู้เขียนจึงอาจล้มเหลวบนเซิร์ฟเวอร์ Linux ถ้าสะกดตัวพิมพ์ไม่ตรง
+- **ชื่อไฟล์ภาษาไทยและช่องว่าง** ใช้ได้ แต่ต้องใส่เครื่องหมายคำพูดในคำสั่ง และอาจมีปัญหากับเครื่องมือบางตัว ชื่อไฟล์ในโครงการจึงควรเป็นภาษาอังกฤษตัวพิมพ์เล็กและขีดล่าง
+
+## ข.2 คำสั่ง conda และ uv {#sec-appb-env .unnumbered}
+
+บทที่ 2 อธิบายว่าเมื่อใดควรใช้ conda และเมื่อใดควรใช้ uv ตารางต่อไปนี้รวบรวมคำสั่งที่ใช้บ่อย [@conda2026docs; @astral2026uv]
+
+### conda
+
+| งาน | คำสั่ง |
+|---|---|
+| สร้างสภาพแวดล้อมจากไฟล์ | `conda env create -f environment.yml` |
+| เปิดใช้ | `conda activate dstoolbox` |
+| ปิด | `conda deactivate` |
+| แสดงสภาพแวดล้อมทั้งหมด | `conda env list` |
+| อัปเดตให้ตรงกับไฟล์ (ลบแพ็กเกจที่ไม่อยู่ในไฟล์) | `conda env update -f environment.yml --prune` |
+| ติดตั้งแพ็กเกจเพิ่ม | `conda install -c conda-forge geopandas` (แล้วเพิ่มลง `environment.yml` ด้วย) |
+| แสดงแพ็กเกจที่ติดตั้ง | `conda list` |
+| บันทึกเฉพาะแพ็กเกจที่สั่งติดตั้งเอง | `conda env export --from-history` |
+| ลบสภาพแวดล้อม | `conda env remove -n dstoolbox` |
+
+: คำสั่ง conda ที่ใช้บ่อย {#tbl-appb-conda}
+
+### uv
+
+| งาน | คำสั่ง |
+|---|---|
+| สร้างโครงการใหม่ | `uv init` |
+| เพิ่มแพ็กเกจ (แก้ `pyproject.toml` และ `uv.lock`) | `uv add plotly` |
+| เพิ่มแพ็กเกจสำหรับพัฒนาเท่านั้น | `uv add --dev pytest ruff` |
+| ลบแพ็กเกจ | `uv remove plotly` |
+| ติดตั้งให้ `.venv` ตรงกับ `uv.lock` | `uv sync` |
+| รันคำสั่งในสภาพแวดล้อมโดยไม่ต้อง activate | `uv run python src/run_pipeline.py` |
+| อัปเกรดแพ็กเกจเดียวอย่างตั้งใจ | `uv lock --upgrade-package pandas` |
+| ติดตั้ง Python รุ่นที่ต้องการ | `uv python install 3.12` |
+
+: คำสั่ง uv ที่ใช้บ่อย {#tbl-appb-uv}
+
+หลักสำคัญของทั้งสองเครื่องมือคือ **ไฟล์ที่บรรยายสภาพแวดล้อมต้องอยู่ใน Git และตรงกับสิ่งที่ติดตั้งจริง** ถ้าติดตั้งแพ็กเกจด้วยคำสั่งโดยไม่แก้ไฟล์ ผู้อื่นที่ clone repository จะสร้างสภาพแวดล้อมที่ขาดแพ็กเกจนั้น (บทที่ 19) uv แก้ไฟล์ให้อัตโนมัติด้วย `uv add` ส่วน conda ต้องแก้ `environment.yml` เอง
+
+## ข.3 คำสั่ง Git ตามสถานการณ์: เริ่มโครงการ ทำงานประจำวัน ย้อนการเปลี่ยนแปลง แก้ conflict {#sec-appb-git .unnumbered}
+
+### เริ่มโครงการ
+
+| สถานการณ์ | คำสั่ง |
+|---|---|
+| ตั้งชื่อและอีเมล (ครั้งแรกในเครื่อง) | `git config --global user.name "ชื่อ นามสกุล"` และ `git config --global user.email "อีเมล"` |
+| สร้าง repository ใหม่ในโฟลเดอร์ปัจจุบัน | `git init` |
+| คัดลอก repository จาก GitHub | `git clone https://github.com/<ผู้ใช้>/pm25-explorer.git` |
+| เชื่อม repository ในเครื่องกับ GitHub | `git remote add origin https://github.com/<ผู้ใช้>/pm25-explorer.git` |
+| push ครั้งแรกพร้อมตั้ง upstream | `git push -u origin main` |
+
+: คำสั่ง Git เมื่อเริ่มโครงการ {#tbl-appb-git-start}
+
+ก่อน commit ครั้งแรก ต้องมี `.gitignore` ที่กัน `data/`, `.env`, `outputs/` และไฟล์ที่สร้างอัตโนมัติ (บทที่ 3) การลบไฟล์ข้อมูลหรือความลับออกจากประวัติภายหลังทำได้ยากมาก
+
+### ทำงานประจำวัน
+
+```bash
+git switch main && git pull                 # เริ่มจาก main ล่าสุด
+git switch -c week07-missing-data           # สร้าง branch ของงานใหม่
+git status                                  # ดูว่าไฟล์ใดเปลี่ยน
+git diff                                    # ดูรายละเอียดที่เปลี่ยน (ยังไม่ stage)
+git add src/clean.py notebooks/07_missing.ipynb   # stage เฉพาะไฟล์ที่ตั้งใจ
+git diff --staged                           # ตรวจสิ่งที่จะ commit
+git commit -m "สร้าง daily_pm25_clean พร้อมเกณฑ์ความครบถ้วน 18 ชั่วโมง"
+git push -u origin week07-missing-data      # ส่งขึ้น GitHub แล้วเปิด pull request
+```
+
+| งาน | คำสั่ง |
+|---|---|
+| ดูประวัติแบบย่อ | `git log --oneline --graph -n 20` |
+| ดูว่าใครแก้บรรทัดใด | `git blame src/clean.py` |
+| ดูไฟล์ ณ commit หนึ่ง | `git show <commit>:src/clean.py` |
+| ดึงการเปลี่ยนแปลงจาก GitHub โดยไม่ merge | `git fetch origin` |
+| นำ main ล่าสุดเข้ามาใน branch ของตน | `git switch week07-missing-data && git merge main` |
+| แสดง branch ทั้งหมด | `git branch -a` |
+| ลบ branch ที่ merge แล้ว | `git branch -d week07-missing-data` |
+
+: คำสั่ง Git ประจำวัน {#tbl-appb-git-daily}
+
+### ย้อนการเปลี่ยนแปลง
+
+การย้อนการเปลี่ยนแปลงต้องเลือกคำสั่งให้ตรงกับว่าการเปลี่ยนแปลงอยู่ที่ใด และ push ขึ้น GitHub แล้วหรือยัง
+
+| สถานการณ์ | คำสั่ง | หมายเหตุ |
+|---|---|---|
+| ทิ้งการแก้ไฟล์ที่ยังไม่ stage | `git restore src/clean.py` | การแก้หายถาวร |
+| เอาไฟล์ออกจาก stage แต่เก็บการแก้ไว้ | `git restore --staged src/clean.py` | |
+| แก้ข้อความของ commit ล่าสุดที่ยังไม่ push | `git commit --amend -m "ข้อความใหม่"` | ห้ามใช้กับ commit ที่ push แล้ว |
+| ย้อน commit ที่ push แล้ว โดยสร้าง commit ใหม่ที่กลับการเปลี่ยนแปลง | `git revert <commit>` | ปลอดภัยสำหรับ branch ที่ใช้ร่วมกัน |
+| เก็บงานที่ยังไม่เสร็จไว้ชั่วคราวเพื่อสลับ branch | `git stash` แล้ว `git stash pop` | |
+| ยกเลิก commit ล่าสุดที่ยังไม่ push แต่เก็บการแก้ไว้ | `git reset --soft HEAD~1` | ห้ามใช้กับ commit ที่ push แล้ว |
+| กู้ commit ที่ "หายไป" | `git reflog` แล้ว `git switch -c กู้คืน <commit>` | reflog เก็บประวัติการเคลื่อนของ HEAD |
+
+: คำสั่ง Git สำหรับย้อนการเปลี่ยนแปลง {#tbl-appb-git-undo}
+
+กฎที่สำคัญที่สุดคือ **อย่าเขียนประวัติใหม่ (amend, reset, rebase, force push) บน branch ที่ผู้อื่นใช้แล้ว** เพราะประวัติในเครื่องของผู้อื่นจะไม่ตรงกับบน GitHub ให้ใช้ `git revert` แทน [@chacon2014pro]
+
+### ถ้า commit ข้อมูลหรือความลับไปแล้ว
+
+ถ้า commit ไฟล์ `.env` ที่มี API key หรือไฟล์ข้อมูลส่วนบุคคล ให้ทำตามลำดับนี้ทันที
+
+1. **ยกเลิกความลับนั้นก่อน** เช่น สร้าง API key ใหม่และยกเลิกตัวเก่า เพราะถ้า push แล้ว ต้องถือว่ารั่วไปแล้ว แม้จะลบออกภายหลัง
+2. ลบไฟล์ออกจาก repository และเพิ่มลง `.gitignore` ด้วย `git rm --cached .env`
+3. ถ้าต้องลบออกจากประวัติทั้งหมด ใช้เครื่องมือเฉพาะ เช่น `git filter-repo` และประสานกับทุกคนในทีม เพราะเป็นการเขียนประวัติใหม่
+4. ถ้าเป็นข้อมูลส่วนบุคคล แจ้งผู้รับผิดชอบตามขั้นตอนของหน่วยงาน (บทที่ 16)
+
+### แก้ conflict
+
+**conflict** เกิดเมื่อสอง branch แก้บรรทัดเดียวกันของไฟล์เดียวกัน Git ไม่รู้ว่าจะเลือกแบบใด จึงหยุดและให้ผู้ใช้ตัดสิน
+
+```text
+<<<<<<< HEAD
+COMPLETE_HOURS = 18
+=======
+COMPLETE_HOURS = 20
+>>>>>>> week07-threshold
+```
+
+ขั้นตอนการแก้มีดังนี้
+
+1. `git status` ดูว่าไฟล์ใดมี conflict
+2. เปิดไฟล์ แก้ส่วนระหว่าง `<<<<<<<` และ `>>>>>>>` ให้เป็นสิ่งที่ถูกต้อง แล้วลบเครื่องหมายทั้งสามบรรทัด การตัดสินใจต้องอาศัยความเข้าใจ ไม่ใช่เลือกฝั่งใดฝั่งหนึ่งโดยอัตโนมัติ ในตัวอย่างนี้ต้องคุยกับทีมว่าจะใช้เกณฑ์ความครบถ้วนเท่าใด
+3. รันการทดสอบหรือ notebook ที่เกี่ยวข้องเพื่อยืนยันว่ายังทำงานได้
+4. `git add` ไฟล์ที่แก้แล้ว และ `git commit` เพื่อจบการ merge
+
+conflict ใน notebook (`.ipynb`) แก้ยากมากเพราะเป็น JSON การล้างผลลัพธ์ก่อน commit ด้วย nbstripout และการแบ่งงานให้แต่ละคนแก้คนละไฟล์ช่วยลด conflict ได้มาก (บทที่ 2 และ 3) ถ้าเกิดแล้ว ทางเลือกที่ง่ายที่สุดมักเป็นการเลือกไฟล์ฝั่งหนึ่งทั้งไฟล์ด้วย `git checkout --theirs notebook.ipynb` หรือ `--ours` แล้วนำการแก้ของอีกฝั่งมาทำซ้ำเอง
+
+## ข.4 GitHub CLI (`gh`) เบื้องต้น {#sec-appb-gh .unnumbered}
+
+**GitHub CLI** (`gh`) ทำงานกับ GitHub จาก terminal ได้โดยไม่ต้องเปิดเบราว์เซอร์ เช่น เปิด pull request ดูสถานะของ GitHub Actions และ review งานของเพื่อน [@github2026cli]
+
+| งาน | คำสั่ง |
+|---|---|
+| เข้าสู่ระบบ (ครั้งแรก) | `gh auth login` |
+| สร้าง repository บน GitHub จากโฟลเดอร์ปัจจุบัน | `gh repo create pm25-explorer --private --source . --push` |
+| clone repository | `gh repo clone <ผู้ใช้>/pm25-explorer` |
+| เปิด pull request จาก branch ปัจจุบัน | `gh pr create --title "สร้าง daily_pm25_clean" --body "รายละเอียด"` |
+| แสดง pull request ที่เปิดอยู่ | `gh pr list` |
+| ดึง pull request ของเพื่อนมาทดสอบในเครื่อง | `gh pr checkout 12` |
+| ดูสถานะของ CI ใน pull request | `gh pr checks` |
+| review แบบอนุมัติหรือขอแก้ | `gh pr review 12 --approve` หรือ `gh pr review 12 --request-changes --body "..."` |
+| merge pull request | `gh pr merge 12 --squash --delete-branch` |
+| สร้าง issue | `gh issue create --title "Fresh-clone test" --body "..."` |
+| ดูผลการรัน GitHub Actions ล่าสุด | `gh run list` และ `gh run view --log-failed` |
+
+: คำสั่ง GitHub CLI ที่ใช้บ่อย {#tbl-appb-gh}
+
+`gh pr checkout` มีประโยชน์มากสำหรับ code review ในรายวิชา (บทที่ 3) ผู้ review ดึง branch ของเพื่อนมารันในเครื่องตัวเองได้ด้วยคำสั่งเดียว ซึ่งเป็นวิธีเดียวที่รู้แน่ว่าโค้ดทำงานบนเครื่องอื่นได้ ตัวเลข 12 ในตารางคือหมายเลขของ pull request

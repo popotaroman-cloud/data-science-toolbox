@@ -74,15 +74,15 @@ import seaborn.objects as so
 ```
 
 - มีตั้งแต่ seaborn 0.12
-- `daily_region` = มัธยฐาน PM2.5 รายวันต่อภาค
+- `daily_region` = มัธยฐาน PM2.5 รายวันต่อภาค · `monthly_region` = สรุปเป็นรายเดือน
 
 ## Altair (เสริม): ไวยากรณ์เดียวกันผ่าน Vega-Lite
 
 ```python
 import altair as alt
 
-alt.Chart(daily_region).mark_line().encode(
-    x="date:T", y="pm25_median:Q", color="region:N"
+alt.Chart(monthly_region).mark_line().encode(     # รายเดือน: Altair รับไม่เกิน 5,000 แถว
+    x="month:T", y="pm25_median:Q", color="region:N"
 ).facet(column="region:N")
 ```
 
@@ -303,6 +303,7 @@ Altair ฝังข้อมูลลงในกราฟ และเตือ
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 12](../book/chapters/12-interactive-viz.html) ก่อนเข้าเรียน
 - อ่าน *Fundamentals of Data Visualization*: "Visualizing distributions" และ "Color basics"
 - ดูตัวอย่าง `px.line` และ `px.scatter` ใน Plotly Express
 - นับจำนวนแถวของ `measurements` ด้วย SQL แล้วจดไว้

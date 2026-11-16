@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 10: Interactive visualization และ�
 
 > **CLO:** CLO4 · **เครื่องมือ:** Plotly (หลัก), PyGWalker และ Datashader (เสริม)
 > **ผลงานที่เพิ่มในระบบ:** กราฟ interactive ด้วย Plotly (hover, range slider, facet/animation รายเดือน) ใน `notebooks/10_interactive_viz.ipynb` + ไฟล์ HTML และฟังก์ชันสร้างกราฟใน `src/charts.py`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 12 [Grammar of graphics และ visualization เชิงโต้ตอบ](../../book/chapters/12-interactive-viz.html)
 
 ## วัตถุประสงค์การเรียนรู้
 
@@ -69,6 +71,7 @@ region_daily = con.sql("""
            median(d.pm25_mean) AS pm25_median,
            count(*)            AS n_stations
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
     GROUP BY ALL
     ORDER BY s.region, d.date
 """).df()
@@ -113,6 +116,7 @@ facet ใน px ใช้แกน y ร่วมกันเป็นค่า�
 monthly = con.sql("""
     SELECT s.region, month(d.date) AS month, median(d.pm25_mean) AS pm25_median
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
     GROUP BY ALL ORDER BY month
 """).df()
 fig = px.bar(monthly, x="region", y="pm25_median", animation_frame="month",

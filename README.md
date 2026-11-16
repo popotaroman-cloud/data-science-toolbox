@@ -37,7 +37,10 @@
 ├── slides/
 │   ├── week01.qmd          ← สไลด์ (Quarto revealjs)
 │   └── ... week15.qmd
-└── _publish.yml            ← ตั้งค่า publish เว็บไซต์ไปที่ GitHub Pages (branch gh-pages)
+├── book/                   ← หนังสือประกอบการสอน (Quarto book) ดู book/AUTHORING.md
+│   ├── chapters/           ← บทที่ 0–22
+│   └── appendices/         ← ภาคผนวก ก–ซ
+└── scripts/build_site.sh   ← สร้างเว็บไซต์พร้อมหนังสือใน _site/
 ```
 
 ## แผนการสอน
@@ -60,6 +63,10 @@
 | [14](weeks/week14/index.md) | สื่อสารข้อค้นพบและ reproducibility | 5 | [lab](weeks/week14/lab.md) | [slides](slides/week14.qmd) |
 | [15](weeks/week15/index.md) | **นำเสนอโครงการสุดท้าย** | 1–6 | [lab](weeks/week15/lab.md) | [slides](slides/week15.qmd) |
 
+## หนังสือประกอบการสอน
+
+**ชุดเครื่องมือสำหรับวิทยาการข้อมูล: การสำรวจข้อมูลเชิงลึกด้วย Python และ SQL ตั้งแต่แหล่งข้อมูลถึงแดชบอร์ด** (โฟลเดอร์ [`book/`](book/)) มี 23 บทและภาคผนวก 8 ภาค ใช้กรณีศึกษา PM2.5 เดียวกับรายวิชา เอกสารรายสัปดาห์ตอบว่า *ทำอย่างไร* ส่วนหนังสือตอบเพิ่มว่า *ทำไม* เอกสารแต่ละสัปดาห์มีลิงก์ "อ่านประกอบในหนังสือ" ไปยังบทที่เกี่ยวข้อง อ่านฉบับเว็บได้ที่ <https://popotaroman-cloud.github.io/data-science-toolbox/book/> ความคืบหน้าของแต่ละบทอยู่ใน [`book/STATUS.md`](book/STATUS.md)
+
 ## เริ่มต้นใช้งาน
 
 ```bash
@@ -80,13 +87,18 @@ uv run jupyter lab
 ## Render เป็นเว็บไซต์
 
 ```bash
-quarto preview
+quarto preview              # ดูตัวอย่างเว็บไซต์ (ไม่รวมหนังสือ)
+quarto preview book         # ดูตัวอย่างหนังสือ
+./scripts/build_site.sh     # สร้างเว็บไซต์พร้อมหนังสือใน _site/ (หนังสืออยู่ที่ _site/book/)
 ```
+
+ต้อง render เว็บไซต์ก่อนหนังสือเสมอ เพราะการ render เว็บไซต์ทั้งหมดจะล้างโฟลเดอร์ `_site/` script ข้างต้นทำตามลำดับนี้ให้
 
 ## Publish เว็บไซต์
 
-เว็บไซต์อยู่บน GitHub Pages (branch `gh-pages`) หลังแก้เอกสาร ให้รัน
+เว็บไซต์อยู่บน GitHub Pages (branch `gh-pages`) หลังแก้เอกสาร ให้สร้างเว็บไซต์พร้อมหนังสือก่อน แล้ว publish โดยไม่ render ซ้ำ (ถ้าให้ `quarto publish` render เอง หนังสือจะหายไปจากเว็บไซต์)
 
 ```bash
-quarto publish gh-pages
+./scripts/build_site.sh
+quarto publish gh-pages --no-render
 ```

@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 7: การวิเคราะห์�
 
 > **CLO:** CLO3 · **เครื่องมือ:** missingno, pandas (หลัก) · scikit-learn `SimpleImputer` / `KNNImputer` (เสริม)
 > **ผลงานที่เพิ่มในระบบ:** `src/clean.py` ที่สร้างตาราง `measurements_clean` และ view `daily_pm25_clean` + `data_dictionary.md`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 10 [ข้อมูลสูญหาย](../../book/chapters/10-missing-data.html) — อ่านเสริม: [หัวข้อ 14.8 การจัดแนวข้อมูลเซนเซอร์](../../book/chapters/14-time-series.html#sec-ch14-alignment)
 
 ## วัตถุประสงค์การเรียนรู้
 

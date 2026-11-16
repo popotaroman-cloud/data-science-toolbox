@@ -1,0 +1,60 @@
+- term: Query
+  th: query
+  definition: >
+    คำสั่งที่ส่งให้ฐานข้อมูลเพื่อขอข้อมูล เช่น SELECT ใน SQL ผู้ใช้บอกว่าต้องการผลลัพธ์อะไร
+    ฐานข้อมูลเป็นผู้เลือกวิธีทำงานที่เร็วที่สุด
+  section: sec-ch07-logical-order
+
+- term: Join
+  th: join
+  definition: >
+    การรวมแถวจากสองตารางตามเงื่อนไข มีหลายชนิด เช่น inner, left, semi, anti และ ASOF
+    inner join ตัดแถวที่จับคู่ไม่ได้ทิ้งโดยไม่แจ้งเตือน
+  section: sec-ch07-joins
+  see_also: [Primary key]
+
+- term: Aggregation
+  th: การรวมกลุ่ม
+  definition: >
+    การยุบหลายแถวให้เหลือหนึ่งแถวต่อกลุ่ม พร้อมค่าสรุป เช่น AVG, COUNT, MAX
+    ด้วย GROUP BY ฟังก์ชันรวมส่วนใหญ่ข้ามค่า NULL ยกเว้น COUNT(*)
+  section: sec-ch07-aggregation
+  see_also: [Window function]
+
+- term: Window function
+  th: window function
+  definition: >
+    ฟังก์ชัน SQL ที่คำนวณค่าจากกลุ่มแถวที่สัมพันธ์กับแถวปัจจุบัน โดยไม่ยุบแถวเหมือน GROUP BY
+    เช่น ค่าเฉลี่ยเคลื่อนที่ 7 วัน อันดับ หรือค่าของวันก่อนหน้า
+  section: sec-ch07-window
+  see_also: [Aggregation, CTE]
+
+- term: CTE
+  th: CTE
+  definition: >
+    Common Table Expression ส่วนของ query ที่ตั้งชื่อไว้ด้วย WITH แล้วอ้างถึงในขั้นถัดไป
+    ทำให้ query ที่ซับซ้อนอ่านเป็นขั้นตอนจากบนลงล่างและตรวจสอบได้ทีละขั้น
+  section: sec-ch07-cte
+
+- term: Idempotent
+  th: idempotent
+  definition: >
+    คุณสมบัติของการทำงานที่รันซ้ำได้ผลเท่าเดิม เช่น การโหลดข้อมูลแบบ upsert
+    ที่ขจัดข้อมูลซ้ำก่อน รันกี่ครั้งตารางก็มีข้อมูลเหมือนเดิม
+  section: sec-ch07-upsert
+  see_also: [Upsert, Primary key]
+
+- term: Upsert
+  th: upsert
+  definition: >
+    การเพิ่มแถวใหม่เมื่อ key ยังไม่มี และแก้ไขแถวเดิมเมื่อ key มีอยู่แล้ว
+    ใน DuckDB ใช้ INSERT OR REPLACE หรือ INSERT ... ON CONFLICT
+  section: sec-ch07-upsert
+  see_also: [Idempotent]
+
+- term: Timezone
+  th: เขตเวลา
+  definition: >
+    กฎที่กำหนดความต่างของเวลาท้องถิ่นจาก UTC เช่น Asia/Bangkok คือ UTC+07:00 ไม่มีเวลาออมแสง
+    การตัดวันผิดเขตเวลาทำให้ค่าเฉลี่ยรายวันปนข้อมูลสองวัน
+  section: sec-ch07-datetime

@@ -1,0 +1,63 @@
+- term: Time series
+  th: อนุกรมเวลา
+  definition: >
+    ลำดับของค่าที่วัดตามเวลา ค่าที่อยู่ติดกันมักสัมพันธ์กัน
+    เครื่องมือส่วนใหญ่ต้องการข้อมูลที่มีความถี่แน่นอน
+  section: sec-ch14-components
+  see_also: [Trend / seasonality, Autocorrelation]
+
+- term: Trend / seasonality
+  th: แนวโน้ม / ฤดูกาล
+  definition: >
+    องค์ประกอบของอนุกรมเวลา แนวโน้มคือการเปลี่ยนระดับระยะยาว ฤดูกาลคือรูปแบบที่ซ้ำในคาบแน่นอน
+    PM2.5 มีฤดูกาลรายวัน รายสัปดาห์ และรายปี
+  section: sec-ch14-components
+  see_also: [Decomposition]
+
+- term: Stationarity
+  th: stationarity
+  definition: >
+    คุณสมบัติของอนุกรมเวลาที่ค่าเฉลี่ย ความแปรปรวน และโครงสร้างความสัมพันธ์ไม่เปลี่ยนตามเวลา
+    อนุกรมที่ไม่มีคุณสมบัตินี้อาจให้สหสัมพันธ์ปลอม
+  section: sec-ch14-stationarity
+  see_also: [Time series]
+
+- term: Autocorrelation
+  th: สหสัมพันธ์ในตัว
+  definition: >
+    สหสัมพันธ์ระหว่างอนุกรมกับตัวเองที่เลื่อนไป k ช่วงเวลา (lag) แสดงด้วย ACF
+    ทำให้ขนาดตัวอย่างที่มีประสิทธิผลต่ำกว่าจำนวนค่าจริง
+  section: sec-ch14-acf
+  see_also: [Stationarity]
+
+- term: Decomposition
+  th: การแยกองค์ประกอบ
+  definition: >
+    การแยกอนุกรมเวลาเป็นแนวโน้ม ฤดูกาล และส่วนเหลือ แบบบวกหรือแบบคูณ
+    STL ยอมให้ฤดูกาลเปลี่ยนได้และทนต่อค่าผิดปกติ
+  section: sec-ch14-decomposition
+  see_also: [Trend / seasonality, Smoothing]
+
+- term: Smoothing
+  th: การทำให้เรียบ
+  definition: >
+    การลดความผันผวนระยะสั้นเพื่อให้เห็นรูปแบบที่ช้ากว่า เช่น moving average และ LOESS
+    ขนาดหน้าต่างต้องเลือกให้ตรงกับคำถาม
+  section: sec-ch14-smoothing
+  see_also: [Decomposition]
+
+- term: Change point
+  th: change point
+  definition: >
+    จุดในเวลาที่คุณสมบัติทางสถิติของอนุกรมเปลี่ยนอย่างฉับพลัน
+    อาจเกิดจากปรากฏการณ์จริงหรือจากการเปลี่ยนระบบการวัด
+  section: sec-ch14-change-point
+  see_also: [Time series]
+
+- term: As-of join
+  th: as-of join
+  definition: >
+    การจับคู่แต่ละแถวกับแถวของอีกตารางที่มีเวลาใกล้ที่สุดตามทิศที่กำหนด
+    ควรกำหนดระยะห่างสูงสุดที่ยอมรับได้ (tolerance)
+  section: sec-ch14-alignment
+  see_also: [Join]

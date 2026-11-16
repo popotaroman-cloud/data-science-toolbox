@@ -1,9 +1,299 @@
 ---
-status: todo
+status: drafting
+authors: ["agent:claude"]
+last-verified: "2026-10"
 ---
 
 # ภาคผนวก ค SQL ฉบับอ้างอิงย่อ (DuckDB) {.unnumbered}
 
-::: {.callout-warning}
-ภาคผนวกนี้ยังไม่ได้เขียน (ดู STATUS.md)
-:::
+ภาคผนวกนี้รวบรวมไวยากรณ์และฟังก์ชันของ DuckDB ที่ใช้บ่อยในเล่ม สำหรับเปิดค้นระหว่างทำงาน คำอธิบายแนวคิดอยู่ในบทที่ 6 ถึง 8 ตัวอย่างทั้งหมดทดสอบกับ DuckDB 1.5 และตาราง `stations`, `measurements` และ `daily_pm25_clean` ของโครงการ เอกสารฉบับเต็มอยู่ที่เว็บไซต์ของ DuckDB [@duckdb2026docs]
+
+## ค.1 ไวยากรณ์ SELECT ฉบับเต็มและลำดับการประมวลผล {#sec-appc-select .unnumbered}
+
+### โครงสร้างของ SELECT
+
+```sql
+WITH monthly AS (                                   -- CTE: ตารางชั่วคราวที่ตั้งชื่อ
+    SELECT station_id, date_trunc('month', date) AS month, AVG(pm25_mean) AS pm25
+    FROM daily_pm25_clean
+    WHERE is_complete
+    GROUP BY station_id, month
+)
+SELECT s.region, m.month,
+       MEDIAN(m.pm25) AS median_pm25,
+       COUNT(*) AS n_stations
+FROM monthly AS m
+JOIN stations AS s USING (station_id)
+WHERE year(m.month) = 2023
+GROUP BY s.region, m.month
+HAVING COUNT(*) >= 2
+QUALIFY ROW_NUMBER() OVER (PARTITION BY s.region ORDER BY median_pm25 DESC) <= 3
+ORDER BY s.region, median_pm25 DESC
+LIMIT 20;
+```
+
+query นี้หาสามเดือนที่มัธยฐานสูงที่สุดของแต่ละภาคในปี ค.ศ. 2023 โดยนับเฉพาะเดือนที่มีอย่างน้อยสองสถานี
+
+### ลำดับการประมวลผล
+
+ฐานข้อมูลประมวลผลส่วนต่าง ๆ ของ query ตามลำดับเชิงตรรกะที่ต่างจากลำดับที่เขียน ความเข้าใจลำดับนี้อธิบายข้อผิดพลาดที่พบบ่อยหลายข้อ (บทที่ 7)
+
+| ลำดับ | ส่วน | ทำอะไร | ผลต่อการเขียน |
+|---|---|---|---|
+| 1 | `FROM`, `JOIN` | รวมตาราง | |
+| 2 | `WHERE` | กรองแถว | ใช้ฟังก์ชันรวมไม่ได้ |
+| 3 | `GROUP BY` | จัดกลุ่ม | |
+| 4 | `HAVING` | กรองกลุ่ม | ใช้ฟังก์ชันรวมได้ |
+| 5 | window function | คำนวณข้ามแถว | ทำงานหลังการจัดกลุ่ม |
+| 6 | `QUALIFY` | กรองผลของ window function | เฉพาะ DuckDB และบางฐานข้อมูล |
+| 7 | `SELECT` | เลือกและคำนวณคอลัมน์ | |
+| 8 | `DISTINCT` | ตัดแถวซ้ำ | |
+| 9 | `ORDER BY` | เรียง | ใช้ alias จาก `SELECT` ได้ |
+| 10 | `LIMIT`, `OFFSET` | จำกัดจำนวนแถว | |
+
+: ลำดับการประมวลผลเชิงตรรกะของ SELECT {#tbl-appc-order}
+
+DuckDB ผ่อนปรนกว่ามาตรฐาน SQL ในบางจุด เช่น ใช้ alias ที่ตั้งใน `SELECT` ใน `GROUP BY` และ `HAVING` ได้ (ในตัวอย่างข้างต้น `GROUP BY station_id, month` ใช้ alias `month`) และมี `GROUP BY ALL` ที่จัดกลุ่มตามทุกคอลัมน์ที่ไม่ใช่ฟังก์ชันรวม [@duckdb2026friendly] ความสะดวกเหล่านี้อาจไม่มีในฐานข้อมูลอื่น
+
+### JOIN
+
+| ชนิด | ผล | ตัวอย่างการใช้ในโครงการ |
+|---|---|---|
+| `INNER JOIN` | เฉพาะแถวที่จับคู่ได้ทั้งสองฝั่ง | ค่าวัดพร้อมข้อมูลสถานี |
+| `LEFT JOIN` | ทุกแถวของฝั่งซ้าย ฝั่งขวาเป็น `NULL` ถ้าไม่มีคู่ | ตารางชั่วโมงที่ควรมีกับค่าวัดจริง (หาข้อมูลหาย) |
+| `FULL OUTER JOIN` | ทุกแถวของทั้งสองฝั่ง | เทียบรายชื่อสถานีจากสองแหล่ง |
+| `SEMI JOIN` | แถวฝั่งซ้ายที่มีคู่ ไม่นำคอลัมน์ฝั่งขวามา | สถานีที่เคยมีวันเกิน 75 µg/m³ |
+| `ANTI JOIN` | แถวฝั่งซ้ายที่ไม่มีคู่ | สถานีที่ไม่มีข้อมูลเลยในปีหนึ่ง |
+| `ASOF JOIN` | จับคู่กับแถวที่เวลาใกล้ที่สุดตามเงื่อนไข | ค่าวัดกับข้อมูลอุตุนิยมวิทยาที่บันทึกไม่ตรงเวลา |
+
+: ชนิดของ JOIN {#tbl-appc-joins}
+
+ข้อควรระวังของ `LEFT JOIN` คือ เงื่อนไขของตารางฝั่งขวาต้องอยู่ใน `ON` ถ้าย้ายไปไว้ใน `WHERE` แถวที่ฝั่งขวาเป็น `NULL` จะถูกกรองทิ้ง และกลายเป็น `INNER JOIN` โดยไม่รู้ตัว (บทที่ 7 และ 17)
+
+## ค.2 ชนิดข้อมูลและการแปลงชนิด {#sec-appc-types .unnumbered}
+
+| ชนิด | ใช้กับ | ตัวอย่างค่า |
+|---|---|---|
+| `INTEGER`, `BIGINT` | จำนวนเต็ม | `24` |
+| `DOUBLE` | จำนวนจริง | `37.5` |
+| `DECIMAL(p, s)` | ทศนิยมแม่นยำ เช่น เงิน | `DECIMAL(10, 2)` |
+| `VARCHAR` | ข้อความ | `'35t'` |
+| `BOOLEAN` | ค่าความจริง | `TRUE` |
+| `DATE` | วันที่ | `DATE '2023-03-15'` |
+| `TIMESTAMP` | วันเวลาไม่มีเขตเวลา | `TIMESTAMP '2023-03-15 08:00'` |
+| `TIMESTAMPTZ` | วันเวลามีเขตเวลา | `TIMESTAMPTZ '2023-03-15 01:00+00'` |
+| `INTERVAL` | ช่วงเวลา | `INTERVAL 1 HOUR` |
+| `LIST`, `STRUCT` | ข้อมูลซ้อน เช่น จาก JSON | `[1, 2, 3]`, `{'value': 42}` |
+
+: ชนิดข้อมูลที่ใช้บ่อยใน DuckDB {#tbl-appc-types}
+
+```sql
+SELECT CAST('42.3' AS DOUBLE)            AS a,     -- แปลงชนิด ล้มเหลวถ้าแปลงไม่ได้
+       TRY_CAST('-' AS DOUBLE)           AS b,     -- คืน NULL ถ้าแปลงไม่ได้
+       '2023-03-15'::DATE                AS c,     -- รูปย่อของ CAST
+       (42.3 > 37.5)::INT                AS d,     -- TRUE → 1
+       NULLIF('-1', '-1')                AS e;     -- คืน NULL ถ้าเท่ากับค่าที่สอง
+```
+
+```text
+# ผลลัพธ์
+      a   b           c  d     e
+0  42.3 NaN  2023-03-15  1  None
+```
+
+`TRY_CAST` และ `NULLIF` มีประโยชน์มากกับข้อมูลดิบจาก API เช่น ค่าแทนข้อมูลหาย `"-1"` ของ Air4Thai (บทที่ 6 และ 9) ส่วนการแปลงค่าความจริงเป็น 0 และ 1 ด้วย `::INT` ทำให้หาสัดส่วนด้วย `AVG` ได้ ทางเลือกที่อ่านง่ายกว่าสำหรับการนับคือ `COUNT(*) FILTER (WHERE ...)`
+
+## ค.3 ฟังก์ชันวันเวลา สตริง และสถิติ {#sec-appc-functions .unnumbered}
+
+### วันเวลา
+
+| ฟังก์ชัน | ผล | ตัวอย่าง |
+|---|---|---|
+| `CAST(ts AS DATE)` | วันที่ของ timestamp | `2023-03-15 08:00` → `2023-03-15` |
+| `date_trunc('month', d)` | ปัดลงเป็นต้นช่วง | `2023-03-15` → `2023-03-01` |
+| `year(d)`, `month(d)`, `hour(ts)` | ส่วนของวันเวลา | `month(DATE '2023-03-15')` → `3` |
+| `dayofweek(d)` | วันในสัปดาห์ (0 = อาทิตย์) | |
+| `d + INTERVAL 7 DAY` | บวกช่วงเวลา | |
+| `date_diff('day', a, b)` | จำนวนช่วงระหว่างสองค่า | |
+| `time_bucket(INTERVAL 1 HOUR, ts)` | จัดกลุ่มตามช่วงเวลาคงที่ | บทที่ 14 |
+| `generate_series(a, b, INTERVAL 1 HOUR)` | สร้างลำดับเวลา | ตารางชั่วโมงที่ควรมี (บทที่ 7, 10) |
+| `strftime(ts, '%Y-%m-%d %H:%M')` | จัดรูปแบบเป็นข้อความ | |
+| `timezone('Asia/Bangkok', tstz)` | แปลง TIMESTAMPTZ เป็นเวลาท้องถิ่น | บทที่ 6 [@duckdb2026timezone] |
+
+: ฟังก์ชันวันเวลาที่ใช้บ่อย {#tbl-appc-datetime}
+
+### สตริง
+
+| ฟังก์ชัน | ผล |
+|---|---|
+| `lower(s)`, `upper(s)`, `trim(s)` | ตัวพิมพ์เล็ก ใหญ่ และตัดช่องว่างหัวท้าย |
+| `s LIKE '%เชียง%'`, `s ILIKE '%chiang%'` | จับคู่รูปแบบ (`ILIKE` ไม่สนตัวพิมพ์) |
+| `regexp_matches(s, '^[0-9]+t$')` | ตรวจด้วย regular expression |
+| `regexp_replace(s, '\s+', ' ', 'g')` | แทนที่ด้วย regular expression |
+| `replace(s, 'กรุงเทพฯ', 'กรุงเทพมหานคร')` | แทนที่ข้อความ |
+| `split_part(s, '-', 1)`, `string_split(s, ',')` | แยกข้อความ |
+| `concat(a, ' ', b)` หรือ `a || ' ' || b` | ต่อข้อความ |
+| `length(s)` | จำนวนอักขระ (นับตามรหัส Unicode สระและวรรณยุกต์ไทยนับเป็นอักขระ) |
+
+: ฟังก์ชันสตริงที่ใช้บ่อย {#tbl-appc-string}
+
+### สถิติและฟังก์ชันรวม
+
+| ฟังก์ชัน | ผล |
+|---|---|
+| `COUNT(*)`, `COUNT(x)`, `COUNT(DISTINCT x)` | จำนวนแถว จำนวนค่าที่ไม่ว่าง จำนวนค่าไม่ซ้ำ |
+| `COUNT(*) FILTER (WHERE x > 37.5)` | นับเฉพาะแถวที่ตรงเงื่อนไข (ใช้ `FILTER` กับฟังก์ชันรวมใดก็ได้) |
+| `AVG`, `SUM`, `MIN`, `MAX` | ฟังก์ชันรวมพื้นฐาน |
+| `MEDIAN(x)`, `QUANTILE_CONT(x, 0.95)` | มัธยฐานและเปอร์เซ็นไทล์ (แบบประมาณค่าในช่วง) |
+| `MAD(x)` | median absolute deviation (ไม่ปรับสเกล บทที่ 13) |
+| `STDDEV_SAMP(x)`, `VAR_SAMP(x)` | ส่วนเบี่ยงเบนมาตรฐานและความแปรปรวนของตัวอย่าง |
+| `CORR(x, y)` | สหสัมพันธ์ของ Pearson |
+| `ARG_MAX(arg, val)` | ค่า `arg` ของแถวที่ `val` สูงสุด เช่น วันที่ค่าสูงสุด |
+| `ANY_VALUE(x)` | ค่าใดค่าหนึ่งในกลุ่ม (ใช้เมื่อรู้ว่าทุกค่าเหมือนกัน) |
+| `LIST(x)` | รวมค่าเป็น list |
+
+: ฟังก์ชันรวมที่ใช้บ่อย {#tbl-appc-aggregate}
+
+```sql
+SELECT station_id,
+       COUNT(*) AS n_days,
+       ROUND(MEDIAN(pm25_mean), 1) AS median,
+       ROUND(QUANTILE_CONT(pm25_mean, 0.95), 1) AS p95,
+       ARG_MAX(date, pm25_mean) AS worst_day
+FROM daily_pm25_clean
+WHERE is_complete AND date < DATE '2024-01-01'
+GROUP BY station_id
+ORDER BY p95 DESC
+LIMIT 3;
+```
+
+```text
+# ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+  station_id  n_days  median   p95   worst_day
+0        35t    1446    23.9  56.3  2023-03-21
+1        57t    1461    23.8  55.4  2023-03-12
+2        36t    1450    23.8  54.8  2022-03-20
+```
+
+## ค.4 window function ทั้งหมดพร้อมตัวอย่าง {#sec-appc-window .unnumbered}
+
+### โครงสร้าง
+
+window function คำนวณค่าจากกลุ่มของแถวที่เกี่ยวข้องกับแถวปัจจุบัน โดยไม่ยุบแถวแบบ `GROUP BY` (บทที่ 7)
+
+```sql
+function(args) OVER (
+    PARTITION BY station_id          -- แบ่งกลุ่ม (ไม่บังคับ)
+    ORDER BY date                    -- ลำดับภายในกลุ่ม
+    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW   -- ขอบเขตของหน้าต่าง (ไม่บังคับ)
+)
+```
+
+### ฟังก์ชันจัดลำดับ
+
+| ฟังก์ชัน | ผล | ค่าที่เท่ากัน |
+|---|---|---|
+| `ROW_NUMBER()` | 1, 2, 3, 4 | ได้เลขต่างกัน (ลำดับไม่แน่นอน) |
+| `RANK()` | 1, 2, 2, 4 | อันดับเท่ากัน แล้วข้ามอันดับ |
+| `DENSE_RANK()` | 1, 2, 2, 3 | อันดับเท่ากัน ไม่ข้าม |
+| `NTILE(4)` | แบ่งเป็นสี่กลุ่มเท่า ๆ กัน | |
+| `PERCENT_RANK()`, `CUME_DIST()` | อันดับสัมพัทธ์ 0 ถึง 1 | |
+
+: ฟังก์ชันจัดลำดับ {#tbl-appc-ranking}
+
+### ฟังก์ชันเลื่อนและค่าในหน้าต่าง
+
+| ฟังก์ชัน | ผล | ตัวอย่างการใช้ |
+|---|---|---|
+| `LAG(x, 1)` | ค่าของแถวก่อนหน้า | ผลต่างจากวันก่อน |
+| `LEAD(x, 1)` | ค่าของแถวถัดไป | |
+| `FIRST_VALUE(x)`, `LAST_VALUE(x)` | ค่าแรกและค่าสุดท้ายในหน้าต่าง | ระวังขอบเขตเริ่มต้นของ `LAST_VALUE` |
+| `NTH_VALUE(x, n)` | ค่าลำดับที่ n | |
+| ฟังก์ชันรวมใด ๆ `OVER (...)` | ค่าเฉลี่ยเคลื่อนที่ ผลรวมสะสม | `AVG(x) OVER (... ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)` |
+
+: ฟังก์ชันเลื่อนและค่าในหน้าต่าง {#tbl-appc-offset}
+
+### ตัวอย่างรวม
+
+```sql
+SELECT station_id, date, ROUND(pm25_mean, 1) AS pm25,
+       ROUND(pm25_mean - LAG(pm25_mean) OVER w, 1) AS change,
+       ROUND(AVG(pm25_mean) OVER (w ROWS BETWEEN 6 PRECEDING AND CURRENT ROW), 1) AS ma7_rows,
+       ROUND(AVG(pm25_mean) OVER (w RANGE BETWEEN INTERVAL 6 DAY PRECEDING AND CURRENT ROW), 1) AS ma7_range,
+       RANK() OVER (PARTITION BY station_id, year(date) ORDER BY pm25_mean DESC) AS rank_in_year
+FROM daily_pm25_clean
+WHERE station_id = '35t' AND is_complete AND date BETWEEN DATE '2023-03-01' AND DATE '2023-03-05'
+WINDOW w AS (PARTITION BY station_id ORDER BY date)
+ORDER BY date;
+```
+
+```text
+# ผลลัพธ์ (ตัวอย่าง)
+# ข้อมูลสังเคราะห์ ไม่ใช่ข้อมูล Air4Thai จริง
+  station_id        date  pm25  change  ma7_rows  ma7_range  rank_in_year
+0        35t  2023-03-01  58.1     NaN      58.1       58.1             3
+1        35t  2023-03-02  70.4    12.3      64.2       64.2             1
+2        35t  2023-03-03  40.9   -29.5      56.4       56.4             4
+3        35t  2023-03-04  40.7    -0.2      52.5       52.5             5
+4        35t  2023-03-05  65.6    24.9      55.1       55.1             2
+```
+
+ข้อสังเกตสามข้อ ข้อแรก `WINDOW w AS (...)` ตั้งชื่อหน้าต่างเพื่อใช้ซ้ำ ข้อสอง window function ทำงานหลัง `WHERE` แถวแรกจึงไม่มีค่าก่อนหน้า (ค่าของ 28 กุมภาพันธ์ถูกกรองออกไปแล้ว) และ `rank_in_year` จัดอันดับเฉพาะห้าวันที่ผ่านการกรอง ไม่ใช่ทั้งปีตามชื่อ ถ้าต้องการค่าของวันก่อนช่วงที่เลือกหรืออันดับในทั้งปี ต้องคำนวณใน CTE ก่อนกรอง ข้อสาม `ROWS` นับตามแถว ส่วน `RANGE` กับ `INTERVAL` นับตามเวลาจริง สองแบบให้ผลต่างกันเมื่อมีวันที่ขาดหาย (บทที่ 7) ในช่วงสั้นที่ไม่มีวันขาดหายนี้จึงได้ผลเท่ากัน
+
+## ค.5 การอ่าน/เขียน CSV, JSON และ Parquet {#sec-appc-io .unnumbered}
+
+### อ่านไฟล์โดยตรง
+
+DuckDB query ไฟล์ได้โดยไม่ต้องสร้างตารางก่อน ใช้ wildcard อ่านหลายไฟล์พร้อมกันได้ [@duckdb2026docs]
+
+```sql
+SELECT COUNT(*) FROM 'data/raw/*.json';                              -- ตรวจรูปแบบจากนามสกุล
+SELECT * FROM read_csv('data/sample/stations_sample.csv', header = true);
+SELECT * FROM read_json('data/raw/2023-03-15.json', format = 'auto');
+SELECT * FROM read_parquet('data/parquet/**/*.parquet', hive_partitioning = true);
+DESCRIBE SELECT * FROM 'data/sample/stations_sample.csv';            -- ดูชนิดของคอลัมน์ที่ตรวจได้
+```
+
+| ฟังก์ชัน | ตัวเลือกที่ใช้บ่อย |
+|---|---|
+| `read_csv` | `header`, `delim`, `columns = {...}` (กำหนดชนิดเอง), `nullstr = '-1'`, `dateformat` |
+| `read_json` | `format = 'array'` หรือ `'newline_delimited'`, `columns = {...}`, `maximum_depth` |
+| `read_parquet` | `hive_partitioning`, `filename = true` (เพิ่มคอลัมน์ชื่อไฟล์) |
+
+: ฟังก์ชันอ่านไฟล์และตัวเลือกที่ใช้บ่อย {#tbl-appc-read}
+
+### เขียนไฟล์
+
+```sql
+COPY (SELECT * FROM daily_pm25_clean WHERE is_complete)
+    TO 'outputs/daily.csv' (HEADER, DELIMITER ',');
+COPY daily_pm25_clean TO 'outputs/daily.parquet' (FORMAT parquet, COMPRESSION zstd);
+COPY (SELECT *, year(date) AS year FROM daily_pm25_clean)
+    TO 'outputs/daily_by_year' (FORMAT parquet, PARTITION_BY (year), OVERWRITE_OR_IGNORE);
+```
+
+Parquet เป็นรูปแบบที่แนะนำสำหรับข้อมูลที่ผ่านการประมวลผลแล้ว เพราะเก็บชนิดของคอลัมน์ไว้ ขนาดเล็ก และอ่านเร็ว (บทที่ 6) ส่วน CSV เหมาะกับการส่งต่อให้เครื่องมืออื่นที่อ่าน Parquet ไม่ได้ เช่น โปรแกรมตารางคำนวณ (บทที่ 20)
+
+## ค.6 ตารางเทียบ SQL ↔ pandas ↔ Polars {#sec-appc-compare .unnumbered}
+
+ตารางต่อไปนี้เทียบงานเดียวกันในสามเครื่องมือ สมมติว่า `df` คือ DataFrame ของ `daily_pm25_clean` และ `st` คือ DataFrame ของ `stations` ใน pandas หรือ Polars ตามคอลัมน์ [@mckinney2022python; @polars2026guide]
+
+| งาน | SQL (DuckDB) | pandas | Polars |
+|---|---|---|---|
+| เลือกคอลัมน์ | `SELECT station_id, pm25_mean` | `df[["station_id", "pm25_mean"]]` | `df.select("station_id", "pm25_mean")` |
+| กรองแถว | `WHERE pm25_mean > 37.5` | `df[df["pm25_mean"] > 37.5]` | `df.filter(pl.col("pm25_mean") > 37.5)` |
+| เพิ่มคอลัมน์ | `SELECT *, pm25_mean > 37.5 AS over` | `df.assign(over=df["pm25_mean"] > 37.5)` | `df.with_columns((pl.col("pm25_mean") > 37.5).alias("over"))` |
+| จัดกลุ่มและรวม | `GROUP BY station_id` + `AVG(pm25_mean)` | `df.groupby("station_id")["pm25_mean"].mean()` | `df.group_by("station_id").agg(pl.col("pm25_mean").mean())` |
+| นับตามเงื่อนไข | `COUNT(*) FILTER (WHERE pm25_mean > 37.5)` | `(df["pm25_mean"] > 37.5).sum()` | `(pl.col("pm25_mean") > 37.5).sum()` |
+| เรียง | `ORDER BY pm25_mean DESC` | `df.sort_values("pm25_mean", ascending=False)` | `df.sort("pm25_mean", descending=True)` |
+| join | `JOIN stations USING (station_id)` | `df.merge(st, on="station_id", validate="m:1")` | `df.join(st, on="station_id", validate="m:1")` |
+| ค่าว่าง | `WHERE pm25_mean IS NULL` | `df["pm25_mean"].isna()` | `pl.col("pm25_mean").is_null()` |
+| ค่าก่อนหน้า | `LAG(pm25_mean) OVER (PARTITION BY station_id ORDER BY date)` | `df.sort_values("date").groupby("station_id")["pm25_mean"].shift(1)` | `pl.col("pm25_mean").shift(1).over("station_id", order_by="date")` |
+| ค่าเฉลี่ยเคลื่อนที่ 7 แถว | `AVG(...) OVER (... ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)` | `.groupby("station_id")["pm25_mean"].transform(lambda s: s.rolling(7, min_periods=1).mean())` | `pl.col("pm25_mean").rolling_mean(7, min_samples=1).over("station_id", order_by="date")` |
+| กว้างเป็นยาว | `UNPIVOT ... ON pm25, pm10` | `df.melt(id_vars=[...], value_vars=[...])` | `df.unpivot(index=[...], on=[...])` |
+| ยาวเป็นกว้าง | `PIVOT ... ON region USING AVG(...)` | `df.pivot_table(index=..., columns="region", values=..., aggfunc="mean")` | `df.pivot(on="region", index=..., values=..., aggregate_function="mean")` |
+
+: เทียบงานเดียวกันใน SQL, pandas และ Polars {#tbl-appc-compare}
+
+ข้อควรระวังเมื่อย้ายระหว่างเครื่องมือ ได้แก่ การจัดการค่าว่าง (SQL ใช้ตรรกะสามค่า ส่วน pandas ข้ามค่าว่างในฟังก์ชันรวมโดยค่าเริ่มต้น บทที่ 7 และ 10) และ `validate` ของการ join ใน pandas และ Polars ซึ่งตรวจความสัมพันธ์ของคีย์ป้องกัน fan-out ได้ (บทที่ 8) แต่ SQL ไม่มีกลไกเทียบเท่าในตัว ต้องตรวจจำนวนแถวเอง ตัวอย่าง `shift` และ `rolling` ของ pandas ในตารางทำงานตามลำดับของแถวที่มีอยู่ จึงต้องเรียงข้อมูลตาม `station_id` และ `date` ก่อน ส่วน Polars ระบุลำดับด้วย `order_by` ได้โดยตรง ชื่อพารามิเตอร์ของ Polars บางตัวเปลี่ยนระหว่างรุ่น เช่น `min_periods` เป็น `min_samples` ให้ตรวจเอกสารของรุ่นที่ใช้

@@ -1,0 +1,23 @@
+- term: Architecture decision record (ADR)
+  th: บันทึกการตัดสินใจออกแบบ
+  definition: >
+    เอกสารสั้นที่บันทึกบริบท สิ่งที่ตัดสินใจ ทางเลือกที่พิจารณา และผลที่ตามมาของการตัดสินใจออกแบบแต่ละข้อ
+    ช่วยให้ผู้อื่นเข้าใจว่าทำไมระบบจึงเป็นแบบนี้
+  section: sec-ch21-architecture
+  see_also: [Reproducibility]
+
+- term: Sensitivity analysis
+  th: การวิเคราะห์ความไว
+  definition: >
+    การคำนวณผลซ้ำด้วยทางเลือกที่สมเหตุสมผลต่างกัน เช่น เกณฑ์ความครบถ้วนหรือวิธีจัดการข้อมูลสูญหาย
+    เพื่อดูว่าข้อสรุปเปลี่ยนหรือไม่
+  section: sec-ch21-quality
+  see_also: [Missing data, Garden of forking paths]
+
+- term: Cluster bootstrap
+  th: cluster bootstrap
+  definition: >
+    bootstrap ที่สุ่มทั้งกลุ่ม เช่น ทั้งสถานี แทนการสุ่มทีละแถว ใช้เมื่อข้อมูลภายในกลุ่มสัมพันธ์กัน
+    ให้ช่วงความเชื่อมั่นที่ซื่อตรงกว่าการถือว่าทุกแถวเป็นอิสระ
+  section: sec-ch21-findings
+  see_also: [Bootstrap, Autocorrelation]

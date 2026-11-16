@@ -276,6 +276,7 @@ def region_timeseries(df):
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 13](../book/chapters/13-exploratory-statistics.html) และ [บทที่ 14](../book/chapters/14-time-series.html) ก่อนเข้าเรียน
 - ทบทวน median, IQR, p-value และ effect size
 - อ่าน `scipy.stats.mannwhitneyu` และ `statsmodels.tsa.seasonal.STL` คร่าว ๆ
 - เลือกข้อสังเกต 2 ข้อจากกราฟสัปดาห์ 9–10 ที่อยาก *ทดสอบ*

@@ -1,0 +1,7 @@
+- term: Pipeline
+  th: pipeline
+  definition: >
+    ลำดับขั้นตอนที่ข้อมูลไหลผ่านอย่างเป็นระบบ แต่ละขั้นมีหน้าที่เดียวและส่งผลลัพธ์ให้ขั้นถัดไป
+    เช่น ดึงข้อมูล → บันทึกไฟล์ดิบ → โหลดเข้าฐานข้อมูล → ตรวจสอบ → ทำความสะอาด
+  section: sec-ch00-case-main
+  see_also: [Idempotent, Reproducibility]

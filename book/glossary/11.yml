@@ -1,0 +1,71 @@
+- term: Visualization
+  th: การนำเสนอข้อมูลด้วยภาพ
+  definition: >
+    การแปลงข้อมูลเป็นภาพเพื่อให้ผู้อ่านเห็นรูปแบบ ความผิดปกติ และความแตกต่าง
+    โดยอาศัยระบบการมองเห็น ใช้ทั้งในการสำรวจและการสื่อสาร
+  section: sec-ch11-perception
+  see_also: [Encoding (visual)]
+
+- term: Preattentive attribute
+  th: คุณลักษณะที่รับรู้ก่อนการตั้งใจ
+  definition: >
+    คุณลักษณะทางภาพ เช่น สี ขนาด ตำแหน่ง และการวางแนว ที่ระบบการมองเห็นประมวลผลได้ทันที
+    ก่อนการตั้งใจมองหา ใช้เน้นสิ่งที่ต้องการให้ผู้อ่านเห็นก่อน
+  section: sec-ch11-perception
+  see_also: [Encoding (visual)]
+
+- term: Encoding (visual)
+  th: การเข้ารหัสภาพ
+  definition: >
+    การแปลงค่าของข้อมูลเป็นคุณสมบัติทางภาพ เช่น ตำแหน่ง ความยาว มุม พื้นที่ หรือสี
+    แต่ละแบบให้ความแม่นยำในการถอดค่ากลับต่างกัน
+  section: sec-ch11-cleveland
+  see_also: [Preattentive attribute, Colormap / palette]
+
+- term: Colormap / palette
+  th: ชุดสี
+  definition: >
+    การจับคู่ค่าหรือกลุ่มของข้อมูลกับสี แบ่งเป็น sequential, diverging และ categorical
+    ชุดสีที่ดีสำหรับค่าต่อเนื่องควรมี perceptual uniformity
+  section: sec-ch11-color
+  see_also: [Encoding (visual)]
+
+- term: Lie factor
+  th: lie factor
+  definition: >
+    อัตราส่วนระหว่างขนาดของผลที่แสดงในภาพกับขนาดของผลในข้อมูล ตามนิยามของ Tufte
+    กราฟที่ซื่อตรงมีค่าใกล้ 1
+  section: sec-ch11-integrity
+  see_also: [Data-ink ratio]
+
+- term: Data-ink ratio
+  th: อัตราส่วนหมึกข้อมูล
+  definition: >
+    สัดส่วนของหมึกที่ใช้แสดงข้อมูลจริงต่อหมึกทั้งหมดในกราฟ ตามแนวคิดของ Tufte
+    ใช้เป็นแนวทางลดสิ่งรบกวนที่ไม่ช่วยให้เข้าใจข้อมูล
+  section: sec-ch11-integrity
+  see_also: [Lie factor]
+
+- term: Facet / small multiples
+  th: facet / small multiples
+  definition: >
+    ชุดกราฟขนาดเล็กที่ออกแบบเหมือนกันและใช้สเกลเดียวกัน ต่างกันเพียงกลุ่มของข้อมูลที่แสดง
+    ช่วยให้เปรียบเทียบหลายกลุ่มได้ด้วยสายตา
+  section: sec-ch11-small-multiples
+  see_also: [Visualization]
+
+- term: Annotation
+  th: คำอธิบายประกอบ
+  definition: >
+    ข้อความ ลูกศร หรือเส้นอ้างอิงที่วางบนกราฟเพื่อชี้ประเด็นและให้บริบท
+    เช่น เส้นมาตรฐาน 37.5 µg/m³ และป้ายบอกค่าสูงสุด
+  section: sec-ch11-annotation
+  see_also: [Visualization]
+
+- term: Overplotting
+  th: overplotting
+  definition: >
+    ภาวะที่จุดจำนวนมากทับกันใน scatter plot จนไม่เห็นความหนาแน่น
+    แก้ด้วยการลดความทึบ สุ่มตัวอย่าง หรือใช้ 2D histogram
+  section: sec-ch11-chart-choice
+  see_also: [Visualization]

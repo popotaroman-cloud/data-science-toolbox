@@ -1,0 +1,37 @@
+- term: Analytical question
+  th: คำถามเชิงวิเคราะห์
+  definition: >
+    คำถามที่ตอบได้ด้วยข้อมูล มีคุณลักษณะสี่ข้อ คือ เฉพาะเจาะจง วัดได้ มีคำตอบได้มากกว่าหนึ่งแบบ
+    และนำไปใช้ได้ พร้อมระบุเกณฑ์ที่ใช้อย่างชัดเจน
+  section: sec-ch04-good-questions
+
+- term: Hypothesis
+  th: สมมติฐาน
+  definition: >
+    คำตอบที่คาดไว้ล่วงหน้าพร้อมเหตุผล มาจากความรู้เชิงโดเมน งานวิจัย ผู้ใช้ผลลัพธ์ หรือ first look
+    ต้องแยกสมมติฐานก่อนเห็นข้อมูลออกจากสมมติฐานที่เกิดจากข้อมูล
+  section: sec-ch04-hypothesis-sources
+  see_also: [Analytical question]
+
+- term: Garden of forking paths
+  th: garden of forking paths
+  definition: >
+    ปรากฏการณ์ที่ทางเลือกเล็ก ๆ จำนวนมากในการวิเคราะห์ ซึ่งตัดสินใจหลังเห็นข้อมูล
+    ทำให้ผลดูมีนัยสำคัญเกินจริง แม้ทดสอบเพียงครั้งเดียวและไม่มีเจตนาโกง
+  section: sec-ch04-forking-paths
+  see_also: [HARKing, Multiple comparisons]
+
+- term: HARKing
+  th: HARKing
+  definition: >
+    Hypothesizing After the Results are Known คือการเห็นผลในข้อมูลก่อน
+    แล้วรายงานราวกับว่าได้ตั้งสมมติฐานนั้นไว้ล่วงหน้า ทำให้ข้อสันนิษฐานดูเหมือนข้อสรุปที่ยืนยันแล้ว
+  section: sec-ch04-forking-paths
+  see_also: [Garden of forking paths]
+
+- term: Stakeholder
+  th: ผู้มีส่วนได้ส่วนเสีย
+  definition: >
+    บุคคลหรือหน่วยงานที่ใช้ผลการวิเคราะห์หรือได้รับผลกระทบจากผลนั้น
+    การคุยกับผู้มีส่วนได้ส่วนเสียช่วยให้คำถามนำไปใช้ได้
+  section: sec-ch04-hypothesis-sources

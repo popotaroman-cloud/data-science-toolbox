@@ -49,6 +49,7 @@ region_daily = con.sql("""
            max(d.pm25_max)     AS pm25_peak,
            count(*)            AS n_stations
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
     GROUP BY ALL
     ORDER BY s.region, d.date
 """).df()

@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 3: การได้มาซึ่ง�
 
 > **CLO:** CLO2 · **เครื่องมือ:** requests (หลัก), BeautifulSoup (เสริม)
 > **ผลงานที่เพิ่มในระบบ:** `src/fetch_air4thai.py` ที่บันทึก JSON ดิบพร้อม timestamp ลง `data/raw/`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 5 [การได้มาซึ่งข้อมูลจาก API และเว็บไซต์](../../book/chapters/05-data-acquisition.html) — อ่านเสริม: [หัวข้อ 16.1 พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล](../../book/chapters/16-synthetic-privacy.html#sec-ch16-pdpa) · [ภาคผนวก ง ข้อมูล Air4Thai](../../book/appendices/d-air4thai-open-data.html)
 
 ## วัตถุประสงค์การเรียนรู้
 

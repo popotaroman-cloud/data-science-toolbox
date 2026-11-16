@@ -1,0 +1,31 @@
+- term: Data storytelling
+  th: การเล่าเรื่องด้วยข้อมูล
+  definition: >
+    การสื่อสารผลการวิเคราะห์ที่จัดโครงสร้างตามความต้องการของผู้อ่าน ข้อค้นพบก่อน หลักฐานตาม
+    พร้อมบริบทของตัวเลข ข้อจำกัด และความไม่แน่นอน
+  section: sec-ch19-structure
+  see_also: [Literate programming]
+
+- term: Literate programming
+  th: literate programming
+  definition: >
+    แนวคิดของ Knuth ที่เขียนโปรแกรมเป็นงานเขียนอธิบายความคิดโดยมีโค้ดแทรก ในงานข้อมูลคือเอกสาร
+    ที่รวมข้อความ โค้ด และผลลัพธ์ ทำให้ตัวเลขในรายงานตรงกับการคำนวณเสมอ
+  section: sec-ch19-quarto
+  see_also: [Reproducibility, Notebook]
+
+- term: Inline code
+  th: inline code
+  definition: >
+    expression ที่แทรกในข้อความของเอกสาร Quarto ด้วยรูปแบบ `{python} expr` ผลลัพธ์ถูกแทรกลงในประโยค
+    เมื่อ render จึงไม่ต้องคัดลอกตัวเลขด้วยมือ
+  section: sec-ch19-quarto
+  see_also: [Literate programming]
+
+- term: Parameterized report
+  th: รายงานแบบมีพารามิเตอร์
+  definition: >
+    แม่แบบรายงานที่รับค่าพารามิเตอร์จากภายนอก แล้ว render ซ้ำด้วยค่าต่างกันเพื่อสร้างหลายฉบับ
+    เช่น หนึ่งฉบับต่อภาค เอกสาร Python ใน Quarto ใช้กลไกของ papermill
+  section: sec-ch19-parameterized
+  see_also: [Inline code]

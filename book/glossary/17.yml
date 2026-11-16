@@ -1,0 +1,63 @@
+- term: Coordinate Reference System (CRS)
+  th: ระบบพิกัดอ้างอิง
+  definition: >
+    ข้อกำหนดที่บอกว่าตัวเลขพิกัดหมายถึงตำแหน่งใด ประกอบด้วย datum ชนิดของพิกัด และหน่วย
+    ระบุด้วยรหัส EPSG เช่น 4326 (WGS 84) และ 32647 (UTM 47N)
+  section: sec-ch17-crs
+  see_also: [Projection, Datum]
+
+- term: Datum
+  th: datum
+  definition: >
+    การผูก ellipsoid เข้ากับโลกจริง กำหนดตำแหน่งและการวางแนว พิกัดของจุดเดียวกันใน datum
+    ต่างกันอาจต่างกันหลายร้อยเมตร เช่น WGS 84 กับ Indian 1975
+  section: sec-ch17-geodesy
+  see_also: [Coordinate Reference System (CRS)]
+
+- term: Projection
+  th: เส้นโครงแผนที่
+  definition: >
+    การแปลงพิกัดบนผิวโค้งของโลกเป็นพิกัดบนระนาบ ต้องบิดเบือนบางคุณสมบัติเสมอ
+    UTM แบ่งโลกเป็นโซน 6 องศา ประเทศไทยคร่อมโซน 47N และ 48N
+  section: sec-ch17-crs
+  see_also: [Coordinate Reference System (CRS)]
+
+- term: Spatial join
+  th: spatial join
+  definition: >
+    การเชื่อมสองตารางด้วยความสัมพันธ์เชิงพื้นที่แทนคีย์ เช่น สถานีที่อยู่ภายในจังหวัด
+    ต้องให้ทั้งสองชุดอยู่ใน CRS เดียวกัน
+  section: sec-ch17-operations
+  see_also: [Join, Coordinate Reference System (CRS)]
+
+- term: Choropleth map
+  th: แผนที่ choropleth
+  definition: >
+    แผนที่ที่ระบายสีแต่ละพื้นที่ตามค่าของตัวแปร ต้องแยกพื้นที่ไม่มีข้อมูล แสดงจำนวนข้อมูลต่อพื้นที่
+    และระวังพื้นที่ใหญ่ครอบงำสายตาและ MAUP
+  section: sec-ch17-choropleth
+  see_also: [MAUP]
+
+- term: MAUP
+  th: MAUP
+  definition: >
+    modifiable areal unit problem ผลการวิเคราะห์ข้อมูลที่รวมเป็นพื้นที่เปลี่ยนไปตามขนาดและการแบ่งเขต
+    ของพื้นที่ที่ใช้รวม
+  section: sec-ch17-choropleth
+  see_also: [Choropleth map, Ecological fallacy]
+
+- term: Spatial autocorrelation
+  th: สหสัมพันธ์เชิงพื้นที่
+  definition: >
+    ความสัมพันธ์ระหว่างค่าของตัวแปรเดียวกันในตำแหน่งที่ใกล้กัน วัดด้วย Moran's I
+    ทำให้หน่วยเชิงพื้นที่ไม่เป็นอิสระต่อกัน
+  section: sec-ch17-moran
+  see_also: [Autocorrelation]
+
+- term: Spatial interpolation
+  th: การประมาณค่าเชิงพื้นที่
+  definition: >
+    การสร้างพื้นผิวต่อเนื่องจากค่าที่จุดตรวจวัด เช่น IDW และ kriging
+    ไม่สามารถสร้างข้อมูลในบริเวณที่ไม่ได้วัด จึงต้องแสดงความไม่แน่นอนควบคู่
+  section: sec-ch17-interpolation
+  see_also: [Spatial autocorrelation]

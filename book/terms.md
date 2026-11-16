@@ -176,3 +176,54 @@ title: "ศัพท์มาตรฐานของหนังสือ"
 
 | English | เสนอให้ใช้ | รูปแบบ | เสนอโดย (บท) |
 |---|---|---|---|
+| Normalization / denormalization | normalization / denormalization | ทับศัพท์ | 6 |
+| OLTP / OLAP | OLTP / OLAP | ทับศัพท์ · อธิบายเต็มครั้งแรก | 6 |
+| Parquet | Parquet | ทับศัพท์ (ชื่อรูปแบบไฟล์) | 6 |
+| CTE (Common Table Expression) | CTE | ทับศัพท์ · อธิบายเต็มครั้งแรก | 7 |
+| Fan-out (join) | fan-out | ทับศัพท์ · อธิบายครั้งแรก | 8 |
+| Preattentive attribute | preattentive attribute | ทับศัพท์ · อธิบายครั้งแรก | 11 |
+| Lie factor | lie factor | ทับศัพท์ (ศัพท์ของ Tufte) | 11 |
+| Data-ink ratio | อัตราส่วนหมึกข้อมูล (data-ink ratio) | แปล | 11 |
+| Annotation | คำอธิบายประกอบ (annotation) | แปล | 11 |
+| Linked views / brushing | linked views / brushing | ทับศัพท์ | 12 |
+| Accessibility | การเข้าถึงได้ (accessibility) | แปล | 12 |
+| Trace (Plotly) | trace | ทับศัพท์ (ศัพท์ของ Plotly) | 12 |
+| Simpson's paradox | Simpson's paradox | ทับศัพท์ | 13 |
+| Ecological fallacy | ecological fallacy | ทับศัพท์ · อธิบายครั้งแรก | 13 |
+| False discovery rate (FDR) | false discovery rate (FDR) | ทับศัพท์ | 13 |
+| Breakdown point | breakdown point | ทับศัพท์ | 13 |
+| Smoothing | การทำให้เรียบ (smoothing) | แปล | 14 |
+| Change point | change point | ทับศัพท์ | 14 |
+| As-of join | as-of join | ทับศัพท์ | 14 |
+| Lag | lag | ทับศัพท์ | 14 |
+| Loading | loading | ทับศัพท์ | 15 |
+| Silhouette | silhouette | ทับศัพท์ | 15 |
+| Isolation Forest | Isolation Forest | ทับศัพท์ (ชื่อวิธี) | 15 |
+| Robust z-score | robust z-score | ทับศัพท์ | 15 |
+| Quasi-identifier | quasi-identifier | ทับศัพท์ · อธิบายครั้งแรก | 16 |
+| k-anonymity / l-diversity | k-anonymity / l-diversity | ทับศัพท์ | 16 |
+| Data minimization | การเก็บเท่าที่จำเป็น (data minimization) | แปล | 16 |
+| Class imbalance | class imbalance | ทับศัพท์ | 16 |
+| Datum | datum | ทับศัพท์ | 17 |
+| MAUP (modifiable areal unit problem) | MAUP | ทับศัพท์ · อธิบายเต็มครั้งแรก | 17 |
+| Spatial autocorrelation | สหสัมพันธ์เชิงพื้นที่ (spatial autocorrelation) | แปล | 17 |
+| Spatial interpolation | การประมาณค่าเชิงพื้นที่ | แปล | 17 |
+| Geodesic distance | ระยะทาง geodesic | ทับศัพท์ | 17 |
+| Roll-up / slice / dice | roll-up / slice / dice | ทับศัพท์ | 18 |
+| Treemap / sunburst | treemap / sunburst | ทับศัพท์ | 18 |
+| Data cube | data cube | ทับศัพท์ | 18 |
+| Inline code | inline code | ทับศัพท์ | 19 |
+| Parameterized report | รายงานแบบมีพารามิเตอร์ | แปล | 19 |
+| Render | render | ทับศัพท์ | 19 |
+| Key performance indicator (KPI) | ตัวชี้วัดหลัก (KPI) | แปล · ใช้ KPI ได้หลังครั้งแรก | 20 |
+| Session state / callback | session state / callback | ทับศัพท์ (ศัพท์ของ Streamlit) | 20 |
+| SQL injection | SQL injection | ทับศัพท์ | 20 |
+| Breadcrumb | breadcrumb | ทับศัพท์ | 20 |
+| Architecture decision record (ADR) | บันทึกการตัดสินใจออกแบบ (ADR) | แปล | 21 |
+| Sensitivity analysis | การวิเคราะห์ความไว (sensitivity analysis) | แปล | 21 |
+| Cluster bootstrap | cluster bootstrap | ทับศัพท์ | 21 |
+| Fresh-clone test | fresh-clone test | ทับศัพท์ | 21 |
+| Data ethics | จริยธรรมข้อมูล | แปล | 22 |
+| Hallucination (AI) | hallucination | ทับศัพท์ · อธิบายครั้งแรก | 22 |
+| License | สัญญาอนุญาต (license) | แปล | 22 |
+| Environmental justice | ความยุติธรรมเชิงสิ่งแวดล้อม | แปล | 22 |

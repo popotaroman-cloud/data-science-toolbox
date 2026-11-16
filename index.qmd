@@ -1,5 +1,79 @@
 ---
+title: "1145100 ชุดเครื่องมือสำหรับวิทยาการข้อมูล"
+subtitle: "Data Science Toolbox · ภาคการศึกษาที่ 2 ปีการศึกษา 2569"
 pagetitle: "Data Science Toolbox"
+toc: false
 ---
 
-{{< include README.md >}}
+หลักสูตรวิทยาศาสตรบัณฑิต สาขาวิชาวิทยาการข้อมูลและนวัตกรรมซอฟต์แวร์ มหาวิทยาลัยอุบลราชธานี · ผู้สอน: อาจารย์วาโย ปุยะติ · 3(2-2-5) · 15 สัปดาห์
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+### [ประมวลรายวิชา](syllabus.md)
+ผลการเรียนรู้ เครื่องมือ แผนการสอน และการประเมินผล
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### [เอกสารรายสัปดาห์](weeks/week01/index.md)
+เอกสารประกอบการสอน คู่มือปฏิบัติการ และสไลด์ 15 สัปดาห์
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### [หนังสือประกอบการสอน](book/index.html)
+ชุดเครื่องมือสำหรับวิทยาการข้อมูล: อธิบาย *ทำไม* และ *ลึกลงไปเป็นอย่างไร* ของสิ่งที่ทำในแต่ละสัปดาห์
+:::
+
+:::
+
+## แนวคิดของรายวิชา
+
+ผู้เรียนสร้าง **ระบบสำรวจข้อมูลระบบเดียวตลอดภาคการศึกษา** ใน repository ของตนเอง ผลงานแต่ละสัปดาห์เป็น input ของสัปดาห์ถัดไป จนได้ระบบที่ข้อมูลไหลจากแหล่งต้นทางถึงแดชบอร์ด
+
+```text
+แหล่งข้อมูล (API / เว็บ) → DuckDB (ไฟล์เดียว) → pandas → Plotly → Streamlit dashboard
+```
+
+โจทย์ตัวอย่างคือ **ระบบสำรวจคุณภาพอากาศ PM2.5 ของประเทศไทย** ผู้เรียนเลือกโดเมนอื่นได้ แต่ใช้สถาปัตยกรรมเดียวกัน หลักการสอน: ตั้งคำถามก่อนใช้เครื่องมือ · สอนเครื่องมือเมื่อจำเป็นต้องใช้ (just-in-time) · ใช้ AI ช่วยเขียนโค้ดได้ แต่ต้องอธิบายและตรวจสอบผลได้
+
+## แผนการสอน
+
+| สัปดาห์ | หัวข้อ | ปฏิบัติการ | สไลด์ | หนังสือ |
+|---|---|---|---|---|
+| [1](weeks/week01/index.md) | ภาพรวม EDA, สภาพแวดล้อมการทำงาน และ Git/GitHub | [lab](weeks/week01/lab.md) | [slides](slides/week01.qmd) | [0](book/chapters/00-overview.html), [1](book/chapters/01-data-science-eda.html), [2](book/chapters/02-reproducible-environment.html), [3](book/chapters/03-version-control.html) |
+| [2](weeks/week02/index.md) | การตั้งคำถามเชิงวิเคราะห์และสมมติฐาน | [lab](weeks/week02/lab.md) | [slides](slides/week02.qmd) | [4](book/chapters/04-questions-hypotheses.html) |
+| [3](weeks/week03/index.md) | การได้มาซึ่งข้อมูลจาก API และเว็บไซต์ | [lab](weeks/week03/lab.md) | [slides](slides/week03.qmd) | [5](book/chapters/05-data-acquisition.html) |
+| [4](weeks/week04/index.md) | การจัดเก็บและสืบค้นข้อมูลด้วย DuckDB, SQL และ Parquet | [lab](weeks/week04/lab.md) | [slides](slides/week04.qmd) | [6](book/chapters/06-analytical-databases.html), [7](book/chapters/07-sql-analysis.html) |
+| [5](weeks/week05/index.md) | การจัดการข้อมูลและการเชื่อม SQL กับ Python | [lab](weeks/week05/lab.md) | [slides](slides/week05.qmd) | [8](book/chapters/08-data-wrangling.html) |
+| [6](weeks/week06/index.md) | Data profiling และการตรวจคุณภาพข้อมูล | [lab](weeks/week06/lab.md) | [slides](slides/week06.qmd) | [9](book/chapters/09-data-quality.html) |
+| [7](weeks/week07/index.md) | การวิเคราะห์ข้อมูลสูญหาย (MCAR / MAR / MNAR) | [lab](weeks/week07/lab.md) | [slides](slides/week07.qmd) | [10](book/chapters/10-missing-data.html) |
+| [8](weeks/week08/index.md) | **Checkpoint 1:** นำเสนอ data pipeline | [lab](weeks/week08/lab.md) | [slides](slides/week08.qmd) | [21](book/chapters/21-case-study-pm25.html) (อ่านเสริม) |
+| [9](weeks/week09/index.md) | หลักการ visualization และ grammar of graphics | [lab](weeks/week09/lab.md) | [slides](slides/week09.qmd) | [11](book/chapters/11-visual-perception.html) |
+| [10](weeks/week10/index.md) | Interactive visualization และข้อมูลขนาดใหญ่ | [lab](weeks/week10/lab.md) | [slides](slides/week10.qmd) | [12](book/chapters/12-interactive-viz.html) |
+| [11](weeks/week11/index.md) | สถิติเชิงสำรวจและ time series | [lab](weeks/week11/lab.md) | [slides](slides/week11.qmd) | [13](book/chapters/13-exploratory-statistics.html), [14](book/chapters/14-time-series.html) |
+| [12](weeks/week12/index.md) | ข้อมูลหลายมิติ, outlier และข้อมูลสังเคราะห์ (PDPA) | [lab](weeks/week12/lab.md) | [slides](slides/week12.qmd) | [15](book/chapters/15-multivariate.html), [16](book/chapters/16-synthetic-privacy.html) |
+| [13](weeks/week13/index.md) | ข้อมูลเชิงพื้นที่และข้อมูลลำดับชั้น | [lab](weeks/week13/lab.md) | [slides](slides/week13.qmd) | [17](book/chapters/17-spatial-data.html), [18](book/chapters/18-hierarchical-data.html) |
+| [14](weeks/week14/index.md) | สื่อสารข้อค้นพบและ reproducibility | [lab](weeks/week14/lab.md) | [slides](slides/week14.qmd) | [19](book/chapters/19-storytelling-reports.html), [20](book/chapters/20-dashboards.html) |
+| [15](weeks/week15/index.md) | **นำเสนอโครงการสุดท้าย** | [lab](weeks/week15/lab.md) | [slides](slides/week15.qmd) | [21](book/chapters/21-case-study-pm25.html), [22](book/chapters/22-ethics-ai.html) |
+
+: ตัวเลขในคอลัมน์หนังสือคือเลขบท {tbl-colwidths="[8,44,12,12,24]"}
+
+## หนังสือประกอบการสอน
+
+[**ชุดเครื่องมือสำหรับวิทยาการข้อมูล: การสำรวจข้อมูลเชิงลึกด้วย Python และ SQL ตั้งแต่แหล่งข้อมูลถึงแดชบอร์ด**](book/index.html) มี 23 บทและภาคผนวก 8 ภาค ใช้กรณีศึกษา PM2.5 เดียวกับรายวิชาตลอดเล่ม เอกสารรายสัปดาห์ตอบว่า *ทำอย่างไร* ส่วนหนังสือตอบเพิ่มว่า *ทำไม* และมีหัวข้อ ★ ที่ลึกกว่าที่สอนในชั้นเรียน ส่วนที่เปิดดูบ่อยระหว่างทำปฏิบัติการ ได้แก่
+
+- [ภาคผนวก ฉ การแก้ปัญหาที่พบบ่อย](book/appendices/f-troubleshooting.html) ปัญหาการติดตั้ง Git, API, DuckDB, ภาษาไทยในกราฟ, Streamlit และ Quarto
+- [ภาคผนวก ซ ชุดเครื่องมือฉบับอ้างอิงเร็ว](book/appendices/h-toolbox-reference.html) cheat sheet และรายการตรวจสอบประจำแต่ละขั้นของ pipeline
+- [ภาคผนวก ค SQL ฉบับอ้างอิงย่อ](book/appendices/c-sql-reference.html) และ [อภิธานศัพท์](book/glossary.html)
+
+## เริ่มต้นใช้งาน
+
+```bash
+git clone https://github.com/popotaroman-cloud/data-science-toolbox.git
+cd data-science-toolbox
+conda env create -f environment.yml     # หรือ uv sync
+conda activate dstoolbox
+jupyter lab
+```
+
+รายละเอียดการติดตั้งอยู่ใน[คู่มือปฏิบัติการสัปดาห์ที่ 1](weeks/week01/lab.md) และ[การเตรียมเครื่องในหนังสือ](book/index.html#sec-front-setup)

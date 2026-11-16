@@ -4,6 +4,8 @@ title: "สัปดาห์ที่ 2: การตั้งคำถาม�
 
 > **CLO:** CLO4, CLO6 · **เครื่องมือ:** pandas (first look), Markdown
 > **ผลงานที่เพิ่มในระบบ:** `questions.md` + `notebooks/02_first_look.ipynb`
+>
+> **อ่านประกอบในหนังสือ:** บทที่ 4 [การตั้งคำถาม สมมติฐาน และความซื่อตรงทางวิชาการ](../../book/chapters/04-questions-hypotheses.html) — อ่านเสริม: [หัวข้อ 13.8 การเปรียบเทียบหลายครั้ง](../../book/chapters/13-exploratory-statistics.html#sec-ch13-multiple)
 
 ## วัตถุประสงค์การเรียนรู้
 

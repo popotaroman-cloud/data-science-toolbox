@@ -1,0 +1,44 @@
+- term: Data quality
+  th: คุณภาพข้อมูล
+  definition: >
+    ความเหมาะของข้อมูลกับการใช้งาน ตรวจได้หลายมิติ เช่น ความครบถ้วน ความถูกต้องตามรูปแบบ
+    ความสอดคล้อง ความไม่ซ้ำ ความทันเวลา และความแม่นยำ
+  section: sec-ch09-dimensions
+  see_also: [Completeness, Validation]
+
+- term: Data profiling
+  th: data profiling
+  definition: >
+    การสรุปลักษณะของข้อมูลทุกคอลัมน์อย่างเป็นระบบ เช่น ชนิด ค่าว่าง การแจกแจง และค่าซ้ำ
+    เพื่อหาปัญหาของข้อมูล ไม่ได้แทนการตีความของผู้วิเคราะห์
+  section: sec-ch09-profiling
+
+- term: Sentinel value
+  th: ค่าแทน
+  definition: >
+    ตัวเลขพิเศษที่ระบบใช้แทนค่าว่าง เช่น "-1" ของ Air4Thai ต้องแปลงเป็น NULL ในขั้นโหลด
+    มิฉะนั้นจะถูกนำไปคำนวณและทำให้ค่าสรุปผิดอย่างเป็นระบบ
+  section: sec-ch09-sensor
+  see_also: [Missing value]
+
+- term: Validation
+  th: การตรวจสอบความถูกต้อง
+  definition: >
+    การตรวจข้อมูลกับกฎที่กำหนดไว้ เช่น ชนิด ช่วงค่า และ key ที่ไม่ซ้ำ เขียนเป็นโค้ดด้วย pandera
+    เพื่อให้ตรวจซ้ำได้ทุกครั้งที่ข้อมูลใหม่เข้ามา
+  section: sec-ch09-pandera
+  see_also: [Schema]
+
+- term: Schema
+  th: schema
+  definition: >
+    คำอธิบายโครงสร้างที่ข้อมูลต้องมี เช่น ชื่อคอลัมน์ ชนิดข้อมูล และกฎของค่า
+    ทั้งในฐานข้อมูล (CREATE TABLE) และในการตรวจ DataFrame (pandera)
+  section: sec-ch09-pandera
+
+- term: Data dictionary
+  th: พจนานุกรมข้อมูล
+  definition: >
+    เอกสารที่อธิบายทุกตารางและทุกคอลัมน์ รวมถึงหน่วย เขตเวลา ความหมาย
+    และการตัดสินใจที่ส่งผลต่อการตีความ เช่น การแปลงค่าแทน
+  section: sec-ch09-documentation

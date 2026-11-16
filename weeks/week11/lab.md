@@ -79,13 +79,14 @@ desc = con.sql("""
            round(quantile_cont(d.pm25_mean, 0.95), 1) AS p95,
            round(avg(CASE WHEN d.pm25_mean > 37.5 THEN 1 ELSE 0 END), 3) AS share_over_std
     FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
+    WHERE d.is_complete
     GROUP BY s.region ORDER BY median DESC
 """).df()
 desc
 ```
 
 ```python
-x = con.sql("SELECT pm25_mean FROM daily_pm25_clean WHERE pm25_mean > 0").df()["pm25_mean"]
+x = con.sql("SELECT pm25_mean FROM daily_pm25_clean WHERE is_complete AND pm25_mean > 0").df()["pm25_mean"]
 print("skew เดิม:", round(stats.skew(x), 2), "| skew หลัง log:", round(stats.skew(np.log(x)), 2))
 ```
 
@@ -100,7 +101,7 @@ def station_units(years, months):
         SELECT d.station_id, s.region, s.province,
                median(d.pm25_mean) AS pm25, count(*) AS n_days
         FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)
-        WHERE year(d.date) BETWEEN ? AND ? AND month(d.date) BETWEEN ? AND ?
+        WHERE d.is_complete AND year(d.date) BETWEEN ? AND ? AND month(d.date) BETWEEN ? AND ?
         GROUP BY ALL
         HAVING count(*) >= 30
     """, [*years, *months]).df()
@@ -182,7 +183,7 @@ print("Spearman:", stats.spearmanr(pair["pm25"], pair["pm10"]))
 from statsmodels.graphics.tsaplots import plot_acf
 
 SID = dry.loc[dry["region"] == NORTH, "station_id"].iloc[0]   # หรือใส่รหัสสถานีที่สนใจเอง
-one = con.execute("SELECT date, pm25_mean FROM daily_pm25_clean WHERE station_id = ? ORDER BY date", [SID]).df()
+one = con.execute("SELECT date, pm25_mean FROM daily_pm25_clean WHERE is_complete AND station_id = ? ORDER BY date", [SID]).df()
 y = one.set_index(pd.to_datetime(one["date"]))["pm25_mean"].asfreq("D")
 fig = plot_acf(np.log(y), lags=60, missing="conservative")
 fig.savefig("reports/figures/11_acf.png", dpi=150, bbox_inches="tight")
@@ -197,7 +198,7 @@ from statsmodels.tsa.seasonal import STL
 
 m = con.execute("""
     SELECT date_trunc('month', date) AS month, avg(pm25_mean) AS pm25, count(*) AS n_days
-    FROM daily_pm25_clean WHERE station_id = ? GROUP BY ALL ORDER BY month
+    FROM daily_pm25_clean WHERE is_complete AND station_id = ? GROUP BY ALL ORDER BY month
 """, [SID]).df()
 s = m.set_index(pd.to_datetime(m["month"])).asfreq("MS")
 print("เดือนที่หายทั้งเดือน:", s["pm25"].isna().sum())

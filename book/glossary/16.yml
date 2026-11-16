@@ -1,0 +1,63 @@
+- term: Personal data
+  th: ข้อมูลส่วนบุคคล
+  definition: >
+    ข้อมูลเกี่ยวกับบุคคลซึ่งทำให้ระบุตัวบุคคลนั้นได้ ไม่ว่าทางตรงหรือทางอ้อม ไม่รวมข้อมูลของผู้ถึงแก่กรรม
+    ตามมาตรา 6 ของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+  section: sec-ch16-personal-data
+  see_also: [Sensitive data, PDPA]
+
+- term: Sensitive data
+  th: ข้อมูลส่วนบุคคลที่มีความอ่อนไหว
+  definition: >
+    ข้อมูลส่วนบุคคลตามมาตรา 26 เช่น ข้อมูลสุขภาพ เชื้อชาติ ความเชื่อทางศาสนา ประวัติอาชญากรรม
+    ข้อมูลพันธุกรรมและชีวภาพ ซึ่งการเก็บรวบรวมมีเงื่อนไขเข้มงวดกว่าข้อมูลทั่วไป
+  section: sec-ch16-personal-data
+  see_also: [Personal data]
+
+- term: PDPA
+  th: พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+  definition: >
+    กฎหมายหลักของไทยที่กำกับการเก็บ ใช้ และเปิดเผยข้อมูลส่วนบุคคล บังคับใช้เต็มรูปแบบ
+    ตั้งแต่ 1 มิถุนายน 2565 กำหนดบทบาทของผู้ควบคุมและผู้ประมวลผลข้อมูล และหลักการ เช่น การเก็บเท่าที่จำเป็น
+  section: sec-ch16-pdpa
+  see_also: [Personal data]
+
+- term: Pseudonymization
+  th: การแฝงข้อมูล
+  definition: >
+    การแทนตัวระบุโดยตรงด้วยรหัสแฝง โดยเก็บตารางจับคู่หรือกุญแจไว้แยก ลดความเสี่ยง
+    แต่ข้อมูลที่แฝงแล้วยังเป็นข้อมูลส่วนบุคคล
+  section: sec-ch16-anonymization
+  see_also: [Anonymization]
+
+- term: Anonymization
+  th: การทำให้เป็นข้อมูลนิรนาม
+  definition: >
+    การแปลงข้อมูลจนไม่สามารถระบุตัวบุคคลได้อีกด้วยวิธีที่มีเหตุผลตามสมควร ข้อมูลที่เป็นนิรนามแท้จริง
+    ไม่ใช่ข้อมูลส่วนบุคคล แต่ทำได้ยากกว่าที่คิดเพราะ quasi-identifier
+  section: sec-ch16-anonymization
+  see_also: [Pseudonymization, Re-identification]
+
+- term: Re-identification
+  th: การระบุตัวตนซ้ำ
+  definition: >
+    การเชื่อมข้อมูลที่ลบตัวระบุแล้วเข้ากับข้อมูลภายนอกจนรู้ว่าแถวใดเป็นของใคร
+    มักอาศัย quasi-identifier เช่น อายุ เพศ และที่อยู่
+  section: sec-ch16-k-anonymity
+  see_also: [Anonymization]
+
+- term: Differential privacy
+  th: differential privacy
+  definition: >
+    นิยามความเป็นส่วนตัวของกระบวนการ ซึ่งผลลัพธ์แทบไม่เปลี่ยนไม่ว่าข้อมูลของคนใดคนหนึ่งจะอยู่ในชุดข้อมูลหรือไม่
+    ควบคุมด้วยงบ epsilon แลกกับความแม่นยำ
+  section: sec-ch16-dp
+  see_also: [Anonymization]
+
+- term: Synthetic data
+  th: ข้อมูลสังเคราะห์
+  definition: >
+    ข้อมูลที่สร้างด้วยกระบวนการคำนวณแทนการเก็บจากโลกจริง แบบกฎใช้ทดสอบ pipeline
+    แบบสถิติและ deep learning รักษาความสัมพันธ์ ต้องประเมินทั้ง utility และ privacy
+  section: sec-ch16-synthetic
+  see_also: [Differential privacy]

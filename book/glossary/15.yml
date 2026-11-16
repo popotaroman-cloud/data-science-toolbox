@@ -1,0 +1,55 @@
+- term: Scaling / standardization
+  th: การปรับสเกล / การทำให้เป็นมาตรฐาน
+  definition: >
+    การแปลงมิติของข้อมูลให้อยู่ในสเกลที่เทียบกันได้ การทำให้เป็นมาตรฐานทำให้แต่ละมิติมีค่าเฉลี่ย 0
+    และส่วนเบี่ยงเบนมาตรฐาน 1 ซึ่งกำหนดน้ำหนักของแต่ละมิติในวิธีที่อาศัยระยะทาง
+  section: sec-ch15-distance
+  see_also: [Principal Component Analysis (PCA), Clustering]
+
+- term: Principal Component Analysis (PCA)
+  th: การวิเคราะห์องค์ประกอบหลัก
+  definition: >
+    วิธีลดมิติแบบเชิงเส้นที่หาทิศทางที่ข้อมูลกระจายมากที่สุด ทิศทางคือ eigenvector ของเมทริกซ์
+    ความแปรปรวนร่วม และความแปรปรวนตามทิศคือ eigenvalue คำนวณผ่าน SVD
+  section: sec-ch15-pca
+  see_also: [Loading, Scaling / standardization]
+
+- term: Loading
+  th: loading
+  definition: >
+    สัมประสิทธิ์ของแต่ละมิติเดิมในองค์ประกอบหลัก ใช้ตีความว่าองค์ประกอบหมายถึงอะไร
+    เครื่องหมายของ loading กลับได้โดยไม่เปลี่ยนผล
+  section: sec-ch15-loadings
+  see_also: [Principal Component Analysis (PCA)]
+
+- term: Clustering
+  th: การจัดกลุ่ม
+  definition: >
+    การแบ่งหน่วยข้อมูลเป็นกลุ่มที่คล้ายกันภายในและต่างกันระหว่างกลุ่ม โดยไม่มีป้ายคำตอบ
+    เช่น k-means, hierarchical clustering และ DBSCAN ผลขึ้นกับการตัดสินใจของผู้วิเคราะห์
+  section: sec-ch15-clustering
+  see_also: [Silhouette]
+
+- term: Silhouette
+  th: silhouette
+  definition: >
+    ตัววัดว่าแต่ละจุดอยู่ใกล้กลุ่มของตนมากกว่ากลุ่มอื่นเพียงใด มีค่าระหว่าง −1 ถึง 1
+    ใช้ร่วมกับ elbow ความเสถียร และความหมายในการเลือกจำนวนกลุ่ม
+  section: sec-ch15-evaluation
+  see_also: [Clustering]
+
+- term: Outlier
+  th: ค่าผิดปกติ
+  definition: >
+    ค่าที่ต่างจากค่าส่วนใหญ่มากจนน่าสงสัยว่ามาจากกลไกอื่น ต้องนิยามเทียบกับบริบท
+    อาจเป็นความผิดพลาดหรือเหตุการณ์จริง จึงบันทึกเป็นธงพร้อมเหตุผลแทนการลบ
+  section: sec-ch15-outliers
+  see_also: [Robust statistics, Isolation Forest]
+
+- term: Isolation Forest
+  th: Isolation Forest
+  definition: >
+    วิธีตรวจหาค่าผิดปกติที่แยกข้อมูลด้วยต้นไม้แบ่งแบบสุ่ม ค่าที่ถูกแยกออกได้ด้วยการแบ่งน้อยครั้งถือว่าผิดปกติ
+    จำนวนธงขึ้นกับพารามิเตอร์ contamination ที่กำหนดล่วงหน้า
+  section: sec-ch15-outliers
+  see_also: [Outlier]

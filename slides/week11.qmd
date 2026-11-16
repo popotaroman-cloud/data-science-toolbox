@@ -283,6 +283,7 @@ reject, p_adj, _, _ = multipletests(pvals, method="holm")
 
 ## ก่อนสัปดาห์หน้า
 
+- อ่านหนังสือ [บทที่ 15](../book/chapters/15-multivariate.html) และ [บทที่ 16](../book/chapters/16-synthetic-privacy.html) ก่อนเข้าเรียน
 - อ่าน *Forecasting: Principles and Practice* บท "Time series decomposition" หัวข้อ STL
 - ทบทวน PCA และ k-means หรืออ่าน scikit-learn User Guide หัวข้อ "Clustering"
 - จดสถานีที่มีพฤติกรรม "ผิดจากกลุ่ม" จากผลสัปดาห์นี้ ไว้ใช้เรื่อง outlier สัปดาห์ที่ 12

@@ -1,0 +1,119 @@
+- term: Distribution
+  th: การแจกแจง
+  definition: >
+    รูปแบบที่บอกว่าค่าแต่ละช่วงของตัวแปรเกิดขึ้นบ่อยเพียงใด สรุปด้วยตำแหน่ง การกระจาย และรูปร่าง
+    ค่า PM2.5 มักมีการแจกแจงเบ้ขวาใกล้เคียง log-normal
+  section: sec-ch13-distribution
+  see_also: [Skewness, Mean / median]
+
+- term: Mean / median
+  th: ค่าเฉลี่ย / มัธยฐาน
+  definition: >
+    ตัววัดตำแหน่งของข้อมูล ค่าเฉลี่ยใช้ค่าทุกค่าและไวต่อค่าผิดปกติ
+    มัธยฐานคือค่ากลางเมื่อเรียงข้อมูล มี breakdown point 50%
+  section: sec-ch13-robust
+  see_also: [Robust statistics]
+
+- term: Skewness
+  th: ความเบ้
+  definition: >
+    ตัววัดความไม่สมมาตรของการแจกแจง ค่าบวกหมายถึงหางยาวทางขวา
+    ซึ่งทำให้ค่าเฉลี่ยสูงกว่ามัธยฐาน
+  section: sec-ch13-distribution
+  see_also: [Distribution]
+
+- term: Robust statistics
+  th: สถิติแบบทนทาน
+  definition: >
+    สถิติที่ไม่เปลี่ยนมากเมื่อข้อมูลบางส่วนผิดปกติ เช่น มัธยฐาน IQR MAD และ trimmed mean
+    เปรียบเทียบความทนทานด้วย breakdown point
+  section: sec-ch13-robust
+  see_also: [Interquartile range (IQR), Mean / median]
+
+- term: Interquartile range (IQR)
+  th: พิสัยระหว่างควอร์ไทล์
+  definition: >
+    ผลต่างระหว่างควอร์ไทล์ที่สามกับควอร์ไทล์ที่หนึ่ง ครอบคลุมข้อมูลครึ่งกลาง
+    เป็นตัววัดการกระจายที่ทนต่อค่าผิดปกติ
+  section: sec-ch13-robust
+  see_also: [Robust statistics]
+
+- term: Confidence interval
+  th: ช่วงความเชื่อมั่น
+  definition: >
+    ช่วงที่คำนวณจากตัวอย่าง ซึ่งถ้าทำซ้ำกระบวนการหลายครั้ง สัดส่วนที่กำหนด (เช่น 95%)
+    ของช่วงจะครอบคลุมค่าจริง สะท้อนเฉพาะความไม่แน่นอนจากการสุ่มตัวอย่าง
+  section: sec-ch13-ci
+  see_also: [Bootstrap, Effect size]
+
+- term: p-value
+  th: p-value
+  definition: >
+    ความน่าจะเป็นที่จะได้ข้อมูลต่างจากสมมติฐานว่างอย่างน้อยเท่าที่เห็น ถ้าสมมติฐานว่างเป็นจริง
+    ไม่ได้วัดความน่าจะเป็นที่สมมติฐานเป็นจริง และไม่ได้วัดขนาดของผล
+  section: sec-ch13-testing
+  see_also: [Statistical significance, Effect size]
+
+- term: Statistical significance
+  th: นัยสำคัญทางสถิติ
+  definition: >
+    สถานะเมื่อ p-value ต่ำกว่าเกณฑ์ที่กำหนดไว้ล่วงหน้า เช่น 0.05
+    ไม่ได้หมายความว่าผลมีขนาดใหญ่หรือมีความสำคัญในทางปฏิบัติ
+  section: sec-ch13-testing
+  see_also: [p-value]
+
+- term: Effect size
+  th: ขนาดอิทธิพล
+  definition: >
+    ขนาดของผลที่วัดแยกจากขนาดตัวอย่าง เช่น ผลต่างในหน่วยเดิม Hedges' g หรือ Cliff's delta
+    ควรรายงานคู่กับช่วงความเชื่อมั่นเสมอ
+  section: sec-ch13-effect-size
+  see_also: [p-value, Confidence interval]
+
+- term: Bootstrap
+  th: bootstrap
+  definition: >
+    วิธี resampling ที่สุ่มข้อมูลจากตัวอย่างเดิมแบบใส่คืนซ้ำหลายพันครั้ง
+    เพื่อประมาณการแจกแจงและช่วงความเชื่อมั่นของสถิติใดก็ได้
+  section: sec-ch13-resampling
+  see_also: [Permutation test, Confidence interval]
+
+- term: Permutation test
+  th: permutation test
+  definition: >
+    การทดสอบสมมติฐานโดยสลับป้ายกลุ่มแบบสุ่มซ้ำหลายพันครั้ง เพื่อสร้างการแจกแจงของสถิติ
+    ภายใต้สมมติฐานว่าง ไม่ต้องสมมติรูปแบบของการแจกแจง
+  section: sec-ch13-resampling
+  see_also: [Bootstrap, p-value]
+
+- term: Multiple comparisons
+  th: การเปรียบเทียบหลายครั้ง
+  definition: >
+    ปัญหาที่โอกาสได้ผลบวกเท็จเพิ่มขึ้นตามจำนวนการทดสอบ แก้ด้วยการปรับ p-value
+    เช่น Holm (ควบคุม FWER) หรือ Benjamini–Hochberg (ควบคุม FDR)
+  section: sec-ch13-multiple
+  see_also: [p-value, Garden of forking paths]
+
+- term: Correlation
+  th: สหสัมพันธ์
+  definition: >
+    ตัววัดความสัมพันธ์ระหว่างสองตัวแปร Pearson วัดความสัมพันธ์เชิงเส้น
+    Spearman วัดความสัมพันธ์แบบทางเดียวจากลำดับ สหสัมพันธ์ไม่ใช่เหตุและผล
+  section: sec-ch13-correlation
+  see_also: [Simpson's paradox]
+
+- term: Simpson's paradox
+  th: Simpson's paradox
+  definition: >
+    ปรากฏการณ์ที่ความสัมพันธ์ในข้อมูลรวมตรงข้ามกับในทุกกลุ่มย่อย
+    มักเกิดเมื่อองค์ประกอบของกลุ่มต่างกัน เช่น เครือข่ายสถานีขยายตัว
+  section: sec-ch13-correlation
+  see_also: [Correlation, Ecological fallacy]
+
+- term: Ecological fallacy
+  th: ecological fallacy
+  definition: >
+    การอนุมานความสัมพันธ์ในระดับบุคคลจากข้อมูลระดับกลุ่ม เช่น ระดับจังหวัด
+    ข้อสรุปควรจำกัดอยู่ที่ระดับของข้อมูล
+  section: sec-ch13-correlation
+  see_also: [Simpson's paradox]
