@@ -5,9 +5,12 @@ project:
     - syllabus.md
     - weeks/*/*.md
     - slides/*.qmd
+  resources:
+    - robots.txt
 
 website:
   title: "Data Science Toolbox"
+  site-url: https://popotaroman-cloud.github.io/data-science-toolbox
   repo-url: https://github.com/popotaroman-cloud/data-science-toolbox
   repo-actions: [source]
   sidebar:

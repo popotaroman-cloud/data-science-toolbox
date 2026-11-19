@@ -6,6 +6,7 @@ book:
   title: "ชุดเครื่องมือสำหรับวิทยาการข้อมูล"
   subtitle: "การสำรวจข้อมูลเชิงลึกด้วย Python และ SQL ตั้งแต่แหล่งข้อมูลถึงแดชบอร์ด"
   author: "วาโย ปุยะติ"
+  site-url: https://popotaroman-cloud.github.io/data-science-toolbox/book
   repo-url: https://github.com/popotaroman-cloud/data-science-toolbox
   sidebar:
     tools:
