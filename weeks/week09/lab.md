@@ -9,7 +9,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 9: กร�
 
 - pipeline จาก Checkpoint 1 (สัปดาห์ที่ 8) ทำงานได้ และมี `data/pm25.duckdb` ที่มีตาราง `stations`, `measurements` และ view `daily_pm25_clean`
 - `questions.md` ที่มีคำถามเชิงวิเคราะห์ (สัปดาห์ที่ 2) และกฎ pandera ที่ผ่านแล้ว (สัปดาห์ที่ 6–7)
-- ถ้าฐานข้อมูลของตนเองยังไม่สมบูรณ์ ให้ใช้ **ไฟล์ตัวอย่างจากผู้สอน** `data/sample/pm25_sample.duckdb` แทนชั่วคราว (เปลี่ยนชื่อไฟล์ในโค้ด) และระบุใน PR ว่าใช้ข้อมูลตัวอย่าง
+- ถ้าฐานข้อมูลของตนเองยังไม่สมบูรณ์ ให้ใช้ **ไฟล์ตัวอย่างของรายวิชา** `data/sample/pm25_sample.duckdb` แทนชั่วคราว (ดาวน์โหลดด้วย `curl -fL -o data/sample/pm25_sample.duckdb https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main/sample-data/pm25_sample.duckdb` หรือดูวิธีใน[ประมวลรายวิชา](../../syllabus.md#sample-data)) (เปลี่ยนชื่อไฟล์ในโค้ด) และระบุใน PR ว่าใช้ข้อมูลตัวอย่าง
 - ทดสอบว่าไลบรารีพร้อม: `python -c "import seaborn, altair; print(seaborn.__version__)"` (ควรเป็น 0.13 ขึ้นไป)
 
 ---

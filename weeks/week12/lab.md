@@ -16,7 +16,7 @@ python -c "import sklearn, faker; print(sklearn.__version__, faker.VERSION)"
 python -c "import umap, pyod, sdv, imblearn"    # เสริม ถ้าไม่ผ่านข้ามได้
 ```
 
-ถ้าฐานข้อมูลมีสถานีน้อยกว่า 15 แห่งหรือข้อมูลไม่ครบ 12 เดือน ให้ใช้ไฟล์ตัวอย่างจากผู้สอนที่ `data/sample/` แทน และระบุใน notebook
+ถ้าฐานข้อมูลมีสถานีน้อยกว่า 15 แห่งหรือข้อมูลไม่ครบ 12 เดือน ให้ใช้[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)ที่ `data/sample/` แทน และระบุใน notebook
 
 ---
 

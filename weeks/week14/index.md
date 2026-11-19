@@ -188,7 +188,7 @@ def go_to(depth):                       # 0 = ประเทศ, 1 = ภาค,
 | สภาพแวดล้อม | `environment.yml` (หรือ `pyproject.toml` + `uv.lock`) ที่มีไลบรารีครบตามที่ import จริง ระบุเวอร์ชันหลัก |
 | ขั้นตอนรัน | script เดียว เช่น `run_all.py` หรือ `Makefile` หรืออย่างน้อยขั้นตอนใน README ที่คัดลอกไปรันได้ทันที |
 | path | ไม่มี path แบบ absolute เช่น `C:\Users\me\...` ใช้ `Path(__file__).resolve().parents[1]` หรือ path relative จาก root |
-| ข้อมูล | ไม่ commit `data/` แต่บอกวิธีสร้างข้อมูลใหม่ (รัน pipeline) และทางเลือกเมื่อ API ล่ม (ไฟล์ตัวอย่างจากผู้สอน) |
+| ข้อมูล | ไม่ commit `data/` แต่บอกวิธีสร้างข้อมูลใหม่ (รัน pipeline) และทางเลือกเมื่อ API ล่ม ([ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)) |
 | ความลับ | อ่านจาก `.env` และมี `.env.example` ที่ไม่มีค่าจริง |
 | ความสุ่ม | ตั้ง `random_state` / `Faker.seed` ทุกที่ |
 | เอกสาร | README บอก: โครงการนี้คืออะไร ติดตั้ง รัน ผลลัพธ์อยู่ที่ไหน ข้อจำกัด |

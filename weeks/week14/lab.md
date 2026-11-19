@@ -271,7 +271,7 @@ python run_all.py                    # ดึงข้อมูลและส�
 quarto render report/report.qmd      # รายงาน → report/report.html
 streamlit run app/app.py             # แดชบอร์ด
 ```
-ถ้า Air4Thai ใช้งานไม่ได้: วางไฟล์ตัวอย่างจากผู้สอนไว้ที่ `data/sample/` แล้ว ...
+ถ้า Air4Thai ใช้งานไม่ได้: วางไฟล์ตัวอย่างของรายวิชาไว้ที่ `data/sample/` แล้ว ...
 ````
 
 ## ขั้นที่ 5: ตรวจ reproducibility ด้วยตนเอง

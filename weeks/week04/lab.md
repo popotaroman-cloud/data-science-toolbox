@@ -9,7 +9,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 4: สร�
 
 - `src/fetch_air4thai.py` จากสัปดาห์ที่ 3 และไฟล์ `data/raw/air4thai_*.json` อย่างน้อย 3 ไฟล์
 - ตารางจับคู่ key ใน `notebooks/03_inspect_response.ipynb` (ห้ามข้าม ใช้เขียน `STATION_KEYS` ในขั้นที่ 3)
-- ไฟล์ตัวอย่างจากผู้สอน `data/sample/pm25_hourly_sample.csv` (คอลัมน์ตรงกับตาราง `measurements`) และ `data/sample/stations_sample.csv` (คอลัมน์ตรงกับตาราง `stations`)
+- ไฟล์ตัวอย่างของรายวิชา (ดาวน์โหลดตาม[ประมวลรายวิชา](../../syllabus.md#sample-data) หรือคำสั่งในใบงานสัปดาห์ที่ 2) `data/sample/pm25_hourly_sample.csv` (คอลัมน์ตรงกับตาราง `measurements`) และ `data/sample/stations_sample.csv` (คอลัมน์ตรงกับตาราง `stations`)
 - ตรวจ: `python -c "import duckdb, pyarrow; print(duckdb.__version__)"` ควรได้ 1.x
 
 ---
@@ -41,7 +41,7 @@ province,region
 ## ขั้นที่ 3: เขียน `src/load_duckdb.py`
 
 ```python
-"""โหลด raw JSON จาก Air4Thai (และไฟล์ตัวอย่างจากผู้สอน) เข้า data/pm25.duckdb
+"""โหลด raw JSON จาก Air4Thai (และไฟล์ตัวอย่างของรายวิชา) เข้า data/pm25.duckdb
 
 รัน:  python src/load_duckdb.py            # โหลดเฉพาะ data/raw/
       python src/load_duckdb.py --sample   # โหลดข้อมูลย้อนหลังจาก data/sample/ ด้วย
@@ -146,7 +146,7 @@ def upsert(con, st: pd.DataFrame, m: pd.DataFrame):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sample", action="store_true", help="โหลดไฟล์ตัวอย่างจากผู้สอนด้วย")
+    ap.add_argument("--sample", action="store_true", help="โหลดไฟล์ตัวอย่างของรายวิชาด้วย")
     args = ap.parse_args()
 
     con = duckdb.connect(str(DB_PATH))

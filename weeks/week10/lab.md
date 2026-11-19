@@ -8,7 +8,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 10: กร�
 ## สิ่งที่ต้องเตรียม
 
 - งานสัปดาห์ที่ 9 merge แล้ว: `src/viz_style.py`, `notebooks/09_static_viz.ipynb` และโฟลเดอร์ `reports/figures/`
-- `data/pm25.duckdb` ที่มี `stations`, `measurements`, `daily_pm25_clean` (หรือไฟล์ตัวอย่างจากผู้สอนใน `data/sample/`)
+- `data/pm25.duckdb` ที่มี `stations`, `measurements`, `daily_pm25_clean` (หรือ[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)ใน `data/sample/`)
 - จำนวนแถวของ `measurements` ที่นับไว้จากงานศึกษาด้วยตนเองสัปดาห์ที่ 9
 - ทดสอบไลบรารี: `python -c "import plotly; print(plotly.__version__)"` และ (เสริม) `python -c "import datashader, pygwalker"`
 

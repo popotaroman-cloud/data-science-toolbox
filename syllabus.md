@@ -70,16 +70,57 @@
 2. ระบุใน commit message หรือ `AI_USAGE.md` ว่าใช้ AI ช่วยส่วนใด
 3. ตรวจผลลัพธ์จาก AI กับข้อมูลจริงทุกครั้ง โดยเฉพาะชื่อคอลัมน์ ชื่อฟังก์ชัน และ endpoint ของ API ซึ่ง AI มักสร้างขึ้นเองโดยไม่มีอยู่จริง
 
-## ไฟล์ตัวอย่างจากผู้สอน
+## ไฟล์สภาพแวดล้อมของรายวิชา {#env-files}
 
-ใช้แทนข้อมูลจริงเมื่อ API ของ Air4Thai ใช้งานไม่ได้ ผู้สอนแจกผ่านระบบส่งงาน (ไม่อยู่ใน repo นี้) ให้วางไว้ที่ `data/sample/` ของโครงการ
+ไฟล์ `environment.yml` (conda) และ `pyproject.toml` (uv) อยู่ในหน้าแรกของ repository รายวิชา
+**https://github.com/popotaroman-cloud/data-science-toolbox** ดาวน์โหลดตรงด้วยคำสั่งนี้ (ใช้ได้ใน Git Bash, macOS, Linux และ Windows 10 ขึ้นไป)
 
-| ไฟล์ | ใช้ในสัปดาห์ |
-|---|---|
-| `air4thai_sample.json` | 2–3 (first look, ทดสอบ script ดึงข้อมูล) |
-| `stations_sample.csv` | 3–5, 13 |
-| `pm25_hourly_sample.csv` | 4–7 |
-| `pm25_sample.duckdb` | 9 เป็นต้นไป (ฐานข้อมูลที่ผ่านสัปดาห์ 7 แล้ว) |
+```bash
+BASE=https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main
+curl -fLO $BASE/environment.yml     # ถ้าใช้ conda
+curl -fLO $BASE/pyproject.toml      # ถ้าใช้ uv
+```
+
+PowerShell
+
+```powershell
+$base = "https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main"
+Invoke-WebRequest "$base/environment.yml" -OutFile environment.yml    # ถ้าใช้ conda
+Invoke-WebRequest "$base/pyproject.toml"  -OutFile pyproject.toml     # ถ้าใช้ uv
+```
+
+## ไฟล์ตัวอย่างของรายวิชา {#sample-data}
+
+ข้อมูลจริงจาก Air4Thai (กรมควบคุมมลพิษ) ที่ผู้สอนดึงและจัดรูปแบบไว้ล่วงหน้า ใช้เมื่อ API ใช้งานไม่ได้ หรือเมื่อต้องการข้อมูลย้อนหลังเกิน 3 เดือน (API ย้อนหลังเก็บข้อมูลประมาณ 3 เดือนเท่านั้น) **ดาวน์โหลดจากโฟลเดอร์ [`sample-data/`](https://github.com/popotaroman-cloud/data-science-toolbox/tree/main/sample-data) ใน repository รายวิชา** แล้ววางที่ `data/sample/` ของโครงการตนเอง (โฟลเดอร์นี้ไม่ถูก commit เพราะอยู่ใต้ `data/`)
+
+```bash
+mkdir -p data/sample
+BASE=https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main/sample-data
+for f in stations_sample.csv pm25_hourly_sample.csv air4thai_sample.json; do
+  curl -fL -o "data/sample/$f" "$BASE/$f"
+done
+```
+
+PowerShell
+
+```powershell
+New-Item -ItemType Directory -Force data/sample | Out-Null
+$base = "https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main/sample-data"
+foreach ($f in "stations_sample.csv","pm25_hourly_sample.csv","air4thai_sample.json") {
+  Invoke-WebRequest "$base/$f" -OutFile "data/sample/$f"
+}
+```
+
+ตรวจว่าดาวน์โหลดครบ: `python -c "import pandas as pd; print(pd.read_csv('data/sample/pm25_hourly_sample.csv').shape)"`
+
+| ไฟล์ | เนื้อหา | ใช้ในสัปดาห์ |
+|---|---|---|
+| `air4thai_sample.json` | response ของ API ค่าปัจจุบัน ณ เวลาที่สร้างไฟล์ | 2–3 (first look, ทดสอบ script ดึงข้อมูล) |
+| `stations_sample.csv` | ตาราง `stations` (มี `province` และ `region`) | 3–5, 13 |
+| `pm25_hourly_sample.csv` | ตาราง `measurements` รายชั่วโมง | 4–7 |
+| `pm25_sample.duckdb` | ฐานข้อมูลที่ผ่านสัปดาห์ 7 แล้ว (มี `daily_pm25_clean`) ใช้แทนฐานข้อมูลของตนเองชั่วคราว | 9 เป็นต้นไป |
+
+รายละเอียดช่วงเวลา จำนวนแถว และวิธีสร้างไฟล์อยู่ใน [`sample-data/README.md`](https://github.com/popotaroman-cloud/data-science-toolbox/blob/main/sample-data/README.md)
 
 ## แหล่งข้อมูลและตำรา
 

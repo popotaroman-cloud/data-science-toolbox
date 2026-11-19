@@ -9,7 +9,27 @@ title: "ปฏิบัติการสัปดาห์ที่ 2: เข�
 
 - repo โครงการจากสัปดาห์ที่ 1 ที่มี `.gitignore` (มี `data/`), `AI_USAGE.md` และสภาพแวดล้อม `dstoolbox` ที่ใช้งานได้
 - คำถาม 3 ข้อที่จดไว้จากงานศึกษาด้วยตนเองสัปดาห์ที่ 1
-- ไฟล์ตัวอย่างจากผู้สอน `data/sample/pm25_hourly_sample.csv` และ `data/sample/stations_sample.csv` (ดาวน์โหลดจากระบบของรายวิชา วางไว้ในโฟลเดอร์ `data/sample/` ของ repo ซึ่งไม่ถูก commit เพราะอยู่ใต้ `data/`)
+- ไฟล์ตัวอย่างของรายวิชา `data/sample/pm25_hourly_sample.csv` และ `data/sample/stations_sample.csv` ดาวน์โหลดจากโฟลเดอร์ [`sample-data/`](https://github.com/popotaroman-cloud/data-science-toolbox/tree/main/sample-data) ใน repository รายวิชา ด้วยคำสั่งนี้ที่ root ของ repo โครงการ (ไฟล์อยู่ใต้ `data/` จึงไม่ถูก commit)
+
+```bash
+mkdir -p data/sample
+BASE=https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main/sample-data
+for f in stations_sample.csv pm25_hourly_sample.csv air4thai_sample.json; do
+  curl -fL -o "data/sample/$f" "$BASE/$f"
+done
+```
+
+PowerShell
+
+```powershell
+New-Item -ItemType Directory -Force data/sample | Out-Null
+$base = "https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main/sample-data"
+foreach ($f in "stations_sample.csv","pm25_hourly_sample.csv","air4thai_sample.json") {
+  Invoke-WebRequest "$base/$f" -OutFile "data/sample/$f"
+}
+```
+
+ตรวจว่าครบ: `python -c "import pandas as pd; print(pd.read_csv('data/sample/pm25_hourly_sample.csv').shape)"` (รายละเอียดไฟล์ดูที่ [ประมวลรายวิชา](../../syllabus.md#sample-data))
 
 > **ลำดับสำคัญมาก:** ทำขั้นที่ 1–3 ให้เสร็จและ commit ก่อน แล้วจึงเปิดดูข้อมูลในขั้นที่ 4 ห้ามสลับลำดับ
 

@@ -7,7 +7,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 5: สร�
 
 ## สิ่งที่ต้องเตรียม
 
-- `data/pm25.duckdb` จากสัปดาห์ที่ 4 ที่มี `stations` (ทุกสถานีมี `region`) และ `measurements` ซึ่งรวมข้อมูลย้อนหลังจากไฟล์ตัวอย่างจากผู้สอนแล้ว (`python src/load_duckdb.py --sample`)
+- `data/pm25.duckdb` จากสัปดาห์ที่ 4 ที่มี `stations` (ทุกสถานีมี `region`) และ `measurements` ซึ่งรวมข้อมูลย้อนหลังจาก[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)แล้ว (`python src/load_duckdb.py --sample`)
 - `questions.md` ที่ระบุช่วงสำรวจ 2563–2566 และช่วงทดสอบ 2567–2568
 - ตรวจ: `python -c "import pandas, polars, duckdb; print(pandas.__version__, polars.__version__, duckdb.__version__)"`
 

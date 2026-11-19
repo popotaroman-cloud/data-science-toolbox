@@ -1,0 +1,179 @@
+station_id,name_th,name_en,province,region,lat,lon,station_type
+119t,สวนสาธารณะธารา,Thara Public Park,กระบี่,ใต้,8.0506237,98.9180489,GROUND
+02t,มหาวิทยาลัยราชภัฏบ้านสมเด็จเจ้าพระยา,Bansomdejchaopraya Rajabhat University,กรุงเทพฯ,กลาง,13.732846,100.487662,GROUND
+03t,ริมถนนทางหลวงหมายเลข 3902,Highway NO.3902 km.13 +600,กรุงเทพฯ,กลาง,13.636514,100.414262,GROUND
+05t,กรมอุตุนิยมวิทยาบางนา,Thai Meteorological Department,กรุงเทพฯ,กลาง,13.666183,100.605742,GROUND
+12t,โรงเรียนนนทรีวิทยา,Nonsi Witthaya School,กรุงเทพฯ,กลาง,13.70806667,100.5473333,GROUND
+50t,โรงพยาบาลจุฬาลงกรณ์,Chulalongkorn Hospital,กรุงเทพฯ,กลาง,13.729852,100.536501,GROUND
+52t,การไฟฟ้าย่อยธนบุรี,Thonburi Power Sub-Station,กรุงเทพฯ,กลาง,13.727622,100.486568,GROUND
+53t,สถานีตำรวจนครบาลโชคชัย,Chokchai Police Station,กรุงเทพฯ,กลาง,13.7954248,100.5930298,GROUND
+54t,การเคหะชุมชนดินแดง,National Housing Authority Dindaeng,กรุงเทพฯ,กลาง,13.76251667,100.5502,GROUND
+59t,กรมประชาสัมพันธ์,The Government Public Relations Department,กรุงเทพฯ,กลาง,13.783185,100.540489,GROUND
+61t,โรงเรียนบดินทรเดชา (สิงห์ สิงหเสนี),Bodindecha Sing Singhaseni School,กรุงเทพฯ,กลาง,13.769634,100.614567,GROUND
+bkp100t,สำนักงานเขตบึงกุ่ม,"Bueng Kum District Office, Bangkok",กรุงเทพฯ,กลาง,13.785212,100.669183,BKK
+bkp101t,สำนักงานเขตคลองสามวา,"Khlong Sam Wa District Office, Bangkok",กรุงเทพฯ,กลาง,13.859911,100.704002,BKK
+bkp102t,สำนักงานเขตจอมทอง,"Chomthong District Office, Bangkok",กรุงเทพฯ,กลาง,13.677757,100.483861,BKK
+bkp103t,สำนักงานเขตบางพลัด,"Bang Phlat District Office, Bangkok",กรุงเทพฯ,กลาง,13.793965,100.504956,BKK
+bkp104t,สำนักงานเขตบางแค,"Bang Khae District Office, Bangkok",กรุงเทพฯ,กลาง,13.696314,100.409049,BKK
+bkp105t,สำนักงานเขตบางขุนเทียน,"Bang Khun Thian District Office, Bangkok",กรุงเทพฯ,กลาง,13.659908,100.435902,BKK
+bkp114t,สวนลุมพินี ถนนพระราม 4 แขวงวังใหม่ เขตปทุมวัน,Lumpini park,กรุงเทพฯ,กลาง,13.732225,100.5448381,BKK
+bkp115t,สวนวชิรเบญจทัศ ถนนกำแพงเพชร 3 แขวงลาดยาว เขตจตุจักร,Wacchirabenchatat Park,กรุงเทพฯ,กลาง,13.8118516,100.5535825,BKK
+bkp116t,สวนจตุจักร ถนนพหลโยธิน แขวงจตุจักร เขตจตุจักร,Chatuchak Park,กรุงเทพฯ,กลาง,13.802546,100.5509191,BKK
+bkp117t,สวนหลวง ร.9 ถนนเฉลิมพระเกียรติ ร.9 แขวงหนองบอน เขตประเวศ,Suan Luang Rama IX,กรุงเทพฯ,กลาง,13.6881393,100.6579657,BKK
+bkp118t,สวน 60 พรรษาสมเด็จพระนางเจ้าพระบรมราชินีนาถ ถนนเคหะร่มเกล้า เขตลาดกระบัง,"60th Anniversary of Queen Sirikit Park ,Kheha Romklao Road, Lat Krabang, Bangkok",กรุงเทพฯ,กลาง,13.7631141,100.7302101,BKK
+bkp119t,อุทยานเบญจสิริ,Benchasiri Park,กรุงเทพฯ,กลาง,13.7304916,100.5684634,BKK
+bkp120t,สวนรมณีย์ทุ่งสีกัน,Rommani Thungsikan Park,กรุงเทพฯ,กลาง,13.9288678,100.5684666,BKK
+bkp121t,สวนธนบุรีรมย์,Thonburirom Park,กรุงเทพฯ,กลาง,13.6502295,100.4909771,BKK
+bkp122t,สวนเบญจกิติ,Benjakitti Park,กรุงเทพฯ,กลาง,13.7328791,100.5600172,BKK
+bkp123t,สวนสมเด็จพระนางเจ้าสิริกิติ์ฯ,Queen Sirikit Park,กรุงเทพฯ,กลาง,13.8055472,100.5488338,BKK
+bkp124t,สวนเฉลิมพระเกียรติ 80 พรรษา,80th Anniversary Commemoration Park,กรุงเทพฯ,กลาง,13.7716446,100.4681128,BKK
+bkp125t,สวนเสรีไทย,Serithai Park,กรุงเทพฯ,กลาง,13.7855673,100.6733359,BKK
+bkp126t,สวนบางแคภิรมย์,Bang Khae Phirom Park,กรุงเทพฯ,กลาง,13.6863478,100.3844036,BKK
+bkp127t,สวนทวีวนารมย์,Thawee Wanarom Park,กรุงเทพฯ,กลาง,13.7435329,100.3526893,BKK
+bkp128t,สวนพระนคร,Phra Nakhon Park,กรุงเทพฯ,กลาง,13.7201042,100.7807077,BKK
+bkp129t,สวนหนองจอก,Nong Chok Park,กรุงเทพฯ,กลาง,13.855656,100.8585539,BKK
+bkp130t,สวนกีฬารามอินทรา,Ramintra Sports Park,กรุงเทพฯ,กลาง,13.8778763,100.6207085,BKK
+bkp131t,สวนสาธารณะเฉลิมพระเกียรติ 6 รอบพระชนมพรรษา,Public Park to commemorate the sixth anniversary of His Majesty the King,กรุงเทพฯ,กลาง,13.685524189587932,100.51830028147444,BKK
+bkp133t,สวนหลวงพระราม 8,Rama VIII Park,กรุงเทพฯ,กลาง,13.7693437,100.4945337,BKK
+bkp56t,สำนักงานเขตดินแดง กรุงเทพฯ,"Din Dang, Bangkok",กรุงเทพฯ,กลาง,13.7619223,100.558606,BKK
+bkp57t,สำนักงานเขตพระโขนง กรุงเทพฯ,"Phra Kanong District Office,  Bangkok",กรุงเทพฯ,กลาง,13.691511,100.61457,BKK
+bkp58t,สำนักงานเขตราษฎร์บูรณะ กรุงเทพฯ,"Rat Burana District Office,  Bangkok",กรุงเทพฯ,กลาง,13.6821364,100.5060513,BKK
+bkp59t,สำนักงานเขตราชเทวี กรุงเทพฯ,"Ratchathewi District Office, Bangkok",กรุงเทพฯ,กลาง,13.7590851,100.5345788,BKK
+bkp60t,ริมสวนหย่อมตรงข้ามสำนักงานเขตดุสิต,"Dusit District Office, Bangkok",กรุงเทพฯ,กลาง,13.776664,100.520982,BKK
+bkp61t,สำนักงานคณะกรรมการพัฒนาเศรษฐกิจและสังคมแห่งชาติ,National Economic and Social Development Council Office,กรุงเทพฯ,กลาง,13.756281,100.514267,BKK
+bkp62t,วงเวียนโอเดียน,Odeon Circus,กรุงเทพฯ,กลาง,13.737136,100.512734,BKK
+bkp63t,แฟลตทหารบก สามเสน,Army Apartment Sam Sen,กรุงเทพฯ,กลาง,13.783554,100.5344645,BKK
+bkp64t,สำนักงานเขตวังทองหลาง,"Wang Thonglang District Office, Bangkok",กรุงเทพฯ,กลาง,13.778981,100.622294,BKK
+bkp65t,สามย่านมิตรทาวน์,Samyan Mitrtown,กรุงเทพฯ,กลาง,13.733136,100.52829,BKK
+bkp66t,ลานบางรักเลิฟลี่ พลาซ่า,Bangrak Lovely Plaza,กรุงเทพฯ,กลาง,13.726136,100.528055,BKK
+bkp67t,สำนักงานเขตสาทร,"Sathon District Office, Bangkok",กรุงเทพฯ,กลาง,13.707763,100.526787,BKK
+bkp69t,ธนาคารกรุงศรีอยุธยา สำนักงานใหญ่,"Bank of Ayuthaya Head Office Yan Nawa, Bangkok",กรุงเทพฯ,กลาง,13.679226,100.54687,BKK
+bkp70t,ริมถนนซอยสุขุมวิท 63,"Soi Sukhumwit 63 Roadside Wattana, Bangkok",กรุงเทพฯ,กลาง,13.722096,100.584559,BKK
+bkp71t,สำนักงานเขตสวนหลวง,"Suan Luang District Office, Bangkok",กรุงเทพฯ,กลาง,13.731051,100.651705,BKK
+bkp72t,บิ๊กซี ซุปเปอร์เซ็นเตอร์ บางนา,Big C Supercenter Bang Na,กรุงเทพฯ,กลาง,13.667987,100.635313,BKK
+bkp73t,มหาวิทยาลัยเกษตรศาสตร์,Kasertsart University,กรุงเทพฯ,กลาง,13.839923,100.575632,BKK
+bkp74t,สำนักงานเขตดอนเมือง,"Don Mueng District Office, Bangkok",กรุงเทพฯ,กลาง,13.910986,100.594877,BKK
+bkp75t,สำนักงานเขตสายไหม,"Sai Mai District Office, Bangkok",กรุงเทพฯ,กลาง,13.896035,100.660628,BKK
+bkp76t,สำนักงานเขตบางกะปิ,"Bang Kapi District Office, Bangkok",กรุงเทพฯ,กลาง,13.766478,100.647785,BKK
+bkp77t,แยกสวนสยาม-รามอินทรา,Suan Sayam-Ram Intra Intersection,กรุงเทพฯ,กลาง,13.813844,100.686594,BKK
+bkp78t,โรงพยาบาลลาดกระบัง,Lat Krabang Hospital,กรุงเทพฯ,กลาง,13.72205,100.784069,BKK
+bkp79t,สวนเฉลิมพระเกียรติ ร.9,"Chaloem Phrakiat Rama 9 Park Min buri, Bangkok",กรุงเทพฯ,กลาง,13.813578,100.73208,BKK
+bkp80t,สำนักงานเขตหนองจอก,"Nong Chok District Office, Bangkok",กรุงเทพฯ,กลาง,13.855362,100.86267,BKK
+bkp81t,ซีคอน สแควร์,Seacon Square,กรุงเทพฯ,กลาง,13.695561,100.647615,BKK
+bkp82t,แยกมไหศวรรย์,Mahaisawan Intersection,กรุงเทพฯ,กลาง,13.70515,100.48465,BKK
+bkp83t,ห้องสมุดใต้สะพานสมเด็จพระเจ้าตากสิน,Library under King Taksin Bridge,กรุงเทพฯ,กลาง,13.719705,100.508782,BKK
+bkp84t,สี่แยกท่าพระ,Tha phra Intersection,กรุงเทพฯ,กลาง,13.729431,100.474373,BKK
+bkp85t,สถานีตำรวจรถไฟบางกอกน้อย,Bangkok Noi Train Police Station,กรุงเทพฯ,กลาง,13.759619,100.481137,BKK
+bkp86t,ถนนพุทธมณฑลสาย 1 ตัดกับถนนบรมราชชนนี,Phutthamonthon 1 - Borommaratchachonnani Intersection,กรุงเทพฯ,กลาง,13.780778,100.426727,BKK
+bkp87t,ตลาดธนบุรีสนามหลวง 2,Thon Buri Market Sanam Luang 2,กรุงเทพฯ,กลาง,13.746257,100.355099,BKK
+bkp88t,มหาวิทยาลัยสยาม,Siam University,กรุงเทพฯ,กลาง,13.718689,100.45391,BKK
+bkp89t,"ริมถนนมาเจริญ เพชรเกษม 8, เขตหนองแขม","Ma Charean Roadside, Petcha Kasem 8, Nong Khaem",กรุงเทพฯ,กลาง,13.705582,100.343164,BKK
+bkp90t,ตลาดบางบอน 5,Bang Bon 5 Market,กรุงเทพฯ,กลาง,13.639165,100.372958,BKK
+bkp91t,มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี,King Mongkut's University of Technology Thonburi,กรุงเทพฯ,กลาง,13.651004,100.496673,BKK
+bkp92t,สำนักงานเขตพระนคร,"Phra Nakhon District Office, Bangkok",กรุงเทพฯ,กลาง,13.76415,100.499077,BKK
+bkp93t,สำนักงานเขตห้วยขวาง,"Huai Khwang District Office, Bangkok",กรุงเทพฯ,กลาง,13.77682,100.579543,BKK
+bkp94t,สำนักงานเขตคลองเตย,"Khlong Toei District Office, Bangkok",กรุงเทพฯ,กลาง,13.708488,100.583747,BKK
+bkp95t,สำนักงานเขตบางซื่อ,"Bang Sue District Office, Bangkok",กรุงเทพฯ,กลาง,13.809596,100.537883,BKK
+bkp96t,สำนักงานเขตลาดพร้าว,"Ladphrao District Office, Bangkok",กรุงเทพฯ,กลาง,13.803587,100.607535,BKK
+bkp97t,สำนักงานเขตหลักสี่,"Lak Si District Office, Bangkok",กรุงเทพฯ,กลาง,13.887395,100.579247,BKK
+bkp98t,สำนักงานเขตบางเขน,"Bang Khen District Office, Bangkok",กรุงเทพฯ,กลาง,13.873603,100.595839,BKK
+bkp99t,สำนักงานเขตสะพานสูง,"Saphan Sung District Office, Bangkok",กรุงเทพฯ,กลาง,13.768892,100.685743,BKK
+o10,เคหะชุมชนคลองจั่น,National Housing Authority Klongchan,กรุงเทพฯ,กลาง,13.779873,100.646009,GROUND
+79t,สถานีอุตุนิยมวิทยา จ.กาญจนบุรี,Kanchanaburi Meteorological Station,กาญจนบุรี,ตะวันตก,14.022376,99.536195,GROUND
+107t,สวนสาธารณะแก่งดอนกลาง,KAENG DON KLANG PARK,กาฬสินธุ์,ตะวันออกเฉียงเหนือ,16.4436,103.513,GROUND
+94t,ลานอนุรักษ์วัฒนธรรมไทยสิริจิตอุทยาน,Sirichit Thai Cultural Conservation Ground,กำแพงเพชร,กลาง,16.475374,99.525425,GROUND
+46t,ส่วนอุทกวิทยา สำนักงานทรัพยากรน้ำภาคที่4 ขอนแก่น,Hydrogeological Group Water Resources Regional Office4 khonkaen,ขอนแก่น,ตะวันออกเฉียงเหนือ,16.44538333,102.83525,GROUND
+100t,สถานีอุตุนิยมวิทยาจันทบุรี,Chanthaburi Meteorological Station,จันทบุรี,ตะวันออก,12.6095704,102.1040804,GROUND
+60t,สำนักงานเทศบาลตำบลทุ่งสะเดา,Municipality Office Tungsadao,ฉะเชิงเทรา,ตะวันออก,13.5885,101.2863333,GROUND
+33t,โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านเขาหิน,Health Promotion Hospital Bankhaohin,ชลบุรี,ตะวันออก,13.054551,101.098128,GROUND
+34t,สำนักงานสิ่งแวดล้อมภาคที่ 13,"Environment Agency Section 13, Chonburi",ชลบุรี,ตะวันออก,13.35461667,100.9792167,GROUND
+o61,สนามกีฬาเทศบาลแหลมฉบัง,Laem Chabang Municipal Stadium,ชลบุรี,ตะวันออก,13.11923333,100.91855,GROUND
+117t,สวนสาธารณะเฉลิมพระเกียรติ ร. 9,Chalermprakiat Rama IX Park,ชัยนาท,กลาง,15.173475,100.132105,GROUND
+108t,สนามกีฬาเทศบาลเมืองชัยภูมิ,Mueang Chaiyaphum Municipality Stadium,ชัยภูมิ,ตะวันออกเฉียงเหนือ,15.81148,102.02281,GROUND
+118t,สนามกีฬา จ.ชุมพร,"Sports Stadium, Chumphon Province",ชุมพร,ใต้,10.495142389105824,99.18935409512319,GROUND
+93t,วิทยาลัยสารพัดช่างตรัง,"Polytechnic College, Trang",ตรัง,ใต้,7.570238,99.588743,GROUND
+87t,สนามกีฬากลางจังหวัดตราด,Trat Provincial Central Stadium,ตราด,ตะวันออก,12.234862,102.523721,GROUND
+76t,ศูนย์การศึกษานอกโรงเรียน,"Non-Formal Education Centre, Mea Sot",ตาก,ตะวันตก,16.734413,98.566961,GROUND
+105t,ศูนย์บริการสาธารณสุขเทศบาลเมืองนครนายก,Nakhon Nayok Municipality Public Health Service Center,นครนายก,กลาง,14.20422,101.21509,GROUND
+o69,อ่างเก็บน้ำประปา,Water reservoir,นครปฐม,กลาง,13.832076,100.057961,GROUND
+88t,สถานีอุตุนิยมวิทยานครพนม,"Meteorological stations, Nakhon Phanom",นครพนม,ตะวันออกเฉียงเหนือ,17.412345,104.7786123,GROUND
+47t,สถานีสูบน้ำประตูพลแสน,Municipal Waste Water Pumping Station,นครราชสีมา,ตะวันออกเฉียงเหนือ,14.979537,102.098335,GROUND
+89t,ศูนย์ฟื้นฟูสุขภาพผู้สูงอายุ,Elderly Health Rehabilitation Center,นครศรีธรรมราช,ใต้,8.426923,99.961469,GROUND
+41t,โครงการชลประทานนครสวรรค์,Nakhonsawan Irrigation Project,นครสวรรค์,กลาง,15.68623,100.110556,GROUND
+13t,กรมควบคุมโรค,Department of Disease Control,นนทบุรี,กลาง,13.852778,100.529444,GROUND
+22t,มหาวิทยาลัยสุโขทัยธรรมาธิราช,Sukhothai Thammathirat Open University,นนทบุรี,กลาง,13.907861,100.535641,GROUND
+62t,ศาลากลางจังหวัดนราธิวาส,"City Hall, Narathiwat",นราธิวาส,ใต้,6.426853,101.823388,GROUND
+67t,สำนักงานเทศบาลเมืองน่าน,"Municipality Office, Nan",น่าน,เหนือ,18.7888833,100.7763166,GROUND
+75t,โรงพยาบาลเฉลิมพระเกียรติ,Chalermprakiet Hospital,น่าน,เหนือ,19.5759666,101.0815166,GROUND
+106t,สวนสาธารณะหนองบึงกาฬ,Nong Bueng Kan Park,บึงกาฬ,ตะวันออกเฉียงเหนือ,18.362008,103.65977,GROUND
+101t,ศาลากลางจังหวัดบุรีรัมย์,Buriram City Hall,บุรีรัมย์,ตะวันออกเฉียงเหนือ,14.945452,103.105896,GROUND
+20t,มหาวิทยาลัยกรุงเทพ วิทยาเขตรังสิต,Bangkok University Rangsit Campus,ปทุมธานี,กลาง,14.03742,100.605216,GROUND
+103t,สถานีตรวจอากาศหัวหิน สถานีอุตุนิยมวิทยาประจวบคีรีขันธ์,Hua Hin Weather Station Prachuap Khiri Khan Meteorological Station,ประจวบคีรีขันธ์,ตะวันตก,12.577835,99.953663,GROUND
+77t,ศาลาประชาคมบ้านบุยายใบ,Bu Yai Bai Hall Station,ปราจีนบุรี,ตะวันออก,13.917563,101.590529,GROUND
+121t,ศูนย์ป่าไม้จังหวัดปัตตานี,Pattani Provincial Forestry Center,ปัตตานี,ใต้,6.890637,101.250888,GROUND
+21t,โรงเรียนอยุธยาวิทยาลัย,Ayutthaya Witthayalai School,พระนครศรีอยุธยา,กลาง,14.35222,100.565325,GROUND
+70t,สนามกีฬาจังหวัดพะเยา,"Phayao Provincial, Phayao",พะเยา,เหนือ,19.200226,99.893048,GROUND
+120t,สนามกีฬากลางจังหวัดพัทลุง,Phatthalung Provincial Stadium,พัทลุง,ใต้,7.6156514,100.0480234,GROUND
+95t,สนามกีฬาจังหวัดพิจิตร,"Phichit Provincial , Phichit",พิจิตร,กลาง,16.442554,100.322756,GROUND
+86t,สวนชมน่านเฉลิมพระเกียรติ,Chom Nan Chaloem Phrakiat Public Park,พิษณุโลก,กลาง,16.820833,100.258056,GROUND
+43t,ศูนย์บริการสาธารณสุขเทศบาลภูเก็ต,Municipal Health Center,ภูเก็ต,ใต้,7.884488,98.391283,GROUND
+114t,สวนสุขภาพประมวลสุข,Pramuan Suk Health Park,มหาสารคาม,ตะวันออกเฉียงเหนือ,16.177283,103.299824,GROUND
+102t,สนามกีฬากลางจังหวัดมุกดาหาร,Mukdahan Provincial Stadium,มุกดาหาร,ตะวันออกเฉียงเหนือ,16.54257,104.7192,GROUND
+63t,สนามโรงพิธีช้างเผือก,White Elephant Park,ยะลา,ใต้,6.546205,101.283137,GROUND
+78t,ศูนย์พัฒนาเด็กเล็กเทศบาลเมืองเบตง,"child development centers, Betong",ยะลา,ใต้,5.763873,101.067903,GROUND
+109t,สวนสาธารณะพญาแถน,Phaya Thaen Public Park,ยโสธร,ตะวันออกเฉียงเหนือ,15.783861,104.154639,GROUND
+28t,สำนักงานสาธารณสุขอำเภอปลวกแดง,Pluakdaeng District Health Office,ระยอง,ตะวันออก,12.97378333,101.21285,GROUND
+29t,โรงพยาบาลส่งเสริมสุขภาพตำบลมาบตาพุด,Health Promotion Hospital Maptaput,ระยอง,ตะวันออก,12.70865,101.1659833,GROUND
+30t,สนามกีฬากลางจังหวัดระยอง,Rayong Provincial Stadium,ระยอง,ตะวันออก,12.678917,101.234664,GROUND
+31t,ศูนย์วิจัยพืชไร่ระยอง,"Field Crop Research Center, Rayong",ระยอง,ตะวันออก,12.73518333,101.13565,GROUND
+74t,ศูนย์ราชการจังหวัดระยอง,"Government Complex, Rayong",ระยอง,ตะวันออก,12.7066,101.18055,GROUND
+o63,ค่ายสุรสิงหนาท,Khai Surasinghanat,ระยอง,ตะวันออก,12.648576,101.32245,MOBILE
+26t,สำนักงานสิ่งแวดล้อมภาคที่8,Environmental Office 8 ratchaburi,ราชบุรี,ตะวันตก,13.52344,99.814082,GROUND
+113t,บึงพลาญชัย,Bueng Planchai,ร้อยเอ็ด,ตะวันออกเฉียงเหนือ,16.057448,103.651056,GROUND
+99t,สถานีอุตุนิยมวิทยาลพบุรี,Meteorological Station Lopburi,ลพบุรี,กลาง,14.800032,100.628548,GROUND
+37t,สถานีอุตุนิยมวิทยาลำปาง,"Meteorological stations, Lampang",ลำปาง,เหนือ,18.2783333,99.5064666,GROUND
+38t,โรงพยาบาลส่งเสริมสุขภาพตำบลบ้านสบป้าด,"Health Promotion Hospital Sob Pad, Lampang",ลำปาง,เหนือ,18.2508166,99.76395,GROUND
+39t,โรงพยาบาลส่งเสริมสุขภาพตำบลท่าสี,Health Promotion Hospital Banthasri,ลำปาง,เหนือ,18.4267833,99.7576333,GROUND
+40t,การประปาส่วนภูมิภาคแม่เมาะ,Provincial Waterworks Authority Mae Moh,ลำปาง,เหนือ,18.2826333,99.6598166,GROUND
+68t,อุตุนิยมวิทยาลำพูน,"Meteorological Staions, Lamphun",ลำพูน,เหนือ,18.567194,99.038639,GROUND
+112t,สถานีอุตุนิยมวิทยาศรีสะเกษ,Sisaket Meteorological Center,ศรีสะเกษ,ตะวันออกเฉียงเหนือ,15.087087,104.326787,GROUND
+90t,สถานีอุตุนิยมวิทยาสกลนคร,"Meteorological stations, Sakon Nakhon",สกลนคร,ตะวันออกเฉียงเหนือ,17.15662,104.133216,GROUND
+44t,เทศบาลนครหาดใหญ่,Hat Yai Municipality,สงขลา,ใต้,7.020434,100.484088,GROUND
+80t,ศาลากลาง จ.สตูล,"City Hall, Satun",สตูล,ใต้,6.624747,100.066159,GROUND
+08t,ศูนย์ฟื้นฟูอาชีพคนพิการและทุพลภาพ,Prabadang Rehabiltation Center,สมุทรปราการ,กลาง,13.664087,100.543436,GROUND
+16t,โรงไฟฟ้าพระนครใต้,South Bangkok Power Plant,สมุทรปราการ,กลาง,13.618,100.5562,GROUND
+17t,บ้านพักกรมอุตสาหกรรมพื้นฐานและการเหมืองแร่,Residence for Dept. of Mineral Resources,สมุทรปราการ,กลาง,13.652141,100.531805,GROUND
+18t,ศาลากลางจังหวัดสมุทรปราการ,"City Hall, Samut Prakan",สมุทรปราการ,กลาง,13.599149,100.597345,GROUND
+19t,การเคหะชุมชนเมืองใหม่บางพลี,National Housing Authority Bangplee,สมุทรปราการ,กลาง,13.5705,100.7862867,GROUND
+84t,สำนักงานสาธารณสุขจังหวัดสมุทรสงคราม,Samut Songkhram Health Office,สมุทรสงคราม,กลาง,13.428581,100.024664,GROUND
+14t,แขวงการทางสมุทรสาคร,Highway District,สมุทรสาคร,กลาง,13.7054879,100.315622,GROUND
+27t,โรงเรียนสมุทรสาครวิทยาลัย,Samut Sakhon Wittayalai School,สมุทรสาคร,กลาง,13.5502631,100.2647676,GROUND
+24t,สถานีตำรวจภูธรตำบลหน้าพระลาน,Na Phralan Police Station,สระบุรี,กลาง,14.685833,100.871996,GROUND
+25t,สถานีดับเพลิงพระลักษณ์,Khao Noi Fire Station,สระบุรี,กลาง,14.526343,100.926047,GROUND
+o67,วัดพระพุทธบาท ราชวรมหาวิหาร,Wat Phra Phutthabat Ratchaworamahawihan,สระบุรี,กลาง,14.719479627460618,100.7889731958419,MOBILE
+71t,สวนกาญจนาภิเษก ร.9 (ฝั่งสวนหิน),Kanjanapisek Park,สระแก้ว,ตะวันออก,13.691047,102.510442,GROUND
+104t,โรงเรียนสิงห์บุรี,SINGBURI SCHOOL,สิงห์บุรี,กลาง,14.8933874,100.4130773,GROUND
+85t,สนามกีฬากลางจังหวัดสุพรรณบุรี,Suphan Buri Provincial Central Stadium,สุพรรณบุรี,กลาง,14.476214,100.086095,GROUND
+42t,สำนักงานสิ่งแวดล้อมภาคที่ 14,"Environment Agency Section 14, Surat Thani",สุราษฎร์ธานี,ใต้,9.126017,99.325145,GROUND
+111t,สถานีอุตุนิยมวิทยาสุรินทร์,Surin Meteorological Center,สุรินทร์,ตะวันออกเฉียงเหนือ,14.8762222,103.4965833,GROUND
+96t,สวนสาธารณะ ชุมชนเลอไทย,Le Thai Community Park,สุโขทัย,กลาง,17.006059,99.81927,GROUND
+82t,สวนสาธารณะหนองถิ่น,"Nong Thin Public Park, Nong Khai",หนองคาย,ตะวันออกเฉียงเหนือ,17.87748,102.728925,GROUND
+115t,องค์การริหารส่วนจังหวัดหนองบัวลำภู,Nong Bua Lamphu Provincial Administrative Organization,หนองบัวลำภู,ตะวันออกเฉียงเหนือ,17.193824,102.4585009,GROUND
+110t,สำนักงานเทศบาลเมืองอำนาจเจริญ,Amnat Charoen Municipality,อำนาจเจริญ,ตะวันออกเฉียงเหนือ,15.8758,104.6223,GROUND
+91t,สวนสาธารณะหนองประจักษ์ อุดรธานี,"Nong Prajak Public Park, Udon Thani",อุดรธานี,ตะวันออกเฉียงเหนือ,17.414174,102.780926,GROUND
+92t,สวนมหามงคลเฉลิมพระชนมพรรษา 6 รอบ 5 ธันวาคม 2552 อุตรดิตถ์,"72nd Anniversary King Bhumibol Public Park, Uttaradit",อุตรดิตถ์,เหนือ,17.631352,100.09896,GROUND
+98t,สถานีสวนเฉลิมพระเกียรติพระบาทสมเด็จพระเจ้าอยู่หัว เฉลิมพระชนมพรรษา 80 พรรษา,Chaloem Phrakiat Park Station 80th birthday celebration,อุทัยธานี,กลาง,15.384667,100.024992,GROUND
+83t,ศูนย์แสดงและจำหน่ายสินค้า OTOP จังหวัดอุบลราชธานี,"OTOP Center, Ubon Ratchathani",อุบลราชธานี,ตะวันออกเฉียงเหนือ,15.245413,104.846219,GROUND
+116t,สวนน้ำเฉลิมพระเกียรติ,Chaloem Phra Kiat Water Park,อ่างทอง,กลาง,14.606306,100.453589,GROUND
+57t,สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัดเชียงราย,"Natural Resources and Environment Office, Chiangrai",เชียงราย,เหนือ,19.909217,99.823467,GROUND
+73t,สำนักงานสาธารณสุขแม่สาย,Maesai Health Office,เชียงราย,เหนือ,20.427325,99.883842,GROUND
+o68,ศูนย์ป้องกันและบรรเทาสาธารณภัยเทศบาลตำบลเวียง,Wiang Subdistrict Disaster Prevention and Mitigation Center,เชียงราย,เหนือ,20.2575,100.4025,MOBILE
+35t,ศูนย์ราชการจังหวัดเชียงใหม่,"City Hall, Chiangmai",เชียงใหม่,เหนือ,18.840732,98.96978,GROUND
+36t,โรงเรียนยุพราชวิทยาลัย,Yupparaj Wittayalai School,เชียงใหม่,เหนือ,18.7909333,98.99,GROUND
+o59,การไฟฟ้าส่วนภูมิภาค สาขา อำเภอฮอด,"Provincial Electricity Authority, Hot District Branch",เชียงใหม่,เหนือ,18.172495,98.61069,MOBILE
+97t,สวนเพชบุระ,Phetbura garden,เพชรบูรณ์,กลาง,16.418417,101.156556,GROUND
+72t,สวนสาธารณะเฉลิมพระเกียรติ 60 พรรษามหาราชินี จังหวัดเลย,"60th Anniversary Queen Sirikit Public Park, Loei",เลย,ตะวันออกเฉียงเหนือ,17.48462,101.732734,GROUND
+69t,อุตุนิยมวิทยาจังหวัดแพร่,"Meteorology Center, Phrae",แพร่,เหนือ,18.1283666,100.1624333,GROUND
+58t,สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัดแม่ฮ่องสอน,"Natural Resources and Environment Office, Mae Hongson",แม่ฮ่องสอน,เหนือ,19.30455,97.97165,GROUND
+o29,ที่ว่าการอำเภอแม่สะเรียง,Mae Sariang District Office,แม่ฮ่องสอน,เหนือ,18.158912,97.93271,MOBILE
+o64,ท่าอากาศยานปาย,Pai Airport,แม่ฮ่องสอน,เหนือ,19.369637,98.43596,MOBILE

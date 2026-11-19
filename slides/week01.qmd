@@ -84,6 +84,20 @@ flowchart LR
 conda env create -f environment.yml && conda activate dstoolbox
 ```
 
+## ดาวน์โหลดไฟล์สภาพแวดล้อมจากไหน
+
+repo รายวิชา: **github.com/popotaroman-cloud/data-science-toolbox**
+
+```bash
+BASE=https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main
+curl -fLO $BASE/environment.yml   # ใช้ conda
+curl -fLO $BASE/pyproject.toml    # ใช้ uv
+```
+
+PowerShell: `Invoke-WebRequest "$BASE/environment.yml" -OutFile environment.yml`
+
+คำสั่งครบทั้งสองแบบอยู่ใน[คู่มือปฏิบัติการ](../weeks/week01/lab.md)
+
 ## เครื่องมือประจำตัว
 
 - **terminal**: รันคำสั่ง, Git, script

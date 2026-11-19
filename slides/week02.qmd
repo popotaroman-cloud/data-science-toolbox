@@ -182,6 +182,20 @@ flowchart LR
 
 # ปฏิบัติการ
 
+## ดาวน์โหลดไฟล์ตัวอย่างจากไหน
+
+โฟลเดอร์ **`sample-data/`** ใน repo รายวิชา → วางที่ `data/sample/` ของโครงการ (ไม่ commit)
+
+```bash
+mkdir -p data/sample
+BASE=https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main/sample-data
+for f in stations_sample.csv pm25_hourly_sample.csv air4thai_sample.json; do
+  curl -fL -o "data/sample/$f" "$BASE/$f"
+done
+```
+
+PowerShell และรายละเอียดไฟล์: [ประมวลรายวิชา](../syllabus.md#sample-data)
+
 ## งานวันนี้
 
 1. สร้าง branch `week02-questions`

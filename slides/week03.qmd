@@ -35,7 +35,7 @@ CLO2 · ผลงาน: `src/fetch_air4thai.py` บันทึก JSON ดิ�
 | ภาคของสถานี | ไม่มี → สร้าง mapping จังหวัด → ภาค (สัปดาห์ 4) |
 
 ::: {.callout-warning}
-endpoint ข้อมูลย้อนหลังเปลี่ยนตามเวลา ตรวจจากเว็บไซต์ Air4Thai ก่อนใช้ · ระหว่างนี้ใช้ไฟล์ตัวอย่างจากผู้สอน
+endpoint ข้อมูลย้อนหลังเปลี่ยนตามเวลา ตรวจจากเว็บไซต์ Air4Thai ก่อนใช้ · ระหว่างนี้ใช้ไฟล์ตัวอย่างใน `sample-data/` ของ repo รายวิชา
 :::
 
 # HTTP พื้นฐาน
@@ -121,7 +121,7 @@ import truststore; truststore.inject_into_ssl()
 ```
 
 ::: {.callout-warning}
-**ห้ามใช้ `verify=False` ทุกกรณี** เพราะปิดการตรวจตัวตนของ server · ถ้า `truststore` ยังไม่ได้ผล (เช่น Linux/Colab) ให้ใช้ไฟล์ตัวอย่างจากผู้สอน
+**ห้ามใช้ `verify=False` ทุกกรณี** เพราะปิดการตรวจตัวตนของ server · ถ้า `truststore` ยังไม่ได้ผล (เช่น Linux/Colab) ให้ใช้ `data/sample/air4thai_sample.json` (ดาวน์โหลดจาก `sample-data/` ของ repo รายวิชา)
 :::
 
 ## ทำไมเก็บ raw ไว้ก่อน
@@ -260,6 +260,6 @@ flowchart LR
 
 - อ่านหนังสือ [บทที่ 6](../book/chapters/06-analytical-databases.html) และ [บทที่ 7](../book/chapters/07-sql-analysis.html) ก่อนเข้าเรียน
 - รัน script สะสมข้อมูลต่อ (อย่างน้อย 3 ครั้ง ห่างกัน ≥ 1 ชั่วโมง)
-- ดาวน์โหลด `pm25_hourly_sample.csv` และ `stations_sample.csv`
+- ตรวจว่า `data/sample/` มี `pm25_hourly_sample.csv` และ `stations_sample.csv` (ยังไม่มี: ดาวน์โหลดจาก `sample-data/` ของ repo รายวิชา ตามสไลด์สัปดาห์ 2)
 - ฝึก SQL `SELECT`, `WHERE`, `GROUP BY` บนเว็บ DuckDB
 - คิดว่าข้อมูลควรแยกเป็นกี่ตาราง อะไรเป็น key

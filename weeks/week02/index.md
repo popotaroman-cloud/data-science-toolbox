@@ -74,7 +74,7 @@ First look มีไว้ตอบคำถามว่า *ข้อมูล�
 ```python
 import pandas as pd
 
-df = pd.read_csv("data/sample/pm25_hourly_sample.csv", parse_dates=["ts"])  # ไฟล์ตัวอย่างจากผู้สอน
+df = pd.read_csv("data/sample/pm25_hourly_sample.csv", parse_dates=["ts"])  # ไฟล์ตัวอย่างของรายวิชา
 
 df.shape                          # (จำนวนแถว, จำนวนคอลัมน์)
 df.dtypes                         # ชนิดข้อมูลถูกต้องไหม ts เป็น datetime หรือยัง

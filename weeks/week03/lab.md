@@ -10,7 +10,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 3: เข�
 - repo โครงการที่มี `questions.md` จากสัปดาห์ที่ 2 (รวมรายการ "ข้อมูลที่ต้องเก็บ")
 - `.gitignore` ที่มี `data/` และ `.env` (จากสัปดาห์ที่ 1)
 - สภาพแวดล้อม `dstoolbox` ตรวจด้วย `python -c "import requests, bs4; print('ok')"` และติดตั้ง `truststore` เพิ่ม (`conda install -c conda-forge truststore`) เพื่อแก้ปัญหา SSL ของ server (ดูตารางแก้ปัญหา)
-- อินเทอร์เน็ต ถ้าเครือข่ายห้องปฏิบัติการเข้า Air4Thai ไม่ได้ ให้ใช้ไฟล์ตัวอย่างจากผู้สอน `data/sample/air4thai_sample.json` ในขั้นที่ 2 แล้วทำขั้นที่ 3–4 ต่อ
+- อินเทอร์เน็ต ถ้าเครือข่ายห้องปฏิบัติการเข้า Air4Thai ไม่ได้ ให้ใช้ไฟล์ตัวอย่างของรายวิชา `data/sample/air4thai_sample.json` ในขั้นที่ 2 แล้วทำขั้นที่ 3–4 ต่อ (ดาวน์โหลดด้วยคำสั่งในใบงานสัปดาห์ที่ 2 หรือตาม [ประมวลรายวิชา](../../syllabus.md#sample-data))
 
 ---
 
@@ -40,7 +40,7 @@ r = requests.get(URL, headers=HEADERS, timeout=(10, 60))
 print(r.status_code, r.headers.get("Content-Type"), len(r.content), "bytes")
 data = r.json()
 
-# ถ้าดึงไม่ได้ ใช้ไฟล์ตัวอย่างจากผู้สอน
+# ถ้าดึงไม่ได้ ใช้ไฟล์ตัวอย่างของรายวิชา
 # data = json.load(open("../data/sample/air4thai_sample.json", encoding="utf-8"))
 ```
 
@@ -258,9 +258,9 @@ clone หรือ checkout branch ของเพื่อนแล้ว **ร
 | อาการ | สาเหตุและวิธีแก้ |
 |---|---|
 | `ZoneInfoNotFoundError: Asia/Bangkok` (Windows) | Windows ไม่มีฐานข้อมูล timezone ในตัว ติดตั้ง `tzdata` (`conda install -c conda-forge tzdata`) |
-| `ConnectTimeout` / `ConnectionError` | เครือข่ายบล็อกหรือ server ไม่ตอบ ลองเครือข่ายอื่น หรือใช้ไฟล์ตัวอย่างจากผู้สอนเพื่อทำขั้นต่อไป |
+| `ConnectTimeout` / `ConnectionError` | เครือข่ายบล็อกหรือ server ไม่ตอบ ลองเครือข่ายอื่น หรือใช้[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)เพื่อทำขั้นต่อไป |
 | `JSONDecodeError` หรือ `ValueError` | server ส่ง HTML กลับมา ดู `r.text[:300]` อาจปิดปรับปรุงหรือ URL ผิด |
-| `SSLError: CERTIFICATE_VERIFY_FAILED` | URL `http://` ถูก redirect ไป `https://` และ server ส่ง certificate chain ไม่ครบ (พบเมื่อ ต.ค. 2569) ติดตั้ง `truststore` (`conda install -c conda-forge truststore`) ซึ่ง script เรียกใช้อยู่แล้ว ได้ผลบน Windows/macOS ถ้ายังไม่ได้ (เช่น Linux/Colab) ใช้ไฟล์ตัวอย่างจากผู้สอน **ห้ามแก้ด้วย `verify=False`** เพราะปิดการตรวจตัวตนของ server |
+| `SSLError: CERTIFICATE_VERIFY_FAILED` | URL `http://` ถูก redirect ไป `https://` และ server ส่ง certificate chain ไม่ครบ (พบเมื่อ ต.ค. 2569) ติดตั้ง `truststore` (`conda install -c conda-forge truststore`) ซึ่ง script เรียกใช้อยู่แล้ว ได้ผลบน Windows/macOS ถ้ายังไม่ได้ (เช่น Linux/Colab) ใช้[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data) **ห้ามแก้ด้วย `verify=False`** เพราะปิดการตรวจตัวตนของ server |
 | `FileNotFoundError` ของ `fetch.log` | ต้องสร้าง `RAW_DIR` ก่อนตั้งค่า logging (ดูลำดับใน script) |
 | ภาษาไทยในไฟล์ raw อ่านเป็น `ก...` | ปกติของ JSON ที่ escape unicode ข้อมูลไม่เสีย `json.load` แล้วจะได้ภาษาไทย |
 | `git status` เห็นไฟล์ใน `data/raw/` | `.gitignore` ไม่มี `data/` หรือสะกดผิด แก้แล้วรัน `git rm -r --cached data` |
@@ -268,6 +268,6 @@ clone หรือ checkout branch ของเพื่อนแล้ว **ร
 ## งานศึกษาด้วยตนเอง (ก่อนสัปดาห์ที่ 4)
 
 1. ให้ script รันสะสมข้อมูลต่อไป (ด้วยมือหรือตั้งเวลา) ยิ่งได้หลายชั่วโมงยิ่งดี
-2. ดาวน์โหลดไฟล์ตัวอย่างจากผู้สอน `data/sample/pm25_hourly_sample.csv` และ `data/sample/stations_sample.csv` ไว้ใช้สัปดาห์ที่ 4
+2. ตรวจว่ามีไฟล์ตัวอย่างของรายวิชา `data/sample/pm25_hourly_sample.csv` และ `data/sample/stations_sample.csv` แล้ว ถ้ายังไม่มี ดาวน์โหลดตามคำสั่งใน[ประมวลรายวิชา](../../syllabus.md#sample-data) ไว้ใช้สัปดาห์ที่ 4
 3. ทำแบบฝึก SQL พื้นฐาน `SELECT`, `WHERE`, `GROUP BY` จาก <https://duckdb.org/docs/stable/sql/introduction>
 4. คิดว่าข้อมูลจากขั้นที่ 2 ควรแยกเป็นกี่ตาราง และอะไรเป็น key ที่ทำให้หนึ่งแถวไม่ซ้ำกัน

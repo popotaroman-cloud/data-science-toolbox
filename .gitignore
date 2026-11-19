@@ -29,3 +29,6 @@ Thumbs.db
 
 # book build output
 book/_book/
+
+# ไฟล์ตัวอย่างของรายวิชา (ผู้เรียนดาวน์โหลดจากที่นี่) ต้องอยู่ใน repo ได้
+!sample-data/*.duckdb

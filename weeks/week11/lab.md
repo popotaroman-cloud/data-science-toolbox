@@ -8,7 +8,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 11: ทด�
 ## สิ่งที่ต้องเตรียม
 
 - งานสัปดาห์ที่ 9–10 merge แล้ว และมีข้อสังเกตจากกราฟที่ต้องการทดสอบ (งานศึกษาด้วยตนเองสัปดาห์ที่ 10)
-- `data/pm25.duckdb` ที่มี `daily_pm25_clean` อย่างน้อย 3 ปี (ถ้าข้อมูลของตนเองไม่ถึง ให้ใช้ไฟล์ตัวอย่างจากผู้สอนใน `data/sample/` และระบุใน PR)
+- `data/pm25.duckdb` ที่มี `daily_pm25_clean` อย่างน้อย 3 ปี (ถ้าข้อมูลของตนเองไม่ถึง ให้ใช้[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)ใน `data/sample/` และระบุใน PR)
 - ตรวจช่วงปีของข้อมูล: `SELECT min(date), max(date) FROM daily_pm25_clean`
 - ทดสอบไลบรารี: `python -c "import scipy, statsmodels; print(scipy.__version__, statsmodels.__version__)"` และ (เสริม) `python -c "import pingouin"`
 

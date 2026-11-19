@@ -251,7 +251,7 @@ tbl = con.sql("SELECT * FROM stations").to_arrow_table()   # pyarrow.Table (ช�
 2. อ่าน data/raw/air4thai_*.json ทุกไฟล์ → แปลงเป็นแถวของ stations และ measurements
    (ใช้ตารางจับคู่ key จากสัปดาห์ที่ 3 ไม่เดาชื่อ key)
 3. แปลงค่า: string → ตัวเลข, ค่าติดลบ/ว่าง → NULL, date + time → TIMESTAMP
-4. (ถ้าเลือก) โหลดไฟล์ตัวอย่างจากผู้สอนใน data/sample/ เป็นข้อมูลย้อนหลัง
+4. (ถ้าเลือก) โหลดไฟล์ตัวอย่างของรายวิชาใน data/sample/ เป็นข้อมูลย้อนหลัง
 5. upsert ทั้งสองตาราง แล้วเติม region จาก mapping จังหวัด → ภาค
 6. พิมพ์สรุป: จำนวนสถานี จำนวนแถว ช่วงเวลา และตรวจแถวซ้ำ
 ```

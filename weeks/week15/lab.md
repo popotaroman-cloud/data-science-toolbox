@@ -68,7 +68,7 @@ git grep -nE "[A-Za-z]:\\\\|/Users/|/home/"                             # ไม
 git clone https://github.com/<เพื่อน>/<repo>.git final-test
 cd final-test
 git checkout main
-# ทำตาม README ทุกขั้น: สร้าง env → run_all.py (หรือไฟล์ตัวอย่างจากผู้สอน) → render รายงาน → เปิด app
+# ทำตาม README ทุกขั้น: สร้าง env → run_all.py (หรือไฟล์ตัวอย่างของรายวิชา) → render รายงาน → เปิด app
 ```
 
 เปิด issue ใน repo ของเพื่อน หัวข้อ `Final fresh-clone test` ด้วยแบบฟอร์มนี้
@@ -192,7 +192,7 @@ git push
 | อาการ | สาเหตุและวิธีแก้ |
 |---|---|
 | fresh clone สร้าง environment ไม่ได้บนเครื่องเพื่อน | ไลบรารีบางตัวไม่มีใน channel หรือ pin เวอร์ชันที่ผูกกับ OS ใช้ `conda env export --from-history` แล้วตรวจด้วยมือ หรือลด pin ให้เหลือเวอร์ชันหลัก |
-| `run_all.py` ล่มเพราะ API ไม่ตอบ | README ต้องมีทางเลือกใช้ไฟล์ตัวอย่างจากผู้สอน และ script ควรแจ้ง error ที่อ่านเข้าใจได้ |
+| `run_all.py` ล่มเพราะ API ไม่ตอบ | README ต้องมีทางเลือกใช้[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data) และ script ควรแจ้ง error ที่อ่านเข้าใจได้ |
 | แดชบอร์ดช้ามากในวัน demo | query ไม่ได้อยู่ใน `st.cache_data` หรือ query จาก `measurements` รายชั่วโมงทุกครั้ง ใช้ `daily_pm25_clean` และสรุปล่วงหน้า |
 | เปิด app แล้ว `IOException` เรื่อง lock | มี notebook หรือ script ที่เปิดฐานข้อมูลแบบเขียนได้ค้างอยู่ ปิด kernel ทั้งหมดก่อน demo |
 | `git push origin v1.0` ถูกปฏิเสธเพราะ tag มีอยู่แล้ว | อย่าบังคับเขียนทับ ให้สร้าง `v1.1` และแจ้งผู้สอน |

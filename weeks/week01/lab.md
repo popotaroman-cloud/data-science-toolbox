@@ -41,7 +41,23 @@ git config --global init.defaultBranch main
 
 ## ขั้นที่ 3: สร้างสภาพแวดล้อมของรายวิชา
 
-ดาวน์โหลด `environment.yml` (หรือ `pyproject.toml`) จาก repository รายวิชา แล้วรัน
+ไฟล์สภาพแวดล้อมอยู่ใน repository รายวิชา <https://github.com/popotaroman-cloud/data-science-toolbox> ดาวน์โหลดไว้ในโฟลเดอร์ที่จะใช้ทำงาน (ตอนนี้ยังไม่ต้องอยู่ใน repo โครงการ จะคัดลอกเข้าไปในขั้นที่ 5)
+
+```bash
+BASE=https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main
+curl -fLO $BASE/environment.yml     # ถ้าใช้ conda
+curl -fLO $BASE/pyproject.toml      # ถ้าใช้ uv
+```
+
+PowerShell
+
+```powershell
+$base = "https://raw.githubusercontent.com/popotaroman-cloud/data-science-toolbox/main"
+Invoke-WebRequest "$base/environment.yml" -OutFile environment.yml    # ถ้าใช้ conda
+Invoke-WebRequest "$base/pyproject.toml"  -OutFile pyproject.toml     # ถ้าใช้ uv
+```
+
+แล้วรัน
 
 ```bash
 # conda
@@ -115,7 +131,7 @@ conda env create -f environment.yml
 |---|---|---|---|
 ```
 
-**4)** คัดลอก `environment.yml` ของรายวิชาเข้ามาไว้ใน repo
+**4)** คัดลอก `environment.yml` (หรือ `pyproject.toml` ถ้าใช้ uv) ที่ดาวน์โหลดในขั้นที่ 3 เข้ามาไว้ใน repo
 
 **5) `notebooks/01_hello.ipynb`** — สร้าง notebook เลือก kernel `dstoolbox` แล้วรัน
 

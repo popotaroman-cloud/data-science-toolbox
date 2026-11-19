@@ -8,7 +8,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 7: วิ�
 ## สิ่งที่ต้องเตรียม
 
 - งานสัปดาห์ที่ 6 ถูก merge แล้ว: `python src/validate.py` รันผ่าน และมี `reports/profiling_notes.md` ที่ระบุ sentinel value และเซนเซอร์ค้างที่พบ
-- `data/pm25.duckdb` ที่มี `measurements` อย่างน้อย 2–4 สัปดาห์จากหลายสถานี (ถ้ายังน้อย ใช้ไฟล์ตัวอย่างจากผู้สอนที่ `data/sample/`)
+- `data/pm25.duckdb` ที่มี `measurements` อย่างน้อย 2–4 สัปดาห์จากหลายสถานี (ถ้ายังน้อย ใช้[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)ที่ `data/sample/`)
 - `questions.md` เลือกคำถาม 1–2 ข้อที่ใช้ค่าเฉลี่ยรายวัน จะใช้ในขั้นที่ 6
 
 ---

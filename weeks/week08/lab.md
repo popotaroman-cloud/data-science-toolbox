@@ -8,7 +8,7 @@ title: "ปฏิบัติการสัปดาห์ที่ 8: เต�
 ## สิ่งที่ต้องเตรียม
 
 - งานสัปดาห์ที่ 3–7 ถูก merge เข้า `main` แล้ว: `fetch_air4thai.py`, `load_duckdb.py`, `schema.py`, `validate.py`, `clean.py`, `data_dictionary.md`, `reports/profiling_notes.md`
-- ไฟล์ JSON ดิบสำรองอย่างน้อย 1 ชุด (ที่ดึงไว้เองหรือไฟล์ตัวอย่างจากผู้สอนที่ `data/sample/`) เก็บไว้นอก repo หรือใน `data/` ซึ่งไม่ถูก commit
+- ไฟล์ JSON ดิบสำรองอย่างน้อย 1 ชุด (ที่ดึงไว้เองหรือ[ไฟล์ตัวอย่างของรายวิชา](../../syllabus.md#sample-data)ที่ `data/sample/`) เก็บไว้นอก repo หรือใน `data/` ซึ่งไม่ถูก commit
 - จับคู่กับเพื่อน 1 คนสำหรับ fresh clone test (ผู้สอนอาจกำหนดคู่ให้) คู่ควรใช้ระบบปฏิบัติการต่างกันถ้าเป็นไปได้
 
 ---
