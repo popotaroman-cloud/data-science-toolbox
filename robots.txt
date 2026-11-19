@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://popotaroman-cloud.github.io/data-science-toolbox/sitemap.xml
+Sitemap: https://popotaroman-cloud.github.io/data-science-toolbox/book/sitemap.xml
