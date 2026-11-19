@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -94,14 +94,15 @@ div.csl-indent {
 <link href="../chapters/17-spatial-data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1436b1d85bd248ef92b4e1f7ee7cda7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -129,50 +130,24 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/18-hierarchical-data.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/18-hierarchical-data.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -183,7 +158,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
@@ -214,13 +189,10 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">ส่วนที่ 1 รากฐาน</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
@@ -249,13 +221,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
@@ -284,13 +253,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">ส่วนที่ 3 คุณภาพข้อมูล</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
@@ -307,13 +273,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">ส่วนที่ 4 การสำรวจด้วยภาพ</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
@@ -330,13 +293,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
@@ -365,13 +325,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
@@ -400,13 +357,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
@@ -423,13 +377,10 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">ภาคผนวก</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">ภาคผนวก</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
@@ -504,38 +455,49 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">สารบัญ</h2>
    
   <ul>
   <li><a href="#วตถประสงคการเรยนร" id="toc-วตถประสงคการเรยนร" class="nav-link active" data-scroll-target="#วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</a></li>
   <li><a href="#sec-ch18-hierarchy" id="toc-sec-ch18-hierarchy" class="nav-link" data-scroll-target="#sec-ch18-hierarchy"><span class="header-section-number">18.1</span> โครงสร้างลำดับชั้น: ภาค → จังหวัด → สถานี</a>
   <ul class="collapse">
-  <li><a href="#ลำดบชนของโครงการ" id="toc-ลำดบชนของโครงการ" class="nav-link" data-scroll-target="#ลำดบชนของโครงการ">ลำดับชั้นของโครงการ</a></li>
+  <li><a href="#ศพทของลำดบชน" id="toc-ศพทของลำดบชน" class="nav-link" data-scroll-target="#ศพทของลำดบชน">ศัพท์ของลำดับชั้น</a></li>
+  <li><a href="#ลำดบชนของขอมล-pm2.5" id="toc-ลำดบชนของขอมล-pm2.5" class="nav-link" data-scroll-target="#ลำดบชนของขอมล-pm2.5">ลำดับชั้นของข้อมูล PM2.5</a></li>
+  <li><a href="#ลำดบชนทสมำเสมอและไมสมำเสมอ" id="toc-ลำดบชนทสมำเสมอและไมสมำเสมอ" class="nav-link" data-scroll-target="#ลำดบชนทสมำเสมอและไมสมำเสมอ">ลำดับชั้นที่สม่ำเสมอและไม่สม่ำเสมอ</a></li>
+  <li><a href="#การเกบลำดบชนในตาราง" id="toc-การเกบลำดบชนในตาราง" class="nav-link" data-scroll-target="#การเกบลำดบชนในตาราง">การเก็บลำดับชั้นในตาราง</a></li>
   <li><a href="#ตรวจความถกตองของลำดบชน" id="toc-ตรวจความถกตองของลำดบชน" class="nav-link" data-scroll-target="#ตรวจความถกตองของลำดบชน">ตรวจความถูกต้องของลำดับชั้น</a></li>
-  <li><a href="#ลำดบชนทไมสมดล" id="toc-ลำดบชนทไมสมดล" class="nav-link" data-scroll-target="#ลำดบชนทไมสมดล">ลำดับชั้นที่ไม่สมดุล</a></li>
   </ul></li>
   <li><a href="#sec-ch18-consistency" id="toc-sec-ch18-consistency" class="nav-link" data-scroll-target="#sec-ch18-consistency"><span class="header-section-number">18.2</span> ความสอดคล้องของการรวมข้อมูลข้ามระดับ</a>
   <ul class="collapse">
-  <li><a href="#ตวชวดสามประเภท" id="toc-ตวชวดสามประเภท" class="nav-link" data-scroll-target="#ตวชวดสามประเภท">ตัวชี้วัดสามประเภท</a></li>
+  <li><a href="#ตวชวดสามชนด" id="toc-ตวชวดสามชนด" class="nav-link" data-scroll-target="#ตวชวดสามชนด">ตัวชี้วัดสามชนิด</a></li>
   <li><a href="#คาเฉลยของคาเฉลย" id="toc-คาเฉลยของคาเฉลย" class="nav-link" data-scroll-target="#คาเฉลยของคาเฉลย">ค่าเฉลี่ยของค่าเฉลี่ย</a></li>
-  <li><a href="#หลายคำตอบท-ถก" id="toc-หลายคำตอบท-ถก" class="nav-link" data-scroll-target="#หลายคำตอบท-ถก">หลายคำตอบที่ “ถูก”</a></li>
-  <li><a href="#มธยฐานรวมไมได" id="toc-มธยฐานรวมไมได" class="nav-link" data-scroll-target="#มธยฐานรวมไมได">มัธยฐานรวมไม่ได้</a></li>
-  <li><a href="#สดสวนวนเกนมาตรฐาน" id="toc-สดสวนวนเกนมาตรฐาน" class="nav-link" data-scroll-target="#สดสวนวนเกนมาตรฐาน">สัดส่วนวันเกินมาตรฐาน</a></li>
+  <li><a href="#ออกแบบตารางสรปทสอดคลองทกระดบ" id="toc-ออกแบบตารางสรปทสอดคลองทกระดบ" class="nav-link" data-scroll-target="#ออกแบบตารางสรปทสอดคลองทกระดบ">ออกแบบตารางสรุปที่สอดคล้องทุกระดับ</a></li>
+  <li><a href="#ทดสอบความสอดคลอง" id="toc-ทดสอบความสอดคลอง" class="nav-link" data-scroll-target="#ทดสอบความสอดคลอง">ทดสอบความสอดคล้อง</a></li>
+  <li><a href="#grouping-sets-และ-rollup" id="toc-grouping-sets-และ-rollup" class="nav-link" data-scroll-target="#grouping-sets-และ-rollup">GROUPING SETS และ ROLLUP</a></li>
   </ul></li>
   <li><a href="#sec-ch18-treemap" id="toc-sec-ch18-treemap" class="nav-link" data-scroll-target="#sec-ch18-treemap"><span class="header-section-number">18.3</span> treemap และ sunburst: ★ อัลกอริทึมการจัดวาง</a>
   <ul class="collapse">
-  <li><a href="#treemap" id="toc-treemap" class="nav-link" data-scroll-target="#treemap">treemap</a></li>
-  <li><a href="#sunburst" id="toc-sunburst" class="nav-link" data-scroll-target="#sunburst">sunburst</a></li>
+  <li><a href="#การแสดงลำดบชนดวยการเตมพนท" id="toc-การแสดงลำดบชนดวยการเตมพนท" class="nav-link" data-scroll-target="#การแสดงลำดบชนดวยการเตมพนท">การแสดงลำดับชั้นด้วยการเติมพื้นที่</a></li>
+  <li><a href="#ขนาดตองรวมกนได-สคอตวชวด" id="toc-ขนาดตองรวมกนได-สคอตวชวด" class="nav-link" data-scroll-target="#ขนาดตองรวมกนได-สคอตวชวด">ขนาดต้องรวมกันได้ สีคือตัวชี้วัด</a></li>
+  <li><a href="#คลกเพอ-drill-down" id="toc-คลกเพอ-drill-down" class="nav-link" data-scroll-target="#คลกเพอ-drill-down">คลิกเพื่อ drill-down</a></li>
   <li><a href="#อลกอรทมการจดวาง" id="toc-อลกอรทมการจดวาง" class="nav-link" data-scroll-target="#อลกอรทมการจดวาง">อัลกอริทึมการจัดวาง ★</a></li>
   </ul></li>
   <li><a href="#sec-ch18-olap" id="toc-sec-ch18-olap" class="nav-link" data-scroll-target="#sec-ch18-olap"><span class="header-section-number">18.4</span> การดำเนินการแบบ OLAP: roll-up, drill-down, slice, dice</a>
   <ul class="collapse">
   <li><a href="#data-cube" id="toc-data-cube" class="nav-link" data-scroll-target="#data-cube">data cube</a></li>
-  <li><a href="#rollup-cube-และ-grouping-sets" id="toc-rollup-cube-และ-grouping-sets" class="nav-link" data-scroll-target="#rollup-cube-และ-grouping-sets">ROLLUP, CUBE และ GROUPING SETS</a></li>
-  <li><a href="#ออกแบบลำดบการ-drill-down" id="toc-ออกแบบลำดบการ-drill-down" class="nav-link" data-scroll-target="#ออกแบบลำดบการ-drill-down">ออกแบบลำดับการ drill-down</a></li>
+  <li><a href="#การดำเนนการหาแบบ" id="toc-การดำเนนการหาแบบ" class="nav-link" data-scroll-target="#การดำเนนการหาแบบ">การดำเนินการห้าแบบ</a></li>
+  <li><a href="#pivot" id="toc-pivot" class="nav-link" data-scroll-target="#pivot">pivot</a></li>
+  <li><a href="#ออกแบบการ-drill-down-หลายระดบ" id="toc-ออกแบบการ-drill-down-หลายระดบ" class="nav-link" data-scroll-target="#ออกแบบการ-drill-down-หลายระดบ">ออกแบบการ drill-down หลายระดับ</a></li>
+  <li><a href="#ตารางสรปสำหรบแดชบอรด" id="toc-ตารางสรปสำหรบแดชบอรด" class="nav-link" data-scroll-target="#ตารางสรปสำหรบแดชบอรด">ตารางสรุปสำหรับแดชบอร์ด</a></li>
   </ul></li>
-  <li><a href="#sec-ch18-case" id="toc-sec-ch18-case" class="nav-link" data-scroll-target="#sec-ch18-case">กรณีศึกษา: ตัวเลขในแดชบอร์ดไม่ตรงกันระหว่างระดับ</a></li>
+  <li><a href="#sec-ch18-case" id="toc-sec-ch18-case" class="nav-link" data-scroll-target="#sec-ch18-case">กรณีศึกษา: โครงข้อมูลลำดับชั้นสำหรับแดชบอร์ด drill-down</a>
+  <ul class="collapse">
+  <li><a href="#เปาหมาย" id="toc-เปาหมาย" class="nav-link" data-scroll-target="#เปาหมาย">เป้าหมาย</a></li>
+  <li><a href="#ขนตอน" id="toc-ขนตอน" class="nav-link" data-scroll-target="#ขนตอน">ขั้นตอน</a></li>
+  <li><a href="#การตความ" id="toc-การตความ" class="nav-link" data-scroll-target="#การตความ">การตีความ</a></li>
+  <li><a href="#ขอจำกด" id="toc-ขอจำกด" class="nav-link" data-scroll-target="#ขอจำกด">ข้อจำกัด</a></li>
+  </ul></li>
   <li><a href="#sec-ch18-pitfalls" id="toc-sec-ch18-pitfalls" class="nav-link" data-scroll-target="#sec-ch18-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
   <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
   <li><a href="#sec-ch18-exercises" id="toc-sec-ch18-exercises" class="nav-link" data-scroll-target="#sec-ch18-exercises">แบบฝึกหัด</a>
@@ -549,9 +511,9 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/18-hierarchical-data.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/18-hierarchical-data.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ข้อมูลลำดับชั้นและการ drill-down</span></h1>
 </div>
@@ -576,30 +538,105 @@ window.Quarto = {
 </header>
 
 
-<p>ข้อมูลของโครงการมีโครงสร้างลำดับชั้นโดยธรรมชาติ สถานีอยู่ในจังหวัด จังหวัดอยู่ในภาค และทุกภาครวมเป็นประเทศ เวลาก็มีลำดับชั้นเช่นกัน ชั่วโมงรวมเป็นวัน วันรวมเป็นเดือน เดือนรวมเป็นปี ผู้ใช้แดชบอร์ดในบทที่ 20 จะเริ่มจากภาพรวมระดับประเทศ แล้ว “เจาะลง” (drill-down) ไปยังภาค จังหวัด และสถานีที่สนใจ ตามหลัก overview first ของ Shneiderman ในบทที่ 12</p>
-<p>คำถามที่ดูเหมือนง่ายแต่มักทำผิดคือ ค่าของระดับบนคำนวณจากระดับล่างอย่างไร ค่าเฉลี่ยของภาคเท่ากับค่าเฉลี่ยของค่าเฉลี่ยจังหวัดหรือไม่ มัธยฐานของภาคหาได้จากมัธยฐานของจังหวัดหรือไม่ คำตอบคือ “ไม่” ในหลายกรณี และความผิดพลาดนี้ทำให้ตัวเลขในแดชบอร์ดขัดแย้งกันเองระหว่างระดับ บทนี้อธิบายหลักการรวมข้อมูลข้ามระดับให้สอดคล้องกัน กราฟสำหรับข้อมูลลำดับชั้น และการดำเนินการแบบ OLAP ซึ่งเป็นภาษากลางของการสำรวจข้อมูลหลายมิติ บทนี้สั้นกว่าบทอื่นตามที่กำหนดไว้ในโครงสร้างของเล่ม</p>
+<p>ข้อมูล PM2.5 มีโครงสร้างลำดับชั้นตามธรรมชาติ สถานีอยู่ในจังหวัด จังหวัดอยู่ในภาค และภาครวมกันเป็นประเทศ เวลาก็เป็นลำดับชั้นเช่นกัน ชั่วโมงรวมเป็นวัน วันรวมเป็นเดือน และเดือนรวมเป็นปี ผู้ใช้ข้อมูลแต่ละกลุ่มสนใจระดับต่างกัน ผู้กำหนดนโยบายระดับชาติดูภาพรวมรายภาค ผู้ว่าราชการจังหวัดดูจังหวัดของตน ส่วนประชาชนอยากรู้ว่าสถานีใกล้บ้านเป็นอย่างไร การ <strong>drill-down</strong> คือการพาผู้ใช้เดินจากภาพรวมลงไปหารายละเอียดตามลำดับชั้นนี้ ซึ่งเป็นโครงของแดชบอร์ดในบทที่ 20</p>
+<p>บทนี้สั้นกว่าบทอื่น แต่มีประเด็นที่ทำให้ตัวเลขผิดได้โดยไม่รู้ตัว คือ <strong>ค่าที่รวมขึ้นไปแต่ละระดับต้องสอดคล้องกัน</strong> ค่าเฉลี่ยของภาคที่คำนวณจากค่าเฉลี่ยของจังหวัดไม่เท่ากับค่าเฉลี่ยของภาคที่คำนวณจากสถานีทั้งหมด และมัธยฐานรวมขึ้นไปไม่ได้เลย ถ้าแดชบอร์ดแสดงตัวเลขที่ไม่สอดคล้องกันระหว่างระดับ ผู้ใช้จะเสียความเชื่อมั่นในทุกตัวเลข เนื้อหาเรียงจากโครงสร้างลำดับชั้น ความสอดคล้องของการรวม การแสดงด้วย treemap และ sunburst จนถึงการดำเนินการแบบ OLAP ที่เป็นภาษาของการ drill-down</p>
 <section id="วตถประสงคการเรยนร" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
 <p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
 <ol type="1">
-<li>อธิบายโครงสร้างลำดับชั้นของข้อมูลโครงการ และตรวจความถูกต้องของลำดับชั้น</li>
-<li>จำแนกตัวชี้วัดที่รวมข้ามระดับได้และไม่ได้ และคำนวณค่าของทุกระดับให้สอดคล้องกัน</li>
-<li>สร้าง treemap และ sunburst ที่ใช้ขนาดและสีอย่างถูกต้อง</li>
-<li>ใช้การดำเนินการแบบ OLAP ได้แก่ roll-up, drill-down, slice และ dice ด้วย SQL</li>
-<li>ออกแบบลำดับการ drill-down สำหรับแดชบอร์ด</li>
+<li>อธิบายโครงสร้างลำดับชั้นของข้อมูล PM2.5 ทั้งด้านพื้นที่และเวลา และตรวจความถูกต้องของลำดับชั้นด้วย SQL</li>
+<li>จำแนกตัวชี้วัดที่รวมขึ้นได้ รวมขึ้นได้บางส่วน และรวมขึ้นไม่ได้ และออกแบบตารางสรุปที่ให้ตัวเลขสอดคล้องทุกระดับ</li>
+<li>เลือกวิธีถ่วงน้ำหนักเมื่อรวมข้อมูลข้ามระดับให้ตรงกับคำถาม</li>
+<li>สร้าง treemap, sunburst และ icicle ที่ใช้ขนาดและสีอย่างถูกต้อง และอธิบายอัลกอริทึมการจัดวางของ treemap</li>
+<li>ใช้การดำเนินการ roll-up, drill-down, slice และ dice กับข้อมูล PM2.5 ด้วย SQL และออกแบบ drill-down หลายระดับ</li>
 </ol>
 </section>
 <section id="sec-ch18-hierarchy" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="sec-ch18-hierarchy"><span class="header-section-number">18.1</span> โครงสร้างลำดับชั้น: ภาค → จังหวัด → สถานี</h2>
-<section id="ลำดบชนของโครงการ" class="level3">
-<h3 class="anchored" data-anchor-id="ลำดบชนของโครงการ">ลำดับชั้นของโครงการ</h3>
-<p><strong><span class="idx">ลำดับชั้น</span></strong> (hierarchy) คือโครงสร้างที่แต่ละหน่วยในระดับล่างเป็นสมาชิกของหน่วยเดียวในระดับบน ข้อมูลของโครงการมีลำดับชั้นสองมิติหลัก</p>
-<div id="tbl-ch18-hierarchies" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="ศพทของลำดบชน" class="level3">
+<h3 class="anchored" data-anchor-id="ศพทของลำดบชน">ศัพท์ของลำดับชั้น</h3>
+<p><strong>ลำดับชั้น</strong> (<span class="idx">hierarchy</span>) คือโครงสร้างต้นไม้ที่แต่ละโหนดมีพ่อแม่ได้หนึ่งโหนด ยกเว้นราก (root) ซึ่งไม่มีพ่อแม่</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+
+<pre class="mermaid mermaid-js">flowchart TD
+  TH["ประเทศไทย (ราก)"] --&gt; N["ภาคเหนือ"]
+  TH --&gt; C["ภาคกลาง"]
+  TH --&gt; O["ภาคอื่น ๆ"]
+  N --&gt; CM["เชียงใหม่"]
+  N --&gt; CR["เชียงราย"]
+  CM --&gt; S1["สถานี A (ใบ)"]
+  CM --&gt; S2["สถานี B (ใบ)"]
+  CR --&gt; S3["สถานี C (ใบ)"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div id="tbl-ch18-terms" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-hierarchies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.1: ลำดับชั้นในข้อมูลโครงการ
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-terms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.1: ศัพท์ของโครงสร้างลำดับชั้น
 </figcaption>
-<div aria-describedby="tbl-ch18-hierarchies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch18-terms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ศัพท์</th>
+<th>ความหมาย</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ระดับ (level)</td>
+<td>ชั้นของต้นไม้</td>
+<td>ประเทศ ภาค จังหวัด สถานี</td>
+</tr>
+<tr class="even">
+<td>โหนด (node)</td>
+<td>สมาชิกหนึ่งตัวในระดับหนึ่ง</td>
+<td>ภาคเหนือ</td>
+</tr>
+<tr class="odd">
+<td>ใบ (leaf)</td>
+<td>โหนดที่ไม่มีลูก</td>
+<td>สถานี</td>
+</tr>
+<tr class="even">
+<td>เส้นทาง (path)</td>
+<td>ลำดับของโหนดจากรากถึงโหนดหนึ่ง</td>
+<td>ประเทศไทย → ภาคเหนือ → เชียงใหม่ → สถานี A</td>
+</tr>
+<tr class="odd">
+<td>ความลึก (depth)</td>
+<td>จำนวนระดับของเส้นทาง</td>
+<td>สถานีอยู่ที่ความลึก 3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="ลำดบชนของขอมล-pm2.5" class="level3">
+<h3 class="anchored" data-anchor-id="ลำดบชนของขอมล-pm2.5">ลำดับชั้นของข้อมูล PM2.5</h3>
+<p>ข้อมูลของเรามีลำดับชั้นอย่างน้อยสองมิติที่ตั้งฉากกัน</p>
+<div id="tbl-ch18-dimensions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-dimensions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.2: มิติที่มีลำดับชั้นในข้อมูล PM2.5
+</figcaption>
+<div aria-describedby="tbl-ch18-dimensions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -609,57 +646,127 @@ window.Quarto = {
 <thead>
 <tr class="header">
 <th>มิติ</th>
-<th>ระดับจากบนลงล่าง</th>
-<th>ที่มาของข้อมูล</th>
+<th>ระดับ</th>
+<th>คอลัมน์ที่ใช้</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>พื้นที่</td>
 <td>ประเทศ → ภาค → จังหวัด → สถานี</td>
-<td>ตาราง <code>stations</code> (คอลัมน์ <code>region</code>, <code>province</code>, <code>station_id</code>)</td>
+<td><code>stations.region</code>, <code>stations.province</code>, <code>station_id</code></td>
 </tr>
 <tr class="even">
 <td>เวลา</td>
 <td>ปี → เดือน → วัน → ชั่วโมง</td>
-<td>คอลัมน์ <code>ts</code> และ <code>date</code> (บทที่ 7)</td>
+<td><code>year(date)</code>, <code>month(date)</code>, <code>date</code>, <code>ts</code></td>
+</tr>
+<tr class="odd">
+<td>(ทางเลือก) ประเภทสถานี</td>
+<td>ทั้งหมด → ประเภท → สถานี</td>
+<td><code>stations.station_type</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>ลำดับชั้นเชิงพื้นที่ของโครงการกำหนดด้วยตาราง mapping จังหวัดกับภาคที่เขียนขึ้นเอง เพราะ Air4Thai ไม่ได้ส่งภาคมาให้ (บทที่ 6) การแบ่งภาคมีหลายระบบ เช่น ระบบสี่ภาค และระบบหกภาคทางภูมิศาสตร์ที่แยกภาคตะวันออกและภาคตะวันตกออกจากภาคกลาง โครงการต้องเลือกระบบเดียว บันทึกไว้ในพจนานุกรมข้อมูล และใช้ให้ตรงกันทุกที่</p>
+<p><strong>ลำดับชั้นของภาคเป็นการตัดสินใจของผู้วิเคราะห์</strong> Air4Thai ไม่ได้ส่งภาคมาให้ ภาคในตาราง <code>stations</code> มาจากไฟล์ <code>src/province_region.csv</code> ที่โครงการเขียนเองในบทที่ 6 การแบ่งภาคในประเทศไทยมีมากกว่าหนึ่งแบบ เช่น การแบ่งหกภาคตามภูมิศาสตร์ที่ใช้ในการศึกษา และการแบ่งสี่ภาคที่ใช้ในงานสถิติบางประเภท การเลือกแบบใดเปลี่ยนค่าระดับภาคทั้งหมด จึงต้องเขียนไว้ใน README ว่าใช้การแบ่งแบบใดและเพราะอะไร</p>
+</section>
+<section id="ลำดบชนทสมำเสมอและไมสมำเสมอ" class="level3">
+<h3 class="anchored" data-anchor-id="ลำดบชนทสมำเสมอและไมสมำเสมอ">ลำดับชั้นที่สม่ำเสมอและไม่สม่ำเสมอ</h3>
+<p>ลำดับชั้นที่ <strong>สม่ำเสมอ</strong> (balanced) มีใบทุกใบอยู่ที่ความลึกเดียวกัน ลำดับชั้นภาค → จังหวัด → สถานีของเราสม่ำเสมอ ถ้าทุกสถานีมีจังหวัดและทุกจังหวัดมีภาค ลำดับชั้นที่ <strong>ไม่สม่ำเสมอ</strong> (ragged) มีบางเส้นทางสั้นกว่า เช่น ถ้าเพิ่มระดับอำเภอ กรุงเทพมหานครแบ่งเป็นเขตแทนอำเภอ หรือสถานีที่ไม่มีข้อมูลอำเภอ เครื่องมือบางอย่าง เช่น treemap ของ Plotly ต้องการให้ทุกเส้นทางมีความยาวเท่ากัน จึงต้องเติมระดับที่ขาดด้วยค่าที่ชัดเจน เช่น “ไม่ระบุ” ก่อนส่งเข้า</p>
+</section>
+<section id="การเกบลำดบชนในตาราง" class="level3">
+<h3 class="anchored" data-anchor-id="การเกบลำดบชนในตาราง">การเก็บลำดับชั้นในตาราง</h3>
+<p>ลำดับชั้นเก็บได้สองแบบ</p>
+<div id="tbl-ch18-storage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-storage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.3: วิธีเก็บลำดับชั้นในตาราง
+</figcaption>
+<div aria-describedby="tbl-ch18-storage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>แบบ</th>
+<th>โครงสร้าง</th>
+<th>ข้อดี</th>
+<th>ข้อเสีย</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>แบบแบน (flattened)</td>
+<td>หนึ่งแถวต่อใบ มีคอลัมน์ของทุกระดับ</td>
+<td>query ง่าย ใช้กับ <code>GROUP BY</code> และ treemap ได้ตรง</td>
+<td>ข้อมูลระดับบนซ้ำในทุกแถว เปลี่ยนชื่อภาคต้องแก้หลายแถว</td>
+</tr>
+<tr class="even">
+<td>adjacency list</td>
+<td>หนึ่งแถวต่อโหนด มีคอลัมน์ <code>parent_id</code></td>
+<td>เก็บลำดับชั้นที่ลึกไม่เท่ากันได้ เพิ่มระดับได้ง่าย</td>
+<td>ต้องใช้ recursive CTE เพื่อเดินต้นไม้</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ตาราง <code>stations</code> ของเราเป็นแบบแบน ซึ่งเหมาะกับลำดับชั้นตื้นที่สม่ำเสมอ ถ้าต้องการแบบ adjacency list เพื่อใช้กับเครื่องมือบางอย่าง สร้างได้จากแบบแบนด้วย SQL และเดินกลับด้วย recursive CTE ซึ่งเป็นเนื้อหาเชิงลึกในบทที่ 7</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT 'TH' AS node_id, NULL AS parent_id, 'ประเทศไทย' AS label, 0 AS depth</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">    UNION ALL</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT DISTINCT 'R:' || region, 'TH', region, 1 FROM stations</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    UNION ALL</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT DISTINCT 'P:' || province, 'R:' || region, province, 2 FROM stations</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">    UNION ALL</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT 'S:' || station_id, 'P:' || province, name_th, 3 FROM stations</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>การเติมคำนำหน้า <code>R:</code>, <code>P:</code> และ <code>S:</code> ทำให้รหัสโหนดไม่ซ้ำข้ามระดับ ป้องกันกรณีที่ชื่อจังหวัดบังเอิญตรงกับชื่อภาคหรือรหัสสถานี</p>
 </section>
 <section id="ตรวจความถกตองของลำดบชน" class="level3">
 <h3 class="anchored" data-anchor-id="ตรวจความถกตองของลำดบชน">ตรวจความถูกต้องของลำดับชั้น</h3>
-<p>ลำดับชั้นที่ถูกต้องต้องมีคุณสมบัติว่า ทุกหน่วยในระดับล่างมีหน่วยแม่เพียงหน่วยเดียว ถ้าจังหวัดหนึ่งถูกบันทึกเป็นสองภาค (เช่น สะกดชื่อภาคต่างกัน หรือแก้ข้อมูลไม่ครบ) ค่าของจังหวัดนั้นจะถูกนับในสองภาค และผลรวมของภาคจะไม่เท่ากับผลรวมของประเทศ</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- จังหวัดที่มีมากกว่าหนึ่งภาค (ควรได้ผลว่าง)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> province, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> region) <span class="kw">AS</span> n_regions, <span class="kw">LIST</span>(<span class="kw">DISTINCT</span> region) <span class="kw">AS</span> regions</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> stations</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> province</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> region) <span class="op">&gt;</span> <span class="dv">1</span>;</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- สถานีที่ไม่มีภาคหรือจังหวัด (ควรได้ผลว่าง)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> station_id <span class="kw">FROM</span> stations <span class="kw">WHERE</span> region <span class="kw">IS</span> <span class="kw">NULL</span> <span class="kw">OR</span> province <span class="kw">IS</span> <span class="kw">NULL</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>การตรวจเหล่านี้ควรอยู่ใน <code>src/validate.py</code> ร่วมกับกฎอื่นของบทที่ 9 ไม่ใช่ทำครั้งเดียวใน notebook เพราะเมื่อมีสถานีใหม่ ปัญหาอาจเกิดขึ้นใหม่ได้</p>
-</section>
-<section id="ลำดบชนทไมสมดล" class="level3">
-<h3 class="anchored" data-anchor-id="ลำดบชนทไมสมดล">ลำดับชั้นที่ไม่สมดุล</h3>
-<p>ลำดับชั้นของโครงการ <em>ไม่สมดุล</em> (unbalanced) คือจำนวนหน่วยลูกต่างกันมาก กรุงเทพมหานครอาจมีหลายสิบสถานี ขณะที่หลายจังหวัดมีสถานีเดียวหรือไม่มีเลย ความไม่สมดุลนี้มีผลสำคัญสองข้อ ข้อแรก ค่าของจังหวัดที่มีสถานีเดียวคือค่าของสถานีนั้น ซึ่งอาจไม่แทนทั้งจังหวัด (บทที่ 17) ข้อสอง วิธีรวมข้อมูลขึ้นไประดับบนที่ต่างกันให้ผลต่างกันมาก ซึ่งเป็นหัวข้อถัดไป</p>
+<p>ลำดับชั้นที่ผิดทำให้ทุกตัวเลขของระดับบนผิด และทำให้ treemap error หรือแสดงผลแปลก การตรวจต่อไปนี้ควรอยู่ใน <code>src/validate.py</code> (บทที่ 9)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>checks <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"จังหวัดที่อยู่หลายภาค"</span>: <span class="st">"""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT province, count(DISTINCT region) AS n FROM stations</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">        GROUP BY province HAVING count(DISTINCT region) &gt; 1"""</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"สถานีที่ไม่มีจังหวัดหรือภาค"</span>: <span class="st">"""</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT station_id FROM stations WHERE province IS NULL OR region IS NULL"""</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"สถานีที่มีรหัสซ้ำ"</span>: <span class="st">"""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT station_id, count(*) FROM stations GROUP BY station_id HAVING count(*) &gt; 1"""</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"สถานีใน daily_pm25_clean ที่ไม่มีใน stations"</span>: <span class="st">"""</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT DISTINCT d.station_id FROM daily_pm25_clean AS d</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">        ANTI JOIN stations AS s USING (station_id)"""</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, sql <span class="kw">in</span> checks.items():</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(con.execute(sql).df())</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ทุกการตรวจควรได้ 0 การตรวจข้อสุดท้ายใช้ anti join (บทที่ 7) หาสถานีที่มีข้อมูลการวัดแต่ไม่มีในตารางสถานี ถ้าไม่ตรวจ การ join แบบ inner จะทำให้ข้อมูลของสถานีเหล่านั้นหายไปจากทุกระดับโดยไม่มีคำเตือน</p>
 </section>
 </section>
 <section id="sec-ch18-consistency" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="sec-ch18-consistency"><span class="header-section-number">18.2</span> ความสอดคล้องของการรวมข้อมูลข้ามระดับ</h2>
-<section id="ตวชวดสามประเภท" class="level3">
-<h3 class="anchored" data-anchor-id="ตวชวดสามประเภท">ตัวชี้วัดสามประเภท</h3>
-<p>ตัวชี้วัดแบ่งตามคุณสมบัติการรวมข้ามระดับเป็นสามประเภท <span class="citation" data-cites="gray1997data">(<a href="../references.html#ref-gray1997data" role="doc-biblioref">Gray และคณะ 1997</a>)</span></p>
-<div id="tbl-ch18-measures" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="ตวชวดสามชนด" class="level3">
+<h3 class="anchored" data-anchor-id="ตวชวดสามชนด">ตัวชี้วัดสามชนิด</h3>
+<p>ความสอดคล้องของตัวเลขข้ามระดับขึ้นกับชนิดของตัวชี้วัด แนวคิดนี้มาจากงานด้านคลังข้อมูล <span class="citation" data-cites="kimball2013data">(<a href="../references.html#ref-kimball2013data" role="doc-biblioref">Kimball และ Ross 2013</a>)</span> และงานของ Gray และคณะ ที่เสนอ data cube <span class="citation" data-cites="gray1997data">(<a href="../references.html#ref-gray1997data" role="doc-biblioref">Gray และคณะ 1997</a>)</span></p>
+<div id="tbl-ch18-measure-types" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-measures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.2: ประเภทของตัวชี้วัดตามคุณสมบัติการรวมข้ามระดับ
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-measure-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.4: ชนิดของตัวชี้วัดตามความสามารถในการรวม
 </figcaption>
-<div aria-describedby="tbl-ch18-measures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch18-measure-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -669,213 +776,225 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th>ประเภท</th>
-<th>ความหมาย</th>
+<th>ชนิด</th>
+<th>นิยาม</th>
 <th>ตัวอย่าง</th>
-<th>ค่าระดับบนหาจากระดับล่างได้อย่างไร</th>
+<th>วิธีรวมขึ้นระดับบน</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>distributive (บวกได้)</td>
-<td>ค่าระดับบนคำนวณจากค่าระดับล่างด้วยฟังก์ชันเดียวกัน</td>
-<td>จำนวนวัน จำนวนวันเกินมาตรฐาน ค่าสูงสุด ค่าต่ำสุด</td>
-<td>รวม (SUM) หรือหาค่าสูงสุดของค่าระดับล่าง</td>
+<td>รวมขึ้นได้ (additive)</td>
+<td>ค่าของระดับบนเท่ากับผลรวมของระดับล่าง</td>
+<td>จำนวนสถานี-วัน จำนวนวันเกินมาตรฐาน ผลรวมของค่า PM2.5</td>
+<td>บวกกัน</td>
 </tr>
 <tr class="even">
-<td>algebraic (รวมได้ถ้าเก็บองค์ประกอบ)</td>
-<td>คำนวณได้จากตัวชี้วัด distributive จำนวนจำกัด</td>
-<td>ค่าเฉลี่ย (= ผลรวม / จำนวน) สัดส่วน ส่วนเบี่ยงเบนมาตรฐาน</td>
-<td>เก็บผลรวมและจำนวนของระดับล่าง แล้วคำนวณใหม่</td>
+<td>รวมขึ้นได้บางส่วน (semi-additive)</td>
+<td>บวกได้ในบางมิติแต่ไม่ได้ในมิติอื่น</td>
+<td>จำนวนสถานีที่มีข้อมูล (บวกข้ามพื้นที่ได้ แต่บวกข้ามวันไม่ได้)</td>
+<td>บวกเฉพาะมิติที่ได้</td>
 </tr>
 <tr class="odd">
-<td>holistic (รวมไม่ได้)</td>
-<td>ต้องใช้ข้อมูลระดับล่างสุดทั้งหมด</td>
-<td>มัธยฐาน เปอร์เซ็นไทล์ จำนวนค่าที่ไม่ซ้ำ</td>
-<td>คำนวณใหม่จากข้อมูลระดับล่างสุดเท่านั้น</td>
+<td>รวมขึ้นไม่ได้ (non-additive)</td>
+<td>ต้องคำนวณใหม่จากข้อมูลระดับล่างสุด</td>
+<td>ค่าเฉลี่ย มัธยฐาน เปอร์เซ็นไทล์ สัดส่วน</td>
+<td>เก็บตัวตั้งกับตัวหาร หรือคำนวณจากใบ</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+<p>ค่าเฉลี่ยและสัดส่วนรวมขึ้นไปตรง ๆ ไม่ได้ แต่ <strong>ทำให้รวมได้</strong> ถ้าเก็บตัวตั้งและตัวหารไว้แยกกัน ค่าเฉลี่ยคือผลรวมหารด้วยจำนวน ทั้งสองส่วนรวมขึ้นได้ ค่าเฉลี่ยของระดับบนจึงคำนวณได้ถูกต้องเสมอจากผลรวมของผลรวมหารด้วยผลรวมของจำนวน ส่วนมัธยฐานและเปอร์เซ็นไทล์ไม่มีตัวตั้งตัวหารให้เก็บ ต้องคำนวณใหม่จากข้อมูลระดับล่างสุดทุกครั้ง หรือใช้โครงสร้างข้อมูลแบบประมาณ เช่น t-digest <span class="citation" data-cites="dunning2019computing">(<a href="../references.html#ref-dunning2019computing" role="doc-biblioref">Dunning และ Ertl 2019</a>)</span> ซึ่ง DuckDB ใช้ใน <code>approx_quantile</code></p>
 </section>
 <section id="คาเฉลยของคาเฉลย" class="level3">
 <h3 class="anchored" data-anchor-id="คาเฉลยของคาเฉลย">ค่าเฉลี่ยของค่าเฉลี่ย</h3>
-<p>ข้อผิดพลาดที่พบบ่อยที่สุดคือการคำนวณค่าเฉลี่ยระดับบนจากค่าเฉลี่ยของระดับล่างโดยไม่ถ่วงน้ำหนัก ค่าเฉลี่ยเป็นตัวชี้วัด algebraic การรวมที่ถูกต้องต้องใช้ผลรวมและจำนวนของระดับล่าง</p>
-<p><span id="eq-ch18-weighted-mean"><span class="math display">\[
-\bar{x}_{\text{ภาค}} = \frac{\sum_{p} \sum_{i \in p} x_i}{\sum_{p} n_p} = \frac{\sum_{p} n_p \bar{x}_p}{\sum_{p} n_p} \neq \frac{1}{P}\sum_{p} \bar{x}_p
-\tag{18.1}\]</span></span></p>
-<p>โดยที่ <span class="math inline">\(p\)</span> คือจังหวัดในภาค <span class="math inline">\(n_p\)</span> คือจำนวนสถานี-วันของจังหวัด <span class="math inline">\(p\)</span> <span class="math inline">\(\bar{x}_p\)</span> คือค่าเฉลี่ยของจังหวัด และ <span class="math inline">\(P\)</span> คือจำนวนจังหวัด ค่าเฉลี่ยของค่าเฉลี่ย (ด้านขวาสุด) ให้น้ำหนักทุกจังหวัดเท่ากัน ไม่ว่าจะมีข้อมูลมากหรือน้อย ตัวอย่างตัวเลขสมมุติ ภาคหนึ่งมีสองจังหวัด จังหวัด ก มีข้อมูล 900 สถานี-วัน ค่าเฉลี่ย 30 µg/m³ จังหวัด ข มี 100 สถานี-วัน ค่าเฉลี่ย 50 µg/m³ ค่าเฉลี่ยรวมที่ถูกต้องคือ <span class="math inline">\((900 \times 30 + 100 \times 50)/1000 = 32\)</span> µg/m³ แต่ค่าเฉลี่ยของค่าเฉลี่ยคือ <span class="math inline">\((30 + 50)/2 = 40\)</span> µg/m³</p>
-</section>
-<section id="หลายคำตอบท-ถก" class="level3">
-<h3 class="anchored" data-anchor-id="หลายคำตอบท-ถก">หลายคำตอบที่ “ถูก”</h3>
-<p>อย่างไรก็ตาม ค่าเฉลี่ยของค่าเฉลี่ยไม่ได้ผิดเสมอ มันตอบคำถามที่ต่างออกไป ตารางต่อไปนี้เปรียบเทียบวิธีรวมสามแบบของข้อมูลสังเคราะห์</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> base <span class="kw">AS</span> (</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> s.region, s.province, d.station_id, d.pm25_mean</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> d.is_complete <span class="kw">AND</span> d.<span class="dt">date</span> <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">'2024-01-01'</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>per_station <span class="kw">AS</span> (<span class="kw">SELECT</span> region, station_id, <span class="fu">AVG</span>(pm25_mean) <span class="kw">AS</span> m <span class="kw">FROM</span> base <span class="kw">GROUP</span> <span class="kw">BY</span> region, station_id),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>per_province <span class="kw">AS</span> (<span class="kw">SELECT</span> region, province, <span class="fu">AVG</span>(pm25_mean) <span class="kw">AS</span> m, <span class="fu">MEDIAN</span>(pm25_mean) <span class="kw">AS</span> med</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                 <span class="kw">FROM</span> base <span class="kw">GROUP</span> <span class="kw">BY</span> region, province)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> b.region,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(b.pm25_mean), <span class="dv">2</span>) <span class="kw">AS</span> pooled,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(ANY_VALUE(st.mean_of_stations), <span class="dv">2</span>) <span class="kw">AS</span> mean_of_stations,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(ANY_VALUE(pr.mean_of_provinces), <span class="dv">2</span>) <span class="kw">AS</span> mean_of_provinces,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">MEDIAN</span>(b.pm25_mean), <span class="dv">2</span>) <span class="kw">AS</span> median_pooled,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(ANY_VALUE(pr.median_of_provinces), <span class="dv">2</span>) <span class="kw">AS</span> median_of_province_medians</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> base <span class="kw">AS</span> b</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> (<span class="kw">SELECT</span> region, <span class="fu">AVG</span>(m) <span class="kw">AS</span> mean_of_stations <span class="kw">FROM</span> per_station <span class="kw">GROUP</span> <span class="kw">BY</span> region) <span class="kw">AS</span> st <span class="kw">USING</span> (region)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> (<span class="kw">SELECT</span> region, <span class="fu">AVG</span>(m) <span class="kw">AS</span> mean_of_provinces, <span class="fu">MEDIAN</span>(med) <span class="kw">AS</span> median_of_provinces</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> per_province <span class="kw">GROUP</span> <span class="kw">BY</span> region) <span class="kw">AS</span> pr <span class="kw">USING</span> (region)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> b.region</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> b.region;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
-# ข้อมูลสังเคราะห์ 50 สถานี ไม่ใช่ข้อมูล Air4Thai จริง
-               region  pooled  mean_of_stations  mean_of_provinces  median_pooled  median_of_province_medians
-0                กลาง   25.53             25.49              25.63           23.2                       24.05
-1  ตะวันออกเฉียงเหนือ   25.43             25.46              25.44           22.9                       21.80
-2               เหนือ   28.11             28.14              27.71           23.7                       23.50
-3                 ใต้   13.33             13.33              13.32           12.6                       12.30</code></pre>
-<div id="tbl-ch18-aggregation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>ตัวอย่าง (ข้อมูลสมมุติ) ภาคหนึ่งมีสองจังหวัด จังหวัด ก มีสองสถานี ค่าเฉลี่ย 40 และ 60 µg/m³ จากข้อมูล 300 และ 100 วัน จังหวัด ข มีสถานีเดียว ค่าเฉลี่ย 20 µg/m³ จากข้อมูล 365 วัน</p>
+<div id="tbl-ch18-average-of-averages" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-aggregation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.3: วิธีรวมค่าเฉลี่ยข้ามระดับและคำถามที่แต่ละวิธีตอบ
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-average-of-averages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.5: ค่าระดับภาคจากวิธีรวมต่างกัน (ข้อมูลสมมุติ, µg/m³)
 </figcaption>
-<div aria-describedby="tbl-ch18-aggregation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch18-average-of-averages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>วิธีรวม</th>
-<th>ตอบคำถาม</th>
-<th>น้ำหนัก</th>
+<th>การคำนวณ</th>
+<th>ค่าระดับภาค</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>pooled (จากสถานี-วันทั้งหมด)</td>
-<td>สถานี-วันทั่วไปในภาคมีค่าเท่าใด</td>
-<td>สถานีที่มีข้อมูลมากและจังหวัดที่มีสถานีมากมีน้ำหนักมาก</td>
+<td>เฉลี่ยทุกสถานีเท่ากัน</td>
+<td>(40 + 60 + 20) / 3</td>
+<td>40.0</td>
 </tr>
 <tr class="even">
-<td>ค่าเฉลี่ยของสถานี</td>
-<td>สถานีทั่วไปในภาคมีค่าเท่าใด</td>
-<td>ทุกสถานีเท่ากัน</td>
+<td>เฉลี่ยจังหวัดก่อน แล้วเฉลี่ยจังหวัดเท่ากัน</td>
+<td>((40 + 60)/2 + 20) / 2</td>
+<td>35.0</td>
 </tr>
 <tr class="odd">
-<td>ค่าเฉลี่ยของจังหวัด</td>
-<td>จังหวัดทั่วไปในภาคมีค่าเท่าใด</td>
-<td>ทุกจังหวัดเท่ากัน</td>
+<td>ถ่วงน้ำหนักด้วยจำนวนสถานี-วัน</td>
+<td>(40·300 + 60·100 + 20·365) / 765</td>
+<td>33.1</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>ในข้อมูลสังเคราะห์ ภาคเหนือมีค่าเฉลี่ยแบบ pooled 28.11 แต่ค่าเฉลี่ยของจังหวัด 27.71 µg/m³ ความต่างเล็กน้อยในตัวอย่างนี้ แต่ในข้อมูลจริงที่ไม่สมดุลมาก เช่น จังหวัดหนึ่งมีหลายสิบสถานีและจังหวัดอื่นมีสถานีเดียว ความต่างอาจใหญ่จนลำดับของภาคเปลี่ยน หลักการคือ <strong>เลือกวิธีรวมจากคำถาม เขียนไว้ใน <code>questions.md</code> และใช้วิธีเดียวกันทุกระดับและทุกกราฟ</strong> การรวมแบบใดก็ได้ที่ไม่สม่ำเสมอระหว่างกราฟจะทำให้ตัวเลขในแดชบอร์ดขัดกัน ซึ่งทำลายความน่าเชื่อถือ</p>
+<p>สามวิธีให้สามคำตอบ และ <strong>ไม่มีวิธีใดผิด</strong> แต่ละวิธีตอบคำถามต่างกัน วิธีแรกตอบว่า “สถานีทั่วไปในภาคนี้วัดได้เท่าใด” วิธีที่สองตอบว่า “จังหวัดทั่วไปในภาคนี้เป็นอย่างไร” วิธีที่สามตอบว่า “การวัดทั้งหมดในภาคนี้เฉลี่ยได้เท่าใด” ซึ่งให้น้ำหนักแก่สถานีที่มีข้อมูลมาก สิ่งที่ผิดคือ <strong>การใช้หลายวิธีปนกันในแดชบอร์ดเดียว</strong> หรือไม่บอกผู้อ่านว่าใช้วิธีใด</p>
+<p>ยังมีวิธีที่สี่ที่ใกล้กับผลกระทบต่อคนที่สุด คือ <strong>การถ่วงน้ำหนักด้วยประชากร</strong> (population-weighted) ซึ่งให้น้ำหนักแก่พื้นที่ที่มีคนอาศัยมาก วิธีนี้ใช้ในการประเมินการได้รับสัมผัสของประชากร <span class="citation" data-cites="who2021global">(<a href="../references.html#ref-who2021global" role="doc-biblioref">World Health Organization 2021</a>)</span> แต่ต้องมีข้อมูลประชากรในพื้นที่ที่แต่ละสถานีเป็นตัวแทน (บทที่ 17) ซึ่งเกินขอบเขตของโครงการพื้นฐาน</p>
 </section>
-<section id="มธยฐานรวมไมได" class="level3">
-<h3 class="anchored" data-anchor-id="มธยฐานรวมไมได">มัธยฐานรวมไม่ได้</h3>
-<p>มัธยฐานเป็นตัวชี้วัด holistic มัธยฐานของมัธยฐานจังหวัดไม่เท่ากับมัธยฐานของภาค และไม่มีวิธีคำนวณที่ถูกต้องจากมัธยฐานของระดับล่าง ในตัวอย่าง ภาคกลางมีมัธยฐานแบบ pooled 23.2 แต่มัธยฐานของมัธยฐานจังหวัด 24.05 µg/m³ ทิศทางของความคลาดเคลื่อนก็ไม่แน่นอน ภาคตะวันออกเฉียงเหนือคลาดไปทางต่ำ (21.80 เทียบกับ 22.9) ส่วนภาคกลางคลาดไปทางสูง การคำนวณมัธยฐานหรือเปอร์เซ็นไทล์ของทุกระดับต้องกลับไปใช้ข้อมูลระดับล่างสุดเสมอ ซึ่งเป็นเหตุผลหนึ่งที่ฐานข้อมูลเชิงวิเคราะห์อย่าง DuckDB มีประโยชน์ คำนวณจากข้อมูลรายวันได้เร็วพอที่ไม่ต้องเก็บค่าสรุปไว้ล่วงหน้า</p>
+<section id="ออกแบบตารางสรปทสอดคลองทกระดบ" class="level3">
+<h3 class="anchored" data-anchor-id="ออกแบบตารางสรปทสอดคลองทกระดบ">ออกแบบตารางสรุปที่สอดคล้องทุกระดับ</h3>
+<p>หลักการคือ <strong>เก็บเฉพาะตัวชี้วัดที่รวมขึ้นได้ในตารางสรุป แล้วคำนวณค่าเฉลี่ยและสัดส่วนตอนแสดงผล</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.region, s.province, d.station_id,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">           date_trunc('month', d.date)                 AS month,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">           count(*)                                    AS station_days,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">           sum(d.pm25_mean)                            AS sum_pm25,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">           count(*) FILTER (WHERE d.pm25_mean &gt; 37.5)  AS exceed_days,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">           max(d.pm25_max)                             AS peak_hourly</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ALL</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ตารางนี้อยู่ที่ระดับล่างสุดของทั้งสองมิติที่แดชบอร์ดต้องการ (สถานี × เดือน) คอลัมน์ <code>station_days</code>, <code>sum_pm25</code> และ <code>exceed_days</code> รวมขึ้นได้ ส่วน <code>peak_hourly</code> รวมขึ้นได้ด้วยฟังก์ชัน <code>max</code> ซึ่งเป็นตัวชี้วัดอีกกลุ่มที่รวมได้ด้วยการดำเนินการที่ไม่ใช่การบวก ค่าเฉลี่ยและสัดส่วนของระดับใดก็ตามคำนวณได้จากการรวมคอลัมน์เหล่านี้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roll_up(df, by):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    g <span class="op">=</span> df.groupby(by, as_index<span class="op">=</span><span class="va">False</span>).agg(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        station_days<span class="op">=</span>(<span class="st">"station_days"</span>, <span class="st">"sum"</span>), sum_pm25<span class="op">=</span>(<span class="st">"sum_pm25"</span>, <span class="st">"sum"</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        exceed_days<span class="op">=</span>(<span class="st">"exceed_days"</span>, <span class="st">"sum"</span>), peak_hourly<span class="op">=</span>(<span class="st">"peak_hourly"</span>, <span class="st">"max"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        n_stations<span class="op">=</span>(<span class="st">"station_id"</span>, <span class="st">"nunique"</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    g[<span class="st">"pm25_mean"</span>] <span class="op">=</span> g[<span class="st">"sum_pm25"</span>] <span class="op">/</span> g[<span class="st">"station_days"</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    g[<span class="st">"share_over_std"</span>] <span class="op">=</span> g[<span class="st">"exceed_days"</span>] <span class="op">/</span> g[<span class="st">"station_days"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> g</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>by_region <span class="op">=</span> roll_up(summary, [<span class="st">"region"</span>])</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>by_province <span class="op">=</span> roll_up(summary, [<span class="st">"region"</span>, <span class="st">"province"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ค่าเฉลี่ยที่ได้เป็นแบบถ่วงน้ำหนักด้วยสถานี-วัน (วิธีที่สามใน <a href="#tbl-ch18-average-of-averages" class="quarto-xref">ตารางที่&nbsp;<span>18.5</span></a>) อย่างสม่ำเสมอทุกระดับ <code>n_stations</code> ใช้ <code>nunique</code> ไม่ใช่ <code>sum</code> เพราะจำนวนสถานีเป็นตัวชี้วัดที่รวมขึ้นได้บางส่วน บวกข้ามเดือนไม่ได้ สถานีเดียวที่มีข้อมูลสิบสองเดือนต้องนับเป็นหนึ่งสถานี</p>
 </section>
-<section id="สดสวนวนเกนมาตรฐาน" class="level3">
-<h3 class="anchored" data-anchor-id="สดสวนวนเกนมาตรฐาน">สัดส่วนวันเกินมาตรฐาน</h3>
-<p>สัดส่วนวันเกินมาตรฐานเป็นตัวชี้วัด algebraic ที่รวมได้ถูกต้องง่ายที่สุด ถ้าเก็บ <em>จำนวนวันเกินมาตรฐาน</em> และ <em>จำนวนวันทั้งหมด</em> (ซึ่งเป็น distributive ทั้งคู่) ไว้ในทุกระดับ แล้วคำนวณสัดส่วนเป็นขั้นสุดท้าย</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, s.province,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> d.pm25_mean <span class="op">&gt;</span> <span class="fl">37.5</span>) <span class="kw">AS</span> n_over,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_days,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> d.pm25_mean <span class="op">&gt;</span> <span class="fl">37.5</span>) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>), <span class="dv">3</span>) <span class="kw">AS</span> share_over</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> d.is_complete <span class="kw">AND</span> d.<span class="dt">date</span> <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">'2024-01-01'</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ROLLUP</span> (s.region, s.province)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> s.region <span class="kw">NULLS</span> <span class="fu">FIRST</span>, s.province <span class="kw">NULLS</span> <span class="fu">FIRST</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>ROLLUP</code> คำนวณผลรวมย่อยของทุกระดับในคำสั่งเดียว (หัวข้อ <a href="#sec-ch18-olap" class="quarto-xref"><span>18.4</span></a>) และเพราะสัดส่วนของทุกระดับคำนวณจากจำนวนนับของสถานี-วันโดยตรง ตัวเลขทุกระดับจึงสอดคล้องกันโดยอัตโนมัติ</p>
+<section id="ทดสอบความสอดคลอง" class="level3">
+<h3 class="anchored" data-anchor-id="ทดสอบความสอดคลอง">ทดสอบความสอดคล้อง</h3>
+<p>ความสอดคล้องควรเป็นการทดสอบอัตโนมัติ ไม่ใช่สิ่งที่ตรวจด้วยตาครั้งเดียว</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>direct <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.region, avg(d.pm25_mean) AS pm25_mean,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">           avg(CAST(d.pm25_mean &gt; 37.5 AS DOUBLE)) AS share_over_std</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete GROUP BY s.region</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df().set_index(<span class="st">"region"</span>).sort_index()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>rolled <span class="op">=</span> by_region.set_index(<span class="st">"region"</span>).sort_index()[[<span class="st">"pm25_mean"</span>, <span class="st">"share_over_std"</span>]]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>pd.testing.assert_frame_equal(direct, rolled, check_exact<span class="op">=</span><span class="va">False</span>, rtol<span class="op">=</span><span class="fl">1e-9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>การทดสอบนี้ยืนยันว่าค่าระดับภาคที่ได้จากการรวมตารางสรุป เท่ากับค่าที่คำนวณตรงจากข้อมูลรายวัน (ซึ่งถ่วงน้ำหนักด้วยสถานี-วันโดยธรรมชาติ) ถ้าวันหนึ่งมีคนแก้ตารางสรุปหรือแก้ query ของแดชบอร์ดผิด การทดสอบนี้จะจับได้ทันที</p>
+</section>
+<section id="grouping-sets-และ-rollup" class="level3">
+<h3 class="anchored" data-anchor-id="grouping-sets-และ-rollup">GROUPING SETS และ ROLLUP</h3>
+<p>SQL มีไวยากรณ์ที่คำนวณหลายระดับพร้อมกันใน query เดียว คือ <code>GROUPING SETS</code>, <code>ROLLUP</code> และ <code>CUBE</code> (บทที่ 7) <code>ROLLUP (region, province)</code> คำนวณสามระดับพร้อมกัน คือ ภาค × จังหวัด ภาค และรวมทั้งประเทศ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>levels <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT s.region, s.province,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">           grouping(s.region, s.province)               AS level_id,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">           count(*)                                    AS station_days,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">           avg(d.pm25_mean)                            AS pm25_mean,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">           avg(CAST(d.pm25_mean &gt; 37.5 AS DOUBLE))     AS share_over_std</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ROLLUP (s.region, s.province)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY level_id DESC, s.region, s.province</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>grouping()</code> คืนค่าบิตที่บอกว่าคอลัมน์ใดถูกรวมไปแล้วในแถวนั้น ค่า 0 คือระดับจังหวัด 1 คือระดับภาค (จังหวัดถูกรวม) และ 3 คือระดับประเทศ (ทั้งสองคอลัมน์ถูกรวม) ใช้แยกแถวรวมออกจากแถวที่มีค่า NULL จริงในข้อมูล ค่าเฉลี่ยใน query นี้คำนวณจากข้อมูลรายวันโดยตรงทุกระดับ จึงสอดคล้องกันเอง</p>
 </section>
 </section>
 <section id="sec-ch18-treemap" class="level2" data-number="18.3">
 <h2 data-number="18.3" class="anchored" data-anchor-id="sec-ch18-treemap"><span class="header-section-number">18.3</span> treemap และ sunburst: ★ อัลกอริทึมการจัดวาง</h2>
-<section id="treemap" class="level3">
-<h3 class="anchored" data-anchor-id="treemap">treemap</h3>
-<p><strong><span class="idx">treemap</span></strong> แสดงข้อมูลลำดับชั้นด้วยสี่เหลี่ยมซ้อนกัน แต่ละหน่วยเป็นสี่เหลี่ยมที่มีพื้นที่เป็นสัดส่วนกับค่าหนึ่ง และหน่วยลูกถูกวางภายในสี่เหลี่ยมของหน่วยแม่ <span class="citation" data-cites="shneiderman1992tree">(<a href="../references.html#ref-shneiderman1992tree" role="doc-biblioref">Shneiderman 1992</a>)</span> treemap ใช้การเข้ารหัสสองช่องทาง คือ <strong>ขนาด</strong> และ <strong>สี</strong> ซึ่งต้องเลือกให้ถูก</p>
-<ul>
-<li><strong>ขนาดต้องเป็นค่าที่บวกกันได้</strong> (distributive) เช่น จำนวนสถานี-วัน หรือจำนวนประชากร เพราะพื้นที่ของหน่วยแม่คือผลรวมของพื้นที่หน่วยลูก ถ้าใช้ค่าเฉลี่ย PM2.5 เป็นขนาด พื้นที่ของภาคจะเป็นผลรวมของค่าเฉลี่ยจังหวัด ซึ่งไม่มีความหมาย</li>
-<li><strong>สีใช้กับค่าที่ต้องการเปรียบเทียบ</strong> เช่น สัดส่วนวันเกินมาตรฐาน</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> con.execute(<span class="st">"""</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT COALESCE(s.region, 'ไม่ระบุ') AS region, COALESCE(s.province, 'ไม่ระบุ') AS province,</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">           s.name_th, COUNT(*) AS n_days,</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">           COUNT(*) FILTER (WHERE d.pm25_mean &gt; 37.5) AS n_over</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE d.is_complete AND d.date &lt; DATE '2024-01-01'</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY ALL</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>h[<span class="st">"share_over"</span>] <span class="op">=</span> h[<span class="st">"n_over"</span>] <span class="op">/</span> h[<span class="st">"n_days"</span>]</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> [px.Constant(<span class="st">"ประเทศไทย"</span>), <span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"name_th"</span>]</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.treemap(h, path<span class="op">=</span>path, values<span class="op">=</span><span class="st">"n_days"</span>, color<span class="op">=</span><span class="st">"share_over"</span>,</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                 color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>, labels<span class="op">=</span>{<span class="st">"share_over"</span>: <span class="st">"สัดส่วนวันเกินมาตรฐาน"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>COALESCE</code> แทนค่าว่างด้วย “ไม่ระบุ” เพราะ Plotly ไม่ยอมให้หน่วยที่เป็นค่าว่างมีหน่วยลูก และ <code>px.Constant</code> สร้างรากของต้นไม้ ข้อดีของการระบุ <code>values</code> คือ Plotly คำนวณสีของหน่วยแม่เป็น <strong>ค่าเฉลี่ยถ่วงน้ำหนักด้วย <code>values</code></strong> ของหน่วยลูก เมื่อสีคือสัดส่วนและน้ำหนักคือจำนวนวัน ค่าเฉลี่ยถ่วงน้ำหนักจึงเท่ากับสัดส่วนแบบ pooled พอดี เมื่อตรวจกับข้อมูลสังเคราะห์ สีของรากเท่ากับ 0.1192 ซึ่งตรงกับ 8,061 วันเกินมาตรฐานจาก 67,631 สถานี-วันที่คำนวณด้วย SQL แต่ถ้าสีเป็นตัวชี้วัด holistic เช่น มัธยฐาน สีของหน่วยแม่จะเป็นค่าเฉลี่ยถ่วงน้ำหนักของมัธยฐาน ซึ่งไม่ใช่มัธยฐานของหน่วยแม่ ต้องระบุในคำบรรยายหรือคำนวณสีของทุกระดับเอง</p>
-</section>
-<section id="sunburst" class="level3">
-<h3 class="anchored" data-anchor-id="sunburst">sunburst</h3>
-<p><strong><span class="idx">sunburst</span></strong> แสดงลำดับชั้นเดียวกันด้วยวงแหวนซ้อนกัน รากอยู่ตรงกลาง ระดับที่ลึกขึ้นอยู่วงนอก ขนาดของแต่ละส่วนแทนด้วยมุม ใช้ <code>px.sunburst</code> ด้วยพารามิเตอร์เดียวกับ treemap ข้อดีคือเห็นโครงสร้างของลำดับชั้นชัดกว่า ข้อเสียคือเปรียบเทียบขนาดด้วยมุมยากกว่าพื้นที่ของสี่เหลี่ยม (บทที่ 11) และวงนอกมีพื้นที่มากกว่าวงในโดยธรรมชาติ ซึ่งทำให้หน่วยระดับล่างดูสำคัญเกินจริง</p>
+<section id="การแสดงลำดบชนดวยการเตมพนท" class="level3">
+<h3 class="anchored" data-anchor-id="การแสดงลำดบชนดวยการเตมพนท">การแสดงลำดับชั้นด้วยการเติมพื้นที่</h3>
+<p><strong><span class="idx">treemap</span></strong> <span class="citation" data-cites="shneiderman1992tree">(<a href="../references.html#ref-shneiderman1992tree" role="doc-biblioref">Shneiderman 1992</a>)</span> แสดงลำดับชั้นด้วยสี่เหลี่ยมซ้อนกัน แต่ละโหนดเป็นสี่เหลี่ยมที่มีพื้นที่แปรตามค่าของมัน และสี่เหลี่ยมของลูกอยู่ภายในสี่เหลี่ยมของพ่อแม่ <strong><span class="idx">sunburst</span></strong> แสดงลำดับชั้นเดียวกันด้วยวงแหวนซ้อนกันจากศูนย์กลาง วงในคือระดับบน และมุมของแต่ละส่วนแปรตามค่า <strong>icicle</strong> คือ sunburst ที่คลี่ออกเป็นแนวตรง แต่ละระดับเป็นแถบหนึ่งแถบ</p>
 <div id="tbl-ch18-hierarchy-charts" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-hierarchy-charts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.4: เปรียบเทียบกราฟสำหรับข้อมูลลำดับชั้น
+ตารางที่&nbsp;18.6: เปรียบเทียบ treemap, sunburst และ icicle
 </figcaption>
 <div aria-describedby="tbl-ch18-hierarchy-charts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>ด้าน</th>
+<th></th>
 <th>treemap</th>
 <th>sunburst</th>
-<th>bar chart แยกระดับ</th>
+<th>icicle</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>เปรียบเทียบขนาดอย่างแม่นยำ</td>
-<td>ปานกลาง (พื้นที่)</td>
-<td>ต่ำ (มุม)</td>
-<td>สูง (ความยาว)</td>
+<td>การเข้ารหัสขนาด</td>
+<td>พื้นที่ของสี่เหลี่ยม</td>
+<td>มุม (และพื้นที่ที่โตขึ้นในวงนอก)</td>
+<td>ความยาวบนแกนร่วม</td>
 </tr>
 <tr class="even">
-<td>เห็นโครงสร้างลำดับชั้น</td>
+<td>อ่านขนาดเปรียบเทียบ</td>
 <td>ปานกลาง</td>
-<td>ดี</td>
-<td>ต่ำ</td>
+<td>ยาก</td>
+<td>ง่ายที่สุด</td>
 </tr>
 <tr class="odd">
-<td>รองรับหน่วยจำนวนมาก</td>
-<td>ดี</td>
-<td>ปานกลาง</td>
-<td>ต่ำ</td>
+<td>เห็นโครงสร้างลำดับชั้น</td>
+<td>ไม่ค่อยชัดเมื่อลึก</td>
+<td>ชัด</td>
+<td>ชัด</td>
 </tr>
 <tr class="even">
-<td>คลิกเพื่อ drill-down ใน Plotly</td>
-<td>ได้</td>
-<td>ได้</td>
-<td>ต้องสร้างเอง</td>
+<td>ใช้พื้นที่จอ</td>
+<td>มีประสิทธิภาพมาก</td>
+<td>เสียพื้นที่มุมจอ</td>
+<td>ปานกลาง</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>ถ้าคำถามคือการเปรียบเทียบค่าระหว่างจังหวัดอย่างแม่นยำ bar chart เรียงตามค่าภายในแต่ละภาคยังคงเป็นตัวเลือกที่ดีที่สุด treemap และ sunburst เหมาะกับการเห็นภาพรวมของโครงสร้าง และเป็นจุดเริ่มต้นของการ drill-down</p>
+<p>ตามลำดับความแม่นยำของการเข้ารหัสภาพในบทที่ 11 ความยาวบนแกนร่วมอ่านได้แม่นกว่าพื้นที่ และพื้นที่อ่านได้แม่นกว่ามุม icicle จึงเหมาะที่สุดเมื่อต้องเทียบขนาด treemap เหมาะเมื่อมีใบจำนวนมากและต้องการเห็นส่วนประกอบของทั้งหมด sunburst ดึงดูดสายตาและเห็นโครงสร้างชัด แต่ไม่ควรใช้เมื่อต้องการให้ผู้อ่านเทียบขนาดแม่นยำ</p>
+</section>
+<section id="ขนาดตองรวมกนได-สคอตวชวด" class="level3">
+<h3 class="anchored" data-anchor-id="ขนาดตองรวมกนได-สคอตวชวด">ขนาดต้องรวมกันได้ สีคือตัวชี้วัด</h3>
+<p>กฎที่สำคัญที่สุดของกราฟทั้งสามแบบคือ <strong>ขนาดต้องเป็นตัวชี้วัดที่รวมขึ้นได้</strong> เพราะพื้นที่ของพ่อแม่ต้องเท่ากับผลรวมของพื้นที่ของลูก จำนวนสถานี-วันหรือจำนวนสถานีใช้เป็นขนาดได้ ค่าเฉลี่ย PM2.5 ใช้เป็นขนาดไม่ได้ เพราะค่าเฉลี่ยของภาคไม่เท่ากับผลรวมของค่าเฉลี่ยของจังหวัด ตัวชี้วัดที่รวมไม่ได้จึงควรเป็น <strong>สี</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> (roll_up(summary, [<span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"station_id"</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     .merge(con.execute(<span class="st">"SELECT station_id, name_th FROM stations"</span>).df(), on<span class="op">=</span><span class="st">"station_id"</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> [px.Constant(<span class="st">"ประเทศไทย"</span>), <span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"name_th"</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.treemap(h, path<span class="op">=</span>path, values<span class="op">=</span><span class="st">"station_days"</span>, color<span class="op">=</span><span class="st">"pm25_mean"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                 color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>, color_continuous_midpoint<span class="op">=</span><span class="fl">37.5</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                 hover_data<span class="op">=</span>{<span class="st">"share_over_std"</span>: <span class="st">":.0%"</span>, <span class="st">"n_stations"</span>: <span class="va">True</span>})</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fig.update_traces(root_color<span class="op">=</span><span class="st">"lightgrey"</span>, branchvalues<span class="op">=</span><span class="st">"total"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>fig.update_layout(margin<span class="op">=</span><span class="bu">dict</span>(t<span class="op">=</span><span class="dv">30</span>, l<span class="op">=</span><span class="dv">0</span>, r<span class="op">=</span><span class="dv">0</span>, b<span class="op">=</span><span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Plotly คำนวณสีของโหนดระดับบนเป็น <strong>ค่าเฉลี่ยถ่วงน้ำหนักด้วย <code>values</code></strong> ของลูกโดยอัตโนมัติ <span class="citation" data-cites="plotly2024python">(<a href="../references.html#ref-plotly2024python" role="doc-biblioref">Plotly Technologies Inc., ม.ป.ป.</a>)</span> เมื่อ <code>values</code> คือสถานี-วันและสีคือค่าเฉลี่ยของสถานี สีของจังหวัดและภาคจึงเท่ากับค่าเฉลี่ยถ่วงน้ำหนักด้วยสถานี-วัน ซึ่งตรงกับตัวเลขใน <code>roll_up</code> พอดี ความสอดคล้องนี้ไม่ได้เกิดขึ้นเอง ถ้าเลือก <code>values</code> เป็นจำนวนสถานี สีของระดับบนจะกลายเป็นค่าเฉลี่ยถ่วงน้ำหนักด้วยจำนวนสถานี ซึ่งต่างจากตัวเลขในตาราง ต้องเลือกให้ตรงกัน</p>
+<p><code>branchvalues="total"</code> บอก Plotly ว่าค่าของพ่อแม่คือผลรวมของลูก ซึ่งเป็นค่าเริ่มต้นของ px เมื่อใช้ <code>path</code> <code>color_continuous_midpoint=37.5</code> ทำให้สีกึ่งกลางของชุดสีอยู่ที่มาตรฐาน ผู้อ่านจึงแยกพื้นที่ที่เกินและไม่เกินมาตรฐานได้ด้วยสี แต่ชุดสี YlOrRd เป็นแบบ sequential การกำหนดจุดกึ่งกลางจึงเพียงเลื่อนช่วงสี ถ้าต้องการเน้นสองฝั่งของเกณฑ์อย่างชัดเจน ควรใช้ชุดสีแบบ diverging (บทที่ 11)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>px.sunburst(h, path<span class="op">=</span>path, values<span class="op">=</span><span class="st">"station_days"</span>, color<span class="op">=</span><span class="st">"pm25_mean"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>, color_continuous_midpoint<span class="op">=</span><span class="fl">37.5</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>px.icicle(h, path<span class="op">=</span>path, values<span class="op">=</span><span class="st">"station_days"</span>, color<span class="op">=</span><span class="st">"pm25_mean"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>          color_continuous_scale<span class="op">=</span><span class="st">"YlOrRd"</span>, color_continuous_midpoint<span class="op">=</span><span class="fl">37.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าข้อมูลมีแถวที่ <code>region</code> หรือ <code>province</code> เป็นค่าว่าง Plotly จะ error เรื่อง non-leaf rows ซึ่งเป็นสัญญาณที่ดีว่าลำดับชั้นไม่สมบูรณ์ ให้กลับไปแก้ด้วยการตรวจใน <a href="#sec-ch18-hierarchy" class="quarto-xref"><span>หัวข้อ 18.1</span></a> แทนการเติมค่าเพื่อให้กราฟวาดได้</p>
+</section>
+<section id="คลกเพอ-drill-down" class="level3">
+<h3 class="anchored" data-anchor-id="คลกเพอ-drill-down">คลิกเพื่อ drill-down</h3>
+<p>treemap, sunburst และ icicle ของ Plotly มีการ drill-down ในตัว คลิกที่โหนดใดกราฟจะซูมเข้าไปให้โหนดนั้นเป็นรากใหม่ และคลิกที่แถบด้านบนเพื่อย้อนกลับ ซึ่งสะดวกสำหรับการสำรวจ แต่การ drill-down ในกราฟเดียวนี้ไม่ได้เปลี่ยนกราฟอื่น ถ้าต้องการให้ทั้งแดชบอร์ดตามการเลือก ต้องจัดการสถานะด้วย <code>session_state</code> ในบทที่ 20</p>
 </section>
 <section id="อลกอรทมการจดวาง" class="level3">
 <h3 class="anchored" data-anchor-id="อลกอรทมการจดวาง">อัลกอริทึมการจัดวาง ★</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -885,15 +1004,14 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>หัวข้อย่อยนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
+<p>ส่วนย่อยนี้ (อัลกอริทึมการจัดวาง) ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
 </div>
 </div>
-<p>การวางสี่เหลี่ยมให้มีพื้นที่ตามค่าทำได้หลายวิธี และวิธีที่เลือกมีผลต่อการอ่านมาก</p>
-<ul>
-<li><strong><span class="idx">slice-and-dice</span></strong> อัลกอริทึมดั้งเดิมของ Shneiderman แบ่งสี่เหลี่ยมของหน่วยแม่ตามแนวนอนในระดับหนึ่ง และตามแนวตั้งในระดับถัดไปสลับกัน <span class="citation" data-cites="shneiderman1992tree">(<a href="../references.html#ref-shneiderman1992tree" role="doc-biblioref">Shneiderman 1992</a>)</span> ข้อดีคือรักษาลำดับของหน่วย ข้อเสียคือสร้างสี่เหลี่ยมผอมยาวเมื่อมีหน่วยจำนวนมาก ซึ่งเปรียบเทียบพื้นที่ได้ยากและติดป้ายไม่ได้</li>
-<li><strong><span class="idx">squarified</span></strong> ของ Bruls และคณะ จัดหน่วยเป็นแถวโดยเลือกให้อัตราส่วนด้านของสี่เหลี่ยมใกล้ 1 มากที่สุด <span class="citation" data-cites="bruls2000squarified">(<a href="../references.html#ref-bruls2000squarified" role="doc-biblioref">Bruls และคณะ 2000</a>)</span> ได้สี่เหลี่ยมที่ใกล้จัตุรัส อ่านและติดป้ายง่าย แต่ลำดับของหน่วยไม่คงที่ หน่วยที่มีค่าใกล้กันอาจอยู่ห่างกัน และเมื่อข้อมูลเปลี่ยนเล็กน้อย การจัดวางอาจเปลี่ยนมาก</li>
-<li><strong>ordered และ strip treemap</strong> เป็นทางสายกลางที่พยายามรักษาลำดับไว้บางส่วน โดยยอมให้อัตราส่วนด้านแย่ลงเล็กน้อย</li>
-</ul>
+<p>การแบ่งสี่เหลี่ยมหนึ่งรูปเป็นสี่เหลี่ยมย่อยที่มีพื้นที่ตามค่าที่กำหนดทำได้หลายวิธี แต่ละวิธีแลกเปลี่ยนระหว่างสามคุณสมบัติ คือ <strong>อัตราส่วนกว้างต่อยาว</strong> (สี่เหลี่ยมที่ใกล้จัตุรัสเทียบพื้นที่ได้ง่ายกว่าแถบยาว) <strong>ลำดับ</strong> (ลูกเรียงตามลำดับเดิมหรือไม่) และ <strong>ความเสถียร</strong> (เมื่อค่าเปลี่ยนเล็กน้อย การจัดวางเปลี่ยนน้อยหรือไม่)</p>
+<p><strong><span class="idx">slice-and-dice</span></strong> <span class="citation" data-cites="shneiderman1992tree">(<a href="../references.html#ref-shneiderman1992tree" role="doc-biblioref">Shneiderman 1992</a>)</span> เป็นวิธีดั้งเดิม แบ่งสี่เหลี่ยมเป็นแถบตามแนวนอนในระดับหนึ่ง แล้วแบ่งตามแนวตั้งในระดับถัดไป สลับกันไปเรื่อย ๆ ตัวอย่าง (ข้อมูลสมมุติ) สี่เหลี่ยมขนาด 100 × 60 แบ่งให้สามโหนดที่มีค่า 50, 30 และ 20 ได้แถบกว้าง 50, 30 และ 20 สูง 60 ทุกแถบ อัตราส่วนยาวต่อสั้นคือ 1.2, 2.0 และ 3.0 ถ้ามีโหนดเล็กจำนวนมาก แถบจะบางจนมองไม่เห็นและเทียบกันไม่ได้</p>
+<p><strong><span class="idx">squarified</span></strong> <span class="citation" data-cites="bruls2000squarified">(<a href="../references.html#ref-bruls2000squarified" role="doc-biblioref">Bruls และคณะ 2000</a>)</span> เพิ่มโหนดลงในแถบทีละโหนด และเริ่มแถบใหม่เมื่อการเพิ่มทำให้อัตราส่วนที่แย่ที่สุดในแถบแย่ลง ผลคือสี่เหลี่ยมใกล้จัตุรัส กับตัวอย่างเดิม วิธีนี้วางโหนด 50 เป็นแถบกว้าง 50 สูง 60 (อัตราส่วน 1.2) แล้ววางโหนด 30 และ 20 ซ้อนกันในพื้นที่ 50 × 60 ที่เหลือ ได้สี่เหลี่ยม 50 × 36 และ 50 × 24 (อัตราส่วน 1.39 และ 2.08) อัตราส่วนที่แย่ที่สุดลดจาก 3.0 เหลือ 2.08 ข้อเสียคือลำดับของโหนดไม่คงที่ และเมื่อค่าเปลี่ยน การจัดวางอาจกระโดด ซึ่งทำให้เทียบ treemap ข้ามเดือนยาก</p>
+<p><strong>ordered และ strip treemap</strong> <span class="citation" data-cites="bederson2002ordered">(<a href="../references.html#ref-bederson2002ordered" role="doc-biblioref">Bederson และคณะ 2002</a>)</span> รักษาลำดับของโหนดไว้ โดยยอมให้อัตราส่วนแย่กว่า squarified เล็กน้อย เหมาะเมื่อลำดับมีความหมาย เช่น เรียงจังหวัดตามรหัส หรือเมื่อต้องเทียบหลาย treemap ข้ามเวลา</p>
+<p><a href="#fig-ch18-layouts" class="quarto-xref">ภาพที่&nbsp;<span>18.1</span></a> เทียบสองวิธีกับข้อมูลสมมุติ 10 จังหวัด slice-and-dice ได้แถบผอมจนติดป้ายไม่ได้ ส่วน squarified ได้สี่เหลี่ยมใกล้จัตุรัสทุกช่อง</p>
 <div id="fig-ch18-layouts" class="quarto-float quarto-figure quarto-figure-center anchored" alt="ภาพซ้ายเป็นแถบแนวตั้งเรียงจากใหญ่ไปเล็ก แถบท้ายผอมมากจนติดป้ายไม่ได้ อัตราส่วนด้านเฉลี่ย 12.6 ภาพขวาเป็นสี่เหลี่ยมใกล้จัตุรัส ติดป้ายได้ทุกช่อง อัตราส่วนด้านเฉลี่ย 1.5">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ch18-layouts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -904,20 +1022,62 @@ window.Quarto = {
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-ch18-layouts" class="quarto-xref">ภาพที่&nbsp;<span>18.1</span></a> แสดงข้อมูลชุดเดียวกันจัดวางสองแบบ slice-and-dice มีอัตราส่วนด้านเฉลี่ย 12.6 สี่จังหวัดสุดท้ายผอมจนติดป้ายไม่ได้ ส่วน squarified มีอัตราส่วนด้านเฉลี่ย 1.5 แต่จังหวัดที่ 3 อยู่เหนือจังหวัดที่ 2 ลำดับจึงไม่ตรงกับค่า Plotly ใช้อัลกอริทึมแบบ squarified เป็นค่าเริ่มต้น และเปลี่ยนได้ด้วย <code>fig.update_traces(tiling_packing="slice-dice")</code></p>
+<div id="tbl-ch18-layout-algorithms" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-layout-algorithms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.7: การแลกเปลี่ยนของอัลกอริทึมจัดวาง treemap
+</figcaption>
+<div aria-describedby="tbl-ch18-layout-algorithms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>อัลกอริทึม</th>
+<th>อัตราส่วน</th>
+<th>รักษาลำดับ</th>
+<th>ความเสถียร</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>slice-and-dice</td>
+<td>แย่</td>
+<td>ใช่</td>
+<td>ดี</td>
+</tr>
+<tr class="even">
+<td>squarified</td>
+<td>ดีที่สุด</td>
+<td>ไม่</td>
+<td>แย่</td>
+</tr>
+<tr class="odd">
+<td>ordered / strip</td>
+<td>ดี</td>
+<td>ใช่</td>
+<td>ปานกลาง</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Plotly ใช้ squarified เป็นค่าเริ่มต้น และเปลี่ยนได้ด้วย <code>fig.update_traces(tiling_packing="slice-dice")</code> หรือค่าอื่น เช่น <code>"binary"</code>, <code>"dice"</code>, <code>"slice"</code> เมื่อทำ treemap ของหลายเดือนเพื่อเทียบกัน การใช้วิธีที่รักษาลำดับช่วยให้ผู้อ่านหาจังหวัดเดิมเจอที่ตำแหน่งเดิม</p>
 </section>
 </section>
 <section id="sec-ch18-olap" class="level2" data-number="18.4">
 <h2 data-number="18.4" class="anchored" data-anchor-id="sec-ch18-olap"><span class="header-section-number">18.4</span> การดำเนินการแบบ OLAP: roll-up, drill-down, slice, dice</h2>
 <section id="data-cube" class="level3">
 <h3 class="anchored" data-anchor-id="data-cube">data cube</h3>
-<p>แนวคิด <strong>OLAP</strong> (online analytical processing) ที่บทที่ 6 แนะนำไว้ มองข้อมูลเป็น <strong><span class="idx">data cube</span></strong> ซึ่งมีหลายมิติ (dimension) เช่น พื้นที่ เวลา และชนิดสารมลพิษ แต่ละเซลล์ของ cube เก็บตัวชี้วัด (measure) เช่น จำนวนวันเกินมาตรฐาน การสำรวจข้อมูลคือการ “หมุน” และ “ตัด” cube นี้ด้วยการดำเนินการสี่แบบ <span class="citation" data-cites="chaudhuri1997overview">(<a href="../references.html#ref-chaudhuri1997overview" role="doc-biblioref">Chaudhuri และ Dayal 1997</a>)</span></p>
-<div id="tbl-ch18-olap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p><strong>OLAP</strong> (online analytical processing) มองข้อมูลเป็น <strong><span class="idx">data cube</span></strong> ที่มีหลายมิติ (dimension) และตัวชี้วัด (measure) อยู่ในแต่ละช่อง <span class="citation" data-cites="gray1997data">(<a href="../references.html#ref-gray1997data" role="doc-biblioref">Gray และคณะ 1997</a>)</span> ข้อมูล PM2.5 ของเรามองเป็นลูกบาศก์สามมิติได้ คือ พื้นที่ (ประเทศ → ภาค → จังหวัด → สถานี) เวลา (ปี → เดือน → วัน) และสารมลพิษ (PM2.5, PM10, O3, …) ตัวชี้วัดคือคอลัมน์ที่รวมขึ้นได้ในตารางสรุป แนวคิดนี้ใกล้กับ star schema ในบทที่ 6 ซึ่งมีตาราง fact ตรงกลางและตารางมิติล้อมรอบ</p>
+</section>
+<section id="การดำเนนการหาแบบ" class="level3">
+<h3 class="anchored" data-anchor-id="การดำเนนการหาแบบ">การดำเนินการห้าแบบ</h3>
+<div id="tbl-ch18-olap-ops" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-olap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.5: การดำเนินการแบบ OLAP
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-olap-ops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.8: การดำเนินการแบบ OLAP
 </figcaption>
-<div aria-describedby="tbl-ch18-olap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch18-olap-ops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -928,86 +1088,89 @@ window.Quarto = {
 <thead>
 <tr class="header">
 <th>การดำเนินการ</th>
-<th>ความหมาย</th>
-<th>ตัวอย่าง</th>
+<th>ทำอะไร</th>
+<th>ตัวอย่างกับ PM2.5</th>
 <th>SQL</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>roll-up</td>
-<td>รวมขึ้นไประดับบนของลำดับชั้น</td>
-<td>จังหวัด → ภาค หรือ วัน → เดือน</td>
-<td><code>GROUP BY</code> ระดับบน, <code>ROLLUP</code></td>
+<td><span class="idx">roll-up</span></td>
+<td>รวมขึ้นไปยังระดับที่หยาบกว่า</td>
+<td>จากจังหวัดเป็นภาค จากวันเป็นเดือน</td>
+<td><code>GROUP BY</code> คอลัมน์ระดับบน</td>
 </tr>
 <tr class="even">
-<td>drill-down</td>
-<td>เจาะลงระดับล่างของลำดับชั้น</td>
-<td>ภาค → จังหวัด → สถานี</td>
-<td><code>GROUP BY</code> ระดับล่าง พร้อม <code>WHERE</code> ของหน่วยแม่</td>
+<td><span class="idx">drill-down</span></td>
+<td>ลงไปยังระดับที่ละเอียดกว่า</td>
+<td>จากภาคเหนือลงไปดูแต่ละจังหวัด</td>
+<td>เพิ่มคอลัมน์ระดับล่างใน <code>GROUP BY</code> พร้อม <code>WHERE</code></td>
 </tr>
 <tr class="odd">
 <td>slice</td>
-<td>ตรึงค่าของมิติหนึ่ง</td>
-<td>เฉพาะปี ค.ศ. 2023</td>
-<td><code>WHERE year = 2023</code></td>
+<td>ตัดหนึ่งค่าของมิติหนึ่ง</td>
+<td>เฉพาะเดือนมีนาคม</td>
+<td><code>WHERE month = 3</code></td>
 </tr>
 <tr class="even">
 <td>dice</td>
-<td>เลือกช่วงของหลายมิติ</td>
-<td>ภาคเหนือและภาคกลาง ช่วงกุมภาพันธ์ถึงเมษายน</td>
-<td><code>WHERE region IN (...) AND month BETWEEN 2 AND 4</code></td>
+<td>ตัดลูกบาศก์ย่อยด้วยหลายเงื่อนไข</td>
+<td>ภาคเหนือและภาคกลาง ฤดูแล้ง ปี 2565–2566</td>
+<td><code>WHERE</code> หลายเงื่อนไข</td>
 </tr>
 <tr class="odd">
 <td>pivot</td>
-<td>หมุนมิติจากแถวเป็นคอลัมน์</td>
-<td>ภาคเป็นแถว ปีเป็นคอลัมน์</td>
-<td><code>PIVOT</code> (บทที่ 8)</td>
+<td>หมุนมิติไปเป็นแถวหรือคอลัมน์</td>
+<td>ภาคเป็นแถว เดือนเป็นคอลัมน์</td>
+<td><code>PIVOT</code> หรือ <code>pivot_table</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cube(con, group_cols, where<span class="op">=</span><span class="st">"TRUE"</span>, params<span class="op">=</span>()):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""roll-up / drill-down / slice / dice ด้วยฟังก์ชันเดียว (where ต้องเป็นข้อความที่เราเขียนเอง)"""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> <span class="st">", "</span>.join(group_cols)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> con.execute(<span class="ss">f"""</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ss">        SELECT </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ss">               count(DISTINCT d.station_id)                 AS n_stations,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ss">               count(*)                                    AS station_days,</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ss">               avg(d.pm25_mean)                            AS pm25_mean,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ss">               avg(CAST(d.pm25_mean &gt; 37.5 AS DOUBLE))     AS share_over_std</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ss">        FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ss">        WHERE d.is_complete AND </span><span class="sc">{</span>where<span class="sc">}</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ss">        GROUP BY </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss"> ORDER BY </span><span class="sc">{</span>cols<span class="sc">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ss">    """</span>, <span class="bu">list</span>(params)).df()</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>country_by_month <span class="op">=</span> cube(con, [<span class="st">"month(d.date) AS month"</span>])                         <span class="co"># roll-up</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>north_drill <span class="op">=</span> cube(con, [<span class="st">"s.province"</span>], <span class="st">"s.region = ?"</span>, [<span class="st">"เหนือ"</span>])                <span class="co"># drill-down</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>march <span class="op">=</span> cube(con, [<span class="st">"s.region"</span>], <span class="st">"month(d.date) = ?"</span>, [<span class="dv">3</span>])                         <span class="co"># slice</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>dry_two <span class="op">=</span> cube(con, [<span class="st">"s.region"</span>, <span class="st">"year(d.date) AS year"</span>],                         <span class="co"># dice</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>               <span class="st">"s.region IN (?, ?) AND month(d.date) BETWEEN 1 AND 4"</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>               [<span class="st">"เหนือ"</span>, <span class="st">"กลาง"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ฟังก์ชัน <code>cube</code> ประกอบ SQL ด้วย f-string สำหรับชื่อคอลัมน์และโครงของเงื่อนไข ซึ่ง <strong>ต้องเป็นข้อความที่ผู้เขียนโค้ดกำหนดเท่านั้น</strong> ส่วนค่าที่มาจากผู้ใช้ เช่น ชื่อภาคที่เลือกในแดชบอร์ด ต้องส่งผ่าน <code>?</code> parameter เสมอ เพื่อป้องกัน SQL injection (บทที่ 20)</p>
 </section>
-<section id="rollup-cube-และ-grouping-sets" class="level3">
-<h3 class="anchored" data-anchor-id="rollup-cube-และ-grouping-sets">ROLLUP, CUBE และ GROUPING SETS</h3>
-<p>SQL มีส่วนขยายของ <code>GROUP BY</code> ที่คำนวณหลายระดับการรวมในคำสั่งเดียว <span class="citation" data-cites="gray1997data">(<a href="../references.html#ref-gray1997data" role="doc-biblioref">Gray และคณะ 1997</a>)</span></p>
-<ul>
-<li><code>ROLLUP (a, b, c)</code> คำนวณกลุ่ม (a, b, c), (a, b), (a) และ () คือทุกระดับตามลำดับชั้น เหมาะกับลำดับชั้นภาค → จังหวัด → สถานี</li>
-<li><code>CUBE (a, b)</code> คำนวณทุกชุดค่าผสม (a, b), (a), (b) และ () เหมาะกับมิติที่ไม่เป็นลำดับชั้นของกันและกัน เช่น ภาคกับปี</li>
-<li><code>GROUPING SETS (...)</code> ระบุชุดของกลุ่มที่ต้องการเองทั้งหมด</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.region, s.province, d.station_id,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> d.pm25_mean <span class="op">&gt;</span> <span class="fl">37.5</span>) <span class="kw">AS</span> n_over,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_days,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> d.pm25_mean <span class="op">&gt;</span> <span class="fl">37.5</span>) <span class="op">/</span> <span class="fu">COUNT</span>(<span class="op">*</span>), <span class="dv">3</span>) <span class="kw">AS</span> share_over,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">GROUPING</span>(s.region, s.province, d.station_id) <span class="kw">AS</span> <span class="kw">level</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> daily_pm25_clean <span class="kw">AS</span> d <span class="kw">JOIN</span> stations <span class="kw">AS</span> s <span class="kw">USING</span> (station_id)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> d.is_complete <span class="kw">AND</span> d.<span class="dt">date</span> <span class="op">&lt;</span> <span class="dt">DATE</span> <span class="st">'2024-01-01'</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">ROLLUP</span> (s.region, s.province, d.station_id)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> s.region <span class="kw">NULLS</span> <span class="fu">FIRST</span>, s.province <span class="kw">NULLS</span> <span class="fu">FIRST</span>, d.station_id <span class="kw">NULLS</span> <span class="fu">FIRST</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
-# ข้อมูลสังเคราะห์ 50 สถานี ไม่ใช่ข้อมูล Air4Thai จริง
-  region       province station_id  n_over  n_days  share_over  level
-0   None           None       None    8061   67631       0.119      7
-1   กลาง           None       None    3583   29917       0.120      3
-2   กลาง  กรุงเทพมหานคร       None    1624   10718       0.152      1
-3   กลาง  กรุงเทพมหานคร        s23     122    1297       0.094      0
-4   กลาง  กรุงเทพมหานคร        s24     421    1395       0.302      0</code></pre>
-<p>แถวที่คอลัมน์เป็น <code>NULL</code> คือแถวผลรวมของระดับนั้น เช่น แถวแรกคือทั้งประเทศ แถวที่สองคือทั้งภาคกลาง ปัญหาคือ <code>NULL</code> จากการรวมแยกไม่ออกจาก <code>NULL</code> ที่เป็นข้อมูลจริง (เช่น สถานีที่ไม่มีจังหวัด) ฟังก์ชัน <code>GROUPING()</code> แก้ปัญหานี้ คืนค่าเป็นบิตที่บอกว่าคอลัมน์ใดถูกรวม ค่า 0 คือระดับสถานี 1 คือระดับจังหวัด 3 คือระดับภาค และ 7 คือระดับประเทศ ใช้กรองหรือติดป้ายระดับในแดชบอร์ดได้</p>
-<p>ผลลัพธ์นี้แสดงความสอดคล้องข้ามระดับที่ต้องการ จำนวน 8,061 วันเกินมาตรฐานของประเทศเท่ากับผลรวมของทุกภาค และสัดส่วนของทุกระดับคำนวณจากจำนวนนับโดยตรง ข้อมูลยังแสดงความต่างภายในจังหวัดเดียวกัน สถานี s24 ในกรุงเทพมหานครเกินมาตรฐาน 30.2% ของวัน ขณะที่ s23 เพียง 9.4% ค่าระดับจังหวัด (15.2%) จึงซ่อนความต่างนี้ไว้ ซึ่งเป็นเหตุผลที่ต้องมี drill-down</p>
+<section id="pivot" class="level3">
+<h3 class="anchored" data-anchor-id="pivot">pivot</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pivot <span class="op">=</span> con.execute(<span class="st">"""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">    PIVOT (</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT s.region, month(d.date) AS month, d.pm25_mean</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">        WHERE d.is_complete</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ) ON month USING avg(pm25_mean) GROUP BY region ORDER BY region</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>PIVOT</code> ของ DuckDB หมุนค่าของ <code>month</code> เป็นคอลัมน์ ได้ตารางภาค × เดือนที่วาดเป็น heatmap ได้ทันที ผลเดียวกันได้จาก <code>pandas.pivot_table</code> แต่การ pivot ใน DuckDB ทำให้ส่งข้อมูลเข้า Python น้อยลง</p>
 </section>
-<section id="ออกแบบลำดบการ-drill-down" class="level3">
-<h3 class="anchored" data-anchor-id="ออกแบบลำดบการ-drill-down">ออกแบบลำดับการ drill-down</h3>
-<p>เมื่อออกแบบแดชบอร์ดในบทที่ 20 ควรกำหนดล่วงหน้าว่าแต่ละระดับแสดงอะไร ตัวอย่างการออกแบบที่สอดคล้องกับคำถามของโครงการ</p>
-<div id="tbl-ch18-drilldown" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="ออกแบบการ-drill-down-หลายระดบ" class="level3">
+<h3 class="anchored" data-anchor-id="ออกแบบการ-drill-down-หลายระดบ">ออกแบบการ drill-down หลายระดับ</h3>
+<p>การดำเนินการ OLAP เป็นภาษาที่ใช้ออกแบบแดชบอร์ด drill-down ในบทที่ 20 หลักการออกแบบมาจาก mantra ของ Shneiderman ในบทที่ 12 คือ overview first ที่ระดับประเทศ zoom and filter ด้วยการ drill-down และ details on demand ที่ระดับสถานี</p>
+<div id="tbl-ch18-drilldown-design" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-drilldown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.6: ตัวอย่างการออกแบบระดับของการ drill-down
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-drilldown-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;18.9: การออกแบบ drill-down สี่ระดับ
 </figcaption>
-<div aria-describedby="tbl-ch18-drilldown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch18-drilldown-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1018,68 +1181,90 @@ window.Quarto = {
 <thead>
 <tr class="header">
 <th>ระดับ</th>
+<th>สถานะ</th>
 <th>คำถามหลัก</th>
-<th>กราฟ</th>
-<th>ตัวชี้วัด</th>
+<th>สิ่งที่แสดง</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>ประเทศ</td>
-<td>ภาพรวมเป็นอย่างไร ภาคใดน่ากังวล</td>
-<td>แผนที่ choropleth หรือ treemap</td>
-<td>สัดส่วนวันเกินมาตรฐานแบบ pooled</td>
+<td>ยังไม่เลือก</td>
+<td>ภาคใดมีปัญหามากที่สุด และเมื่อใด</td>
+<td>KPI รวม แท่งรายภาค แผนที่สถานี heatmap ภาค × เดือน</td>
 </tr>
 <tr class="even">
 <td>ภาค</td>
-<td>จังหวัดใดในภาคน่ากังวล ฤดูฝุ่นเป็นอย่างไร</td>
-<td>bar chart จังหวัดเรียงตามค่า heatmap เดือน × ปี</td>
-<td>สัดส่วนวันเกินมาตรฐาน มัธยฐานรายเดือน</td>
+<td>เลือกภาคแล้ว</td>
+<td>จังหวัดใดในภาคนี้แย่ที่สุด</td>
+<td>แท่งรายจังหวัด เส้นรายเดือนของภาค</td>
 </tr>
 <tr class="odd">
 <td>จังหวัด</td>
-<td>สถานีต่างกันหรือไม่</td>
-<td>small multiples ของสถานี</td>
-<td>ค่าเฉลี่ยรายวัน จำนวนสถานี</td>
+<td>เลือกจังหวัดแล้ว</td>
+<td>สถานีในจังหวัดนี้ต่างกันหรือไม่</td>
+<td>แท่งหรือเส้นเทียบสถานี</td>
 </tr>
 <tr class="even">
 <td>สถานี</td>
-<td>รายละเอียดตามเวลาเป็นอย่างไร มีความผิดปกติหรือไม่</td>
-<td>อนุกรมเวลารายวันพร้อมเส้นมาตรฐานและธงค่าผิดปกติ</td>
-<td>ค่าเฉลี่ยรายวัน ความครบถ้วนของข้อมูล</td>
+<td>เลือกสถานีแล้ว</td>
+<td>สถานีนี้เป็นอย่างไรในรายละเอียด</td>
+<td>อนุกรมรายวัน วันเกินมาตรฐาน วันที่ติดธงค่าผิดปกติ กลุ่มของรูปแบบฤดูกาล</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>หลักการสำคัญคือ ทุกระดับต้องใช้นิยามของตัวชี้วัดเดียวกัน และคำนวณจากข้อมูลระดับล่างสุดด้วยวิธีที่สอดคล้องกัน ผู้ใช้ที่เห็นว่าภาคเหนือเกินมาตรฐาน 16.9% แล้วเจาะลงไป ต้องเห็นจังหวัดในภาคเหนือที่ถ้ารวมแบบเดียวกันแล้วได้ 16.9% เช่นเดียวกัน</p>
+<p>ตารางนี้ตรงกับเอกสารสัปดาห์ที่ 14 หลักการออกแบบเพิ่มเติมสามข้อ</p>
+<ol type="1">
+<li><strong>รักษาบริบท</strong> ผู้ใช้ต้องรู้เสมอว่าอยู่ที่ระดับใด ด้วยแถบเส้นทาง (breadcrumb) เช่น “ประเทศไทย › ภาคเหนือ › เชียงใหม่” ที่คลิกย้อนกลับได้</li>
+<li><strong>ตัวกรองต้องไปด้วย</strong> ช่วงวันที่ที่เลือกไว้ต้องใช้กับทุกระดับ ผู้ใช้ไม่ควรต้องเลือกซ้ำเมื่อ drill-down</li>
+<li><strong>ตัวเลขต้องสอดคล้อง</strong> ค่าเฉลี่ยของภาคที่แสดงในระดับประเทศต้องเท่ากับ KPI ที่แสดงเมื่อ drill-down เข้าไปในภาคนั้น ซึ่งเป็นผลโดยตรงของการใช้วิธีรวมเดียวกัน (<a href="#sec-ch18-consistency" class="quarto-xref"><span>หัวข้อ 18.2</span></a>)</li>
+</ol>
+</section>
+<section id="ตารางสรปสำหรบแดชบอรด" class="level3">
+<h3 class="anchored" data-anchor-id="ตารางสรปสำหรบแดชบอรด">ตารางสรุปสำหรับแดชบอร์ด</h3>
+<p>แดชบอร์ดที่ query ข้อมูลรายวันทุกครั้งที่ผู้ใช้คลิกทำงานได้กับข้อมูลขนาดของรายวิชา เพราะ DuckDB เร็วมาก แต่ถ้าข้อมูลใหญ่ขึ้นหรือมีผู้ใช้พร้อมกันมาก การเตรียม <strong>ตารางสรุปล่วงหน้า</strong> ที่ระดับล่างสุดที่แดชบอร์ดต้องการ (เช่น <code>summary</code> ข้างต้น) แล้วให้แดชบอร์ด roll-up จากตารางนั้น ช่วยให้เร็วขึ้นมาก ข้อแลกเปลี่ยนคือตารางสรุปต้องสร้างใหม่ทุกครั้งที่ข้อมูลเปลี่ยน และต้องเก็บเฉพาะตัวชี้วัดที่รวมขึ้นได้ ตัวชี้วัดอย่างมัธยฐานยังต้อง query จากข้อมูลรายวัน</p>
 </section>
 </section>
 <section id="sec-ch18-case" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="sec-ch18-case">กรณีศึกษา: ตัวเลขในแดชบอร์ดไม่ตรงกันระหว่างระดับ</h2>
-<p><strong>สถานการณ์</strong> ระหว่างทดสอบแดชบอร์ดรุ่นแรก อาจารย์ที่ปรึกษาพบว่า หน้าภาพรวมแสดงค่าเฉลี่ย PM2.5 ของภาคเหนือเป็น 27.7 µg/m³ แต่เมื่อคลิกเข้าไปดูภาคเหนือ หน้าภาคแสดง 28.1 µg/m³ และหน้าจังหวัดแสดงมัธยฐานของภาคเป็นค่าที่ไม่ตรงกับหน้าอื่นเลย</p>
-<p><strong>การวินิจฉัย</strong> ทีมตรวจโค้ดของแต่ละหน้าและพบว่า</p>
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch18-case">กรณีศึกษา: โครงข้อมูลลำดับชั้นสำหรับแดชบอร์ด drill-down</h2>
+<section id="เปาหมาย" class="level3">
+<h3 class="anchored" data-anchor-id="เปาหมาย">เป้าหมาย</h3>
+<p>เตรียมข้อมูลและฟังก์ชันที่แดชบอร์ดในบทที่ 20 จะใช้ โดยมีเงื่อนไขสามข้อ ลำดับชั้นต้องถูกต้อง ตัวเลขทุกระดับต้องสอดคล้องกัน และผู้ใช้ต้องเห็นภาพรวมของลำดับชั้นทั้งหมดในภาพเดียว</p>
+</section>
+<section id="ขนตอน" class="level3">
+<h3 class="anchored" data-anchor-id="ขนตอน">ขั้นตอน</h3>
 <ol type="1">
-<li>หน้าภาพรวมคำนวณค่าของภาคจากตาราง <code>province_summary</code> ที่เตรียมไว้ล่วงหน้า โดยเฉลี่ยค่าเฉลี่ยของจังหวัด (ค่าเฉลี่ยของค่าเฉลี่ย)</li>
-<li>หน้าภาคคำนวณจาก <code>daily_pm25_clean</code> โดยตรง (pooled)</li>
-<li>หน้าจังหวัดคำนวณ “มัธยฐานของภาค” จากมัธยฐานของจังหวัด ซึ่งรวมข้ามระดับไม่ได้</li>
+<li><strong>ตรวจลำดับชั้น</strong> รันการตรวจทั้งสี่ข้อใน <a href="#sec-ch18-hierarchy" class="quarto-xref"><span>หัวข้อ 18.1</span></a> แก้ <code>src/province_region.csv</code> จนได้ 0 ทุกข้อ และย้ายการตรวจเข้า <code>src/validate.py</code></li>
+<li><strong>บันทึกการแบ่งภาค</strong> ใน README ระบุว่าใช้การแบ่งภาคแบบใด จำนวนภาค และเหตุผล</li>
+<li><strong>สร้างตารางสรุประดับสถานี × เดือน</strong> ที่มีเฉพาะตัวชี้วัดที่รวมขึ้นได้ (<code>summary</code>)</li>
+<li><strong>เขียนฟังก์ชัน <code>roll_up</code> และ <code>cube</code></strong> ไว้ใน <code>src/queries.py</code> ตามคำแนะนำของเอกสารสัปดาห์ที่ 14 เพื่อให้รายงานและแดชบอร์ดใช้ตัวเลขชุดเดียวกัน</li>
+<li><strong>ทดสอบความสอดคล้อง</strong> ด้วย <code>assert_frame_equal</code> ทั้งระดับภาคและระดับจังหวัด</li>
+<li><strong>วาด treemap และ icicle</strong> ที่ใช้สถานี-วันเป็นขนาดและค่าเฉลี่ยเป็นสี พร้อมจำนวนสถานีใน hover</li>
+<li><strong>ออกแบบ drill-down</strong> เขียนตาราง <a href="#tbl-ch18-drilldown-design" class="quarto-xref">ตารางที่&nbsp;<span>18.9</span></a> ฉบับของโครงการ โดยระบุว่าแต่ละระดับเรียกฟังก์ชันใดด้วยพารามิเตอร์ใด</li>
 </ol>
-<p><strong>การแก้ไข</strong></p>
-<ol type="1">
-<li>ตกลงนิยามตัวชี้วัดหลักใน <code>questions.md</code> คือ สัดส่วนวันเกินมาตรฐานแบบ pooled จากสถานี-วันที่ข้อมูลครบ และมัธยฐานรายวันแบบ pooled</li>
-<li>เขียนฟังก์ชันเดียวใน <code>src/</code> ที่คำนวณตัวชี้วัดของทุกระดับด้วย <code>GROUP BY ROLLUP</code> จากข้อมูลระดับล่างสุด และให้ทุกหน้าใช้ฟังก์ชันนี้</li>
-<li>สำหรับมัธยฐาน คำนวณจากข้อมูลรายวันของแต่ละระดับโดยตรง ไม่สร้างตารางสรุปของมัธยฐาน</li>
-<li>เพิ่มการทดสอบใน <code>tests/</code> ที่ตรวจว่าจำนวนวันเกินมาตรฐานของประเทศเท่ากับผลรวมของภาค และผลรวมของภาคเท่ากับผลรวมของจังหวัด</li>
-</ol>
-<p><strong>บทเรียน</strong> ความไม่สอดคล้องระหว่างระดับไม่ได้เกิดจากข้อผิดพลาดในการคำนวณ ทุกตัวเลข “ถูก” ตามวิธีที่ใช้ แต่เกิดจากการที่แต่ละส่วนของระบบใช้นิยามต่างกัน การแก้ที่ยั่งยืนคือรวมนิยามไว้ที่เดียวและทดสอบความสอดคล้องอัตโนมัติ</p>
+</section>
+<section id="การตความ" class="level3">
+<h3 class="anchored" data-anchor-id="การตความ">การตีความ</h3>
+<p>treemap ระดับประเทศที่ใช้สถานี-วันเป็นขนาดบอกสองเรื่องพร้อมกัน ขนาดบอกว่าข้อมูลกระจุกอยู่ที่ใด ซึ่งมักเป็นกรุงเทพมหานครและภาคกลางที่มีสถานีหนาแน่น สีบอกว่าพื้นที่ใดมีฝุ่นสูง ซึ่งอาจเป็นพื้นที่ที่มีข้อมูลน้อย ผู้อ่านต้องรู้ว่าสี่เหลี่ยมใหญ่ไม่ได้แปลว่าปัญหาใหญ่ แต่แปลว่ามีการวัดมาก ข้อความกำกับกราฟควรบอกเรื่องนี้</p>
+</section>
+<section id="ขอจำกด" class="level3">
+<h3 class="anchored" data-anchor-id="ขอจำกด">ข้อจำกัด</h3>
+<ul>
+<li>การถ่วงน้ำหนักด้วยสถานี-วันให้น้ำหนักแก่พื้นที่ที่มีสถานีหนาแน่น ซึ่งมักเป็นเมืองใหญ่ ค่าระดับภาคจึงไม่ใช่ค่าเฉลี่ยของพื้นที่หรือของประชากร</li>
+<li>การแบ่งภาคเป็นการตัดสินใจของโครงการ ผลระดับภาคเปลี่ยนได้ถ้าใช้การแบ่งแบบอื่น</li>
+<li>มัธยฐานและเปอร์เซ็นไทล์ไม่อยู่ในตารางสรุป แดชบอร์ดที่ต้องแสดงค่าเหล่านี้ต้อง query จากข้อมูลรายวัน หรือใช้ค่าประมาณที่ระบุว่าเป็นค่าประมาณ</li>
+</ul>
+</section>
 </section>
 <section id="sec-ch18-pitfalls" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sec-ch18-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
 <div id="tbl-ch18-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch18-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;18.7: ข้อผิดพลาดที่พบบ่อยในบทที่ 18
+ตารางที่&nbsp;18.10: ข้อผิดพลาดที่พบบ่อยในบทที่ 18
 </figcaption>
 <div aria-describedby="tbl-ch18-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1097,44 +1282,54 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td>เฉลี่ยค่าเฉลี่ยของระดับล่างโดยไม่ถ่วงน้ำหนัก</td>
-<td>ให้น้ำหนักหน่วยที่มีข้อมูลน้อยเท่ากับหน่วยที่มีข้อมูลมาก</td>
-<td>เก็บผลรวมและจำนวน หรือคำนวณจากระดับล่างสุด</td>
+<td>เฉลี่ยค่าเฉลี่ยของระดับล่างเพื่อได้ระดับบน</td>
+<td>ได้ค่าที่ถ่วงน้ำหนักต่างจากที่ตั้งใจ และไม่สอดคล้องกับการคำนวณตรง</td>
+<td>เก็บผลรวมกับจำนวนแล้วหารตอนแสดงผล</td>
 </tr>
 <tr class="even">
-<td>คำนวณมัธยฐานของระดับบนจากมัธยฐานระดับล่าง</td>
-<td>มัธยฐานเป็นตัวชี้วัด holistic รวมข้ามระดับไม่ได้</td>
+<td>ใช้หลายวิธีรวมปนกันในแดชบอร์ดเดียว</td>
+<td>ตัวเลขระดับเดียวกันไม่ตรงกันระหว่างหน้า</td>
+<td>กำหนดวิธีรวมเดียวใน <code>src/queries.py</code> และใช้ทุกที่</td>
+</tr>
+<tr class="odd">
+<td>รวมมัธยฐานของระดับล่างขึ้นไป</td>
+<td>มัธยฐานรวมขึ้นไม่ได้</td>
 <td>คำนวณใหม่จากข้อมูลระดับล่างสุด</td>
 </tr>
-<tr class="odd">
-<td>ใช้ค่าเฉลี่ยหรือสัดส่วนเป็นขนาดของ treemap</td>
-<td>พื้นที่ของหน่วยแม่กลายเป็นผลรวมที่ไม่มีความหมาย</td>
-<td>ใช้ค่าที่บวกกันได้ เช่น จำนวนวันหรือประชากร</td>
-</tr>
 <tr class="even">
-<td>ไม่ตรวจว่าจังหวัดหนึ่งอยู่ภาคเดียว</td>
-<td>ค่าถูกนับซ้ำในสองภาค ผลรวมไม่สอดคล้อง</td>
-<td>ตรวจด้วย SQL ใน <code>src/validate.py</code></td>
+<td>บวกจำนวนสถานีข้ามเดือน</td>
+<td>นับสถานีเดียวซ้ำหลายครั้ง</td>
+<td>ใช้ <code>count(DISTINCT ...)</code> หรือ <code>nunique</code></td>
 </tr>
 <tr class="odd">
-<td>แยก <code>NULL</code> จาก ROLLUP กับ <code>NULL</code> จริงไม่ออก</td>
-<td>ติดป้ายระดับผิด</td>
-<td>ใช้ <code>GROUPING()</code></td>
+<td>ใช้ค่าเฉลี่ยเป็นขนาดของ treemap</td>
+<td>พื้นที่ของพ่อแม่ไม่เท่ากับผลรวมของลูก</td>
+<td>ใช้ตัวชี้วัดที่รวมขึ้นได้เป็นขนาด และค่าเฉลี่ยเป็นสี</td>
 </tr>
 <tr class="even">
-<td>แต่ละหน้าของแดชบอร์ดคำนวณตัวชี้วัดเอง</td>
-<td>นิยามไม่ตรงกัน ตัวเลขขัดกันระหว่างระดับ</td>
-<td>รวมการคำนวณไว้ในฟังก์ชันเดียวใน <code>src/</code></td>
+<td>เลือก <code>values</code> ของ treemap โดยไม่คิดถึงสีของระดับบน</td>
+<td>Plotly ถ่วงน้ำหนักสีด้วย <code>values</code> ซึ่งอาจไม่ตรงกับตัวเลขในตาราง</td>
+<td>เลือก <code>values</code> ให้ตรงกับวิธีรวมที่ใช้</td>
 </tr>
 <tr class="odd">
-<td>ใช้ sunburst เปรียบเทียบขนาดอย่างแม่นยำ</td>
-<td>มุมเปรียบเทียบได้ยาก วงนอกดูใหญ่เกินจริง</td>
-<td>ใช้ bar chart เมื่อต้องการความแม่นยำ</td>
+<td>เติม “ไม่ระบุ” เพื่อให้ treemap วาดได้โดยไม่ตรวจสาเหตุ</td>
+<td>ซ่อนปัญหาลำดับชั้นที่ผิด</td>
+<td>ตรวจและแก้ลำดับชั้นก่อน</td>
 </tr>
 <tr class="even">
-<td>แสดงเฉพาะค่าระดับจังหวัด</td>
-<td>ซ่อนความต่างระหว่างสถานีในจังหวัดเดียวกัน</td>
-<td>ให้ผู้ใช้ drill-down ถึงระดับสถานี</td>
+<td>ใช้ inner join กับตารางสถานีโดยไม่ตรวจ</td>
+<td>ข้อมูลของสถานีที่ไม่มีในตารางสถานีหายไปทุกระดับ</td>
+<td>ตรวจด้วย anti join</td>
+</tr>
+<tr class="odd">
+<td>ต่อค่าจากผู้ใช้เข้า SQL ด้วย f-string</td>
+<td>SQL injection</td>
+<td>ใช้ <code>?</code> parameter</td>
+</tr>
+<tr class="even">
+<td>drill-down แล้วตัวกรองหาย</td>
+<td>ผู้ใช้ต้องเลือกซ้ำ และอาจเทียบตัวเลขต่างช่วงเวลาโดยไม่รู้</td>
+<td>เก็บตัวกรองใน <code>session_state</code> และใช้ทุกระดับ</td>
 </tr>
 </tbody>
 </table>
@@ -1145,13 +1340,12 @@ window.Quarto = {
 <section id="สรป" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
 <ul>
-<li>ข้อมูลโครงการมีลำดับชั้นเชิงพื้นที่ (ประเทศ → ภาค → จังหวัด → สถานี) และเชิงเวลา ลำดับชั้นต้องถูกต้อง คือทุกหน่วยมีหน่วยแม่เดียว และมักไม่สมดุล</li>
-<li>ตัวชี้วัดแบ่งเป็น distributive (บวกได้) algebraic (รวมได้ถ้าเก็บองค์ประกอบ) และ holistic (รวมไม่ได้) มัธยฐานและเปอร์เซ็นไทล์ต้องคำนวณจากข้อมูลระดับล่างสุดเสมอ</li>
-<li>ค่าเฉลี่ยแบบ pooled ค่าเฉลี่ยของสถานี และค่าเฉลี่ยของจังหวัด ตอบคำถามต่างกัน ต้องเลือกจากคำถามและใช้ให้สม่ำเสมอทุกระดับ</li>
-<li>เก็บจำนวนนับ เช่น จำนวนวันเกินมาตรฐานและจำนวนวันทั้งหมด แล้วคำนวณสัดส่วนเป็นขั้นสุดท้าย ทำให้ทุกระดับสอดคล้องกันโดยอัตโนมัติ</li>
-<li>treemap ใช้ค่าที่บวกกันได้เป็นขนาด และค่าที่เปรียบเทียบเป็นสี Plotly คำนวณสีของหน่วยแม่เป็นค่าเฉลี่ยถ่วงน้ำหนักด้วยขนาด sunburst เห็นโครงสร้างชัดแต่เปรียบเทียบขนาดยาก</li>
-<li>อัลกอริทึม squarified ให้สี่เหลี่ยมที่อ่านง่ายแต่ไม่รักษาลำดับ slice-and-dice รักษาลำดับแต่สร้างสี่เหลี่ยมผอมยาว</li>
-<li>การดำเนินการแบบ OLAP ได้แก่ roll-up, drill-down, slice, dice และ pivot ทำได้ด้วย SQL <code>ROLLUP</code>, <code>CUBE</code> และ <code>GROUPING SETS</code> พร้อม <code>GROUPING()</code> เพื่อติดป้ายระดับ</li>
+<li>ข้อมูล PM2.5 มีลำดับชั้นทั้งด้านพื้นที่และเวลา ลำดับชั้นของภาคเป็นการตัดสินใจของโครงการที่ต้องบันทึก และต้องตรวจความถูกต้องด้วย SQL ก่อนใช้</li>
+<li>ตัวชี้วัดแบ่งเป็นรวมขึ้นได้ รวมขึ้นได้บางส่วน และรวมขึ้นไม่ได้ ค่าเฉลี่ยและสัดส่วนทำให้รวมได้ด้วยการเก็บตัวตั้งกับตัวหาร ส่วนมัธยฐานต้องคำนวณจากข้อมูลระดับล่างสุด</li>
+<li>วิธีถ่วงน้ำหนักต่างกันให้ค่าระดับบนต่างกัน แต่ละวิธีตอบคำถามต่างกัน สิ่งที่ผิดคือการใช้ปนกันหรือไม่บอกผู้อ่าน</li>
+<li>ตารางสรุปที่มีเฉพาะตัวชี้วัดที่รวมขึ้นได้ ร่วมกับการทดสอบความสอดคล้องอัตโนมัติ ทำให้ทุกระดับของแดชบอร์ดให้ตัวเลขตรงกัน</li>
+<li>treemap, sunburst และ icicle ใช้ขนาดกับตัวชี้วัดที่รวมขึ้นได้และสีกับตัวชี้วัดอื่น icicle อ่านขนาดได้แม่นที่สุด อัลกอริทึมจัดวางแลกเปลี่ยนระหว่างอัตราส่วน ลำดับ และความเสถียร</li>
+<li>roll-up, drill-down, slice, dice และ pivot เป็นภาษาของการสำรวจข้อมูลหลายมิติและการออกแบบแดชบอร์ด drill-down ที่รักษาบริบท ตัวกรอง และความสอดคล้องของตัวเลข</li>
 </ul>
 </section>
 <section id="sec-ch18-exercises" class="level2 unnumbered">
@@ -1159,29 +1353,29 @@ window.Quarto = {
 <section id="ระดบพนฐาน" class="level3">
 <h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
 <ol type="1">
-<li>จำแนกตัวชี้วัดต่อไปนี้ว่าเป็น distributive, algebraic หรือ holistic: (ก) จำนวนสถานี (ข) ค่าเฉลี่ย PM2.5 (ค) ค่าสูงสุดรายวัน (ง) เปอร์เซ็นไทล์ที่ 95 (จ) สัดส่วนวันเกินมาตรฐาน (ฉ) ส่วนเบี่ยงเบนมาตรฐาน</li>
-<li>ภาคหนึ่งมีสามจังหวัด จำนวนสถานี-วันเป็น 1,200, 300 และ 500 ค่าเฉลี่ยของแต่ละจังหวัดเป็น 25, 40 และ 30 µg/m³ คำนวณค่าเฉลี่ยแบบ pooled และค่าเฉลี่ยของค่าเฉลี่ยจังหวัด แล้วอธิบายว่าแต่ละค่าตอบคำถามอะไร</li>
-<li>ทำไมจึงไม่ควรใช้ค่าเฉลี่ย PM2.5 เป็นขนาดของ treemap</li>
-<li>อธิบายความต่างระหว่าง <code>ROLLUP (region, province)</code> กับ <code>CUBE (region, province)</code> ว่าคำนวณกลุ่มใดบ้าง และแบบใดเหมาะกับลำดับชั้นภาคกับจังหวัด</li>
-<li>ยกตัวอย่างการดำเนินการ slice และ dice กับข้อมูลโครงการอย่างละหนึ่งตัวอย่าง พร้อมเงื่อนไข <code>WHERE</code> ที่ใช้</li>
+<li>จำแนกตัวชี้วัดต่อไปนี้ว่ารวมขึ้นได้ รวมขึ้นได้บางส่วน หรือรวมขึ้นไม่ได้: จำนวนชั่วโมงที่วัดได้ ค่าสูงสุดรายชั่วโมง ค่าเฉลี่ยรายวัน เปอร์เซ็นไทล์ที่ 95 จำนวนสถานีที่ทำงานในวันหนึ่ง สัดส่วนวันเกินมาตรฐาน</li>
+<li>ภาคหนึ่งมีสามจังหวัด จังหวัดละหนึ่งสถานี ค่าเฉลี่ย 30, 45 และ 60 µg/m³ จากข้อมูล 360, 180 และ 90 วัน จงคำนวณค่าระดับภาคด้วยการเฉลี่ยสถานีเท่ากัน และด้วยการถ่วงน้ำหนักด้วยสถานี-วัน แล้วอธิบายว่าแต่ละค่าตอบคำถามใด</li>
+<li>อธิบายว่าทำไมไม่ควรใช้ค่าเฉลี่ย PM2.5 เป็น <code>values</code> ของ treemap และถ้าใช้จะเกิดอะไรกับพื้นที่ของระดับบน</li>
+<li>ยกตัวอย่าง roll-up, drill-down, slice และ dice อย่างละหนึ่งตัวอย่างที่ตอบคำถามจาก <code>questions.md</code> ของโครงการตนเอง</li>
+<li>ใช้ slice-and-dice แบ่งสี่เหลี่ยม 120 × 40 ให้สี่โหนดที่มีค่า 40, 30, 20, 10 ตามแนวยาว แล้วคำนวณอัตราส่วนยาวต่อสั้นของแต่ละสี่เหลี่ยม</li>
 </ol>
 </section>
 <section id="ระดบประยกต" class="level3">
 <h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
 <ol start="6" type="1">
-<li>เขียน query ตรวจความถูกต้องของลำดับชั้นในตาราง <code>stations</code> ของทีม แล้วเพิ่มลงใน <code>src/validate.py</code> เป็นกฎที่ทำให้ pipeline ล้มเหลวเมื่อพบปัญหา</li>
-<li>คำนวณค่าเฉลี่ย PM2.5 ของแต่ละภาคด้วยสามวิธีใน <a href="#tbl-ch18-aggregation" class="quarto-xref">ตารางที่&nbsp;<span>18.3</span></a> จากข้อมูลของทีม อภิปรายว่าลำดับของภาคเปลี่ยนตามวิธีหรือไม่ และวิธีใดตรงกับคำถามใน <code>questions.md</code></li>
-<li>สร้าง treemap และ sunburst ของลำดับชั้นภาค → จังหวัด → สถานี โดยใช้จำนวนสถานี-วันเป็นขนาด และสัดส่วนวันเกินมาตรฐานเป็นสี ตรวจว่าสีของภาคใน treemap ตรงกับสัดส่วนที่คำนวณด้วย SQL <code>ROLLUP</code></li>
-<li>ใช้ <code>GROUP BY CUBE (region, year)</code> คำนวณสัดส่วนวันเกินมาตรฐาน แล้วจัดผลเป็นตารางภาค × ปีที่มีแถวและคอลัมน์ผลรวม เปรียบเทียบกับการใช้ <code>PIVOT</code></li>
-<li>เขียนการทดสอบด้วย pytest (ภาคผนวก ก) ที่ตรวจว่า จำนวนวันเกินมาตรฐานของประเทศเท่ากับผลรวมของภาค และผลรวมของแต่ละภาคเท่ากับผลรวมของจังหวัดในภาคนั้น</li>
+<li>รันการตรวจลำดับชั้นทั้งสี่ข้อกับฐานข้อมูลของตน แก้ข้อมูลจนผ่าน แล้วย้ายการตรวจเข้า <code>src/validate.py</code> ในรูปของฟังก์ชันที่คืนรายการปัญหา</li>
+<li>สร้างตาราง <code>summary</code> และฟังก์ชัน <code>roll_up</code> แล้วเขียนการทดสอบความสอดคล้องสำหรับทั้งระดับภาคและระดับจังหวัด ทดลองแก้ <code>roll_up</code> ให้ผิด (เช่น เฉลี่ย <code>pm25_mean</code> ของระดับล่าง) แล้วดูว่าการทดสอบจับได้หรือไม่</li>
+<li>ใช้ <code>GROUP BY ROLLUP (s.region, s.province)</code> สร้างตารางสามระดับในหนึ่ง query แล้วตรวจว่าค่าระดับประเทศเท่ากับค่าที่คำนวณด้วย query แยก</li>
+<li>วาด treemap, sunburst และ icicle ของลำดับชั้นเดียวกัน แล้วให้เพื่อนสองคนตอบคำถาม “ภาคใดมีสถานี-วันมากเป็นอันดับสอง” จากแต่ละกราฟ บันทึกเวลาและความถูกต้อง</li>
+<li>ใช้ฟังก์ชัน <code>cube</code> ตอบคำถาม “ในฤดูแล้งปีล่าสุด จังหวัดใดของแต่ละภาคมีสัดส่วนวันเกินมาตรฐานสูงสุด” โดยระบุว่าใช้การดำเนินการ OLAP แบบใดในแต่ละขั้น</li>
 </ol>
 </section>
 <section id="ระดบทาทาย" class="level3">
 <h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
 <ol start="11" type="1">
-<li>ออกแบบตาราง <code>summary_cube</code> ที่เก็บตัวชี้วัดไว้ล่วงหน้าสำหรับทุกระดับของภาค × จังหวัด × เดือน เพื่อให้แดชบอร์ดเร็วขึ้น ระบุว่าต้องเก็บคอลัมน์ใดบ้างเพื่อให้คำนวณค่าเฉลี่ยและสัดส่วนของระดับใดก็ได้ถูกต้อง และอภิปรายว่าทำไมมัธยฐานจึงเก็บในตารางนี้ไม่ได้ มีวิธีประมาณอย่างไร (เช่น histogram หรือ sketch)</li>
-<li>ลำดับชั้นเชิงพื้นที่ทางการปกครองไม่ได้สะท้อนการกระจายของฝุ่น ออกแบบลำดับชั้นทางเลือกจากผลการจัดกลุ่มในบทที่ 15 หรือจากลุ่มน้ำ แล้วเปรียบเทียบข้อสรุปกับลำดับชั้นตามภาค อภิปรายในแง่ MAUP (บทที่ 17)</li>
-<li>ศึกษาอัลกอริทึม treemap แบบ ordered หรือ strip แล้วเขียนโค้ดเปรียบเทียบอัตราส่วนด้านเฉลี่ยและความคงที่ของลำดับกับ squarified เมื่อข้อมูลเปลี่ยนเล็กน้อย</li>
+<li>เพิ่มระดับอำเภอในลำดับชั้นด้วย spatial join กับขอบเขตอำเภอ (บทที่ 17) แล้วจัดการกับลำดับชั้นที่ไม่สม่ำเสมอ เช่น กรุงเทพมหานครที่ใช้เขตแทนอำเภอ อภิปรายผลต่อ treemap และการ drill-down</li>
+<li>ใช้ <code>approx_quantile</code> ของ DuckDB คำนวณมัธยฐานระดับภาค เทียบกับ <code>median</code> ที่คำนวณตรง และวัดความต่างกับเวลาที่ใช้ อภิปรายว่าเมื่อใดค่าประมาณเพียงพอสำหรับแดชบอร์ด</li>
+<li>คำนวณค่าเฉลี่ย PM2.5 ระดับจังหวัดแบบถ่วงน้ำหนักด้วยประชากร โดยใช้ข้อมูลประชากรรายอำเภอจากแหล่งเปิดและ Voronoi polygon ของสถานี (บทที่ 17) เทียบกับการถ่วงน้ำหนักด้วยสถานี-วัน และอภิปรายว่าแบบใดเหมาะกับการสื่อสารความเสี่ยงต่อสุขภาพ</li>
 </ol>
 <p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch18">ภาคผนวก ช</a></p>
 </section>
@@ -1189,25 +1383,38 @@ window.Quarto = {
 <section id="อานเพมเตม" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
 <ul>
-<li><span class="citation" data-cites="gray1997data">Gray และคณะ (<a href="../references.html#ref-gray1997data" role="doc-biblioref">1997</a>)</span> — บทความที่เสนอ data cube และตัวดำเนินการ CUBE พร้อมการจำแนกตัวชี้วัดเป็น distributive, algebraic และ holistic</li>
-<li><span class="citation" data-cites="chaudhuri1997overview">Chaudhuri และ Dayal (<a href="../references.html#ref-chaudhuri1997overview" role="doc-biblioref">1997</a>)</span> — ภาพรวมของ data warehousing และ OLAP ที่อธิบายการดำเนินการ roll-up, drill-down, slice และ dice</li>
-<li><span class="citation" data-cites="shneiderman1992tree">Shneiderman (<a href="../references.html#ref-shneiderman1992tree" role="doc-biblioref">1992</a>)</span> — บทความต้นฉบับของ treemap และอัลกอริทึม slice-and-dice</li>
-<li><span class="citation" data-cites="bruls2000squarified">Bruls และคณะ (<a href="../references.html#ref-bruls2000squarified" role="doc-biblioref">2000</a>)</span> — บทความที่เสนออัลกอริทึม squarified ซึ่งเป็นค่าเริ่มต้นของเครื่องมือส่วนใหญ่ในปัจจุบัน</li>
+<li><span class="citation" data-cites="gray1997data">Gray และคณะ (<a href="../references.html#ref-gray1997data" role="doc-biblioref">1997</a>)</span> — บทความที่เสนอ data cube และตัวดำเนินการ ROLLUP และ CUBE ซึ่งเป็นพื้นฐานของ OLAP และไวยากรณ์ SQL ที่ใช้ในบทนี้</li>
+<li><span class="citation" data-cites="kimball2013data">Kimball และ Ross (<a href="../references.html#ref-kimball2013data" role="doc-biblioref">2013</a>)</span> — ตำรามาตรฐานของการออกแบบคลังข้อมูล อธิบายชนิดของตัวชี้วัดและการออกแบบตารางสรุปได้ละเอียด</li>
+<li><span class="citation" data-cites="shneiderman1992tree">Shneiderman (<a href="../references.html#ref-shneiderman1992tree" role="doc-biblioref">1992</a>)</span> — บทความต้นฉบับของ treemap เล่าที่มาของแนวคิดจากปัญหาการดูพื้นที่ใช้งานของดิสก์</li>
+<li><span class="citation" data-cites="bruls2000squarified">Bruls และคณะ (<a href="../references.html#ref-bruls2000squarified" role="doc-biblioref">2000</a>)</span> — อธิบายอัลกอริทึม squarified ที่เป็นค่าเริ่มต้นของเครื่องมือส่วนใหญ่ในปัจจุบัน</li>
+<li><span class="citation" data-cites="bederson2002ordered">Bederson และคณะ (<a href="../references.html#ref-bederson2002ordered" role="doc-biblioref">2002</a>)</span> — เปรียบเทียบอัลกอริทึมจัดวาง treemap หลายแบบ ทั้งด้านอัตราส่วน ลำดับ และความเสถียร</li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-bruls2000squarified" class="csl-entry" role="listitem">
-Bruls, Mark, Kees Huizing, และ Jarke J. van Wijk. 2000. <span>“Squarified Treemaps”</span>. <em>Data Visualization 2000: Proceedings of the Joint EUROGRAPHICS and IEEE TCVG Symposium on Visualization</em>, 33–42. <a href="https://doi.org/10.1007/978-3-7091-6783-0_4">https://doi.org/10.1007/978-3-7091-6783-0_4</a>.
+<div id="ref-bederson2002ordered" class="csl-entry" role="listitem">
+Bederson, Benjamin B., Ben Shneiderman, และ Martin Wattenberg. 2002. <span>“Ordered and Quantum Treemaps: Making Effective Use of 2D Space to Display Hierarchies”</span>. <em>ACM Transactions on Graphics</em> 21 (4): 833–54. <a href="https://doi.org/10.1145/571647.571649">https://doi.org/10.1145/571647.571649</a>.
 </div>
-<div id="ref-chaudhuri1997overview" class="csl-entry" role="listitem">
-Chaudhuri, Surajit, และ Umeshwar Dayal. 1997. <span>“An Overview of Data Warehousing and <span>OLAP</span> Technology”</span>. <em>ACM SIGMOD Record</em> 26 (1): 65–74. <a href="https://doi.org/10.1145/248603.248616">https://doi.org/10.1145/248603.248616</a>.
+<div id="ref-bruls2000squarified" class="csl-entry" role="listitem">
+Bruls, Mark, Kees Huizing, และ Jarke J. van Wijk. 2000. <span>“Squarified Treemaps”</span>. <em>Data Visualization 2000: Proceedings of the Joint Eurographics and IEEE TCVG Symposium on Visualization</em>, 33–42. <a href="https://doi.org/10.1007/978-3-7091-6783-0_4">https://doi.org/10.1007/978-3-7091-6783-0_4</a>.
+</div>
+<div id="ref-dunning2019computing" class="csl-entry" role="listitem">
+Dunning, Ted, และ Otmar Ertl. 2019. <em>Computing Extremely Accurate Quantiles Using t-Digests</em>. arXiv preprint arXiv:1902.04023. <a href="https://doi.org/10.48550/arXiv.1902.04023">https://doi.org/10.48550/arXiv.1902.04023</a>.
 </div>
 <div id="ref-gray1997data" class="csl-entry" role="listitem">
 Gray, Jim, Surajit Chaudhuri, Adam Bosworth, และคณะ. 1997. <span>“Data Cube: A Relational Aggregation Operator Generalizing Group-By, Cross-Tab, and Sub-Totals”</span>. <em>Data Mining and Knowledge Discovery</em> 1 (1): 29–53. <a href="https://doi.org/10.1023/A:1009726021843">https://doi.org/10.1023/A:1009726021843</a>.
 </div>
+<div id="ref-kimball2013data" class="csl-entry" role="listitem">
+Kimball, Ralph, และ Margy Ross. 2013. <em>The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling</em>. 3 พิมพ์ครั้งที่. Wiley.
+</div>
+<div id="ref-plotly2024python" class="csl-entry" role="listitem">
+Plotly Technologies Inc. ม.ป.ป. <em>Plotly Python Graphing Library</em>. Documentation. สืบค้น 25 ตุลาคม 2026. <a href="https://plotly.com/python/">https://plotly.com/python/</a>.
+</div>
 <div id="ref-shneiderman1992tree" class="csl-entry" role="listitem">
 Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d Space-Filling Approach”</span>. <em>ACM Transactions on Graphics</em> 11 (1): 92–99. <a href="https://doi.org/10.1145/102377.115768">https://doi.org/10.1145/102377.115768</a>.
+</div>
+<div id="ref-who2021global" class="csl-entry" role="listitem">
+World Health Organization. 2021. <em><span>WHO</span> Global Air Quality Guidelines: Particulate Matter (<span>PM2.5</span> and <span>PM10</span>), Ozone, Nitrogen Dioxide, Sulfur Dioxide and Carbon Monoxide</em>. World Health Organization.
 </div>
 </div>
 </section>
@@ -1291,7 +1498,8 @@ Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d Space-Fi
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1300,8 +1508,69 @@ Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d Space-Fi
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1315,6 +1584,7 @@ Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d Space-Fi
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1477,44 +1747,54 @@ Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d Space-Fi
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1613,7 +1893,10 @@ Shneiderman, Ben. 1992. <span>“Tree Visualization with Tree-Maps: 2-d Space-Fi
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/17-spatial-data.html" class="pagination-link" aria-label="ข้อมูลเชิงพื้นที่">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ข้อมูลเชิงพื้นที่</span></span>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -94,14 +94,15 @@ div.csl-indent {
 <link href="../chapters/19-storytelling-reports.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5738177460af309ea042e512c03337aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1436b1d85bd248ef92b4e1f7ee7cda7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -136,17 +137,17 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/20-dashboards.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/20-dashboards.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -157,7 +158,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">ชุดเครื่องมือสำหรับวิทยาการข้อมูล</a> 
@@ -188,13 +189,10 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 1 รากฐาน</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">ส่วนที่ 1 รากฐาน</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/01-data-science-eda.html" class="sidebar-item-text sidebar-link">
@@ -223,13 +221,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">ส่วนที่ 2 การได้มาและจัดเก็บข้อมูล</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/05-data-acquisition.html" class="sidebar-item-text sidebar-link">
@@ -258,13 +253,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 3 คุณภาพข้อมูล</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">ส่วนที่ 3 คุณภาพข้อมูล</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/09-data-quality.html" class="sidebar-item-text sidebar-link">
@@ -281,13 +273,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 4 การสำรวจด้วยภาพ</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">ส่วนที่ 4 การสำรวจด้วยภาพ</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/11-visual-perception.html" class="sidebar-item-text sidebar-link">
@@ -304,13 +293,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">ส่วนที่ 5 สถิติและการสำรวจหลายมิติ</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/13-exploratory-statistics.html" class="sidebar-item-text sidebar-link">
@@ -339,13 +325,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/17-spatial-data.html" class="sidebar-item-text sidebar-link">
@@ -374,13 +357,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">ส่วนที่ 7 การนำไปใช้และความรับผิดชอบ</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/21-case-study-pm25.html" class="sidebar-item-text sidebar-link">
@@ -397,13 +377,10 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">ภาคผนวก</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-controls="quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-8-label">ภาคผนวก</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" aria-labelledby="quarto-sidebar-section-8-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../appendices/a-python.html" class="sidebar-item-text sidebar-link">
@@ -478,7 +455,7 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">สารบัญ</h2>
    
   <ul>
@@ -486,45 +463,66 @@ div.csl-indent {
   <li><a href="#sec-ch20-types" id="toc-sec-ch20-types" class="nav-link" data-scroll-target="#sec-ch20-types"><span class="header-section-number">20.1</span> ประเภทของแดชบอร์ด: เชิงปฏิบัติการ เชิงวิเคราะห์ เชิงกลยุทธ์</a>
   <ul class="collapse">
   <li><a href="#แดชบอรดคออะไร" id="toc-แดชบอรดคออะไร" class="nav-link" data-scroll-target="#แดชบอรดคออะไร">แดชบอร์ดคืออะไร</a></li>
-  <li><a href="#สามประเภท" id="toc-สามประเภท" class="nav-link" data-scroll-target="#สามประเภท">สามประเภท</a></li>
+  <li><a href="#สามประเภทตามการตดสนใจ" id="toc-สามประเภทตามการตดสนใจ" class="nav-link" data-scroll-target="#สามประเภทตามการตดสนใจ">สามประเภทตามการตัดสินใจ</a></li>
+  <li><a href="#กอนออกแบบ-ตอบคำถามหาขอ" id="toc-กอนออกแบบ-ตอบคำถามหาขอ" class="nav-link" data-scroll-target="#กอนออกแบบ-ตอบคำถามหาขอ">ก่อนออกแบบ: ตอบคำถามห้าข้อ</a></li>
   </ul></li>
   <li><a href="#sec-ch20-layout" id="toc-sec-ch20-layout" class="nav-link" data-scroll-target="#sec-ch20-layout"><span class="header-section-number">20.2</span> หลักการจัดวางและการออกแบบตัวชี้วัด</a>
   <ul class="collapse">
-  <li><a href="#การจดวาง" id="toc-การจดวาง" class="nav-link" data-scroll-target="#การจดวาง">การจัดวาง</a></li>
-  <li><a href="#ตวชวด" id="toc-ตวชวด" class="nav-link" data-scroll-target="#ตวชวด">ตัวชี้วัด</a></li>
-  <li><a href="#สงทไมควรมในแดชบอรด" id="toc-สงทไมควรมในแดชบอรด" class="nav-link" data-scroll-target="#สงทไมควรมในแดชบอรด">สิ่งที่ไม่ควรมีในแดชบอร์ด</a></li>
+  <li><a href="#ลำดบสายตาและการจดวาง" id="toc-ลำดบสายตาและการจดวาง" class="nav-link" data-scroll-target="#ลำดบสายตาและการจดวาง">ลำดับสายตาและการจัดวาง</a></li>
+  <li><a href="#ตวชวดทด" id="toc-ตวชวดทด" class="nav-link" data-scroll-target="#ตวชวดทด">ตัวชี้วัดที่ดี</a></li>
+  <li><a href="#ระวงตวชวดทกลายเปนเปา" id="toc-ระวงตวชวดทกลายเปนเปา" class="nav-link" data-scroll-target="#ระวงตวชวดทกลายเปนเปา">ระวังตัวชี้วัดที่กลายเป็นเป้า</a></li>
+  <li><a href="#สงทควรหลกเลยง" id="toc-สงทควรหลกเลยง" class="nav-link" data-scroll-target="#สงทควรหลกเลยง">สิ่งที่ควรหลีกเลี่ยง</a></li>
+  <li><a href="#ทมาและขอจำกดบนหนาจอ" id="toc-ทมาและขอจำกดบนหนาจอ" class="nav-link" data-scroll-target="#ทมาและขอจำกดบนหนาจอ">ที่มาและข้อจำกัดบนหน้าจอ</a></li>
   </ul></li>
-  <li><a href="#sec-ch20-streamlit" id="toc-sec-ch20-streamlit" class="nav-link" data-scroll-target="#sec-ch20-streamlit"><span class="header-section-number">20.3</span> แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</a>
+  <li><a href="#sec-ch20-streamlit-model" id="toc-sec-ch20-streamlit-model" class="nav-link" data-scroll-target="#sec-ch20-streamlit-model"><span class="header-section-number">20.3</span> แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</a>
   <ul class="collapse">
-  <li><a href="#streamlit-คออะไร" id="toc-streamlit-คออะไร" class="nav-link" data-scroll-target="#streamlit-คออะไร">Streamlit คืออะไร</a></li>
-  <li><a href="#rerun-รนทง-script-ใหมทกครง" id="toc-rerun-รนทง-script-ใหมทกครง" class="nav-link" data-scroll-target="#rerun-รนทง-script-ใหมทกครง">rerun: รันทั้ง script ใหม่ทุกครั้ง</a></li>
+  <li><a href="#script-ทรนใหมทงไฟล" id="toc-script-ทรนใหมทงไฟล" class="nav-link" data-scroll-target="#script-ทรนใหมทงไฟล">script ที่รันใหม่ทั้งไฟล์</a></li>
   <li><a href="#session-state" id="toc-session-state" class="nav-link" data-scroll-target="#session-state">session state</a></li>
   <li><a href="#callback" id="toc-callback" class="nav-link" data-scroll-target="#callback">callback</a></li>
+  <li><a href="#กฎของการแกคา-widget" id="toc-กฎของการแกคา-widget" class="nav-link" data-scroll-target="#กฎของการแกคา-widget">กฎของการแก้ค่า widget</a></li>
+  <li><a href="#เครองมออนในแบบจำลอง" id="toc-เครองมออนในแบบจำลอง" class="nav-link" data-scroll-target="#เครองมออนในแบบจำลอง">เครื่องมืออื่นในแบบจำลอง</a></li>
   </ul></li>
   <li><a href="#sec-ch20-cache" id="toc-sec-ch20-cache" class="nav-link" data-scroll-target="#sec-ch20-cache"><span class="header-section-number">20.4</span> caching: <code>cache_data</code> กับ <code>cache_resource</code> และการเชื่อมต่อแบบ read-only</a>
   <ul class="collapse">
   <li><a href="#ทำไมตอง-cache" id="toc-ทำไมตอง-cache" class="nav-link" data-scroll-target="#ทำไมตอง-cache">ทำไมต้อง cache</a></li>
-  <li><a href="#ขอผดพลาดของ-cache-ทพบบอย" id="toc-ขอผดพลาดของ-cache-ทพบบอย" class="nav-link" data-scroll-target="#ขอผดพลาดของ-cache-ทพบบอย">ข้อผิดพลาดของ cache ที่พบบ่อย</a></li>
+  <li><a href="#การเชอมตอ-duckdb-สำหรบแดชบอรด" id="toc-การเชอมตอ-duckdb-สำหรบแดชบอรด" class="nav-link" data-scroll-target="#การเชอมตอ-duckdb-สำหรบแดชบอรด">การเชื่อมต่อ DuckDB สำหรับแดชบอร์ด</a></li>
+  <li><a href="#cache-ทรวาขอมลเปลยน" id="toc-cache-ทรวาขอมลเปลยน" class="nav-link" data-scroll-target="#cache-ทรวาขอมลเปลยน">cache ที่รู้ว่าข้อมูลเปลี่ยน</a></li>
+  <li><a href="#argument-ทไมตองการใหเปนสวนของ-key" id="toc-argument-ทไมตองการใหเปนสวนของ-key" class="nav-link" data-scroll-target="#argument-ทไมตองการใหเปนสวนของ-key">argument ที่ไม่ต้องการให้เป็นส่วนของ key</a></li>
+  <li><a href="#ใชฟงกชนรวมกบรายงาน" id="toc-ใชฟงกชนรวมกบรายงาน" class="nav-link" data-scroll-target="#ใชฟงกชนรวมกบรายงาน">ใช้ฟังก์ชันร่วมกับรายงาน</a></li>
   </ul></li>
   <li><a href="#sec-ch20-drilldown" id="toc-sec-ch20-drilldown" class="nav-link" data-scroll-target="#sec-ch20-drilldown"><span class="header-section-number">20.5</span> การออกแบบ drill-down หลายระดับ</a>
   <ul class="collapse">
-  <li><a href="#สรางเงอนไขจาก-session-state" id="toc-สรางเงอนไขจาก-session-state" class="nav-link" data-scroll-target="#สรางเงอนไขจาก-session-state">สร้างเงื่อนไขจาก session state</a></li>
-  <li><a href="#ความปลอดภยของ-sql" id="toc-ความปลอดภยของ-sql" class="nav-link" data-scroll-target="#ความปลอดภยของ-sql">ความปลอดภัยของ SQL</a></li>
-  <li><a href="#breadcrumb-และเนอหาตามระดบ" id="toc-breadcrumb-และเนอหาตามระดบ" class="nav-link" data-scroll-target="#breadcrumb-และเนอหาตามระดบ">breadcrumb และเนื้อหาตามระดับ</a></li>
-  <li><a href="#ทางเลอก-เลอกจากกราฟโดยตรง" id="toc-ทางเลอก-เลอกจากกราฟโดยตรง" class="nav-link" data-scroll-target="#ทางเลอก-เลอกจากกราฟโดยตรง">ทางเลือก: เลือกจากกราฟโดยตรง</a></li>
+  <li><a href="#สระดบตามลำดบชน" id="toc-สระดบตามลำดบชน" class="nav-link" data-scroll-target="#สระดบตามลำดบชน">สี่ระดับตามลำดับชั้น</a></li>
+  <li><a href="#สรางเงอนไขของ-query-จากสถานะ" id="toc-สรางเงอนไขของ-query-จากสถานะ" class="nav-link" data-scroll-target="#สรางเงอนไขของ-query-จากสถานะ">สร้างเงื่อนไขของ query จากสถานะ</a></li>
+  <li><a href="#แถบเสนทาง" id="toc-แถบเสนทาง" class="nav-link" data-scroll-target="#แถบเสนทาง">แถบเส้นทาง</a></li>
+  <li><a href="#เนอหาของแตละระดบ" id="toc-เนอหาของแตละระดบ" class="nav-link" data-scroll-target="#เนอหาของแตละระดบ">เนื้อหาของแต่ละระดับ</a></li>
+  <li><a href="#drill-down-ดวยการคลกบนกราฟ" id="toc-drill-down-ดวยการคลกบนกราฟ" class="nav-link" data-scroll-target="#drill-down-ดวยการคลกบนกราฟ">drill-down ด้วยการคลิกบนกราฟ</a></li>
+  <li><a href="#ลงกทแชรได" id="toc-ลงกทแชรได" class="nav-link" data-scroll-target="#ลงกทแชรได">ลิงก์ที่แชร์ได้</a></li>
+  <li><a href="#หลกการทตองรกษา" id="toc-หลกการทตองรกษา" class="nav-link" data-scroll-target="#หลกการทตองรกษา">หลักการที่ต้องรักษา</a></li>
   </ul></li>
   <li><a href="#sec-ch20-deploy" id="toc-sec-ch20-deploy" class="nav-link" data-scroll-target="#sec-ch20-deploy"><span class="header-section-number">20.6</span> ประสิทธิภาพ การทดสอบ และการ deploy ★</a>
   <ul class="collapse">
-  <li><a href="#ประสทธภาพ" id="toc-ประสทธภาพ" class="nav-link" data-scroll-target="#ประสทธภาพ">ประสิทธิภาพ</a></li>
-  <li><a href="#การทดสอบอตโนมต" id="toc-การทดสอบอตโนมต" class="nav-link" data-scroll-target="#การทดสอบอตโนมต">การทดสอบอัตโนมัติ</a></li>
-  <li><a href="#การ-deploy" id="toc-การ-deploy" class="nav-link" data-scroll-target="#การ-deploy">การ deploy</a></li>
+  <li><a href="#วดกอนปรบ" id="toc-วดกอนปรบ" class="nav-link" data-scroll-target="#วดกอนปรบ">วัดก่อนปรับ</a></li>
+  <li><a href="#วธทำใหเรวขน" id="toc-วธทำใหเรวขน" class="nav-link" data-scroll-target="#วธทำใหเรวขน">วิธีทำให้เร็วขึ้น</a></li>
+  <li><a href="#ทดสอบ-query" id="toc-ทดสอบ-query" class="nav-link" data-scroll-target="#ทดสอบ-query">ทดสอบ query</a></li>
+  <li><a href="#ทดสอบแอปทงตวดวย-apptest" id="toc-ทดสอบแอปทงตวดวย-apptest" class="nav-link" data-scroll-target="#ทดสอบแอปทงตวดวย-apptest">ทดสอบแอปทั้งตัวด้วย AppTest</a></li>
+  <li><a href="#deploy" id="toc-deploy" class="nav-link" data-scroll-target="#deploy">deploy</a></li>
   </ul></li>
-  <li><a href="#sec-ch20-bi" id="toc-sec-ch20-bi" class="nav-link" data-scroll-target="#sec-ch20-bi"><span class="header-section-number">20.7</span> เปรียบเทียบกับ Power BI และ Looker Studio ★</a>
+  <li><a href="#sec-ch20-bi-tools" id="toc-sec-ch20-bi-tools" class="nav-link" data-scroll-target="#sec-ch20-bi-tools"><span class="header-section-number">20.7</span> เปรียบเทียบกับ Power BI และ Looker Studio ★</a>
   <ul class="collapse">
-  <li><a href="#เครองมอ-bi" id="toc-เครองมอ-bi" class="nav-link" data-scroll-target="#เครองมอ-bi">เครื่องมือ BI</a></li>
-  <li><a href="#สงตอขอมลใหเครองมอ-bi" id="toc-สงตอขอมลใหเครองมอ-bi" class="nav-link" data-scroll-target="#สงตอขอมลใหเครองมอ-bi">ส่งต่อข้อมูลให้เครื่องมือ BI</a></li>
+  <li><a href="#เครองมอ-bi-แบบลากวาง" id="toc-เครองมอ-bi-แบบลากวาง" class="nav-link" data-scroll-target="#เครองมอ-bi-แบบลากวาง">เครื่องมือ BI แบบลากวาง</a></li>
+  <li><a href="#สงขอมลออกใหเครองมอ-bi" id="toc-สงขอมลออกใหเครองมอ-bi" class="nav-link" data-scroll-target="#สงขอมลออกใหเครองมอ-bi">ส่งข้อมูลออกให้เครื่องมือ BI</a></li>
+  <li><a href="#เปรยบเทยบ" id="toc-เปรยบเทยบ" class="nav-link" data-scroll-target="#เปรยบเทยบ">เปรียบเทียบ</a></li>
+  <li><a href="#เลอกอยางไร" id="toc-เลอกอยางไร" class="nav-link" data-scroll-target="#เลอกอยางไร">เลือกอย่างไร</a></li>
   </ul></li>
-  <li><a href="#sec-ch20-case" id="toc-sec-ch20-case" class="nav-link" data-scroll-target="#sec-ch20-case">กรณีศึกษา: จากแบบร่างบนกระดาษสู่ PM2.5 Explorer</a></li>
+  <li><a href="#sec-ch20-case" id="toc-sec-ch20-case" class="nav-link" data-scroll-target="#sec-ch20-case">กรณีศึกษา: PM2.5 Explorer แดชบอร์ด drill-down สี่ระดับ</a>
+  <ul class="collapse">
+  <li><a href="#เปาหมายและผใช" id="toc-เปาหมายและผใช" class="nav-link" data-scroll-target="#เปาหมายและผใช">เป้าหมายและผู้ใช้</a></li>
+  <li><a href="#โครงสรางไฟล" id="toc-โครงสรางไฟล" class="nav-link" data-scroll-target="#โครงสรางไฟล">โครงสร้างไฟล์</a></li>
+  <li><a href="#การจดวาง" id="toc-การจดวาง" class="nav-link" data-scroll-target="#การจดวาง">การจัดวาง</a></li>
+  <li><a href="#สวนประกอบหลก" id="toc-สวนประกอบหลก" class="nav-link" data-scroll-target="#สวนประกอบหลก">ส่วนประกอบหลัก</a></li>
+  <li><a href="#การตรวจรบ" id="toc-การตรวจรบ" class="nav-link" data-scroll-target="#การตรวจรบ">การตรวจรับ</a></li>
+  </ul></li>
   <li><a href="#sec-ch20-pitfalls" id="toc-sec-ch20-pitfalls" class="nav-link" data-scroll-target="#sec-ch20-pitfalls">ข้อผิดพลาดที่พบบ่อย</a></li>
   <li><a href="#สรป" id="toc-สรป" class="nav-link" data-scroll-target="#สรป">สรุป</a></li>
   <li><a href="#sec-ch20-exercises" id="toc-sec-ch20-exercises" class="nav-link" data-scroll-target="#sec-ch20-exercises">แบบฝึกหัด</a>
@@ -538,9 +536,9 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/20-dashboards.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/17-spatial-data.html">ส่วนที่ 6 ข้อมูลเชิงพื้นที่ ลำดับชั้น และการสื่อสาร</a></li><li class="breadcrumb-item"><a href="../chapters/20-dashboards.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">การออกแบบและพัฒนาแดชบอร์ด</span></h1>
 </div>
@@ -565,34 +563,35 @@ div.csl-indent {
 </header>
 
 
-<p>รายงานในบทที่ 19 ตอบคำถามที่กำหนดไว้ล่วงหน้า ส่วนแดชบอร์ดให้ผู้ใช้ถามคำถามของตนเอง เจ้าหน้าที่สิ่งแวดล้อมจังหวัดอยากดูจังหวัดของตน นักวิจัยอยากเลือกช่วงเวลาที่สนใจ ผู้บริหารอยากเห็นภาพรวมแล้วเจาะลงไปยังพื้นที่ที่น่ากังวล แดชบอร์ดที่ดีรวมหลักการจากหลายบทเข้าด้วยกัน ได้แก่ การออกแบบกราฟ (บทที่ 11) การโต้ตอบตามหลักของ Shneiderman (บทที่ 12) และการรวมข้อมูลข้ามระดับให้สอดคล้องกัน (บทที่ 18)</p>
-<p>บทนี้แบ่งเป็นสองส่วน ส่วนแรกว่าด้วยการออกแบบ คือประเภทของแดชบอร์ดและหลักการจัดวาง ส่วนที่สองว่าด้วยการพัฒนาด้วย Streamlit ซึ่งเป็นเครื่องมือของรายวิชา ตั้งแต่แบบจำลองการทำงานที่ต่างจากโปรแกรม Python ทั่วไป การใช้ cache อย่างถูกต้อง ไปจนถึงการสร้าง drill-down หลายระดับ ผลงานของบทคือ <code>app/app.py</code> แดชบอร์ด PM2.5 Explorer ที่ drill-down จากประเทศถึงสถานีได้ ส่วนเชิงลึกครอบคลุมการทดสอบ การ deploy และการเปรียบเทียบกับเครื่องมือ BI เชิงพาณิชย์</p>
+<p>รายงานในบทที่ 19 เป็นการสื่อสารแบบผู้เขียนนำ ผู้เขียนเลือกคำถาม ลำดับ และข้อสรุปให้ผู้อ่าน แดชบอร์ดเป็นอีกด้านของโครงสร้างแก้วมาร์ตินี คือการเปิดให้ผู้ใช้สำรวจเอง เลือกพื้นที่ที่สนใจ ช่วงเวลาที่ต้องการ และเจาะลงไปถึงสถานีใกล้บ้าน แดชบอร์ดที่ดีทำให้คนที่ไม่เขียนโค้ดได้ประโยชน์จากข้อมูลทุกวัน แดชบอร์ดที่ไม่ดีแสดงตัวเลขสิบกว่าตัวบนจอเดียวโดยไม่มีใครรู้ว่าควรดูอะไร หรือตอบช้าจนผู้ใช้เลิกใช้</p>
+<p>บทนี้ครอบคลุมทั้งการออกแบบและการพัฒนา ด้านการออกแบบ เริ่มจากประเภทของแดชบอร์ดซึ่งกำหนดว่าควรแสดงอะไร แล้วไปที่การจัดวางและการออกแบบตัวชี้วัด ด้านการพัฒนา ใช้ Streamlit ร่วมกับ DuckDB ซึ่งต้องเข้าใจแบบจำลองการทำงานที่ต่างจากโปรแกรมทั่วไป คือการรันใหม่ทั้งไฟล์ทุกครั้งที่ผู้ใช้โต้ตอบ ตามด้วย caching การเชื่อมต่อแบบอ่านอย่างเดียว และการออกแบบ drill-down สี่ระดับตามลำดับชั้นในบทที่ 18 เนื้อหาเชิงลึกครอบคลุมประสิทธิภาพ การทดสอบ การ deploy และการเปรียบเทียบกับเครื่องมือ BI สำเร็จรูป ผลงานของบทนี้คือ <code>app/app.py</code> ของโครงการ</p>
 <section id="วตถประสงคการเรยนร" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="วตถประสงคการเรยนร">วัตถุประสงค์การเรียนรู้</h2>
 <p>เมื่อจบบทนี้ ผู้อ่านสามารถ</p>
 <ol type="1">
-<li>จำแนกประเภทของแดชบอร์ด และเลือกเนื้อหาให้ตรงกับผู้ใช้และการตัดสินใจ</li>
-<li>ออกแบบการจัดวางและตัวชี้วัดของแดชบอร์ดตามหลักการรับรู้</li>
-<li>อธิบายแบบจำลองการทำงานของ Streamlit ได้แก่ rerun, session state และ callback</li>
-<li>ใช้ <code>cache_data</code> และ <code>cache_resource</code> อย่างถูกต้อง และเชื่อมต่อฐานข้อมูลแบบอ่านอย่างเดียว</li>
-<li>สร้าง drill-down หลายระดับที่ตัวเลขสอดคล้องกันทุกระดับ</li>
-<li>เขียน SQL ที่รับค่าจากผู้ใช้อย่างปลอดภัย</li>
+<li>จำแนกประเภทของแดชบอร์ดตามผู้ใช้และการตัดสินใจ และเลือกเนื้อหาให้ตรงประเภท</li>
+<li>ออกแบบการจัดวางและตัวชี้วัดที่มีนิยาม หน่วย ช่วงเวลา และบริบทของการเปรียบเทียบครบ</li>
+<li>อธิบายแบบจำลองการทำงานของ Streamlit ได้แก่ rerun, session state และ callback และใช้แก้ปัญหาที่พบบ่อย</li>
+<li>ใช้ <code>st.cache_data</code> และ <code>st.cache_resource</code> อย่างถูกต้องร่วมกับการเชื่อมต่อ DuckDB แบบ read-only</li>
+<li>พัฒนา drill-down สี่ระดับที่รักษาบริบท ตัวกรอง และความสอดคล้องของตัวเลข</li>
+<li>วัดประสิทธิภาพ เขียนการทดสอบ และเตรียม deploy แดชบอร์ด</li>
+<li>เปรียบเทียบ Streamlit กับ Power BI และ Looker Studio และเลือกเครื่องมือให้เหมาะกับงาน</li>
 </ol>
 </section>
 <section id="sec-ch20-types" class="level2" data-number="20.1">
 <h2 data-number="20.1" class="anchored" data-anchor-id="sec-ch20-types"><span class="header-section-number">20.1</span> ประเภทของแดชบอร์ด: เชิงปฏิบัติการ เชิงวิเคราะห์ เชิงกลยุทธ์</h2>
 <section id="แดชบอรดคออะไร" class="level3">
 <h3 class="anchored" data-anchor-id="แดชบอรดคออะไร">แดชบอร์ดคืออะไร</h3>
-<p>Stephen Few นิยาม <strong><span class="idx">แดชบอร์ด</span></strong> ว่า การแสดงข้อมูลที่สำคัญที่สุดที่จำเป็นต่อการบรรลุวัตถุประสงค์หนึ่งหรือหลายข้อ รวมไว้ในหน้าจอเดียวเพื่อให้ตรวจดูได้ในพริบตา <span class="citation" data-cites="few2013information">(<a href="../references.html#ref-few2013information" role="doc-biblioref">Few 2013</a>)</span> นิยามนี้มีคำสำคัญสามคำ “สำคัญที่สุด” แปลว่าต้องคัดเลือก ไม่ใช่ใส่ทุกอย่าง “วัตถุประสงค์” แปลว่าต้องรู้ว่าผู้ใช้จะใช้ตัดสินใจอะไร และ “ในพริบตา” แปลว่าต้องอ่านได้เร็ว ซึ่งต้องอาศัยหลักการรับรู้ในบทที่ 11</p>
+<p>Stephen Few <span class="citation" data-cites="few2013information">(<a href="../references.html#ref-few2013information" role="doc-biblioref">Few 2013</a>)</span> นิยาม <strong>แดชบอร์ด</strong> (<span class="idx">dashboard</span>) ว่าเป็นการแสดงผลด้วยภาพของข้อมูลที่สำคัญที่สุดที่ต้องใช้เพื่อบรรลุเป้าหมายหนึ่งหรือหลายเป้าหมาย รวมอยู่บนหน้าจอเดียวเพื่อให้ติดตามได้ในการมองครั้งเดียว นิยามนี้เน้นสามเรื่อง คือ <strong>เป้าหมาย</strong> (ไม่ใช่การแสดงทุกอย่างที่มี) <strong>หน้าจอเดียว</strong> (ไม่ต้องเลื่อนหาสิ่งสำคัญ) และ <strong>การมองครั้งเดียว</strong> (เข้าใจได้เร็ว) ภายหลัง Sarikaya และคณะ <span class="citation" data-cites="sarikaya2019what">(<a href="../references.html#ref-sarikaya2019what" role="doc-biblioref">Sarikaya และคณะ 2019</a>)</span> สำรวจแดชบอร์ดที่ใช้จริงหลายร้อยตัวและพบว่าคำว่าแดชบอร์ดในปัจจุบันกว้างกว่านิยามนี้มาก รวมถึงหน้าที่มีการโต้ตอบและ drill-down หลายระดับ แต่หลักการเรื่องเป้าหมายและความเร็วในการเข้าใจยังคงอยู่</p>
 </section>
-<section id="สามประเภท" class="level3">
-<h3 class="anchored" data-anchor-id="สามประเภท">สามประเภท</h3>
-<div id="tbl-ch20-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="สามประเภทตามการตดสนใจ" class="level3">
+<h3 class="anchored" data-anchor-id="สามประเภทตามการตดสนใจ">สามประเภทตามการตัดสินใจ</h3>
+<div id="tbl-ch20-dashboard-types" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-dashboard-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 ตารางที่&nbsp;20.1: ประเภทของแดชบอร์ด
 </figcaption>
-<div aria-describedby="tbl-ch20-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch20-dashboard-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -606,8 +605,8 @@ div.csl-indent {
 <th>ประเภท</th>
 <th>ผู้ใช้</th>
 <th>คำถาม</th>
-<th>ความถี่ในการอัปเดต</th>
-<th>ตัวอย่างในโดเมน PM2.5</th>
+<th>ความถี่ในการดู</th>
+<th>ตัวอย่างกับ PM2.5</th>
 </tr>
 </thead>
 <tbody>
@@ -615,144 +614,220 @@ div.csl-indent {
 <td>เชิงปฏิบัติการ (operational)</td>
 <td>เจ้าหน้าที่ที่ต้องตอบสนองทันที</td>
 <td>ตอนนี้เกิดอะไรขึ้น ต้องทำอะไรเดี๋ยวนี้</td>
-<td>ทุกชั่วโมงหรือเร็วกว่า</td>
-<td>หน้าจอเฝ้าระวังค่า AQI ล่าสุดของทุกสถานี พร้อมแจ้งเตือนเมื่อเกินเกณฑ์</td>
+<td>ทุกชั่วโมงหรือต่อเนื่อง</td>
+<td>สถานีที่ค่าเฉลี่ย 24 ชั่วโมงล่าสุดเกินมาตรฐาน สถานีที่ไม่ส่งข้อมูล</td>
 </tr>
 <tr class="even">
 <td>เชิงวิเคราะห์ (analytical)</td>
-<td>นักวิเคราะห์ นักวิจัย</td>
-<td>ทำไมจึงเกิดขึ้น มีรูปแบบอะไร</td>
-<td>รายวันถึงรายเดือน</td>
-<td>PM2.5 Explorer ที่สำรวจรูปแบบตามพื้นที่และเวลา</td>
+<td>นักวิเคราะห์ เจ้าหน้าที่วางแผน</td>
+<td>ทำไมจึงเป็นแบบนี้ รูปแบบเป็นอย่างไร</td>
+<td>ตามต้องการ</td>
+<td>ฤดูกาลรายภาค เทียบจังหวัด drill-down ถึงสถานี</td>
 </tr>
 <tr class="odd">
 <td>เชิงกลยุทธ์ (strategic)</td>
 <td>ผู้บริหาร ผู้กำหนดนโยบาย</td>
-<td>แนวโน้มระยะยาวเป็นอย่างไร บรรลุเป้าหมายหรือไม่</td>
-<td>รายเดือนถึงรายปี</td>
-<td>จำนวนวันเกินมาตรฐานรายปีเทียบกับเป้าหมายของแผนระดับชาติ</td>
+<td>เรากำลังไปถูกทางหรือไม่</td>
+<td>รายเดือนหรือรายปี</td>
+<td>แนวโน้มจำนวนวันเกินมาตรฐานรายปีเทียบกับเป้าหมาย</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<p>แต่ละประเภทต้องการการออกแบบต่างกัน แดชบอร์ดเชิงปฏิบัติการต้องเน้นสถานะปัจจุบันและสิ่งผิดปกติ ใช้สีแจ้งเตือนอย่างจำกัดเพื่อให้สิ่งที่ต้องตอบสนองโดดเด่น (preattentive attribute ในบทที่ 11) แดชบอร์ดเชิงวิเคราะห์ต้องมีการโต้ตอบมาก เช่น ตัวกรองและ drill-down ส่วนแดชบอร์ดเชิงกลยุทธ์ต้องมีตัวชี้วัดน้อยและมีบริบท เช่น เป้าหมาย และค่าของปีก่อน</p>
-<p>ข้อผิดพลาดที่พบบ่อยคือพยายามสร้างแดชบอร์ดเดียวที่รับใช้ทุกประเภท ซึ่งมักจบด้วยหน้าจอที่ยัดเยียดและไม่มีใครใช้ได้ดี PM2.5 Explorer ของรายวิชาเป็นแดชบอร์ด <em>เชิงวิเคราะห์</em> สำหรับสำรวจข้อมูลในอดีต ไม่ใช่ระบบเฝ้าระวังแบบเวลาจริง เพราะข้อมูลในฐานข้อมูลของโครงการไม่ได้อัปเดตทุกชั่วโมง และผ่านการทำความสะอาดที่ใช้เวลา</p>
+<p>การจำแนกนี้ใกล้เคียงกับที่ Eckerson <span class="citation" data-cites="eckerson2010performance">(<a href="../references.html#ref-eckerson2010performance" role="doc-biblioref">Eckerson 2010</a>)</span> ใช้ในงานด้านการวัดผลการดำเนินงาน ประเภทกำหนดการออกแบบเกือบทุกด้าน แดชบอร์ดเชิงปฏิบัติการต้องสดใหม่ แสดงสถานะชัด และเตือนเมื่อผิดปกติ แต่ไม่ต้องมีการวิเคราะห์ลึก แดชบอร์ดเชิงวิเคราะห์ต้องมีการโต้ตอบ ตัวกรอง และ drill-down แต่ไม่จำเป็นต้องอัปเดตทุกนาที แดชบอร์ดเชิงกลยุทธ์ต้องมีตัวเลขน้อยแต่มีบริบทของเป้าหมายและแนวโน้ม</p>
+<p>แดชบอร์ดของโครงการในรายวิชานี้เป็น <strong>เชิงวิเคราะห์</strong> เป็นหลัก เพราะข้อมูลถูกดึงเป็นรอบ ไม่ใช่เรียลไทม์ และเป้าหมายคือการสำรวจรูปแบบ ปัญหาที่พบบ่อยคือการพยายามทำทั้งสามประเภทในหน้าเดียว ซึ่งได้หน้าที่แน่นจนไม่มีใครใช้ได้ดี</p>
+</section>
+<section id="กอนออกแบบ-ตอบคำถามหาขอ" class="level3">
+<h3 class="anchored" data-anchor-id="กอนออกแบบ-ตอบคำถามหาขอ">ก่อนออกแบบ: ตอบคำถามห้าข้อ</h3>
+<ol type="1">
+<li>ใครคือผู้ใช้หลัก และใช้ทำอะไร</li>
+<li>การตัดสินใจใดที่แดชบอร์ดนี้ช่วย</li>
+<li>ผู้ใช้ต้องรู้อะไรภายในห้าวินาทีแรก</li>
+<li>ข้อมูลอัปเดตบ่อยแค่ไหน และผู้ใช้ต้องการความสดเท่าใด</li>
+<li>ผู้ใช้เข้าถึงจากอุปกรณ์ใด</li>
+</ol>
+<p>คำตอบของข้อ 3 คือสิ่งที่ต้องอยู่ในตำแหน่งที่เด่นที่สุดของหน้า ซึ่งเป็นหลักเดียวกับสถานะเริ่มต้นของกราฟเชิงโต้ตอบในบทที่ 12</p>
 </section>
 </section>
 <section id="sec-ch20-layout" class="level2" data-number="20.2">
 <h2 data-number="20.2" class="anchored" data-anchor-id="sec-ch20-layout"><span class="header-section-number">20.2</span> หลักการจัดวางและการออกแบบตัวชี้วัด</h2>
-<section id="การจดวาง" class="level3">
-<h3 class="anchored" data-anchor-id="การจดวาง">การจัดวาง</h3>
-<p>ผู้อ่านภาษาไทยและภาษาอังกฤษกวาดตาจากซ้ายบนไปขวาล่าง พื้นที่ซ้ายบนของหน้าจอจึงมีค่าที่สุด และควรเป็นที่ของข้อมูลสำคัญที่สุด หลักการจัดวางที่ใช้บ่อยได้แก่ <span class="citation" data-cites="few2013information bach2023dashboard">(<a href="../references.html#ref-few2013information" role="doc-biblioref">Few 2013</a>; <a href="../references.html#ref-bach2023dashboard" role="doc-biblioref">Bach และคณะ 2023</a>)</span></p>
+<section id="ลำดบสายตาและการจดวาง" class="level3">
+<h3 class="anchored" data-anchor-id="ลำดบสายตาและการจดวาง">ลำดับสายตาและการจัดวาง</h3>
+<p>ผู้อ่านภาษาไทยและภาษาอังกฤษกวาดสายตาจากซ้ายไปขวาและจากบนลงล่าง มุมซ้ายบนจึงเป็นตำแหน่งที่ถูกเห็นก่อนเสมอ หลักการจัดวางที่ใช้ได้กับแดชบอร์ดเชิงวิเคราะห์ส่วนใหญ่มีดังนี้ <span class="citation" data-cites="few2013information wexler2017big">(<a href="../references.html#ref-few2013information" role="doc-biblioref">Few 2013</a>; <a href="../references.html#ref-wexler2017big" role="doc-biblioref">Wexler และคณะ 2017</a>)</span></p>
 <div id="tbl-ch20-layout" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.2: หลักการจัดวางแดชบอร์ด
+ตารางที่&nbsp;20.2: การจัดวางแดชบอร์ดเชิงวิเคราะห์
 </figcaption>
 <div aria-describedby="tbl-ch20-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>หลักการ</th>
-<th>การปฏิบัติ</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>สำคัญที่สุดอยู่บนซ้าย</td>
-<td>ตัวชี้วัดหลักเป็นแถวบนสุด ตามด้วยกราฟหลัก</td>
-</tr>
-<tr class="even">
-<td>ภาพรวมก่อน รายละเอียดตาม</td>
-<td>ตัวชี้วัดสรุป → กราฟระดับปัจจุบัน → ตารางรายละเอียด</td>
-</tr>
-<tr class="odd">
-<td>จัดกลุ่มตามความเกี่ยวข้อง</td>
-<td>ตัวกรองรวมไว้ที่ sidebar กราฟที่ต้องเปรียบเทียบกันวางเคียงกันและใช้สเกลเดียวกัน</td>
-</tr>
-<tr class="even">
-<td>น้อยแต่ชัด</td>
-<td>ไม่เกินห้าถึงเก้าองค์ประกอบในหน้าจอเดียว ถ้ามากกว่านั้นให้แยกหน้าหรือใช้ drill-down</td>
-</tr>
-<tr class="odd">
-<td>สอดคล้องกันทั้งระบบ</td>
-<td>สี หน่วย และรูปแบบตัวเลขเหมือนกันทุกกราฟ เช่น สีแดงหมายถึงเกินมาตรฐานเสมอ</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-</section>
-<section id="ตวชวด" class="level3">
-<h3 class="anchored" data-anchor-id="ตวชวด">ตัวชี้วัด</h3>
-<p><strong><span class="idx">ตัวชี้วัด</span></strong> (key performance indicator, KPI) ที่แสดงเป็นตัวเลขใหญ่ในแถวบนสุดเป็นองค์ประกอบที่ผู้ใช้เห็นก่อน จึงต้องเลือกอย่างรอบคอบ</p>
-<ul>
-<li><strong>ตัวชี้วัดต้องตอบคำถามของผู้ใช้</strong> สำหรับ PM2.5 Explorer คำถามหลักคือ “พื้นที่และช่วงเวลาที่เลือกมีปัญหาฝุ่นมากเพียงใด” ตัวชี้วัดที่ตอบได้ตรงคือสัดส่วนวันเกินมาตรฐาน ซึ่งผูกกับมาตรฐานที่มีความหมาย</li>
-<li><strong>ตัวชี้วัดต้องมีบริบท</strong> ตัวเลข “17%” ต้องมีคำอธิบายว่าคือสัดส่วนของอะไร เทียบกับเกณฑ์ใด <code>st.metric</code> มีพารามิเตอร์ <code>delta</code> สำหรับแสดงการเปลี่ยนแปลงเทียบกับค่าอ้างอิง เช่น ปีก่อน หรือทั้งประเทศ</li>
-<li><strong>นิยามต้องสอดคล้องกับทุกส่วน</strong> ตามหลักในบทที่ 18 ตัวชี้วัดของทุกระดับต้องคำนวณด้วยวิธีเดียวกันจากข้อมูลระดับล่างสุด</li>
-<li><strong>แสดงจำนวนข้อมูล</strong> เช่น จำนวนสถานีและจำนวนสถานี-วัน เพื่อให้ผู้ใช้รู้ว่าตัวเลขมาจากข้อมูลมากหรือน้อยเพียงใด</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>kpi <span class="op">=</span> query(<span class="ss">f"""</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    SELECT AVG(d.pm25_mean) AS mean, MAX(d.pm25_max) AS peak,</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">           COUNT(*) FILTER (WHERE d.pm25_mean &gt; </span><span class="sc">{</span>STD_TH<span class="sc">}</span><span class="ss">) / COUNT(*) AS share,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">           COUNT(DISTINCT d.station_id) AS n_st, COUNT(*) AS n_days</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss">"""</span>, P).iloc[<span class="dv">0</span>]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> kpi[<span class="st">"n_days"</span>] <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    st.warning(<span class="st">"ไม่มีข้อมูลที่ครบถ้วนในช่วงวันที่ที่เลือก"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    st.stop()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> st.columns(<span class="dv">4</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">0</span>].metric(<span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>, <span class="ss">f"</span><span class="sc">{</span>kpi[<span class="st">'mean'</span>]<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">1</span>].metric(<span class="st">"ค่าสูงสุดรายชั่วโมง (µg/m³)"</span>, <span class="ss">f"</span><span class="sc">{</span>kpi[<span class="st">'peak'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">2</span>].metric(<span class="ss">f"สัดส่วนวันเกิน </span><span class="sc">{</span>STD_TH<span class="sc">}</span><span class="ss">"</span>, <span class="ss">f"</span><span class="sc">{</span>kpi[<span class="st">'share'</span>]<span class="sc">:.0%}</span><span class="ss">"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>m[<span class="dv">3</span>].metric(<span class="st">"จำนวนสถานี"</span>, <span class="bu">int</span>(kpi[<span class="st">"n_st"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>โค้ดนี้เป็นส่วนหนึ่งของ <code>app/app.py</code> ซึ่งหัวข้อถัดไปจะสร้างทีละส่วน ตัวแปร <code>FROM</code>, <code>WHERE</code> และ <code>P</code> อธิบายในหัวข้อ <a href="#sec-ch20-drilldown" class="quarto-xref"><span>20.5</span></a> ข้อสังเกตคือการตรวจ <code>n_days == 0</code> ก่อนแสดงผล ถ้าผู้ใช้เลือกช่วงวันที่ที่ไม่มีข้อมูล การหารด้วยศูนย์จะทำให้แสดงค่าว่างหรือข้อผิดพลาด ข้อความแจ้งที่ชัดเจนดีกว่ามาก</p>
-</section>
-<section id="สงทไมควรมในแดชบอรด" class="level3">
-<h3 class="anchored" data-anchor-id="สงทไมควรมในแดชบอรด">สิ่งที่ไม่ควรมีในแดชบอร์ด</h3>
-<div id="tbl-ch20-avoid" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-avoid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.3: สิ่งที่ควรหลีกเลี่ยงในแดชบอร์ด
-</figcaption>
-<div aria-describedby="tbl-ch20-avoid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>สิ่งที่ควรหลีกเลี่ยง</th>
+<th>ตำแหน่ง</th>
+<th>เนื้อหา</th>
 <th>เหตุผล</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>มาตรวัดแบบหน้าปัดรถยนต์ (gauge)</td>
-<td>ใช้พื้นที่มากเพื่อแสดงตัวเลขเดียว และอ่านด้วยมุมซึ่งแม่นยำต่ำ</td>
+<td>บนสุด</td>
+<td>ชื่อ <span class="idx">แถบเส้นทาง</span> ช่วงเวลาที่เลือก วันที่ของข้อมูลล่าสุด</td>
+<td>ผู้ใช้ต้องรู้ว่ากำลังดูอะไร ของเมื่อใด</td>
 </tr>
 <tr class="even">
-<td>กราฟสามมิติ</td>
-<td>บิดเบือนการรับรู้ขนาด (บทที่ 11)</td>
+<td>แถวถัดมา</td>
+<td><span class="idx">ตัวชี้วัดหลัก</span>สามถึงห้าตัว</td>
+<td>ตอบคำถามห้าวินาทีแรก</td>
 </tr>
 <tr class="odd">
-<td>สีสันมากเกินความจำเป็น</td>
-<td>สีไม่ได้ชี้อะไรเมื่อทุกอย่างมีสี</td>
+<td>กลาง ซ้าย</td>
+<td>กราฟหลักที่ตอบคำถามสำคัญที่สุด</td>
+<td>ตำแหน่งที่สายตาไปถึงต่อจากตัวชี้วัด</td>
 </tr>
 <tr class="even">
-<td>ตัวเลขที่ไม่มีหน่วยหรือไม่มีจุดเทียบ</td>
-<td>ผู้ใช้ไม่รู้ว่าดีหรือแย่</td>
+<td>กลาง ขวา</td>
+<td>กราฟประกอบหรือแผนที่</td>
+<td>บริบทเพิ่มเติม</td>
 </tr>
 <tr class="odd">
-<td>กราฟที่ต้องโต้ตอบจึงจะเห็นประเด็นหลัก</td>
-<td>ผู้ใช้จำนวนมากไม่โต้ตอบ (บทที่ 12)</td>
+<td>ล่าง</td>
+<td>ตารางรายละเอียด ที่มาของข้อมูล ข้อจำกัด</td>
+<td>สำหรับผู้ที่ต้องการลงรายละเอียด</td>
+</tr>
+<tr class="even">
+<td>แถบข้าง</td>
+<td>ตัวกรอง</td>
+<td>ใช้ไม่บ่อยเท่าการดู จึงไม่ควรกินพื้นที่หลัก</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Bach และคณะ <span class="citation" data-cites="bach2023dashboard">(<a href="../references.html#ref-bach2023dashboard" role="doc-biblioref">Bach และคณะ 2023</a>)</span> รวบรวมรูปแบบการออกแบบแดชบอร์ด (design pattern) จากแดชบอร์ดที่ใช้จริง และพบการแลกเปลี่ยนที่สำคัญหลายเรื่อง เช่น ระหว่างการใส่ข้อมูลมากในหน้าเดียวกับความง่ายในการอ่าน และระหว่างการให้ผู้ใช้ปรับแต่งได้มากกับความสม่ำเสมอของการตีความ ไม่มีการจัดวางแบบเดียวที่ดีที่สุด แต่มีการจัดวางที่ตรงกับเป้าหมาย</p>
+</section>
+<section id="ตวชวดทด" class="level3">
+<h3 class="anchored" data-anchor-id="ตวชวดทด">ตัวชี้วัดที่ดี</h3>
+<p><strong>ตัวชี้วัด</strong> (indicator หรือ KPI) ที่แสดงเป็นตัวเลขเด่นบนแดชบอร์ดดูง่าย แต่ออกแบบให้ดียาก ตัวชี้วัดที่ดีต้องตอบได้ครบหกข้อ</p>
+<div id="tbl-ch20-kpi-anatomy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-kpi-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.3: องค์ประกอบของตัวชี้วัดที่ดี
+</figcaption>
+<div aria-describedby="tbl-ch20-kpi-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>องค์ประกอบ</th>
+<th>คำถาม</th>
+<th>ตัวอย่าง</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>นิยาม</td>
+<td>คำนวณอย่างไร</td>
+<td>สัดส่วนของสถานี-วันที่ค่าเฉลี่ยรายวันเกิน 37.5 µg/m³ ในวันที่วัดได้อย่างน้อย 18 ชั่วโมง</td>
+</tr>
+<tr class="even">
+<td>หน่วย</td>
+<td>วัดเป็นอะไร</td>
+<td>ร้อยละของสถานี-วัน</td>
+</tr>
+<tr class="odd">
+<td>ช่วงเวลา</td>
+<td>ของช่วงใด</td>
+<td>ช่วงวันที่ที่ผู้ใช้เลือก</td>
+</tr>
+<tr class="even">
+<td>การเปรียบเทียบ</td>
+<td>สูงหรือต่ำเมื่อเทียบกับอะไร</td>
+<td>ช่วงเดียวกันของปีก่อน มาตรฐาน หรือค่าเฉลี่ยของประเทศ</td>
+</tr>
+<tr class="odd">
+<td>ทิศทาง</td>
+<td>ขึ้นคือดีหรือแย่</td>
+<td>ขึ้นคือแย่</td>
+</tr>
+<tr class="even">
+<td>ความสด</td>
+<td>ข้อมูลถึงวันใด</td>
+<td>ข้อมูลล่าสุดถึงวันที่ …</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ตัวเลขที่ไม่มีการเปรียบเทียบไม่มีความหมาย “ค่าเฉลี่ย 32 µg/m³” ไม่บอกผู้ใช้ว่าดีหรือแย่ “ค่าเฉลี่ย 32 µg/m³ ต่ำกว่ามาตรฐาน 37.5 แต่สูงกว่าช่วงเดียวกันของปีก่อน 5 µg/m³” บอกได้มาก Streamlit แสดงตัวชี้วัดพร้อมการเปรียบเทียบด้วย <code>st.metric</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>st.metric(<span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>, <span class="ss">f"</span><span class="sc">{</span>now<span class="sc">:.1f}</span><span class="ss">"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>          delta<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>now <span class="op">-</span> last_year<span class="sc">:+.1f}</span><span class="ss"> จากปีก่อน"</span>, delta_color<span class="op">=</span><span class="st">"inverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>delta_color="inverse"</code> ทำให้ค่าที่เพิ่มขึ้นแสดงเป็นสีแดง เพราะสำหรับฝุ่น การเพิ่มขึ้นคือแย่ ค่าเริ่มต้นของ Streamlit แสดงการเพิ่มขึ้นเป็นสีเขียว ซึ่งจะสื่อผิดถ้าไม่เปลี่ยน ตัวเลขในตัวอย่างเป็นข้อมูลสมมุติเพื่อแสดงรูปแบบ</p>
+</section>
+<section id="ระวงตวชวดทกลายเปนเปา" class="level3">
+<h3 class="anchored" data-anchor-id="ระวงตวชวดทกลายเปนเปา">ระวังตัวชี้วัดที่กลายเป็นเป้า</h3>
+<p>เมื่อตัวชี้วัดถูกใช้เป็นเป้าหมายในการประเมินผล พฤติกรรมของคนจะเปลี่ยนไปเพื่อให้ตัวเลขดีขึ้น ซึ่งอาจไม่ใช่การแก้ปัญหาจริง Strathern <span class="citation" data-cites="strathern1997improving">(<a href="../references.html#ref-strathern1997improving" role="doc-biblioref">Strathern 1997</a>)</span> สรุปแนวคิดของ Goodhart ไว้ว่า “เมื่อตัวชี้วัดกลายเป็นเป้า มันก็หยุดเป็นตัวชี้วัดที่ดี” ตัวอย่างที่เป็นไปได้กับข้อมูลคุณภาพอากาศคือ ถ้าตัวชี้วัดคือ “ค่าเฉลี่ยของสถานีทั้งหมด” การเพิ่มสถานีในพื้นที่ที่ฝุ่นน้อยจะทำให้ตัวเลขดีขึ้นโดยอากาศไม่ได้ดีขึ้นเลย ซึ่งเป็น Simpson’s paradox ในบทที่ 13 การออกแบบตัวชี้วัดจึงต้องคิดว่าตัวเลขจะถูกทำให้ดีขึ้นด้วยวิธีที่ไม่ได้ตั้งใจได้อย่างไร</p>
+</section>
+<section id="สงทควรหลกเลยง" class="level3">
+<h3 class="anchored" data-anchor-id="สงทควรหลกเลยง">สิ่งที่ควรหลีกเลี่ยง</h3>
+<div id="tbl-ch20-avoid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-avoid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.4: สิ่งที่ควรหลีกเลี่ยงในแดชบอร์ด
+</figcaption>
+<div aria-describedby="tbl-ch20-avoid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>สิ่งที่ควรหลีกเลี่ยง</th>
+<th>เหตุผล</th>
+<th>ทางเลือก</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>มาตรวัดหน้าปัด (gauge)</td>
+<td>ใช้พื้นที่มากเพื่อแสดงตัวเลขเดียว อ่านค่าจากมุมไม่แม่น</td>
+<td>ตัวเลขพร้อมแท่งเทียบเป้า (bullet chart)</td>
+</tr>
+<tr class="even">
+<td>กราฟวงกลมหลายวง</td>
+<td>เทียบมุมข้ามวงไม่ได้</td>
+<td>กราฟแท่งเรียงลำดับ</td>
+</tr>
+<tr class="odd">
+<td>สีแดง เหลือง เขียวอย่างเดียว</td>
+<td>ผู้ที่ตาบอดสีแยกไม่ได้ และไม่บอกขนาด</td>
+<td>สีร่วมกับข้อความหรือไอคอน และตัวเลข</td>
+</tr>
+<tr class="even">
+<td>ตัวเลขทศนิยมยาว</td>
+<td>ความแม่นยำปลอม</td>
+<td>ปัดให้เหมาะกับความแม่นยำของการวัด</td>
+</tr>
+<tr class="odd">
+<td>ตัวชี้วัดมากกว่าเจ็ดตัวในแถวเดียว</td>
+<td>ผู้ใช้จับประเด็นไม่ได้</td>
+<td>เลือกสามถึงห้าตัวที่สำคัญที่สุด</td>
 </tr>
 </tbody>
 </table>
@@ -760,79 +835,134 @@ div.csl-indent {
 </figure>
 </div>
 </section>
+<section id="ทมาและขอจำกดบนหนาจอ" class="level3">
+<h3 class="anchored" data-anchor-id="ทมาและขอจำกดบนหนาจอ">ที่มาและข้อจำกัดบนหน้าจอ</h3>
+<p>แดชบอร์ดทุกตัวต้องบอกที่มาของข้อมูล วันที่ของข้อมูลล่าสุด นิยามของมาตรฐานที่ใช้ และข้อจำกัดสำคัญ ไว้ในตำแหน่งที่เห็นได้ เช่น ส่วนท้ายของหน้า ผู้ใช้แดชบอร์ดมักไม่ได้อ่านรายงานประกอบ ข้อความสั้น ๆ อย่าง “ค่าระดับภาคเป็นค่าเฉลี่ยของทุกสถานี-วันในภาค สถานีส่วนใหญ่อยู่ในเขตเมือง” ช่วยป้องกันการตีความผิดที่พบบ่อยที่สุดได้</p>
 </section>
-<section id="sec-ch20-streamlit" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="sec-ch20-streamlit"><span class="header-section-number">20.3</span> แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</h2>
-<section id="streamlit-คออะไร" class="level3">
-<h3 class="anchored" data-anchor-id="streamlit-คออะไร">Streamlit คืออะไร</h3>
-<p><strong><span class="idx-tool">Streamlit</span></strong> เป็นไลบรารี Python สำหรับสร้างแอปพลิเคชันข้อมูลบนเว็บโดยไม่ต้องเขียน HTML, CSS หรือ JavaScript <span class="citation" data-cites="streamlit2026docs">(<a href="../references.html#ref-streamlit2026docs" role="doc-biblioref">Snowflake Inc. 2026</a>)</span> ผู้พัฒนาเขียน script Python ธรรมดาที่เรียกฟังก์ชันอย่าง <code>st.title</code>, <code>st.metric</code> และ <code>st.plotly_chart</code> แล้ว Streamlit แปลงเป็นหน้าเว็บให้ รันด้วยคำสั่ง</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app/app.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="rerun-รนทง-script-ใหมทกครง" class="level3">
-<h3 class="anchored" data-anchor-id="rerun-รนทง-script-ใหมทกครง">rerun: รันทั้ง script ใหม่ทุกครั้ง</h3>
-<p>สิ่งที่ต้องเข้าใจเป็นอันดับแรก และเป็นที่มาของข้อผิดพลาดส่วนใหญ่ คือ <strong>ทุกครั้งที่ผู้ใช้โต้ตอบกับ widget ใด ๆ Streamlit จะรัน script ทั้งไฟล์ใหม่ตั้งแต่บรรทัดแรก</strong> ไม่ใช่รันเฉพาะส่วนที่เกี่ยวข้องแบบโปรแกรม GUI ทั่วไป <span class="citation" data-cites="streamlit2026docs">(<a href="../references.html#ref-streamlit2026docs" role="doc-biblioref">Snowflake Inc. 2026</a>)</span></p>
+<section id="sec-ch20-streamlit-model" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="sec-ch20-streamlit-model"><span class="header-section-number">20.3</span> แบบจำลองการทำงานของ Streamlit: rerun, session state, callback</h2>
+<section id="script-ทรนใหมทงไฟล" class="level3">
+<h3 class="anchored" data-anchor-id="script-ทรนใหมทงไฟล">script ที่รันใหม่ทั้งไฟล์</h3>
+<p><span class="idx-tool">Streamlit</span> <span class="citation" data-cites="streamlit2024docs">(<a href="../references.html#ref-streamlit2024docs" role="doc-biblioref">Snowflake Inc., ม.ป.ป.</a>)</span> ให้เขียนแดชบอร์ดด้วย Python ล้วน โดยไม่ต้องเขียน HTML หรือ JavaScript แบบจำลองการทำงานของมันเรียบง่ายแต่ต่างจากโปรแกรมทั่วไปมาก <strong>ทุกครั้งที่ผู้ใช้โต้ตอบกับ widget ใด Streamlit รัน script ทั้งไฟล์ใหม่ตั้งแต่บรรทัดแรก</strong> widget จะคืนค่าที่ผู้ใช้เลือกล่าสุด และหน้าจอถูกวาดใหม่ตามผลของการรันครั้งนั้น</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
+
 <pre class="mermaid mermaid-js">sequenceDiagram
-    participant U as ผู้ใช้
-    participant B as เบราว์เซอร์
-    participant S as เซิร์ฟเวอร์ Streamlit
-    U-&gt;&gt;B: เปิดหน้าเว็บ
-    B-&gt;&gt;S: ขอหน้า
-    S-&gt;&gt;S: รัน app.py ตั้งแต่บรรทัดแรก
-    S--&gt;&gt;B: ส่งองค์ประกอบทั้งหมด
-    U-&gt;&gt;B: เลือกภาคเหนือใน selectbox
-    B-&gt;&gt;S: ส่งค่าใหม่ของ widget
-    S-&gt;&gt;S: รัน app.py ใหม่ทั้งไฟล์ (rerun)&lt;br/&gt;widget คืนค่า "เหนือ"
-    S--&gt;&gt;B: ส่งองค์ประกอบที่เปลี่ยน
+  participant U as ผู้ใช้
+  participant B as browser
+  participant S as Streamlit server
+  U-&gt;&gt;B: เปิดหน้า
+  B-&gt;&gt;S: ขอหน้า
+  S-&gt;&gt;S: รัน app.py ทั้งไฟล์
+  S--&gt;&gt;B: ส่งหน้าจอ
+  U-&gt;&gt;B: เลือกภาคใน selectbox
+  B-&gt;&gt;S: ส่งค่าใหม่ของ widget
+  S-&gt;&gt;S: รัน callback (ถ้ามี) แล้วรัน app.py ทั้งไฟล์ใหม่
+  S--&gt;&gt;B: ส่งหน้าจอใหม่
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p>แบบจำลองนี้มีข้อดีคือเข้าใจง่าย script อ่านจากบนลงล่างเหมือน notebook และค่าของ widget คือค่าที่ฟังก์ชันคืนมา แต่มีผลสามข้อที่ต้องจัดการ ข้อแรก งานที่ช้า เช่น query ฐานข้อมูล จะถูกทำซ้ำทุก rerun ถ้าไม่ใช้ cache (หัวข้อ <a href="#sec-ch20-cache" class="quarto-xref"><span>20.4</span></a>) ข้อสอง ตัวแปรธรรมดาใน script ถูกสร้างใหม่ทุก rerun จึงจำค่าข้ามการโต้ตอบไม่ได้ ต้องใช้ session state ข้อสาม ลำดับของโค้ดสำคัญ ค่าที่ widget ด้านล่างเลือก ไม่มีผลต่อโค้ดด้านบนในการรันรอบเดียวกัน</p>
+<p>แบบจำลองนี้มีผลสามข้อที่ต้องเข้าใจ ข้อแรก <strong>ตัวแปรธรรมดาหายทุกรอบ</strong> ค่าที่กำหนดในรอบก่อนไม่อยู่ในรอบถัดไป ถ้าต้องจำอะไรข้ามรอบต้องใช้ session state ข้อสอง <strong>ทุกบรรทัดรันซ้ำทุกรอบ</strong> query ที่ใช้เวลาหนึ่งวินาทีจะทำให้ทุกการคลิกช้าหนึ่งวินาที จึงต้องใช้ caching (<a href="#sec-ch20-cache" class="quarto-xref"><span>หัวข้อ 20.4</span></a>) ข้อสาม <strong>ลำดับของโค้ดคือลำดับบนหน้าจอ</strong> widget ที่สร้างก่อนจะปรากฏก่อน</p>
 </section>
 <section id="session-state" class="level3">
 <h3 class="anchored" data-anchor-id="session-state">session state</h3>
-<p><strong><span class="idx">session state</span></strong> (<code>st.session_state</code>) เป็น dictionary ที่ค่าคงอยู่ข้าม rerun ภายใน session ของผู้ใช้คนหนึ่ง ผู้ใช้แต่ละคนที่เปิดแอปมี session state ของตัวเอง ใน PM2.5 Explorer ใช้เก็บระดับของ drill-down ที่ผู้ใช้เลือกไว้</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>KEYS <span class="op">=</span> (<span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"station"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ss <span class="op">=</span> st.session_state</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> KEYS:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ss.setdefault(k, <span class="va">None</span>)                      <span class="co"># กำหนดค่าเริ่มต้นเฉพาะครั้งแรกของ session</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> drill(level: <span class="bu">str</span>, widget_key: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""callback ของ selectbox: บันทึกค่าที่เลือก แล้วล้าง widget"""</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ss[level] <span class="op">=</span> ss[widget_key]</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ss[widget_key] <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> go_to(depth: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""callback ของ breadcrumb: ล้างทุกระดับที่ลึกกว่า depth"""</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> KEYS[depth:]:</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        ss[k] <span class="op">=</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>session state</strong> (<span class="idx-tool"><code>st.session_state</code></span>) เป็นออบเจกต์คล้าย dictionary ที่อยู่รอดข้ามการ <span class="idx">rerun</span> ของ session เดียวกัน (หนึ่งแท็บของ browser หนึ่งผู้ใช้) และแยกกันระหว่าง session ใช้เก็บสิ่งที่ต้องจำ เช่น ระดับ drill-down ที่ผู้ใช้อยู่</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ss <span class="op">=</span> st.session_state</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"station"</span>):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    ss.setdefault(k, <span class="va">None</span>)          <span class="co"># กำหนดค่าเริ่มต้นเฉพาะครั้งแรกของ session</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>widget ที่มี <code>key</code> จะเก็บค่าของตัวเองไว้ใน session state ภายใต้ key นั้นโดยอัตโนมัติ เช่น <code>st.selectbox("ภาค", options, key="pick_region")</code> ทำให้ <code>ss["pick_region"]</code> มีค่าที่ผู้ใช้เลือก</p>
 </section>
 <section id="callback" class="level3">
 <h3 class="anchored" data-anchor-id="callback">callback</h3>
-<p><strong><span class="idx">callback</span></strong> คือฟังก์ชันที่ Streamlit เรียก <em>ก่อน</em> rerun เมื่อ widget เปลี่ยนค่า กำหนดด้วยพารามิเตอร์ <code>on_change</code> (สำหรับ selectbox และ widget รับค่าอื่น) หรือ <code>on_click</code> (สำหรับปุ่ม) callback เหมาะกับการเปลี่ยน session state ที่ต้องมีผลก่อนวาดหน้าใหม่ เช่น ฟังก์ชัน <code>drill</code> ข้างต้นบันทึกค่าที่เลือกไว้ในระดับของ drill-down แล้วล้างค่าของ selectbox เพื่อให้ selectbox ของระดับถัดไปเริ่มที่ค่าว่าง</p>
-<p>ข้อจำกัดที่พบบ่อยคือ Streamlit ไม่อนุญาตให้แก้ค่าใน session state ที่ผูกกับ widget (ผ่าน <code>key</code>) <em>หลังจาก</em> สร้าง widget นั้นแล้วในรอบเดียวกัน จะเกิด <code>StreamlitAPIException</code> การแก้ค่าของ widget จึงต้องทำใน callback หรือก่อนสร้าง widget เท่านั้น ซึ่งเป็นเหตุผลที่ <code>drill</code> ล้าง <code>ss[widget_key]</code> ภายใน callback</p>
+<p><strong><span class="idx">callback</span></strong> คือฟังก์ชันที่ผูกกับ widget ผ่าน <code>on_change</code> หรือ <code>on_click</code> สิ่งสำคัญคือ <strong>callback รันก่อนการ rerun</strong> เมื่อผู้ใช้เปลี่ยนค่า widget ลำดับคือ Streamlit อัปเดตค่าของ widget ใน session state รัน callback แล้วจึงรัน script ทั้งไฟล์ใหม่ ดังนั้นสิ่งที่ callback เปลี่ยนใน session state จะมีผลกับการรันรอบนั้นทันที</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> drill(level, widget_key):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""callback: เก็บค่าที่ผู้ใช้เลือกเป็นระดับ drill-down แล้วล้างตัวเลือก"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    ss[level] <span class="op">=</span> ss[widget_key]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    ss[widget_key] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> go_to(depth):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""callback: ย้อนกลับไปที่ระดับ depth (0 = ประเทศ, 1 = ภาค, 2 = จังหวัด)"""</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"station"</span>)[depth:]:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        ss[k] <span class="op">=</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="กฎของการแกคา-widget" class="level3">
+<h3 class="anchored" data-anchor-id="กฎของการแกคา-widget">กฎของการแก้ค่า widget</h3>
+<p>ข้อผิดพลาดที่พบบ่อยที่สุดของผู้เริ่มใช้ Streamlit คือ <code>StreamlitAPIException</code> เมื่อพยายามแก้ค่าของ widget ใน session state หลังจากที่ widget นั้นถูกสร้างแล้วในรอบเดียวกัน กฎคือ <strong>ค่าของ widget แก้ได้เฉพาะในสองที่</strong> คือ ใน callback หรือก่อนบรรทัดที่สร้าง widget นั้นในรอบนั้น ฟังก์ชัน <code>drill</code> ข้างต้นล้าง <code>ss[widget_key]</code> ได้เพราะรันใน callback</p>
+</section>
+<section id="เครองมออนในแบบจำลอง" class="level3">
+<h3 class="anchored" data-anchor-id="เครองมออนในแบบจำลอง">เครื่องมืออื่นในแบบจำลอง</h3>
+<div id="tbl-ch20-control-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-control-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.5: เครื่องมือควบคุมการทำงานของ Streamlit
+</figcaption>
+<div aria-describedby="tbl-ch20-control-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>เครื่องมือ</th>
+<th>ทำอะไร</th>
+<th>ใช้เมื่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>st.stop()</code></td>
+<td>หยุดการรันรอบนั้นทันที</td>
+<td>ข้อมูลยังไม่พร้อม เช่น ผู้ใช้ยังเลือกช่วงวันที่ไม่ครบ</td>
+</tr>
+<tr class="even">
+<td><code>st.rerun()</code></td>
+<td>สั่งรันใหม่ทันที</td>
+<td>ต้องการให้ผลของการเปลี่ยนสถานะปรากฏโดยไม่รอการโต้ตอบ</td>
+</tr>
+<tr class="odd">
+<td><code>st.form</code></td>
+<td>รวม widget หลายตัว ส่งพร้อมกันเมื่อกดปุ่ม</td>
+<td>มีตัวกรองหลายตัวที่ไม่ต้องการให้ rerun ทุกครั้งที่ปรับ</td>
+</tr>
+<tr class="even">
+<td><code>@st.fragment</code></td>
+<td>รันเฉพาะฟังก์ชันส่วนหนึ่งของหน้าใหม่</td>
+<td>ส่วนที่โต้ตอบบ่อยแต่ไม่ต้องการให้ทั้งหน้ารันใหม่</td>
+</tr>
+<tr class="odd">
+<td><code>st.query_params</code></td>
+<td>อ่านและเขียนพารามิเตอร์ใน URL</td>
+<td>ทำลิงก์ที่แชร์แล้วเปิดที่ระดับ drill-down เดิมได้</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><code>@st.fragment</code> มีใน Streamlit 1.37 ขึ้นไป และ <code>st.query_params</code> มีใน 1.30 ขึ้นไป ให้ตรวจเวอร์ชันที่ติดตั้งด้วย <code>streamlit version</code> ก่อนใช้</p>
 </section>
 </section>
 <section id="sec-ch20-cache" class="level2" data-number="20.4">
 <h2 data-number="20.4" class="anchored" data-anchor-id="sec-ch20-cache"><span class="header-section-number">20.4</span> caching: <code>cache_data</code> กับ <code>cache_resource</code> และการเชื่อมต่อแบบ read-only</h2>
 <section id="ทำไมตอง-cache" class="level3">
 <h3 class="anchored" data-anchor-id="ทำไมตอง-cache">ทำไมต้อง cache</h3>
-<p>เพราะ Streamlit รัน script ใหม่ทุกการโต้ตอบ query ที่ใช้เวลาหนึ่งวินาทีจะทำให้ทุกการคลิกช้าหนึ่งวินาที และถ้าผู้ใช้หลายคนใช้พร้อมกัน ฐานข้อมูลจะถูก query ซ้ำ ๆ ด้วยคำถามเดิม Streamlit มี decorator สองแบบสำหรับเก็บผลไว้ใช้ซ้ำ ซึ่งมีจุดประสงค์ต่างกัน <span class="citation" data-cites="streamlit2026docs">(<a href="../references.html#ref-streamlit2026docs" role="doc-biblioref">Snowflake Inc. 2026</a>)</span></p>
-<div id="tbl-ch20-cache" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>เพราะ script รันใหม่ทุกครั้งที่ผู้ใช้โต้ตอบ การเปิดฐานข้อมูลและ query ซ้ำทุกรอบทำให้ช้า และสิ้นเปลืองทรัพยากร Liu และ Heer <span class="citation" data-cites="liu2014effects">(<a href="../references.html#ref-liu2014effects" role="doc-biblioref">Liu และ Heer 2014</a>)</span> ทดลองพบว่าการหน่วงเพียงครึ่งวินาทีในการตอบสนองของเครื่องมือสำรวจข้อมูล ทำให้ผู้ใช้โต้ตอบน้อยลงและสำรวจได้ครอบคลุมน้อยลงอย่างมีนัยสำคัญ ความเร็วจึงไม่ใช่แค่ความสะดวก แต่กำหนดว่าผู้ใช้จะค้นพบอะไรได้บ้าง</p>
+<p><strong>caching</strong> (<span class="idx">caching</span>) เก็บผลของฟังก์ชันไว้ ถ้าเรียกด้วย argument เดิม คืนผลที่เก็บไว้โดยไม่ต้องรันใหม่ Streamlit มี decorator สองตัวที่ต่างกันในสาระสำคัญ</p>
+<div id="tbl-ch20-cache-types" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-cache-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.4: เปรียบเทียบ <code>cache_data</code> กับ <code>cache_resource</code>
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-cache-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.6: เปรียบเทียบ cache_resource กับ cache_data
 </figcaption>
-<div aria-describedby="tbl-ch20-cache-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch20-cache-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -842,195 +972,213 @@ div.csl-indent {
 <thead>
 <tr class="header">
 <th></th>
-<th><code>st.cache_data</code></th>
-<th><code>st.cache_resource</code></th>
+<th><span class="idx-tool"><code>st.cache_resource</code></span></th>
+<th><span class="idx-tool"><code>st.cache_data</code></span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>เก็บอะไร</td>
-<td>ข้อมูลที่ serialize ได้ เช่น DataFrame ตัวเลข สตริง</td>
-<td>ทรัพยากรที่ใช้ร่วมกัน เช่น การเชื่อมต่อฐานข้อมูล แบบจำลอง ML</td>
+<td>ออบเจกต์ที่ใช้ร่วมกัน เช่น connection ของฐานข้อมูล แบบจำลอง</td>
+<td>ผลลัพธ์ที่ serialize ได้ เช่น DataFrame ตัวเลข</td>
 </tr>
 <tr class="even">
-<td>คืนค่าอย่างไร</td>
+<td>คืนค่าแบบใด</td>
+<td>ออบเจกต์ตัวเดิม ทุก session ใช้ร่วมกัน</td>
 <td>สำเนาใหม่ทุกครั้ง แก้ไขได้โดยไม่กระทบ cache</td>
-<td>วัตถุเดิมตัวเดียวกันทุกครั้ง</td>
 </tr>
 <tr class="odd">
-<td>ใช้ร่วมกัน</td>
-<td>ทุก session ที่เรียกด้วยอาร์กิวเมนต์เดียวกัน</td>
-<td>ทุก session</td>
+<td>key ของ cache</td>
+<td>argument ของฟังก์ชัน</td>
+<td>argument ของฟังก์ชัน</td>
 </tr>
 <tr class="even">
-<td>เหมาะกับ</td>
-<td>ผลของ query และการคำนวณ</td>
-<td><code>duckdb.connect</code></td>
+<td>อายุ</td>
+<td>จนกว่า server จะหยุดหรือล้าง cache</td>
+<td>กำหนดได้ด้วย <code>ttl</code> และ <code>max_entries</code></td>
+</tr>
+<tr class="odd">
+<td>ความเสี่ยงถ้าใช้ผิด</td>
+<td>ถ้าเก็บ DataFrame แล้วโค้ดแก้มัน ทุก session จะเห็นค่าที่ถูกแก้</td>
+<td>ถ้าเก็บ connection จะ serialize ไม่ได้และ error</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""PM2.5 Explorer: แดชบอร์ด drill-down ประเทศ → ภาค → จังหวัด → สถานี"""</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>] <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>STD_TH, STD_WHO <span class="op">=</span> <span class="fl">37.5</span>, <span class="dv">15</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>FROM <span class="op">=</span> <span class="st">"FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)"</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>st.set_page_config(page_title<span class="op">=</span><span class="st">"PM2.5 Explorer"</span>, layout<span class="op">=</span><span class="st">"wide"</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_resource</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_con() <span class="op">-&gt;</span> duckdb.DuckDBPyConnection:</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""การเชื่อมต่อเดียวที่ใช้ร่วมกันทุก session เปิดแบบอ่านอย่างเดียว"""</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(DB_PATH), read_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span>(ttl<span class="op">=</span><span class="dv">600</span>)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query(sql: <span class="bu">str</span>, params: <span class="bu">tuple</span> <span class="op">=</span> ()) <span class="op">-&gt;</span> pd.DataFrame:</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""รัน SQL ด้วย cursor ของตัวเอง ผลลัพธ์ถูก cache ตาม sql และ params"""</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> get_con().cursor().execute(sql, <span class="bu">list</span>(params)).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>นี่คือส่วนต้นของ <code>app/app.py</code> ประเด็นสำคัญมีห้าข้อ</p>
+</section>
+<section id="การเชอมตอ-duckdb-สำหรบแดชบอรด" class="level3">
+<h3 class="anchored" data-anchor-id="การเชอมตอ-duckdb-สำหรบแดชบอรด">การเชื่อมต่อ DuckDB สำหรับแดชบอร์ด</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>] <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"pm25.duckdb"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_resource</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_con():</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(DB_PATH), read_only<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span>(ttl<span class="op">=</span><span class="dv">600</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query(sql: <span class="bu">str</span>, params: <span class="bu">tuple</span> <span class="op">=</span> ()):</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> get_con().cursor().execute(sql, <span class="bu">list</span>(params)).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เหตุผลของการออกแบบแต่ละจุด</p>
 <ol type="1">
-<li><strong>การเชื่อมต่ออยู่ใน <code>cache_resource</code></strong> สร้างครั้งเดียวและใช้ร่วมกันทุก session ถ้าใช้ <code>cache_data</code> Streamlit จะพยายามคัดลอกการเชื่อมต่อซึ่งทำไม่ได้</li>
-<li><strong>เปิดแบบอ่านอย่างเดียว</strong> (<code>read_only=True</code>) แดชบอร์ดไม่ควรแก้ข้อมูล และการเปิดแบบอ่านอย่างเดียวยังป้องกันการล็อกไฟล์ที่ขัดขวาง pipeline ทั้งนี้ DuckDB ไม่อนุญาตให้โปรเซสหนึ่งเขียนขณะที่อีกโปรเซสเปิดไฟล์อยู่ (บทที่ 6) ถ้าต้องรัน <code>run_all.py</code> ต้องปิดแดชบอร์ดก่อน</li>
-<li><strong>ใช้ <code>cursor()</code> ทุกครั้งที่ query</strong> Streamlit อาจรัน session หลาย session พร้อมกันในหลาย thread การเชื่อมต่อ DuckDB หนึ่งตัวไม่ควรถูกใช้จากหลาย thread พร้อมกัน <code>cursor()</code> สร้างการเชื่อมต่อย่อยที่ใช้ฐานข้อมูลเดียวกัน ปลอดภัยสำหรับการใช้งานแบบนี้ <span class="citation" data-cites="duckdb2026python">(<a href="../references.html#ref-duckdb2026python" role="doc-biblioref">DuckDB Foundation 2026</a>)</span></li>
-<li><strong><code>ttl=600</code></strong> ทำให้ผลใน cache หมดอายุหลัง 10 นาที เมื่อ pipeline อัปเดตข้อมูล แดชบอร์ดจะเห็นข้อมูลใหม่ภายในเวลานั้น หรือผู้ใช้กดล้าง cache จากเมนูได้</li>
-<li><strong>cache ใช้อาร์กิวเมนต์เป็นกุญแจ</strong> <code>query</code> ที่ถูกเรียกด้วย SQL และพารามิเตอร์เดียวกันจะคืนผลจาก cache ทันที พารามิเตอร์จึงต้องเป็นค่าที่ hash ได้ เช่น tuple ไม่ใช่ list</li>
+<li><strong><code>read_only=True</code></strong> แดชบอร์ดมีหน้าที่อ่านอย่างเดียว การเปิดแบบอ่านอย่างเดียวป้องกันการเขียนทับโดยไม่ตั้งใจ และหลายกระบวนการเปิดไฟล์เดียวกันแบบอ่านอย่างเดียวพร้อมกันได้ <span class="citation" data-cites="duckdb2026concurrency">(<a href="../references.html#ref-duckdb2026concurrency" role="doc-biblioref">DuckDB Foundation 2026</a>)</span> ผลข้างเคียงคือขณะที่แดชบอร์ดเปิดไฟล์อยู่ กระบวนการที่ต้อง <em>เขียน</em> เช่น <code>src/run_pipeline.py</code> จะเปิดไฟล์ไม่ได้ ต้องหยุดแดชบอร์ดก่อนรัน pipeline (ภาคผนวก ฉ)</li>
+<li><strong><code>cache_resource</code> กับ connection</strong> สร้าง connection ครั้งเดียวต่อ server แล้วใช้ร่วมกันทุก session</li>
+<li><strong><code>.cursor()</code></strong> Streamlit รันแต่ละ session ใน thread ต่างกัน connection ของ DuckDB ไม่ควรใช้ข้าม thread พร้อมกันโดยตรง การสร้าง cursor ต่อการใช้งานเป็นวิธีที่เอกสารของ DuckDB แนะนำสำหรับการใช้หลาย thread</li>
+<li><strong><code>cache_data</code> กับผล query</strong> query เดิมด้วยพารามิเตอร์เดิมไม่ต้องรันซ้ำ <code>ttl=600</code> ให้ผลหมดอายุภายในสิบนาที</li>
+<li><strong><code>?</code> parameter</strong> ค่าที่มาจากผู้ใช้ส่งผ่าน <code>params</code> เสมอ ป้องกัน <span class="idx">SQL injection</span> และทำให้ key ของ cache ชัดเจน</li>
 </ol>
 </section>
-<section id="ขอผดพลาดของ-cache-ทพบบอย" class="level3">
-<h3 class="anchored" data-anchor-id="ขอผดพลาดของ-cache-ทพบบอย">ข้อผิดพลาดของ cache ที่พบบ่อย</h3>
-<div id="tbl-ch20-cache-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-cache-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.5: ข้อผิดพลาดของ cache ที่พบบ่อย
-</figcaption>
-<div aria-describedby="tbl-ch20-cache-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>ข้อผิดพลาด</th>
-<th>ผลที่เกิด</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>เปิดการเชื่อมต่อนอก cache ใน script</td>
-<td>เปิดการเชื่อมต่อใหม่ทุก rerun ช้าและอาจทำให้ไฟล์ถูกล็อก</td>
-</tr>
-<tr class="even">
-<td>cache ฟังก์ชันที่อ่านค่าจาก session state ภายใน</td>
-<td>ผลของผู้ใช้คนหนึ่งถูกส่งให้ผู้ใช้อื่น เพราะกุญแจของ cache ไม่รวมค่านั้น</td>
-</tr>
-<tr class="odd">
-<td>ไม่ตั้ง <code>ttl</code> เมื่อข้อมูลอัปเดต</td>
-<td>แดชบอร์ดแสดงข้อมูลเก่าจนกว่าจะเริ่มเซิร์ฟเวอร์ใหม่</td>
-</tr>
-<tr class="even">
-<td>cache ผลลัพธ์ขนาดใหญ่มากหลายชุด</td>
-<td>หน่วยความจำของเซิร์ฟเวอร์เต็ม ใช้ <code>max_entries</code> จำกัดจำนวน</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-<p>ข้อที่สองสำคัญที่สุดและหาสาเหตุยาก ฟังก์ชันที่ถูก cache ต้องขึ้นกับ <em>อาร์กิวเมนต์เท่านั้น</em> ค่าที่ขึ้นกับผู้ใช้ เช่น ภาคที่เลือก ต้องส่งเป็นอาร์กิวเมนต์ ซึ่งในแอปนี้ทำผ่าน <code>params</code> ของ <code>query</code></p>
+<section id="cache-ทรวาขอมลเปลยน" class="level3">
+<h3 class="anchored" data-anchor-id="cache-ทรวาขอมลเปลยน">cache ที่รู้ว่าข้อมูลเปลี่ยน</h3>
+<p>ปัญหาที่พบหลังรัน pipeline ใหม่คือแดชบอร์ดยังแสดงข้อมูลเก่า เพราะ cache ยังเก็บผลเดิม การใช้ <code>ttl</code> ช่วยได้แต่ต้องรอ วิธีที่ตรงกว่าคือ <strong>ใส่เวลาแก้ไขล่าสุดของไฟล์ฐานข้อมูลเป็นส่วนหนึ่งของ key</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> db_version() <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> DB_PATH.stat().st_mtime        <span class="co"># เปลี่ยนเมื่อไฟล์ถูกเขียนใหม่</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> query(sql: <span class="bu">str</span>, params: <span class="bu">tuple</span> <span class="op">=</span> (), db_mtime: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.0</span>):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> get_con().cursor().execute(sql, <span class="bu">list</span>(params)).df()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> query(<span class="st">"SELECT ..."</span>, (start, end), db_mtime<span class="op">=</span>db_version())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>เมื่อ pipeline เขียนไฟล์ใหม่ <code>st_mtime</code> เปลี่ยน key ของ cache เปลี่ยน ผลเก่าจึงไม่ถูกใช้ แต่ connection ที่เก็บด้วย <code>cache_resource</code> ยังชี้ไปที่ไฟล์เดิมที่เปิดไว้ ต้องเปิดใหม่ด้วย ซึ่งทำได้ด้วยการส่ง <code>db_mtime</code> เข้า <code>get_con</code> เช่นเดียวกัน หรือรีสตาร์ตแดชบอร์ดหลังรัน pipeline ซึ่งต้องทำอยู่แล้วเพราะไฟล์ถูกล็อก</p>
+</section>
+<section id="argument-ทไมตองการใหเปนสวนของ-key" class="level3">
+<h3 class="anchored" data-anchor-id="argument-ทไมตองการใหเปนสวนของ-key">argument ที่ไม่ต้องการให้เป็นส่วนของ key</h3>
+<p>Streamlit สร้าง key ของ cache จากการ hash ทุก argument ถ้า argument เป็นออบเจกต์ที่ hash ไม่ได้ เช่น connection จะเกิด error วิธีแก้คือขึ้นต้นชื่อ argument ด้วยขีดล่าง ซึ่งบอกให้ Streamlit ไม่นำ argument นั้นมาสร้าง key</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span>(ttl<span class="op">=</span><span class="dv">600</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> region_summary(_con, start, end):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _con.cursor().execute(<span class="st">"SELECT ... WHERE d.date BETWEEN ? AND ?"</span>, [start, end]).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ระวังว่า argument ที่ขึ้นต้นด้วยขีดล่างจะไม่ทำให้ cache แยกกัน ถ้าเรียกด้วย <code>_con</code> ต่างกันแต่ <code>start</code>, <code>end</code> เดิม จะได้ผลเดียวกัน</p>
+</section>
+<section id="ใชฟงกชนรวมกบรายงาน" class="level3">
+<h3 class="anchored" data-anchor-id="ใชฟงกชนรวมกบรายงาน">ใช้ฟังก์ชันร่วมกับรายงาน</h3>
+<p>ตามบทที่ 18 และ 19 ฟังก์ชัน query ควรอยู่ใน <code>src/queries.py</code> เพื่อให้รายงานและแดชบอร์ดได้ตัวเลขเดียวกัน แดชบอร์ดห่อฟังก์ชันเหล่านั้นด้วย cache ที่ชั้นของแดชบอร์ด โดยไม่ต้องแก้ <code>src/</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="bu">str</span>(Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>] <span class="op">/</span> <span class="st">"src"</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> queries                               <span class="co"># ฟังก์ชันที่รับ connection แล้วคืน DataFrame</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span>(ttl<span class="op">=</span><span class="dv">600</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cached_cube(group_cols: <span class="bu">tuple</span>, where: <span class="bu">str</span>, params: <span class="bu">tuple</span>):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> queries.cube(get_con().cursor(), <span class="bu">list</span>(group_cols), where, params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>group_cols</code> ส่งเป็น tuple เพราะ list hash ได้ไม่เสถียรเท่า tuple และเพื่อให้ชัดว่าค่าไม่ถูกแก้</p>
 </section>
 </section>
 <section id="sec-ch20-drilldown" class="level2" data-number="20.5">
 <h2 data-number="20.5" class="anchored" data-anchor-id="sec-ch20-drilldown"><span class="header-section-number">20.5</span> การออกแบบ drill-down หลายระดับ</h2>
-<section id="สรางเงอนไขจาก-session-state" class="level3">
-<h3 class="anchored" data-anchor-id="สรางเงอนไขจาก-session-state">สร้างเงื่อนไขจาก session state</h3>
-<p>drill-down ของ PM2.5 Explorer ทำงานด้วยหลักการเดียว ทุกระดับใช้ SQL ชุดเดียวกัน แต่เงื่อนไข <code>WHERE</code> ถูกสร้างจากระดับที่ผู้ใช้เลือกไว้ใน session state ตัวชี้วัดของทุกระดับจึงคำนวณด้วยนิยามเดียวกันจากข้อมูลระดับล่างสุดโดยอัตโนมัติ ตามหลักในบทที่ 18</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dmin, dmax <span class="op">=</span> query(<span class="st">"SELECT MIN(date), MAX(date) FROM daily_pm25_clean"</span>).iloc[<span class="dv">0</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>picked <span class="op">=</span> st.sidebar.date_input(<span class="st">"ช่วงวันที่"</span>, value<span class="op">=</span>(dmin, dmax), min_value<span class="op">=</span>dmin, max_value<span class="op">=</span>dmax)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(picked) <span class="op">!=</span> <span class="dv">2</span>:                        <span class="co"># ระหว่างเลือก date_input คืนค่าเพียงวันเดียว</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    st.info(<span class="st">"เลือกวันเริ่มต้นและวันสิ้นสุด"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    st.stop()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>start, end <span class="op">=</span> picked</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>conds, params <span class="op">=</span> [<span class="st">"d.is_complete"</span>, <span class="st">"d.date BETWEEN ? AND ?"</span>], [start, end]</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col, k <span class="kw">in</span> ((<span class="st">"s.region"</span>, <span class="st">"region"</span>), (<span class="st">"s.province"</span>, <span class="st">"province"</span>), (<span class="st">"s.station_id"</span>, <span class="st">"station"</span>)):</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        conds.append(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> = ?"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        params.append(ss[k])</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>WHERE, P <span class="op">=</span> <span class="st">" AND "</span>.join(conds), <span class="bu">tuple</span>(params)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>depth <span class="op">=</span> <span class="bu">sum</span>(ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">for</span> k <span class="kw">in</span> KEYS)    <span class="co"># 0 = ประเทศ, 1 = ภาค, 2 = จังหวัด, 3 = สถานี</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="สระดบตามลำดบชน" class="level3">
+<h3 class="anchored" data-anchor-id="สระดบตามลำดบชน">สี่ระดับตามลำดับชั้น</h3>
+<p>แดชบอร์ดของโครงการมี drill-down สี่ระดับตามลำดับชั้นในบทที่ 18 และตามเอกสารสัปดาห์ที่ 14</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+
+<pre class="mermaid mermaid-js">stateDiagram-v2
+  [*] --&gt; ประเทศ
+  ประเทศ --&gt; ภาค: เลือกภาค
+  ภาค --&gt; จังหวัด: เลือกจังหวัด
+  จังหวัด --&gt; สถานี: เลือกสถานี
+  สถานี --&gt; จังหวัด: แถบเส้นทาง
+  จังหวัด --&gt; ภาค: แถบเส้นทาง
+  ภาค --&gt; ประเทศ: แถบเส้นทาง
+  สถานี --&gt; ประเทศ: แถบเส้นทาง
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>สถานะของ drill-down คือค่าสามค่าใน session state (<code>region</code>, <code>province</code>, <code>station</code>) ระดับปัจจุบันคือจำนวนค่าที่ไม่เป็น <code>None</code> การออกแบบแบบนี้ทำให้ทุกส่วนของหน้าคำนวณเงื่อนไขของ query จากสถานะเดียวกัน ตัวเลขทุกส่วนจึงสอดคล้องกัน</p>
 </section>
-<section id="ความปลอดภยของ-sql" class="level3">
-<h3 class="anchored" data-anchor-id="ความปลอดภยของ-sql">ความปลอดภัยของ SQL</h3>
-<p>สังเกตว่าค่าที่มาจากผู้ใช้ทุกค่า (วันที่ ภาค จังหวัด สถานี) ถูกส่งผ่านตัวยึดตำแหน่ง <code>?</code> และรายการ <code>params</code> ไม่ได้ต่อลงในสตริง SQL โดยตรง สิ่งที่ถูกต่อลงในสตริงมีเพียงชื่อคอลัมน์ที่โปรแกรมกำหนดเองจากรายการที่แน่นอน การต่อค่าของผู้ใช้ลงในสตริง เช่น <code>f"WHERE s.region = '{region}'"</code> เปิดช่องให้เกิด <strong><span class="idx">SQL injection</span></strong> คือผู้ใช้ส่งข้อความที่เป็นคำสั่ง SQL เข้ามาแทนค่า <span class="citation" data-cites="owasp2021injection">(<a href="../references.html#ref-owasp2021injection" role="doc-biblioref">OWASP Foundation 2021</a>)</span> แม้ข้อมูลในแอปนี้จะมาจาก selectbox ที่ผู้ใช้เลือกได้เฉพาะค่าที่กำหนด แต่หลักปฏิบัติที่ดีคือใช้ตัวยึดตำแหน่งเสมอ เพราะวันหนึ่งอาจมีคนเปลี่ยน selectbox เป็นช่องพิมพ์ข้อความ และตัวยึดตำแหน่งยังแก้ปัญหาเครื่องหมายคำพูดในชื่อได้ด้วย</p>
+<section id="สรางเงอนไขของ-query-จากสถานะ" class="level3">
+<h3 class="anchored" data-anchor-id="สรางเงอนไขของ-query-จากสถานะ">สร้างเงื่อนไขของ query จากสถานะ</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ss <span class="op">=</span> st.session_state</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>KEYS <span class="op">=</span> (<span class="st">"region"</span>, <span class="st">"province"</span>, <span class="st">"station"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>COLS <span class="op">=</span> (<span class="st">"s.region"</span>, <span class="st">"s.province"</span>, <span class="st">"s.station_id"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> current_filter(start, end):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""สร้าง WHERE และพารามิเตอร์จากช่วงวันที่และสถานะ drill-down"""</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    cond, params <span class="op">=</span> [<span class="st">"d.is_complete"</span>, <span class="st">"d.date BETWEEN ? AND ?"</span>], [start, end]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col, k <span class="kw">in</span> <span class="bu">zip</span>(COLS, KEYS):</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            cond.append(<span class="ss">f"</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> = ?"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            params.append(ss[k])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">" AND "</span>.join(cond), <span class="bu">tuple</span>(params)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>depth <span class="op">=</span> <span class="bu">sum</span>(ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="cf">for</span> k <span class="kw">in</span> KEYS)       <span class="co"># 0 = ประเทศ ... 3 = สถานี</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ชื่อคอลัมน์ใน <code>COLS</code> เป็นข้อความที่ผู้พัฒนากำหนด จึงต่อเข้า SQL ได้ ส่วนค่าที่ผู้ใช้เลือกส่งผ่าน <code>?</code> เท่านั้น เงื่อนไข <code>d.is_complete</code> อยู่ในทุก query ทำให้ทุกระดับใช้นิยามของวันเดียวกัน</p>
 </section>
-<section id="breadcrumb-และเนอหาตามระดบ" class="level3">
-<h3 class="anchored" data-anchor-id="breadcrumb-และเนอหาตามระดบ">breadcrumb และเนื้อหาตามระดับ</h3>
-<p><strong><span class="idx">breadcrumb</span></strong> แสดงเส้นทางของ drill-down ปัจจุบัน และให้ผู้ใช้คลิกย้อนกลับไประดับใดก็ได้ ซึ่งสำคัญมากต่อการใช้งาน ผู้ใช้ที่เจาะลงไปแล้วกลับไม่ได้จะหลงทาง</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">"PM2.5 Explorer"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crumbs <span class="op">=</span> st.columns(<span class="dv">4</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>crumbs[<span class="dv">0</span>].button(<span class="st">"ประเทศไทย"</span>, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">0</span>,))</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, k <span class="kw">in</span> <span class="bu">enumerate</span>((<span class="st">"region"</span>, <span class="st">"province"</span>), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ss[k]:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        crumbs[i].button(ss[k], on_click<span class="op">=</span>go_to, args<span class="op">=</span>(i,))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ss.station:</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> query(<span class="st">"SELECT name_th FROM stations WHERE station_id = ?"</span>, (ss.station,)).iloc[<span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    crumbs[<span class="dv">3</span>].markdown(<span class="ss">f"**</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">**"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>เนื้อหาของแต่ละระดับแสดงหน่วยลูกของระดับปัจจุบัน เรียงตามสัดส่วนวันเกินมาตรฐาน พร้อม selectbox สำหรับเจาะลง เมื่อถึงระดับสถานีซึ่งไม่มีหน่วยลูก ให้แสดงอนุกรมเวลารายวันและธงค่าผิดปกติจากบทที่ 15 แทน</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>left, right <span class="op">=</span> st.columns(<span class="dv">2</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> depth <span class="op">&lt;</span> <span class="dv">3</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    child, label, level <span class="op">=</span> [(<span class="st">"s.region"</span>, <span class="st">"ภาค"</span>, <span class="st">"region"</span>), (<span class="st">"s.province"</span>, <span class="st">"จังหวัด"</span>, <span class="st">"province"</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                           (<span class="st">"s.station_id"</span>, <span class="st">"สถานี"</span>, <span class="st">"station"</span>)][depth]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    name_col <span class="op">=</span> <span class="st">"ANY_VALUE(s.name_th)"</span> <span class="cf">if</span> level <span class="op">==</span> <span class="st">"station"</span> <span class="cf">else</span> child</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    by <span class="op">=</span> query(<span class="ss">f"""</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">        SELECT </span><span class="sc">{</span>child<span class="sc">}</span><span class="ss"> AS id, </span><span class="sc">{</span>name_col<span class="sc">}</span><span class="ss"> AS name, COUNT(*) AS n_days,</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ss">               COUNT(*) FILTER (WHERE d.pm25_mean &gt; </span><span class="sc">{</span>STD_TH<span class="sc">}</span><span class="ss">) / COUNT(*) AS share</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">        </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss"> GROUP BY </span><span class="sc">{</span>child<span class="sc">}</span><span class="ss"> ORDER BY share DESC"""</span>, P)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.bar(by, x<span class="op">=</span><span class="st">"share"</span>, y<span class="op">=</span><span class="st">"name"</span>, orientation<span class="op">=</span><span class="st">"h"</span>, hover_data<span class="op">=</span>[<span class="st">"n_days"</span>],</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                 labels<span class="op">=</span>{<span class="st">"name"</span>: label, <span class="st">"share"</span>: <span class="ss">f"สัดส่วนวันเกิน </span><span class="sc">{</span>STD_TH<span class="sc">}</span><span class="ss"> µg/m³"</span>, <span class="st">"n_days"</span>: <span class="st">"จำนวนสถานี-วัน"</span>})</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    fig.update_layout(yaxis<span class="op">=</span>{<span class="st">"categoryorder"</span>: <span class="st">"total ascending"</span>}, xaxis_tickformat<span class="op">=</span><span class="st">".0%"</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    left.plotly_chart(fig)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    names <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(by[<span class="st">"id"</span>], by[<span class="st">"name"</span>]))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    left.selectbox(<span class="ss">f"เลือก</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">เพื่อดูรายละเอียด"</span>, options<span class="op">=</span><span class="bu">list</span>(by[<span class="st">"id"</span>]), index<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                   format_func<span class="op">=</span>names.get, key<span class="op">=</span><span class="ss">f"pick_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>, on_change<span class="op">=</span>drill, args<span class="op">=</span>(level, <span class="ss">f"pick_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> query(<span class="ss">f"SELECT d.date, d.pm25_mean </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss"> ORDER BY d.date"</span>, P)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> px.line(ts, x<span class="op">=</span><span class="st">"date"</span>, y<span class="op">=</span><span class="st">"pm25_mean"</span>, labels<span class="op">=</span>{<span class="st">"date"</span>: <span class="st">"วันที่"</span>, <span class="st">"pm25_mean"</span>: <span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>})</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    fig.add_hline(y<span class="op">=</span>STD_TH, line_dash<span class="op">=</span><span class="st">"dash"</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    left.plotly_chart(fig)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    flags <span class="op">=</span> query(<span class="st">"""SELECT date, pm25_mean, outlier_reason FROM daily_outlier_flags</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">                     WHERE station_id = ? AND date BETWEEN ? AND ? ORDER BY date"""</span>, (ss.station, start, end))</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    left.subheader(<span class="st">"วันที่ถูกติดธงค่าผิดปกติ"</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    left.dataframe(flags, hide_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>ฝั่งขวา (<code>right</code>) แสดงแนวโน้มรายเดือนของพื้นที่ที่เลือกพร้อมเส้นมาตรฐานไทยและแนวทาง WHO และท้ายหน้าระบุที่มาของข้อมูล เกณฑ์ความครบถ้วน และนิยามของมาตรฐาน</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>trend <span class="op">=</span> query(<span class="ss">f"""</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ss">    SELECT date_trunc('month', d.date) AS month, AVG(d.pm25_mean) AS pm25</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="sc">{</span>FROM<span class="sc">}</span><span class="ss"> WHERE </span><span class="sc">{</span>WHERE<span class="sc">}</span><span class="ss"> GROUP BY month ORDER BY month"""</span>, P)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(trend, x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"pm25"</span>, labels<span class="op">=</span>{<span class="st">"month"</span>: <span class="st">"เดือน"</span>, <span class="st">"pm25"</span>: <span class="st">"PM2.5 เฉลี่ย (µg/m³)"</span>})</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>fig.add_hline(y<span class="op">=</span>STD_TH, line_dash<span class="op">=</span><span class="st">"dash"</span>, annotation_text<span class="op">=</span><span class="st">"มาตรฐานไทย 37.5"</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>fig.add_hline(y<span class="op">=</span>STD_WHO, line_dash<span class="op">=</span><span class="st">"dot"</span>, annotation_text<span class="op">=</span><span class="st">"WHO 15"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>right.plotly_chart(fig)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>st.caption(<span class="st">"ที่มา: Air4Thai กรมควบคุมมลพิษ · เฉพาะวันที่ข้อมูลครบอย่างน้อย 18 ชั่วโมง · "</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">"มาตรฐานไทย 37.5 µg/m³ (ค่าเฉลี่ย 24 ชม.) · WHO 2021: 15 µg/m³"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>ไฟล์ <code>app/app.py</code> ฉบับสมบูรณ์ประกอบจากโค้ดในบทนี้เรียงตามลำดับต่อไปนี้ ส่วนต้นและการเชื่อมต่อ (หัวข้อ <a href="#sec-ch20-cache" class="quarto-xref"><span>20.4</span></a>) session state และ callback (หัวข้อ <a href="#sec-ch20-streamlit" class="quarto-xref"><span>20.3</span></a>) ตัวกรองและเงื่อนไข breadcrumb (หัวข้อนี้) ตัวชี้วัด (หัวข้อ <a href="#sec-ch20-layout" class="quarto-xref"><span>20.2</span></a>) เนื้อหาตามระดับ และแนวโน้มกับที่มาของข้อมูล (หัวข้อนี้) แอปที่ประกอบแล้วผ่านการทดสอบในหัวข้อ <a href="#sec-ch20-deploy" class="quarto-xref"><span>20.6</span></a></p>
+<section id="แถบเสนทาง" class="level3">
+<h3 class="anchored" data-anchor-id="แถบเสนทาง">แถบเส้นทาง</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> breadcrumb():</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    cols <span class="op">=</span> st.columns(<span class="dv">4</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    cols[<span class="dv">0</span>].button(<span class="st">"ประเทศไทย"</span>, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">0</span>,), key<span class="op">=</span><span class="st">"bc0"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ss.region:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        cols[<span class="dv">1</span>].button(ss.region, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">1</span>,), key<span class="op">=</span><span class="st">"bc1"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ss.province:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        cols[<span class="dv">2</span>].button(ss.province, on_click<span class="op">=</span>go_to, args<span class="op">=</span>(<span class="dv">2</span>,), key<span class="op">=</span><span class="st">"bc2"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ss.station:</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> query(<span class="st">"SELECT name_th FROM stations WHERE station_id = ?"</span>, (ss.station,))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        cols[<span class="dv">3</span>].markdown(<span class="ss">f"**</span><span class="sc">{</span>name<span class="sc">.</span>iloc[<span class="dv">0</span>, <span class="dv">0</span>]<span class="sc">}</span><span class="ss">**"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>แถบเส้นทางบอกผู้ใช้ว่าอยู่ที่ใดและย้อนกลับได้ทุกระดับในคลิกเดียว ซึ่งเป็นงาน history ในอนุกรมของ Shneiderman (บทที่ 12)</p>
 </section>
-<section id="ทางเลอก-เลอกจากกราฟโดยตรง" class="level3">
-<h3 class="anchored" data-anchor-id="ทางเลอก-เลอกจากกราฟโดยตรง">ทางเลือก: เลือกจากกราฟโดยตรง</h3>
-<p>Streamlit รุ่นใหม่รองรับการเลือกจากกราฟ Plotly โดยตรงด้วย <code>st.plotly_chart(fig, on_select="rerun", key=...)</code> ซึ่งคืนค่าจุดที่ผู้ใช้คลิกหรือลากเลือก การคลิกแท่งของภาคเพื่อเจาะลงเป็นประสบการณ์ที่เป็นธรรมชาติกว่า selectbox แต่ selectbox มีข้อดีที่ใช้ได้กับคีย์บอร์ดและโปรแกรมอ่านหน้าจอ (บทที่ 12) และทดสอบอัตโนมัติได้ง่ายกว่า แอปของรายวิชาจึงใช้ selectbox เป็นหลัก และให้การเลือกจากกราฟเป็นส่วนเสริมได้</p>
+<section id="เนอหาของแตละระดบ" class="level3">
+<h3 class="anchored" data-anchor-id="เนอหาของแตละระดบ">เนื้อหาของแต่ละระดับ</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>CHILD <span class="op">=</span> [(<span class="st">"s.region"</span>, <span class="st">"ภาค"</span>, <span class="st">"region"</span>), (<span class="st">"s.province"</span>, <span class="st">"จังหวัด"</span>, <span class="st">"province"</span>),</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>         (<span class="st">"s.station_id"</span>, <span class="st">"สถานี"</span>, <span class="st">"station"</span>)]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> children_bar(where, params):</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""แท่งของระดับลูก พร้อม selectbox สำหรับ drill-down"""</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    col, label, level <span class="op">=</span> CHILD[depth]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"any_value(s.name_th)"</span> <span class="cf">if</span> level <span class="op">==</span> <span class="st">"station"</span> <span class="cf">else</span> col</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    by <span class="op">=</span> query(<span class="ss">f"""SELECT </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> AS id, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> AS name, count(*) AS station_days,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ss">                          avg(d.pm25_mean) AS pm25,</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ss">                          avg(CAST(d.pm25_mean &gt; 37.5 AS DOUBLE)) AS share_over_std</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ss">                   FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ss">                   WHERE </span><span class="sc">{</span>where<span class="sc">}</span><span class="ss"> GROUP BY </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss"> ORDER BY share_over_std DESC"""</span>, params)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    st.plotly_chart(charts.ranked_bar(by, label), key<span class="op">=</span><span class="ss">f"bar_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    names <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(by[<span class="st">"id"</span>], by[<span class="st">"name"</span>]))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    st.selectbox(<span class="ss">f"เลือก</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">เพื่อดูรายละเอียด"</span>, options<span class="op">=</span><span class="bu">list</span>(by[<span class="st">"id"</span>]), index<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                 format_func<span class="op">=</span>names.get, key<span class="op">=</span><span class="ss">f"pick_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>, on_change<span class="op">=</span>drill,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                 args<span class="op">=</span>(level, <span class="ss">f"pick_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>index=None</code> ทำให้ selectbox เริ่มต้นแบบยังไม่ได้เลือก ผู้ใช้จึงไม่ถูกพาลงไประดับถัดไปโดยไม่ตั้งใจ <code>format_func</code> แสดงชื่อแทนรหัส ส่วนค่าที่เก็บคือรหัส ซึ่งไม่กำกวมแม้ชื่อจะซ้ำกัน ฟังก์ชัน <code>charts.ranked_bar</code> อยู่ใน <code>src/charts.py</code> ตามแนวทางของบทที่ 12</p>
+</section>
+<section id="drill-down-ดวยการคลกบนกราฟ" class="level3">
+<h3 class="anchored" data-anchor-id="drill-down-ดวยการคลกบนกราฟ">drill-down ด้วยการคลิกบนกราฟ</h3>
+<p>Streamlit ตั้งแต่ 1.35 ให้ <code>st.plotly_chart</code> คืนข้อมูลการเลือกได้ ผู้ใช้จึงคลิกที่แท่งเพื่อ drill-down แทนการใช้ selectbox</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>event <span class="op">=</span> st.plotly_chart(fig, on_select<span class="op">=</span><span class="st">"rerun"</span>, selection_mode<span class="op">=</span><span class="st">"points"</span>, key<span class="op">=</span><span class="ss">f"bar_</span><span class="sc">{</span>level<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> event.selection.points:</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    picked <span class="op">=</span> event.selection.points[<span class="dv">0</span>][<span class="st">"x"</span>]           <span class="co"># ค่าบนแกน x ของแท่งที่คลิก</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ค่าที่ได้จากการคลิกคือค่าบนแกนของกราฟ ซึ่งมักเป็นชื่อ ไม่ใช่รหัส ต้องแปลงกลับเป็นรหัสด้วย dictionary และเพราะผลของการคลิกได้มาหลังจากที่กราฟถูกสร้าง การตั้งค่า session state จากผลนี้ต้องตามด้วย <code>st.rerun()</code> เอกสารสัปดาห์ที่ 14 แนะนำให้ทำแบบ selectbox ให้ทำงานได้ก่อน แล้วจึงเพิ่มการคลิกเป็นทางเลือก เพราะ selectbox ใช้ได้กับคีย์บอร์ดและโปรแกรมอ่านหน้าจอ (บทที่ 12)</p>
+</section>
+<section id="ลงกทแชรได" class="level3">
+<h3 class="anchored" data-anchor-id="ลงกทแชรได">ลิงก์ที่แชร์ได้</h3>
+<p>ผู้ใช้ที่ drill-down ไปถึงสถานีหนึ่งแล้วอยากส่งให้เพื่อนดู ควรส่งลิงก์ที่เปิดที่สถานีนั้นได้ทันที <code>st.query_params</code> ทำได้โดยเก็บสถานะไว้ใน URL</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>qp <span class="op">=</span> st.query_params</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"init"</span> <span class="kw">not</span> <span class="kw">in</span> ss:                                   <span class="co"># อ่าน URL ครั้งแรกของ session</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> KEYS:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        ss[k] <span class="op">=</span> qp.get(k)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    ss.init <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>qp.from_dict({k: ss[k] <span class="cf">for</span> k <span class="kw">in</span> KEYS <span class="cf">if</span> ss[k] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>})   <span class="co"># เขียนสถานะกลับลง URL</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="หลกการทตองรกษา" class="level3">
+<h3 class="anchored" data-anchor-id="หลกการทตองรกษา">หลักการที่ต้องรักษา</h3>
+<ol type="1">
+<li><strong>สถานะเริ่มต้นตอบคำถามหลัก</strong> ระดับประเทศต้องเห็นภาพรวมทันทีโดยไม่ต้องเลือกอะไร</li>
+<li><strong>ตัวกรองไปด้วยทุกระดับ</strong> ช่วงวันที่อยู่ใน <code>current_filter</code> ซึ่งใช้ทุกระดับ</li>
+<li><strong>ตัวเลขสอดคล้อง</strong> ค่าของภาคในแท่งระดับประเทศต้องเท่ากับตัวชี้วัดเมื่อ drill-down เข้าไปในภาคนั้น ซึ่งเป็นจริงเพราะใช้เงื่อนไขและวิธีรวมเดียวกัน (บทที่ 18)</li>
+<li><strong>สถานะว่างมีข้อความ</strong> เมื่อช่วงวันที่ที่เลือกไม่มีข้อมูล แสดงข้อความ “ไม่มีข้อมูลในช่วงที่เลือก” แทนกราฟว่างหรือ error</li>
+</ol>
 </section>
 </section>
 <section id="sec-ch20-deploy" class="level2" data-number="20.6">
 <h2 data-number="20.6" class="anchored" data-anchor-id="sec-ch20-deploy"><span class="header-section-number">20.6</span> ประสิทธิภาพ การทดสอบ และการ deploy ★</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1043,13 +1191,30 @@ div.csl-indent {
 <p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
 </div>
 </div>
-<section id="ประสทธภาพ" class="level3">
-<h3 class="anchored" data-anchor-id="ประสทธภาพ">ประสิทธิภาพ</h3>
-<p>แหล่งความช้าที่พบบ่อยของแดชบอร์ด Streamlit และวิธีแก้ ได้แก่</p>
+<section id="วดกอนปรบ" class="level3">
+<h3 class="anchored" data-anchor-id="วดกอนปรบ">วัดก่อนปรับ</h3>
+<p>เป้าหมายของเวลาตอบสนองมาจากงานด้านการใช้งานซอฟต์แวร์ Nielsen <span class="citation" data-cites="nielsen1993usability">(<a href="../references.html#ref-nielsen1993usability" role="doc-biblioref">Nielsen 1993</a>)</span> สรุปขีดจำกัดสามระดับ ราว 0.1 วินาทีคือรู้สึกว่าตอบสนองทันที ราว 1 วินาทีคือผู้ใช้ยังคิดต่อเนื่องได้แม้รู้สึกว่ามีการหน่วง และราว 10 วินาทีคือขีดที่ผู้ใช้ยังจดจ่ออยู่ได้ แดชบอร์ดเชิงวิเคราะห์ควรตอบสนองต่อการคลิกส่วนใหญ่ภายในหนึ่งวินาที</p>
+<p>ก่อนปรับประสิทธิภาพ ต้องรู้ว่าส่วนใดช้า</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> timed(label):</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""context manager อย่างง่ายสำหรับจับเวลาแต่ละส่วนของหน้า"""</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">class</span> _T:</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> <span class="fu">__enter__</span>(<span class="va">self</span>):</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.t0 <span class="op">=</span> time.perf_counter()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">def</span> <span class="fu">__exit__</span>(<span class="va">self</span>, <span class="op">*</span>exc):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            st.sidebar.caption(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>time<span class="sc">.</span>perf_counter() <span class="op">-</span> <span class="va">self</span><span class="sc">.</span>t0<span class="sc">:.2f}</span><span class="ss"> วินาที"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _T()</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> timed(<span class="st">"KPI"</span>):</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    kpi <span class="op">=</span> query(KPI_SQL, params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="วธทำใหเรวขน" class="level3">
+<h3 class="anchored" data-anchor-id="วธทำใหเรวขน">วิธีทำให้เร็วขึ้น</h3>
 <div id="tbl-ch20-performance" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-performance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.6: แหล่งความช้าของแดชบอร์ดและวิธีแก้
+ตารางที่&nbsp;20.7: สาเหตุที่แดชบอร์ดช้าและวิธีแก้
 </figcaption>
 <div aria-describedby="tbl-ch20-performance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1059,30 +1224,30 @@ div.csl-indent {
 </colgroup>
 <thead>
 <tr class="header">
-<th>แหล่งความช้า</th>
+<th>สาเหตุที่ช้า</th>
 <th>วิธีแก้</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>query ซ้ำทุก rerun</td>
-<td><code>cache_data</code> (หัวข้อ <a href="#sec-ch20-cache" class="quarto-xref"><span>20.4</span></a>)</td>
+<td>query ข้อมูลรายวันหรือรายชั่วโมงทุกครั้ง</td>
+<td>ตารางสรุปล่วงหน้าที่มีเฉพาะตัวชี้วัดที่รวมขึ้นได้ (บทที่ 18)</td>
 </tr>
 <tr class="even">
-<td>ดึงข้อมูลรายชั่วโมงทั้งหมดมาไว้ใน pandas แล้วกรอง</td>
-<td>ให้ DuckDB กรองและรวมข้อมูล ส่งเฉพาะผลลัพธ์ (บทที่ 12)</td>
+<td>ส่งข้อมูลจำนวนมากเข้ากราฟ</td>
+<td>รวมกลุ่มใน DuckDB ก่อนส่ง (บทที่ 12)</td>
 </tr>
 <tr class="odd">
-<td>กราฟที่มีจุดหลายแสนจุด</td>
-<td>รวมข้อมูลก่อน หรือใช้ WebGL</td>
+<td>cache ไม่ทำงานเพราะ key เปลี่ยนทุกครั้ง</td>
+<td>ตรวจว่าไม่มี argument ที่เปลี่ยนทุกรอบ เช่น <code>datetime.now()</code></td>
 </tr>
 <tr class="even">
-<td>query ที่ช้าเอง</td>
-<td>ตรวจด้วย <code>EXPLAIN ANALYZE</code> (บทที่ 7) หรือเตรียมตารางสรุปไว้ล่วงหน้าตามหลักในบทที่ 18</td>
+<td>ทั้งหน้ารันใหม่เมื่อปรับตัวกรองตัวเดียว</td>
+<td><code>st.form</code> หรือ <code>@st.fragment</code></td>
 </tr>
 <tr class="odd">
-<td>ทุกส่วนของหน้ารันใหม่เมื่อ widget เดียวเปลี่ยน</td>
-<td>ใช้ <code>st.fragment</code> ให้รันใหม่เฉพาะส่วนที่เกี่ยวข้อง</td>
+<td>สร้างกราฟ Plotly ที่ซับซ้อนทุกรอบ</td>
+<td>cache ข้อมูลของกราฟ และลดจำนวน trace</td>
 </tr>
 </tbody>
 </table>
@@ -1090,50 +1255,99 @@ div.csl-indent {
 </figure>
 </div>
 </section>
-<section id="การทดสอบอตโนมต" class="level3">
-<h3 class="anchored" data-anchor-id="การทดสอบอตโนมต">การทดสอบอัตโนมัติ</h3>
-<p>Streamlit มีโมดูล <code>streamlit.testing</code> สำหรับทดสอบแอปโดยไม่ต้องเปิดเบราว์เซอร์ ทดสอบได้ทั้งการรันโดยไม่มีข้อผิดพลาด และการโต้ตอบกับ widget <span class="citation" data-cites="streamlit2026docs">(<a href="../references.html#ref-streamlit2026docs" role="doc-biblioref">Snowflake Inc. 2026</a>)</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""tests/test_app.py: ทดสอบแดชบอร์ด (รัน: pytest tests/test_app.py)"""</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> streamlit.testing.v1 <span class="im">import</span> AppTest</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>APP <span class="op">=</span> <span class="bu">str</span>(Path(<span class="va">__file__</span>).resolve().parents[<span class="dv">1</span>] <span class="op">/</span> <span class="st">"app"</span> <span class="op">/</span> <span class="st">"app.py"</span>)   <span class="co"># AppTest หาไฟล์สัมพัทธ์กับไฟล์ทดสอบ</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_app_runs_without_error():</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    at <span class="op">=</span> AppTest.from_file(APP, default_timeout<span class="op">=</span><span class="dv">60</span>).run()</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="kw">not</span> at.exception</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(at.metric) <span class="op">==</span> <span class="dv">4</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_drill_down_and_back():</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    at <span class="op">=</span> AppTest.from_file(APP, default_timeout<span class="op">=</span><span class="dv">60</span>).run()</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    region <span class="op">=</span> at.selectbox[<span class="dv">0</span>].options[<span class="dv">0</span>]</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    at.selectbox[<span class="dv">0</span>].select(region).run()</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> at.session_state[<span class="st">"region"</span>] <span class="op">==</span> region</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    at.button[<span class="dv">0</span>].click().run()                         <span class="co"># breadcrumb "ประเทศไทย"</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> at.session_state[<span class="st">"region"</span>] <span class="kw">is</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre class="text"><code># ผลลัพธ์ (ตัวอย่าง)
-# ทดสอบกับฐานข้อมูลสังเคราะห์ของหนังสือ (Streamlit 1.66, pytest 9.1)
-..                                                                       [100%]
-2 passed in 2.29s</code></pre>
-<p>ข้อสังเกตจากการทดสอบ <code>AppTest.from_file</code> หาไฟล์สัมพัทธ์กับตำแหน่งของไฟล์ทดสอบ ไม่ใช่โฟลเดอร์ที่รัน pytest จึงต้องสร้างพาธจาก <code>__file__</code> และสำหรับ selectbox ที่มี <code>format_func</code> เมธอด <code>select</code> ต้องรับ <em>ค่าจริง</em> (เช่น รหัสสถานี) ไม่ใช่ข้อความที่แสดง</p>
+<section id="ทดสอบ-query" class="level3">
+<h3 class="anchored" data-anchor-id="ทดสอบ-query">ทดสอบ query</h3>
+<p>ส่วนที่ทดสอบได้ง่ายและสำคัญที่สุดคือฟังก์ชันใน <code>src/queries.py</code> เพราะเป็นตัวกำหนดตัวเลขบนหน้าจอ การทดสอบใช้ฐานข้อมูลเล็กในหน่วยความจำที่สร้างจากข้อมูลที่รู้คำตอบ</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests/test_queries.py</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> queries</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_con():</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    con <span class="op">=</span> duckdb.<span class="ex">connect</span>()                       <span class="co"># ฐานข้อมูลในหน่วยความจำ</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    con.register(<span class="st">"stations_df"</span>, pd.DataFrame({</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"station_id"</span>: [<span class="st">"a"</span>, <span class="st">"b"</span>], <span class="st">"name_th"</span>: [<span class="st">"ก"</span>, <span class="st">"ข"</span>],</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"province"</span>: [<span class="st">"P1"</span>, <span class="st">"P1"</span>], <span class="st">"region"</span>: [<span class="st">"R1"</span>, <span class="st">"R1"</span>]}))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    con.register(<span class="st">"daily_df"</span>, pd.DataFrame({</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"station_id"</span>: [<span class="st">"a"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>], <span class="st">"date"</span>: pd.to_datetime([<span class="st">"2025-01-01"</span>, <span class="st">"2025-01-02"</span>, <span class="st">"2025-01-01"</span>]),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"pm25_mean"</span>: [<span class="fl">30.0</span>, <span class="fl">50.0</span>, <span class="fl">40.0</span>], <span class="st">"is_complete"</span>: [<span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>]}))</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    con.execute(<span class="st">"CREATE TABLE stations AS SELECT * FROM stations_df"</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    con.execute(<span class="st">"CREATE TABLE daily_pm25_clean AS SELECT * FROM daily_df"</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> con</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_region_share():</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> queries.cube(make_con(), [<span class="st">"s.region"</span>])</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> df.loc[<span class="dv">0</span>, <span class="st">"station_days"</span>] <span class="op">==</span> <span class="dv">3</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">abs</span>(df.loc[<span class="dv">0</span>, <span class="st">"share_over_std"</span>] <span class="op">-</span> <span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>) <span class="op">&lt;</span> <span class="fl">1e-9</span>     <span class="co"># มีหนึ่งวันจากสามที่เกิน 37.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ข้อมูลทดสอบสามแถวนี้มีคำตอบที่คำนวณด้วยมือได้ คือ สถานี-วันสามวัน มีหนึ่งวัน (50 µg/m³) ที่เกิน 37.5 การทดสอบแบบนี้จับข้อผิดพลาดเช่น ลืม <code>is_complete</code> หรือเปลี่ยนวิธีรวมโดยไม่ตั้งใจได้ รันด้วย <code>pytest</code> (ภาคผนวก ก)</p>
 </section>
-<section id="การ-deploy" class="level3">
-<h3 class="anchored" data-anchor-id="การ-deploy">การ deploy</h3>
-<p>การ deploy คือการนำแดชบอร์ดขึ้นเซิร์ฟเวอร์ให้ผู้อื่นเข้าถึงผ่านเว็บ ทางเลือกที่ใช้บ่อยได้แก่ Streamlit Community Cloud ซึ่ง deploy จาก repository บน GitHub ได้ฟรีสำหรับแอปสาธารณะ และการรันบนเซิร์ฟเวอร์ของหน่วยงานด้วย container (บทที่ 2) ประเด็นที่ต้องแก้ก่อน deploy มีดังนี้</p>
-<ul>
-<li><strong>ข้อมูล</strong> ไฟล์ <code>data/pm25.duckdb</code> ไม่อยู่ใน repository ทางเลือกได้แก่ ให้แอปสร้างฐานข้อมูลขนาดเล็กจากไฟล์ Parquet ที่สรุปแล้วและ commit ได้ (ระดับรายวัน มีขนาดไม่กี่เมกะไบต์) หรือให้แอปดึงข้อมูลจากที่เก็บภายนอก</li>
-<li><strong>ความลับ</strong> ถ้าแอปต้องใช้ API key ให้เก็บใน <code>st.secrets</code> ซึ่งอ่านจาก <code>.streamlit/secrets.toml</code> บนเครื่อง หรือจากการตั้งค่าของบริการ ห้าม commit ลง repository (บทที่ 5)</li>
-<li><strong>ข้อมูลส่วนบุคคล</strong> แดชบอร์ดสาธารณะต้องไม่มีข้อมูลส่วนบุคคลเลย (บทที่ 16)</li>
-<li><strong>สภาพแวดล้อม</strong> ระบุแพ็กเกจใน <code>requirements.txt</code> ที่บริการอ่านได้ และตรวจว่าฟอนต์ไทยไม่จำเป็น (Plotly ใช้ฟอนต์ของเบราว์เซอร์ จึงไม่มีปัญหาแบบ matplotlib)</li>
-</ul>
+<section id="ทดสอบแอปทงตวดวย-apptest" class="level3">
+<h3 class="anchored" data-anchor-id="ทดสอบแอปทงตวดวย-apptest">ทดสอบแอปทั้งตัวด้วย AppTest</h3>
+<p>Streamlit มี <code>AppTest</code> (ตั้งแต่ 1.28) ซึ่งรันแอปโดยไม่ต้องเปิด browser และจำลองการโต้ตอบได้</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests/test_app.py</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> streamlit.testing.v1 <span class="im">import</span> AppTest</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_drill_down_to_region():</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    at <span class="op">=</span> AppTest.from_file(<span class="st">"app/app.py"</span>, default_timeout<span class="op">=</span><span class="dv">30</span>).run()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="kw">not</span> at.exception</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    at.selectbox(key<span class="op">=</span><span class="st">"pick_region"</span>).select_index(<span class="dv">0</span>).run()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="kw">not</span> at.exception</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> at.session_state[<span class="st">"region"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>การทดสอบนี้ต้องมีไฟล์ฐานข้อมูลอยู่จริง ใน continuous integration ควรสร้างจากไฟล์ข้อมูลตัวอย่าง (บทที่ 19) การทดสอบที่ตรวจเพียงว่า “ไม่มี exception” ในทุกระดับของ drill-down ก็จับปัญหาที่พบบ่อยได้มากแล้ว เช่น คอลัมน์ที่เปลี่ยนชื่อ หรือ query ที่ผิดเมื่อเลือกบางระดับ</p>
+</section>
+<section id="deploy" class="level3">
+<h3 class="anchored" data-anchor-id="deploy">deploy</h3>
+<div id="tbl-ch20-deploy-options" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-deploy-options-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.8: ทางเลือกในการ deploy แดชบอร์ด
+</figcaption>
+<div aria-describedby="tbl-ch20-deploy-options-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ทางเลือก</th>
+<th>ลักษณะ</th>
+<th>ข้อควรพิจารณา</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>รันในเครื่อง</td>
+<td><code>streamlit run app/app.py</code></td>
+<td>เหมาะกับการนำเสนอและการใช้ภายในทีม</td>
+</tr>
+<tr class="even">
+<td>Streamlit Community Cloud</td>
+<td>deploy จาก GitHub repository</td>
+<td>ต้องให้แอปสร้างหรือดาวน์โหลดข้อมูลได้เอง เพราะ <code>data/</code> ไม่อยู่ใน repository ทรัพยากรมีจำกัด</td>
+</tr>
+<tr class="odd">
+<td>container (Docker)</td>
+<td>บรรจุแอป สภาพแวดล้อม และข้อมูลเป็นภาพเดียว</td>
+<td>ควบคุมได้มาก ใช้กับ server ขององค์กรหรือคลาวด์ใดก็ได้</td>
+</tr>
+<tr class="even">
+<td>server ขององค์กร</td>
+<td>ติดตั้งบนเครื่องของหน่วยงาน</td>
+<td>ต้องจัดการการยืนยันตัวตน HTTPS และการอัปเดต</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>ก่อน deploy ให้ตรวจสามเรื่อง เรื่องแรก <strong>ข้อมูล</strong> แดชบอร์ดที่เผยแพร่สาธารณะต้องไม่มีข้อมูลส่วนบุคคล (บทที่ 16) และต้องเคารพเงื่อนไขของข้อมูลทุกแหล่ง เช่น ขอบเขตการปกครองและแผนที่พื้นหลัง (บทที่ 17 และ 22) เรื่องที่สอง <strong>ความลับ</strong> ใช้ระบบความลับของแพลตฟอร์ม เช่น <code>st.secrets</code> ไม่เขียนไว้ในโค้ด เรื่องที่สาม <strong>ความปลอดภัยของ query</strong> ทุกค่าจากผู้ใช้ผ่าน <code>?</code> parameter และฐานข้อมูลเปิดแบบอ่านอย่างเดียว ซึ่งจำกัดความเสียหายแม้มีช่องโหว่</p>
 </section>
 </section>
-<section id="sec-ch20-bi" class="level2" data-number="20.7">
-<h2 data-number="20.7" class="anchored" data-anchor-id="sec-ch20-bi"><span class="header-section-number">20.7</span> เปรียบเทียบกับ Power BI และ Looker Studio ★</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="★ เนื้อหาเชิงลึก">
+<section id="sec-ch20-bi-tools" class="level2" data-number="20.7">
+<h2 data-number="20.7" class="anchored" data-anchor-id="sec-ch20-bi-tools"><span class="header-section-number">20.7</span> เปรียบเทียบกับ Power BI และ Looker Studio ★</h2>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1146,15 +1360,29 @@ div.csl-indent {
 <p>หัวข้อนี้ไม่ได้สอนในชั้นเรียน อ่านข้ามได้โดยไม่กระทบความเข้าใจบทถัดไป</p>
 </div>
 </div>
-<section id="เครองมอ-bi" class="level3">
-<h3 class="anchored" data-anchor-id="เครองมอ-bi">เครื่องมือ BI</h3>
-<p>องค์กรจำนวนมากใช้เครื่องมือ business intelligence (BI) เชิงพาณิชย์ เช่น Microsoft Power BI, Tableau และ Google Looker Studio สร้างแดชบอร์ดด้วยการลากวาง โดยไม่ต้องเขียนโค้ด นักวิทยาการข้อมูลควรรู้ว่าเครื่องมือแต่ละแบบเหมาะกับงานใด เพราะในที่ทำงานจริง การส่งต่อข้อมูลให้ทีม BI สร้างแดชบอร์ดเป็นเรื่องปกติ</p>
-<div id="tbl-ch20-bi" class="quarto-float quarto-figure quarto-figure-center anchored">
+<section id="เครองมอ-bi-แบบลากวาง" class="level3">
+<h3 class="anchored" data-anchor-id="เครองมอ-bi-แบบลากวาง">เครื่องมือ BI แบบลากวาง</h3>
+<p>องค์กรจำนวนมากใช้เครื่องมือ business intelligence (BI) สำเร็จรูป เช่น Power BI ของ Microsoft และ Looker Studio ของ Google สร้างแดชบอร์ดด้วยการลากวาง แบบเดียวกับเครื่องมือสำรวจในบทที่ 12 นักวิทยาการข้อมูลควรรู้จุดแข็งและข้อจำกัดของเครื่องมือเหล่านี้ เพราะผู้ใช้ผลงานมักคุ้นเคยกับมันอยู่แล้ว</p>
+</section>
+<section id="สงขอมลออกใหเครองมอ-bi" class="level3">
+<h3 class="anchored" data-anchor-id="สงขอมลออกใหเครองมอ-bi">ส่งข้อมูลออกให้เครื่องมือ BI</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>con.execute(<span class="st">"""</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">    COPY (</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">        SELECT d.station_id, s.name_th, s.province, s.region, d.date,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="st">               d.pm25_mean, d.pm25_max, d.n_hours_observed, d.is_complete</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ) TO 'reports/daily_pm25_clean.csv' (HEADER)</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ไฟล์ CSV ที่มี UTF-8 เปิดในเครื่องมือ BI ส่วนใหญ่ได้ แต่บางโปรแกรมต้องการ BOM ที่ต้นไฟล์จึงจะอ่านภาษาไทยถูก (บทที่ 5) การส่งออกเป็น Parquet รักษาชนิดข้อมูลได้ดีกว่าถ้าเครื่องมือรองรับ ต้องส่งออกคอลัมน์ <code>is_complete</code> ไปด้วย เพื่อให้ผู้สร้างแดชบอร์ดใน BI ใช้นิยามเดียวกัน</p>
+</section>
+<section id="เปรยบเทยบ" class="level3">
+<h3 class="anchored" data-anchor-id="เปรยบเทยบ">เปรียบเทียบ</h3>
+<div id="tbl-ch20-bi-compare" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-bi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.7: เปรียบเทียบ Streamlit กับเครื่องมือ BI
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-bi-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.9: เปรียบเทียบ Streamlit กับเครื่องมือ BI
 </figcaption>
-<div aria-describedby="tbl-ch20-bi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-ch20-bi-compare-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1165,53 +1393,134 @@ div.csl-indent {
 <thead>
 <tr class="header">
 <th>ด้าน</th>
-<th>Streamlit</th>
+<th>Streamlit + DuckDB</th>
 <th>Power BI</th>
 <th>Looker Studio</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>วิธีสร้าง</td>
-<td>เขียนโค้ด Python</td>
-<td>ลากวาง พร้อมภาษา DAX สำหรับการคำนวณ</td>
-<td>ลากวางบนเว็บ</td>
+<td>สร้างแดชบอร์ดแรก</td>
+<td>ต้องเขียนโค้ด</td>
+<td>เร็ว ลากวาง</td>
+<td>เร็ว ลากวาง</td>
 </tr>
 <tr class="even">
-<td>ค่าใช้จ่าย</td>
-<td>ฟรีและโอเพนซอร์ส</td>
-<td>มีรุ่นฟรีสำหรับใช้ส่วนตัว การแชร์ในองค์กรมีค่าใช้จ่าย</td>
-<td>ฟรี</td>
+<td>version control และการ review</td>
+<td>เต็มที่ด้วย Git</td>
+<td>จำกัด ไฟล์เป็น binary (มีรูปแบบโครงการที่เป็นข้อความในรุ่นใหม่)</td>
+<td>จำกัด อยู่บนคลาวด์</td>
 </tr>
 <tr class="odd">
-<td>ความยืดหยุ่น</td>
-<td>สูงมาก ทำอะไรก็ได้ที่ Python ทำได้</td>
-<td>ปานกลางถึงสูง</td>
-<td>ปานกลาง</td>
+<td>การทำซ้ำได้</td>
+<td>สูงถ้าทำตามบทที่ 19</td>
+<td>ขึ้นกับการตั้งค่าบนแพลตฟอร์ม</td>
+<td>ขึ้นกับการตั้งค่าบนแพลตฟอร์ม</td>
 </tr>
 <tr class="even">
 <td>การวิเคราะห์ขั้นสูง</td>
-<td>ใช้ไลบรารี Python ได้ทั้งหมด</td>
-<td>จำกัด (รองรับ script ของ Python และ R บางส่วน)</td>
-<td>จำกัด</td>
+<td>ไม่จำกัด ใช้ Python ทั้งหมด</td>
+<td>ภาษา DAX และการเชื่อมต่อ Python ที่จำกัด</td>
+<td>ฟิลด์คำนวณที่จำกัด</td>
 </tr>
 <tr class="odd">
-<td>การควบคุมเวอร์ชันและทำซ้ำได้</td>
-<td>ดีมาก โค้ดอยู่ใน Git</td>
-<td>จำกัด ไฟล์เป็น binary</td>
-<td>จำกัด</td>
+<td>การแชร์ในองค์กร</td>
+<td>ต้องจัดการ deploy เอง</td>
+<td>เด่นมากในองค์กรที่ใช้ Microsoft 365</td>
+<td>เด่นในองค์กรที่ใช้ Google Workspace</td>
 </tr>
 <tr class="even">
-<td>ความง่ายสำหรับผู้ไม่เขียนโค้ด</td>
-<td>ต่ำ</td>
-<td>สูง</td>
-<td>สูง</td>
+<td>ค่าใช้จ่าย</td>
+<td>ฟรี (ต้นทุนอยู่ที่การดูแล server)</td>
+<td>มีรุ่นฟรีสำหรับใช้เอง การแชร์มักต้องมี license</td>
+<td>ฟรีเป็นส่วนใหญ่</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>รายละเอียดเรื่องราคาและความสามารถของเครื่องมือเชิงพาณิชย์เปลี่ยนบ่อย ข้อมูลในตารางเป็นภาพรวม ณ ต.ค. 2569 ให้ตรวจกับเว็บไซต์ของผู้ให้บริการก่อนตัดสินใจ</p>
+</section>
+<section id="เลอกอยางไร" class="level3">
+<h3 class="anchored" data-anchor-id="เลอกอยางไร">เลือกอย่างไร</h3>
+<p>เครื่องมือ BI เหมาะเมื่อองค์กรใช้อยู่แล้ว ผู้ดูแลแดชบอร์ดไม่ใช่โปรแกรมเมอร์ และความต้องการอยู่ในขอบเขตของการกรองและรวมกลุ่มมาตรฐาน Streamlit เหมาะเมื่อต้องการการวิเคราะห์ที่เครื่องมือ BI ทำไม่ได้ เช่น การแยกองค์ประกอบด้วย STL หรือการตรวจค่าผิดปกติ ต้องการให้ทุกการเปลี่ยนแปลงผ่านการ review โค้ด หรือต้องการให้ตัวเลขตรงกับรายงานที่สร้างจากโค้ดเดียวกัน ในทางปฏิบัติ หลายองค์กรใช้ทั้งสองแบบ งานวิเคราะห์ที่ซับซ้อนทำใน Python แล้วส่งตารางสรุปที่ผ่านการตรวจแล้วให้เครื่องมือ BI แสดงผล ซึ่งทำให้ตรรกะการคำนวณอยู่ในที่เดียวที่ตรวจสอบได้</p>
+</section>
+</section>
+<section id="sec-ch20-case" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec-ch20-case">กรณีศึกษา: PM2.5 Explorer แดชบอร์ด drill-down สี่ระดับ</h2>
+<section id="เปาหมายและผใช" class="level3">
+<h3 class="anchored" data-anchor-id="เปาหมายและผใช">เป้าหมายและผู้ใช้</h3>
+<p>แดชบอร์ดเชิงวิเคราะห์สำหรับเจ้าหน้าที่สิ่งแวดล้อมและนักศึกษา ที่ต้องการรู้ว่าพื้นที่ใดมีฝุ่นเกินมาตรฐานบ่อย เมื่อใด และสถานีใดเป็นตัวขับเคลื่อนค่าของพื้นที่ คำถามห้าวินาทีแรกคือ “ในช่วงที่เลือก ภาคใดแย่ที่สุด และแย่แค่ไหนเมื่อเทียบกับมาตรฐาน”</p>
+</section>
+<section id="โครงสรางไฟล" class="level3">
+<h3 class="anchored" data-anchor-id="โครงสรางไฟล">โครงสร้างไฟล์</h3>
+<pre class="text"><code>app/app.py            หน้าแดชบอร์ด: สถานะ ตัวกรอง การจัดวาง
+src/queries.py        ฟังก์ชัน query ที่ใช้ร่วมกับรายงาน (บทที่ 18–19)
+src/charts.py         ฟังก์ชันสร้างกราฟ (บทที่ 12)
+tests/test_queries.py การทดสอบตัวเลข
+tests/test_app.py     การทดสอบ drill-down ด้วย AppTest</code></pre>
+</section>
+<section id="การจดวาง" class="level3">
+<h3 class="anchored" data-anchor-id="การจดวาง">การจัดวาง</h3>
+<div id="tbl-ch20-case-layout" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-case-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+ตารางที่&nbsp;20.10: การจัดวางของ PM2.5 Explorer ในแต่ละระดับ
+</figcaption>
+<div aria-describedby="tbl-ch20-case-layout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ส่วน</th>
+<th>ระดับประเทศ</th>
+<th>ระดับภาค</th>
+<th>ระดับจังหวัด</th>
+<th>ระดับสถานี</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>บน</td>
+<td>แถบเส้นทาง ช่วงวันที่ วันที่ของข้อมูลล่าสุด</td>
+<td>เหมือนกันทุกระดับ</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ตัวชี้วัด</td>
+<td>ค่าเฉลี่ยรายวัน ค่าสูงสุดรายชั่วโมง สัดส่วนวันเกินมาตรฐาน จำนวนสถานี (เทียบปีก่อน)</td>
+<td>เหมือนกันทุกระดับ แต่กรองตามสถานะ</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
-<td>เหมาะกับ</td>
-<td>ต้นแบบ แอปวิเคราะห์เฉพาะทาง งานที่ต้องทำซ้ำได้</td>
-<td>แดชบอร์ดองค์กรที่เชื่อมระบบของ Microsoft</td>
-<td>แดชบอร์ดที่เชื่อมข้อมูลของ Google</td>
+<td>ซ้าย</td>
+<td>แท่งรายภาค + selectbox</td>
+<td>แท่งรายจังหวัด + selectbox</td>
+<td>แท่งรายสถานี + selectbox</td>
+<td>อนุกรมรายวันพร้อมเส้นมาตรฐาน</td>
+</tr>
+<tr class="even">
+<td>ขวา</td>
+<td>เส้นรายเดือนของประเทศ</td>
+<td>เส้นรายเดือนของภาค</td>
+<td>เส้นรายเดือนของจังหวัด</td>
+<td>วันที่ติดธงค่าผิดปกติ กลุ่มของรูปแบบฤดูกาล</td>
+</tr>
+<tr class="odd">
+<td>ล่าง</td>
+<td>ที่มา นิยาม ข้อจำกัด และลิงก์ไปยังรายงาน</td>
+<td>เหมือนกันทุกระดับ</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -1219,40 +1528,48 @@ div.csl-indent {
 </figure>
 </div>
 </section>
-<section id="สงตอขอมลใหเครองมอ-bi" class="level3">
-<h3 class="anchored" data-anchor-id="สงตอขอมลใหเครองมอ-bi">ส่งต่อข้อมูลให้เครื่องมือ BI</h3>
-<p>เครื่องมือ BI ทุกตัวอ่านไฟล์ CSV หรือ Parquet ได้ การส่งออกข้อมูลที่ผ่านการทำความสะอาดจาก DuckDB จึงเป็นสะพานที่ง่ายที่สุด</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> duckdb.<span class="ex">connect</span>(<span class="st">"data/pm25.duckdb"</span>, read_only<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> con:</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    con.execute(<span class="st">"""</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">        COPY (</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">            SELECT d.*, s.name_th, s.province, s.region</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">            FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id)</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">            WHERE d.is_complete</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">        ) TO 'outputs/daily_pm25_clean.csv' (HEADER)</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>ข้อควรระวังเมื่อส่งต่อคือ <em>นิยามของตัวชี้วัด</em> เครื่องมือ BI ทำให้การรวมข้อมูลด้วยค่าเฉลี่ยของค่าเฉลี่ยเกิดขึ้นได้ง่ายมาก (บทที่ 18) และผู้ใช้อาจไม่รู้ว่าต้องกรองเฉพาะวันที่ข้อมูลครบ การส่งออกที่กรองไว้แล้ว และเอกสารนิยามตัวชี้วัดที่ส่งไปพร้อมกัน ช่วยป้องกันตัวเลขที่ไม่ตรงกันระหว่างแดชบอร์ดของทีม BI กับรายงานของทีมวิเคราะห์</p>
+<section id="สวนประกอบหลก" class="level3">
+<h3 class="anchored" data-anchor-id="สวนประกอบหลก">ส่วนประกอบหลัก</h3>
+<p>ตัวชี้วัดพร้อมการเทียบกับช่วงเดียวกันของปีก่อน ใช้ <code>current_filter</code> สองครั้งด้วยช่วงวันที่ต่างกัน</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kpis(start, end):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    where, params <span class="op">=</span> current_filter(start, end)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    prev_where, prev_params <span class="op">=</span> current_filter(start <span class="op">-</span> pd.DateOffset(years<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                                             end <span class="op">-</span> pd.DateOffset(years<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    sql <span class="op">=</span> <span class="st">"""SELECT avg(d.pm25_mean) AS mean, max(d.pm25_max) AS peak,</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">                    avg(CAST(d.pm25_mean &gt; 37.5 AS DOUBLE)) AS share,</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">                    count(DISTINCT d.station_id) AS n_st</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">             FROM daily_pm25_clean AS d JOIN stations AS s USING (station_id) WHERE </span><span class="sc">{w}</span><span class="st">"""</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    now <span class="op">=</span> query(sql.<span class="bu">format</span>(w<span class="op">=</span>where), params, db_mtime<span class="op">=</span>db_version()).iloc[<span class="dv">0</span>]</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    prev <span class="op">=</span> query(sql.<span class="bu">format</span>(w<span class="op">=</span>prev_where), prev_params, db_mtime<span class="op">=</span>db_version()).iloc[<span class="dv">0</span>]</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> st.columns(<span class="dv">4</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    m[<span class="dv">0</span>].metric(<span class="st">"PM2.5 เฉลี่ยรายวัน (µg/m³)"</span>, <span class="ss">f"</span><span class="sc">{</span>now[<span class="st">'mean'</span>]<span class="sc">:.1f}</span><span class="ss">"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"</span><span class="sc">{</span>now[<span class="st">'mean'</span>] <span class="op">-</span> prev[<span class="st">'mean'</span>]<span class="sc">:+.1f}</span><span class="ss"> จากปีก่อน"</span>, delta_color<span class="op">=</span><span class="st">"inverse"</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    m[<span class="dv">1</span>].metric(<span class="st">"ค่าสูงสุดรายชั่วโมง (µg/m³)"</span>, <span class="ss">f"</span><span class="sc">{</span>now[<span class="st">'peak'</span>]<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    m[<span class="dv">2</span>].metric(<span class="st">"สัดส่วนสถานี-วันที่เกิน 37.5"</span>, <span class="ss">f"</span><span class="sc">{</span>now[<span class="st">'share'</span>]<span class="sc">:.0%}</span><span class="ss">"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                <span class="ss">f"</span><span class="sc">{</span>(now[<span class="st">'share'</span>] <span class="op">-</span> prev[<span class="st">'share'</span>]) <span class="op">*</span> <span class="dv">100</span><span class="sc">:+.0f}</span><span class="ss"> จุด"</span>, delta_color<span class="op">=</span><span class="st">"inverse"</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    m[<span class="dv">3</span>].metric(<span class="st">"จำนวนสถานี"</span>, <span class="bu">int</span>(now[<span class="st">"n_st"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ถ้าปีก่อนไม่มีข้อมูลในช่วงที่เลือก <code>prev</code> จะเป็น NaN และ delta จะแสดง “nan” ต้องตรวจแล้วส่ง <code>delta=None</code> แทน จำนวนสถานีควรแสดงเสมอ เพราะการเปลี่ยนแปลงของตัวชี้วัดอาจมาจากจำนวนสถานีที่เปลี่ยน ไม่ใช่อากาศที่เปลี่ยน (บทที่ 13)</p>
+<p>ลำดับการประกอบหน้าใน <code>app.py</code> เป็นไปตามแบบจำลองของ Streamlit คือ ตั้งค่าหน้า เปิด connection อ่านสถานะ สร้างตัวกรอง ตรวจว่าตัวกรองสมบูรณ์ (ไม่เช่นนั้น <code>st.stop()</code>) แล้ววาดแต่ละส่วนจากบนลงล่าง โค้ดเต็มที่ทำงานได้อยู่ในคู่มือปฏิบัติการสัปดาห์ที่ 14 ซึ่งกรณีศึกษานี้ปรับปรุงสี่จุด ได้แก่ ใช้ <code>is_complete</code> ทุก query ย้าย query เข้า <code>src/queries.py</code> เพิ่มการเทียบกับปีก่อน และเพิ่มการทดสอบ</p>
 </section>
-</section>
-<section id="sec-ch20-case" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="sec-ch20-case">กรณีศึกษา: จากแบบร่างบนกระดาษสู่ PM2.5 Explorer</h2>
-<p><strong>ผู้ใช้และคำถาม</strong> ทีมสัมภาษณ์เจ้าหน้าที่สำนักงานสิ่งแวดล้อมภาคสองคน พบว่าคำถามที่ถามบ่อยที่สุดคือ “จังหวัดใดในภาคมีปัญหามากที่สุดในช่วงที่ผ่านมา” และ “สถานีในจังหวัดเดียวกันต่างกันมากหรือไม่” ทั้งสองคำถามเป็นการเปรียบเทียบข้ามระดับของลำดับชั้น แดชบอร์ดจึงออกแบบเป็นเชิงวิเคราะห์ที่มี drill-down เป็นหัวใจ</p>
-<p><strong>แบบร่าง</strong> ทีมร่าง wireframe บนกระดาษก่อนเขียนโค้ด ตามตาราง <a href="18-hierarchical-data.html#tbl-ch18-drilldown" class="quarto-xref">ตารางที่&nbsp;<span>18.6</span></a> ในบทที่ 18 ตัดสินใจว่า</p>
-<ul>
-<li>แถวบนสุดเป็นตัวชี้วัดสี่ตัว โดยสัดส่วนวันเกินมาตรฐานเป็นตัวหลัก</li>
-<li>ฝั่งซ้ายเป็น bar chart แนวนอนของหน่วยลูกเรียงตามสัดส่วน (เปรียบเทียบด้วยความยาว ตามบทที่ 11) พร้อม selectbox สำหรับเจาะลง</li>
-<li>ฝั่งขวาเป็นแนวโน้มรายเดือนพร้อมเส้นมาตรฐาน</li>
-<li>ระดับสถานีแสดงอนุกรมเวลารายวันและธงค่าผิดปกติ</li>
+<section id="การตรวจรบ" class="level3">
+<h3 class="anchored" data-anchor-id="การตรวจรบ">การตรวจรับ</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">สถานะเริ่มต้นตอบคำถามห้าวินาทีแรกได้โดยไม่ต้องคลิก</label></li>
+<li><label><input type="checkbox">drill-down ได้ครบสี่ระดับ ย้อนกลับได้ทุกระดับ และตัวกรองวันที่ทำงานทุกระดับ</label></li>
+<li><label><input type="checkbox">ค่าของภาคในแท่งระดับประเทศเท่ากับตัวชี้วัดเมื่อ drill-down เข้าไปในภาคนั้น</label></li>
+<li><label><input type="checkbox">ตัวชี้วัดทุกตัวมีนิยามในส่วนท้าย มีการเปรียบเทียบ และสีของ delta ถูกทิศทาง</label></li>
+<li><label><input type="checkbox">การคลิกส่วนใหญ่ตอบสนองภายในหนึ่งวินาที</label></li>
+<li><label><input type="checkbox"><code>pytest</code> ผ่านทั้งการทดสอบ query และ <span class="idx-tool">AppTest</span></label></li>
+<li><label><input type="checkbox">เปิด DuckDB แบบ <code>read_only=True</code> ใน <code>cache_resource</code> และทุกค่าจากผู้ใช้ผ่าน <code>?</code></label></li>
 </ul>
-<p><strong>การทดสอบกับผู้ใช้</strong> เมื่อให้เจ้าหน้าที่ลองใช้รุ่นแรก พบปัญหาสามข้อ ข้อแรก เจ้าหน้าที่ไม่รู้ว่าเลือกระดับใดอยู่ ทีมจึงเพิ่ม breadcrumb ข้อสอง ตัวเลขสัดส่วนของจังหวัดที่มีสถานีเดียวดูน่ากลัวเกินจริง ทีมจึงเพิ่มจำนวนสถานี-วันใน tooltip ข้อสาม เมื่อเลือกช่วงวันที่ในฤดูฝนของภาคใต้ บางจังหวัดไม่มีวันเกินมาตรฐานเลย กราฟแท่งจึงว่าง ทีมจึงเพิ่มข้อความอธิบายแทนกราฟว่าง</p>
-<p><strong>ผล</strong> แดชบอร์ดรุ่นสุดท้ายผ่านการทดสอบอัตโนมัติ (<code>tests/test_app.py</code>) และการทดสอบโดยเพื่อนที่โคลน repository ใหม่ (บทที่ 19)</p>
-<p><strong>ข้อจำกัด</strong> แดชบอร์ดแสดงข้อมูลในอดีตที่ผ่านการทำความสะอาด ไม่ใช่ข้อมูลเวลาจริง จึงไม่เหมาะกับการเฝ้าระวังรายวัน ซึ่งต้องใช้แดชบอร์ดเชิงปฏิบัติการที่ดึงข้อมูลล่าสุดจาก Air4Thai โดยตรง และตัวชี้วัดของระดับที่มีข้อมูลน้อยยังต้องตีความอย่างระมัดระวังแม้มี tooltip ช่วย</p>
+</section>
 </section>
 <section id="sec-ch20-pitfalls" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sec-ch20-pitfalls">ข้อผิดพลาดที่พบบ่อย</h2>
 <div id="tbl-ch20-pitfalls" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ch20-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-ตารางที่&nbsp;20.8: ข้อผิดพลาดที่พบบ่อยในบทที่ 20
+ตารางที่&nbsp;20.11: ข้อผิดพลาดที่พบบ่อยในบทที่ 20
 </figcaption>
 <div aria-describedby="tbl-ch20-pitfalls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1270,54 +1587,54 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td>สร้างแดชบอร์ดเดียวสำหรับทุกผู้ใช้และทุกประเภท</td>
-<td>หน้าจอยัดเยียด ไม่มีใครใช้ได้ดี</td>
-<td>เลือกผู้ใช้และประเภทให้ชัด</td>
+<td>ใส่ทุกอย่างที่มีไว้ในหน้าเดียว</td>
+<td>ผู้ใช้หาสิ่งสำคัญไม่เจอ</td>
+<td>เริ่มจากคำถามห้าวินาทีแรก และเลือกตัวชี้วัดสามถึงห้าตัว</td>
 </tr>
 <tr class="even">
-<td>ใส่ตัวชี้วัดที่ไม่มีบริบทหรือหน่วย</td>
-<td>ผู้ใช้ไม่รู้ว่าดีหรือแย่</td>
-<td>ระบุหน่วย เกณฑ์ และจุดเทียบ</td>
+<td>ตัวชี้วัดไม่มีการเปรียบเทียบ</td>
+<td>ตัวเลขไม่มีความหมาย</td>
+<td>เทียบกับมาตรฐาน ช่วงก่อน หรือค่าของระดับบน</td>
 </tr>
 <tr class="odd">
-<td>คิดว่า Streamlit รันเฉพาะส่วนที่เปลี่ยน</td>
-<td>ตัวแปรหายข้าม rerun งานช้าซ้ำทุกครั้ง</td>
-<td>ใช้ session state และ cache</td>
+<td>ใช้สีของ delta ตามค่าเริ่มต้น</td>
+<td>การเพิ่มขึ้นของฝุ่นแสดงเป็นสีเขียว</td>
+<td><code>delta_color="inverse"</code></td>
 </tr>
 <tr class="even">
-<td>เปิดการเชื่อมต่อฐานข้อมูลนอก <code>cache_resource</code></td>
-<td>เปิดใหม่ทุก rerun ช้าและล็อกไฟล์</td>
-<td><code>@st.cache_resource</code> พร้อม <code>read_only=True</code></td>
+<td>ใช้ <code>cache_data</code> กับ connection</td>
+<td>serialize ไม่ได้ เกิด error</td>
+<td><code>cache_resource</code> กับ connection, <code>cache_data</code> กับผล query</td>
 </tr>
 <tr class="odd">
-<td>ใช้การเชื่อมต่อเดียวจากหลาย thread</td>
-<td>อาจเกิดข้อผิดพลาดเมื่อผู้ใช้หลายคนพร้อมกัน</td>
-<td><code>get_con().cursor()</code> ทุกครั้งที่ query</td>
+<td>ใช้ <code>cache_resource</code> กับ DataFrame แล้วแก้ไข</td>
+<td>ทุก session เห็นค่าที่ถูกแก้</td>
+<td><code>cache_data</code> ซึ่งคืนสำเนา</td>
 </tr>
 <tr class="even">
-<td>ฟังก์ชันที่ cache อ่าน session state ภายใน</td>
-<td>ผลของผู้ใช้คนหนึ่งรั่วไปยังคนอื่น</td>
-<td>ส่งค่าที่ขึ้นกับผู้ใช้เป็นอาร์กิวเมนต์</td>
+<td>เปิด DuckDB แบบเขียนได้ในแดชบอร์ด</td>
+<td>เสี่ยงเขียนทับ และกันกระบวนการอื่น</td>
+<td><code>read_only=True</code></td>
 </tr>
 <tr class="odd">
-<td>ต่อค่าของผู้ใช้ลงในสตริง SQL</td>
-<td>SQL injection และปัญหาเครื่องหมายคำพูด</td>
-<td>ใช้ตัวยึดตำแหน่ง <code>?</code></td>
+<td>ใช้ connection เดียวข้าม thread โดยไม่สร้าง cursor</td>
+<td>ปัญหาเมื่อหลายผู้ใช้พร้อมกัน</td>
+<td><code>get_con().cursor()</code></td>
 </tr>
 <tr class="even">
-<td>แก้ค่าของ widget หลังสร้าง widget แล้ว</td>
+<td>แก้ค่า widget ใน session state หลังสร้าง widget</td>
 <td><code>StreamlitAPIException</code></td>
-<td>แก้ใน callback หรือก่อนสร้าง widget</td>
+<td>แก้ใน callback</td>
 </tr>
 <tr class="odd">
-<td>ไม่มีทางย้อนกลับใน drill-down</td>
-<td>ผู้ใช้หลงทาง</td>
-<td>breadcrumb ที่คลิกได้</td>
+<td>ต่อค่าจากผู้ใช้เข้า SQL ด้วย f-string</td>
+<td>SQL injection</td>
+<td><code>?</code> parameter</td>
 </tr>
 <tr class="even">
-<td>ไม่กรอง <code>is_complete</code></td>
-<td>ตัวชี้วัดของแดชบอร์ดไม่ตรงกับรายงาน</td>
-<td>ใช้เงื่อนไขเดียวกับการวิเคราะห์ทุกที่</td>
+<td>แดชบอร์ดแสดงข้อมูลเก่าหลังรัน pipeline</td>
+<td>cache เก็บผลเดิม</td>
+<td>ใส่เวลาแก้ไขของไฟล์ในคีย์ของ cache และรีสตาร์ตแอป</td>
 </tr>
 </tbody>
 </table>
@@ -1328,13 +1645,13 @@ div.csl-indent {
 <section id="สรป" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="สรป">สรุป</h2>
 <ul>
-<li>แดชบอร์ดแสดงข้อมูลที่สำคัญที่สุดสำหรับวัตถุประสงค์หนึ่งในหน้าจอเดียว แบ่งเป็นเชิงปฏิบัติการ เชิงวิเคราะห์ และเชิงกลยุทธ์ ซึ่งออกแบบต่างกัน</li>
-<li>จัดวางสิ่งสำคัญที่สุดไว้ซ้ายบน ภาพรวมก่อนรายละเอียด และเลือกตัวชี้วัดที่ตอบคำถามของผู้ใช้ มีบริบท และนิยามสอดคล้องกันทุกระดับ</li>
-<li>Streamlit รัน script ทั้งไฟล์ใหม่ทุกการโต้ตอบ session state เก็บค่าข้าม rerun และ callback เปลี่ยน session state ก่อนวาดหน้าใหม่</li>
-<li><code>cache_data</code> เก็บผลของ query และคืนสำเนา <code>cache_resource</code> เก็บการเชื่อมต่อเดียวที่ใช้ร่วมกัน เปิด DuckDB แบบอ่านอย่างเดียวและใช้ <code>cursor()</code> ทุกครั้ง</li>
-<li>drill-down ที่ดีใช้ SQL ชุดเดียวที่สร้างเงื่อนไขจาก session state ทำให้ตัวชี้วัดสอดคล้องกันทุกระดับ มี breadcrumb ให้ย้อนกลับ และใช้ตัวยึดตำแหน่งกับค่าของผู้ใช้เสมอ</li>
-<li>ทดสอบแอปอัตโนมัติด้วย <code>streamlit.testing</code> และเตรียมเรื่องข้อมูล ความลับ และสภาพแวดล้อมก่อน deploy</li>
-<li>เครื่องมือ BI เหมาะกับผู้ไม่เขียนโค้ดและแดชบอร์ดองค์กร Streamlit เหมาะกับงานที่ต้องการความยืดหยุ่นและการทำซ้ำได้ การส่งต่อข้อมูลต้องส่งนิยามตัวชี้วัดไปด้วย</li>
+<li>แดชบอร์ดแบ่งเป็นเชิงปฏิบัติการ เชิงวิเคราะห์ และเชิงกลยุทธ์ ตามผู้ใช้และการตัดสินใจ ประเภทกำหนดเนื้อหา ความสด และระดับการโต้ตอบ</li>
+<li>การจัดวางเริ่มจากสิ่งที่ผู้ใช้ต้องรู้ในห้าวินาทีแรก ตัวชี้วัดที่ดีมีนิยาม หน่วย ช่วงเวลา การเปรียบเทียบ ทิศทาง และความสด และต้องระวังเมื่อถูกใช้เป็นเป้า</li>
+<li>Streamlit รัน script ทั้งไฟล์ใหม่ทุกครั้งที่ผู้ใช้โต้ตอบ session state จำค่าข้ามรอบ callback รันก่อนการ rerun และค่าของ widget แก้ได้เฉพาะใน callback</li>
+<li><code>cache_resource</code> ใช้กับ connection ที่ใช้ร่วมกัน <code>cache_data</code> ใช้กับผล query DuckDB เปิดแบบ read-only สร้าง cursor ต่อการใช้งาน และใส่เวลาแก้ไขของไฟล์ในคีย์ของ cache</li>
+<li>drill-down สี่ระดับคำนวณเงื่อนไขของทุก query จากสถานะเดียวกัน ทำให้ตัวเลขสอดคล้อง มีแถบเส้นทาง ตัวกรองไปด้วยทุกระดับ และลิงก์ที่แชร์ได้</li>
+<li>วัดเวลาก่อนปรับ ทดสอบฟังก์ชัน query ด้วยข้อมูลที่รู้คำตอบ ทดสอบแอปด้วย AppTest และตรวจข้อมูล ความลับ และความปลอดภัยก่อน deploy</li>
+<li>เครื่องมือ BI เร็วในการสร้างและเด่นด้านการแชร์ในองค์กร Streamlit เด่นด้านการวิเคราะห์ขั้นสูง การ review และการทำซ้ำได้ หลายองค์กรใช้ร่วมกัน</li>
 </ul>
 </section>
 <section id="sec-ch20-exercises" class="level2 unnumbered">
@@ -1342,32 +1659,30 @@ div.csl-indent {
 <section id="ระดบพนฐาน" class="level3">
 <h3 class="anchored" data-anchor-id="ระดบพนฐาน">ระดับพื้นฐาน</h3>
 <ol type="1">
-<li><p>ระบุประเภทของแดชบอร์ดที่เหมาะกับผู้ใช้ต่อไปนี้ และตัวชี้วัดหลักหนึ่งตัว: (ก) เจ้าหน้าที่ศูนย์ปฏิบัติการที่ต้องประกาศเตือนภัยฝุ่น (ข) ผู้อำนวยการกรมที่ต้องรายงานผลตามแผนระดับชาติทุกปี (ค) นักวิจัยที่ศึกษารูปแบบตามฤดูกาล</p></li>
-<li><p>อธิบายด้วยคำพูดของตนเองว่าเกิดอะไรขึ้นเมื่อผู้ใช้เลือกภาคใน selectbox ของ PM2.5 Explorer ตั้งแต่การคลิกจนหน้าเว็บแสดงจังหวัด</p></li>
-<li><p>ทำไมการเชื่อมต่อ DuckDB จึงต้องอยู่ใน <code>cache_resource</code> ไม่ใช่ <code>cache_data</code></p></li>
-<li><p>โค้ด <code>query(f"SELECT * FROM stations WHERE province = '{province}'")</code> มีปัญหาอะไรบ้าง และควรเขียนอย่างไร</p></li>
-<li><p>ฟังก์ชันต่อไปนี้มีปัญหาอะไรเมื่อผู้ใช้หลายคนใช้แดชบอร์ดพร้อมกัน</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="at">@st.cache_data</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> region_summary():</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> query(<span class="ss">f"SELECT ... WHERE s.region = ?"</span>, (st.session_state.region,))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li>จำแนกแดชบอร์ดต่อไปนี้ว่าเป็นเชิงปฏิบัติการ เชิงวิเคราะห์ หรือเชิงกลยุทธ์ และระบุผู้ใช้หลัก (ก) หน้าจอในห้องควบคุมที่แสดงสถานีที่ค่า 24 ชั่วโมงล่าสุดเกินมาตรฐาน (ข) หน้ารายงานประจำปีที่แสดงแนวโน้มวันเกินมาตรฐานเทียบเป้าหมาย (ค) PM2.5 Explorer ของโครงการ</li>
+<li>ออกแบบตัวชี้วัด “สัดส่วนวันเกินมาตรฐาน” ให้ครบองค์ประกอบหกข้อใน <a href="#tbl-ch20-kpi-anatomy" class="quarto-xref">ตารางที่&nbsp;<span>20.3</span></a></li>
+<li>อธิบายลำดับของเหตุการณ์ตั้งแต่ผู้ใช้เลือกภาคใน selectbox ที่มี <code>on_change=drill</code> จนหน้าจอแสดงระดับภาค</li>
+<li>อธิบายว่าทำไมการใช้ <code>st.cache_data</code> กับฟังก์ชันที่คืน DuckDB connection จึงผิด และทำไมการใช้ <code>st.cache_resource</code> กับฟังก์ชันที่คืน DataFrame จึงเสี่ยง</li>
+<li>ยกตัวอย่างว่าตัวชี้วัด “ค่าเฉลี่ย PM2.5 ของทุกสถานี” อาจถูกทำให้ดีขึ้นโดยอากาศไม่ได้ดีขึ้นได้อย่างไร และเสนอตัวชี้วัดที่ทนต่อปัญหานี้กว่า</li>
 </ol>
 </section>
 <section id="ระดบประยกต" class="level3">
 <h3 class="anchored" data-anchor-id="ระดบประยกต">ระดับประยุกต์</h3>
 <ol start="6" type="1">
-<li>สร้าง <code>app/app.py</code> ตามบท แล้วเพิ่ม <code>delta</code> ให้ตัวชี้วัดสัดส่วนวันเกินมาตรฐาน ที่แสดงความต่างจากค่าของทั้งประเทศในช่วงเวลาเดียวกัน</li>
-<li>เพิ่มแผนที่สถานีในระดับประเทศและภาค โดยใช้ Plotly หรือ Folium (บทที่ 17) ระบายสีตามสัดส่วนวันเกินมาตรฐาน และแสดงจำนวนสถานี-วันใน tooltip</li>
-<li>เพิ่มตัวกรองเดือน (เช่น เลือกเฉพาะเดือนกุมภาพันธ์ถึงเมษายน) ใน sidebar ให้มีผลทุกระดับของ drill-down โดยใช้ตัวยึดตำแหน่งใน SQL</li>
-<li>เขียนการทดสอบด้วย <code>streamlit.testing</code> ที่ตรวจว่า drill-down ถึงระดับสถานีได้ และตารางธงค่าผิดปกติแสดงผลโดยไม่มีข้อผิดพลาด</li>
-<li>ส่งออกข้อมูลเป็น CSV แล้วสร้างแดชบอร์ดระดับภาคหนึ่งหน้าใน Looker Studio หรือ Power BI เปรียบเทียบตัวเลขกับ PM2.5 Explorer และเขียนสามถึงห้าบรรทัดว่าเครื่องมือใดเหมาะกับงานแบบใด</li>
+<li>ย้าย query ทั้งหมดของ <code>app/app.py</code> จากคู่มือปฏิบัติการสัปดาห์ที่ 14 เข้า <code>src/queries.py</code> แล้วห่อด้วย <code>st.cache_data</code> ในแอป และตรวจว่าตัวเลขเท่าเดิม</li>
+<li>เพิ่มการเทียบกับช่วงเดียวกันของปีก่อนในตัวชี้วัด ตาม <code>kpis</code> ในกรณีศึกษา และจัดการกรณีที่ปีก่อนไม่มีข้อมูล</li>
+<li>ใส่เวลาแก้ไขของไฟล์ฐานข้อมูลในคีย์ของ cache แล้วทดลองรัน pipeline ใหม่ (หยุดแอปก่อน) ตรวจว่าแอปแสดงข้อมูลใหม่หลังเปิดใหม่โดยไม่ต้องล้าง cache ด้วยมือ</li>
+<li>เพิ่ม <code>st.query_params</code> ให้ลิงก์ของแอปเก็บระดับ drill-down แล้วทดสอบว่าการเปิดลิงก์ในแท็บใหม่พาไปที่สถานีเดิม</li>
+<li>เขียนการทดสอบ <code>tests/test_queries.py</code> อย่างน้อยสามกรณีที่มีคำตอบคำนวณด้วยมือได้ รวมถึงกรณีที่มีวันที่ <code>is_complete</code> เป็นเท็จ และเขียน AppTest ที่ drill-down ครบสี่ระดับ</li>
+<li>จับเวลาทุกส่วนของแอปด้วย <code>timed</code> แล้วปรับส่วนที่ช้าที่สุดด้วยวิธีใน <a href="#tbl-ch20-performance" class="quarto-xref">ตารางที่&nbsp;<span>20.7</span></a> รายงานเวลาก่อนและหลัง</li>
 </ol>
 </section>
 <section id="ระดบทาทาย" class="level3">
 <h3 class="anchored" data-anchor-id="ระดบทาทาย">ระดับท้าทาย</h3>
-<ol start="11" type="1">
-<li>ใช้ <code>st.plotly_chart(..., on_select="rerun")</code> ให้ผู้ใช้คลิกแท่งของ bar chart เพื่อเจาะลงแทนการใช้ selectbox โดยยังคง selectbox ไว้สำหรับผู้ใช้คีย์บอร์ด อภิปรายข้อดีข้อเสียต่อการเข้าถึงได้และการทดสอบ</li>
-<li>วัดเวลาตอบสนองของแดชบอร์ดเมื่อไม่มี cache, มีเฉพาะ <code>cache_resource</code> และมีทั้งสองแบบ ด้วยข้อมูลรายวันและรายชั่วโมง แล้วออกแบบตารางสรุปล่วงหน้าที่ทำให้ทุกระดับตอบสนองภายในหนึ่งวินาที โดยตัวชี้วัดยังถูกต้องตามบทที่ 18</li>
-<li>ออกแบบแดชบอร์ดเชิงปฏิบัติการสำหรับเฝ้าระวังฝุ่นรายชั่วโมงที่ดึงข้อมูลล่าสุดจาก Air4Thai อภิปรายว่าการออกแบบ การ cache การจัดการข้อมูลผิดปกติ และการแจ้งเตือน ต่างจาก PM2.5 Explorer อย่างไร</li>
+<ol start="12" type="1">
+<li>ออกแบบและสร้างแดชบอร์ดเชิงปฏิบัติการหนึ่งหน้า ที่แสดงสถานีที่ค่าเฉลี่ย 24 ชั่วโมงล่าสุดเกินมาตรฐานและสถานีที่ไม่ส่งข้อมูลเกินหกชั่วโมง อภิปรายว่าต้องเปลี่ยน pipeline อย่างไรให้ข้อมูลสดพอ</li>
+<li>deploy PM2.5 Explorer บนแพลตฟอร์มใดแพลตฟอร์มหนึ่ง โดยให้แอปสร้างฐานข้อมูลจากไฟล์ข้อมูลตัวอย่างเมื่อเริ่มทำงาน บันทึกปัญหาที่พบ และอภิปรายเรื่องสัญญาอนุญาตของข้อมูลที่เผยแพร่</li>
+<li>สร้างแดชบอร์ดระดับภาคเดียวกันใน Power BI หรือ Looker Studio จากไฟล์ที่ส่งออก เปรียบเทียบเวลาที่ใช้ ความสามารถในการ drill-down ความสอดคล้องของตัวเลขกับ Streamlit และความสะดวกในการ review การเปลี่ยนแปลง</li>
 </ol>
 <p>แนวคำตอบระดับพื้นฐานและประยุกต์อยู่ใน<a href="../appendices/g-answers.html#sec-appg-ch20">ภาคผนวก ช</a></p>
 </section>
@@ -1375,10 +1690,12 @@ div.csl-indent {
 <section id="อานเพมเตม" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="อานเพมเตม">อ่านเพิ่มเติม</h2>
 <ul>
-<li><span class="citation" data-cites="few2013information">Few (<a href="../references.html#ref-few2013information" role="doc-biblioref">2013</a>)</span> — ตำราคลาสสิกของการออกแบบแดชบอร์ด อธิบายหลักการจัดวาง การเลือกตัวชี้วัด และสิ่งที่ควรหลีกเลี่ยง</li>
-<li><span class="citation" data-cites="bach2023dashboard">Bach และคณะ (<a href="../references.html#ref-bach2023dashboard" role="doc-biblioref">2023</a>)</span> — งานวิจัยที่รวบรวมรูปแบบการออกแบบแดชบอร์ดจากตัวอย่างจำนวนมากอย่างเป็นระบบ</li>
-<li><span class="citation" data-cites="streamlit2026docs">Snowflake Inc. (<a href="../references.html#ref-streamlit2026docs" role="doc-biblioref">2026</a>)</span> — เอกสารของ Streamlit โดยเฉพาะหน้าเรื่อง execution model, caching และ session state</li>
-<li><span class="citation" data-cites="owasp2021injection">OWASP Foundation (<a href="../references.html#ref-owasp2021injection" role="doc-biblioref">2021</a>)</span> — คำอธิบาย SQL injection และวิธีป้องกันจาก OWASP ซึ่งเป็นมาตรฐานด้านความปลอดภัยของเว็บแอปพลิเคชัน</li>
+<li><span class="citation" data-cites="few2013information">Few (<a href="../references.html#ref-few2013information" role="doc-biblioref">2013</a>)</span> — ตำราคลาสสิกของการออกแบบแดชบอร์ด อธิบายนิยาม การจัดวาง และสิ่งที่ควรหลีกเลี่ยงพร้อมตัวอย่างจำนวนมาก</li>
+<li><span class="citation" data-cites="wexler2017big">Wexler และคณะ (<a href="../references.html#ref-wexler2017big" role="doc-biblioref">2017</a>)</span> — รวมแดชบอร์ดจริงหลายสิบตัวพร้อมการวิเคราะห์ว่าทำไมจึงได้ผล เหมาะสำหรับหาแรงบันดาลใจ</li>
+<li><span class="citation" data-cites="sarikaya2019what">Sarikaya และคณะ (<a href="../references.html#ref-sarikaya2019what" role="doc-biblioref">2019</a>)</span> — งานวิจัยที่สำรวจว่าแดชบอร์ดในโลกจริงมีกี่แบบและใช้ทำอะไร ช่วยขยายมุมมองจากนิยามแบบดั้งเดิม</li>
+<li><span class="citation" data-cites="bach2023dashboard">Bach และคณะ (<a href="../references.html#ref-bach2023dashboard" role="doc-biblioref">2023</a>)</span> — รวบรวมรูปแบบการออกแบบแดชบอร์ดและการแลกเปลี่ยนที่ต้องตัดสินใจ</li>
+<li><span class="citation" data-cites="liu2014effects">Liu และ Heer (<a href="../references.html#ref-liu2014effects" role="doc-biblioref">2014</a>)</span> — หลักฐานจากการทดลองว่าความเร็วในการตอบสนองมีผลต่อการสำรวจข้อมูลอย่างไร</li>
+<li><span class="citation" data-cites="streamlit2024docs">Snowflake Inc. (<a href="../references.html#ref-streamlit2024docs" role="doc-biblioref">ม.ป.ป.</a>)</span> — เอกสารทางการของ Streamlit โดยเฉพาะส่วน caching และ session state ซึ่งควรอ่านคู่กับเวอร์ชันที่ติดตั้ง</li>
 </ul>
 
 
@@ -1386,17 +1703,32 @@ div.csl-indent {
 <div id="ref-bach2023dashboard" class="csl-entry" role="listitem">
 Bach, Benjamin, Euan Freeman, Alfie Abdul-Rahman, และคณะ. 2023. <span>“Dashboard Design Patterns”</span>. <em>IEEE Transactions on Visualization and Computer Graphics</em> 29 (1): 342–52. <a href="https://doi.org/10.1109/TVCG.2022.3209448">https://doi.org/10.1109/TVCG.2022.3209448</a>.
 </div>
-<div id="ref-duckdb2026python" class="csl-entry" role="listitem">
-DuckDB Foundation. 2026. <em>Python <span>DB</span> <span>API</span>: Concurrency and Cursors</em>. <a href="https://duckdb.org/docs/stable/clients/python/dbapi.html">https://duckdb.org/docs/stable/clients/python/dbapi.html</a>.
+<div id="ref-duckdb2026concurrency" class="csl-entry" role="listitem">
+DuckDB Foundation. 2026. <em>Concurrency</em>. <a href="https://duckdb.org/docs/stable/connect/concurrency">https://duckdb.org/docs/stable/connect/concurrency</a>.
+</div>
+<div id="ref-eckerson2010performance" class="csl-entry" role="listitem">
+Eckerson, Wayne W. 2010. <em>Performance Dashboards: Measuring, Monitoring, and Managing Your Business</em>. 2 พิมพ์ครั้งที่. Wiley.
 </div>
 <div id="ref-few2013information" class="csl-entry" role="listitem">
 Few, Stephen. 2013. <em>Information Dashboard Design: Displaying Data for At-a-Glance Monitoring</em>. 2 พิมพ์ครั้งที่. Analytics Press.
 </div>
-<div id="ref-owasp2021injection" class="csl-entry" role="listitem">
-OWASP Foundation. 2021. <em><span>A03:2021</span> – Injection</em>. <a href="https://owasp.org/Top10/A03_2021-Injection/">https://owasp.org/Top10/A03_2021-Injection/</a>.
+<div id="ref-liu2014effects" class="csl-entry" role="listitem">
+Liu, Zhicheng, และ Jeffrey Heer. 2014. <span>“The Effects of Interactive Latency on Exploratory Visual Analysis”</span>. <em>IEEE Transactions on Visualization and Computer Graphics</em> 20 (12): 2122–31. <a href="https://doi.org/10.1109/TVCG.2014.2346452">https://doi.org/10.1109/TVCG.2014.2346452</a>.
 </div>
-<div id="ref-streamlit2026docs" class="csl-entry" role="listitem">
-Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.streamlit.io/">https://docs.streamlit.io/</a>.
+<div id="ref-nielsen1993usability" class="csl-entry" role="listitem">
+Nielsen, Jakob. 1993. <em>Usability Engineering</em>. Academic Press.
+</div>
+<div id="ref-sarikaya2019what" class="csl-entry" role="listitem">
+Sarikaya, Alper, Michael Correll, Lyn Bartram, Melanie Tory, และ Danyel Fisher. 2019. <span>“What Do We Talk About When We Talk About Dashboards?”</span> <em>IEEE Transactions on Visualization and Computer Graphics</em> 25 (1): 682–92. <a href="https://doi.org/10.1109/TVCG.2018.2864903">https://doi.org/10.1109/TVCG.2018.2864903</a>.
+</div>
+<div id="ref-streamlit2024docs" class="csl-entry" role="listitem">
+Snowflake Inc. ม.ป.ป. <em>Streamlit Documentation</em>. Documentation. สืบค้น 25 ตุลาคม 2026. <a href="https://docs.streamlit.io/">https://docs.streamlit.io/</a>.
+</div>
+<div id="ref-strathern1997improving" class="csl-entry" role="listitem">
+Strathern, Marilyn. 1997. <span>“<span>‘Improving Ratings’</span>: Audit in the British University System”</span>. <em>European Review</em> 5 (3): 305–21. <a href="https://doi.org/10.1002/(SICI)1234-981X(199707)5:3<305::AID-EURO184>3.0.CO;2-4">https://doi.org/10.1002/(SICI)1234-981X(199707)5:3&lt;305::AID-EURO184&gt;3.0.CO;2-4</a>.
+</div>
+<div id="ref-wexler2017big" class="csl-entry" role="listitem">
+Wexler, Steve, Jeffrey Shaffer, และ Andy Cotgreave. 2017. <em>The Big Book of Dashboards: Visualizing Your Data Using Real-World Business Scenarios</em>. Wiley.
 </div>
 </div>
 </section>
@@ -1480,7 +1812,8 @@ Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.str
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1489,8 +1822,69 @@ Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.str
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1504,6 +1898,7 @@ Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.str
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1666,44 +2061,54 @@ Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.str
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1802,7 +2207,10 @@ Snowflake Inc. 2026. <em>Streamlit Documentation</em>. <a href="https://docs.str
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/19-storytelling-reports.html" class="pagination-link" aria-label="การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">การเล่าเรื่องด้วยข้อมูลและรายงานที่ทำซ้ำได้</span></span>
